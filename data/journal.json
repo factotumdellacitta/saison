@@ -1,0 +1,2208 @@
+{
+ "maj": "2026-11-13",
+ "sorties": [
+  {
+   "id": "faust-castellucci",
+   "titre": "Faust",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Romeo Castellucci",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "odeon",
+   "salle": "",
+   "debut": "2026-11-10",
+   "fin": "2026-11-10",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-11-10"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "manon-lescaut",
+   "titre": "Manon Lescaut",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Giacomo Puccini",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "tce",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-mis-en-scene/manon-lescaut",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-11-12"
+   ],
+   "noteLeonard": 4,
+   "avis": "Très émouvant avec Roberto Alagna dans le rôle de Des Grieux et Ailyn Pérez pour Manon Lescaut"
+  },
+  {
+   "id": "vu-1-2-3-pocquelin",
+   "titre": "1, 2, 3… Pocquelin",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-07-18"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-alors-on-en-est-ou",
+   "titre": "Alors on en est où ?",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-26"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-angels-in-america",
+   "titre": "Angels in America",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Tony Kushner",
+     "role": "auteur"
+    },
+    {
+     "nom": "Arnaud Desplechin",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2023-04-29"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-antigone",
+   "titre": "Antigone",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "Espace Roseau Teinturiers",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-20"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-apres-moi-le-deluge",
+   "titre": "Après moi, le déluge",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "(LA)HORDE",
+     "role": "compagnie"
+    }
+   ],
+   "lieuId": "theatre-de-la-ville",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-09-05"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-art-majeur",
+   "titre": "Art majeur",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Guillaume Barbot",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "salle": "Studio-Théâtre",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": "https://www.offi.fr/theatre/comedie-francaise-studio-theatre-1913/art-majeur-93221.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-03-29"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-autopsie-dune-photo-de-famille",
+   "titre": "Autopsie d’une photo de famille",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "La Manufacture",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-11"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-bejart-et-nous-loiseau-de-feu-bolero",
+   "titre": "Béjart et nous, L’Oiseau de feu, Boléro",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Béjart Ballet Lausanne",
+     "role": "compagnie"
+    }
+   ],
+   "lieuId": "seine-musicale",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-03-14"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-bestioles",
+   "titre": "Bestioles",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "comedie-francaise",
+   "salle": "Studio-Théâtre",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": "https://www.offi.fr/theatre/comedie-francaise-studio-theatre-1913/bestioles-104677.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-02-06"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-brel",
+   "titre": "BREL",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Anne Teresa De Keersmaeker",
+     "role": "chorégraphie"
+    },
+    {
+     "nom": "Solal Mariotte",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "festival-avignon",
+   "salle": "Carrière de Boulbon",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-09"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-conteneur",
+   "titre": "Conteneur",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "Espace Alya",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-19"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-cosi-fan-tutte",
+   "titre": "Così fan tutte",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Wolfgang Amadeus Mozart",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "chatelet",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2024-02-02"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-dans-la-peau-de-cyrano",
+   "titre": "Dans la peau de Cyrano",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "Théâtre des Corps Saints",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-07-12"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-edmond",
+   "titre": "Edmond",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Alexis Michalik",
+     "role": "auteur"
+    },
+    {
+     "nom": "Alexis Michalik",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "theatre-du-palais-royal",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-12-19"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-fragment-s",
+   "titre": "Fragment(s)",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "Espace Alya",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-11"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-from-martin-to-eden",
+   "titre": "From Martin to Eden",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-07-19"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-gestion-de-la-ressource-humaine",
+   "titre": "Gestion de la ressource humaine",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "Archipel Théâtre",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-18"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-hecube-pas-hecube",
+   "titre": "Hécube, pas Hécube",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Tiago Rodrigues",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": "https://festival-avignon.com/en/edition-2024/programme/hecube-pas-hecube-348428",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-03-31"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-hubris",
+   "titre": "Hubris",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Compagnie Paizo",
+     "role": "compagnie"
+    }
+   ],
+   "lieuId": "festival-avignon",
+   "salle": "Espace Roseau Teinturiers",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-07-11",
+    "2026-07-19"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-jacques-et-chirac",
+   "titre": "Jacques et Chirac",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "La Luna",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-13"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-jerome-robbins",
+   "titre": "Jerome Robbins",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Jerome Robbins",
+     "role": "chorégraphie"
+    },
+    {
+     "nom": "Ballet de l’Opéra de Paris",
+     "role": "compagnie"
+    }
+   ],
+   "lieuId": "palais-garnier",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2023-10-23"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-la-distance",
+   "titre": "La Distance",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Tiago Rodrigues",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "festival-avignon",
+   "salle": "L’Autre Scène du Grand Avignon",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-16"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-la-liste-de-mes-envies",
+   "titre": "La Liste de mes envies",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-10"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-la-mouette",
+   "titre": "La Mouette",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Anton Tchekhov",
+     "role": "auteur"
+    }
+   ],
+   "lieuId": null,
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2024-05-28"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-la-musica-deuxieme",
+   "titre": "La Musica deuxième",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Marguerite Duras",
+     "role": "auteur"
+    },
+    {
+     "nom": "Arnaud Desplechin",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "salle": "Vieux-Colombier",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-10-22"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-la-parabole-du-seum-avignon",
+   "titre": "La Parabole du Seum",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Rébecca Chaillon",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "festival-avignon",
+   "salle": "Cloître des Célestins",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-07-12"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-la-puce-a-loreille",
+   "titre": "La Puce à l’oreille",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Georges Feydeau",
+     "role": "auteur"
+    },
+    {
+     "nom": "Lilo Baur",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2023-10-22"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-la-vestale",
+   "titre": "La Vestale",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Gaspare Spontini",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "opera-bastille",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2024-07-11"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-la-vie-parisienne",
+   "titre": "La Vie parisienne",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Jacques Offenbach",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "chatelet",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-06-20"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-lavare",
+   "titre": "L’Avare",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Molière",
+     "role": "auteur"
+    },
+    {
+     "nom": "Lilo Baur",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2024-10-23"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-le-bain",
+   "titre": "Le Bain",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-07-18"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-le-barbier-de-seville",
+   "titre": "Le Barbier de Séville",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Gioachino Rossini",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "la-fenice",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-03-02"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-le-barbier-de-seville-avignon",
+   "titre": "Le Barbier de Séville",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-06"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-le-bourgeois-gentilhomme-porte-saint-martin",
+   "titre": "Le Bourgeois gentilhomme",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Molière",
+     "role": "auteur"
+    }
+   ],
+   "lieuId": "porte-saint-martin",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-03-01"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-le-cercle-des-poetes-disparus",
+   "titre": "Le Cercle des poètes disparus",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "theatre-libre",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2024-12-28"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-le-cid",
+   "titre": "Le Cid",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Pierre Corneille",
+     "role": "auteur"
+    }
+   ],
+   "lieuId": "porte-saint-martin",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-04-22"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-le-malade-imaginaire",
+   "titre": "Le Malade imaginaire",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Molière",
+     "role": "auteur"
+    }
+   ],
+   "lieuId": "porte-saint-martin",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-06-14"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-le-mariage-force",
+   "titre": "Le Mariage forcé",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Molière",
+     "role": "auteur"
+    },
+    {
+     "nom": "Louis Arene",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "salle": "Vieux-Colombier",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": "https://www.offi.fr/theatre/comedie-francaise-studio-theatre-1913/le-mariage-force-32894.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-09-19"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-le-proces-dune-vie",
+   "titre": "Le Procès d’une vie",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "le-splendid",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-06-12"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-le-proces-pelicot",
+   "titre": "Le Procès Pelicot",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "Cloître des Carmes",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-18"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-le-radeau-de-la-meduse",
+   "titre": "Le Radeau de la Méduse",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-23"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-le-revizor",
+   "titre": "Le Révizor",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "Espace Alya",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-06"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-le-soulier-de-satin",
+   "titre": "Le Soulier de satin",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-23"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-le-suicide",
+   "titre": "Le Suicidé",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Nikolaï Erdman",
+     "role": "auteur"
+    },
+    {
+     "nom": "Stéphane Varupenne",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-01-22"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-le-suicide-double-jeu",
+   "titre": "Le Suicidé (Double Jeu)",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Nikolaï Erdman",
+     "role": "auteur"
+    },
+    {
+     "nom": "Double Jeu",
+     "role": "compagnie"
+    }
+   ],
+   "lieuId": "hec-paris",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-04-07"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-le-syndrome-dulysse",
+   "titre": "Le Syndrome d’Ulysse",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "Théâtre du Balcon",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-07-13"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-leducation-sentimentale",
+   "titre": "L’Éducation sentimentale",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Gustave Flaubert",
+     "role": "auteur"
+    }
+   ],
+   "lieuId": "poche-montparnasse",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2023-09-30"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-les-bonnes",
+   "titre": "Les Bonnes",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Jean Genet",
+     "role": "auteur"
+    },
+    {
+     "nom": "Carme Portaceli",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "salle": "Athénée",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-10-08"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-les-enchanteurs",
+   "titre": "Les Enchanteurs",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Christophe Malavoy",
+     "role": "artiste"
+    }
+   ],
+   "lieuId": "festival-avignon",
+   "salle": "Théâtre des Gémeaux (Avignon)",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-08"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-les-fourberies-de-scapin",
+   "titre": "Les Fourberies de Scapin",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Molière",
+     "role": "auteur"
+    },
+    {
+     "nom": "Denis Podalydès",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-11-02"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-letrangere",
+   "titre": "L’Étrangère",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "Théâtre du Balcon",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-22"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-lexikon",
+   "titre": "Lexikon",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "El Conde de Torrefiel",
+     "role": "compagnie"
+    }
+   ],
+   "lieuId": "odeon",
+   "salle": "Berthier",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-10-13"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-lexperience-theatrale",
+   "titre": "L’Expérience théâtrale",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "theatre-de-la-michodiere",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-02-07"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-lights-on-chaplin",
+   "titre": "Lights on Chaplin",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-26"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-marc-tourneboeuf",
+   "titre": "Marc Tourneboeuf",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "Théâtre Le Paris",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-25"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-michel-et-claude",
+   "titre": "Michel et Claude",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "Espace Alya",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-07"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-miss-charity",
+   "titre": "Miss Charity",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-11"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-nous-ou-le-paradoxe-du-herisson",
+   "titre": "Nous ou le paradoxe du hérisson",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "Théâtre Benoît XII",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-07-11"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-orso-et-moi",
+   "titre": "Orso et moi",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "la-colline",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-10-15"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-par-autan",
+   "titre": "Par autan",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "Lycée Frédéric-Mistral",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-14"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-points-de-non-retour-quais-de-seine",
+   "titre": "Points de non-retour [Quais de Seine]",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Alexandra Badea",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "la-colline",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2022-01-27"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-post",
+   "titre": "Post!",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "Rue de la Carreterie",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-07-11"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-puccini",
+   "titre": "Puccini",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Giacomo Puccini",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "tce",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2023-06-17"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-refuge",
+   "titre": "Refuge",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "Espace Alya",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-21"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-roberto-zucco",
+   "titre": "Roberto Zucco",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "Théâtre du Girasole",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-07-12"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-rosas-danst-rosas",
+   "titre": "Rosas danst Rosas",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Anne Teresa De Keersmaeker",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "chaillot",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Date à confirmer",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-09-11"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-seisme",
+   "titre": "Séisme",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "petit-saint-martin",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-06-17"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-sylvia",
+   "titre": "Sylvia",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Léo Delibes",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Manuel Legris",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "palais-garnier",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-05-16"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-taire",
+   "titre": "TAIRE",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "La FabricA",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-21"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-toute-lhistoire-de-la-peinture-en-moins-de-2-heures",
+   "titre": "Toute l’histoire de la peinture en moins de 2 heures",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-09",
+    "2026-07-10"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-ubu-roi-avignon",
+   "titre": "Ubu Roi",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-23"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-un-soir-de-gala",
+   "titre": "Un soir de gala",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Vincent Dedienne",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "bouffes-du-nord",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Aussi vu au Théâtre Marigny en 2022",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2022-06-24",
+    "2024-12-26"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-un-tramway-nomme-desir",
+   "titre": "Un tramway nommé désir",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Tennessee Williams",
+     "role": "auteur"
+    }
+   ],
+   "lieuId": "bouffes-parisiens",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2024-03-30"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-une-mouette",
+   "titre": "Une Mouette",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Anton Tchekhov",
+     "role": "auteur"
+    },
+    {
+     "nom": "Elsa Granat",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": "https://www.offi.fr/theatre/comedie-francaise-salle-richelieu-1912/une-mouette-99976.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-09-28"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-une-operette-a-ravensbruck",
+   "titre": "Une opérette à Ravensbrück",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-05"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-variations-pour-un-parapluie",
+   "titre": "Variations pour un parapluie",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "Espace Alya",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-10"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-willy-protagoras-enferme-dans-les-toilettes",
+   "titre": "Willy Protagoras enfermé dans les toilettes",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Wajdi Mouawad",
+     "role": "auteur"
+    }
+   ],
+   "lieuId": "la-colline",
+   "salle": "",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2026-02-15"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-y-a-de-la-joie",
+   "titre": "Y a de la joie !",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "Théâtre des Lucioles",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-12"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  },
+  {
+   "id": "vu-yongoyely",
+   "titre": "Yongoyely",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "festival-avignon",
+   "salle": "La Scala Provence",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "offres": [],
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-09"
+   ],
+   "noteLeonard": null,
+   "avis": ""
+  }
+ ]
+}

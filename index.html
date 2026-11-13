@@ -131,7 +131,7 @@ code{font-size:.8rem;word-break:break-all;background:var(--chip);padding:2px 5px
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
 const OWNER="Léonard";
-const GENRES=["Théâtre","Opéra","Danse","Comédie musicale","Récital","Concert","Cirque"];
+const GENRES=["Théâtre","Opéra","Danse","Comédie musicale","Récital","Concert","Festival","Exposition","Cinéma","Événement","Sur scène","Autre"];
 const MOIS=["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."];
 const MOIS_L=["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
 const JOURS=["dim.","lun.","mar.","mer.","jeu.","ven.","sam."];
@@ -258,7 +258,7 @@ function renderPrive(){
     <div class="cal priv"><h3 style="font:600 1.05rem Literata,Georgia,serif;margin:0 0 6px">Abonnement Apple Calendar</h3>
     <p class="cred">Sur iPhone : Réglages, Calendrier, Comptes, Ajouter un compte, Autre, S’abonner à un calendrier, puis colle cette adresse.</p>
     <p><code id="icsurl">${esc(ics)}</code></p><button class="btn" id="copyIcs">Copier l’adresse</button></div>
-    ${(PRIVE.envies||[]).length?`<div class="cal priv"><h3 style="font:600 1.05rem Literata,Georgia,serif;margin:0 0 6px">Envies</h3><p>${PRIVE.envies.map(id=>`<a href="#fiche-${esc(id)}">${esc((byId[id]||{titre:id}).titre)}</a>`).join(" · ")}</p></div>`:""}
+    ${Object.keys(PRIVE.envies||{}).length?`<div class="cal priv"><h3 style="font:600 1.05rem Literata,Georgia,serif;margin:0 0 6px">Envies</h3><p>${Object.keys(PRIVE.envies).map(id=>`<a href="#fiche-${esc(id)}">${esc((byId[id]||{titre:id}).titre)}</a>`).join(" · ")}</p></div>`:""}
     <button class="btn" id="lock">Verrouiller</button>`;
   $("#copyIcs").onclick=()=>navigator.clipboard.writeText(ics).then(()=>toast("Adresse copiée"));
   $("#lock").onclick=()=>{PRIVE=null;renderPrive()}}
@@ -328,8 +328,13 @@ $("#sort").onchange=e=>{state.sort=e.target.value;render()};
 document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>setView(b.dataset.view));
 (async()=>{
   try{
-    const [s,l,d]=await Promise.all(["data/spectacles.json","data/lieux.json","data/dispo.json"].map(u=>fetch(u,{cache:"no-cache"}).then(r=>r.json())));
-    DATA=s.spectacles;LIEUX=l;BUSY=new Set([...(d.reservations||[]),...(d.manuel||[]),...(d.calendrier||[])]);
+    const [s,j,l,d]=await Promise.all(["data/affiche.json","data/journal.json","data/lieux.json","data/dispo.json"].map(u=>fetch(u,{cache:"no-cache"}).then(r=>r.json())));
+    // Compatibilité lot 1 : on rebâtit l'ancienne forme (genre, lieu = nom, credits) à partir du nouveau schéma.
+    LIEUX={};for(const v of Object.values(l))LIEUX[v.nom]=v;
+    const cred=a=>{const n=r=>a.filter(x=>r.includes(x.role)).map(x=>x.nom).filter((x,i,t)=>t.indexOf(x)===i).join(", ");
+      const o=n(["auteur","compositeur"]),m=n(["mise en scène","chorégraphie","direction musicale","réalisation","commissaire","compagnie","artiste"]),i=n(["interprète"]);
+      return[[o,m].filter(Boolean).join(" / "),i?(o||m?"avec ":"")+i:""].filter(Boolean).join(", ")};
+    DATA=[...s.sorties,...j.sorties].map(e=>({...e,genre:e.categorie,lieu:(l[e.lieuId]||{}).nom||null,credits:cred(e.artistes||[])}));BUSY=new Set([...(d.reservations||[]),...(d.manuel||[]),...(d.calendrier||[])]);
     const n=DATA.filter(e=>e.statut==="a-voir"&&!ended(e)).length;
     $("#sub").textContent=`${n} spectacles à Paris et en petite couronne, notés et commentés par ${OWNER}. Mis à jour le ${fmtY(D(s.maj))}.`;
     buildFilters();label();

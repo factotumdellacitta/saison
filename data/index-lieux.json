@@ -1,0 +1,462 @@
+{
+ "accor-arena": {
+  "sorties": [
+   "tame-impala"
+  ]
+ },
+ "athenee": {
+  "sorties": [
+   "le-temps-d-aimer",
+   "magdalena-creation"
+  ]
+ },
+ "bouffes-du-nord": {
+  "sorties": [
+   "les-surs-hilton",
+   "madame-de-sade",
+   "vu-un-soir-de-gala"
+  ]
+ },
+ "bouffes-parisiens": {
+  "sorties": [
+   "concert-tres-chic",
+   "vu-un-tramway-nomme-desir"
+  ]
+ },
+ "chaillot": {
+  "sorties": [
+   "10000-gestes",
+   "dancing-with-bob",
+   "delay-the-sadness",
+   "gustavia",
+   "impressions",
+   "muette",
+   "rave-l-age-d-or",
+   "thrice",
+   "un-coin-de-paradis",
+   "un-peu-pour-mon-cur",
+   "vertige-manhattan-transfer",
+   "vu-rosas-danst-rosas"
+  ]
+ },
+ "chatelet": {
+  "sorties": [
+   "les-miserables",
+   "vu-cosi-fan-tutte",
+   "vu-la-vie-parisienne"
+  ]
+ },
+ "comedie-des-champs-elysees": {
+  "sorties": [
+   "chante-et-tais-toi"
+  ]
+ },
+ "comedie-francaise": {
+  "sorties": [
+   "apres-guerre",
+   "berlin-mon-garcon",
+   "c-est-beau",
+   "ce-que-j-appelle-oubli",
+   "deshonoree",
+   "l-ecole-de-danse",
+   "l-envers-du-music-hall",
+   "l-evenement",
+   "la-fournaise",
+   "la-souriciere",
+   "la-tour-de-nesle",
+   "la-vie-est-un-songe",
+   "le-bourgeois-gentilhomme",
+   "le-cid",
+   "les-fausses-confidences",
+   "les-femmes-savantes",
+   "resurrection-un-cas-de-conscience",
+   "ruy-blas",
+   "vu-angels-in-america",
+   "vu-art-majeur",
+   "vu-bestioles",
+   "vu-hecube-pas-hecube",
+   "vu-la-musica-deuxieme",
+   "vu-la-puce-a-loreille",
+   "vu-lavare",
+   "vu-le-mariage-force",
+   "vu-le-suicide",
+   "vu-les-bonnes",
+   "vu-les-fourberies-de-scapin",
+   "vu-une-mouette"
+  ]
+ },
+ "edouard-vii": {
+  "sorties": [
+   "le-chameau",
+   "le-pere"
+  ]
+ },
+ "festival-avignon": {
+  "sorties": [
+   "vu-1-2-3-pocquelin",
+   "vu-alors-on-en-est-ou",
+   "vu-antigone",
+   "vu-autopsie-dune-photo-de-famille",
+   "vu-brel",
+   "vu-conteneur",
+   "vu-dans-la-peau-de-cyrano",
+   "vu-fragment-s",
+   "vu-from-martin-to-eden",
+   "vu-gestion-de-la-ressource-humaine",
+   "vu-hubris",
+   "vu-jacques-et-chirac",
+   "vu-la-distance",
+   "vu-la-liste-de-mes-envies",
+   "vu-la-parabole-du-seum-avignon",
+   "vu-le-bain",
+   "vu-le-barbier-de-seville-avignon",
+   "vu-le-proces-pelicot",
+   "vu-le-radeau-de-la-meduse",
+   "vu-le-revizor",
+   "vu-le-soulier-de-satin",
+   "vu-le-syndrome-dulysse",
+   "vu-les-enchanteurs",
+   "vu-letrangere",
+   "vu-lights-on-chaplin",
+   "vu-marc-tourneboeuf",
+   "vu-michel-et-claude",
+   "vu-miss-charity",
+   "vu-nous-ou-le-paradoxe-du-herisson",
+   "vu-par-autan",
+   "vu-post",
+   "vu-refuge",
+   "vu-roberto-zucco",
+   "vu-taire",
+   "vu-toute-lhistoire-de-la-peinture-en-moins-de-2-heures",
+   "vu-ubu-roi-avignon",
+   "vu-une-operette-a-ravensbruck",
+   "vu-variations-pour-un-parapluie",
+   "vu-y-a-de-la-joie",
+   "vu-yongoyely"
+  ]
+ },
+ "folies-bergere": {
+  "sorties": [
+   "shrek-le-musical"
+  ]
+ },
+ "grande-halle-villette": {
+  "sorties": [
+   "tartuffe-van-hove"
+  ]
+ },
+ "hec-paris": {
+  "sorties": [
+   "vu-le-suicide-double-jeu"
+  ]
+ },
+ "jardin-des-tuileries": {
+  "sorties": []
+ },
+ "la-colline": {
+  "sorties": [
+   "amadoca",
+   "celle-qui-doute",
+   "l-ange-du-foyer",
+   "la-guerre-n-a-pas-un-visage-de-femme",
+   "la-mort-du-mome",
+   "le-serment-d-europe",
+   "le-silence",
+   "rituel-4-le-grand-debat",
+   "vu-orso-et-moi",
+   "vu-points-de-non-retour-quais-de-seine",
+   "vu-willy-protagoras-enferme-dans-les-toilettes"
+  ]
+ },
+ "la-fenice": {
+  "sorties": [
+   "vu-le-barbier-de-seville"
+  ]
+ },
+ "le-splendid": {
+  "sorties": [
+   "vu-le-proces-dune-vie"
+  ]
+ },
+ "les-gemeaux": {
+  "sorties": [
+   "chiens",
+   "hernani",
+   "la-religieuse",
+   "le-canard-sauvage",
+   "le-petit-cirque",
+   "may-b",
+   "my-fierce-ignorant-step",
+   "thesee-sa-vie-nouvelle"
+  ]
+ },
+ "lido": {
+  "sorties": [
+   "singin-in-the-rain"
+  ]
+ },
+ "mc93": {
+  "sorties": [
+   "chiens-de-navarre-i-will-survive",
+   "josef-nadj-dialogues-dans-le-reve",
+   "steven-cohen-people-will-people-you"
+  ]
+ },
+ "nanterre-amandiers": {
+  "sorties": [
+   "ceci-n-est-pas-nous",
+   "ivanov",
+   "l-amant",
+   "la-fete",
+   "le-chien",
+   "madeleine-tornade",
+   "piano-man",
+   "thesee",
+   "une-odyssee"
+  ]
+ },
+ "odeon": {
+  "sorties": [
+   "10-000-langages-pour-en-faire-un",
+   "capri",
+   "faust-castellucci",
+   "fondre-gourfink",
+   "food-court",
+   "maldoror",
+   "neanderthal-repetitions-publiques",
+   "oedipe-roi",
+   "seppuku",
+   "vampire-s-mountain",
+   "vu-lexikon",
+   "zero"
+  ]
+ },
+ "olympia": {
+  "sorties": [
+   "esdeekid"
+  ]
+ },
+ "opera-bastille": {
+  "sorties": [
+   "don-giovanni",
+   "idomeneo",
+   "joyaux",
+   "l-elixir-d-amour",
+   "la-walkyrie",
+   "lady-macbeth-de-mzensk",
+   "le-trouvere",
+   "raymonda",
+   "rituels-lifar",
+   "turandot",
+   "vu-la-vestale",
+   "werther"
+  ]
+ },
+ "opera-comique": {
+  "sorties": [
+   "heaven-hell"
+  ]
+ },
+ "opera-de-paris": {
+  "sorties": [
+   "kaguyahime",
+   "pulsations-childs",
+   "repetitions-publiques-danse"
+  ]
+ },
+ "palais-garnier": {
+  "sorties": [
+   "correspondances-nocturnes",
+   "giselle",
+   "la-clemence-de-titus",
+   "la-fille-mal-gardee",
+   "miroir-de-nos-peines",
+   "vu-jerome-robbins",
+   "vu-sylvia"
+  ]
+ },
+ "petit-saint-martin": {
+  "sorties": [
+   "vu-seisme"
+  ]
+ },
+ "poche-montparnasse": {
+  "sorties": [
+   "vu-leducation-sentimentale"
+  ]
+ },
+ "porte-saint-martin": {
+  "sorties": [
+   "le-mariage-de-figaro",
+   "vu-le-bourgeois-gentilhomme-porte-saint-martin",
+   "vu-le-cid",
+   "vu-le-malade-imaginaire"
+  ]
+ },
+ "rond-point": {
+  "sorties": [
+   "diskoteekki",
+   "ellen-babic",
+   "merci-de-votre-collaboration",
+   "mon-vrai-nom-est-elisabeth",
+   "oum"
+  ]
+ },
+ "seine-musicale": {
+  "sorties": [
+   "vu-bejart-et-nous-loiseau-de-feu-bolero"
+  ]
+ },
+ "t2g": {
+  "sorties": [
+   "et-jamais-nous-ne-serons-separes",
+   "histoire-du-soldat",
+   "la-tour-de-constance",
+   "nocturne-parade",
+   "race-d-ep"
+  ]
+ },
+ "tce": {
+  "sorties": [
+   "anna-netrebko-brian-jagde-george-petean",
+   "asmik-grigorian-lukas-geniusas",
+   "attila",
+   "didon-et-enee",
+   "dipus-rex",
+   "faust",
+   "hippolyte-et-aricie",
+   "histoire-du-soldat-tce",
+   "l-orfeo",
+   "le-chateau-de-barbe-bleue",
+   "lea-desandre",
+   "les-pecheurs-de-perles",
+   "les-sept-peches-capitaux",
+   "manon-lescaut",
+   "maria-stuarda",
+   "marina-rebeka-jonas-kaufmann",
+   "mitridate",
+   "mitridate-re-di-ponto",
+   "orphee",
+   "platee",
+   "rinaldo",
+   "vu-puccini"
+  ]
+ },
+ "tgp": {
+  "sorties": [
+   "a-la-renverse",
+   "capra-une-chevre",
+   "ces-filles-qu-on-attend",
+   "le-birgit-kabarett-7",
+   "le-ventre-de-paris"
+  ]
+ },
+ "theatre-14": {
+  "sorties": []
+ },
+ "theatre-antoine": {
+  "sorties": [
+   "la-cerisaie",
+   "les-trois-mousquetaires",
+   "robert-badinter-l-enrage-de-justice"
+  ]
+ },
+ "theatre-cite-internationale": {
+  "sorties": [
+   "ganesh-versus-the-third-reich"
+  ]
+ },
+ "theatre-de-l-atelier": {
+  "sorties": [
+   "4-48-psychose"
+  ]
+ },
+ "theatre-de-la-bastille": {
+  "sorties": [
+   "cabaret-teheran",
+   "olalaland",
+   "shabaab",
+   "tout-doit-disparaitre"
+  ]
+ },
+ "theatre-de-la-michodiere": {
+  "sorties": [
+   "la-jalousie",
+   "vu-lexperience-theatrale"
+  ]
+ },
+ "theatre-de-la-ville": {
+  "sorties": [
+   "7-minutes",
+   "aria-da-capo",
+   "deux-trois-choses-qu-elle-nous-dit-d-elle",
+   "dipe-antigone",
+   "focus-ben-duke",
+   "j-ai-une-theorie",
+   "le-cercle-de-craie-caucasien",
+   "noh-climax",
+   "restart",
+   "rhinoceros",
+   "vu-apres-moi-le-deluge"
+  ]
+ },
+ "theatre-de-paris": {
+  "sorties": [
+   "ubu-roi"
+  ]
+ },
+ "theatre-du-gymnase": {
+  "sorties": [
+   "le-discours-d-un-roi",
+   "le-fantome-de-l-opera"
+  ]
+ },
+ "theatre-du-palais-royal": {
+  "sorties": [
+   "vu-edmond"
+  ]
+ },
+ "theatre-du-soleil": {
+  "sorties": [
+   "ici-sont-les-dragons"
+  ]
+ },
+ "theatre-hebertot": {
+  "sorties": [
+   "diplomatie"
+  ]
+ },
+ "theatre-libre": {
+  "sorties": [
+   "vu-le-cercle-des-poetes-disparus"
+  ]
+ },
+ "theatre-mogador": {
+  "sorties": [
+   "le-roi-lion"
+  ]
+ },
+ "theatre-montparnasse": {
+  "sorties": [
+   "suzanne"
+  ]
+ },
+ "theatre-public-montreuil": {
+  "sorties": [
+   "la-parabole-du-seum",
+   "lorenzaccio",
+   "ravage-tout-court",
+   "un-hamlet-de-moins"
+  ]
+ },
+ "theatre-saint-georges": {
+  "sorties": [
+   "du-charbon-dans-les-veines"
+  ]
+ },
+ "zenith-paris": {
+  "sorties": [
+   "nono"
+  ]
+ }
+}

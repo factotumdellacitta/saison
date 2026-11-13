@@ -1,320 +1,479 @@
 {
- "Comédie-Française": {
-  "statut": "Public",
+ "accor-arena": {
+  "nom": "Accor Arena",
+  "ville": "Paris",
   "zone": "Paris",
-  "tarifJeune": "Carte Jeune CF : 24 / 17 / 12 € (Richelieu), 17 € (Vieux-Colombier), 15 € (Studio)",
-  "site": null
- },
- "Odéon": {
-  "statut": "Public",
-  "zone": "Paris",
-  "tarifJeune": "Abonnement ou tarif -28 ans",
-  "site": null
- },
- "La Colline": {
-  "statut": "Public",
-  "zone": "Paris",
-  "tarifJeune": "10 € étudiant -30 ans",
-  "site": "https://www.colline.fr/spectacles/saison-2026-2027"
- },
- "Théâtre de la Ville": {
-  "statut": "Public",
-  "zone": "Paris",
-  "tarifJeune": "Carte -30 ans à 10 € puis tarif réduit",
-  "site": "https://www.theatredelaville-paris.com/en/spectacles/saison-26-27/theatre"
- },
- "Théâtre de la Cité internationale": {
-  "statut": "Public",
-  "zone": "Paris",
-  "tarifJeune": "Tarif réduit Festival d’Automne",
-  "site": null
- },
- "Théâtre du Rond-Point": {
-  "statut": "Public",
-  "zone": "Paris",
-  "tarifJeune": "12 € étudiant (salle Tardieu)",
-  "site": "https://www.theatredurondpoint.fr/files/44dfdad8/brochure_saison_26_27.pdf"
- },
- "Théâtre du Soleil": {
-  "statut": "Public",
-  "zone": "Paris",
-  "tarifJeune": "Places dès 15 €",
-  "site": null
- },
- "Théâtre de la Bastille": {
-  "statut": "Public",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
- },
- "Chaillot": {
-  "statut": "Public",
-  "zone": "Paris",
-  "tarifJeune": "Environ moitié prix -30 ans",
-  "site": "https://theatre-chaillot.fr/fr/programmation"
- },
- "Théâtre 14": {
-  "statut": "Public",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
- },
- "Jardin des Tuileries": {
-  "statut": "Public",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
- },
- "Opéra de Paris – Bastille": {
-  "statut": "Public",
-  "zone": "Paris",
-  "tarifJeune": "Avant-premières jeunes 10 €, dernière minute -28 ans",
-  "site": "https://www.operadeparis.fr/programmation/saison-26-27"
- },
- "Opéra de Paris – Garnier": {
-  "statut": "Public",
-  "zone": "Paris",
-  "tarifJeune": "Avant-premières jeunes 10 €, dernière minute -28 ans",
-  "site": "https://www.operadeparis.fr/programmation/saison-26-27"
- },
- "Opéra de Paris": {
-  "statut": "Public",
-  "zone": "Paris",
-  "tarifJeune": "Tarifs -28 ans",
-  "site": "https://www.operadeparis.fr/programmation/saison-26-27"
- },
- "Opéra-Comique": {
-  "statut": "Public",
-  "zone": "Paris",
-  "tarifJeune": "Tarifs -35 ans",
-  "site": "https://www.opera-comique.com/en/shows/2026-2027"
- },
- "Athénée": {
-  "statut": "Public",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
- },
- "Châtelet": {
-  "statut": "Public",
-  "zone": "Paris",
-  "tarifJeune": "10 € -30 ans sur une sélection",
-  "site": null
- },
- "TCE": {
   "statut": "Privé",
-  "zone": "Paris",
-  "tarifJeune": "Carte Jeunes TCE : 10 à 20 €",
-  "site": "https://www.theatrechampselysees.fr/en/season-2026-27/staged-opera"
+  "site": "https://www.accorarena.com",
+  "billetterie": null,
+  "tarifJeune": ""
  },
- "Nanterre-Amandiers": {
+ "athenee": {
+  "nom": "Athénée Théâtre Louis-Jouvet",
+  "ville": "Paris",
+  "zone": "Paris",
   "statut": "Public",
-  "zone": "Petite couronne",
-  "tarifJeune": "",
-  "site": "https://nanterre-amandiers.com/"
+  "site": "https://www.athenee-theatre.com",
+  "billetterie": null,
+  "tarifJeune": ""
  },
- "Les Gémeaux": {
+ "bouffes-du-nord": {
+  "nom": "Théâtre des Bouffes du Nord",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.bouffesdunord.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "bouffes-parisiens": {
+  "nom": "Théâtre des Bouffes Parisiens",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.bouffesparisiens.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "chaillot": {
+  "nom": "Chaillot – Théâtre national de la Danse",
+  "ville": "Paris",
+  "zone": "Paris",
   "statut": "Public",
-  "zone": "Petite couronne",
-  "tarifJeune": "",
-  "site": "https://www.lesgemeaux.com/programmation/"
+  "site": "https://theatre-chaillot.fr",
+  "billetterie": null,
+  "tarifJeune": "Environ moitié prix -30 ans"
  },
- "Théâtre Public de Montreuil": {
+ "chatelet": {
+  "nom": "Théâtre du Châtelet",
+  "ville": "Paris",
+  "zone": "Paris",
   "statut": "Public",
-  "zone": "Petite couronne",
-  "tarifJeune": "",
-  "site": "https://theatrepublicmontreuil.com/programme?subsections=a_venir"
+  "site": "https://www.chatelet.com",
+  "billetterie": null,
+  "tarifJeune": "10 € -30 ans sur une sélection"
  },
- "TGP": {
+ "comedie-des-champs-elysees": {
+  "nom": "Comédie des Champs-Élysées",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.comediedeschampselysees.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "comedie-francaise": {
+  "nom": "Comédie-Française",
+  "ville": "Paris",
+  "zone": "Paris",
   "statut": "Public",
-  "zone": "Petite couronne",
-  "tarifJeune": "",
-  "site": "https://tgp.theatregerardphilipe.com/saison-2026-2027/"
+  "site": "https://www.comedie-francaise.fr",
+  "billetterie": null,
+  "tarifJeune": "Carte Jeune CF : 24 / 17 / 12 € (Richelieu), 17 € (Vieux-Colombier), 15 € (Studio)"
  },
- "T2G": {
-  "statut": "Public",
-  "zone": "Petite couronne",
-  "tarifJeune": "",
-  "site": "https://theatredegennevilliers.fr/la-saison/calendrier"
- },
- "MC93": {
-  "statut": "Public",
-  "zone": "Petite couronne",
-  "tarifJeune": "",
-  "site": "https://www.mc93.com/"
- },
- "Théâtre Antoine": {
-  "statut": "Privé",
+ "edouard-vii": {
+  "nom": "Théâtre Édouard VII",
+  "ville": "Paris",
   "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
- },
- "Théâtre Saint-Georges": {
   "statut": "Privé",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
+  "site": "https://www.theatreedouard7.com",
+  "billetterie": null,
+  "tarifJeune": ""
  },
- "Édouard VII": {
-  "statut": "Privé",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
- },
- "Théâtre de l’Atelier": {
-  "statut": "Privé",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
- },
- "Bouffes du Nord": {
-  "statut": "Privé",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
- },
- "Théâtre du Gymnase": {
-  "statut": "Privé",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
- },
- "Théâtre Hébertot": {
-  "statut": "Privé",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
- },
- "Théâtre de Paris": {
-  "statut": "Privé",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
- },
- "Théâtre de la Michodière": {
-  "statut": "Privé",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
- },
- "Théâtre Montparnasse": {
-  "statut": "Privé",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
- },
- "Lido": {
-  "statut": "Privé",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
- },
- "Théâtre Mogador": {
-  "statut": "Privé",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
- },
- "Folies Bergère": {
-  "statut": "Privé",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
- },
- "Comédie des Champs-Élysées": {
-  "statut": "Privé",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
- },
- "Bouffes Parisiens": {
-  "statut": "Privé",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
- },
- "Théâtre de la Porte Saint-Martin": {
-  "statut": "Privé",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
- },
- "Festival d’Avignon": {
-  "statut": "Public",
+ "festival-avignon": {
+  "nom": "Festival d’Avignon",
+  "ville": "Avignon",
   "zone": "Avignon",
-  "tarifJeune": "",
-  "site": null
- },
- "Olympia": {
-  "statut": "Privé",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
- },
- "Zénith": {
-  "statut": "Privé",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
- },
- "Accor Arena": {
-  "statut": "Privé",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
- },
- "Grande Halle de la Villette": {
   "statut": "Public",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
+  "site": "https://festival-avignon.com",
+  "billetterie": null,
+  "tarifJeune": ""
  },
- "La Seine Musicale": {
+ "folies-bergere": {
+  "nom": "Folies Bergère",
+  "ville": "Paris",
+  "zone": "Paris",
   "statut": "Privé",
+  "site": "https://www.foliesbergere.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "grande-halle-villette": {
+  "nom": "Grande Halle de la Villette",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://lavillette.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "hec-paris": {
+  "nom": "HEC Paris",
+  "ville": "Jouy-en-Josas",
+  "zone": "Île-de-France",
+  "statut": "Public",
+  "site": null,
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "jardin-des-tuileries": {
+  "nom": "Jardin des Tuileries",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": null,
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "la-colline": {
+  "nom": "La Colline – théâtre national",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://www.colline.fr",
+  "billetterie": null,
+  "tarifJeune": "10 € étudiant -30 ans"
+ },
+ "la-fenice": {
+  "nom": "La Fenice",
+  "ville": "Venise",
+  "zone": "Autre",
+  "statut": "Public",
+  "site": "https://www.teatrolafenice.it",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "le-splendid": {
+  "nom": "Le Splendid",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": null,
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "les-gemeaux": {
+  "nom": "Les Gémeaux",
+  "ville": "Sceaux",
   "zone": "Petite couronne",
-  "tarifJeune": "",
-  "site": null
- },
- "Théâtre du Palais-Royal": {
-  "statut": "Privé",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
- },
- "La Fenice, Venise": {
   "statut": "Public",
-  "zone": "Autre",
-  "tarifJeune": "",
-  "site": null
+  "site": "https://www.lesgemeaux.com",
+  "billetterie": null,
+  "tarifJeune": ""
  },
- "Théâtre Libre": {
-  "statut": "Privé",
+ "lido": {
+  "nom": "Lido 2 Paris",
+  "ville": "Paris",
   "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
- },
- "Le Splendid": {
   "statut": "Privé",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
+  "site": "https://www.lido2paris.com",
+  "billetterie": null,
+  "tarifJeune": ""
  },
- "HEC Paris": {
+ "mc93": {
+  "nom": "MC93",
+  "ville": "Bobigny",
+  "zone": "Petite couronne",
   "statut": "Public",
-  "zone": "Autre",
-  "tarifJeune": "",
-  "site": null
+  "site": "https://www.mc93.com",
+  "billetterie": null,
+  "tarifJeune": ""
  },
- "Théâtre de Poche-Montparnasse": {
-  "statut": "Privé",
-  "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
+ "nanterre-amandiers": {
+  "nom": "Nanterre-Amandiers",
+  "ville": "Nanterre",
+  "zone": "Petite couronne",
+  "statut": "Public",
+  "site": "https://nanterre-amandiers.com",
+  "billetterie": null,
+  "tarifJeune": ""
  },
- "Petit Saint-Martin": {
-  "statut": "Privé",
+ "odeon": {
+  "nom": "Odéon – Théâtre de l’Europe",
+  "ville": "Paris",
   "zone": "Paris",
-  "tarifJeune": "",
-  "site": null
+  "statut": "Public",
+  "site": "https://www.theatre-odeon.eu",
+  "billetterie": null,
+  "tarifJeune": "Abonnement ou tarif -28 ans"
+ },
+ "olympia": {
+  "nom": "Olympia",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.olympiahall.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "opera-bastille": {
+  "nom": "Opéra Bastille",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://www.operadeparis.fr",
+  "billetterie": null,
+  "tarifJeune": "Avant-premières jeunes 10 €, dernière minute -28 ans"
+ },
+ "opera-comique": {
+  "nom": "Opéra-Comique",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://www.opera-comique.com",
+  "billetterie": null,
+  "tarifJeune": "Tarifs -35 ans"
+ },
+ "opera-de-paris": {
+  "nom": "Opéra de Paris",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://www.operadeparis.fr",
+  "billetterie": null,
+  "tarifJeune": "Tarifs -28 ans"
+ },
+ "palais-garnier": {
+  "nom": "Palais Garnier",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://www.operadeparis.fr",
+  "billetterie": null,
+  "tarifJeune": "Avant-premières jeunes 10 €, dernière minute -28 ans"
+ },
+ "petit-saint-martin": {
+  "nom": "Théâtre du Petit Saint-Martin",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": null,
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "poche-montparnasse": {
+  "nom": "Théâtre de Poche-Montparnasse",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.theatredepoche-montparnasse.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "porte-saint-martin": {
+  "nom": "Théâtre de la Porte Saint-Martin",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.portestmartin.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "rond-point": {
+  "nom": "Théâtre du Rond-Point",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://www.theatredurondpoint.fr",
+  "billetterie": null,
+  "tarifJeune": "12 € étudiant (salle Tardieu)"
+ },
+ "seine-musicale": {
+  "nom": "La Seine Musicale",
+  "ville": "Boulogne-Billancourt",
+  "zone": "Petite couronne",
+  "statut": "Privé",
+  "site": "https://www.laseinemusicale.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "t2g": {
+  "nom": "Théâtre de Gennevilliers (T2G)",
+  "ville": "Gennevilliers",
+  "zone": "Petite couronne",
+  "statut": "Public",
+  "site": "https://theatredegennevilliers.fr",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "tce": {
+  "nom": "Théâtre des Champs-Élysées",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.theatrechampselysees.fr",
+  "billetterie": null,
+  "tarifJeune": "Carte Jeunes TCE : 10 à 20 €"
+ },
+ "tgp": {
+  "nom": "Théâtre Gérard Philipe (TGP)",
+  "ville": "Saint-Denis",
+  "zone": "Petite couronne",
+  "statut": "Public",
+  "site": "https://tgp.theatregerardphilipe.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "theatre-14": {
+  "nom": "Théâtre 14",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://www.theatre14.fr",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "theatre-antoine": {
+  "nom": "Théâtre Antoine",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.theatre-antoine.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "theatre-cite-internationale": {
+  "nom": "Théâtre de la Cité internationale",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://www.theatredelacite.com",
+  "billetterie": null,
+  "tarifJeune": "Tarif réduit Festival d’Automne"
+ },
+ "theatre-de-l-atelier": {
+  "nom": "Théâtre de l’Atelier",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.theatre-atelier.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "theatre-de-la-bastille": {
+  "nom": "Théâtre de la Bastille",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://www.theatre-bastille.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "theatre-de-la-michodiere": {
+  "nom": "Théâtre de la Michodière",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.michodiere.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "theatre-de-la-ville": {
+  "nom": "Théâtre de la Ville",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://www.theatredelaville-paris.com",
+  "billetterie": null,
+  "tarifJeune": "Carte -30 ans à 10 € puis tarif réduit"
+ },
+ "theatre-de-paris": {
+  "nom": "Théâtre de Paris",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.theatredeparis.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "theatre-du-gymnase": {
+  "nom": "Théâtre du Gymnase Marie Bell",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.theatredugymnase.paris",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "theatre-du-palais-royal": {
+  "nom": "Théâtre du Palais-Royal",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.theatrepalaisroyal.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "theatre-du-soleil": {
+  "nom": "Théâtre du Soleil",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://www.theatre-du-soleil.fr",
+  "billetterie": null,
+  "tarifJeune": "Places dès 15 €"
+ },
+ "theatre-hebertot": {
+  "nom": "Théâtre Hébertot",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.theatrehebertot.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "theatre-libre": {
+  "nom": "Théâtre Libre",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": null,
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "theatre-mogador": {
+  "nom": "Théâtre Mogador",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.theatremogador.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "theatre-montparnasse": {
+  "nom": "Théâtre Montparnasse",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.theatremontparnasse.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "theatre-public-montreuil": {
+  "nom": "Théâtre Public de Montreuil",
+  "ville": "Montreuil",
+  "zone": "Petite couronne",
+  "statut": "Public",
+  "site": "https://theatrepublicmontreuil.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "theatre-saint-georges": {
+  "nom": "Théâtre Saint-Georges",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.theatresaintgeorges.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "zenith-paris": {
+  "nom": "Zénith Paris – La Villette",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.zenith-paris.com",
+  "billetterie": null,
+  "tarifJeune": ""
  }
 }

@@ -1,0 +1,272 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//saison//FR
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Saison – ouvertures de ventes
+X-WR-TIMEZONE:Europe/Paris
+BEGIN:VTIMEZONE
+TZID:Europe/Paris
+BEGIN:DAYLIGHT
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+TZNAME:CEST
+DTSTART:19700329T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+TZNAME:CET
+DTSTART:19701025T030000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:vente-asmik-grigorian-lukas-geniusas-0-carte-jeunes-tce@saison
+DTSTAMP:20261113T000000Z
+DTSTART;TZID=Europe/Paris:20270228T100000
+DTEND;TZID=Europe/Paris:20270228T101500
+SUMMARY:~ Vente : Carte Jeunes TCE – Asmik Grigorian\, Lukas Geniušas
+DESCRIPTION:Tarif : 15 €\nReprésentation : 2027-05-29\nCondition : Carte
+  Jeunes TCE\nBilletterie : https://www.theatrechampselysees.fr/en/season-2
+ 026-27/sung-recital/asmik-grigorian-lukas-geniusas-1
+URL:https://www.theatrechampselysees.fr/en/season-2026-27/sung-recital/asmi
+ k-grigorian-lukas-geniusas-1
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vente : Asmik Grigorian\, Lukas Geniušas
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:vente-attila-0-carte-jeunes-tce@saison
+DTSTAMP:20261113T000000Z
+DTSTART;TZID=Europe/Paris:20261206T100000
+DTEND;TZID=Europe/Paris:20261206T101500
+SUMMARY:~ Vente : Carte Jeunes TCE – Attila
+DESCRIPTION:Tarif : 20 €\nReprésentation : 2027-03-06\nCondition : Carte
+  Jeunes TCE\nBilletterie : https://www.theatrechampselysees.fr/en/season-2
+ 026-27/opera-in-concert-version/attila-1
+URL:https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-
+ version/attila-1
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vente : Attila
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:vente-correspondances-nocturnes-0-avant-premiere-jeunes@saison
+DTSTAMP:20261113T000000Z
+DTSTART;TZID=Europe/Paris:20270121T120000
+DTEND;TZID=Europe/Paris:20270121T121500
+SUMMARY:Vente : Avant-première jeunes – Correspondances nocturnes
+DESCRIPTION:Tarif : 10 €\nReprésentation : 2027-02-11\nCondition : Nés 
+ après le 1er janvier 1998\, 2 places max.\nBilletterie : https://www.oper
+ adeparis.fr/saison-26-27/ballet/correspondances-nocturnes
+URL:https://www.operadeparis.fr/saison-26-27/ballet/correspondances-nocturn
+ es
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vente : Correspondances nocturnes
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:vente-don-giovanni-0-avant-premiere-jeunes@saison
+DTSTAMP:20261113T000000Z
+DTSTART;TZID=Europe/Paris:20270107T120000
+DTEND;TZID=Europe/Paris:20270107T121500
+SUMMARY:Vente : Avant-première jeunes – Don Giovanni
+DESCRIPTION:Tarif : 10 €\nReprésentation : 2027-01-25\nCondition : Nés 
+ après le 1er janvier 1998\, 2 places max.\nBilletterie : https://www.oper
+ adeparis.fr/saison-26-27/opera/don-giovanni
+URL:https://www.operadeparis.fr/saison-26-27/opera/don-giovanni
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vente : Don Giovanni
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:vente-giselle-0-avant-premiere-jeunes@saison
+DTSTAMP:20261113T000000Z
+DTSTART;TZID=Europe/Paris:20270603T120000
+DTEND;TZID=Europe/Paris:20270603T121500
+SUMMARY:Vente : Avant-première jeunes – Giselle
+DESCRIPTION:Tarif : 10 €\nReprésentation : 2027-06-24\nCondition : Nés 
+ après le 1er janvier 1998\, 2 places max.\nBilletterie : https://www.oper
+ adeparis.fr/saison-26-27/ballet/giselle
+URL:https://www.operadeparis.fr/saison-26-27/ballet/giselle
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vente : Giselle
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:vente-idomeneo-0-avant-premiere-jeunes@saison
+DTSTAMP:20261113T000000Z
+DTSTART;TZID=Europe/Paris:20270408T120000
+DTEND;TZID=Europe/Paris:20270408T121500
+SUMMARY:Vente : Avant-première jeunes – Idomeneo
+DESCRIPTION:Tarif : 10 €\nReprésentation : 2027-04-30\nCondition : Nés 
+ après le 1er janvier 1998\, 2 places max.\nBilletterie : https://www.oper
+ adeparis.fr/saison-26-27/opera/idomeneo
+URL:https://www.operadeparis.fr/saison-26-27/opera/idomeneo
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vente : Idomeneo
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:vente-joyaux-0-avant-premiere-jeunes@saison
+DTSTAMP:20261113T000000Z
+DTSTART;TZID=Europe/Paris:20270318T120000
+DTEND;TZID=Europe/Paris:20270318T121500
+SUMMARY:Vente : Avant-première jeunes – Joyaux
+DESCRIPTION:Tarif : 10 €\nReprésentation : 2027-04-03\nCondition : Nés 
+ après le 1er janvier 1998\, 2 places max.\nBilletterie : https://www.oper
+ adeparis.fr/saison-26-27/ballet/joyaux
+URL:https://www.operadeparis.fr/saison-26-27/ballet/joyaux
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vente : Joyaux
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:vente-la-fille-mal-gardee-0-avant-premiere-jeunes@saison
+DTSTAMP:20261113T000000Z
+DTSTART;TZID=Europe/Paris:20270415T120000
+DTEND;TZID=Europe/Paris:20270415T121500
+SUMMARY:Vente : Avant-première jeunes – La Fille mal gardée
+DESCRIPTION:Tarif : 10 €\nReprésentation : 2027-05-05\nCondition : Nés 
+ après le 1er janvier 1998\, 2 places max.\nBilletterie : https://www.oper
+ adeparis.fr/saison-26-27/ballet/la-fille-mal-gardee
+URL:https://www.operadeparis.fr/saison-26-27/ballet/la-fille-mal-gardee
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vente : La Fille mal gardée
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:vente-les-pecheurs-de-perles-0-avant-premiere-30-ans@saison
+DTSTAMP:20261113T000000Z
+DTSTART;TZID=Europe/Paris:20260903T100000
+DTEND;TZID=Europe/Paris:20260903T101500
+SUMMARY:~ Vente : Avant-première -30 ans – Les Pêcheurs de perles
+DESCRIPTION:Tarif : 20 €\nReprésentation : 2026-12-03\nCondition : Carte
+  Jeunes TCE\nBilletterie : https://www.theatrechampselysees.fr/en/season-2
+ 026-27/previews-for-young-people-under-30/les-pecheurs-de-perles-2-2-1
+URL:https://www.theatrechampselysees.fr/en/season-2026-27/previews-for-youn
+ g-people-under-30/les-pecheurs-de-perles-2-2-1
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vente : Les Pêcheurs de perles
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:vente-marina-rebeka-jonas-kaufmann-0-carte-jeunes-tce@saison
+DTSTAMP:20261113T000000Z
+DTSTART;TZID=Europe/Paris:20270111T100000
+DTEND;TZID=Europe/Paris:20270111T101500
+SUMMARY:~ Vente : Carte Jeunes TCE – Marina Rebeka\, Jonas Kaufmann
+DESCRIPTION:Tarif : 20 €\nReprésentation : 2027-04-11\nCondition : Carte
+  Jeunes TCE\nBilletterie : https://www.theatrechampselysees.fr/en/season-2
+ 026-27/sung-recital/marina-rebeka-jonas-kaufmann-1
+URL:https://www.theatrechampselysees.fr/en/season-2026-27/sung-recital/mari
+ na-rebeka-jonas-kaufmann-1
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vente : Marina Rebeka\, Jonas Kaufmann
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:vente-miroir-de-nos-peines-0-avant-premiere-jeunes@saison
+DTSTAMP:20261113T000000Z
+DTSTART;TZID=Europe/Paris:20270401T120000
+DTEND;TZID=Europe/Paris:20270401T121500
+SUMMARY:Vente : Avant-première jeunes – Miroir de nos peines
+DESCRIPTION:Tarif : 10 €\nReprésentation : 2027-04-21\nCondition : Nés 
+ après le 1er janvier 1998\, 2 places max.\nBilletterie : https://www.oper
+ adeparis.fr/saison-26-27/opera/miroir-de-nos-peines
+URL:https://www.operadeparis.fr/saison-26-27/opera/miroir-de-nos-peines
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vente : Miroir de nos peines
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:vente-orphee-0-avant-premiere-30-ans@saison
+DTSTAMP:20261113T000000Z
+DTSTART;TZID=Europe/Paris:20270118T100000
+DTEND;TZID=Europe/Paris:20270118T101500
+SUMMARY:~ Vente : Avant-première -30 ans – Orphée
+DESCRIPTION:Tarif : 20 €\nReprésentation : 2027-04-18\nCondition : Carte
+  Jeunes TCE\nBilletterie : https://www.theatrechampselysees.fr/en/season-2
+ 026-27/staged-opera/orphee-1
+URL:https://www.theatrechampselysees.fr/en/season-2026-27/staged-opera/orph
+ ee-1
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vente : Orphée
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:vente-raymonda-0-avant-premiere-jeunes@saison
+DTSTAMP:20261113T000000Z
+DTSTART;TZID=Europe/Paris:20270527T120000
+DTEND;TZID=Europe/Paris:20270527T121500
+SUMMARY:Vente : Avant-première jeunes – Raymonda
+DESCRIPTION:Tarif : 10 €\nReprésentation : 2027-06-14\nCondition : Nés 
+ après le 1er janvier 1998\, 2 places max.\nBilletterie : https://www.oper
+ adeparis.fr/saison-26-27/ballet/raymonda
+URL:https://www.operadeparis.fr/saison-26-27/ballet/raymonda
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vente : Raymonda
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:vente-rinaldo-0-avant-premiere-30-ans@saison
+DTSTAMP:20261113T000000Z
+DTSTART;TZID=Europe/Paris:20261120T100000
+DTEND;TZID=Europe/Paris:20261120T101500
+SUMMARY:~ Vente : Avant-première -30 ans – Rinaldo
+DESCRIPTION:Tarif : 20 €\nReprésentation : 2027-02-20\nCondition : Carte
+  Jeunes TCE\nBilletterie : https://www.theatrechampselysees.fr/en/season-2
+ 026-27/staged-opera/rinaldo-2-1
+URL:https://www.theatrechampselysees.fr/en/season-2026-27/staged-opera/rina
+ ldo-2-1
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vente : Rinaldo
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:vente-werther-0-avant-premiere-jeunes@saison
+DTSTAMP:20261113T000000Z
+DTSTART;TZID=Europe/Paris:20270114T120000
+DTEND;TZID=Europe/Paris:20270114T121500
+SUMMARY:Vente : Avant-première jeunes – Werther
+DESCRIPTION:Tarif : 10 €\nReprésentation : 2027-02-08\nCondition : Nés 
+ après le 1er janvier 1998\, 2 places max.\nBilletterie : https://www.oper
+ adeparis.fr/saison-26-27/opera/werther
+URL:https://www.operadeparis.fr/saison-26-27/opera/werther
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vente : Werther
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR
