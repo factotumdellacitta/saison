@@ -2360,11 +2360,16 @@
    "note": 0,
    "pronostic": false,
    "pourquoi": "",
-   "lien": null,
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-mis-en-scene/manon-lescaut",
    "publicJeune": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": true
+   "statut": "vu",
+   "leonardYVa": false,
+   "vuLe": [
+    "2026-11-12"
+   ],
+   "noteLeonard": 4,
+   "avis": "Très émouvant avec Roberto Alagna dans le rôle de Des Grieux et Ailyn Pérez pour Manon Lescaut"
   },
   {
    "id": "maria-stuarda",
