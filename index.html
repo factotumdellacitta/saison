@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Saison 2026–2027 · Léonard</title>
+<meta name="description" content="Théâtre, opéra et danse à Paris : la saison commentée de Léonard.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎭</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F6F1;--card:#FFFFFF;--stub:#DCEAE1;--stub-ink:#1F4733;
+  --ink:#1B2430;--muted:#5B6573;--line:#D5D9D2;--accent:#A8231B;--accent-ink:#FFFFFF;
+  --chip:#ECEEE8;--chip-on:#1B2430;--chip-on-ink:#FFFFFF;--warn:#8A4B00;--warn-bg:#FFF1DC;--ok:#1F6B45;--ok-bg:#E2F3E9;
+  --busy:#E4E5E1;--busy-ink:#9AA0A6;--play:#DCEAE1;--play-ink:#1F4733;
+  color-scheme:light;box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#11151B;--card:#1A2029;--stub:#1E3328;--stub-ink:#BFE3CD;--ink:#E8EBEF;--muted:#9AA4B1;--line:#2C3440;
+  --accent:#FF8A80;--accent-ink:#2A0B08;--chip:#232A34;--chip-on:#E8EBEF;--chip-on-ink:#11151B;--warn:#FFC27A;--warn-bg:#3A2A12;
+  --ok:#8FDDB0;--ok-bg:#16301F;--busy:#252B33;--busy-ink:#5F6873;--play:#1E3328;--play-ink:#BFE3CD;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#11151B;--card:#1A2029;--stub:#1E3328;--stub-ink:#BFE3CD;--ink:#E8EBEF;--muted:#9AA4B1;--line:#2C3440;
+  --accent:#FF8A80;--accent-ink:#2A0B08;--chip:#232A34;--chip-on:#E8EBEF;--chip-on-ink:#11151B;--warn:#FFC27A;--warn-bg:#3A2A12;
+  --ok:#8FDDB0;--ok-bg:#16301F;--busy:#252B33;--busy-ink:#5F6873;--play:#1E3328;--play-ink:#BFE3CD;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 15px/1.5 "Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+.wrap{max-width:780px;margin:0 auto;padding:20px 16px 56px}
+header h1{font:700 2rem/1.1 "Literata",Georgia,serif;margin:8px 0 4px;letter-spacing:-.01em}
+header p{margin:0;color:var(--muted)}
+.tabs{display:flex;gap:4px;margin:20px 0 12px;background:var(--chip);padding:4px;border-radius:12px;overflow-x:auto}
+.tabs button{flex:1 0 auto;border:0;background:transparent;color:var(--ink);font:600 .88rem "Public Sans",sans-serif;padding:10px 10px;border-radius:9px;cursor:pointer;white-space:nowrap}
+.tabs button[aria-selected="true"]{background:var(--card);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.search{display:flex;gap:8px;margin-bottom:10px}
+.search input,.field{flex:1;min-width:0;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);font:600 .88rem "Public Sans",sans-serif;padding:9px 12px;border-radius:10px;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-block}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.filters{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:12px;margin-bottom:12px;display:none}
+.filters.open{display:block}
+.frow{margin:6px 0 12px}.frow h3{font:600 .8rem "Public Sans",sans-serif;color:var(--muted);margin:0 0 6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:0;background:var(--chip);color:var(--ink);font:500 .85rem "Public Sans",sans-serif;padding:7px 11px;border-radius:999px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--chip-on);color:var(--chip-on-ink)}
+select{padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit;max-width:100%}
+.meta{display:flex;justify-content:space-between;align-items:center;gap:8px;color:var(--muted);font-size:.85rem;margin:4px 2px 10px}
+.list{display:flex;flex-direction:column;gap:12px}
+.ticket{display:grid;grid-template-columns:76px 1fr;background:var(--card);border-radius:14px;position:relative;overflow:hidden;border:1px solid var(--line)}
+.stub{background:var(--stub);color:var(--stub-ink);padding:12px 6px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;border-right:2px dashed var(--paper);position:relative}
+.stub::before,.stub::after{content:"";position:absolute;right:-9px;width:16px;height:16px;border-radius:50%;background:var(--paper)}
+.stub::before{top:-8px}.stub::after{bottom:-8px}
+.stars{font-size:.95rem;letter-spacing:1px;line-height:1.1;word-break:break-all}.stars .off{opacity:.25}
+.pro{font:600 .7rem "Public Sans",sans-serif;opacity:.85}
+.when{font:700 1.05rem/1.05 "Literata",Georgia,serif}
+.when small{display:block;font:500 .72rem "Public Sans",sans-serif;opacity:.8;margin-top:2px}
+.body{padding:12px 14px}
+.body h2{font:600 1.15rem/1.25 "Literata",Georgia,serif;margin:0 0 2px}
+.body h2 a{color:inherit;text-decoration:none}
+.cred{color:var(--muted);font-size:.88rem;margin:0 0 6px}
+.place,.why{font-size:.88rem;margin:0 0 6px}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0 0}
+.tag{font:500 .76rem "Public Sans",sans-serif;padding:3px 8px;border-radius:6px;background:var(--chip);color:var(--ink)}
+.tag.warn{background:var(--warn-bg);color:var(--warn)}.tag.ok{background:var(--ok-bg);color:var(--ok)}.tag.acc{background:var(--accent);color:var(--accent-ink)}
+.offer{margin-top:8px;font-size:.84rem;border-left:3px solid var(--accent);padding:2px 0 2px 8px}
+.offer.soft{border-color:var(--line)}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;align-items:center}
+.actions a.link{color:var(--ink);font-weight:600;font-size:.86rem}
+.empty,.notice{background:var(--card);border:1px dashed var(--line);border-radius:12px;padding:18px;color:var(--muted)}
+.day{font:600 1rem "Literata",Georgia,serif;margin:18px 2px 8px}
+/* Calendriers */
+.cal{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:12px}
+.cal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.cal-head h3{font:600 1.05rem "Literata",Georgia,serif;margin:0;text-transform:capitalize}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.dow{font:600 .72rem "Public Sans",sans-serif;color:var(--muted);text-align:center;padding:2px 0}
+.cell{min-height:44px;border-radius:8px;padding:4px;font-size:.78rem;background:var(--paper);border:0;color:var(--ink);text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:2px;overflow:hidden}
+.cell .n{font-weight:600}
+.cell.out{visibility:hidden}
+.cell.today{outline:2px solid var(--accent);outline-offset:-2px}
+.cell.play{background:var(--play);color:var(--play-ink)}
+.cell.busy{background:var(--busy);color:var(--busy-ink)}
+.cell.busy .n{text-decoration:line-through}
+.cell .dot{font-size:.68rem;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cell.sel{outline:2px solid var(--ink);outline-offset:-2px}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:.78rem;color:var(--muted);margin-top:8px}
+.legend span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-2px;background:var(--sw)}
+/* Fiche */
+.sheet{position:fixed;inset:0;background:rgba(10,12,16,.45);z-index:30;display:none;overflow-y:auto;padding:calc(16px + env(safe-area-inset-top,0px)) 12px calc(16px + env(safe-area-inset-bottom,0px))}
+.sheet.open{display:block}
+.sheet-in{max-width:720px;margin:0 auto;background:var(--paper);border-radius:16px;padding:14px}
+.sheet-top{display:flex;justify-content:flex-end;gap:8px;margin-bottom:8px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--paper);padding:10px 14px;border-radius:10px;font-size:.9rem;opacity:0;transition:opacity .2s;pointer-events:none;z-index:40}
+.toast.show{opacity:1}
+.priv table{width:100%;border-collapse:collapse;font-size:.88rem}
+.priv td,.priv th{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+.scroll{overflow-x:auto}
+code{font-size:.8rem;word-break:break-all;background:var(--chip);padding:2px 5px;border-radius:5px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+@media (max-width:420px){.ticket{grid-template-columns:64px 1fr}.when{font-size:.95rem}.cell{min-height:38px}.cell .dot{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Saison 2026–2027</h1>
+    <p id="sub">Théâtre, opéra et danse à Paris et en petite couronne.</p>
+  </header>
+  <nav class="tabs" role="tablist" aria-label="Vues">
+    <button role="tab" data-view="catalogue" aria-selected="true">Catalogue</button>
+    <button role="tab" data-view="calendrier" aria-selected="false">Calendrier</button>
+    <button role="tab" data-view="ventes" aria-selected="false">Ventes à venir</button>
+    <button role="tab" data-view="vus" aria-selected="false">Déjà vus</button>
+    <button role="tab" data-view="prive" aria-selected="false">Espace privé</button>
+  </nav>
+  <div id="controls">
+    <div class="search">
+      <input id="q" type="search" placeholder="Titre, artiste, lieu…" aria-label="Rechercher">
+      <button class="btn" id="toggleFilters" aria-expanded="false">Filtres</button>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="meta"><span id="count"></span><span><label for="sort">Trier </label><select id="sort"><option value="date">par date</option><option value="note">par note</option></select></span></div>
+  </div>
+  <main id="list" class="list"><div class="notice">Chargement de la saison…</div></main>
+</div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Fiche du spectacle"><div class="sheet-in" id="sheetIn"></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+const OWNER="Léonard";
+const GENRES=["Théâtre","Opéra","Danse","Comédie musicale","Récital","Concert","Cirque"];
+const MOIS=["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."];
+const MOIS_L=["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+const JOURS=["dim.","lun.","mar.","mer.","jeu.","ven.","sam."];
+const state={view:"catalogue",q:"",genres:new Set(),zones:new Set(),statutLieu:new Set(),noteMin:0,jeune:false,offre:false,yva:false,lieu:"",periode:"tout",sort:"date",calMonth:null,calSel:null};
+let DATA=[],LIEUX={},BUSY=new Set(),PRIVE=null;
+const $=s=>document.querySelector(s);
+const today=new Date();today.setHours(0,0,0,0);
+const D=s=>{if(!s)return null;const[y,m,d]=s.slice(0,10).split("-").map(Number);return new Date(y,m-1,d)};
+const iso=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const fmt=(d,wd)=>d?(wd?JOURS[d.getDay()]+" ":"")+d.getDate()+(d.getDate()===1?"er":"")+" "+MOIS[d.getMonth()]:"";
+const fmtY=d=>d?fmt(d)+" "+d.getFullYear():"";
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const norm=s=>String(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+function toast(t){const el=$("#toast");el.textContent=t;el.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove("show"),2600)}
+function range(e){const a=D(e.debut),b=D(e.fin);if(!a)return"Dates à préciser";if(!b||+a===+b)return fmt(a,true)+" "+a.getFullYear();
+  return a.getFullYear()===b.getFullYear()?fmt(a)+" – "+fmtY(b):fmtY(a)+" – "+fmtY(b)}
+const li=e=>LIEUX[e.lieu]||{};
+const ended=e=>{const b=D(e.fin)||D(e.debut);return b&&b<today};
+const plays=(e,d)=>{const a=D(e.debut),b=D(e.fin)||a;return a&&d>=a&&d<=b};
+function stars(n,p){if(!n)return"";let s="";for(let i=1;i<=4;i++)s+=i<=n?"★":'<span class="off">★</span>';
+  return`<div class="stars" aria-label="${n} sur 4${p?", pronostic":""}">${s}</div>${p?'<div class="pro" title="Pronostic : pas encore critiqué">pronostic</div>':""}`}
+function stubWhen(e){
+  if(e.statut==="vu"&&e.vuLe&&e.vuLe.length){const v=D(e.vuLe[e.vuLe.length-1]);return`<div class="when"><small>vu le</small>${v.getDate()}<small>${MOIS[v.getMonth()]} ${String(v.getFullYear()).slice(2)}</small></div>`}
+  const a=D(e.debut);if(!a)return'<div class="when">–<small>dates à venir</small></div>';
+  const cur=a<today&&D(e.fin)>=today;const t=cur?D(e.fin):a;
+  return`<div class="when"><small>${cur?"jusqu’au":""}</small>${t.getDate()}<small>${MOIS[t.getMonth()]} ${String(t.getFullYear()).slice(2)}</small></div>`}
+function offerHTML(o){const v=D(o.vente);const open=v&&v<=new Date();
+  let t=`<strong>${esc(o.type)}</strong>${o.date?" le "+fmt(D(o.date),true):""}${o.tarif?", "+esc(o.tarif):""}`;
+  if(v)t+=open?", en vente":`, vente ${o.venteApprox?"vers le ":"le "}${fmt(v,true)}${String(o.vente).includes("T12")?" à 12h":""}`;
+  return`<div class="offer">${t}</div>`}
+function card(e){
+  const L=li(e),tags=[`<span class="tag">${esc(e.genre)}</span>`];
+  if(e.publicJeune)tags.push('<span class="tag ok">Public jeune</span>');
+  if(e.leonardYVa&&e.statut!=="vu")tags.push(`<span class="tag acc">${OWNER} y va</span>`);
+  if(e.statut==="vu")tags.push(`<span class="tag">Vu${e.vuLe&&e.vuLe.length?" le "+e.vuLe.map(x=>fmtY(D(x))).join(" et le "):""}</span>`);
+  const fin=D(e.fin);if(e.statut!=="vu"&&fin&&fin>=today&&(fin-today)/864e5<=10)tags.push('<span class="tag warn">Dernières dates</span>');
+  const place=[e.lieu||"Lieu à préciser",e.salle].filter(Boolean).join(", ")+(L.zone&&L.zone!=="Paris"?` (${L.zone.toLowerCase()})`:"");
+  const lien=e.lien||L.site;const mine=e.statut==="vu"&&(e.noteLeonard||e.avis);
+  return`<article class="ticket"><div class="stub">${stubWhen(e)}${stars(e.statut==="vu"&&e.noteLeonard?e.noteLeonard:e.note,e.statut!=="vu"&&e.pronostic)}</div><div class="body">
+  <h2><a href="#fiche-${e.id}">${esc(e.titre)}</a></h2>${e.credits?`<p class="cred">${esc(e.credits)}</p>`:""}
+  <p class="place">${esc(place)}${e.statut!=="vu"?"<br>"+esc(range(e)):""}</p>
+  ${mine?`<p class="why"><strong>Avis de ${OWNER}${e.noteLeonard?" ("+e.noteLeonard+"/4)":""} :</strong> ${esc(e.avis||"")}</p>`:(e.pourquoi?`<p class="why">${esc(e.pourquoi)}</p>`:"")}
+  ${e.statut!=="vu"?(e.offres||[]).map(offerHTML).join(""):""}
+  ${e.statut!=="vu"&&L.tarifJeune?`<div class="offer soft">Tarif jeune du lieu : ${esc(L.tarifJeune)}</div>`:""}
+  <div class="tags">${tags.join("")}</div>
+  <div class="actions"><a class="btn" href="#fiche-${e.id}">${e.statut==="vu"?"Fiche":"Dates et dispos"}</a>${lien?`<a class="link" href="${esc(lien)}" target="_blank" rel="noopener">Site officiel</a>`:""}</div>
+  </div></article>`}
+function matches(e){
+  if(e.statut!=="a-voir"||ended(e))return false;
+  if(state.q){const h=norm([e.titre,e.credits,e.lieu,e.salle,e.pourquoi,e.genre].join(" "));if(!state.q.split(/\s+/).every(w=>h.includes(w)))return false}
+  const L=li(e);
+  if(state.genres.size&&!state.genres.has(e.genre))return false;
+  if(state.zones.size&&!state.zones.has(L.zone))return false;
+  if(state.statutLieu.size&&!state.statutLieu.has(L.statut))return false;
+  if(state.noteMin&&e.note<state.noteMin)return false;
+  if(state.jeune&&!e.publicJeune)return false;
+  if(state.yva&&!e.leonardYVa)return false;
+  if(state.offre&&!((e.offres||[]).length||L.tarifJeune))return false;
+  if(state.lieu&&e.lieu!==state.lieu)return false;
+  if(state.periode!=="tout"){const a=D(e.debut),b=D(e.fin)||a;if(!a)return false;let s,t;
+    if(state.periode==="30"){s=today;t=new Date(today);t.setDate(t.getDate()+30)}else{const[y,m]=state.periode.split("-").map(Number);s=new Date(y,m-1,1);t=new Date(y,m,0)}
+    if(b<s||a>t)return false}
+  return true}
+const sortKey=e=>{const a=D(e.debut);return a?(a<today&&D(e.fin)?D(e.fin):a):new Date(9e15)};
+function sortList(a){return a.sort((x,y)=>state.sort==="note"?(y.note-x.note)||(sortKey(x)-sortKey(y)):sortKey(x)-sortKey(y))}
+
+/* Calendriers */
+function monthGrid(y,m,dayFn){
+  const first=new Date(y,m,1),last=new Date(y,m+1,0);let html='<div class="grid">'+["lun.","mar.","mer.","jeu.","ven.","sam.","dim."].map(d=>`<div class="dow">${d}</div>`).join("");
+  const pad=(first.getDay()+6)%7;for(let i=0;i<pad;i++)html+='<div class="cell out"></div>';
+  for(let d=1;d<=last.getDate();d++)html+=dayFn(new Date(y,m,d));
+  return html+"</div>"}
+function ficheCal(e){
+  const a=D(e.debut),b=D(e.fin)||a;if(!a)return'<div class="notice">Les dates de ce spectacle ne sont pas encore connues.</div>';
+  const offers=new Set((e.offres||[]).map(o=>o.date).filter(Boolean));
+  let start=a<today?new Date(today):new Date(a);start=new Date(start.getFullYear(),start.getMonth(),1);
+  let html="",n=0;
+  for(let c=new Date(start);c<=b&&n<6;c=new Date(c.getFullYear(),c.getMonth()+1,1),n++){
+    html+=`<div class="cal"><div class="cal-head"><h3>${MOIS_L[c.getMonth()]} ${c.getFullYear()}</h3></div>`+monthGrid(c.getFullYear(),c.getMonth(),d=>{
+      const k=iso(d),on=plays(e,d)&&d>=today,busy=BUSY.has(k);const cls=["cell",on?(busy?"busy":"play"):"",+d===+today?"today":""].join(" ");
+      return`<div class="${cls}" title="${on?(busy?OWNER+" n’est pas disponible":"Libre"):""}"><span class="n">${d.getDate()}</span>${offers.has(k)?'<span class="dot">★ offre</span>':""}</div>`})+"</div>"}
+  return html+`<div class="legend"><span style="--sw:var(--play)">Se joue, ${OWNER} libre</span><span style="--sw:var(--busy)">${OWNER} pris</span></div>
+  <p class="cred" style="margin-top:6px">Les relâches éventuelles ne sont pas indiquées : vérifie le calendrier du théâtre.</p>`}
+function renderCalendrier(){
+  if(!state.calMonth)state.calMonth=new Date(today.getFullYear(),today.getMonth(),1);
+  const c=state.calMonth,y=c.getFullYear(),m=c.getMonth();
+  const live=DATA.filter(e=>e.statut==="a-voir");
+  const ev={};const add=(k,t)=>(ev[k]=ev[k]||[]).push(t);
+  live.forEach(e=>{(e.offres||[]).forEach(o=>o.date&&add(o.date,"★ "+e.titre));
+    if(e.debut&&(!e.fin||e.fin===e.debut))add(e.debut,e.titre);
+    else if(e.debut&&e.note>=3){add(e.debut,"▸ "+e.titre);add(e.fin,"◂ "+e.titre)}});
+  let html=`<div class="cal"><div class="cal-head"><button class="btn" id="prevM" aria-label="Mois précédent">‹</button><h3>${MOIS_L[m]} ${y}</h3><button class="btn" id="nextM" aria-label="Mois suivant">›</button></div>`+
+    monthGrid(y,m,d=>{const k=iso(d),busy=BUSY.has(k),items=ev[k]||[];
+      return`<button class="cell ${busy?"busy":""} ${+d===+today?"today":""} ${state.calSel===k?"sel":""}" data-day="${k}" aria-label="${fmtY(d)}${busy?", "+OWNER+" pris":""}"><span class="n">${d.getDate()}</span>${items.slice(0,2).map(t=>`<span class="dot">${esc(t)}</span>`).join("")}${items.length>2?`<span class="dot">+${items.length-2}</span>`:""}</button>`})+
+    `<div class="legend"><span style="--sw:var(--busy)">${OWNER} pris</span><span style="--sw:transparent">★ offre jeune · ▸ première · ◂ dernière (★★★ et plus)</span></div></div>`;
+  if(state.calSel){const d=D(state.calSel);const on=sortList(live.filter(e=>plays(e,d)||(e.offres||[]).some(o=>o.date===state.calSel))).sort((a,b)=>b.note-a.note);
+    html+=`<div class="day">${fmtY(d)}${BUSY.has(state.calSel)?` · ${OWNER} est pris ce soir-là`:""}</div>`+(on.length?on.map(card).join(""):'<div class="empty">Aucun spectacle du catalogue ce jour-là.</div>')}
+  else html+='<div class="empty">Touche un jour pour voir tout ce qui se joue.</div>';
+  $("#list").innerHTML=html;
+  $("#prevM").onclick=()=>{state.calMonth=new Date(y,m-1,1);renderCalendrier()};
+  $("#nextM").onclick=()=>{state.calMonth=new Date(y,m+1,1);renderCalendrier()};
+  document.querySelectorAll("[data-day]").forEach(b=>b.onclick=()=>{state.calSel=b.dataset.day;renderCalendrier()})}
+
+/* Espace privé */
+const unb64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function decrypt(p,pw){
+  const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(pw),"PBKDF2",false,["deriveKey"]);
+  const key=await crypto.subtle.deriveKey({name:"PBKDF2",hash:"SHA-256",salt:unb64(p.salt),iterations:p.iter},base,{name:"AES-GCM",length:256},false,["decrypt"]);
+  return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name:"AES-GCM",iv:unb64(p.iv)},key,unb64(p.ct))))}
+function renderPrive(){
+  if(!PRIVE){$("#list").innerHTML=`<div class="cal priv"><h3 style="font:600 1.1rem Literata,Georgia,serif;margin:0 0 8px">Espace privé</h3>
+    <p class="cred">Réservé à ${OWNER}. Le déchiffrement se fait dans ton navigateur, rien n’est envoyé.</p>
+    <form id="pf" class="search"><input class="field" id="pw" type="password" autocomplete="current-password" placeholder="Mot de passe" aria-label="Mot de passe"><button class="btn primary">Ouvrir</button></form></div>`;
+    $("#pf").onsubmit=async ev=>{ev.preventDefault();try{const p=await (await fetch("data/prive.enc",{cache:"no-store"})).json();PRIVE=await decrypt(p,$("#pw").value);renderPrive()}catch(_){toast("Mot de passe incorrect")}};return}
+  const byId=Object.fromEntries(DATA.map(e=>[e.id,e]));
+  const rows=Object.entries(PRIVE.reservations||{}).sort((a,b)=>(a[1].date||"9").localeCompare(b[1].date||"9"));
+  const dates={};rows.forEach(([,r])=>r.date&&(dates[r.date]=(dates[r.date]||0)+1));
+  const ics=`webcal://${location.host}${location.pathname.replace(/[^/]*$/,"")}data/agenda-${PRIVE.icsToken}.ics`;
+  $("#list").innerHTML=`<div class="cal priv"><h3 style="font:600 1.1rem Literata,Georgia,serif;margin:0 0 8px">Mes réservations</h3><div class="scroll"><table>
+    <tr><th>Date</th><th>Spectacle</th><th>Salle</th><th>Détails</th></tr>
+    ${rows.map(([id,r])=>{const s=byId[id]||{titre:id};const past=r.date&&D(r.date)<today;
+      return`<tr style="${past?"opacity:.55":""}"><td>${r.date?fmtY(D(r.date)):"À préciser"}${r.heure?"<br>"+esc(r.heure):""}</td><td><a href="#fiche-${esc(id)}">${esc(s.titre)}</a></td><td>${esc(r.salle||s.lieu||"")}</td><td>${[r.places?"Places : "+esc(r.places):"",r.note?esc(r.note):"",dates[r.date]>1?"<strong>Conflit</strong>":""].filter(Boolean).join("<br>")}</td></tr>`}).join("")}
+    </table></div></div>
+    <div class="cal priv"><h3 style="font:600 1.05rem Literata,Georgia,serif;margin:0 0 6px">Abonnement Apple Calendar</h3>
+    <p class="cred">Sur iPhone : Réglages, Calendrier, Comptes, Ajouter un compte, Autre, S’abonner à un calendrier, puis colle cette adresse.</p>
+    <p><code id="icsurl">${esc(ics)}</code></p><button class="btn" id="copyIcs">Copier l’adresse</button></div>
+    ${(PRIVE.envies||[]).length?`<div class="cal priv"><h3 style="font:600 1.05rem Literata,Georgia,serif;margin:0 0 6px">Envies</h3><p>${PRIVE.envies.map(id=>`<a href="#fiche-${esc(id)}">${esc((byId[id]||{titre:id}).titre)}</a>`).join(" · ")}</p></div>`:""}
+    <button class="btn" id="lock">Verrouiller</button>`;
+  $("#copyIcs").onclick=()=>navigator.clipboard.writeText(ics).then(()=>toast("Adresse copiée"));
+  $("#lock").onclick=()=>{PRIVE=null;renderPrive()}}
+
+/* Fiche */
+function openFiche(id){const e=DATA.find(x=>x.id===id);if(!e){closeFiche();return}
+  $("#sheetIn").innerHTML=`<div class="sheet-top"><button class="btn primary" id="share">Partager</button><button class="btn" id="close">Fermer</button></div>${card(e)}
+    ${e.statut==="vu"?"":`<div class="day">Dates et disponibilités de ${OWNER}</div>${ficheCal(e)}`}`;
+  $("#sheet").classList.add("open");document.body.style.overflow="hidden";
+  $("#close").onclick=()=>{history.pushState(null,"",location.pathname+location.search);closeFiche()};
+  $("#share").onclick=async()=>{const url=location.origin+location.pathname+"#fiche-"+e.id;
+    const text=`${e.titre} : voici les dates où ${OWNER} est libre.`;
+    try{if(navigator.share){await navigator.share({title:e.titre,text,url});return}}catch(_){return}
+    try{await navigator.clipboard.writeText(url);toast("Lien copié")}catch(_){prompt("Copie ce lien :",url)}}}
+function closeFiche(){$("#sheet").classList.remove("open");document.body.style.overflow=""}
+$("#sheet").onclick=ev=>{if(ev.target.id==="sheet"){history.pushState(null,"",location.pathname+location.search);closeFiche()}};
+document.addEventListener("keydown",ev=>{if(ev.key==="Escape"&&$("#sheet").classList.contains("open")){history.pushState(null,"",location.pathname+location.search);closeFiche()}});
+function route(){const h=location.hash.slice(1);
+  if(h.startsWith("fiche-"))openFiche(h.slice(6));else{closeFiche();if(h.startsWith("vue-"))setView(h.slice(4),true)}}
+window.addEventListener("hashchange",route);
+
+/* Vues */
+function setView(v,fromHash){if(!["catalogue","calendrier","ventes","vus","prive"].includes(v))v="catalogue";state.view=v;
+  document.querySelectorAll(".tabs button").forEach(x=>x.setAttribute("aria-selected",x.dataset.view===v));
+  if(!fromHash)history.replaceState(null,"","#vue-"+v);render()}
+function render(){
+  $("#controls").style.display=state.view==="catalogue"?"":"none";
+  const list=$("#list");
+  if(state.view==="catalogue"){const items=sortList(DATA.filter(matches));
+    $("#count").textContent=items.length+" spectacle"+(items.length>1?"s":"");
+    list.innerHTML=items.length?items.map(card).join(""):'<div class="empty">Aucun spectacle ne correspond. Retire un filtre ou élargis la période.</div>'}
+  else if(state.view==="calendrier")renderCalendrier();
+  else if(state.view==="ventes"){const rows=[];DATA.forEach(e=>e.statut==="a-voir"&&(e.offres||[]).forEach(o=>{const v=D(o.vente);if(v&&v>=today)rows.push({e,o,v})}));
+    rows.sort((a,b)=>a.v-b.v);let html="",last="";
+    rows.forEach(({e,o,v})=>{const k=fmtY(v);if(k!==last){html+=`<div class="day">Ouverture ${o.venteApprox?"vers le":"le"} ${fmt(v,true)} ${v.getFullYear()}${String(o.vente).includes("T12")?", 12h":""}</div>`;last=k}html+=card(e)});
+    list.innerHTML=html||'<div class="empty">Aucune ouverture de vente à venir.</div>'}
+  else if(state.view==="vus"){const vus=DATA.filter(e=>e.statut==="vu"&&e.vuLe&&e.vuLe.length).sort((a,b)=>b.vuLe.at(-1).localeCompare(a.vuLe.at(-1)));
+    let html=`<div class="meta">${vus.length} spectacles vus par ${OWNER}</div>`,last="";
+    vus.forEach(e=>{const y=e.vuLe.at(-1).slice(0,4);if(y!==last){html+=`<div class="day">${y}</div>`;last=y}html+=card(e)});
+    list.innerHTML=vus.length?html:'<div class="empty">Rien pour l’instant.</div>'}
+  else renderPrive()}
+function buildFilters(){
+  const months=[];for(let i=0;i<10;i++){const d=new Date(today.getFullYear(),today.getMonth()+i,1);months.push([iso(d).slice(0,7),MOIS_L[d.getMonth()]+" "+d.getFullYear()])}
+  const lieux=[...new Set(DATA.filter(e=>e.statut==="a-voir").map(e=>e.lieu).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"fr"));
+  const chip=(g,v,l)=>`<button class="chip" data-grp="${g}" data-val="${esc(v)}" aria-pressed="false">${esc(l||v)}</button>`;
+  $("#filters").innerHTML=`
+  <div class="frow"><h3>Genre</h3><div class="chips">${GENRES.map(g=>chip("genres",g)).join("")}</div></div>
+  <div class="frow"><h3>Note minimale</h3><div class="chips">${[0,2,3,4].map(n=>`<button class="chip" data-grp="noteMin" data-val="${n}" aria-pressed="${n===0}">${n?"★".repeat(n)+" et +":"Toutes"}</button>`).join("")}</div></div>
+  <div class="frow"><h3>Zone et salle</h3><div class="chips">${chip("zones","Paris")}${chip("zones","Petite couronne")}${chip("statutLieu","Public","Théâtre public")}${chip("statutLieu","Privé","Théâtre privé")}</div></div>
+  <div class="frow"><h3>Pour qui, à quel prix</h3><div class="chips">${chip("jeune","1","Public jeune")}${chip("offre","1","Offre ou tarif jeune")}${chip("yva","1",OWNER+" y va")}</div></div>
+  <div class="frow" style="display:flex;gap:8px;flex-wrap:wrap"><select id="periode" aria-label="Période"><option value="tout">Toute la saison</option><option value="30">30 prochains jours</option>${months.map(([v,l])=>`<option value="${v}">${l}</option>`).join("")}</select>
+  <select id="lieu" aria-label="Lieu"><option value="">Tous les lieux</option>${lieux.map(l=>`<option>${esc(l)}</option>`).join("")}</select>
+  <button class="btn" id="reset">Effacer</button></div>`;
+  $("#filters").querySelectorAll(".chip").forEach(b=>b.onclick=()=>{const g=b.dataset.grp,v=b.dataset.val;
+    if(g==="noteMin"){state.noteMin=+v;$("#filters").querySelectorAll('[data-grp="noteMin"]').forEach(x=>x.setAttribute("aria-pressed",x===b))}
+    else if(["jeune","offre","yva"].includes(g)){state[g]=!state[g];b.setAttribute("aria-pressed",state[g])}
+    else{const s=state[g];s.has(v)?s.delete(v):s.add(v);b.setAttribute("aria-pressed",s.has(v))}
+    label();render()});
+  $("#periode").onchange=e=>{state.periode=e.target.value;label();render()};
+  $("#lieu").onchange=e=>{state.lieu=e.target.value;label();render()};
+  $("#reset").onclick=()=>{Object.assign(state,{genres:new Set(),zones:new Set(),statutLieu:new Set(),noteMin:0,jeune:false,offre:false,yva:false,lieu:"",periode:"tout"});buildFilters();label();render()}}
+function label(){const n=state.genres.size+state.zones.size+state.statutLieu.size+(state.noteMin?1:0)+state.jeune+state.offre+state.yva+(state.lieu?1:0)+(state.periode!=="tout"?1:0);
+  $("#toggleFilters").textContent=n?`Filtres (${n})`:"Filtres"}
+$("#toggleFilters").onclick=()=>{const f=$("#filters");f.classList.toggle("open");$("#toggleFilters").setAttribute("aria-expanded",f.classList.contains("open"))};
+$("#q").oninput=e=>{state.q=norm(e.target.value).trim();render()};
+$("#sort").onchange=e=>{state.sort=e.target.value;render()};
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>setView(b.dataset.view));
+(async()=>{
+  try{
+    const [s,l,d]=await Promise.all(["data/spectacles.json","data/lieux.json","data/dispo.json"].map(u=>fetch(u,{cache:"no-cache"}).then(r=>r.json())));
+    DATA=s.spectacles;LIEUX=l;BUSY=new Set([...(d.reservations||[]),...(d.manuel||[]),...(d.calendrier||[])]);
+    const n=DATA.filter(e=>e.statut==="a-voir"&&!ended(e)).length;
+    $("#sub").textContent=`${n} spectacles à Paris et en petite couronne, notés et commentés par ${OWNER}. Mis à jour le ${fmtY(D(s.maj))}.`;
+    buildFilters();label();
+    const h=location.hash.slice(1);if(h.startsWith("vue-"))setView(h.slice(4),true);else render();
+    route();
+  }catch(err){$("#list").innerHTML='<div class="notice">Impossible de charger la saison. Recharge la page.</div>'}
+})();
+</script>
+</body>
+</html>

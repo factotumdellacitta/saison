@@ -1,0 +1,37 @@
+# Quand Claude Code envoie une branche claude/…, on vérifie, on fusionne dans main et on déclenche la publication.
+name: Intégrer les modifications de Claude Code
+on:
+  push:
+    branches: ["claude/**"]
+permissions:
+  contents: write
+  actions: write
+concurrency:
+  group: integrer
+  cancel-in-progress: false
+jobs:
+  integrer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Contrôle des données
+        run: node tools/check.mjs
+      - name: Fusion dans main
+        run: |
+          git config user.name "saison-bot"
+          git config user.email "saison-bot@users.noreply.github.com"
+          git fetch origin main
+          git checkout main
+          git merge --no-edit "origin/${GITHUB_REF_NAME}"
+          node tools/check.mjs
+          git push origin main
+          git push origin --delete "${GITHUB_REF_NAME}" || true
+      - name: Lancer la publication
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run publier.yml --ref main
