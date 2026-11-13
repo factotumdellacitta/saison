@@ -1,4 +1,7 @@
-# Publie le site sur GitHub Pages. Toutes les heures, met aussi à jour les soirs pris depuis le calendrier Apple.
+# Publie le site sur GitHub Pages.
+# À chaque passage : génère les fichiers dérivés (index, soirs réservés, flux agenda et ventes) avec le secret SAISON_MDP,
+# et les commite s'ils ont changé. Toutes les heures, met aussi à jour les soirs pris depuis le calendrier Apple.
+# Pas de boucle : un push fait avec le GITHUB_TOKEN ne relance aucun workflow.
 name: Publier le site
 on:
   push:
@@ -21,6 +24,8 @@ jobs:
       url: ${{ steps.deploiement.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -31,25 +36,35 @@ jobs:
         run: |
           npm install --no-save node-ical@0.27.3
           node tools/sync-dispo.mjs
-          if ! git diff --quiet data/dispo.json; then
+      - name: Fichiers générés (index, soirs réservés, flux)
+        env:
+          SAISON_MDP: ${{ secrets.SAISON_MDP }}
+        run: node tools/build.mjs
+      - name: Enregistrer les changements
+        run: |
+          git add -A data
+          if git diff --cached --quiet; then
+            if [ "${{ github.event_name }}" = "schedule" ]; then echo "RIEN_A_PUBLIER=1" >> "$GITHUB_ENV"; fi
+          else
             git config user.name "saison-bot"
             git config user.email "saison-bot@users.noreply.github.com"
-            git add data/dispo.json
-            git commit -m "Soirs pris : synchronisation du calendrier"
-            git push origin main
-          elif [ "${{ github.event_name }}" = "schedule" ]; then
-            echo "RIEN_A_PUBLIER=1" >> "$GITHUB_ENV"
+            git commit -m "Mise à jour automatique : soirs pris et fichiers générés"
+            git pull --rebase origin main
+            git push origin HEAD:main
           fi
       - name: Contrôle des données
         if: env.RIEN_A_PUBLIER != '1'
         run: node tools/check.mjs
-      - name: Préparer le site
+      - name: Préparer le site (index.html, assets, data uniquement)
         if: env.RIEN_A_PUBLIER != '1'
         run: |
           mkdir -p _site
           cp index.html _site/
+          if [ -d assets ]; then cp -r assets _site/assets; fi
           cp -r data _site/data
+          rm -f _site/data/_prive.json
           touch _site/.nojekyll
+          find _site -type f | sort
       - uses: actions/configure-pages@v5
         if: env.RIEN_A_PUBLIER != '1'
       - uses: actions/upload-pages-artifact@v3

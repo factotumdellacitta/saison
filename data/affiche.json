@@ -1,12 +1,17 @@
 {
  "maj": "2026-11-13",
- "spectacles": [
+ "sorties": [
   {
    "id": "10-000-langages-pour-en-faire-un",
    "titre": "10 000 langages pour en faire un",
-   "credits": "Laura Vazquez",
-   "genre": "Théâtre",
-   "lieu": "Odéon",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Laura Vazquez",
+     "role": "auteur"
+    }
+   ],
+   "lieuId": "odeon",
    "salle": "Berthier Paris 17",
    "debut": "2027-04-16",
    "fin": "2027-04-24",
@@ -15,17 +20,23 @@
    "pronostic": true,
    "pourquoi": "Trois performances autour du langage, avec Théo Mercier et Rebeka Warrior.",
    "lien": "https://www.theatre-odeon.eu/en/season-2026-2027/performances-2026-2027/laura-vazquez-10-000-langages-le-soleil-se-couche-parce-quil-est-lourd-s26-27-en",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "10000-gestes",
    "titre": "10000 gestes",
-   "credits": "Boris Charmatz",
-   "genre": "Danse",
-   "lieu": "Chaillot",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Boris Charmatz",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "chaillot",
    "salle": "",
    "debut": "2027-04-09",
    "fin": "2027-04-12",
@@ -34,36 +45,59 @@
    "pronostic": false,
    "pourquoi": "Sur le Requiem de Mozart, au Théâtre de la Ville.",
    "lien": "https://theatre-chaillot.fr/fr/programmation",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "4-48-psychose",
    "titre": "4.48 Psychose",
-   "credits": "Sarah Kane / Jacques Osinski, avec Sandrine Bonnaire",
-   "genre": "Théâtre",
-   "lieu": "Théâtre de l’Atelier",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Sarah Kane",
+     "role": "auteur"
+    },
+    {
+     "nom": "Jacques Osinski",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Sandrine Bonnaire",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "theatre-de-l-atelier",
    "salle": "",
    "debut": null,
    "fin": null,
-   "datesTexte": "",
    "note": 3,
    "pronostic": false,
    "pourquoi": "Seule en scène, très bien reçu par la critique.",
    "lien": "https://www.offi.fr/theatre/theatre-de-latelier-1472/448-psychose-106897.html",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "7-minutes",
    "titre": "7 minutes",
-   "credits": "Stefano Massini / Maëlle Poésy",
-   "genre": "Théâtre",
-   "lieu": "Théâtre de la Ville",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Stefano Massini",
+     "role": "auteur"
+    },
+    {
+     "nom": "Maëlle Poésy",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "theatre-de-la-ville",
    "salle": "Abbesses",
    "debut": "2027-01-15",
    "fin": "2027-01-23",
@@ -72,17 +106,27 @@
    "pronostic": false,
    "pourquoi": "11 interprètes.",
    "lien": "https://www.theatredelaville-paris.com/en/spectacles/saison-26-27/theatre/7-minutes-stefano-massini-maelle-poesy",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "a-la-renverse",
    "titre": "À la renverse",
-   "credits": "Anne Dufourmantelle / Noëmie Ksicova",
-   "genre": "Théâtre",
-   "lieu": "TGP",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Anne Dufourmantelle",
+     "role": "auteur"
+    },
+    {
+     "nom": "Noëmie Ksicova",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "tgp",
    "salle": "",
    "debut": "2027-02-24",
    "fin": "2027-03-07",
@@ -91,18 +135,28 @@
    "pronostic": true,
    "pourquoi": "Création.",
    "lien": "https://tgp.theatregerardphilipe.com/spectacle/a-la-renverse/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "amadoca",
    "titre": "Amadoca",
-   "credits": "d'après Sofia Andrukhovych / Jules Audry",
-   "genre": "Théâtre",
-   "lieu": "La Colline",
-   "salle": "—",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Sofia Andrukhovych",
+     "role": "auteur"
+    },
+    {
+     "nom": "Jules Audry",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "la-colline",
+   "salle": "",
    "debut": "2027-01-07",
    "fin": "2027-01-31",
    "datesTexte": "7 – 31 janv. 2027",
@@ -110,17 +164,31 @@
    "pronostic": true,
    "pourquoi": "Roman ukrainien, en français et ukrainien surtitré.",
    "lien": "https://www.colline.fr/spectacles/amadoca",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "anna-netrebko-brian-jagde-george-petean",
    "titre": "Anna Netrebko, Brian Jagde, George Petean",
-   "credits": "",
-   "genre": "Récital",
-   "lieu": "TCE",
+   "categorie": "Récital",
+   "artistes": [
+    {
+     "nom": "Anna Netrebko",
+     "role": "interprète"
+    },
+    {
+     "nom": "Brian Jagde",
+     "role": "interprète"
+    },
+    {
+     "nom": "George Petean",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "tce",
    "salle": "",
    "debut": "2027-03-14",
    "fin": "2027-03-14",
@@ -129,26 +197,36 @@
    "pronostic": false,
    "pourquoi": "Verdi, Puccini. Date fermée aux groupes : forte demande, réserver dès l’ouverture.",
    "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/sung-recital/anna-netrebko-brian-jagde-george-petean-1",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Carte Jeunes TCE",
      "date": "2027-03-14",
      "tarif": "20 €",
-     "condition": "Carte Jeunes TCE",
      "vente": "2026-12-14T10:00",
-     "venteApprox": true
+     "venteApprox": true,
+     "condition": "Carte Jeunes TCE"
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "apres-guerre",
    "titre": "Après-guerre",
-   "credits": "d'après Beauvoir / Constance Meyer",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Simone de Beauvoir",
+     "role": "auteur"
+    },
+    {
+     "nom": "Constance Meyer",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "comedie-francaise",
    "salle": "Vieux-Colombier",
    "debut": "2027-04-21",
    "fin": "2027-05-30",
@@ -157,17 +235,23 @@
    "pronostic": true,
    "pourquoi": "Création. Beauvoir, Sartre, Camus, Koestler.",
    "lien": "https://comedie-francaise.fr/2026-2027/apres-guerre",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "aria-da-capo",
    "titre": "Aria da Capo",
-   "credits": "Séverine Chavrier",
-   "genre": "Théâtre",
-   "lieu": "Théâtre de la Ville",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Séverine Chavrier",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "theatre-de-la-ville",
    "salle": "Abbesses",
    "debut": "2026-12-10",
    "fin": "2026-12-18",
@@ -176,17 +260,27 @@
    "pronostic": false,
    "pourquoi": "",
    "lien": "https://www.theatredelaville-paris.com/en/spectacles/saison-26-27/theatre/aria-da-capo-severine-chavrier",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "asmik-grigorian-lukas-geniusas",
    "titre": "Asmik Grigorian, Lukas Geniušas",
-   "credits": "",
-   "genre": "Récital",
-   "lieu": "TCE",
+   "categorie": "Récital",
+   "artistes": [
+    {
+     "nom": "Asmik Grigorian",
+     "role": "interprète"
+    },
+    {
+     "nom": "Lukas Geniušas",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "tce",
    "salle": "",
    "debut": "2027-05-29",
    "fin": "2027-05-29",
@@ -195,26 +289,33 @@
    "pronostic": false,
    "pourquoi": "Rachmaninov. L'une des voix majeures du moment.",
    "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/sung-recital/asmik-grigorian-lukas-geniusas-1",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Carte Jeunes TCE",
      "date": "2027-05-29",
      "tarif": "15 €",
-     "condition": "Carte Jeunes TCE",
      "vente": "2027-02-28T10:00",
-     "venteApprox": true
+     "venteApprox": true,
+     "condition": "Carte Jeunes TCE"
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "attila",
    "titre": "Attila",
-   "credits": "Verdi (version concert)",
-   "genre": "Opéra",
-   "lieu": "TCE",
+   "categorie": "Opéra",
+   "sousGenre": "Version de concert",
+   "artistes": [
+    {
+     "nom": "Giuseppe Verdi",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "tce",
    "salle": "",
    "debut": "2027-03-04",
    "fin": "2027-03-06",
@@ -223,45 +324,60 @@
    "pronostic": false,
    "pourquoi": "Riccardo Muti.",
    "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-version/attila-1",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Carte Jeunes TCE",
      "date": "2027-03-06",
      "tarif": "20 €",
-     "condition": "Carte Jeunes TCE",
      "vente": "2026-12-06T10:00",
-     "venteApprox": true
+     "venteApprox": true,
+     "condition": "Carte Jeunes TCE"
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "berlin-mon-garcon",
    "titre": "Berlin mon garçon",
-   "credits": "Marie NDiaye",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Marie NDiaye",
+     "role": "auteur"
+    }
+   ],
+   "lieuId": "comedie-francaise",
    "salle": "Vieux-Colombier",
    "debut": null,
    "fin": null,
-   "datesTexte": "",
    "note": 0,
    "pronostic": false,
    "pourquoi": "",
    "lien": null,
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": true,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": true
+   "statut": "a-voir"
   },
   {
    "id": "c-est-beau",
    "titre": "C'est beau",
-   "credits": "Sarraute / Clément Hervieu-Léger",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Nathalie Sarraute",
+     "role": "auteur"
+    },
+    {
+     "nom": "Clément Hervieu-Léger",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "comedie-francaise",
    "salle": "Studio-Théâtre",
    "debut": "2026-11-26",
    "fin": "2027-01-14",
@@ -270,17 +386,23 @@
    "pronostic": true,
    "pourquoi": "Entrée au Répertoire.",
    "lien": "https://comedie-francaise.fr/2026-2027/cest-beau",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "cabaret-teheran",
    "titre": "Cabaret Téhéran",
-   "credits": "Gurshad Shaheman",
-   "genre": "Théâtre",
-   "lieu": "Théâtre de la Bastille",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Gurshad Shaheman",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "theatre-de-la-bastille",
    "salle": "",
    "debut": "2027-01-01",
    "fin": "2027-01-31",
@@ -289,17 +411,23 @@
    "pronostic": true,
    "pourquoi": "Cabaret transformiste sur la pop iranienne, par un artiste associé de la maison.",
    "lien": "https://www.theatre-bastille.com/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "capra-une-chevre",
    "titre": "CAPRA (une chèvre)",
-   "credits": "Jeanne Candel",
-   "genre": "Théâtre",
-   "lieu": "TGP",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Jeanne Candel",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "tgp",
    "salle": "",
    "debut": "2026-12-02",
    "fin": "2026-12-13",
@@ -308,36 +436,47 @@
    "pronostic": true,
    "pourquoi": "Création.",
    "lien": "https://tgp.theatregerardphilipe.com/spectacle/capra-une-chevre/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "capri",
    "titre": "Capri – wyspa uciekinierów",
-   "credits": "Krystian Lupa",
-   "genre": "Théâtre",
-   "lieu": "Odéon",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Krystian Lupa",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "odeon",
    "salle": "",
    "debut": null,
    "fin": null,
-   "datesTexte": "",
    "note": 0,
    "pronostic": false,
    "pourquoi": "",
    "lien": null,
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": true,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": true
+   "statut": "a-voir"
   },
   {
    "id": "ce-que-j-appelle-oubli",
    "titre": "Ce que j'appelle oubli",
-   "credits": "Laurent Mauvignier",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Laurent Mauvignier",
+     "role": "auteur"
+    }
+   ],
+   "lieuId": "comedie-francaise",
    "salle": "Studio-Théâtre",
    "debut": "2027-06-02",
    "fin": "2027-07-04",
@@ -346,17 +485,27 @@
    "pronostic": true,
    "pourquoi": "Seul-en-scène de Denis Podalydès.",
    "lien": "https://comedie-francaise.fr/2026-2027/ce-que-jappelle-oubli",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "ceci-n-est-pas-nous",
    "titre": "Ceci n'est pas nous",
-   "credits": "Christophe Pellet / Emmanuel Lagarrigue",
-   "genre": "Théâtre",
-   "lieu": "Nanterre-Amandiers",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Christophe Pellet",
+     "role": "auteur"
+    },
+    {
+     "nom": "Emmanuel Lagarrigue",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "nanterre-amandiers",
    "salle": "",
    "debut": "2027-01-07",
    "fin": "2027-01-24",
@@ -365,17 +514,23 @@
    "pronostic": true,
    "pourquoi": "Petite salle.",
    "lien": "https://nanterre-amandiers.com/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "celle-qui-doute",
    "titre": "Celle qui doute",
-   "credits": "Isabelle Lafon",
-   "genre": "Théâtre",
-   "lieu": "La Colline",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Isabelle Lafon",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "la-colline",
    "salle": "Petit théâtre",
    "debut": "2026-11-12",
    "fin": "2026-12-12",
@@ -384,17 +539,27 @@
    "pronostic": true,
    "pourquoi": "Seule en scène, 1h15. Nouveaux horaires : 20h30 en semaine, 18h le samedi.",
    "lien": "https://www.colline.fr/spectacles/celle-qui-doute",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "ces-filles-qu-on-attend",
    "titre": "Ces filles qu'on attend",
-   "credits": "Claudine Galea / Elsa Granat",
-   "genre": "Théâtre",
-   "lieu": "TGP",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Claudine Galea",
+     "role": "auteur"
+    },
+    {
+     "nom": "Elsa Granat",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "tgp",
    "salle": "",
    "debut": "2026-11-18",
    "fin": "2026-11-29",
@@ -403,17 +568,18 @@
    "pronostic": true,
    "pourquoi": "Création.",
    "lien": "https://tgp.theatregerardphilipe.com/spectacle/ces-filles-quon-attend-2/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "chante-et-tais-toi",
    "titre": "Chante et tais-toi",
-   "credits": "",
-   "genre": "Comédie musicale",
-   "lieu": "Comédie des Champs-Élysées",
+   "categorie": "Comédie musicale",
+   "artistes": [],
+   "lieuId": "comedie-des-champs-elysees",
    "salle": "",
    "debut": null,
    "fin": null,
@@ -422,17 +588,23 @@
    "pronostic": false,
    "pourquoi": "Laurent Ruquier et Vincent Niclo.",
    "lien": "https://www.offi.fr/theatre/comedie-des-champs-elysees-1908/chante-et-tais-toi-106701.html",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "chiens",
    "titre": "Chiens",
-   "credits": "Lorraine de Sagazan",
-   "genre": "Théâtre",
-   "lieu": "Les Gémeaux",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Lorraine de Sagazan",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "les-gemeaux",
    "salle": "",
    "debut": "2027-03-15",
    "fin": "2027-03-21",
@@ -441,17 +613,23 @@
    "pronostic": true,
    "pourquoi": "Dès 16 ans.",
    "lien": "https://www.lesgemeaux.com/spectacles/chiens/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "chiens-de-navarre-i-will-survive",
    "titre": "Chiens de Navarre : I Will Survive",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "MC93",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Chiens de Navarre",
+     "role": "compagnie"
+    }
+   ],
+   "lieuId": "mc93",
    "salle": "",
    "debut": "2027-01-26",
    "fin": "2027-01-29",
@@ -460,17 +638,18 @@
    "pronostic": false,
    "pourquoi": "Comédie, 2h.",
    "lien": "https://www.mc93.com/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "concert-tres-chic",
    "titre": "Concert très chic",
-   "credits": "",
-   "genre": "Comédie musicale",
-   "lieu": "Bouffes Parisiens",
+   "categorie": "Comédie musicale",
+   "artistes": [],
+   "lieuId": "bouffes-parisiens",
    "salle": "",
    "debut": null,
    "fin": null,
@@ -479,17 +658,27 @@
    "pronostic": false,
    "pourquoi": "Avec Michel Fau.",
    "lien": "https://www.offi.fr/theatre/theatre-des-bouffes-parisiens-1563/concert-tres-chic-106727.html",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "correspondances-nocturnes",
    "titre": "Correspondances nocturnes",
-   "credits": "Malandain / Marston",
-   "genre": "Danse",
-   "lieu": "Opéra de Paris – Garnier",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Thierry Malandain",
+     "role": "chorégraphie"
+    },
+    {
+     "nom": "Cathy Marston",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "palais-garnier",
    "salle": "",
    "debut": "2027-02-01",
    "fin": "2027-02-28",
@@ -498,25 +687,32 @@
    "pronostic": false,
    "pourquoi": "Avant-première jeunes le 11 fév.",
    "lien": "https://www.operadeparis.fr/saison-26-27/ballet/correspondances-nocturnes",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Avant-première jeunes",
      "date": "2027-02-11",
      "tarif": "10 €",
      "vente": "2027-01-21T12:00",
+     "venteApprox": false,
      "condition": "Nés après le 1er janvier 1998, 2 places max."
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "dancing-with-bob",
    "titre": "Dancing with Bob",
-   "credits": "Trisha Brown Dance Company",
-   "genre": "Danse",
-   "lieu": "Chaillot",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Trisha Brown Dance Company",
+     "role": "compagnie"
+    }
+   ],
+   "lieuId": "chaillot",
    "salle": "",
    "debut": "2027-04-08",
    "fin": "2027-04-16",
@@ -525,17 +721,23 @@
    "pronostic": false,
    "pourquoi": "Centenaire Rauschenberg, à la Villette. Incontournable.",
    "lien": "https://theatre-chaillot.fr/fr/programmation",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "delay-the-sadness",
    "titre": "Delay the Sadness",
-   "credits": "Sharon Eyal",
-   "genre": "Danse",
-   "lieu": "Chaillot",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Sharon Eyal",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "chaillot",
    "salle": "",
    "debut": "2026-12-16",
    "fin": "2026-12-19",
@@ -544,17 +746,27 @@
    "pronostic": false,
    "pourquoi": "Huit danseurs, pièce sur le deuil. Aussi aux Gémeaux fin novembre. Plus tôt qu'à Chaillot.",
    "lien": "https://theatre-chaillot.fr/fr/programmation",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "deshonoree",
    "titre": "Déshonorée",
-   "credits": "Saverio La Ruina / Françoise Gillard",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Saverio La Ruina",
+     "role": "auteur"
+    },
+    {
+     "nom": "Françoise Gillard",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "comedie-francaise",
    "salle": "Théâtre 14",
    "debut": "2027-04-27",
    "fin": "2027-05-09",
@@ -563,17 +775,31 @@
    "pronostic": true,
    "pourquoi": "Seule-en-scène d'Anna Cervinka.",
    "lien": "https://comedie-francaise.fr/2026-2027/deshonoree",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "deux-trois-choses-qu-elle-nous-dit-d-elle",
    "titre": "Deux trois choses qu'elle nous dit d'elle",
-   "credits": "Beauvoir / Marie-Armelle Deguy et Marcel Bozonnet",
-   "genre": "Théâtre",
-   "lieu": "Théâtre de la Ville",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Simone de Beauvoir",
+     "role": "auteur"
+    },
+    {
+     "nom": "Marie-Armelle Deguy",
+     "role": "artiste"
+    },
+    {
+     "nom": "Marcel Bozonnet",
+     "role": "artiste"
+    }
+   ],
+   "lieuId": "theatre-de-la-ville",
    "salle": "Sarah Bernhardt, Studio",
    "debut": "2026-12-01",
    "fin": "2026-12-19",
@@ -582,17 +808,23 @@
    "pronostic": true,
    "pourquoi": "Création.",
    "lien": "https://www.theatredelaville-paris.com/en/spectacles/saison-26-27/theatre/simone-de-beauvoir-deux-trois-choses-quelle-nous-dit-delle",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "didon-et-enee",
    "titre": "Didon et Énée",
-   "credits": "Purcell",
-   "genre": "Opéra",
-   "lieu": "TCE",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Henry Purcell",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "tce",
    "salle": "",
    "debut": "2027-03-13",
    "fin": "2027-03-13",
@@ -601,26 +833,36 @@
    "pronostic": false,
    "pourquoi": "Adèle Charvet. Court et bouleversant.",
    "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-version/dido-and-aeneas-1",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Carte Jeunes TCE",
      "date": "2027-03-13",
      "tarif": "20 €",
-     "condition": "Carte Jeunes TCE",
      "vente": "2026-12-13T10:00",
-     "venteApprox": true
+     "venteApprox": true,
+     "condition": "Carte Jeunes TCE"
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "dipe-antigone",
    "titre": "Œdipe / Antigone",
-   "credits": "Stéphane Braunschweig",
-   "genre": "Théâtre",
-   "lieu": "Théâtre de la Ville",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Sophocle",
+     "role": "auteur"
+    },
+    {
+     "nom": "Stéphane Braunschweig",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "theatre-de-la-ville",
    "salle": "Sarah Bernhardt, Grande salle",
    "debut": "2027-01-21",
    "fin": "2027-02-06",
@@ -629,36 +871,55 @@
    "pronostic": true,
    "pourquoi": "Création d'après trois tragédies de Sophocle.",
    "lien": "https://www.theatredelaville-paris.com/en/spectacles/saison-26-27/theatre/oedipe-antigone-stephane-braunschweig",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "diplomatie",
    "titre": "Diplomatie",
-   "credits": "Cyril Gely, avec Dominique Pinon, Bruno Putzulu",
-   "genre": "Théâtre",
-   "lieu": "Théâtre Hébertot",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Cyril Gely",
+     "role": "auteur"
+    },
+    {
+     "nom": "Dominique Pinon",
+     "role": "interprète"
+    },
+    {
+     "nom": "Bruno Putzulu",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "theatre-hebertot",
    "salle": "",
    "debut": null,
    "fin": null,
-   "datesTexte": "",
    "note": 2,
    "pronostic": false,
    "pourquoi": "Huis clos historique, Paris 1944.",
    "lien": "https://www.offi.fr/theatre/theatre-hebertot-2446/diplomatie-106413.html",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "dipus-rex",
    "titre": "Œdipus Rex",
-   "credits": "Stravinsky",
-   "genre": "Opéra",
-   "lieu": "TCE",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Igor Stravinsky",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "tce",
    "salle": "",
    "debut": "2027-05-24",
    "fin": "2027-05-24",
@@ -667,26 +928,32 @@
    "pronostic": false,
    "pourquoi": "Alan Gilbert, avec Le Sacre.",
    "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-version/dipus-rex-1",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Carte Jeunes TCE",
      "date": "2027-05-24",
      "tarif": "20 €",
-     "condition": "Carte Jeunes TCE",
      "vente": "2027-02-24T10:00",
-     "venteApprox": true
+     "venteApprox": true,
+     "condition": "Carte Jeunes TCE"
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "diskoteekki",
    "titre": "Diskoteekki",
-   "credits": "Nicole Genovese",
-   "genre": "Théâtre",
-   "lieu": "Théâtre du Rond-Point",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Nicole Genovese",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "rond-point",
    "salle": "",
    "debut": "2026-11-18",
    "fin": "2026-11-22",
@@ -695,17 +962,23 @@
    "pronostic": true,
    "pourquoi": "Théâtre musical avec les Percussions de Strasbourg.",
    "lien": "https://www.theatredurondpoint.fr/files/44dfdad8/brochure_saison_26_27.pdf",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "don-giovanni",
    "titre": "Don Giovanni",
-   "credits": "Mozart",
-   "genre": "Opéra",
-   "lieu": "Opéra de Paris – Bastille",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Wolfgang Amadeus Mozart",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "opera-bastille",
    "salle": "",
    "debut": "2027-01-28",
    "fin": "2027-06-24",
@@ -714,25 +987,32 @@
    "pronostic": false,
    "pourquoi": "Avant-première jeunes 10 € le 25 janv. (vente le 7 janv. à midi).",
    "lien": "https://www.operadeparis.fr/saison-26-27/opera/don-giovanni",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Avant-première jeunes",
      "date": "2027-01-25",
      "tarif": "10 €",
      "vente": "2027-01-07T12:00",
+     "venteApprox": false,
      "condition": "Nés après le 1er janvier 1998, 2 places max."
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "du-charbon-dans-les-veines",
    "titre": "Du charbon dans les veines",
-   "credits": "Jean-Philippe Daguerre",
-   "genre": "Théâtre",
-   "lieu": "Théâtre Saint-Georges",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Jean-Philippe Daguerre",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "theatre-saint-georges",
    "salle": "",
    "debut": "2026-11-01",
    "fin": "2026-12-20",
@@ -741,17 +1021,27 @@
    "pronostic": false,
    "pourquoi": "5 Molières 2025, conseillé dès 11 ans.",
    "lien": "https://mag.agendaculturel.fr/blog/sortie-culturelle/pieces-de-theatre-a-voir-a-paris.html",
+   "billetterie": null,
    "publicJeune": true,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "ellen-babic",
    "titre": "Ellen Babić",
-   "credits": "Marius von Mayenburg / Patrick Pineau",
-   "genre": "Théâtre",
-   "lieu": "Théâtre du Rond-Point",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Marius von Mayenburg",
+     "role": "auteur"
+    },
+    {
+     "nom": "Patrick Pineau",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "rond-point",
    "salle": "",
    "debut": "2027-01-12",
    "fin": "2027-01-24",
@@ -760,36 +1050,51 @@
    "pronostic": true,
    "pourquoi": "Avec Constance Dollé.",
    "lien": "https://www.theatredurondpoint.fr/files/44dfdad8/brochure_saison_26_27.pdf",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "esdeekid",
    "titre": "EsDeeKid",
-   "credits": "",
-   "genre": "Concert",
-   "lieu": "Olympia",
+   "categorie": "Concert",
+   "artistes": [
+    {
+     "nom": "EsDeeKid",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "olympia",
    "salle": "",
    "debut": null,
    "fin": null,
-   "datesTexte": "",
    "note": 0,
    "pronostic": false,
    "pourquoi": "",
    "lien": null,
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": true,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": true
+   "statut": "a-voir"
   },
   {
    "id": "et-jamais-nous-ne-serons-separes",
    "titre": "Et jamais nous ne serons séparés",
-   "credits": "Jon Fosse / Daniel Jeanneteau",
-   "genre": "Théâtre",
-   "lieu": "T2G",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Jon Fosse",
+     "role": "auteur"
+    },
+    {
+     "nom": "Daniel Jeanneteau",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "t2g",
    "salle": "",
    "debut": "2026-11-27",
    "fin": "2026-12-03",
@@ -798,17 +1103,23 @@
    "pronostic": false,
    "pourquoi": "1h30.",
    "lien": "https://theatredegennevilliers.fr/la-saison/programmation/et-jamais-nous-ne-serons-separes-2",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "faust",
    "titre": "Faust",
-   "credits": "Gounod",
-   "genre": "Opéra",
-   "lieu": "TCE",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Charles Gounod",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "tce",
    "salle": "",
    "debut": "2027-03-23",
    "fin": "2027-03-23",
@@ -817,50 +1128,32 @@
    "pronostic": false,
    "pourquoi": "Christian Van Horn. Écho au Faust de Castellucci. Date fermée aux groupes.",
    "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-version/faust-1",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Carte Jeunes TCE",
      "date": "2027-03-23",
      "tarif": "20 €",
-     "condition": "Carte Jeunes TCE",
      "vente": "2026-12-23T10:00",
-     "venteApprox": true
+     "venteApprox": true,
+     "condition": "Carte Jeunes TCE"
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
-  },
-  {
-   "id": "faust-castellucci",
-   "titre": "Faust",
-   "credits": "Romeo Castellucci",
-   "genre": "Théâtre",
-   "lieu": "Odéon",
-   "salle": "",
-   "debut": "2026-11-10",
-   "fin": "2026-11-10",
-   "datesTexte": "",
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-11-10"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
+   "statut": "a-voir"
   },
   {
    "id": "focus-ben-duke",
    "titre": "Focus Ben Duke",
-   "credits": "(danse)",
-   "genre": "Danse",
-   "lieu": "Théâtre de la Ville",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Ben Duke",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "theatre-de-la-ville",
    "salle": "Abbesses, Sarah Bernhardt",
    "debut": "2026-11-01",
    "fin": "2026-11-21",
@@ -869,17 +1162,23 @@
    "pronostic": false,
    "pourquoi": "Danse-théâtre britannique.",
    "lien": "https://www.theatredelaville-paris.com/en/spectacles/saison-26-27/danse/focus-ben-duke",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "fondre-gourfink",
    "titre": "[Fondre] : Arche puis Almasty",
-   "credits": "Myriam Gourfink",
-   "genre": "Danse",
-   "lieu": "Odéon",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Myriam Gourfink",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "odeon",
    "salle": "Petit Odéon",
    "debut": "2026-11-10",
    "fin": "2026-12-10",
@@ -888,17 +1187,23 @@
    "pronostic": false,
    "pourquoi": "Danse, format intime, 1h10. Danse lente, format intime, 1h10.",
    "lien": "https://www.theatre-odeon.eu/en/season-2026-2027/performances-2026-2027/myriam-gourfink-fondre-arche-s26-27-en",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "food-court",
    "titre": "Food Court",
-   "credits": "Back to Back Theatre",
-   "genre": "Théâtre",
-   "lieu": "Odéon",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Back to Back Theatre",
+     "role": "compagnie"
+    }
+   ],
+   "lieuId": "odeon",
    "salle": "Odéon Paris 6",
    "debut": "2026-12-04",
    "fin": "2026-12-19",
@@ -907,17 +1212,23 @@
    "pronostic": false,
    "pourquoi": "1h, musique de The Necks.",
    "lien": "https://www.theatre-odeon.eu/en/season-2026-2027/performances-2026-2027/back-to-back-theatre-food-court-s26-27-en",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "ganesh-versus-the-third-reich",
    "titre": "Ganesh versus the Third Reich",
-   "credits": "Back to Back Theatre",
-   "genre": "Théâtre",
-   "lieu": "Théâtre de la Cité internationale",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Back to Back Theatre",
+     "role": "compagnie"
+    }
+   ],
+   "lieuId": "theatre-cite-internationale",
    "salle": "Théâtre de la Cité internationale",
    "debut": "2026-11-17",
    "fin": "2026-11-21",
@@ -926,17 +1237,23 @@
    "pronostic": false,
    "pourquoi": "Lion d'or Venise 2024, en anglais.",
    "lien": "https://www.theatredelaville-paris.com/en/spectacles/saison-26-27/theatre/ganesh-versus-the-third-reich-back-to-back-theatre",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "giselle",
    "titre": "Giselle",
-   "credits": "Johan Inger",
-   "genre": "Danse",
-   "lieu": "Opéra de Paris – Garnier",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Johan Inger",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "palais-garnier",
    "salle": "",
    "debut": "2027-06-01",
    "fin": "2027-06-30",
@@ -945,25 +1262,36 @@
    "pronostic": true,
    "pourquoi": "Relecture contemporaine. Avant-première jeunes le 24 juin.",
    "lien": "https://www.operadeparis.fr/saison-26-27/ballet/giselle",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Avant-première jeunes",
      "date": "2027-06-24",
      "tarif": "10 €",
      "vente": "2027-06-03T12:00",
+     "venteApprox": false,
      "condition": "Nés après le 1er janvier 1998, 2 places max."
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "gustavia",
    "titre": "Gustavia",
-   "credits": "Mathilde Monnier et La Ribot",
-   "genre": "Danse",
-   "lieu": "Chaillot",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Mathilde Monnier",
+     "role": "chorégraphie"
+    },
+    {
+     "nom": "La Ribot",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "chaillot",
    "salle": "",
    "debut": "2027-03-17",
    "fin": "2027-03-20",
@@ -972,17 +1300,23 @@
    "pronostic": false,
    "pourquoi": "Danse et théâtre, burlesque.",
    "lien": "https://theatre-chaillot.fr/fr/programmation",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "heaven-hell",
    "titre": "Heaven & Hell",
-   "credits": "Pascal Dusapin",
-   "genre": "Opéra",
-   "lieu": "Opéra-Comique",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Pascal Dusapin",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "opera-comique",
    "salle": "",
    "debut": "2027-06-11",
    "fin": "2027-06-13",
@@ -991,17 +1325,27 @@
    "pronostic": true,
    "pourquoi": "Contemporain.",
    "lien": "https://www.opera-comique.com/en/shows/2026-2027",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "hernani",
    "titre": "Hernani",
-   "credits": "Hugo / Laurent Brethome",
-   "genre": "Théâtre",
-   "lieu": "Les Gémeaux",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Victor Hugo",
+     "role": "auteur"
+    },
+    {
+     "nom": "Laurent Brethome",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "les-gemeaux",
    "salle": "",
    "debut": "2026-11-01",
    "fin": "2026-11-14",
@@ -1010,17 +1354,23 @@
    "pronostic": false,
    "pourquoi": "Dernières dates. Hugo après Ruy Blas.",
    "lien": "https://www.lesgemeaux.com/spectacles/hernani/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "hippolyte-et-aricie",
    "titre": "Hippolyte et Aricie",
-   "credits": "Rameau",
-   "genre": "Opéra",
-   "lieu": "TCE",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Jean-Philippe Rameau",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "tce",
    "salle": "",
    "debut": "2027-05-28",
    "fin": "2027-05-28",
@@ -1029,26 +1379,36 @@
    "pronostic": false,
    "pourquoi": "Minkowski.",
    "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-version/hippolyte-et-aricie-1",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Carte Jeunes TCE",
      "date": "2027-05-28",
      "tarif": "20 €",
-     "condition": "Carte Jeunes TCE",
      "vente": "2027-02-28T10:00",
-     "venteApprox": true
+     "venteApprox": true,
+     "condition": "Carte Jeunes TCE"
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "histoire-du-soldat",
    "titre": "Histoire du soldat / Into the Little Hill",
-   "credits": "Opéra-Comique hors les murs",
-   "genre": "Opéra",
-   "lieu": "T2G",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Igor Stravinsky",
+     "role": "compositeur"
+    },
+    {
+     "nom": "George Benjamin",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "t2g",
    "salle": "",
    "debut": "2026-11-01",
    "fin": "2026-11-16",
@@ -1057,36 +1417,47 @@
    "pronostic": false,
    "pourquoi": "C'est ici que se joue la production de l'Opéra-Comique. Mise en scène Soma et Jeanneteau.",
    "lien": "https://theatredegennevilliers.fr/la-saison/programmation/into-the-little-hill-et-histoire-du-soldat",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "histoire-du-soldat-tce",
    "titre": "L’Histoire du soldat",
-   "credits": "Stravinsky",
-   "genre": "Opéra",
-   "lieu": "TCE",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Igor Stravinsky",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "tce",
    "salle": "",
    "debut": null,
    "fin": null,
-   "datesTexte": "",
    "note": 0,
    "pronostic": false,
    "pourquoi": "",
    "lien": null,
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": true,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": true
+   "statut": "a-voir"
   },
   {
    "id": "ici-sont-les-dragons",
    "titre": "Ici sont les dragons",
-   "credits": "Ariane Mnouchkine",
-   "genre": "Théâtre",
-   "lieu": "Théâtre du Soleil",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Ariane Mnouchkine",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "theatre-du-soleil",
    "salle": "",
    "debut": "2026-11-01",
    "fin": "2026-11-29",
@@ -1095,17 +1466,27 @@
    "pronostic": false,
    "pourquoi": "Dernières dates. Une époque 15 – 35 €.",
    "lien": "https://www.theatre-du-soleil.fr/public_data/download/event/1781021789/dossier_pedagogique-isld2-120626.pdf",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "idomeneo",
    "titre": "Idomeneo",
-   "credits": "Mozart / Wajdi Mouawad",
-   "genre": "Opéra",
-   "lieu": "Opéra de Paris – Bastille",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Wolfgang Amadeus Mozart",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Wajdi Mouawad",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "opera-bastille",
    "salle": "",
    "debut": "2027-04-30",
    "fin": "2027-05-25",
@@ -1114,25 +1495,32 @@
    "pronostic": true,
    "pourquoi": "Lea Desandre, Elsa Dreisig. 3h15. Avant-première jeunes le 30 avril (vente le 8 avril).",
    "lien": "https://www.operadeparis.fr/saison-26-27/opera/idomeneo",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Avant-première jeunes",
      "date": "2027-04-30",
      "tarif": "10 €",
      "vente": "2027-04-08T12:00",
+     "venteApprox": false,
      "condition": "Nés après le 1er janvier 1998, 2 places max."
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "impressions",
    "titre": "Impressions",
-   "credits": "Angelin Preljocaj",
-   "genre": "Danse",
-   "lieu": "Chaillot",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Angelin Preljocaj",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "chaillot",
    "salle": "",
    "debut": "2027-01-05",
    "fin": "2027-01-16",
@@ -1141,17 +1529,27 @@
    "pronostic": false,
    "pourquoi": "Trois tableaux d'après Caillebotte, Degas, Manet, Monet.",
    "lien": "https://theatre-chaillot.fr/fr/programmation",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "ivanov",
    "titre": "Ivanov",
-   "credits": "Tchekhov / Jean-François Sivadier",
-   "genre": "Théâtre",
-   "lieu": "Nanterre-Amandiers",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Anton Tchekhov",
+     "role": "auteur"
+    },
+    {
+     "nom": "Jean-François Sivadier",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "nanterre-amandiers",
    "salle": "",
    "debut": "2027-01-06",
    "fin": "2027-01-30",
@@ -1160,17 +1558,23 @@
    "pronostic": true,
    "pourquoi": "Grand Tchekhov.",
    "lien": "https://nanterre-amandiers.com/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "j-ai-une-theorie",
    "titre": "J'ai une théorie",
-   "credits": "Scali Delpeyrat",
-   "genre": "Théâtre",
-   "lieu": "Théâtre de la Ville",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Scali Delpeyrat",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "theatre-de-la-ville",
    "salle": "Sarah Bernhardt, Studio",
    "debut": "2026-11-10",
    "fin": "2026-11-20",
@@ -1179,17 +1583,23 @@
    "pronostic": false,
    "pourquoi": "",
    "lien": "https://www.theatredelaville-paris.com/en/spectacles/saison-26-27/theatre/jai-une-theorie-scali-delpeyrat",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "josef-nadj-dialogues-dans-le-reve",
    "titre": "Josef Nadj : Dialogues dans le rêve",
-   "credits": "",
-   "genre": "Danse",
-   "lieu": "MC93",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Josef Nadj",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "mc93",
    "salle": "",
    "debut": "2027-02-04",
    "fin": "2027-02-07",
@@ -1198,17 +1608,23 @@
    "pronostic": false,
    "pourquoi": "Danse et marionnettes.",
    "lien": "https://www.mc93.com/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "joyaux",
    "titre": "Joyaux",
-   "credits": "Balanchine",
-   "genre": "Danse",
-   "lieu": "Opéra de Paris – Bastille",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "George Balanchine",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "opera-bastille",
    "salle": "",
    "debut": "2027-04-01",
    "fin": "2027-04-30",
@@ -1217,25 +1633,32 @@
    "pronostic": false,
    "pourquoi": "Avant-première jeunes le 3 avril. Incontournable.",
    "lien": "https://www.operadeparis.fr/saison-26-27/ballet/joyaux",
+   "billetterie": null,
    "publicJeune": true,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Avant-première jeunes",
      "date": "2027-04-03",
      "tarif": "10 €",
      "vente": "2027-03-18T12:00",
+     "venteApprox": false,
      "condition": "Nés après le 1er janvier 1998, 2 places max."
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "kaguyahime",
    "titre": "Kaguyahime",
-   "credits": "Tokyo Ballet",
-   "genre": "Danse",
-   "lieu": "Opéra de Paris",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Tokyo Ballet",
+     "role": "compagnie"
+    }
+   ],
+   "lieuId": "opera-de-paris",
    "salle": "",
    "debut": null,
    "fin": null,
@@ -1244,36 +1667,44 @@
    "pronostic": false,
    "pourquoi": "Compagnie invitée.",
    "lien": "https://www.operadeparis.fr/programmation/saison-26-27",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "l-amant",
    "titre": "L'Amant",
-   "credits": "en deux parties ou en intégrale",
-   "genre": "Théâtre",
-   "lieu": "Nanterre-Amandiers",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "nanterre-amandiers",
    "salle": "",
    "debut": "2027-04-23",
    "fin": "2027-05-09",
    "datesTexte": "23 avril – 9 mai 2027",
+   "horaires": "En deux parties ou en intégrale",
    "note": 2,
    "pronostic": true,
    "pourquoi": "Intégrales les 25 avril et 9 mai.",
    "lien": "https://nanterre-amandiers.com/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "l-ange-du-foyer",
    "titre": "L'Ange du foyer",
-   "credits": "Emma Dante",
-   "genre": "Théâtre",
-   "lieu": "La Colline",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Emma Dante",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "la-colline",
    "salle": "Grand théâtre",
    "debut": "2027-01-13",
    "fin": "2027-02-07",
@@ -1282,36 +1713,47 @@
    "pronostic": false,
    "pourquoi": "Fable noire sur les féminicides, 1h05, en italien surtitré.",
    "lien": "https://www.colline.fr/spectacles/lange-du-foyer",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "l-ecole-de-danse",
    "titre": "L’École de danse",
-   "credits": "Goldoni",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Carlo Goldoni",
+     "role": "auteur"
+    }
+   ],
+   "lieuId": "comedie-francaise",
    "salle": "Richelieu",
    "debut": null,
    "fin": null,
-   "datesTexte": "",
    "note": 0,
    "pronostic": false,
    "pourquoi": "",
    "lien": null,
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": true,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": true
+   "statut": "a-voir"
   },
   {
    "id": "l-elixir-d-amour",
    "titre": "L'Élixir d'amour",
-   "credits": "Donizetti",
-   "genre": "Opéra",
-   "lieu": "Opéra de Paris – Bastille",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Gaetano Donizetti",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "opera-bastille",
    "salle": "",
    "debut": "2027-03-23",
    "fin": "2027-04-13",
@@ -1320,17 +1762,23 @@
    "pronostic": false,
    "pourquoi": "Plus léger.",
    "lien": "https://www.operadeparis.fr/programmation/saison-26-27",
+   "billetterie": null,
    "publicJeune": true,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "l-envers-du-music-hall",
    "titre": "L'Envers du music-hall",
-   "credits": "Colette",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Colette",
+     "role": "auteur"
+    }
+   ],
+   "lieuId": "comedie-francaise",
    "salle": "Studio-Théâtre",
    "debut": "2027-05-27",
    "fin": "2027-06-27",
@@ -1339,36 +1787,47 @@
    "pronostic": true,
    "pourquoi": "Seule-en-scène de Danièle Lebrun.",
    "lien": "https://comedie-francaise.fr/2026-2027/lenvers-du-music-hall",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "l-evenement",
    "titre": "L’Événement",
-   "credits": "Annie Ernaux",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Annie Ernaux",
+     "role": "auteur"
+    }
+   ],
+   "lieuId": "comedie-francaise",
    "salle": "Vieux-Colombier",
    "debut": null,
    "fin": null,
-   "datesTexte": "",
    "note": 0,
    "pronostic": false,
    "pourquoi": "",
    "lien": null,
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": true,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": true
+   "statut": "a-voir"
   },
   {
    "id": "l-orfeo",
    "titre": "L'Orfeo",
-   "credits": "Monteverdi",
-   "genre": "Opéra",
-   "lieu": "TCE",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Claudio Monteverdi",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "tce",
    "salle": "",
    "debut": "2027-01-18",
    "fin": "2027-01-18",
@@ -1377,26 +1836,44 @@
    "pronostic": false,
    "pourquoi": "Les Épopées, Stéphane Fuget. Le premier chef-d'œuvre de l'opéra.",
    "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-version/l-orfeo-1",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Carte Jeunes TCE",
      "date": "2027-01-18",
      "tarif": "20 €",
-     "condition": "Carte Jeunes TCE",
      "vente": "2026-10-18T10:00",
-     "venteApprox": true
+     "venteApprox": true,
+     "condition": "Carte Jeunes TCE"
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "la-cerisaie",
    "titre": "La Cerisaie",
-   "credits": "Tchekhov, mise en scène Éric Ruf, avec Isabelle Adjani et Jacques Weber",
-   "genre": "Théâtre",
-   "lieu": "Théâtre Antoine",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Anton Tchekhov",
+     "role": "auteur"
+    },
+    {
+     "nom": "Éric Ruf",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Isabelle Adjani",
+     "role": "interprète"
+    },
+    {
+     "nom": "Jacques Weber",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "theatre-antoine",
    "salle": "",
    "debut": "2027-01-29",
    "fin": "2027-02-28",
@@ -1405,17 +1882,23 @@
    "pronostic": true,
    "pourquoi": "Premier spectacle de Ruf depuis Le Soulier de satin, costumes Christian Lacroix. Prix : 28,50 – 93 €.",
    "lien": "https://www.offi.fr/theatre/theatre-antoine-1408/la-cerisaie-108517.html",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "la-clemence-de-titus",
    "titre": "La Clémence de Titus",
-   "credits": "Mozart",
-   "genre": "Opéra",
-   "lieu": "Opéra de Paris – Garnier",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Wolfgang Amadeus Mozart",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "palais-garnier",
    "salle": "",
    "debut": "2026-11-24",
    "fin": "2026-12-25",
@@ -1424,17 +1907,23 @@
    "pronostic": false,
    "pourquoi": "",
    "lien": "https://www.operadeparis.fr/programmation/saison-26-27",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "la-fete",
    "titre": "La Fête",
-   "credits": "Anne-Cécile Vandalem",
-   "genre": "Théâtre",
-   "lieu": "Nanterre-Amandiers",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Anne-Cécile Vandalem",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "nanterre-amandiers",
    "salle": "",
    "debut": "2026-11-19",
    "fin": "2026-11-29",
@@ -1443,17 +1932,23 @@
    "pronostic": true,
    "pourquoi": "Grande salle.",
    "lien": "https://nanterre-amandiers.com/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "la-fille-mal-gardee",
    "titre": "La Fille mal gardée",
-   "credits": "Ashton",
-   "genre": "Danse",
-   "lieu": "Opéra de Paris – Garnier",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Frederick Ashton",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "palais-garnier",
    "salle": "",
    "debut": "2027-05-01",
    "fin": "2027-05-31",
@@ -1462,25 +1957,40 @@
    "pronostic": false,
    "pourquoi": "Avant-première jeunes le 5 mai.",
    "lien": "https://www.operadeparis.fr/saison-26-27/ballet/la-fille-mal-gardee",
+   "billetterie": null,
    "publicJeune": true,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Avant-première jeunes",
      "date": "2027-05-05",
      "tarif": "10 €",
      "vente": "2027-04-15T12:00",
+     "venteApprox": false,
      "condition": "Nés après le 1er janvier 1998, 2 places max."
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "la-fournaise",
    "titre": "La Fournaise",
-   "credits": "Ananda Devi d'après Othello / Lolita Tergémina",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Ananda Devi",
+     "role": "auteur"
+    },
+    {
+     "nom": "William Shakespeare",
+     "role": "auteur"
+    },
+    {
+     "nom": "Lolita Tergémina",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "comedie-francaise",
    "salle": "Studio-Théâtre",
    "debut": "2027-02-04",
    "fin": "2027-03-14",
@@ -1489,18 +1999,28 @@
    "pronostic": true,
    "pourquoi": "Création.",
    "lien": "https://comedie-francaise.fr/2026-2027/la-fournaise",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "la-guerre-n-a-pas-un-visage-de-femme",
    "titre": "La guerre n'a pas un visage de femme",
-   "credits": "Alexievitch / Julie Deliquet",
-   "genre": "Théâtre",
-   "lieu": "La Colline",
-   "salle": "—",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Svetlana Alexievitch",
+     "role": "auteur"
+    },
+    {
+     "nom": "Julie Deliquet",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "la-colline",
+   "salle": "",
    "debut": "2027-05-06",
    "fin": "2027-05-28",
    "datesTexte": "6 – 28 mai 2027",
@@ -1508,36 +2028,51 @@
    "pronostic": false,
    "pourquoi": "Première saison de Deliquet à la direction.",
    "lien": "https://www.colline.fr/spectacles/la-guerre-na-pas-un-visage-de-femme",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "la-jalousie",
    "titre": "La Jalousie",
-   "credits": "Sacha Guitry, avec Michel Fau",
-   "genre": "Théâtre",
-   "lieu": "Théâtre de la Michodière",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Sacha Guitry",
+     "role": "auteur"
+    },
+    {
+     "nom": "Michel Fau",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "theatre-de-la-michodiere",
    "salle": "",
    "debut": null,
    "fin": null,
-   "datesTexte": "",
    "note": 2,
    "pronostic": false,
    "pourquoi": "Reprise, Guitry par Fau.",
    "lien": "https://www.offi.fr/theatre/theatre-de-la-michodiere-2784/la-jalousie-101767.html",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "la-mort-du-mome",
    "titre": "La mort du Môme",
-   "credits": "Sébastien Kheroufi",
-   "genre": "Théâtre",
-   "lieu": "La Colline",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Sébastien Kheroufi",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "la-colline",
    "salle": "Grand théâtre",
    "debut": "2026-11-06",
    "fin": "2026-12-12",
@@ -1546,17 +2081,27 @@
    "pronostic": true,
    "pourquoi": "Création, Festival d'Automne. Reda Kateb, Élodie Bouchez, Oulaya Amamra. 3h. 6 nov. – 12 déc. 2026, Festival d'Automne.",
    "lien": "https://www.colline.fr/spectacles/la-mort-du-mome",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "la-parabole-du-seum",
    "titre": "La Parabole du Seum",
-   "credits": "Rébecca Chaillon et Céline Champinot",
-   "genre": "Théâtre",
-   "lieu": "Théâtre Public de Montreuil",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Rébecca Chaillon",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Céline Champinot",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "theatre-public-montreuil",
    "salle": "",
    "debut": "2026-11-26",
    "fin": "2026-12-12",
@@ -1565,17 +2110,27 @@
    "pronostic": true,
    "pourquoi": "",
    "lien": "https://theatrepublicmontreuil.com/la-parabole-du-seum",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "la-religieuse",
    "titre": "La Religieuse",
-   "credits": "Diderot / Anne Théron",
-   "genre": "Théâtre",
-   "lieu": "Les Gémeaux",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Denis Diderot",
+     "role": "auteur"
+    },
+    {
+     "nom": "Anne Théron",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "les-gemeaux",
    "salle": "",
    "debut": "2027-04-28",
    "fin": "2027-04-30",
@@ -1584,17 +2139,27 @@
    "pronostic": false,
    "pourquoi": "",
    "lien": "https://www.lesgemeaux.com/spectacles/la-religieuse/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "la-souriciere",
    "titre": "La Souricière",
-   "credits": "Agatha Christie / Lilo Baur",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Agatha Christie",
+     "role": "auteur"
+    },
+    {
+     "nom": "Lilo Baur",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "comedie-francaise",
    "salle": "Vieux-Colombier",
    "debut": "2027-06-09",
    "fin": "2027-07-18",
@@ -1603,17 +2168,23 @@
    "pronostic": false,
    "pourquoi": "Polar en huis clos.",
    "lien": "https://comedie-francaise.fr/2026-2027/la-souriciere",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "la-tour-de-constance",
    "titre": "La Tour de Constance",
-   "credits": "Guillaume Vincent",
-   "genre": "Théâtre",
-   "lieu": "T2G",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Guillaume Vincent",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "t2g",
    "salle": "",
    "debut": "2027-04-20",
    "fin": "2027-04-30",
@@ -1622,17 +2193,27 @@
    "pronostic": true,
    "pourquoi": "1h40.",
    "lien": "https://theatredegennevilliers.fr/la-saison/programmation/la-tour-de-constance",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "la-tour-de-nesle",
    "titre": "La Tour de Nesle",
-   "credits": "Dumas / Thomas Jolly",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Alexandre Dumas",
+     "role": "auteur"
+    },
+    {
+     "nom": "Thomas Jolly",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "comedie-francaise",
    "salle": "Jardin des Tuileries",
    "debut": "2027-07-06",
    "fin": "2027-07-31",
@@ -1641,17 +2222,27 @@
    "pronostic": true,
    "pourquoi": "Plein air, entrée au Répertoire.",
    "lien": "https://comedie-francaise.fr/2026-2027/la-tour-de-nesle",
+   "billetterie": null,
    "publicJeune": true,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "la-vie-est-un-songe",
    "titre": "La vie est un songe",
-   "credits": "Calderón / Benjamin Lazar",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Pedro Calderón de la Barca",
+     "role": "auteur"
+    },
+    {
+     "nom": "Benjamin Lazar",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "comedie-francaise",
    "salle": "Richelieu",
    "debut": "2027-03-11",
    "fin": "2027-06-20",
@@ -1660,17 +2251,23 @@
    "pronostic": true,
    "pourquoi": "Création baroque avec trio de musiciens.",
    "lien": "https://comedie-francaise.fr/2026-2027/la-vie-est-un-songe",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "la-walkyrie",
    "titre": "La Walkyrie",
-   "credits": "Wagner",
-   "genre": "Opéra",
-   "lieu": "Opéra de Paris – Bastille",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Richard Wagner",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "opera-bastille",
    "salle": "",
    "debut": "2026-11-07",
    "fin": "2026-11-17",
@@ -1679,17 +2276,23 @@
    "pronostic": false,
    "pourquoi": "Barbeyrac, Maltman, van den Heever.",
    "lien": "https://www.operadeparis.fr/programmation/saison-26-27",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "lady-macbeth-de-mzensk",
    "titre": "Lady Macbeth de Mzensk",
-   "credits": "Chostakovitch",
-   "genre": "Opéra",
-   "lieu": "Opéra de Paris – Bastille",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Dmitri Chostakovitch",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "opera-bastille",
    "salle": "",
    "debut": "2027-03-13",
    "fin": "2027-03-28",
@@ -1698,17 +2301,23 @@
    "pronostic": false,
    "pourquoi": "",
    "lien": "https://www.operadeparis.fr/programmation/saison-26-27",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "le-birgit-kabarett-7",
    "titre": "Le Birgit Kabarett #7",
-   "credits": "Le Birgit Ensemble",
-   "genre": "Théâtre",
-   "lieu": "TGP",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Le Birgit Ensemble",
+     "role": "compagnie"
+    }
+   ],
+   "lieuId": "tgp",
    "salle": "",
    "debut": "2027-04-21",
    "fin": "2027-04-25",
@@ -1717,17 +2326,31 @@
    "pronostic": false,
    "pourquoi": "Cabaret politique.",
    "lien": "https://tgp.theatregerardphilipe.com/spectacle/le-birgit-kabarett-7/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "le-bourgeois-gentilhomme",
    "titre": "Le Bourgeois gentilhomme",
-   "credits": "Molière / Valérie Lesort et Christian Hecq",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Molière",
+     "role": "auteur"
+    },
+    {
+     "nom": "Valérie Lesort",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Christian Hecq",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "comedie-francaise",
    "salle": "Richelieu",
    "debut": "2027-04-16",
    "fin": "2027-07-25",
@@ -1736,17 +2359,27 @@
    "pronostic": false,
    "pourquoi": "Mise en scène de Valérie Lesort et Christian Hecq, reprise.",
    "lien": "https://comedie-francaise.fr/2026-2027/le-bourgeois-gentilhomme",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "le-canard-sauvage",
    "titre": "Le Canard sauvage",
-   "credits": "Ibsen / Thomas Ostermeier",
-   "genre": "Théâtre",
-   "lieu": "Les Gémeaux",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Henrik Ibsen",
+     "role": "auteur"
+    },
+    {
+     "nom": "Thomas Ostermeier",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "les-gemeaux",
    "salle": "",
    "debut": "2027-01-21",
    "fin": "2027-01-31",
@@ -1755,17 +2388,27 @@
    "pronostic": false,
    "pourquoi": "",
    "lien": "https://www.lesgemeaux.com/spectacles/le-canard-sauvage/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "le-cercle-de-craie-caucasien",
    "titre": "Le Cercle de craie caucasien",
-   "credits": "Brecht / Emmanuel Demarcy-Mota",
-   "genre": "Théâtre",
-   "lieu": "Théâtre de la Ville",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Bertolt Brecht",
+     "role": "auteur"
+    },
+    {
+     "nom": "Emmanuel Demarcy-Mota",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "theatre-de-la-ville",
    "salle": "Sarah Bernhardt",
    "debut": "2027-03-01",
    "fin": "2027-04-30",
@@ -1774,36 +2417,51 @@
    "pronostic": false,
    "pourquoi": "Troupe du TDV, 5 à 35 €.",
    "lien": "https://www.theatredelaville-paris.com/en/spectacles/saison-26-27/theatre/le-cercle-de-craie-caucasien-bertolt-brecht-emmanuel-demarcy-mota",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "le-chameau",
    "titre": "Le Chameau",
-   "credits": "Jean Reno, avec Jean Reno",
-   "genre": "Théâtre",
-   "lieu": "Édouard VII",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Jean Reno",
+     "role": "auteur"
+    },
+    {
+     "nom": "Jean Reno",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "edouard-vii",
    "salle": "",
    "debut": "2026-12-01",
    "fin": "2026-12-31",
-   "datesTexte": "",
    "note": 1,
    "pronostic": false,
    "pourquoi": "1er – 31 déc. 2026, premier seul-en-scène.",
    "lien": null,
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "le-chateau-de-barbe-bleue",
    "titre": "Le Château de Barbe-Bleue",
-   "credits": "Bartók",
-   "genre": "Opéra",
-   "lieu": "TCE",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Béla Bartók",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "tce",
    "salle": "",
    "debut": "2027-06-22",
    "fin": "2027-06-22",
@@ -1812,26 +2470,36 @@
    "pronostic": false,
    "pourquoi": "Elīna Garanča.",
    "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-version/duke-bluebeard-s-castle",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Carte Jeunes TCE",
      "date": "2027-06-22",
      "tarif": "20 €",
-     "condition": "Carte Jeunes TCE",
      "vente": "2027-03-22T10:00",
-     "venteApprox": true
+     "venteApprox": true,
+     "condition": "Carte Jeunes TCE"
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "le-chien",
    "titre": "Le Chien, la nuit et le couteau",
-   "credits": "la nuit et le couteau, Marius von Mayenburg / Louis Arene",
-   "genre": "Théâtre",
-   "lieu": "Nanterre-Amandiers",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Marius von Mayenburg",
+     "role": "auteur"
+    },
+    {
+     "nom": "Louis Arene",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "nanterre-amandiers",
    "salle": "",
    "debut": "2027-03-11",
    "fin": "2027-03-27",
@@ -1840,17 +2508,27 @@
    "pronostic": true,
    "pourquoi": "",
    "lien": "https://nanterre-amandiers.com/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "le-cid",
    "titre": "Le Cid",
-   "credits": "Corneille / Denis Podalydès",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Pierre Corneille",
+     "role": "auteur"
+    },
+    {
+     "nom": "Denis Podalydès",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "comedie-francaise",
    "salle": "Richelieu",
    "debut": "2027-01-15",
    "fin": "2027-06-01",
@@ -1859,36 +2537,51 @@
    "pronostic": true,
    "pourquoi": "Première fois à Richelieu.",
    "lien": "https://comedie-francaise.fr/2026-2027/le-cid",
+   "billetterie": null,
    "publicJeune": true,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "le-discours-d-un-roi",
    "titre": "Le Discours d'un roi",
-   "credits": "avec Philippe Torreton, Francis Huster",
-   "genre": "Théâtre",
-   "lieu": "Théâtre du Gymnase",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Philippe Torreton",
+     "role": "interprète"
+    },
+    {
+     "nom": "Francis Huster",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "theatre-du-gymnase",
    "salle": "",
    "debut": null,
    "fin": null,
-   "datesTexte": "",
    "note": 2,
    "pronostic": true,
    "pourquoi": "Nouvelle création.",
    "lien": "https://www.offi.fr/theatre/theatre-du-gymnase-2434/le-discours-dun-roi-106912.html",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "le-fantome-de-l-opera",
    "titre": "Le Fantôme de l'Opéra",
-   "credits": "mise en scène Benoît Solès",
-   "genre": "Comédie musicale",
-   "lieu": "Théâtre du Gymnase",
+   "categorie": "Comédie musicale",
+   "artistes": [
+    {
+     "nom": "Benoît Solès",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "theatre-du-gymnase",
    "salle": "",
    "debut": "2026-10-08",
    "fin": "2027-01-10",
@@ -1897,55 +2590,96 @@
    "pronostic": true,
    "pourquoi": "Version inspirée du roman de Leroux, pas le musical de Lloyd Webber.",
    "lien": "https://www.sortiraparis.com/en/what-to-see-in-paris/theater/articles/324979-10th-arrondissement-theatres-and-their-programming",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "le-mariage-de-figaro",
    "titre": "La Folle Journée ou Le Mariage de Figaro",
-   "credits": "Beaumarchais / Alain Françon, avec Vincent Dedienne",
-   "genre": "Théâtre",
-   "lieu": "Théâtre de la Porte Saint-Martin",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Beaumarchais",
+     "role": "auteur"
+    },
+    {
+     "nom": "Alain Françon",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Vincent Dedienne",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "porte-saint-martin",
    "salle": "",
    "debut": null,
    "fin": null,
-   "datesTexte": "",
    "note": 0,
    "pronostic": false,
    "pourquoi": "",
    "lien": null,
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": true,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": true
+   "statut": "a-voir"
   },
   {
    "id": "le-pere",
    "titre": "Le Père",
-   "credits": "Florian Zeller, avec Pierre Arditi, Isabelle Carré",
-   "genre": "Théâtre",
-   "lieu": "Édouard VII",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Florian Zeller",
+     "role": "auteur"
+    },
+    {
+     "nom": "Pierre Arditi",
+     "role": "interprète"
+    },
+    {
+     "nom": "Isabelle Carré",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "edouard-vii",
    "salle": "",
    "debut": null,
    "fin": null,
-   "datesTexte": "",
    "note": 3,
    "pronostic": false,
    "pourquoi": "Nouvelle mise en scène de Zeller, Arditi dans le rôle d'André.",
    "lien": "https://www.offi.fr/theatre/theatre-edouard-vii-2027/le-pere-106201.html",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "le-petit-cirque",
    "titre": "Le Petit Cirque",
-   "credits": "Marie et Yoann Bourgeois, Pomme",
-   "genre": "Cirque",
-   "lieu": "Les Gémeaux",
+   "categorie": "Autre",
+   "sousGenre": "Cirque",
+   "artistes": [
+    {
+     "nom": "Marie Bourgeois",
+     "role": "artiste"
+    },
+    {
+     "nom": "Yoann Bourgeois",
+     "role": "artiste"
+    },
+    {
+     "nom": "Pomme",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "les-gemeaux",
    "salle": "",
    "debut": "2026-12-16",
    "fin": "2026-12-18",
@@ -1954,17 +2688,18 @@
    "pronostic": false,
    "pourquoi": "",
    "lien": "https://www.lesgemeaux.com/spectacles/le-petit-cirque/",
+   "billetterie": null,
    "publicJeune": true,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "le-roi-lion",
    "titre": "Le Roi Lion",
-   "credits": "",
-   "genre": "Comédie musicale",
-   "lieu": "Théâtre Mogador",
+   "categorie": "Comédie musicale",
+   "artistes": [],
+   "lieuId": "theatre-mogador",
    "salle": "",
    "debut": "2026-09-25",
    "fin": "2027-08-08",
@@ -1973,17 +2708,27 @@
    "pronostic": false,
    "pourquoi": "Grand spectacle, toute la saison.",
    "lien": "https://www.parisselectbook.com/?p=243350",
+   "billetterie": null,
    "publicJeune": true,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "le-serment-d-europe",
    "titre": "Le Serment d'Europe",
-   "credits": "Wajdi Mouawad",
-   "genre": "Théâtre",
-   "lieu": "La Colline",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Wajdi Mouawad",
+     "role": "auteur"
+    },
+    {
+     "nom": "Wajdi Mouawad",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "la-colline",
    "salle": "Grand théâtre",
    "debut": "2027-03-10",
    "fin": "2027-04-10",
@@ -1992,17 +2737,18 @@
    "pronostic": false,
    "pourquoi": "Avec Juliette Binoche. 2h20, dès 16 ans, en anglais, français et grec surtitrés. Créé à Épidaure en août 2025. Prix : 11 – 36,50 € ; 10 € étudiant -30 ans.",
    "lien": "https://www.colline.fr/spectacles/le-serment-deurope-0",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "le-silence",
    "titre": "Le Silence",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "La Colline",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "la-colline",
    "salle": "Petit théâtre",
    "debut": "2027-05-18",
    "fin": "2027-06-12",
@@ -2011,17 +2757,23 @@
    "pronostic": true,
    "pourquoi": "Inspiré d'Antonioni, 1h45.",
    "lien": "https://www.colline.fr/spectacles/le-silence",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "le-temps-d-aimer",
    "titre": "Le Temps d'aimer",
-   "credits": "Reynaldo Hahn",
-   "genre": "Opéra",
-   "lieu": "Athénée",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Reynaldo Hahn",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "athenee",
    "salle": "",
    "debut": "2027-03-26",
    "fin": "2027-04-04",
@@ -2030,17 +2782,27 @@
    "pronostic": false,
    "pourquoi": "Opérette rare.",
    "lien": null,
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "le-trouvere",
    "titre": "Le Trouvère",
-   "credits": "Verdi / Àlex Ollé",
-   "genre": "Opéra",
-   "lieu": "Opéra de Paris – Bastille",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Giuseppe Verdi",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Àlex Ollé",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "opera-bastille",
    "salle": "",
    "debut": "2027-01-16",
    "fin": "2027-02-27",
@@ -2049,17 +2811,27 @@
    "pronostic": false,
    "pourquoi": "Quinn Kelsey, Tamara Wilson.",
    "lien": "https://www.operadeparis.fr/programmation/saison-26-27",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "le-ventre-de-paris",
    "titre": "Le Ventre de Paris",
-   "credits": "Zola / Anne Barbot",
-   "genre": "Théâtre",
-   "lieu": "TGP",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Émile Zola",
+     "role": "auteur"
+    },
+    {
+     "nom": "Anne Barbot",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "tgp",
    "salle": "",
    "debut": "2027-01-27",
    "fin": "2027-02-07",
@@ -2068,17 +2840,23 @@
    "pronostic": true,
    "pourquoi": "Création.",
    "lien": "https://tgp.theatregerardphilipe.com/spectacle/le-ventre-de-paris/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "lea-desandre",
    "titre": "Lea Desandre",
-   "credits": "",
-   "genre": "Récital",
-   "lieu": "TCE",
+   "categorie": "Récital",
+   "artistes": [
+    {
+     "nom": "Lea Desandre",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "tce",
    "salle": "",
    "debut": "2027-06-02",
    "fin": "2027-06-02",
@@ -2087,26 +2865,36 @@
    "pronostic": false,
    "pourquoi": "Avec Thomas Dunford au luth. Elle chante aussi dans Idomeneo à Bastille.",
    "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/sung-recital/lea-desandre-1",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Carte Jeunes TCE",
      "date": "2027-06-02",
      "tarif": "10 €",
-     "condition": "Carte Jeunes TCE",
      "vente": "2027-03-02T10:00",
-     "venteApprox": true
+     "venteApprox": true,
+     "condition": "Carte Jeunes TCE"
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "les-fausses-confidences",
    "titre": "Les Fausses Confidences",
-   "credits": "Marivaux / Christophe Honoré",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Marivaux",
+     "role": "auteur"
+    },
+    {
+     "nom": "Christophe Honoré",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "comedie-francaise",
    "salle": "Richelieu",
    "debut": "2027-06-03",
    "fin": "2027-07-25",
@@ -2115,17 +2903,27 @@
    "pronostic": true,
    "pourquoi": "Création.",
    "lien": "https://comedie-francaise.fr/2026-2027/les-fausses-confidences",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "les-femmes-savantes",
    "titre": "Les Femmes savantes",
-   "credits": "Molière / Emma Dante",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Molière",
+     "role": "auteur"
+    },
+    {
+     "nom": "Emma Dante",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "comedie-francaise",
    "salle": "Richelieu",
    "debut": "2027-04-02",
    "fin": "2027-07-15",
@@ -2134,17 +2932,23 @@
    "pronostic": false,
    "pourquoi": "Molière par Emma Dante.",
    "lien": "https://comedie-francaise.fr/2026-2027/les-femmes-savantes",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "les-miserables",
    "titre": "Les Misérables",
-   "credits": "mise en scène Ladislas Chollat",
-   "genre": "Comédie musicale",
-   "lieu": "Châtelet",
+   "categorie": "Comédie musicale",
+   "artistes": [
+    {
+     "nom": "Ladislas Chollat",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "chatelet",
    "salle": "",
    "debut": "2026-11-11",
    "fin": "2027-01-10",
@@ -2153,17 +2957,23 @@
    "pronostic": false,
    "pourquoi": "Reprise de la production 2024. Tarif -30 ans à 10 € sur une sélection de dates.",
    "lien": "https://www.tesla-mag.com/les-miserables-chatelet-2026/",
+   "billetterie": null,
    "publicJeune": true,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "les-pecheurs-de-perles",
    "titre": "Les Pêcheurs de perles",
-   "credits": "Bizet",
-   "genre": "Opéra",
-   "lieu": "TCE",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Georges Bizet",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "tce",
    "salle": "",
    "debut": "2026-12-05",
    "fin": "2026-12-14",
@@ -2172,26 +2982,36 @@
    "pronostic": true,
    "pourquoi": "Pretty Yende, Minkowski, nouvelle production. Nouvelle production Weitz, Pretty Yende, Minkowski. 2h. Représentations du 5 au 14 déc.",
    "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/previews-for-young-people-under-30/les-pecheurs-de-perles-2-2-1",
+   "billetterie": null,
    "publicJeune": true,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Avant-première -30 ans",
      "date": "2026-12-03",
      "tarif": "20 €",
-     "condition": "Carte Jeunes TCE",
      "vente": "2026-09-03T10:00",
-     "venteApprox": true
+     "venteApprox": true,
+     "condition": "Carte Jeunes TCE"
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "les-sept-peches-capitaux",
    "titre": "Les Sept Péchés capitaux",
-   "credits": "Weill / Brecht",
-   "genre": "Opéra",
-   "lieu": "TCE",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Kurt Weill",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Bertolt Brecht",
+     "role": "auteur"
+    }
+   ],
+   "lieuId": "tce",
    "salle": "",
    "debut": "2027-03-30",
    "fin": "2027-03-30",
@@ -2200,64 +3020,94 @@
    "pronostic": false,
    "pourquoi": "Nina Stemme.",
    "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-version/die-sieben-todsunden-1",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Carte Jeunes TCE",
      "date": "2027-03-30",
      "tarif": "20 €",
-     "condition": "Carte Jeunes TCE",
      "vente": "2026-12-28T10:00",
-     "venteApprox": true
+     "venteApprox": true,
+     "condition": "Carte Jeunes TCE"
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "les-surs-hilton",
    "titre": "Les Sœurs Hilton",
-   "credits": "avec Valérie Lesort, Christian Hecq",
-   "genre": "Théâtre",
-   "lieu": "Bouffes du Nord",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Valérie Lesort",
+     "role": "interprète"
+    },
+    {
+     "nom": "Christian Hecq",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "bouffes-du-nord",
    "salle": "",
    "debut": null,
    "fin": null,
-   "datesTexte": "",
    "note": 2,
    "pronostic": false,
    "pourquoi": "Reprise, le duo du Bourgeois gentilhomme de la CF.",
    "lien": "https://www.offi.fr/theatre/theatre-des-bouffes-du-nord-1562/les-soeurs-hilton-97340.html",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "les-trois-mousquetaires",
    "titre": "Les Trois Mousquetaires",
-   "credits": "Dumas / Grenier de Babouchka",
-   "genre": "Théâtre",
-   "lieu": "Théâtre Antoine",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Alexandre Dumas",
+     "role": "auteur"
+    },
+    {
+     "nom": "Le Grenier de Babouchka",
+     "role": "compagnie"
+    }
+   ],
+   "lieuId": "theatre-antoine",
    "salle": "",
    "debut": "2026-10-18",
    "fin": "2027-03-28",
    "datesTexte": "18 oct. 2026 – 28 mars 2027, matinées",
+   "horaires": "Matinées",
    "note": 3,
    "pronostic": false,
    "pourquoi": "Cape et épée, 1h10, très bien noté par les familles avec ados. 22 – 49 €. Même troupe que Du charbon dans les veines.",
    "lien": "https://www.jds.fr/paris/sorties-famille/les-trois-mousquetaires-theatre-antoine-paris-1582872_A",
+   "billetterie": null,
    "publicJeune": true,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "lorenzaccio",
    "titre": "Lorenzaccio",
-   "credits": "Musset / David Bobée",
-   "genre": "Théâtre",
-   "lieu": "Théâtre Public de Montreuil",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Alfred de Musset",
+     "role": "auteur"
+    },
+    {
+     "nom": "David Bobée",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "theatre-public-montreuil",
    "salle": "",
    "debut": "2027-03-16",
    "fin": "2027-04-10",
@@ -2266,36 +3116,51 @@
    "pronostic": true,
    "pourquoi": "Grand drame romantique.",
    "lien": "https://theatrepublicmontreuil.com/lorenzaccio",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "madame-de-sade",
    "titre": "Madame de Sade",
-   "credits": "Mishima, avec Anne Brochet",
-   "genre": "Théâtre",
-   "lieu": "Bouffes du Nord",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Yukio Mishima",
+     "role": "auteur"
+    },
+    {
+     "nom": "Anne Brochet",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "bouffes-du-nord",
    "salle": "",
    "debut": null,
    "fin": null,
-   "datesTexte": "",
    "note": 2,
    "pronostic": false,
    "pourquoi": "Mishima, par Anne Brochet.",
    "lien": "https://www.offi.fr/theatre/theatre-des-bouffes-du-nord-1562/madame-de-sade-107115.html",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "madeleine-tornade",
    "titre": "Madeleine Tornade",
-   "credits": "Antoine Heuillet",
-   "genre": "Théâtre",
-   "lieu": "Nanterre-Amandiers",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Antoine Heuillet",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "nanterre-amandiers",
    "salle": "",
    "debut": "2026-11-26",
    "fin": "2026-12-05",
@@ -2304,17 +3169,19 @@
    "pronostic": true,
    "pourquoi": "Petite salle.",
    "lien": "https://nanterre-amandiers.com/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "magdalena-creation",
    "titre": "Magdalena",
-   "credits": "création mondiale",
-   "genre": "Opéra",
-   "lieu": "Athénée",
+   "categorie": "Opéra",
+   "sousGenre": "Création mondiale",
+   "artistes": [],
+   "lieuId": "athenee",
    "salle": "",
    "debut": "2027-01-28",
    "fin": "2027-02-13",
@@ -2323,60 +3190,51 @@
    "pronostic": true,
    "pourquoi": "Création mondiale.",
    "lien": null,
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "maldoror",
    "titre": "Maldoror",
-   "credits": "Lautréamont / Julien Gosselin",
-   "genre": "Théâtre",
-   "lieu": "Odéon",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Lautréamont",
+     "role": "auteur"
+    },
+    {
+     "nom": "Julien Gosselin",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "odeon",
    "salle": "Berthier",
    "debut": null,
    "fin": null,
-   "datesTexte": "",
    "note": 0,
    "pronostic": false,
    "pourquoi": "",
    "lien": null,
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": true,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": true
-  },
-  {
-   "id": "manon-lescaut",
-   "titre": "Manon Lescaut",
-   "credits": "Puccini",
-   "genre": "Opéra",
-   "lieu": "TCE",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "datesTexte": "",
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-mis-en-scene/manon-lescaut",
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "leonardYVa": false,
-   "vuLe": [
-    "2026-11-12"
-   ],
-   "noteLeonard": 4,
-   "avis": "Très émouvant avec Roberto Alagna dans le rôle de Des Grieux et Ailyn Pérez pour Manon Lescaut"
+   "statut": "a-voir"
   },
   {
    "id": "maria-stuarda",
    "titre": "Maria Stuarda",
-   "credits": "Donizetti",
-   "genre": "Opéra",
-   "lieu": "TCE",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Gaetano Donizetti",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "tce",
    "salle": "",
    "debut": "2027-04-01",
    "fin": "2027-04-01",
@@ -2385,26 +3243,36 @@
    "pronostic": false,
    "pourquoi": "Ermonela Jaho.",
    "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-version/maria-stuarda-1",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Carte Jeunes TCE",
      "date": "2027-04-01",
      "tarif": "20 €",
-     "condition": "Carte Jeunes TCE",
      "vente": "2027-01-01T10:00",
-     "venteApprox": true
+     "venteApprox": true,
+     "condition": "Carte Jeunes TCE"
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "marina-rebeka-jonas-kaufmann",
    "titre": "Marina Rebeka, Jonas Kaufmann",
-   "credits": "",
-   "genre": "Récital",
-   "lieu": "TCE",
+   "categorie": "Récital",
+   "artistes": [
+    {
+     "nom": "Marina Rebeka",
+     "role": "interprète"
+    },
+    {
+     "nom": "Jonas Kaufmann",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "tce",
    "salle": "",
    "debut": "2027-04-11",
    "fin": "2027-04-11",
@@ -2413,26 +3281,32 @@
    "pronostic": false,
    "pourquoi": "Tout Verdi.",
    "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/sung-recital/marina-rebeka-jonas-kaufmann-1",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Carte Jeunes TCE",
      "date": "2027-04-11",
      "tarif": "20 €",
-     "condition": "Carte Jeunes TCE",
      "vente": "2027-01-11T10:00",
-     "venteApprox": true
+     "venteApprox": true,
+     "condition": "Carte Jeunes TCE"
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "may-b",
    "titre": "May B",
-   "credits": "Maguy Marin",
-   "genre": "Danse",
-   "lieu": "Les Gémeaux",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Maguy Marin",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "les-gemeaux",
    "salle": "",
    "debut": "2027-02-26",
    "fin": "2027-02-28",
@@ -2441,17 +3315,27 @@
    "pronostic": false,
    "pourquoi": "Chef-d'œuvre de la danse d'après Beckett.",
    "lien": "https://www.lesgemeaux.com/spectacles/may-b/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "merci-de-votre-collaboration",
    "titre": "Merci de votre collaboration",
-   "credits": "Lola Lafon / Emmanuel Noblet",
-   "genre": "Théâtre",
-   "lieu": "Théâtre du Rond-Point",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Lola Lafon",
+     "role": "auteur"
+    },
+    {
+     "nom": "Emmanuel Noblet",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "rond-point",
    "salle": "",
    "debut": "2026-11-01",
    "fin": "2026-11-14",
@@ -2460,17 +3344,23 @@
    "pronostic": true,
    "pourquoi": "Première pièce de Lola Lafon, avec Zita Hanrot. 1h40. Reprise ensuite au Théâtre de l'Atelier du 15 janv. au 28 févr. 2027.",
    "lien": "https://www.theatredurondpoint.fr/files/44dfdad8/brochure_saison_26_27.pdf",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "miroir-de-nos-peines",
    "titre": "Miroir de nos peines",
-   "credits": "Hèctor Parra",
-   "genre": "Opéra",
-   "lieu": "Opéra de Paris – Garnier",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Hèctor Parra",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "palais-garnier",
    "salle": "",
    "debut": "2027-04-01",
    "fin": "2027-04-30",
@@ -2479,25 +3369,32 @@
    "pronostic": true,
    "pourquoi": "Création. Avant-première jeunes le 21 avril.",
    "lien": "https://www.operadeparis.fr/saison-26-27/opera/miroir-de-nos-peines",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Avant-première jeunes",
      "date": "2027-04-21",
      "tarif": "10 €",
      "vente": "2027-04-01T12:00",
+     "venteApprox": false,
      "condition": "Nés après le 1er janvier 1998, 2 places max."
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "mitridate",
    "titre": "Mitridate",
-   "credits": "Porpora",
-   "genre": "Opéra",
-   "lieu": "TCE",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Nicola Porpora",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "tce",
    "salle": "",
    "debut": "2027-04-26",
    "fin": "2027-04-26",
@@ -2506,26 +3403,32 @@
    "pronostic": false,
    "pourquoi": "Michael Spyres. Rareté.",
    "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-version/mitridate-1",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Carte Jeunes TCE",
      "date": "2027-04-26",
      "tarif": "20 €",
-     "condition": "Carte Jeunes TCE",
      "vente": "2027-01-26T10:00",
-     "venteApprox": true
+     "venteApprox": true,
+     "condition": "Carte Jeunes TCE"
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "mitridate-re-di-ponto",
    "titre": "Mitridate, re di Ponto",
-   "credits": "Mozart",
-   "genre": "Opéra",
-   "lieu": "TCE",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Wolfgang Amadeus Mozart",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "tce",
    "salle": "",
    "debut": "2027-03-12",
    "fin": "2027-03-12",
@@ -2534,26 +3437,27 @@
    "pronostic": false,
    "pourquoi": "Francesco Corti. À coupler avec le Mitridate de Porpora en avril.",
    "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-version/mitridate-re-di-ponto-1",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Carte Jeunes TCE",
      "date": "2027-03-12",
      "tarif": "20 €",
-     "condition": "Carte Jeunes TCE",
      "vente": "2026-12-12T10:00",
-     "venteApprox": true
+     "venteApprox": true,
+     "condition": "Carte Jeunes TCE"
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "mon-vrai-nom-est-elisabeth",
    "titre": "Mon vrai nom est Elisabeth",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Théâtre du Rond-Point",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "rond-point",
    "salle": "",
    "debut": "2027-02-23",
    "fin": "2027-03-14",
@@ -2562,17 +3466,23 @@
    "pronostic": true,
    "pourquoi": "",
    "lien": "https://www.theatredurondpoint.fr/files/44dfdad8/brochure_saison_26_27.pdf",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "muette",
    "titre": "Muette",
-   "credits": "Boris Charmatz",
-   "genre": "Danse",
-   "lieu": "Chaillot",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Boris Charmatz",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "chaillot",
    "salle": "",
    "debut": "2027-03-10",
    "fin": "2027-03-13",
@@ -2581,17 +3491,23 @@
    "pronostic": true,
    "pourquoi": "Solo, dès 16 ans.",
    "lien": "https://theatre-chaillot.fr/fr/programmation",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "my-fierce-ignorant-step",
    "titre": "My Fierce Ignorant Step",
-   "credits": "Christos Papadopoulos",
-   "genre": "Danse",
-   "lieu": "Les Gémeaux",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Christos Papadopoulos",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "les-gemeaux",
    "salle": "",
    "debut": "2027-03-26",
    "fin": "2027-03-27",
@@ -2600,36 +3516,49 @@
    "pronostic": false,
    "pourquoi": "Danse.",
    "lien": "https://www.lesgemeaux.com/spectacles/my-fierce-ignorant-step/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "neanderthal-repetitions-publiques",
    "titre": "NEANDERTHAL, répétitions publiques",
-   "credits": "Back to Back Theatre",
-   "genre": "Théâtre",
-   "lieu": "Odéon",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Back to Back Theatre",
+     "role": "compagnie"
+    }
+   ],
+   "lieuId": "odeon",
    "salle": "Odéon Paris 6",
    "debut": "2026-11-10",
    "fin": "2026-11-28",
    "datesTexte": "10 – 28 nov. 2026, 14h – 16h",
+   "horaires": "14h – 16h",
    "note": 2,
    "pronostic": false,
    "pourquoi": "Gratuit sur réservation.",
    "lien": "https://www.festival-automne.com/en/edition-2026/back-to-back-theatre-neanderthal-histoires-du-theatre-viii",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "nocturne-parade",
    "titre": "Nocturne (Parade)",
-   "credits": "Phia Ménard",
-   "genre": "Théâtre",
-   "lieu": "T2G",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Phia Ménard",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "t2g",
    "salle": "",
    "debut": "2027-03-20",
    "fin": "2027-03-23",
@@ -2638,17 +3567,23 @@
    "pronostic": false,
    "pourquoi": "Aussi au TPM fin février.",
    "lien": "https://theatredegennevilliers.fr/la-saison/programmation/nocturne-parade",
+   "billetterie": null,
    "publicJeune": true,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "noh-climax",
    "titre": "Noh Climax",
-   "credits": "Hiroshi Sugimoto",
-   "genre": "Théâtre",
-   "lieu": "Théâtre de la Ville",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Hiroshi Sugimoto",
+     "role": "artiste"
+    }
+   ],
+   "lieuId": "theatre-de-la-ville",
    "salle": "Abbesses",
    "debut": "2026-12-03",
    "fin": "2026-12-06",
@@ -2657,55 +3592,79 @@
    "pronostic": true,
    "pourquoi": "Création mondiale, avec Atsuo Kanze.",
    "lien": "https://www.theatredelaville-paris.com/en/spectacles/saison-26-27/theatre/hiroshi-sugimoto-noh-climax",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "nono",
    "titre": "Nono la Grinta",
-   "credits": "",
-   "genre": "Concert",
-   "lieu": "Zénith",
+   "categorie": "Concert",
+   "artistes": [
+    {
+     "nom": "Nono la Grinta",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "zenith-paris",
    "salle": "",
    "debut": null,
    "fin": null,
-   "datesTexte": "",
    "note": 0,
    "pronostic": false,
    "pourquoi": "",
    "lien": null,
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": true,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": true
+   "statut": "a-voir"
   },
   {
    "id": "oedipe-roi",
    "titre": "Œdipe roi",
-   "credits": "Sophocle / Eddy D’aranjo",
-   "genre": "Théâtre",
-   "lieu": "Odéon",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Sophocle",
+     "role": "auteur"
+    },
+    {
+     "nom": "Eddy D’Aranjo",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "odeon",
    "salle": "Berthier",
    "debut": null,
    "fin": null,
-   "datesTexte": "",
    "note": 0,
    "pronostic": false,
    "pourquoi": "",
    "lien": null,
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": true,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": true
+   "statut": "a-voir"
   },
   {
    "id": "olalaland",
    "titre": "Olalaland",
-   "credits": "Lionel Dray et Clémence Jeanguillaume",
-   "genre": "Théâtre",
-   "lieu": "Théâtre de la Bastille",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Lionel Dray",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Clémence Jeanguillaume",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "theatre-de-la-bastille",
    "salle": "",
    "debut": "2027-03-01",
    "fin": "2027-03-31",
@@ -2714,45 +3673,62 @@
    "pronostic": false,
    "pourquoi": "",
    "lien": "https://www.theatre-bastille.com/saison-26-27/olalaland",
+   "billetterie": null,
    "publicJeune": true,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "orphee",
    "titre": "Orphée",
-   "credits": "Gluck / Berlioz",
-   "genre": "Opéra",
-   "lieu": "TCE",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Christoph Willibald Gluck",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Hector Berlioz",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "tce",
    "salle": "",
    "debut": "2027-04-18",
    "fin": "2027-04-29",
    "datesTexte": "dim. 18 avril 2027, 19h30",
+   "horaires": "19h30",
    "note": 3,
    "pronostic": true,
    "pourquoi": "Puis 20 – 29 avril.",
    "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/staged-opera/orphee-1",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Avant-première -30 ans",
      "date": "2027-04-18",
      "tarif": "20 €",
-     "condition": "Carte Jeunes TCE",
      "vente": "2027-01-18T10:00",
-     "venteApprox": true
+     "venteApprox": true,
+     "condition": "Carte Jeunes TCE"
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "oum",
    "titre": "Oüm",
-   "credits": "Fouad Boussouf (danse)",
-   "genre": "Danse",
-   "lieu": "Théâtre du Rond-Point",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Fouad Boussouf",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "rond-point",
    "salle": "",
    "debut": "2027-01-14",
    "fin": "2027-01-17",
@@ -2761,17 +3737,23 @@
    "pronostic": false,
    "pourquoi": "Six danseurs et deux musiciens autour d'Oum Kalthoum.",
    "lien": "https://www.theatredurondpoint.fr/files/44dfdad8/brochure_saison_26_27.pdf",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "piano-man",
    "titre": "Piano Man",
-   "credits": "Marcus Lindeen",
-   "genre": "Théâtre",
-   "lieu": "Nanterre-Amandiers",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Marcus Lindeen",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "nanterre-amandiers",
    "salle": "",
    "debut": "2026-11-12",
    "fin": "2026-11-22",
@@ -2780,17 +3762,23 @@
    "pronostic": false,
    "pourquoi": "Théâtre documentaire.",
    "lien": "https://nanterre-amandiers.com/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "platee",
    "titre": "Platée",
-   "credits": "Rameau",
-   "genre": "Opéra",
-   "lieu": "TCE",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Jean-Philippe Rameau",
+     "role": "compositeur"
+    }
+   ],
+   "lieuId": "tce",
    "salle": "",
    "debut": "2027-06-24",
    "fin": "2027-06-24",
@@ -2799,26 +3787,44 @@
    "pronostic": false,
    "pourquoi": "Trois heures de comédie lyrique.",
    "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-version/platee-2-1",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Carte Jeunes TCE",
      "date": "2027-06-24",
      "tarif": "20 €",
-     "condition": "Carte Jeunes TCE",
      "vente": "2027-03-24T10:00",
-     "venteApprox": true
+     "venteApprox": true,
+     "condition": "Carte Jeunes TCE"
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "pulsations-childs",
    "titre": "Pulsations",
-   "credits": "Childs, Graham, León et Lightfoot",
-   "genre": "Danse",
-   "lieu": "Opéra de Paris",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Lucinda Childs",
+     "role": "chorégraphie"
+    },
+    {
+     "nom": "Martha Graham",
+     "role": "chorégraphie"
+    },
+    {
+     "nom": "Sol León",
+     "role": "chorégraphie"
+    },
+    {
+     "nom": "Paul Lightfoot",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "opera-de-paris",
    "salle": "",
    "debut": null,
    "fin": null,
@@ -2827,17 +3833,27 @@
    "pronostic": false,
    "pourquoi": "Programme contemporain.",
    "lien": "https://www.operadeparis.fr/programmation/saison-26-27",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "race-d-ep",
    "titre": "Race d'Ep",
-   "credits": "d'après Crevel et Dustan",
-   "genre": "Théâtre",
-   "lieu": "T2G",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "René Crevel",
+     "role": "auteur"
+    },
+    {
+     "nom": "Guillaume Dustan",
+     "role": "auteur"
+    }
+   ],
+   "lieuId": "t2g",
    "salle": "",
    "debut": "2027-05-25",
    "fin": "2027-05-27",
@@ -2846,17 +3862,23 @@
    "pronostic": true,
    "pourquoi": "",
    "lien": "https://theatredegennevilliers.fr/la-saison/programmation/race-d-ep-reflexions-sur-la-question-gay",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "ravage-tout-court",
    "titre": "Ravage Tout Court",
-   "credits": "Adeline Rosenstein",
-   "genre": "Théâtre",
-   "lieu": "Théâtre Public de Montreuil",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Adeline Rosenstein",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "theatre-public-montreuil",
    "salle": "",
    "debut": "2027-05-25",
    "fin": "2027-05-28",
@@ -2865,17 +3887,27 @@
    "pronostic": false,
    "pourquoi": "Théâtre documentaire.",
    "lien": "https://theatrepublicmontreuil.com/ravage-tout-court",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "rave-l-age-d-or",
    "titre": "Rave + L'Âge d'or",
-   "credits": "Ballet de Lorraine / Karole Armitage",
-   "genre": "Danse",
-   "lieu": "Chaillot",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Ballet de Lorraine",
+     "role": "compagnie"
+    },
+    {
+     "nom": "Karole Armitage",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "chaillot",
    "salle": "",
    "debut": "2027-06-15",
    "fin": "2027-06-23",
@@ -2884,17 +3916,23 @@
    "pronostic": false,
    "pourquoi": "25 danseurs, ballet et électro.",
    "lien": "https://theatre-chaillot.fr/fr/programmation",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "raymonda",
    "titre": "Raymonda",
-   "credits": "Noureev",
-   "genre": "Danse",
-   "lieu": "Opéra de Paris – Bastille",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Rudolf Noureev",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "opera-bastille",
    "salle": "",
    "debut": "2027-06-01",
    "fin": "2027-06-30",
@@ -2903,25 +3941,27 @@
    "pronostic": false,
    "pourquoi": "Avant-première jeunes le 14 juin. Grand classique Noureev.",
    "lien": "https://www.operadeparis.fr/saison-26-27/ballet/raymonda",
+   "billetterie": null,
    "publicJeune": true,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Avant-première jeunes",
      "date": "2027-06-14",
      "tarif": "10 €",
      "vente": "2027-05-27T12:00",
+     "venteApprox": false,
      "condition": "Nés après le 1er janvier 1998, 2 places max."
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "repetitions-publiques-danse",
    "titre": "Répétitions publiques danse",
-   "credits": "",
-   "genre": "Danse",
-   "lieu": "Opéra de Paris",
+   "categorie": "Danse",
+   "artistes": [],
+   "lieuId": "opera-de-paris",
    "salle": "",
    "debut": "2026-11-14",
    "fin": "2026-11-21",
@@ -2930,17 +3970,23 @@
    "pronostic": false,
    "pourquoi": "5 € pour les moins de 28 ans.",
    "lien": "https://www.operadeparis.fr/programmation/saison-26-27/experiences-repetitions-publiques",
+   "billetterie": null,
    "publicJeune": true,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "restart",
    "titre": "RESTART",
-   "credits": "Jacob Jonas (danse)",
-   "genre": "Danse",
-   "lieu": "Théâtre de la Ville",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Jacob Jonas",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "theatre-de-la-ville",
    "salle": "Sarah Bernhardt, Grande salle",
    "debut": "2026-12-17",
    "fin": "2026-12-19",
@@ -2949,17 +3995,31 @@
    "pronostic": true,
    "pourquoi": "12 danseurs, première en France.",
    "lien": "https://www.theatredelaville-paris.com/en/spectacles/saison-26-27/danse/jacob-jonas-restart",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "resurrection-un-cas-de-conscience",
    "titre": "Résurrection. Un cas de conscience",
-   "credits": "Leïla Slimani d'après Tolstoï / Simon Delétang",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Leïla Slimani",
+     "role": "auteur"
+    },
+    {
+     "nom": "Léon Tolstoï",
+     "role": "auteur"
+    },
+    {
+     "nom": "Simon Delétang",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "comedie-francaise",
    "salle": "Vieux-Colombier",
    "debut": "2026-11-25",
    "fin": "2027-01-03",
@@ -2968,17 +4028,27 @@
    "pronostic": true,
    "pourquoi": "Première pièce de Slimani. Rencontre le 7 déc.",
    "lien": "https://comedie-francaise.fr/2026-2027/resurrection",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "rhinoceros",
    "titre": "Rhinocéros",
-   "credits": "Ionesco / Emmanuel Demarcy-Mota",
-   "genre": "Théâtre",
-   "lieu": "Théâtre de la Ville",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Eugène Ionesco",
+     "role": "auteur"
+    },
+    {
+     "nom": "Emmanuel Demarcy-Mota",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "theatre-de-la-ville",
    "salle": "Sarah Bernhardt",
    "debut": null,
    "fin": null,
@@ -2987,17 +4057,27 @@
    "pronostic": false,
    "pourquoi": "Reprise du spectacle phare de la maison.",
    "lien": "https://www.theatredelaville-paris.com/en/spectacles/saison-26-27/theatre/rhinoceros-eugene-ionesco-emmanuel-demarcy-mota",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "rinaldo",
    "titre": "Rinaldo",
-   "credits": "Haendel / Valentina Carrasco",
-   "genre": "Opéra",
-   "lieu": "TCE",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Georg Friedrich Haendel",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Valentina Carrasco",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "tce",
    "salle": "",
    "debut": "2027-02-22",
    "fin": "2027-02-28",
@@ -3006,26 +4086,36 @@
    "pronostic": true,
    "pourquoi": "Jaroussky à la direction. Mise en scène Valentina Carrasco, Jaroussky à la direction. Puis 22 – 28 févr.",
    "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/staged-opera/rinaldo-2-1",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Avant-première -30 ans",
      "date": "2027-02-20",
      "tarif": "20 €",
-     "condition": "Carte Jeunes TCE",
      "vente": "2026-11-20T10:00",
-     "venteApprox": true
+     "venteApprox": true,
+     "condition": "Carte Jeunes TCE"
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "rituel-4-le-grand-debat",
    "titre": "Rituel 4 : Le Grand Débat",
-   "credits": "Émilie Rousset et Louise Hémon",
-   "genre": "Théâtre",
-   "lieu": "La Colline",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Émilie Rousset",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Louise Hémon",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "la-colline",
    "salle": "Petit théâtre",
    "debut": "2027-02-23",
    "fin": "2027-03-26",
@@ -3034,17 +4124,31 @@
    "pronostic": true,
    "pourquoi": "Forme courte, 1h.",
    "lien": "https://www.colline.fr/spectacles/rituel-4-le-grand-debat",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "rituels-lifar",
    "titre": "Rituels",
-   "credits": "Lifar, Binyamini, Bausch",
-   "genre": "Danse",
-   "lieu": "Opéra de Paris – Bastille",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Serge Lifar",
+     "role": "chorégraphie"
+    },
+    {
+     "nom": "Binyamini",
+     "role": "chorégraphie"
+    },
+    {
+     "nom": "Pina Bausch",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "opera-bastille",
    "salle": "",
    "debut": "2026-12-02",
    "fin": "2027-01-02",
@@ -3053,36 +4157,51 @@
    "pronostic": false,
    "pourquoi": "Programme mixte, 25 – 175 €.",
    "lien": "https://www.operadeparis.fr/programmation/saison-26-27",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "robert-badinter-l-enrage-de-justice",
    "titre": "Robert Badinter, l'enragé de justice",
-   "credits": "avec Stéphane Guillon",
-   "genre": "Théâtre",
-   "lieu": "Théâtre Antoine",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Stéphane Guillon",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "theatre-antoine",
    "salle": "",
    "debut": "2026-11-01",
    "fin": "2027-01-03",
-   "datesTexte": "",
    "note": 2,
    "pronostic": false,
    "pourquoi": "Jusqu'au 3 janv. 2027. 22,50 – 64 €.",
    "lien": "https://www.offi.fr/theatre/theatre-antoine-1408/robert-badinter-lenrage-de-justice-105442.html",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "ruy-blas",
    "titre": "Ruy Blas",
-   "credits": "Hugo / Julie Duclos",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Victor Hugo",
+     "role": "auteur"
+    },
+    {
+     "nom": "Julie Duclos",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "comedie-francaise",
    "salle": "Richelieu",
    "debut": "2026-10-15",
    "fin": "2027-01-27",
@@ -3091,36 +4210,47 @@
    "pronostic": true,
    "pourquoi": "Création, absent de la CF depuis 25 ans. 2h45.",
    "lien": "https://comedie-francaise.fr/2026-2027/ruy-blas",
+   "billetterie": null,
    "publicJeune": true,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "seppuku",
    "titre": "Seppuku. El funeral de Mishima",
-   "credits": "Angélica Liddell",
-   "genre": "Théâtre",
-   "lieu": "Odéon",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Angélica Liddell",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "odeon",
    "salle": "",
    "debut": null,
    "fin": null,
-   "datesTexte": "",
    "note": 0,
    "pronostic": false,
    "pourquoi": "",
    "lien": null,
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": true,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": true
+   "statut": "a-voir"
   },
   {
    "id": "shabaab",
    "titre": "Shabaab",
-   "credits": "Samar Haddad King",
-   "genre": "Danse",
-   "lieu": "Théâtre de la Bastille",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Samar Haddad King",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "theatre-de-la-bastille",
    "salle": "",
    "debut": "2027-02-01",
    "fin": "2027-02-03",
@@ -3129,17 +4259,18 @@
    "pronostic": false,
    "pourquoi": "Danse.",
    "lien": "https://www.theatre-bastille.com/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "shrek-le-musical",
    "titre": "Shrek le musical",
-   "credits": "",
-   "genre": "Comédie musicale",
-   "lieu": "Folies Bergère",
+   "categorie": "Comédie musicale",
+   "artistes": [],
+   "lieuId": "folies-bergere",
    "salle": "",
    "debut": "2026-10-02",
    "fin": "2027-01-17",
@@ -3148,17 +4279,18 @@
    "pronostic": false,
    "pourquoi": "Plutôt familial, avec Chantal Ladesou.",
    "lien": "https://www.sortiraparis.com/scenes/spectacle/guides/197336-spectacles-musicaux-paris",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "singin-in-the-rain",
    "titre": "Singin' in the Rain",
-   "credits": "",
-   "genre": "Comédie musicale",
-   "lieu": "Lido",
+   "categorie": "Comédie musicale",
+   "artistes": [],
+   "lieuId": "lido",
    "salle": "",
    "debut": "2026-11-11",
    "fin": "2027-01-10",
@@ -3167,17 +4299,23 @@
    "pronostic": true,
    "pourquoi": "Présenté comme l'un des événements de la saison.",
    "lien": "https://www.parisselectbook.com/?p=243350",
+   "billetterie": null,
    "publicJeune": true,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "steven-cohen-people-will-people-you",
    "titre": "Steven Cohen : People Will People You",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "MC93",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Steven Cohen",
+     "role": "artiste"
+    }
+   ],
+   "lieuId": "mc93",
    "salle": "",
    "debut": "2026-11-24",
    "fin": "2026-12-05",
@@ -3186,36 +4324,47 @@
    "pronostic": false,
    "pourquoi": "Performance.",
    "lien": "https://www.mc93.com/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "suzanne",
    "titre": "Suzanne",
-   "credits": "avec Catherine Hiegel",
-   "genre": "Théâtre",
-   "lieu": "Théâtre Montparnasse",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Catherine Hiegel",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "theatre-montparnasse",
    "salle": "",
    "debut": null,
    "fin": null,
-   "datesTexte": "",
    "note": 2,
    "pronostic": false,
    "pourquoi": "Ancienne sociétaire de la CF.",
    "lien": "https://www.offi.fr/theatre/theatre-montparnasse-2825/suzanne-107288.html",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "tame-impala",
    "titre": "Tame Impala",
-   "credits": "",
-   "genre": "Concert",
-   "lieu": "Accor Arena",
+   "categorie": "Concert",
+   "artistes": [
+    {
+     "nom": "Tame Impala",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
    "salle": "",
    "debut": null,
    "fin": null,
@@ -3223,36 +4372,55 @@
    "pronostic": false,
    "pourquoi": "",
    "lien": null,
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": true,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": true
+   "statut": "a-voir"
   },
   {
    "id": "tartuffe-van-hove",
    "titre": "Le Tartuffe",
-   "credits": "Molière / Ivo van Hove",
-   "genre": "Théâtre",
-   "lieu": "Grande Halle de la Villette",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Molière",
+     "role": "auteur"
+    },
+    {
+     "nom": "Ivo van Hove",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "grande-halle-villette",
    "salle": "",
    "debut": null,
    "fin": null,
-   "datesTexte": "",
    "note": 0,
    "pronostic": false,
    "pourquoi": "",
    "lien": null,
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": true,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": true
+   "statut": "a-voir"
   },
   {
    "id": "thesee",
    "titre": "Thésée",
-   "credits": "Valérie Dréville et Guy Cassiers",
-   "genre": "Théâtre",
-   "lieu": "Nanterre-Amandiers",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Valérie Dréville",
+     "role": "interprète"
+    },
+    {
+     "nom": "Guy Cassiers",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "nanterre-amandiers",
    "salle": "",
    "debut": "2027-04-23",
    "fin": "2027-04-25",
@@ -3261,17 +4429,27 @@
    "pronostic": false,
    "pourquoi": "Aussi aux Gémeaux en décembre.",
    "lien": "https://nanterre-amandiers.com/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "thesee-sa-vie-nouvelle",
    "titre": "Thésée, sa vie nouvelle",
-   "credits": "Valérie Dréville et Guy Cassiers",
-   "genre": "Théâtre",
-   "lieu": "Les Gémeaux",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Valérie Dréville",
+     "role": "interprète"
+    },
+    {
+     "nom": "Guy Cassiers",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "les-gemeaux",
    "salle": "",
    "debut": "2026-12-09",
    "fin": "2026-12-11",
@@ -3280,17 +4458,23 @@
    "pronostic": false,
    "pourquoi": "",
    "lien": "https://www.lesgemeaux.com/spectacles/thesee-sa-vie-nouvelle/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "thrice",
    "titre": "Thrice",
-   "credits": "Damien Jalet",
-   "genre": "Danse",
-   "lieu": "Chaillot",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Damien Jalet",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "chaillot",
    "salle": "",
    "debut": "2027-01-22",
    "fin": "2027-01-29",
@@ -3299,17 +4483,23 @@
    "pronostic": false,
    "pourquoi": "Triptyque vent, eau, terre.",
    "lien": "https://theatre-chaillot.fr/fr/programmation",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "tout-doit-disparaitre",
    "titre": "Tout doit disparaître",
-   "credits": "Stéphanie Aflalo",
-   "genre": "Théâtre",
-   "lieu": "Théâtre de la Bastille",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Stéphanie Aflalo",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "theatre-de-la-bastille",
    "salle": "",
    "debut": "2027-05-21",
    "fin": "2027-06-01",
@@ -3318,17 +4508,27 @@
    "pronostic": false,
    "pourquoi": "Seule en scène entre théâtre et philosophie, en dialogue avec la voix enregistrée de son père.",
    "lien": "https://www.theatre-bastille.com/saison-26-27/tout-doit-disparaitre",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "turandot",
    "titre": "Turandot",
-   "credits": "Puccini / Robert Wilson",
-   "genre": "Opéra",
-   "lieu": "Opéra de Paris – Bastille",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Giacomo Puccini",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Robert Wilson",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "opera-bastille",
    "salle": "",
    "debut": "2026-11-27",
    "fin": "2026-12-27",
@@ -3337,36 +4537,59 @@
    "pronostic": false,
    "pourquoi": "Tamara Wilson, Eun Sun Kim.",
    "lien": "https://www.operadeparis.fr/programmation/saison-26-27",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "ubu-roi",
    "titre": "Ubu Roi",
-   "credits": "Jarry, avec André Marcon",
-   "genre": "Théâtre",
-   "lieu": "Théâtre de Paris",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Alfred Jarry",
+     "role": "auteur"
+    },
+    {
+     "nom": "André Marcon",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "theatre-de-paris",
    "salle": "",
    "debut": null,
    "fin": null,
-   "datesTexte": "",
    "note": 2,
    "pronostic": false,
    "pourquoi": "Jarry par André Marcon.",
    "lien": "https://www.offi.fr/theatre/theatre-de-paris-3269/ubu-roi-106625.html",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "un-coin-de-paradis",
    "titre": "Un coin de Paradis",
-   "credits": "Josette Baïz / Groupe Grenade, d'après José Montalvo",
-   "genre": "Danse",
-   "lieu": "Chaillot",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Josette Baïz",
+     "role": "chorégraphie"
+    },
+    {
+     "nom": "Groupe Grenade",
+     "role": "compagnie"
+    },
+    {
+     "nom": "José Montalvo",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "chaillot",
    "salle": "",
    "debut": "2026-11-11",
    "fin": "2026-11-14",
@@ -3375,17 +4598,27 @@
    "pronostic": false,
    "pourquoi": "Jeunes danseurs, mélange break, classique, africain.",
    "lien": "https://theatre-chaillot.fr/fr/programmation",
+   "billetterie": null,
    "publicJeune": true,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "un-hamlet-de-moins",
    "titre": "Un Hamlet de moins",
-   "credits": "Nathalie Garraud et Olivier Saccomano",
-   "genre": "Théâtre",
-   "lieu": "Théâtre Public de Montreuil",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Nathalie Garraud",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Olivier Saccomano",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "theatre-public-montreuil",
    "salle": "",
    "debut": "2027-03-03",
    "fin": "2027-03-12",
@@ -3394,17 +4627,23 @@
    "pronostic": false,
    "pourquoi": "",
    "lien": "https://theatrepublicmontreuil.com/un-hamlet-de-moins",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "un-peu-pour-mon-cur",
    "titre": "Un peu pour mon cœur…",
-   "credits": "Dalila Belaza",
-   "genre": "Danse",
-   "lieu": "Chaillot",
+   "categorie": "Danse",
+   "artistes": [
+    {
+     "nom": "Dalila Belaza",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "chaillot",
    "salle": "",
    "debut": "2026-11-25",
    "fin": "2026-11-28",
@@ -3413,17 +4652,18 @@
    "pronostic": true,
    "pourquoi": "Création, au Théâtre de la Ville.",
    "lien": "https://theatre-chaillot.fr/fr/programmation",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "une-odyssee",
    "titre": "Une odyssée",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Nanterre-Amandiers",
+   "categorie": "Théâtre",
+   "artistes": [],
+   "lieuId": "nanterre-amandiers",
    "salle": "",
    "debut": "2027-05-19",
    "fin": "2027-05-22",
@@ -3432,17 +4672,23 @@
    "pronostic": true,
    "pourquoi": "",
    "lien": "https://nanterre-amandiers.com/",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "vampire-s-mountain",
    "titre": "Vampire's Mountain",
-   "credits": "Philippe Quesne",
-   "genre": "Théâtre",
-   "lieu": "Odéon",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Philippe Quesne",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "odeon",
    "salle": "Odéon Paris 6",
    "debut": "2027-03-20",
    "fin": "2027-04-04",
@@ -3451,17 +4697,23 @@
    "pronostic": false,
    "pourquoi": "Théâtre d'images, 1h50, surtitré. 42 €.",
    "lien": "https://www.theatre-odeon.eu/en/season-2026-2027/performances-2026-2027",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "vertige-manhattan-transfer",
    "titre": "Vertige – Manhattan Transfer",
-   "credits": "Léonard Matton",
-   "genre": "Théâtre",
-   "lieu": "Chaillot",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Léonard Matton",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "chaillot",
    "salle": "",
    "debut": "2027-01-13",
    "fin": "2027-01-16",
@@ -3470,1837 +4722,27 @@
    "pronostic": true,
    "pourquoi": "Immersif d'après Dos Passos, 2h45. Création mondiale.",
    "lien": "https://theatre-chaillot.fr/fr/programmation",
+   "billetterie": null,
    "publicJeune": false,
-   "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
-  },
-  {
-   "id": "vu-1-2-3-pocquelin",
-   "titre": "1, 2, 3… Pocquelin",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-07-18"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-alors-on-en-est-ou",
-   "titre": "Alors on en est où ?",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-26"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-angels-in-america",
-   "titre": "Angels in America",
-   "credits": "Tony Kushner / Arnaud Desplechin",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2023-04-29"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-antigone",
-   "titre": "Antigone",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "Espace Roseau Teinturiers",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-20"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-apres-moi-le-deluge",
-   "titre": "Après moi, le déluge",
-   "credits": "(LA)HORDE",
-   "genre": "Danse",
-   "lieu": "Théâtre de la Ville",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-09-05"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-art-majeur",
-   "titre": "Art majeur",
-   "credits": "Guillaume Barbot",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
-   "salle": "Studio-Théâtre",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": "https://www.offi.fr/theatre/comedie-francaise-studio-theatre-1913/art-majeur-93221.html",
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-03-29"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-autopsie-dune-photo-de-famille",
-   "titre": "Autopsie d’une photo de famille",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "La Manufacture",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-11"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-bejart-et-nous-loiseau-de-feu-bolero",
-   "titre": "Béjart et nous, L’Oiseau de feu, Boléro",
-   "credits": "Béjart Ballet Lausanne",
-   "genre": "Danse",
-   "lieu": "La Seine Musicale",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-03-14"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-bestioles",
-   "titre": "Bestioles",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
-   "salle": "Studio-Théâtre",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": "https://www.offi.fr/theatre/comedie-francaise-studio-theatre-1913/bestioles-104677.html",
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-02-06"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-brel",
-   "titre": "BREL",
-   "credits": "Anne Teresa De Keersmaeker et Solal Mariotte",
-   "genre": "Danse",
-   "lieu": "Festival d’Avignon",
-   "salle": "Carrière de Boulbon",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-09"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-conteneur",
-   "titre": "Conteneur",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "Espace Alya",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-19"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-cosi-fan-tutte",
-   "titre": "Così fan tutte",
-   "credits": "Mozart",
-   "genre": "Opéra",
-   "lieu": "Châtelet",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2024-02-02"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-dans-la-peau-de-cyrano",
-   "titre": "Dans la peau de Cyrano",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "Théâtre des Corps Saints",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-07-12"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-edmond",
-   "titre": "Edmond",
-   "credits": "Alexis Michalik",
-   "genre": "Théâtre",
-   "lieu": "Théâtre du Palais-Royal",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-12-19"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-fragment-s",
-   "titre": "Fragment(s)",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "Espace Alya",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-11"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-from-martin-to-eden",
-   "titre": "From Martin to Eden",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-07-19"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-gestion-de-la-ressource-humaine",
-   "titre": "Gestion de la ressource humaine",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "Archipel Théâtre",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-18"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-hecube-pas-hecube",
-   "titre": "Hécube, pas Hécube",
-   "credits": "Tiago Rodrigues",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": "https://festival-avignon.com/en/edition-2024/programme/hecube-pas-hecube-348428",
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-03-31"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-hubris",
-   "titre": "Hubris",
-   "credits": "Compagnie Paizo",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "Espace Roseau Teinturiers",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-07-11",
-    "2026-07-19"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-jacques-et-chirac",
-   "titre": "Jacques et Chirac",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "La Luna",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-13"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-jerome-robbins",
-   "titre": "Jerome Robbins",
-   "credits": "Ballet de l’Opéra de Paris",
-   "genre": "Danse",
-   "lieu": "Opéra de Paris – Garnier",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2023-10-23"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-la-distance",
-   "titre": "La Distance",
-   "credits": "Tiago Rodrigues",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "L’Autre Scène du Grand Avignon",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-16"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-la-liste-de-mes-envies",
-   "titre": "La Liste de mes envies",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-10"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-la-mouette",
-   "titre": "La Mouette",
-   "credits": "Tchekhov",
-   "genre": "Théâtre",
-   "lieu": null,
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2024-05-28"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-la-musica-deuxieme",
-   "titre": "La Musica deuxième",
-   "credits": "Duras / Arnaud Desplechin",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
-   "salle": "Vieux-Colombier",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-10-22"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-la-parabole-du-seum-avignon",
-   "titre": "La Parabole du Seum",
-   "credits": "Rébecca Chaillon",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "Cloître des Célestins",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-07-12"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-la-puce-a-loreille",
-   "titre": "La Puce à l’oreille",
-   "credits": "Feydeau / Lilo Baur",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2023-10-22"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-la-vestale",
-   "titre": "La Vestale",
-   "credits": "Spontini",
-   "genre": "Opéra",
-   "lieu": "Opéra de Paris – Bastille",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2024-07-11"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-la-vie-parisienne",
-   "titre": "La Vie parisienne",
-   "credits": "Offenbach",
-   "genre": "Opéra",
-   "lieu": "Châtelet",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-06-20"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-lavare",
-   "titre": "L’Avare",
-   "credits": "Molière / Lilo Baur",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2024-10-23"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-le-bain",
-   "titre": "Le Bain",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-07-18"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-le-barbier-de-seville",
-   "titre": "Le Barbier de Séville",
-   "credits": "Rossini",
-   "genre": "Opéra",
-   "lieu": "La Fenice, Venise",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-03-02"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-le-barbier-de-seville-avignon",
-   "titre": "Le Barbier de Séville",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-06"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-le-bourgeois-gentilhomme-porte-saint-martin",
-   "titre": "Le Bourgeois gentilhomme",
-   "credits": "Molière",
-   "genre": "Théâtre",
-   "lieu": "Théâtre de la Porte Saint-Martin",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-03-01"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-le-cercle-des-poetes-disparus",
-   "titre": "Le Cercle des poètes disparus",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Théâtre Libre",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2024-12-28"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-le-cid",
-   "titre": "Le Cid",
-   "credits": "Corneille",
-   "genre": "Théâtre",
-   "lieu": "Théâtre de la Porte Saint-Martin",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-04-22"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-le-malade-imaginaire",
-   "titre": "Le Malade imaginaire",
-   "credits": "Molière",
-   "genre": "Théâtre",
-   "lieu": "Théâtre de la Porte Saint-Martin",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-06-14"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-le-mariage-force",
-   "titre": "Le Mariage forcé",
-   "credits": "Molière / Louis Arene",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
-   "salle": "Vieux-Colombier",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": "https://www.offi.fr/theatre/comedie-francaise-studio-theatre-1913/le-mariage-force-32894.html",
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-09-19"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-le-proces-dune-vie",
-   "titre": "Le Procès d’une vie",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Le Splendid",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-06-12"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-le-proces-pelicot",
-   "titre": "Le Procès Pelicot",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "Cloître des Carmes",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-18"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-le-radeau-de-la-meduse",
-   "titre": "Le Radeau de la Méduse",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-23"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-le-revizor",
-   "titre": "Le Révizor",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "Espace Alya",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-06"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-le-soulier-de-satin",
-   "titre": "Le Soulier de satin",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-23"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-le-suicide",
-   "titre": "Le Suicidé",
-   "credits": "Nikolaï Erdman / Stéphane Varupenne",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-01-22"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-le-suicide-double-jeu",
-   "titre": "Le Suicidé (Double Jeu)",
-   "credits": "Nikolaï Erdman, troupe étudiante Double Jeu",
-   "genre": "Théâtre",
-   "lieu": "HEC Paris",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-04-07"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-le-syndrome-dulysse",
-   "titre": "Le Syndrome d’Ulysse",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "Théâtre du Balcon",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-07-13"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-leducation-sentimentale",
-   "titre": "L’Éducation sentimentale",
-   "credits": "Flaubert",
-   "genre": "Théâtre",
-   "lieu": "Théâtre de Poche-Montparnasse",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2023-09-30"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-les-bonnes",
-   "titre": "Les Bonnes",
-   "credits": "Genet / Carme Portaceli",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
-   "salle": "Athénée",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-10-08"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-les-enchanteurs",
-   "titre": "Les Enchanteurs",
-   "credits": "Christophe Malavoy",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "Théâtre des Gémeaux (Avignon)",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-08"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-les-fourberies-de-scapin",
-   "titre": "Les Fourberies de Scapin",
-   "credits": "Molière / Denis Podalydès",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-11-02"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-letrangere",
-   "titre": "L’Étrangère",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "Théâtre du Balcon",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-22"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-lexikon",
-   "titre": "Lexikon",
-   "credits": "El Conde de Torrefiel",
-   "genre": "Théâtre",
-   "lieu": "Odéon",
-   "salle": "Berthier",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-10-13"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-lexperience-theatrale",
-   "titre": "L’Expérience théâtrale",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Théâtre de la Michodière",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-02-07"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-lights-on-chaplin",
-   "titre": "Lights on Chaplin",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-26"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-marc-tourneboeuf",
-   "titre": "Marc Tourneboeuf",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "Théâtre Le Paris",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-25"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-michel-et-claude",
-   "titre": "Michel et Claude",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "Espace Alya",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-07"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-miss-charity",
-   "titre": "Miss Charity",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-11"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-nous-ou-le-paradoxe-du-herisson",
-   "titre": "Nous ou le paradoxe du hérisson",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "Théâtre Benoît XII",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-07-11"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-orso-et-moi",
-   "titre": "Orso et moi",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "La Colline",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-10-15"
-   ],
    "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-par-autan",
-   "titre": "Par autan",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "Lycée Frédéric-Mistral",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-14"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-points-de-non-retour-quais-de-seine",
-   "titre": "Points de non-retour [Quais de Seine]",
-   "credits": "Alexandra Badea",
-   "genre": "Théâtre",
-   "lieu": "La Colline",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2022-01-27"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-post",
-   "titre": "Post!",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "Rue de la Carreterie",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-07-11"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-puccini",
-   "titre": "Puccini",
-   "credits": "",
-   "genre": "Opéra",
-   "lieu": "TCE",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2023-06-17"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-refuge",
-   "titre": "Refuge",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "Espace Alya",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-21"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-roberto-zucco",
-   "titre": "Roberto Zucco",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "Théâtre du Girasole",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-07-12"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-rosas-danst-rosas",
-   "titre": "Rosas danst Rosas",
-   "credits": "Anne Teresa De Keersmaeker",
-   "genre": "Danse",
-   "lieu": "Chaillot",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "Date à confirmer",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-09-11"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-seisme",
-   "titre": "Séisme",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Petit Saint-Martin",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-06-17"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-sylvia",
-   "titre": "Sylvia",
-   "credits": "Delibes / Manuel Legris",
-   "genre": "Danse",
-   "lieu": "Opéra de Paris – Garnier",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-05-16"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-taire",
-   "titre": "TAIRE",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "La FabricA",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-21"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-toute-lhistoire-de-la-peinture-en-moins-de-2-heures",
-   "titre": "Toute l’histoire de la peinture en moins de 2 heures",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-09",
-    "2026-07-10"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-ubu-roi-avignon",
-   "titre": "Ubu Roi",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-23"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-un-soir-de-gala",
-   "titre": "Un soir de gala",
-   "credits": "Vincent Dedienne",
-   "genre": "Théâtre",
-   "lieu": "Bouffes du Nord",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "Aussi vu au Théâtre Marigny en 2022",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2022-06-24",
-    "2024-12-26"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-un-tramway-nomme-desir",
-   "titre": "Un tramway nommé désir",
-   "credits": "Tennessee Williams",
-   "genre": "Théâtre",
-   "lieu": "Bouffes Parisiens",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2024-03-30"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-une-mouette",
-   "titre": "Une Mouette",
-   "credits": "Tchekhov / Elsa Granat",
-   "genre": "Théâtre",
-   "lieu": "Comédie-Française",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": "https://www.offi.fr/theatre/comedie-francaise-salle-richelieu-1912/une-mouette-99976.html",
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-09-28"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-une-operette-a-ravensbruck",
-   "titre": "Une opérette à Ravensbrück",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-05"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-variations-pour-un-parapluie",
-   "titre": "Variations pour un parapluie",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "Espace Alya",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-10"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-willy-protagoras-enferme-dans-les-toilettes",
-   "titre": "Willy Protagoras enfermé dans les toilettes",
-   "credits": "Wajdi Mouawad",
-   "genre": "Théâtre",
-   "lieu": "La Colline",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2026-02-15"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-y-a-de-la-joie",
-   "titre": "Y a de la joie !",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "Théâtre des Lucioles",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
    "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-12"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
-  },
-  {
-   "id": "vu-yongoyely",
-   "titre": "Yongoyely",
-   "credits": "",
-   "genre": "Théâtre",
-   "lieu": "Festival d’Avignon",
-   "salle": "La Scala Provence",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "publicJeune": false,
-   "offres": [],
-   "statut": "vu",
-   "vuLe": [
-    "2025-07-09"
-   ],
-   "leonardYVa": false,
-   "noteLeonard": null,
-   "avis": ""
+   "statut": "a-voir"
   },
   {
    "id": "werther",
    "titre": "Werther",
-   "credits": "Massenet / Robert Carsen",
-   "genre": "Opéra",
-   "lieu": "Opéra de Paris – Bastille",
+   "categorie": "Opéra",
+   "artistes": [
+    {
+     "nom": "Jules Massenet",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Robert Carsen",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "opera-bastille",
    "salle": "",
    "debut": "2027-02-11",
    "fin": "2027-03-12",
@@ -5309,25 +4751,36 @@
    "pronostic": false,
    "pourquoi": "Bernheim, Spyres, Stutzmann. Avant-première jeunes le 8 fév. (vente le 14 janv.).",
    "lien": "https://www.operadeparis.fr/saison-26-27/opera/werther",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [
     {
      "type": "Avant-première jeunes",
      "date": "2027-02-08",
      "tarif": "10 €",
      "vente": "2027-01-14T12:00",
+     "venteApprox": false,
      "condition": "Nés après le 1er janvier 1998, 2 places max."
     }
    ],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   },
   {
    "id": "zero",
    "titre": "Zéro",
-   "credits": "Laura Vazquez / Hubert Colas",
-   "genre": "Théâtre",
-   "lieu": "Odéon",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Laura Vazquez",
+     "role": "auteur"
+    },
+    {
+     "nom": "Hubert Colas",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "odeon",
    "salle": "Berthier Paris 17",
    "debut": "2027-04-30",
    "fin": "2027-05-05",
@@ -5336,10 +4789,11 @@
    "pronostic": true,
    "pourquoi": "2h.",
    "lien": "https://www.theatre-odeon.eu/en/season-2026-2027/performances-2026-2027",
+   "billetterie": null,
    "publicJeune": false,
+   "leonardYVa": false,
    "offres": [],
-   "statut": "a-voir",
-   "leonardYVa": false
+   "statut": "a-voir"
   }
  ]
 }
