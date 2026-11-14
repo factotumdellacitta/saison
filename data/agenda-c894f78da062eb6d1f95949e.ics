@@ -40,8 +40,9 @@ DTSTART;TZID=Europe/Paris:20261119T193000
 DTEND;TZID=Europe/Paris:20261119T220000
 SUMMARY:Œdipe roi
 LOCATION:Berthier\, Odéon – Théâtre de l’Europe
-DESCRIPTION:Sophocle\, Eddy D’Aranjo\nhttps://www.theatre-odeon.eu/fr/sai
- son-2026-2027/spectacles-2026-2027/eddy-d-aranjo-oedipe-roi-s26-27
+DESCRIPTION:Sophocle\, Eddy D’Aranjo\nPlaces : 2\nPrix : 2 × 16 € = 32
+  € (Abonné jeune moins de 28 ans)\nhttps://www.theatre-odeon.eu/fr/sais
+ on-2026-2027/spectacles-2026-2027/eddy-d-aranjo-oedipe-roi-s26-27
 URL:https://www.theatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/e
  ddy-d-aranjo-oedipe-roi-s26-27
 END:VEVENT
@@ -85,9 +86,10 @@ DTSTART;TZID=Europe/Paris:20270122T200000
 DTEND;TZID=Europe/Paris:20270122T223000
 SUMMARY:Seppuku. El funeral de Mishima
 LOCATION:Odéon\, Odéon – Théâtre de l’Europe
-DESCRIPTION:Angélica Liddell\, Yukio Mishima\nPlaces : 2\nAvec : Alexandre
- \nhttps://www.theatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/an
- gelica-liddell-seppuku-el-funeral-de-mishima-s26-27
+DESCRIPTION:Angélica Liddell\, Yukio Mishima\nPlaces : 2\nPrix : 2 × 18 
+ € = 36 € (Abonné jeune moins de 28 ans\, cat. 1)\nAvec : Alexandre\nh
+ ttps://www.theatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/angel
+ ica-liddell-seppuku-el-funeral-de-mishima-s26-27
 URL:https://www.theatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/a
  ngelica-liddell-seppuku-el-funeral-de-mishima-s26-27
 END:VEVENT
@@ -110,9 +112,10 @@ DTSTART;TZID=Europe/Paris:20270204T183000
 DTEND;TZID=Europe/Paris:20270204T210000
 SUMMARY:Maldoror
 LOCATION:Berthier\, Odéon – Théâtre de l’Europe
-DESCRIPTION:Lautréamont\, Roberto Bolaño\, Julien Gosselin\nhttps://www.t
- heatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/julien-gosselin-m
- aldoror-s26-27
+DESCRIPTION:Lautréamont\, Roberto Bolaño\, Julien Gosselin\nPlaces : 2\nP
+ rix : 2 × 16 € = 32 € (Abonné jeune moins de 28 ans)\nhttps://www.th
+ eatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/julien-gosselin-ma
+ ldoror-s26-27
 URL:https://www.theatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/j
  ulien-gosselin-maldoror-s26-27
 END:VEVENT
@@ -135,9 +138,10 @@ DTSTART;TZID=Europe/Paris:20270304T180000
 DTEND;TZID=Europe/Paris:20270304T203000
 SUMMARY:Capri – L’Île des fugitifs
 LOCATION:Odéon\, Odéon – Théâtre de l’Europe
-DESCRIPTION:Curzio Malaparte\, Krystian Lupa\nhttps://www.theatre-odeon.eu/
- fr/saison-2026-2027/spectacles-2026-2027/krystian-lupa-capri-wyspa-uciekin
- ierow-s26-27
+DESCRIPTION:Curzio Malaparte\, Krystian Lupa\nPlaces : 2\nPrix : 2 × 18 
+ € = 36 € (Abonné jeune moins de 28 ans\, cat. 1)\nhttps://www.theatre
+ -odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/krystian-lupa-capri-wys
+ pa-uciekinierow-s26-27
 URL:https://www.theatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/k
  rystian-lupa-capri-wyspa-uciekinierow-s26-27
 END:VEVENT
