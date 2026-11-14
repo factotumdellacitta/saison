@@ -2189,7 +2189,7 @@
   },
   {
    "id": "vu-puccini",
-   "titre": "Puccini",
+   "titre": "La Bohème",
    "categorie": "Opéra",
    "artistes": [
     {
@@ -2199,12 +2199,12 @@
    ],
    "lieuId": "tce",
    "salle": "",
-   "debut": null,
-   "fin": null,
+   "debut": "",
+   "fin": "",
    "note": 0,
    "pronostic": false,
    "pourquoi": "",
-   "lien": null,
+   "lien": "https://www.theatrechampselysees.fr/saison-2022-2023/opera-mis-en-scene/la-boheme",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
@@ -2214,7 +2214,8 @@
    ],
    "noteLeonard": null,
    "avis": "",
-   "offres": []
+   "offres": [],
+   "sousGenre": ""
   },
   {
    "id": "vu-refuge",
