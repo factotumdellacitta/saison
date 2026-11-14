@@ -557,3 +557,6 @@ details.box[open]>summary::before{content:"–"}
 .ch-icos figure{display:flex;flex-direction:column;align-items:center;gap:var(--e2);margin:0;padding:var(--e4) var(--e2) var(--e3);border-right:1px solid var(--filet-leger);border-bottom:1px solid var(--filet-leger);text-align:center}
 .ch-ico .pi{width:48px;height:48px}
 .ch-ico.p .pi{width:16px;height:16px}
+.btn .coeur,.chip .coeur{width:18px;height:18px}
+.btn[aria-pressed="true"] .coeur,.chip[aria-pressed="true"] .coeur{fill:currentColor}
+.ico2 .pi{width:20px;height:20px}

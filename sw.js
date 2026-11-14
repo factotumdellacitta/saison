@@ -1,6 +1,6 @@
 /* Factotum – service worker : coque en cache, données « réseau d'abord, cache en secours ». */
-const V = "factotum-4.7";
-const SHELL = ["./", "index.html", "assets/app.js?v=4.7", "assets/admin.js?v=4.7", "assets/factotum.css?v=4.7", "assets/charte.js?v=4.7",
+const V = "factotum-4.8";
+const SHELL = ["./", "index.html", "assets/app.js?v=4.8", "assets/admin.js?v=4.8", "assets/factotum.css?v=4.8", "assets/charte.js?v=4.8",
   "assets/fonts/schibsted-400.woff2", "assets/fonts/schibsted-500.woff2", "assets/fonts/schibsted-700.woff2", "assets/fonts/schibsted-800.woff2",
   "assets/icon.svg", "assets/manifest.webmanifest", "assets/icon-192.png",
   "data/affiche.json", "data/journal.json", "data/lieux.json", "data/dispo.json", "data/liens.json", "data/envies.json"];
