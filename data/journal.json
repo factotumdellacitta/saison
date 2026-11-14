@@ -1393,15 +1393,20 @@
    "id": "vu-le-proces-dune-vie",
    "titre": "Le Procès d’une vie",
    "categorie": "Théâtre",
-   "artistes": [],
+   "artistes": [
+    {
+     "nom": "Barbara Lamballais",
+     "role": "mise en scène"
+    }
+   ],
    "lieuId": "le-splendid",
    "salle": "",
-   "debut": null,
-   "fin": null,
+   "debut": "",
+   "fin": "",
    "note": 0,
    "pronostic": false,
    "pourquoi": "",
-   "lien": null,
+   "lien": "https://www.lesplendid.com/project/le-proces-dune-vie/",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
@@ -1411,7 +1416,8 @@
    ],
    "noteLeonard": null,
    "avis": "",
-   "offres": []
+   "offres": [],
+   "sousGenre": ""
   },
   {
    "id": "vu-le-proces-pelicot",
