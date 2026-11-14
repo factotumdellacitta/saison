@@ -95,17 +95,18 @@ const fichierIcs = (lignes) => lignes.map(plie).join("\r\n") + "\r\n";
 const num = (v) => (v == null || v === "" ? null : typeof v === "number" ? v : (() => { const m = String(v).replace(",", ".").match(/-?\d+(\.\d+)?/); return m ? +m[0] : null; })());
 const eur = (n) => (Number.isInteger(n) ? String(n) : n.toFixed(2).replace(".", ",")) + " €";
 function lignesPlaces(r) {
-  if (r.billets?.length) return r.billets.map((b) => ({ ...b, spectateur: b.spectateur ?? b.pour ?? "", prix: num(b.prix), paiement: b.paiement || "moi" }));
+  if (r.billets?.length) return r.billets.map((b) => ({ ...b, spectateur: b.spectateur ?? b.pour ?? "", prix: num(b.prix), paiement: !b.paiement || b.paiement === "offert" ? "moi" : b.paiement }));
   const n = r.places || 1, u = num(r.prixPlace) != null ? num(r.prixPlace) : num(r.prix) != null ? num(r.prix) / n : null;
   if (u == null) return [];
   return Array.from({ length: n }, (_, i) => ({ spectateur: i ? (r.accompagnants || [])[i - 1] || "" : "Moi", prix: u, paiement: "moi", tarif: r.tarif, categoriePlace: r.categoriePlace }));
 }
-const MARQ = { offert: "offerte par moi", spectateur: "sa part", gratuit: "gratuite" };
+// Ma place : « autrui » = offerte par quelqu’un (prix = valeur). Place d’un tiers : « moi » = je l’offre.
+const marque = (b) => (/^moi$/i.test(b.spectateur) ? { autrui: "offerte à moi", gratuit: "gratuite" } : { moi: "offerte par moi", spectateur: "sa part", gratuit: "gratuite" })[b.paiement] || "";
 function prixTexte(r) {
   const L = lignesPlaces(r);
   if (!L.some((b) => b.prix != null)) return r.tarif ? `Tarif : ${r.tarif}` : "";
   const t = L.map((b) => {
-    const pr = [b.paiement !== "moi" ? (/^moi$/i.test(b.spectateur) ? "offerte à moi" : MARQ[b.paiement]) : "", b.tarif, b.categoriePlace].filter(Boolean);
+    const pr = [marque(b), b.tarif, b.categoriePlace].filter(Boolean);
     return `${b.spectateur || "?"} ${b.prix != null ? eur(b.prix) : "?"}${pr.length ? ` (${pr.join(", ")})` : ""}`;
   }).join(" + ");
   return `Prix : ${t}${L.length > 1 ? " = " + eur(L.reduce((s, b) => s + (b.prix || 0), 0)) : ""}`;
