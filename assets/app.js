@@ -1,4 +1,4 @@
-/* Saison – interface publique (lot 2). Aucune dépendance. */
+/* Saison – interface publique (lots 2 et 3). Aucune dépendance. Le mode admin est dans assets/admin.js, chargé à la demande. */
 "use strict";
 const OWNER = "Léonard";
 const CATS = ["Théâtre", "Opéra", "Danse", "Comédie musicale", "Récital", "Concert", "Festival", "Exposition", "Cinéma", "Événement", "Sur scène", "Autre"];
@@ -39,11 +39,24 @@ const getJSON = (u, o) => fetch(u, o).then((r) => { if (!r.ok) throw new Error(u
 
 /* ---------- Données ---------- */
 let AFF = [], LIVE = [], LIEUX = {}, BUSY = new Set(), BUSY_SRC = {}, MAJ = "", JOURNAL = null, JMAJ = "", LIENS = null, PRIVE = null;
+let ADMIN = null, JAVEC = ""; // ADMIN : module admin (assets/admin.js) ; JAVEC : filtre du journal par accompagnant (mémoire seulement)
 const BYID = new Map();
 let jP = null, lP = null;
 const loadJournal = () => jP || (jP = getJSON("data/journal.json").then((j) => { JOURNAL = j.sorties; JMAJ = j.maj; JOURNAL.forEach((e) => BYID.set(e.id, e)); ART = null; return JOURNAL; }).catch((e) => { jP = null; throw e; }));
 const loadLiens = () => lP || (lP = getJSON("data/liens.json").then((l) => (LIENS = l)).catch((e) => { lP = null; throw e; }));
 
+// Remplace les données en mémoire (démarrage, ou données fraîches lues par l’admin via l’API).
+function applyData({ affiche, lieux, dispo, journal, liens }) {
+  if (affiche) { AFF = affiche.sorties; MAJ = affiche.maj; }
+  if (lieux) LIEUX = lieux;
+  if (journal) { JOURNAL = journal.sorties; JMAJ = journal.maj; jP = Promise.resolve(JOURNAL); }
+  if (liens) { LIENS = liens; lP = Promise.resolve(LIENS); }
+  if (dispo) { BUSY_SRC = dispo; BUSY = new Set([...(dispo.reservations || []), ...(dispo.manuel || []), ...(dispo.calendrier || [])]); }
+  BYID.clear(); AFF.forEach((e) => BYID.set(e.id, e)); (JOURNAL || []).forEach((e) => BYID.set(e.id, e));
+  LIVE = AFF.filter((e) => e.statut === "a-voir" && !ended(e));
+  ART = null;
+  if (MAJ) $("#maj").textContent = "À jour au " + fmt(D(MAJ));
+}
 const lieu = (e) => LIEUX[e.lieuId] || {};
 function court(id) {
   if (!id || !LIEUX[id]) return "";
@@ -126,7 +139,7 @@ function rowA(e) {
   const sub = [court(e.lieuId), e.categorie + (e.sousGenre ? " (" + e.sousGenre.toLowerCase() + ")" : "")].filter(Boolean).join(" · ");
   return `<article class="row" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${esc(e.id)}">${stubHTML(e)}
   <span class="mid"><span class="tt">${esc(e.titre)}</span><span class="ss">${esc(sub)}</span></span>
-  <span class="end">${stars(e.note, e.pronostic)}${badges(e)}</span></button><div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
+  <span class="end">${stars(e.note, e.pronostic)}${badges(e)}</span></button>${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}<div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
 }
 function rowJ(e) {
   const sub = esc([court(e.lieuId), e.avis ? "" : e.categorie].filter(Boolean).join(" · ")) + (e.avis ? ` · <i>« ${esc(e.avis)} »</i>` : "");
@@ -409,6 +422,7 @@ async function openSheet(id) {
     ${vu ? `<dt>Ma note</dt><dd>${e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : "pas de note"}</dd>${e.note ? `<dt>Grille</dt><dd>${stars(e.note, false, "Note de la grille")}</dd>` : ""}` : ""}</dl>
     ${vu && e.avis ? `<blockquote>${esc(e.avis)}</blockquote>` : ""}
     ${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}
+    ${PRIVE && ADMIN ? ADMIN.ficheHTML(e) : ""}
     ${vu ? actsHTML(e, false) : `${(e.offres || []).length || L.tarifJeune ? `<h3 class="sec">Offres et ventes</h3>${offresHTML(e)}` : ""}${actsHTML(e, false)}<h3 class="sec">Dates et disponibilités de ${OWNER}</h3>${ficheCal(e)}`}`;
   }
   const s = $("#sheet");
@@ -445,17 +459,21 @@ function renderJournal(q) {
   const last = (e) => e.vuLe.at(-1);
   const cats = CATS.filter((c) => all.some((e) => e.categorie === c));
   const ans = [...new Set(all.map((e) => last(e).slice(0, 4)))].sort().reverse();
-  const items = all.filter((e) => (!f.cat.size || f.cat.has(slug(e.categorie))) && (!f.an.size || f.an.has(last(e).slice(0, 4))) && (!f.mn.size || f.mn.has(String(e.noteLeonard || 0))));
+  if (!PRIVE || !ADMIN) JAVEC = "";
+  const avec = JAVEC ? ADMIN.idsAvec(JAVEC) : null;
+  const items = all.filter((e) => (!f.cat.size || f.cat.has(slug(e.categorie))) && (!f.an.size || f.an.has(last(e).slice(0, 4))) && (!f.mn.size || f.mn.has(String(e.noteLeonard || 0))) && (!avec || avec.has(e.id)));
   items.sort(f.tri === "note" ? (a, b) => (b.noteLeonard || 0) - (a.noteLeonard || 0) || last(b).localeCompare(last(a)) : (a, b) => last(b).localeCompare(last(a)) || a.titre.localeCompare(b.titre, "fr"));
   const chip = (g, v, t) => `<a class="chip" href="#journal?${esc(jq(f, g, v))}" data-k="${g}-${esc(v)}" aria-pressed="${f[g].has(v)}" role="button">${t}</a>`;
   let list = "", lastY = "";
   for (const e of items) { const y = last(e).slice(0, 4); if (f.tri === "date" && y !== lastY) { list += `<h2 class="mh">${y} <small>${plural(items.filter((x) => last(x).startsWith(y)).length, "sortie")}</small></h2>`; lastY = y; } list += rowJ(e); }
   const nAct = f.cat.size + f.an.size + f.mn.size;
+  const accSel = PRIVE && ADMIN ? ADMIN.accSelectHTML(JAVEC) : "";
   $("#main").innerHTML = `<div class="ph"><h1>Journal</h1><p>${plural(all.length, "sortie vue", "sorties vues")} par ${OWNER}${JMAJ ? ", à jour au " + fmtY(D(JMAJ)) : ""}.</p></div>
   <details class="box stats"><summary>Statistiques</summary>${statsHTML(all)}</details>
   <div class="fbar"><div class="chips" role="group" aria-label="Filtres du journal">${cats.map((c) => chip("cat", slug(c), esc(c))).join("")}<span class="sep" aria-hidden="true"></span>${ans.map((y) => chip("an", y, y)).join("")}<span class="sep" aria-hidden="true"></span>${[4, 3, 2, 1].map((n) => chip("mn", String(n), "★".repeat(n))).join("")}${chip("mn", "0", "Sans note")}</div>
-  <div class="active"><span class="n">${plural(items.length, "sortie")}</span>${nAct ? `<a class="linkbtn" href="#journal${f.tri === "note" ? "?tri=note" : ""}">Effacer</a>` : ""}<a class="linkbtn ml" href="#journal?${esc(jq(f, "tri", f.tri === "note" ? "date" : "note"))}">Tri : ${f.tri === "note" ? "ma note" : "date"}</a></div></div>
+  <div class="active"><span class="n">${plural(items.length, "sortie")}</span>${nAct ? `<a class="linkbtn" href="#journal${f.tri === "note" ? "?tri=note" : ""}">Effacer</a>` : ""}<a class="linkbtn ml" href="#journal?${esc(jq(f, "tri", f.tri === "note" ? "date" : "note"))}">Tri : ${f.tri === "note" ? "ma note" : "date"}</a></div>${accSel}</div>
   <div class="list">${list || '<p class="empty">Aucune sortie ne correspond.</p>'}</div>`;
+  const as = $("#jAvec"); if (as) as.onchange = () => { JAVEC = as.value; renderJournal(q); };
 }
 function jq(f, g, v) {
   const n = { cat: new Set(f.cat), an: new Set(f.an), mn: new Set(f.mn), tri: f.tri };
@@ -547,45 +565,16 @@ function subsHTML() {
   <p style="margin:10px 0 0"><b>Saison – ouvertures de ventes</b></p><code class="code">${esc(icsURL("ventes"))}</code><button class="btn" type="button" data-copy="${esc(icsURL("ventes"))}">Copier</button></div>`;
 }
 
-/* ---------- Admin (lecture seule, lot 3 à venir) ---------- */
-const unb64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
-async function decrypt(p, pw) {
-  const base = await crypto.subtle.importKey("raw", new TextEncoder().encode(pw), "PBKDF2", false, ["deriveKey"]);
-  const key = await crypto.subtle.deriveKey({ name: "PBKDF2", hash: "SHA-256", salt: unb64(p.salt), iterations: p.iter }, base, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
-  return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({ name: "AES-GCM", iv: unb64(p.iv) }, key, unb64(p.ct))));
-}
+/* ---------- Admin : le module est chargé à la première visite de l’onglet ---------- */
 function lockIcon() { $("#shackle").setAttribute("d", PRIVE ? "M8 10.5V8a4 4 0 0 1 7.6-1.7" : "M8 10.5V8a4 4 0 0 1 8 0v2.5"); $("#t-admin").setAttribute("aria-label", PRIVE ? "Admin, déverrouillé" : "Admin"); }
-async function renderAdmin() {
-  if (!PRIVE) {
-    $("#main").innerHTML = `<div class="ph"><h1>Admin</h1><p>Réservé à ${OWNER}. Le déchiffrement se fait dans le navigateur, rien n’est envoyé.</p></div>
-    <form id="pf" class="tools" style="gap:8px"><input type="password" id="pw" autocomplete="current-password" placeholder="Mot de passe" aria-label="Mot de passe" style="flex:1"><button class="btn pri">Ouvrir</button></form>`;
-    $("#pf").onsubmit = async (ev) => {
-      ev.preventDefault();
-      try { const p = await getJSON("data/prive.enc", { cache: "no-store" }); PRIVE = await decrypt(p, $("#pw").value); lockIcon(); renderAdmin(); }
-      catch (_) { toast("Mot de passe incorrect"); }
-    };
-    return;
-  }
-  try { await loadJournal(); } catch (_) {}
-  const T = (id) => (BYID.get(id) || { titre: id }).titre;
-  const res = Object.entries(PRIVE.reservations || {}).sort((a, b) => (a[1].date || "9").localeCompare(b[1].date || "9"));
-  const cnt = {}; res.forEach(([, r]) => r.date && (cnt[r.date] = (cnt[r.date] || 0) + 1));
-  const other = new Set([...(BUSY_SRC.manuel || []), ...(BUSY_SRC.calendrier || [])]);
-  const line = ([id, r]) => {
-    const conf = r.date && (cnt[r.date] > 1 || other.has(r.date));
-    const det = [r.places ? plural(r.places, "place") : "", r.tarif, r.prix != null && r.prix !== "" ? (typeof r.prix === "number" ? r.prix + " €" : r.prix) : "", (r.accompagnants || []).length ? "avec " + r.accompagnants.join(", ") : "", r.siege, r.note].filter(Boolean).join(" · ");
-    return `<tr${r.date && D(r.date) < TODAY ? ' style="opacity:.6"' : ""}><td>${r.date ? fmt(D(r.date), true) + " " + String(D(r.date).getFullYear()).slice(2) : "À préciser"}${r.heure ? "<br>" + esc(r.heure) : ""}</td><td><a href="#sortie-${esc(id)}">${esc(T(id))}</a>${r.salle ? "<br><small>" + esc(r.salle) + "</small>" : ""}</td><td>${esc(det)}${conf ? '<br><span class="warn">Conflit</span>' : ""}</td></tr>`;
-  };
-  const fut = res.filter(([, r]) => !r.date || D(r.date) >= TODAY), past = res.filter(([, r]) => r.date && D(r.date) < TODAY);
-  const env = Object.entries(PRIVE.envies || {}).sort((a, b) => (a[1].priorite || 2) - (b[1].priorite || 2));
-  const PRI = { 1: "forte", 2: "normale", 3: "faible" };
-  $("#main").innerHTML = `<div class="ph"><h1>Admin</h1><p>Lecture seule. L’édition arrive avec le lot 3.</p></div>
-  <h2 class="mh">Réservations à venir <small>${fut.length}</small></h2><div class="cal" style="overflow-x:auto"><table class="t"><tr><th>Date</th><th>Sortie</th><th>Détails</th></tr>${fut.map(line).join("") || '<tr><td colspan="3">Aucune.</td></tr>'}</table></div>
-  ${past.length ? `<details class="box"><summary>Réservations passées <span class="ml">${past.length}, à archiver avec /vu</span></summary><div style="padding:0 12px 8px;overflow-x:auto"><table class="t">${past.map(line).join("")}</table></div></details>` : ""}
-  <h2 class="mh">Envies <small>${env.length}</small></h2>${env.length ? `<ul class="lk">${env.map(([id, v]) => `<li><a href="#sortie-${esc(id)}"><b>${esc(T(id))}</b><small>Priorité ${PRI[v.priorite] || "normale"}${v.note ? " · " + esc(v.note) : ""}</small></a></li>`).join("")}</ul>` : '<p class="empty">Aucune envie.</p>'}
-  <h2 class="mh">Abonnements</h2>${subsHTML()}
-  <p style="margin-top:14px"><button class="btn" type="button" id="lock">Verrouiller</button></p>`;
-  $("#lock").onclick = () => { PRIVE = null; lockIcon(); renderAdmin(); };
+let adP = null;
+const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=3.0"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  document.head.appendChild(s);
+}));
+async function renderAdmin(q) {
+  if (!ADMIN) { $("#main").innerHTML = '<p class="load">Chargement…</p>'; try { await loadAdmin(); } catch (_) { $("#main").innerHTML = '<p class="empty">Impossible de charger le mode admin. Vérifie la connexion puis recharge.</p>'; return; } }
+  return ADMIN.render(q);
 }
 
 /* ---------- Routeur ---------- */
@@ -612,7 +601,7 @@ async function renderView(h) {
   else if (view === "artiste") renderArtiste(decodeURIComponent(path.slice(8)));
   else if (view === "lieu") renderLieu(decodeURIComponent(path.slice(5)));
   else if (view === "liens") renderLiens();
-  else if (view === "admin") renderAdmin();
+  else if (view === "admin") await renderAdmin(q);
   RENDERED = h;
   if (!samePath) window.scrollTo(0, 0);
   else if (focusK) { const el = $(`[data-k="${focusK}"]`); if (el) el.focus({ preventScroll: true }); }
@@ -675,11 +664,7 @@ document.addEventListener("click", async (ev) => {
 (async () => {
   try {
     const [a, l, d] = await Promise.all([getJSON("data/affiche.json"), getJSON("data/lieux.json"), getJSON("data/dispo.json").catch(() => ({}))]);
-    AFF = a.sorties; LIEUX = l; MAJ = a.maj;
-    AFF.forEach((e) => BYID.set(e.id, e));
-    LIVE = AFF.filter((e) => e.statut === "a-voir" && !ended(e));
-    BUSY_SRC = d; BUSY = new Set([...(d.reservations || []), ...(d.manuel || []), ...(d.calendrier || [])]);
-    $("#maj").textContent = "À jour au " + fmt(D(MAJ));
+    applyData({ affiche: a, lieux: l, dispo: d });
     await route();
   } catch (err) {
     console.error(err);

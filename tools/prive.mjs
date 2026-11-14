@@ -2,7 +2,7 @@
 //   node tools/prive.mjs ouvrir            -> déchiffre data/prive.enc vers _prive.json (ignoré par git)
 //   node tools/prive.mjs fermer            -> chiffre _prive.json vers data/prive.enc, puis supprime _prive.json
 //   node tools/prive.mjs init <fichier>    -> premier chiffrement depuis un fichier en clair (puis le supprime)
-// Schéma v2 : { version:2, icsToken, reservations{}, envies{}, journalPrive{}, blocages[] } (voir CLAUDE.md).
+// Schéma v2 : { version:2, icsToken, reservations{}, envies{}, journalPrive{}, blocages[], aCompleter[] } (voir CLAUDE.md).
 // Le mot de passe est lu dans la variable d'environnement SAISON_MDP.
 import { readFileSync, writeFileSync, existsSync, rmSync } from "node:fs";
 import { randomBytes } from "node:crypto";
@@ -22,11 +22,14 @@ async function main() {
     if (!existsSync(CLAIR)) throw new Error(`${CLAIR} introuvable.`);
     const objet = JSON.parse(readFileSync(CLAIR, "utf8"));
     if (objet.version !== 2) throw new Error("Zone privée : version 2 attendue (voir CLAUDE.md).");
-    writeFileSync(ENC, JSON.stringify(await chiffrer(objet, MDP)));
+    // Garde le sel actuel si le mot de passe n'a pas changé (le mode admin du site reste ainsi connecté).
+    let sel;
+    try { const p = JSON.parse(readFileSync(ENC, "utf8")); await dechiffrer(p, MDP); sel = p.salt; } catch (_) {}
+    writeFileSync(ENC, JSON.stringify(await chiffrer(objet, MDP, sel)));
     rmSync(CLAIR);
     console.log(`Zone privée chiffrée dans ${ENC}, fichier en clair supprimé.`);
   } else if (cmd === "init") {
-    const objet = { version: 2, reservations: {}, envies: {}, journalPrive: {}, blocages: [], ...JSON.parse(readFileSync(arg, "utf8")) };
+    const objet = { version: 2, reservations: {}, envies: {}, journalPrive: {}, blocages: [], aCompleter: [], ...JSON.parse(readFileSync(arg, "utf8")) };
     if (!objet.icsToken) objet.icsToken = randomBytes(12).toString("hex");
     writeFileSync(ENC, JSON.stringify(await chiffrer(objet, MDP)));
     rmSync(arg);
