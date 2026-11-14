@@ -21,7 +21,7 @@ Léonard écrit en français, style direct. Réponds en français, brièvement, 
 
 Le site publié ne contient que `index.html`, `sw.js`, `assets/` et `data/`. Jamais `tools/`, `_setup/` ni fichier en clair.
 Après toute modification de `assets/app.js` ou `assets/admin.js` : incrémente `?v=` dans `index.html`, dans `loadAdmin` d'`app.js` et dans `SHELL` de `sw.js`, ainsi que `V` dans `sw.js` (sinon les téléphones gardent l'ancienne version en cache). Icônes et image de partage : `node tools/visuels.mjs` (une fois).
-Routes du site : `#affiche?filtres`, `#journal`, `#artistes`, `#lieux`, `#artiste-<slug>`, `#lieu-<id>`, `#liens`, `#sortie-<id>`, `#admin?v=res|envies|rapide|soirs|budget|acc|liens|abo` (les anciens `#fiche-<id>` redirigent).
+Routes du site : `#affiche?filtres`, `#journal`, `#artistes`, `#lieux`, `#artiste-<slug>`, `#lieu-<id>`, `#liens`, `#sortie-<id>`, `#admin?v=res|envies|rapide|soirs|budget|acc|lieux|liens|abo` (les anciens `#fiche-<id>` redirigent).
 
 ## Sortie (affiche.json et journal.json)
 
@@ -64,13 +64,15 @@ Le mot de passe est dans la variable d'environnement `SAISON_MDP` (et dans le se
 Schéma (version 2) :
 ```json
 {"version":2,"icsToken":"…",
- "reservations":{"<id>":{"date":"2027-02-08","heure":"20:00","salle":"","places":2,"siege":"","prix":24,"tarifPlein":64,"tarif":"Carte Jeune","accompagnants":["…"],"billetterie":"","note":""}},
+ "reservations":{"<id>":{"date":"2027-02-08","heure":"20:00","salle":"","siege":"","places":2,"prixPlace":18,"pleinPlace":40,"tarif":"Abonné jeune moins de 28 ans","categoriePlace":"cat. 1","accompagnants":["…"],"billetterie":"","note":""}},
  "envies":{"<id>":{"ajouteLe":"2026-11-13","priorite":2,"note":""}},
- "journalPrive":{"<id>":{"prix":24,"tarifPlein":64,"tarif":"Carte Jeune","accompagnants":["…"]}},
- "blocages":[],
+ "journalPrive":{"<id>":{"places":2,"billets":[{"pour":"Moi","prix":20},{"pour":"Papa","prix":75,"categoriePlace":"cat. 4"}],"accompagnants":["Papa"]}},
+ "blocages":[{"debut":"2027-04-10","fin":"2027-04-20","motif":"…"}],
  "aCompleter":[{"ajouteLe":"2026-11-14","texte":"…confirmation collée…","extrait":{"sortieId":null,"date":"2027-02-03","heure":"19:30","salle":"","places":1,"siege":"","prix":12,"tarif":""}}]}
 ```
-`priorite` : 1 forte, 2 normale, 3 faible. `prix` et `tarifPlein` : montants **totaux** en euros (nombres) ; `tarifPlein` (facultatif) sert au calcul des économies du budget. Une seule réservation par sortie (clé = id).
+`priorite` : 1 forte, 2 normale, 3 faible. Une seule réservation par sortie (clé = id).
+**Prix** (réservations et journalPrive) : `places` × `prixPlace` (prix **par place**, nombre en euros, 0 si gratuit). Si les places n'ont pas le même prix : `billets`, une entrée par place (`pour` : « Moi » ou un prénom, `prix`, `tarif` et `categoriePlace` facultatifs) ; `places` = nombre de billets, pas de `prixPlace`. `tarif` = nom de la formule (« Abonné jeune moins de 28 ans », « Mécénat CDC »…), `categoriePlace` = catégorie de place (« cat. 1 »), `pleinPlace` (facultatif) = plein tarif par place, pour les économies du budget. Le total n'est jamais stocké : il est calculé (site, flux agenda). L'ancien champ `prix` (total) est encore lu mais ne s'écrit plus.
+`blocages` : périodes privées (`debut`, `fin` inclus, `motif`) comptées dans les conflits mais jamais publiées dans `dispo.json`.
 `aCompleter` : billets collés dans la saisie rapide du site et non reconnus. `/veille` les traite (voir plus bas).
 
 ## Fichiers générés (`node tools/build.mjs`)
@@ -80,11 +82,12 @@ Schéma (version 2) :
 - L'action « Publier le site » relance `build.mjs` à chaque passage (avec le secret) et commite les fichiers générés. Sortie déterministe : pas de commit si rien n'a changé.
 
 ## Mode admin (site, onglet cadenas)
-Léonard gère aussi tout depuis le site (iPhone) : envies (cœur), réservations, vu, ajout et modification de sorties, saisie rapide de billets, soirs pris, liens, budget, accompagnants, abonnements.
+Léonard gère aussi tout depuis le site (iPhone) : envies (cœur, priorité, note), réservations, vu, ajout et modification de sorties, lieux (ajout, modification, suppression d'un lieu inutilisé), saisie rapide de billets, soirs pris et périodes bloquées privées, liens, budget, accompagnants, abonnements.
 - Connexion : mot de passe (déchiffre `prive.enc` dans le navigateur). Première fois sur un appareil : jeton GitHub « fine-grained » limité au dépôt (Contents : lecture et écriture ; Actions : lecture), testé puis rangé dans `localStorage` chiffré avec une clé dérivée du mot de passe. Verrouillage après 30 min d'inactivité, bouton « Verrouiller », « Oublier cet appareil ».
 - Écriture : `assets/admin.js` relit `main` via l'API GitHub, applique l'action, valide (mêmes règles que `check.mjs`), rechiffre la zone privée et crée **un commit directement sur `main`** (« Admin : réservé Werther le 8 févr. »). Si `main` a bougé entre-temps, l'action est rejouée sur la version fraîche ; si l'objet visé a changé, Léonard est consulté.
 - Le navigateur n'écrit que les sources : `affiche.json`, `journal.json`, `lieux.json`, `liens.json`, `dispo.json` (`manuel` seulement), `prive.enc`. Le push déclenche « Publier le site », qui régénère index, `dispo.reservations` et flux ; le site suit l'exécution (bandeau « Publication en cours », puis « En ligne »).
 - Conséquence pour toi : **Léonard commite aussi sur `main`.** Pars toujours de `origin/main` à jour et rebase avant de pousser (voir la procédure). `prive.enc` tient sur une ligne : en cas de conflit, ne fusionne jamais à la main, rouvre la version de `main` et refais ta modification.
+- Le dépôt est **public**, messages de commit compris : ils ne citent jamais un prix, un accompagnant, une envie ni une période bloquée (le site écrit « Admin : envies mises à jour », « Admin : périodes bloquées mises à jour »). Fais de même dans tes commits.
 - Messages de commit commençant par « Admin : » = modifications faites depuis le site. Lis-les (`git log origin/main`) pour savoir ce qui a changé.
 
 ## Procédure à chaque modification

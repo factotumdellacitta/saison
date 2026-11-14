@@ -91,6 +91,19 @@ const VTZ = [
 const DTSTAMP = (affiche.maj || "2026-01-01").replace(/-/g, "") + "T000000Z";
 const entete = (nom) => ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//saison//FR", "CALSCALE:GREGORIAN", "METHOD:PUBLISH", `X-WR-CALNAME:${nom}`, "X-WR-TIMEZONE:Europe/Paris", ...VTZ];
 const fichierIcs = (lignes) => lignes.map(plie).join("\r\n") + "\r\n";
+// Places et prix : prix par place × places, ou détail place par place (billets). Ancien champ « prix » = total.
+const num = (v) => (v == null || v === "" ? null : typeof v === "number" ? v : (() => { const m = String(v).replace(",", ".").match(/-?\d+(\.\d+)?/); return m ? +m[0] : null; })());
+const eur = (n) => (Number.isInteger(n) ? String(n) : n.toFixed(2).replace(".", ",")) + " €";
+function prixTexte(r) {
+  const tarif = [r.tarif, r.categoriePlace].filter(Boolean).join(", ");
+  let p = "";
+  if (r.billets?.length) {
+    const l = r.billets.map((b) => num(b.prix)).filter((x) => x != null);
+    if (l.length) p = r.billets.map((b) => (num(b.prix) != null ? eur(num(b.prix)) : "?") + (b.pour || b.tarif || b.categoriePlace ? ` (${[b.pour, b.tarif, b.categoriePlace].filter(Boolean).join(", ")})` : "")).join(" + ") + (r.billets.length > 1 ? " = " + eur(l.reduce((a, b) => a + b, 0)) : "");
+  } else if (num(r.prixPlace) != null) { const n = r.places || 1; p = (n > 1 ? `${n} × ${eur(num(r.prixPlace))} = ` : "") + eur(num(r.prixPlace) * n); }
+  else if (num(r.prix) != null) p = eur(num(r.prix));
+  return p ? `Prix : ${p}${tarif ? ` (${tarif})` : ""}` : tarif ? `Tarif : ${tarif}` : "";
+}
 const credits = (s) => (s.artistes || []).map((a) => a.nom).filter((n, i, t) => t.indexOf(n) === i).join(", ");
 const nomLieu = (s) => (s.lieuId && lieux[s.lieuId] ? lieux[s.lieuId].nom : "");
 
@@ -125,7 +138,7 @@ async function main() {
       credits(s),
       r.places ? `Places : ${r.places}` : "",
       r.siege ? `Siège : ${r.siege}` : "",
-      r.prix != null && r.prix !== "" ? `Prix : ${typeof r.prix === "number" ? r.prix + " €" : r.prix}${r.tarif ? ` (${r.tarif})` : ""}` : r.tarif ? `Tarif : ${r.tarif}` : "",
+      prixTexte(r),
       r.accompagnants?.length ? `Avec : ${r.accompagnants.join(", ")}` : "",
       r.heure ? "" : "Heure à préciser",
       r.note,

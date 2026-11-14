@@ -569,7 +569,7 @@ function subsHTML() {
 function lockIcon() { $("#shackle").setAttribute("d", PRIVE ? "M8 10.5V8a4 4 0 0 1 7.6-1.7" : "M8 10.5V8a4 4 0 0 1 8 0v2.5"); $("#t-admin").setAttribute("aria-label", PRIVE ? "Admin, déverrouillé" : "Admin"); }
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=3.0"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=3.1"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
