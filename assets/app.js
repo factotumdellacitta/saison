@@ -242,11 +242,11 @@ const cherche = (e, q) => { const t = normQ(q).trim(); if (!t) return true; cons
 const genre = (e) => e.categorie + (e.sousGenre ? " (" + e.sousGenre.toLowerCase() + ")" : "");
 // Ligne : 1) genre à gauche, note à droite (cœur juste avant en admin) ; 2) titre ; 3) artistes ; 4) lieu et horaires, puis badges.
 const coeurPub = (e) => (!(PRIVE && ADMIN) && enviesIds().has(e.id) ? `<span class="coeur-l" role="img" aria-label="Dans les envies de ${OWNER}">${COEUR}</span>` : "");
-// Bande de genre : aplat de la couleur du genre, icône et libellé court en blanc, lus de bas en haut.
-const GENRE_COURT = { "Comédie musicale": "Musical", Exposition: "Expo", "Sur scène": "Scène" };
-const gb = (e) => `<span class="gb" title="${esc(genre(e))}">${genreIco(e)}<span class="gl">${esc(GENRE_COURT[e.categorie] || e.categorie || "Autre")}</span></span>`;
+// Bande de genre : aplat fin de la couleur du genre, à gauche de la ligne.
+const gb = (e) => `<span class="gb" aria-hidden="true"></span>`; // bande pleine de la couleur du genre, sans contenu
 // Première ligne : titre à gauche, note puis cœur à droite.
-const l1 = (e, note) => `<span class="l1"><span class="tt nom">${esc(e.titre)}</span>${note}${coeurPub(e)}</span>`;
+// Première ligne : picto du genre (de sa couleur) et titre à gauche, note puis cœur à droite.
+const l1 = (e, note) => `<span class="l1"><span class="tt nom">${genreIco(e, "gt")}<span class="vh">${esc(genre(e))} : </span>${esc(e.titre)}</span>${note}${coeurPub(e)}</span>`;
 const sousG = (e) => (e.sousGenre ? cap(e.sousGenre.toLowerCase()) : "");
 const ligneMeta = (meta, b) => (meta || b ? `<span class="ss">${meta ? `<span class="ssm">${meta}</span>` : ""}${b}</span>` : "");
 function rowA(e) {
@@ -856,7 +856,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.15"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.16"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -874,7 +874,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.15"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.16"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
