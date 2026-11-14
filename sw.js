@@ -1,6 +1,6 @@
 /* Saison – service worker : coque en cache, données « réseau d'abord, cache en secours ». */
-const V = "saison-3.2";
-const SHELL = ["./", "index.html", "assets/app.js?v=3.2", "assets/admin.js?v=3.2", "assets/literata.woff2", "assets/icon.svg", "assets/manifest.webmanifest", "assets/icon-192.png",
+const V = "saison-3.3";
+const SHELL = ["./", "index.html", "assets/app.js?v=3.3", "assets/admin.js?v=3.3", "assets/literata.woff2", "assets/icon.svg", "assets/manifest.webmanifest", "assets/icon-192.png",
   "data/affiche.json", "data/journal.json", "data/lieux.json", "data/dispo.json", "data/liens.json"];
 self.addEventListener("install", (e) => { e.waitUntil(caches.open(V).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting())); });
 self.addEventListener("activate", (e) => {
