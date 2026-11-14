@@ -96,8 +96,6 @@ body.compact .barre{visibility:visible}
 .tab[aria-selected="true"]::after,.tab[aria-current="page"]::after{content:"";position:absolute;left:var(--e2);right:var(--e2);bottom:var(--e1);height:3px;background:var(--rouge)}
 
 .tab .coeur{flex:none}
-.tabs{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 48px}
-@media (min-width:960px){.tabs{grid-template-columns:none}}
 .tab .long{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .tab.ouvert .court::after{content:"";display:inline-block;width:6px;height:6px;margin-left:var(--e1);vertical-align:2px;background:var(--rouge-texte)}
 @media (hover:hover){.tab:hover{color:var(--encre)}}
@@ -419,8 +417,8 @@ body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
 .envie[aria-pressed="true"]{color:var(--rouge-texte)}
 .envie[aria-pressed="true"] svg,.tab[aria-selected="true"] .coeur{fill:currentColor}
 @media (hover:hover){.envie:hover{color:var(--rouge-texte)}}
-.admbox,.loginbox,.ad{margin:var(--e4) 0;padding:var(--e3) 0;border-top:3px solid var(--encre)}
-.adm-titre{display:inline-block;margin:0 0 var(--e2);padding:2px var(--e2);background:var(--encre);color:var(--fond);font-size:var(--t-meta);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.admbox,.loginbox,.ad{margin:var(--e4) 0;padding:var(--e2) 0;border-top:1px solid var(--filet-leger)}
+.adm-titre{display:block;margin:0 0 var(--e1);font-size:var(--t-meta);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--encre-2)}
 .admbox p,.ad p{margin:var(--e1) 0}
 .ad h3{font-size:var(--t-fiche);font-weight:700;line-height:1.2}
 .ad h3 a{text-decoration:none}
@@ -448,7 +446,14 @@ body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
 #dlg .shtop .btn{border-color:var(--fond);background:var(--encre);color:var(--fond)}
 #dlg .shtop :focus-visible{outline-color:var(--fond)}
 #dlg .frm{max-width:640px;padding-top:var(--e4)}
-#dlg .sheet-in{padding-bottom:calc(var(--sab) + var(--nav) + var(--cible) + var(--e6))}
+@media (min-width:960px){#dlg .sheet-in{max-width:720px}}
+/* Formulaire du journal : dates et note côte à côte, avis et notes côte à côte sur grand écran, barre d’enregistrement toujours visible */
+.jgrid{display:grid;grid-template-columns:minmax(0,1fr);gap:0 var(--e4)}
+@media (min-width:600px){.jgrid{grid-template-columns:minmax(0,1fr) 220px}.jgrid.jtxt{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.jgrid .fs{margin-bottom:var(--e3)}
+.jgrid textarea{min-height:88px}
+.jacts{position:sticky;bottom:0;z-index:2;margin:var(--e4) 0 0;padding:var(--e3) 0 calc(var(--e3) + var(--sab));background:var(--fond);border-top:1px solid var(--filet)}
+#dlg .sheet-in{padding-bottom:0}
 .lkg .mh .linkbtn{min-height:32px}
 .lkadm{list-style:none;margin:0;padding:0;border-top:1px solid var(--filet);min-height:48px}
 .lkadm:empty::before{content:"Glisse un lien ici";display:block;padding:var(--e3) 0;color:var(--encre-2)}
@@ -630,10 +635,19 @@ body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
 }
 
 /* Actions admin : petits boutons à icône (cible de 44 px), un mot pour l’action principale seulement */
-.acts-adm{gap:var(--e1)}
-.btn.ai{min-width:var(--cible);padding:0 var(--e2);gap:6px}
+/* Boutons admin discrets : sans contour au repos, gris ; l’action principale garde un filet léger. */
+.acts-adm{gap:2px}
+.btn.ai{min-width:var(--cible);padding:0 var(--e2);gap:6px;border-color:transparent;background:none;color:var(--encre-2)}
 .btn.ai .pi{width:18px;height:18px}
-.btn.ai.danger{border-color:var(--filet-leger)}
-@media (hover:hover){.btn.ai.danger:hover{border-color:var(--rouge);background:var(--rouge);color:var(--sur-rouge)}}
+.btn.ai.pri{border-color:var(--filet-leger);background:none;color:var(--encre)}
+.btn.ai.danger{border-color:transparent;color:var(--encre-2)}
+@media (hover:hover){.btn.ai:hover{border-color:var(--encre);background:none;color:var(--encre)}.btn.ai.danger:hover{border-color:var(--rouge-texte);background:none;color:var(--rouge-texte)}}
 @media print{.gb{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 @media (forced-colors:active){.gb{border-right:1px solid CanvasText}}
+
+/* Cœur du bandeau (vers la page des envies) ; actif quand on y est */
+#hcoeur{text-decoration:none}
+#hcoeur .coeur{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:miter}
+#hcoeur[aria-current="page"]{background:var(--sur-rouge);color:var(--rouge)}
+#hcoeur[aria-current="page"] .coeur{fill:currentColor}
+.r-lat .acts .btn .coeur{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2}
