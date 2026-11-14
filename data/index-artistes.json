@@ -342,8 +342,7 @@
  "ballet-de-l-opera-de-paris": {
   "nom": "Ballet de l’Opéra de Paris",
   "sorties": [
-   "vu-jerome-robbins",
-   "vu-sylvia"
+   "vu-jerome-robbins"
   ]
  },
  "ballet-de-lorraine": {
@@ -1765,12 +1764,6 @@
    "histoire-du-soldat-tce"
   ]
  },
- "leo-delibes": {
-  "nom": "Léo Delibes",
-  "sorties": [
-   "vu-sylvia"
-  ]
- },
  "leo-vermot-desroches": {
   "nom": "Léo Vermot-Desroches",
   "sorties": [
@@ -1960,12 +1953,6 @@
   "nom": "Mané Galoyan",
   "sorties": [
    "la-rondine"
-  ]
- },
- "manuel-legris": {
-  "nom": "Manuel Legris",
-  "sorties": [
-   "vu-sylvia"
   ]
  },
  "marc-leroy-calatayud": {
