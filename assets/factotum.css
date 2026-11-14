@@ -371,9 +371,16 @@ details.box[open]>summary::before{content:"–"}
 .warn{color:var(--rouge-texte);font-weight:700}
 
 /* ---------- Mode admin : pages ---------- */
-body.adm .row .mid{padding-right:76px}
-.envie{position:absolute;top:var(--e2);right:0;min-height:var(--cible);padding:0 var(--e2);border:1px solid var(--encre);border-radius:0;background:var(--fond);color:var(--encre);font-size:var(--t-meta);font-weight:700;text-transform:uppercase;letter-spacing:.06em;cursor:pointer}
-.envie[aria-pressed="true"]{background:var(--rouge);border-color:var(--rouge);color:var(--sur-rouge)}
+/* Cœur des envies : en bas de la colonne de date, sans rien recouvrir */
+body.adm .row{display:grid;grid-template-columns:var(--colonne-date) minmax(0,1fr)}
+body.adm .row>.rb{grid-area:1/1/2/3}
+body.adm .row>.det{grid-column:1/-1}
+body.adm .row .stub{padding-bottom:calc(var(--cible) + var(--e1))}
+.envie{grid-area:1/1/2/2;align-self:end;justify-self:start;z-index:1;display:flex;align-items:center;justify-content:flex-start;width:var(--cible);height:var(--cible);margin:0 0 var(--e1);padding:0;border:0;border-radius:0;background:none;color:var(--encre-2);cursor:pointer;transition:color var(--duree)}
+.envie svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:miter}
+.envie[aria-pressed="true"]{color:var(--rouge-texte)}
+.envie[aria-pressed="true"] svg{fill:currentColor}
+@media (hover:hover){.envie:hover{color:var(--rouge-texte)}}
 .admbox,.loginbox,.ad{margin:var(--e4) 0;padding:var(--e3) 0;border-top:3px solid var(--encre)}
 .adm-titre{display:inline-block;margin:0 0 var(--e2);padding:2px var(--e2);background:var(--encre);color:var(--fond);font-size:var(--t-meta);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
 .admbox p,.ad p{margin:var(--e1) 0}
