@@ -2273,7 +2273,7 @@
    "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-en-concert/l-orfeo",
    "billetterie": null,
    "publicJeune": false,
-   "leonardYVa": false,
+   "leonardYVa": true,
    "statut": "a-voir",
    "offres": [
     {
