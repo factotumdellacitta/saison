@@ -135,6 +135,7 @@ body.compact .barre{visibility:visible}
 .row.open .tt{color:var(--rouge-texte)}
 .det{margin-left:var(--colonne-date);padding:0 0 var(--e4) var(--e3);border-left:1px dotted var(--encre-2)}
 .det p{margin:0 0 var(--e2)}
+.det .jin{max-width:640px;padding-top:var(--e2)}
 .cr a,.pl a,.inl a{color:var(--encre)}
 .ro{font-size:var(--t-meta);font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--encre-2)}
 .why{color:var(--encre)}
