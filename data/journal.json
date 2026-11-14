@@ -2337,7 +2337,7 @@
   },
   {
    "id": "vu-toute-lhistoire-de-la-peinture-en-moins-de-2-heures",
-   "titre": "Toute l’histoire de la peinture en moins de 2 heures",
+   "titre": "Toute l’histoire de la peinture en moins de 2 heures – parcours Jésus",
    "categorie": "Théâtre",
    "artistes": [
     {
@@ -2358,8 +2358,37 @@
    "leonardYVa": false,
    "statut": "vu",
    "vuLe": [
-    "2025-07-09",
     "2026-07-10"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "toute-l-histoire-de-la-peinture-en-moins-de-2-heures-parcours-rembrandt",
+   "titre": "Toute l’histoire de la peinture en moins de 2 heures – parcours Rembrandt",
+   "categorie": "Théâtre",
+   "sousGenre": "",
+   "artistes": [
+    {
+     "nom": "Hector Obalk",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "avignon-off",
+   "salle": "Théâtre 3S",
+   "debut": null,
+   "fin": null,
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2025-07-09"
    ],
    "noteLeonard": null,
    "avis": "",
