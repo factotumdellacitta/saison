@@ -128,6 +128,7 @@ const verifierSortie = (s, fichier) => {
   for (const k of ["debut", "fin"]) if (s[k] && !ISO.test(s[k])) erreurs.push(`${ou} ${k} n'est pas au format AAAA-MM-JJ.`);
   if (s.debut && s.fin && s.fin < s.debut) erreurs.push(`${ou} fin avant début.`);
   for (const k of ["lien", "billetterie"]) if (s[k] != null && s[k] !== "" && !URL_RE.test(s[k])) erreurs.push(`${ou} ${k} n'est pas une URL.`);
+  if ("relaches" in s && (!Array.isArray(s.relaches) || s.relaches.some((r) => !["lun", "mar", "mer", "jeu", "ven", "sam", "dim"].includes(r) && !ISO.test(r)))) erreurs.push(`${ou} relaches : liste de jours (lun … dim) ou de dates AAAA-MM-JJ.`);
   if (!Array.isArray(s.offres)) erreurs.push(`${ou} offres doit être une liste.`);
   else for (const o of s.offres) {
     if (!o.type) erreurs.push(`${ou} offre sans type.`);

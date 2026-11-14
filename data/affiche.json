@@ -84,7 +84,12 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "lun",
+    "mar",
+    "mer"
+   ]
   },
   {
    "id": "7-minutes",
@@ -114,7 +119,10 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "mar"
+   ]
   },
   {
    "id": "a-la-renverse",
@@ -144,7 +152,10 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "mar"
+   ]
   },
   {
    "id": "amadoca",
@@ -182,7 +193,11 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "lun",
+    "2027-01-10"
+   ]
   },
   {
    "id": "anna-netrebko-brian-jagde-george-petean",
@@ -284,7 +299,10 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "dim"
+   ]
   },
   {
    "id": "asmik-grigorian-lukas-geniusas",
@@ -379,6 +397,9 @@
      "venteApprox": true,
      "condition": "Carte Jeunes TCE"
     }
+   ],
+   "relaches": [
+    "2027-03-05"
    ]
   },
   {
@@ -495,7 +516,10 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "dim"
+   ]
   },
   {
    "id": "capra-une-chevre",
@@ -521,7 +545,10 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "mar"
+   ]
   },
   {
    "id": "capri",
@@ -637,7 +664,11 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "dim",
+    "lun"
+   ]
   },
   {
    "id": "ces-filles-qu-on-attend",
@@ -667,7 +698,10 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "mar"
+   ]
   },
   {
    "id": "chante-et-tais-toi",
@@ -688,7 +722,11 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "lun",
+    "mar"
+   ]
   },
   {
    "id": "chiens",
@@ -714,7 +752,10 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "2027-03-17"
+   ]
   },
   {
    "id": "chiens-de-navarre-i-will-survive",
@@ -921,7 +962,14 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "dim",
+    "2026-12-05",
+    "2026-12-14",
+    "2026-12-15",
+    "2026-12-17"
+   ]
   },
   {
    "id": "didon-et-enee",
@@ -999,7 +1047,10 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "lun"
+   ]
   },
   {
    "id": "diplomatie",
@@ -1220,7 +1271,10 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "lun"
+   ]
   },
   {
    "id": "esdeekid",
@@ -1566,7 +1620,11 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "lun",
+    "mar"
+   ]
   },
   {
    "id": "hippolyte-et-aricie",
@@ -1843,7 +1901,10 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "dim"
+   ]
   },
   {
    "id": "josef-nadj-dialogues-dans-le-reve",
@@ -1972,7 +2033,20 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "2027-04-26",
+    "2027-04-27",
+    "2027-04-28",
+    "2027-04-29",
+    "2027-04-30",
+    "2027-05-01",
+    "2027-05-02",
+    "2027-05-03",
+    "2027-05-04",
+    "2027-05-05",
+    "2027-05-06"
+   ]
   },
   {
    "id": "l-ange-du-foyer",
@@ -1998,7 +2072,11 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "lun",
+    "2027-01-17"
+   ]
   },
   {
    "id": "l-ecole-de-danse",
@@ -2425,7 +2503,10 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "dim"
+   ]
   },
   {
    "id": "la-jalousie",
@@ -2489,7 +2570,11 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "dim",
+    "lun"
+   ]
   },
   {
    "id": "la-parabole-du-seum",
@@ -2519,7 +2604,12 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "dim",
+    "2026-12-03",
+    "2026-12-10"
+   ]
   },
   {
    "id": "la-religieuse",
@@ -2843,7 +2933,10 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "2027-01-25"
+   ]
   },
   {
    "id": "le-cercle-de-craie-caucasien",
@@ -2873,7 +2966,12 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "2027-03-21",
+    "2027-03-28",
+    "2027-03-29"
+   ]
   },
   {
    "id": "le-chameau",
@@ -3109,7 +3207,11 @@
    "publicJeune": false,
    "leonardYVa": true,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "lun",
+    "mar"
+   ]
   },
   {
    "id": "le-pere",
@@ -3238,7 +3340,11 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "dim",
+    "lun"
+   ]
   },
   {
    "id": "le-silence",
@@ -3259,7 +3365,11 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "dim",
+    "lun"
+   ]
   },
   {
    "id": "le-temps-d-aimer",
@@ -3364,7 +3474,10 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "mar"
+   ]
   },
   {
    "id": "lea-desandre",
@@ -3547,6 +3660,13 @@
      "venteApprox": true,
      "condition": "Moins de 30 ans, jeu. 3 déc. à 19h30"
     }
+   ],
+   "relaches": [
+    "2026-12-06",
+    "2026-12-08",
+    "2026-12-10",
+    "2026-12-12",
+    "2026-12-13"
    ]
   },
   {
@@ -3683,7 +3803,11 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "dim",
+    "lun"
+   ]
   },
   {
    "id": "madame-de-sade",
@@ -3721,7 +3845,10 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "lun"
+   ]
   },
   {
    "id": "madeleine-tornade",
@@ -3963,7 +4090,11 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "lun",
+    "mar"
+   ]
   },
   {
    "id": "miroir-de-nos-peines",
@@ -4127,7 +4258,11 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "lun",
+    "2027-02-28"
+   ]
   },
   {
    "id": "muette",
@@ -4396,6 +4531,13 @@
      "venteApprox": true,
      "condition": "Moins de 30 ans, dim. 18 avril à 19h30"
     }
+   ],
+   "relaches": [
+    "2027-04-21",
+    "2027-04-22",
+    "2027-04-24",
+    "2027-04-26",
+    "2027-04-28"
    ]
   },
   {
@@ -4783,7 +4925,11 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "lun",
+    "ven"
+   ]
   },
   {
    "id": "rinaldo",
@@ -4843,6 +4989,11 @@
      "venteApprox": true,
      "condition": "Moins de 30 ans, sam. 20 févr. à 19h30"
     }
+   ],
+   "relaches": [
+    "2027-02-23",
+    "2027-02-25",
+    "2027-02-27"
    ]
   },
   {
@@ -4885,7 +5036,11 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "dim",
+    "lun"
+   ]
   },
   {
    "id": "rituels-lifar",
@@ -5149,7 +5304,11 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "lun",
+    "mar"
+   ]
   },
   {
    "id": "tame-impala",
@@ -5288,7 +5447,10 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "dim"
+   ]
   },
   {
    "id": "turandot",
@@ -5425,7 +5587,10 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "dim"
+   ]
   },
   {
    "id": "un-peu-pour-mon-cur",

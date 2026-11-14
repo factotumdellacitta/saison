@@ -80,7 +80,8 @@ function court(id) {
 }
 const ended = (e) => { const b = D(e.fin) || D(e.debut); return b && b < TODAY; };
 const span = (e) => { const a = D(e.debut); return a ? [a, D(e.fin) || a] : null; };
-const playsOn = (e, d) => { const s = span(e); return s && d >= s[0] && d <= s[1]; };
+const RELJ = ["dim", "lun", "mar", "mer", "jeu", "ven", "sam"];
+const playsOn = (e, d) => { const s = span(e); if (!s || d < s[0] || d > s[1]) return false; const r = e.relaches; return !r || (!r.includes(RELJ[d.getDay()]) && !r.includes(iso(d))); };
 const overlaps = (e, s, t) => { const p = span(e); return p && p[0] <= t && p[1] >= s; };
 function freeIn(e, s, t) {
   const p = span(e); if (!p) return false;
@@ -224,13 +225,13 @@ function ficheCal(e) {
   for (let c = new Date(st.getFullYear(), st.getMonth(), 1); c <= p[1] && n < 6; c = new Date(c.getFullYear(), c.getMonth() + 1, 1), n++) {
     h += `<div class="cal mini"><div class="calh"><h3>${MOIS_L[c.getMonth()]} ${c.getFullYear()}</h3></div>` + monthGrid(c.getFullYear(), c.getMonth(), (d) => {
       const k = iso(d), on = playsOn(e, d) && d >= TODAY, busy = BUSY.has(k);
-      const cls = ["cell", on ? (busy ? "busy" : "play") : "", d < TODAY ? "past" : "", +d === +TODAY ? "today" : "", offers.has(k) ? "of" : "", (BUSY_SRC.reservations || []).includes(k) ? "va" : ""].filter(Boolean).join(" ");
+      const cls = ["cell", on ? (busy ? "busy" : "play") : "", d < TODAY ? "past" : "", +d === +TODAY ? "today" : "", offers.has(k) ? "of" : ""].filter(Boolean).join(" ");
       const lab = `${fmt(d, true)}${on ? (busy ? `, se joue, ${OWNER} pris` : `, se joue, ${OWNER} libre`) : ""}${offers.has(k) ? ", offre jeune" : ""}`;
       return `<div class="${cls}" role="img" aria-label="${lab}"><span class="n" aria-hidden="true">${d.getDate()}</span></div>`;
     }) + "</div>";
   }
-  return `<div class="mini-wrap">${h}</div><div class="legend"><span class="l-joue">Se joue, ${OWNER} libre</span><span class="l-pris">${OWNER} pris</span><span class="l-va">${OWNER} y va</span><span class="l-offre">Offre jeune</span><span class="l-auj">Aujourd’hui</span></div>
-  <p class="aide">Les relâches ne sont pas indiquées : vérifie le calendrier du lieu.</p>`;
+  return `<div class="mini-wrap">${h}</div><div class="legend"><span class="l-joue">Se joue, ${OWNER} libre</span><span class="l-pris">${OWNER} pris</span><span class="l-offre">Offre jeune</span><span class="l-auj">Aujourd’hui</span></div>
+  <p class="aide">${e.relaches ? "Relâches connues retirées du calendrier" : "Relâches non renseignées"} : en cas de doute, vérifie le calendrier du lieu.</p>`;
 }
 
 /* ---------- Filtres de l’affiche (état dans l’URL) ---------- */
@@ -318,8 +319,7 @@ function renderAffiche(q) {
   let frise = "";
   for (let i = 0; i < 14; i++) {
     const d = add(TODAY, i), k = iso(d), busy = BUSY.has(k), n = LIVE.filter((e) => e.note >= 3 && playsOn(e, d)).length;
-    const va = (BUSY_SRC.reservations || []).includes(k);
-    frise += `<button class="fd${busy ? " busy" : ""}${i === 0 ? " today" : ""}" type="button" data-jour="${k}" aria-pressed="false"><span class="dw">${i === 0 ? "auj." : JOURS[d.getDay()]}</span> <span class="dn">${d.getDate()}</span><span class="vh"> ${MOIS[d.getMonth()]}${va ? `, ${OWNER} y va` : busy ? `, ${OWNER} est pris` : ""}, </span>${va ? '<span class="pc" aria-hidden="true"></span>' : ""}${n ? `<span class="nb">${n}</span><span class="vh"> ${n > 1 ? "sorties notées" : "sortie notée"} 3 ou plus</span>` : ""}</button>`;
+    frise += `<button class="fd${busy ? " busy" : ""}${i === 0 ? " today" : ""}" type="button" data-jour="${k}" aria-pressed="false"><span class="dw">${i === 0 ? "auj." : JOURS[d.getDay()]}</span> <span class="dn">${d.getDate()}</span><span class="vh"> ${MOIS[d.getMonth()]}${busy ? `, ${OWNER} est pris` : ""}, </span>${n ? `<span class="nb">${n}</span><span class="vh"> ${n > 1 ? "sorties notées" : "sortie notée"} 3 ou plus</span>` : ""}</button>`;
   }
   const chip = (g, v, t, extra = "") => `<button class="chip" type="button" data-g="${g}" data-v="${esc(v)}" aria-pressed="false"${extra}>${t}</button>`;
   $("#main").innerHTML = `<section id="aff"><h1 class="vh">À l’affiche</h1>
@@ -435,9 +435,8 @@ function monthHTML(f) {
   return `<div class="cal"><div class="calh"><button class="btn" type="button" data-mnav="-1" aria-label="Mois précédent">Préc.</button><h2>${MOIS_L[m]} ${y}</h2><button class="btn" type="button" data-mnav="1" aria-label="Mois suivant">Suiv.</button></div>` +
     monthGrid(y, m, (d) => {
       const k = iso(d), busy = BUSY.has(k), n = base.filter((e) => e.note >= 3 && playsOn(e, d)).length;
-      const va = (BUSY_SRC.reservations || []).includes(k);
-      return `<button type="button" class="cell${busy ? " busy" : ""}${+d === +TODAY ? " today" : ""}${d < TODAY ? " past" : ""}${va ? " va" : offs.has(k) ? " of" : ""}" data-day="${k}" aria-pressed="${f.jour === k}"><span class="n">${d.getDate()}</span><span class="vh"> ${MOIS[m]}${va ? `, ${OWNER} y va` : busy ? `, ${OWNER} pris` : ""}, </span>${n ? `<span class="nb">${n}</span><span class="vh"> ${n > 1 ? "sorties" : "sortie"} notées 3 ou plus</span>` : ""}${prem.has(k) ? '<span class="vh">, une première</span>' : ""}${offs.has(k) ? '<span class="vh">, une offre jeune</span>' : ""}</button>`;
-    }) + `<div class="legend"><span class="l-nb">Chiffre : sorties notées 3 et plus</span><span class="l-pris">${OWNER} pris</span><span class="l-va">${OWNER} y va</span><span class="l-offre">Offre jeune</span><span class="l-auj">Aujourd’hui</span></div></div>`;
+      return `<button type="button" class="cell${busy ? " busy" : ""}${+d === +TODAY ? " today" : ""}${d < TODAY ? " past" : ""}${offs.has(k) ? " of" : ""}" data-day="${k}" aria-pressed="${f.jour === k}"><span class="n">${d.getDate()}</span><span class="vh"> ${MOIS[m]}${busy ? `, ${OWNER} pris` : ""}, </span>${n ? `<span class="nb">${n}</span><span class="vh"> ${n > 1 ? "sorties" : "sortie"} notées 3 ou plus</span>` : ""}${prem.has(k) ? '<span class="vh">, une première</span>' : ""}${offs.has(k) ? '<span class="vh">, une offre jeune</span>' : ""}</button>`;
+    }) + `<div class="legend"><span class="l-nb">Chiffre : sorties notées 3 et plus</span><span class="l-pris">${OWNER} pris</span><span class="l-offre">Offre jeune</span><span class="l-auj">Aujourd’hui</span></div></div>`;
 }
 
 /* ---------- Fiche ---------- */
@@ -655,7 +654,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.3"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.4"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -673,7 +672,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.3"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.4"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
