@@ -4,21 +4,21 @@
   const NOTES = { 4: "incontournable", 3: "fortement recommandé", 2: "bon choix si disponible", 1: "curiosité" };
   const note = (n, pro) => `<span class="st" role="img" aria-label="${n} sur 4, ${NOTES[n]}${pro ? ", prévision" : ""}">${[1, 2, 3, 4].map((i) => `<i${i <= n ? ' class="on"' : ""}></i>`).join("")}${pro ? '<sup aria-hidden="true">P</sup>' : ""}</span>`;
   const DEMO = [
-    { j: "15", m: "oct.", t: "Ruy Blas", a: "Victor Hugo, Claire Dumas", g: "Théâtre", l: "Théâtre · Théâtre du Quai · 20h · 2h45", n: 3, b: ["Léonard y va"] },
-    { j: "8", m: "févr.", t: "Werther", a: "Jules Massenet, Paul Arnaud (direction musicale)", g: "Opéra", l: "Opéra · Opéra Nord · 19h30", n: 4, b: ["Carte Jeunes"] },
-    { j: "21", m: "janv.", t: "La Mouette", a: "Anton Tchekhov, Ivan Sorel", g: "Théâtre", l: "Théâtre · Atelier Lumière · 20h", n: 2, p: true, b: ["Public jeune", "Dernières places"] },
-    { j: "3", m: "mars", t: "Les Noces de Figaro, ou la Folle Journée en version de concert intégrale", a: "Wolfgang Amadeus Mozart, Lorenzo Da Ponte, Orchestre des Remparts", g: "Opéra", l: "Opéra (version de concert) · Salle Pleyel-sur-Seine · 19h", n: 1, b: [] },
+    { j: "15", m: "oct.", t: "Ruy Blas", a: "Victor Hugo, Claire Dumas", g: "Théâtre", l: "Théâtre du Quai · 20h · 2h45", n: 3, b: ["Léonard y va"] },
+    { j: "8", m: "févr.", t: "Werther", a: "Jules Massenet, Paul Arnaud (direction musicale)", g: "Opéra", l: "Opéra Nord · 19h30", n: 4, b: ["Carte Jeunes"] },
+    { j: "21", m: "janv.", t: "La Mouette", a: "Anton Tchekhov, Ivan Sorel", g: "Danse", l: "Atelier Lumière · 20h", n: 2, p: true, b: ["Public jeune", "Dernières places"] },
+    { j: "3", m: "mars", t: "Les Noces de Figaro, ou la Folle Journée en version de concert intégrale", a: "Wolfgang Amadeus Mozart, Lorenzo Da Ponte, Orchestre des Remparts", g: "Opéra", l: "Salle Pleyel-sur-Seine · 19h", n: 1, b: [] },
   ];
   const badge = (x) => `<span class="b${x === "Léonard y va" ? " yva" : ""}">${x}</span>`;
-  const ligne = (d) => `<article class="row"><a class="rb" href="#charte"><span class="stub"><b>${d.j}</b><small>${d.m}</small></span>
-    <span class="mid"><span class="tt nom">${d.t}</span><span class="art nom">${d.a}</span><span class="ss">${ICO(d.g)}${d.l}</span></span>
+  const ligne = (d) => `<article class="row g-${FAM(d.g)}"><a class="rb" href="#charte"><span class="stub"><b>${d.j}</b><small>${d.m}</small></span>
+    <span class="mid"><span class="gk">${ICO(d.g)}${d.g}</span><span class="tt nom">${d.t}</span><span class="art nom">${d.a}</span><span class="ss">${d.l}</span></span>
     <span class="end">${note(d.n, d.p)}${d.b.length ? `<span class="bds">${d.b.map(badge).join("")}</span>` : ""}</span></a></article>`;
 
   // Favicon : la clé (dont le dessin occupe 75 % × 60 % de sa boîte) laisse 18 % de marge et se centre optiquement
-  let CLE = null, ICO = () => "";
+  let CLE = null, ICO = () => "", FAM = () => "neutre";
   const carre = (n) => { const t = n * 0.85, d = (t * 1.5) / 48; return CLE("", Math.round(t)).replace("<svg ", `<svg style="transform:translate(${-d}px,${d}px)" `); };
-  function render(main, { cleF, saisonTxt, themeBouton, ico, ICONES, CATS }) {
-    CLE = cleF; ICO = ico; const S = saisonTxt();
+  function render(main, { cleF, saisonTxt, themeBouton, ico, ICONES, CATS, famille }) {
+    CLE = cleF; ICO = ico; FAM = famille; const S = saisonTxt();
     const carres = (n) => `<span class="st" aria-hidden="true">${[1, 2, 3, 4].map((i) => `<i${i <= n ? ' class="on"' : ""}></i>`).join("")}</span>`;
     const tuile = (k, lib) => `<figure><span class="ch-ico">${ico(k)}</span><span class="ch-ico p">${ico(k)}</span><figcaption class="meta muet">${lib}</figcaption></figure>`;
     const LIB_UI = { clair: "Thème clair", sombre: "Thème sombre", auto: "Thème auto", cadenas: "Connexion", "cadenas-ouvert": "Session", loupe: "Rechercher", liste: "Liste", mois: "Mois", filtres: "Plus de filtres", tri: "Tri", prec: "Précédent", suiv: "Suivant", fermer: "Fermer", partager: "Partager", billet: "Réserver", externe: "Site officiel", lieu: "Lieu", horaires: "Horaires", stats: "Statistiques", ventes: "Ventes", ajouter: "Ajouter", modifier: "Modifier", supprimer: "Supprimer", poignee: "Déplacer" };
@@ -39,7 +39,7 @@
     const notes = `<table class="t"><tbody>${[4, 3, 2, 1].map((n) => `<tr><td>${note(n)}</td><td>${n} – ${NOTES[n]}</td></tr>`).join("")}<tr><td>${note(3, true)}</td><td>Prévision : création pas encore critiquée</td></tr></tbody></table>`;
     const badges = `<div class="bds">${["Léonard y va", "Public jeune", "Carte Jeunes", "Dernières places", "Offre jeune"].map(badge).join("")}</div>`;
     const boutons = `<div class="acts"><a class="btn pri" href="#charte">${ico("billet")}Réserver</a><a class="btn" href="#charte">${ico("externe")}Site officiel</a><button class="btn ico" type="button" aria-label="Partager">${ico("partager")}</button><button class="btn danger" type="button">Annuler la réservation</button><button class="btn" type="button" disabled>Indisponible</button></div>`;
-    const puces = `<div class="chips"><button class="chip" type="button" aria-pressed="true">${ico("Théâtre")}Théâtre</button><button class="chip" type="button" aria-pressed="false">${ico("Opéra")}Opéra</button><button class="chip" type="button" aria-pressed="false">${ico("Danse")}Danse</button><button class="chip" type="button" aria-pressed="true" aria-label="Note 3 et plus">${carres(3)}+</button><button class="chip i" type="button" aria-label="Plus de filtres">${ico("filtres")}</button><button class="chip" type="button" aria-pressed="false">Libre ce soir-là</button><button class="chip effacer" type="button">Tout effacer</button></div>
+    const puces = `<div class="chips"><button class="chip g-theatre" type="button" aria-pressed="true">${ico("Théâtre")}Théâtre</button><button class="chip g-musique" type="button" aria-pressed="true">${ico("Opéra")}Opéra</button><button class="chip g-danse" type="button" aria-pressed="false">${ico("Danse")}Danse</button><button class="chip g-images" type="button" aria-pressed="false">${ico("Exposition")}Exposition</button><button class="chip" type="button" aria-pressed="true" aria-label="Note 3 et plus">${carres(3)}+</button><button class="chip i" type="button" aria-label="Plus de filtres">${ico("filtres")}</button><button class="chip" type="button" aria-pressed="false">Libre ce soir-là</button><button class="chip effacer" type="button">Tout effacer</button></div>
       <div class="active"><span class="n">12 sorties</span><span>2 filtres actifs</span></div><div class="seg" role="group" aria-label="Affichage"><button class="i" type="button" aria-pressed="true" aria-label="Liste">${ico("liste")}</button><button class="i" type="button" aria-pressed="false" aria-label="Mois">${ico("mois")}</button></div>`;
     const JOURS = ["sam.", "dim.", "lun.", "mar.", "mer.", "jeu.", "ven."];
     const frise = `<div class="frise" role="group" aria-label="Les 14 prochains jours (exemple)">${Array.from({ length: 14 }, (_, i) => {
@@ -86,6 +86,7 @@
     ${icones}
 
     <section class="ch-section"><h2 class="mh">Couleur</h2><p>Rouge #E30613 en aplats francs ; tout le reste en noir et blanc. Sur un aplat rouge, texte blanc uniquement. Le rouge employé comme couleur de texte passe à #FF5A4F sur fond sombre. Ni ombre, ni dégradé (hachures fonctionnelles exceptées), ni flou, ni transparence décorative.</p>
+      <p>Code des genres : une encre par famille, réservée au genre (surtitre, tranche de 3 px devant la date, icône des puces, barres « Par catégorie »), et un aplat pour la puce active et l’en-tête de fiche. Théâtre en carmin (#B4233C, rose #FF94A3 en sombre ; en-tête de fiche en rouge franc), Musique (opéra, récital, concert, comédie musicale) en bleu de Prusse (#1F5FA8 / #8DB8F2), Danse en ocre (#946200 / #E8B04A), Images (exposition, cinéma) en vert sapin (#00695C / #4FC3A1). Les autres genres restent en encre. Jamais d’aplat de genre ailleurs, jamais de couleur de genre sur le rouge.</p>
       <div class="ch-duo"><div class="ch-planche" data-theme="light"><span class="meta">Clair</span><div class="ch-jetons" data-jetons></div></div><div class="ch-planche" data-theme="dark"><span class="meta">Sombre</span><div class="ch-jetons" data-jetons></div></div></div>
       <h3 class="sec">Contrastes (WCAG AA)</h3><div class="defile-x"><table class="t" id="ch-contrastes"></table></div></section>
 
@@ -120,7 +121,7 @@
     <p class="meta muet" style="margin:var(--e8) 0">Largo al factotum della città.</p></div>`;
 
     // Jetons et contrastes, lus dans la feuille (aucune valeur recopiée ici)
-    const JET = ["fond", "surface", "encre", "encre-2", "filet", "filet-leger", "rouge", "sur-rouge", "rouge-texte"];
+    const JET = ["fond", "surface", "encre", "encre-2", "filet", "filet-leger", "rouge", "sur-rouge", "rouge-texte", "g-theatre", "g-musique", "g-danse", "g-images", "a-theatre", "a-musique", "a-danse", "a-images"];
     main.querySelectorAll("[data-jetons]").forEach((box) => {
       const cs = getComputedStyle(box.parentElement);
       box.innerHTML = JET.map((k) => `<div class="ch-jeton"><i style="--c:var(--${k})"></i><b>--${k}</b><span class="muet">${cs.getPropertyValue("--" + k).trim()}</span></div>`).join("");
@@ -128,7 +129,7 @@
     const hex = (h) => { h = h.trim().replace("#", ""); return [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16) / 255); };
     const lum = (h) => { const [r, g, b] = hex(h).map((c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4)); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
     const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };
-    const PAIRES = [["encre", "fond", 4.5], ["encre", "surface", 4.5], ["encre-2", "fond", 4.5], ["encre-2", "surface", 4.5], ["rouge-texte", "fond", 4.5], ["rouge-texte", "surface", 4.5], ["sur-rouge", "rouge", 4.5], ["fond", "encre", 4.5], ["filet", "fond", 3], ["rouge", "fond", 3]];
+    const PAIRES = [["encre", "fond", 4.5], ["encre", "surface", 4.5], ["encre-2", "fond", 4.5], ["encre-2", "surface", 4.5], ["rouge-texte", "fond", 4.5], ["rouge-texte", "surface", 4.5], ["sur-rouge", "rouge", 4.5], ["fond", "encre", 4.5], ["filet", "fond", 3], ["rouge", "fond", 3], ...["theatre", "musique", "danse", "images"].flatMap((f) => [["g-" + f, "fond", 4.5], ["sur-rouge", "a-" + f, 4.5]])];
     const [cl, so] = [...main.querySelectorAll("[data-jetons]")].map((b) => getComputedStyle(b.parentElement));
     const v = (cs, k) => cs.getPropertyValue("--" + k);
     $("#ch-contrastes", main).innerHTML = `<thead><tr><th>Texte</th><th>Fond</th><th class="num">Clair</th><th class="num">Sombre</th><th class="num">Seuil</th></tr></thead><tbody>${PAIRES.map(([t, f, s]) => {
