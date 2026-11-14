@@ -26,24 +26,39 @@
   const dCourt = (k) => (k ? fmt(D(k)) : "date à préciser");
   const euros = (n) => (n == null || n === "" || isNaN(n) ? "" : (Math.round(n * 100) / 100).toLocaleString("fr-FR", { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 }) + " €");
   const num = (v) => { if (v == null || v === "") return null; if (typeof v === "number") return v; const m = String(v).replace(/\s/g, "").replace(",", ".").match(/-?\d+(\.\d+)?/); return m ? +m[0] : null; };
-  /* Prix : places × prix par place, ou détail place par place (billets) quand les prix diffèrent.
-     L’ancien champ « prix » (total) est encore lu s’il existe. */
-  const nbPlaces = (r) => (r && r.billets && r.billets.length) || (r && r.places) || 1;
-  function totalPrix(r) {
-    if (!r) return null;
-    if (r.billets && r.billets.length) { const l = r.billets.map((b) => num(b.prix)).filter((x) => x != null); return l.length ? l.reduce((a, b) => a + b, 0) : null; }
-    if (num(r.prixPlace) != null) return num(r.prixPlace) * (r.places || 1);
-    return num(r.prix);
+  /* Places : une ligne par spectateur (« Moi » ou un tiers), avec son prix et qui paie.
+     paiement : "moi" (payée par moi), "offert" (place d’un tiers que j’offre), "spectateur" (le tiers paie sa part),
+     "gratuit" (gratuité ou cadeau reçu, 0 €). Les anciens formats (prix total, prixPlace × places) sont encore lus. */
+  const estMoi = (n) => norm(n).trim() === "moi";
+  const PAIEMENTS_MOI = [["moi", "Payée par moi"], ["gratuit", "Offerte à moi (cadeau, gratuité)"]];
+  const PAIEMENTS_TIERS = [["moi", "Payée par moi"], ["offert", "Je l’offre"], ["spectateur", "Payée par la personne"], ["gratuit", "Gratuite (invitation, mécénat)"]];
+  const MARQ = { offert: "offerte par moi", spectateur: "sa part", gratuit: "gratuite" };
+  function places(r) {
+    if (!r) return [];
+    if (r.billets && r.billets.length) return r.billets.map((b) => ({ ...b, spectateur: b.spectateur ?? b.pour ?? "", prix: num(b.prix), paiement: b.paiement || "moi" }));
+    const n = r.places || 1, u = num(r.prixPlace) != null ? num(r.prixPlace) : num(r.prix) != null ? num(r.prix) / n : null, acc = r.accompagnants || [];
+    return Array.from({ length: n }, (_, i) => ({ spectateur: i === 0 ? "Moi" : acc[i - 1] || "", prix: u, paiement: "moi", ...(r.tarif ? { tarif: r.tarif } : {}), ...(r.categoriePlace ? { categoriePlace: r.categoriePlace } : {}) }));
   }
+  const nbPlaces = (r) => places(r).length || 1;
+  // Sommes : engagé (toutes les places), payé par moi, pour mon bénéfice (mes places), offert par moi.
+  function comptes(r) {
+    const L = places(r).filter((b) => b.prix != null);
+    if (!L.length) return null;
+    const c = { engage: 0, paye: 0, benef: 0, offert: 0, nMoi: 0 };
+    for (const b of L) {
+      c.engage += b.prix;
+      if (estMoi(b.spectateur)) { c.benef += b.prix; c.nMoi++; if (b.paiement !== "gratuit") c.paye += b.prix; }
+      else if (b.paiement === "moi" || b.paiement === "offert") { c.paye += b.prix; if (b.paiement === "offert") c.offert += b.prix; }
+    }
+    return c;
+  }
+  const totalPrix = (r) => { const c = comptes(r); return c ? c.engage : null; };
   const pleinTotal = (r) => (r && num(r.pleinPlace) != null ? num(r.pleinPlace) * nbPlaces(r) : r ? num(r.tarifPlein) : null);
   function resumePrix(r) {
-    if (!r) return "";
-    const t = totalPrix(r), tarif = [r.tarif, r.categoriePlace].filter(Boolean).join(", ");
-    let p = "";
-    if (r.billets && r.billets.length && t != null) p = r.billets.map((b) => (num(b.prix) != null ? euros(num(b.prix)) : "?") + (b.pour ? ` (${b.pour})` : "")).join(" + ") + (r.billets.length > 1 ? " = " + euros(t) : "");
-    else if (num(r.prixPlace) != null) p = ((r.places || 1) > 1 ? `${r.places} × ${euros(num(r.prixPlace))} = ` : "") + euros(t);
-    else if (t != null) p = euros(t);
-    return [p, tarif].filter(Boolean).join(" · ");
+    const L = places(r), c = comptes(r); if (!c) return "";
+    const txt = L.map((b) => `${b.spectateur || "?"} ${b.prix != null ? euros(b.prix) : "?"}${b.paiement !== "moi" ? ` (${estMoi(b.spectateur) ? "offerte à moi" : MARQ[b.paiement]})` : ""}`).join(" + ");
+    const tarifs = [...new Set(L.map((b) => [b.tarif, b.categoriePlace].filter(Boolean).join(", ")).filter(Boolean))].join(" ; ");
+    return [txt + (L.length > 1 ? " = " + euros(c.engage) : "") + (Math.abs(c.paye - c.engage) > 0.001 ? `, payé par moi ${euros(c.paye)}` : ""), tarifs].filter(Boolean).join(" · ");
   }
   const pause = (ms) => new Promise((r) => setTimeout(r, ms));
   const b64 = (u8) => { let s = ""; for (let i = 0; i < u8.length; i += 0x8000) s += String.fromCharCode.apply(null, u8.subarray(i, i + 0x8000)); return btoa(s); };
@@ -134,7 +149,7 @@
 
   /* ---------- Contrôles (reprise de tools/check.mjs) ---------- */
   const ISO_RE = /^\d{4}-\d{2}-\d{2}$/, VENTE_RE = /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?$/, URL_RE = /^https?:\/\/[^\s]+$/, ID_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
-  const CLES_PRIVEES = new Set(["prix", "accompagnants", "places", "siege", "heure", "reserveLe", "icsToken", "tarifPlein", "prixPlace", "pleinPlace", "billets", "categoriePlace", "envies", "journalPrive", "aCompleter", "priorite", "jeton", "token"]);
+  const CLES_PRIVEES = new Set(["prix", "accompagnants", "places", "siege", "heure", "reserveLe", "icsToken", "tarifPlein", "prixPlace", "pleinPlace", "billets", "categoriePlace", "spectateur", "paiement", "envies", "journalPrive", "aCompleter", "priorite", "jeton", "token"]);
   function valider(d) {
     const err = [];
     const fouille = (o, f, ch) => {
@@ -180,6 +195,7 @@
     else for (const l of d.liens) if (!CAT_LIENS.includes(l.categorie) || !l.titre || !URL_RE.test(l.url || "")) err.push(`Lien « ${l.titre || "?"} » : catégorie, titre ou adresse invalide.`);
     for (const k of ["reservations", "manuel", "calendrier"]) if (!Array.isArray(d.dispo[k]) || d.dispo[k].some((x) => !ISO_RE.test(x))) err.push(`Soirs pris : liste ${k} invalide.`);
     for (const [id, r] of Object.entries(d.prive.reservations)) if (r.date && !ISO_RE.test(r.date)) err.push(`Réservation ${titreDe(id)} : date invalide.`);
+    for (const [id, r] of [...Object.entries(d.prive.reservations), ...Object.entries(d.prive.journalPrive)]) for (const b of r.billets || []) if (!["moi", "offert", "spectateur", "gratuit"].includes(b.paiement || "moi") || (b.prix != null && (typeof b.prix !== "number" || b.prix < 0))) err.push(`${titreDe(id)} : place invalide (prix ou paiement).`);
     for (const b of d.prive.blocages) if (b && typeof b === "object" && (!ISO_RE.test(b.debut || "") || !ISO_RE.test(b.fin || "") || b.fin < b.debut)) err.push("Période bloquée : dates invalides.");
     return err;
   }
@@ -303,7 +319,7 @@
       catch (e) { if (!(e instanceof Annule)) { errEl.textContent = msgGH(e); errEl.hidden = false; } }
       finally { sub.disabled = false; }
     };
-    branchAcc(form); brancherPrix(form);
+    brancherPrix(form);
     el.querySelector(".sheet-in").focus();
     return form;
   }
@@ -314,78 +330,67 @@
   const ck = (name, on, lab) => `<label class="f ck"><input type="checkbox" name="${name}"${on ? " checked" : ""}> <span>${lab}</span></label>`;
   const dl = (id, items) => `<datalist id="${id}">${[...new Set(items)].map((x) => `<option value="${esc(x)}"></option>`).join("")}</datalist>`;
 
-  /* ---------- Accompagnants (saisie avec autocomplétion) ---------- */
+  /* ---------- Noms déjà utilisés (autocomplétion) ---------- */
   function nomsConnus() {
     const s = new Set();
-    Object.values(PRIVE.reservations).forEach((r) => (r.accompagnants || []).forEach((n) => s.add(n)));
-    Object.values(PRIVE.journalPrive).forEach((r) => (r.accompagnants || []).forEach((n) => s.add(n)));
+    [...Object.values(PRIVE.reservations), ...Object.values(PRIVE.journalPrive)].forEach((r) => { (r.accompagnants || []).forEach((n) => s.add(n)); places(r).forEach((b) => b.spectateur && !estMoi(b.spectateur) && s.add(b.spectateur)); });
     return [...s].sort((a, b) => a.localeCompare(b, "fr"));
   }
-  const accChip = (n) => `<span class="chip on">${esc(n)}<input type="hidden" name="acc" value="${esc(n)}"><button type="button" class="x" data-accdel aria-label="Retirer ${esc(n)}">×</button></span>`;
-  const accHTML = (liste) => champ("Accompagnants", `<span class="accs">${(liste || []).map(accChip).join("")}<input data-accin list="dl-acc" placeholder="Nom, puis Entrée" enterkeyhint="done"><button type="button" class="btn" data-accadd>Ajouter</button></span>${dl("dl-acc", nomsConnus())}`);
-  function branchAcc(form) {
-    const box = form.querySelector(".accs"); if (!box) return;
-    const input = box.querySelector("[data-accin]");
-    const ajoute = () => { const v = input.value.trim().replace(/,$/, ""); if (v && !lireAcc(form, true).includes(v)) input.insertAdjacentHTML("beforebegin", accChip(v)); input.value = ""; };
-    box.addEventListener("click", (ev) => { if (ev.target.closest("[data-accadd]")) ajoute(); const d = ev.target.closest("[data-accdel]"); if (d) d.parentElement.remove(); });
-    input.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === ",") { ev.preventDefault(); ajoute(); } });
-  }
-  function lireAcc(form, seul) {
-    const l = [...form.querySelectorAll('input[name="acc"]')].map((x) => x.value);
-    const p = !seul && form.querySelector("[data-accin]") ? form.querySelector("[data-accin]").value.trim() : "";
-    if (p && !l.includes(p)) l.push(p);
-    return l;
-  }
 
-  /* ---------- Places et prix (formulaire) ---------- */
-  const tarifsConnus = () => [...new Set([...TARIFS, ...[...Object.values(PRIVE.reservations), ...Object.values(PRIVE.journalPrive)].flatMap((x) => [x.tarif, ...(x.billets || []).map((b) => b.tarif)]).filter(Boolean)])];
-  const billetRow = (b = {}) => `<div class="bl3"><div class="grid2">${champ("Pour", inp("b_pour", b.pour, 'list="dl-pour" placeholder="Moi"'))}${champ("Prix (€)", inp("b_prix", b.prix ?? "", 'inputmode="decimal"'))}</div><div class="grid2">${champ("Tarif", inp("b_tarif", b.tarif, 'list="dl-tarifs"'))}${champ("Catégorie", inp("b_cat", b.categoriePlace, 'placeholder="cat. 1"'))}</div><button type="button" class="linkbtn" data-delbillet>Retirer cette place</button></div>`;
+  /* ---------- Spectateurs et prix (formulaire) ---------- */
+  const tarifsConnus = () => [...new Set([...TARIFS, ...[...Object.values(PRIVE.reservations), ...Object.values(PRIVE.journalPrive)].flatMap((x) => places(x).map((b) => b.tarif)).filter(Boolean)])];
+  const ligneHTML = (b = {}) => `<div class="bl3">
+    <div class="grid2">${champ("Spectateur", inp("b_sp", b.spectateur, 'list="dl-pour" placeholder="Moi ou un prénom" autocapitalize="words"'))}${champ("Prix (€)", inp("b_prix", b.prix ?? "", 'inputmode="decimal" placeholder="0 si offert"'))}</div>
+    ${champ("Paiement", sel("b_pay", estMoi(b.spectateur) ? PAIEMENTS_MOI : PAIEMENTS_TIERS, b.paiement || "moi"))}
+    <div class="grid2">${champ("Tarif", inp("b_tarif", b.tarif, 'list="dl-tarifs"'))}${champ("Catégorie", inp("b_cat", b.categoriePlace, 'placeholder="cat. 1"'))}</div>
+    <button type="button" class="linkbtn" data-delbillet>Retirer cette place</button></div>`;
   function prixHTML(r = {}) {
-    const det = !!(r.billets && r.billets.length);
-    const unit = num(r.prixPlace) != null ? num(r.prixPlace) : num(r.prix) != null && !det ? Math.round((num(r.prix) / (r.places || 1)) * 100) / 100 : "";
-    return `<fieldset class="fs" data-prix><legend>Places et prix</legend>
-      <div class="grid2">${champ("Places", inp("places", nbPlaces(r), 'type="number" min="1" max="30" inputmode="numeric"'))}${champ("Catégorie de place", inp("categoriePlace", r.categoriePlace, 'placeholder="cat. 1, placement libre…"'))}</div>
-      ${champ("Tarif", inp("tarif", r.tarif, 'list="dl-tarifs" placeholder="Abonné jeune moins de 28 ans…"') + dl("dl-tarifs", tarifsConnus()))}
-      <div class="grid2"><div data-unit${det ? " hidden" : ""}>${champ("Prix par place (€)", inp("prixPlace", unit, 'inputmode="decimal"'))}</div>${champ("Plein tarif par place (€)", inp("pleinPlace", r.pleinPlace ?? (num(r.tarifPlein) != null ? Math.round((num(r.tarifPlein) / nbPlaces(r)) * 100) / 100 : ""), 'inputmode="decimal" placeholder="facultatif"'))}</div>
-      ${ck("detail", det, "Prix différents selon les places")}
-      <div data-billets${det ? "" : " hidden"}>${(det ? r.billets : []).map(billetRow).join("")}<button type="button" class="btn" data-addbillet>+ Place</button></div>
-      ${dl("dl-pour", ["Moi", ...nomsConnus()])}
+    const L = places(r);
+    return `<fieldset class="fs" data-prix><legend>Spectateurs et prix</legend>
+      <p class="cr">Une ligne par place. Ta place : « Moi » ; si on te l’offre, 0 € et « Offerte à moi ».</p>
+      <div data-rows>${L.map(ligneHTML).join("")}</div>
+      <div class="acts" style="margin:0 0 10px"><button type="button" class="btn" data-addbillet>+ Spectateur</button><button type="button" class="btn" data-meme>Même prix et tarif partout</button></div>
+      ${champ("Plein tarif par place (€, facultatif, pour les économies)", inp("pleinPlace", r.pleinPlace ?? "", 'inputmode="decimal"'))}
+      ${dl("dl-pour", ["Moi", ...nomsConnus()])}${dl("dl-tarifs", tarifsConnus())}
       <p class="total" data-total aria-live="polite"></p></fieldset>`;
   }
   function lirePrix(f) {
-    const out = { places: Math.max(1, Math.round(num(val(f, "places")) || 1)) };
-    const t = val(f, "tarif"), c = val(f, "categoriePlace"), pl = num(val(f, "pleinPlace"));
-    if (t) out.tarif = t;
-    if (c) out.categoriePlace = c;
-    if (f.elements.detail && f.elements.detail.checked) {
-      const l = [...f.querySelectorAll("[data-billets] .bl3")].map((x) => {
-        const q = (n) => x.querySelector(`[name="${n}"]`).value.trim(), b = { pour: q("b_pour"), prix: num(q("b_prix")) };
-        if (q("b_tarif")) b.tarif = q("b_tarif"); if (q("b_cat")) b.categoriePlace = q("b_cat");
-        return b;
-      });
-      if (l.length) { out.billets = l; out.places = l.length; }
-    }
-    if (!out.billets) out.prixPlace = num(val(f, "prixPlace"));
-    if (pl != null) out.pleinPlace = pl;
+    const billets = [...f.querySelectorAll("[data-rows] .bl3")].map((x) => {
+      const q = (n) => x.querySelector(`[name="${n}"]`).value.trim();
+      const b = { spectateur: q("b_sp"), prix: num(q("b_prix")), paiement: q("b_pay") || "moi" };
+      if (estMoi(b.spectateur)) { b.spectateur = "Moi"; if (!["moi", "gratuit"].includes(b.paiement)) b.paiement = "moi"; }
+      if (q("b_tarif")) b.tarif = q("b_tarif");
+      if (q("b_cat")) b.categoriePlace = q("b_cat");
+      return b;
+    });
+    if (!billets.length) throw new Error("Ajoute au moins une place.");
+    const out = { places: billets.length, billets, accompagnants: [...new Set(billets.map((b) => b.spectateur).filter((n) => n && !estMoi(n)))] };
+    const pl = num(val(f, "pleinPlace")); if (pl != null) out.pleinPlace = pl;
     return out;
   }
   function brancherPrix(form) {
     const box = form.querySelector("[data-prix]"); if (!box) return;
-    const E = form.elements, rows = box.querySelector("[data-billets]"), plus = rows.querySelector("[data-addbillet]");
-    const lignes = () => [...rows.querySelectorAll(".bl3")];
-    const ajoute = (b) => plus.insertAdjacentHTML("beforebegin", billetRow(b));
-    const maj = () => { const r = lirePrix(form), t = totalPrix(r); box.querySelector("[data-total]").textContent = t == null ? "Total : prix à préciser" : "Total : " + resumePrix({ ...r, tarif: "", categoriePlace: "" }); };
-    E.detail.addEventListener("change", () => {
-      const on = E.detail.checked; box.querySelector("[data-unit]").hidden = on; rows.hidden = !on;
-      if (on && !lignes().length) { const n = Math.max(1, num(E.places.value) || 1), acc = lireAcc(form); for (let i = 0; i < n; i++) ajoute({ pour: i === 0 ? "Moi" : acc[i - 1] || "", prix: num(E.prixPlace.value), tarif: E.tarif.value.trim(), categoriePlace: E.categoriePlace.value.trim() }); }
+    const rows = box.querySelector("[data-rows]"), lignes = () => [...rows.querySelectorAll(".bl3")];
+    const maj = () => {
+      let t = "Total : prix à préciser";
+      try { const c = comptes(lirePrix(form)); if (c) t = `Engagé ${euros(c.engage)} · payé par moi ${euros(c.paye)}${c.offert ? ` (dont offert ${euros(c.offert)})` : ""} · pour moi ${euros(c.benef)}`; }
+      catch (_) { t = "Ajoute au moins une place."; }
+      box.querySelector("[data-total]").textContent = t;
+    };
+    const options = (x) => {
+      const s = x.querySelector('[name="b_pay"]'), v = s.value, moi = estMoi(x.querySelector('[name="b_sp"]').value), opts = moi ? PAIEMENTS_MOI : PAIEMENTS_TIERS;
+      if (s.dataset.moi === String(moi)) return; s.dataset.moi = String(moi);
+      s.innerHTML = opts.map(([k, t]) => `<option value="${k}"${k === v ? " selected" : ""}>${esc(t)}</option>`).join("");
+    };
+    lignes().forEach(options);
+    box.addEventListener("click", (ev) => {
+      if (ev.target.closest("[data-addbillet]")) { const l = lignes().at(-1), g = (n) => (l ? l.querySelector(`[name="${n}"]`).value : ""); rows.insertAdjacentHTML("beforeend", ligneHTML({ spectateur: lignes().length ? "" : "Moi", tarif: g("b_tarif"), categoriePlace: g("b_cat") })); lignes().forEach(options); rows.lastElementChild.querySelector('[name="b_sp"]').focus(); }
+      if (ev.target.closest("[data-meme]")) { const [a, ...r] = lignes(); if (a) r.forEach((x) => ["b_prix", "b_tarif", "b_cat"].forEach((n) => (x.querySelector(`[name="${n}"]`).value = a.querySelector(`[name="${n}"]`).value))); }
+      const d = ev.target.closest("[data-delbillet]"); if (d) d.closest(".bl3").remove();
       maj();
     });
-    E.places.addEventListener("change", () => { if (!E.detail.checked) return maj(); const n = Math.max(1, num(E.places.value) || 1); while (lignes().length < n) ajoute({ tarif: E.tarif.value.trim(), categoriePlace: E.categoriePlace.value.trim() }); while (lignes().length > n) lignes().at(-1).remove(); maj(); });
-    box.addEventListener("click", (ev) => {
-      if (ev.target.closest("[data-addbillet]")) { ajoute({ tarif: E.tarif.value.trim(), categoriePlace: E.categoriePlace.value.trim() }); E.places.value = lignes().length; maj(); }
-      const d = ev.target.closest("[data-delbillet]"); if (d) { d.closest(".bl3").remove(); E.places.value = Math.max(1, lignes().length); if (!lignes().length) { E.detail.checked = false; E.detail.dispatchEvent(new Event("change")); } maj(); }
-    });
-    box.addEventListener("input", maj);
+    rows.addEventListener("input", (ev) => { if (ev.target.name === "b_sp") options(ev.target.closest(".bl3")); });
+    box.addEventListener("input", maj); box.addEventListener("change", maj);
     maj();
   }
 
@@ -444,7 +449,7 @@
     if (env) etat += `<p><b>Dans mes envies</b> · priorité ${PRI[env.priorite || 2]}${env.note ? " · « " + esc(env.note) + " »" : ""}</p>`;
     const prio = env ? `<div class="chips wrap-ok" role="group" aria-label="Priorité">${[1, 2, 3].map((p) => `<button class="chip" type="button" data-adm="prio" data-p="${p}" data-id="${esc(e.id)}" aria-pressed="${(env.priorite || 2) === p}">Priorité ${PRI[p]}</button>`).join("")}<button class="chip" type="button" data-adm="envie" data-id="${esc(e.id)}">Note</button></div>` : "";
     const acts = vu
-      ? b("revu", "Vu à nouveau") + b("notes", "Mes notes, prix, avec qui") + b("editer", "Modifier la fiche") + b("supprimer", "Supprimer")
+      ? b("revu", "Vu à nouveau") + b("notes", "Ma note, spectateurs et prix") + b("editer", "Modifier la fiche") + b("supprimer", "Supprimer")
       : (r ? b("reserver", "Modifier la réservation", "pri") + b("annuler", "Annuler la réservation") : b("reserver", "Réserver", "pri")) +
         b("vu", "Marquer vu") + `<button class="btn" type="button" data-envie="${esc(e.id)}" aria-pressed="${!!env}">${env ? "♥ Dans mes envies" : "♡ Ça m’intéresse"}</button>` +
         b("editer", "Modifier la fiche") + (e.statut === "ecarte" ? b("remettre", "Remettre à l’affiche") : b("ecarter", "Écarter")) + b("supprimer", "Supprimer");
@@ -475,12 +480,11 @@
       <div class="grid2">${champ("Heure", inp("heure", hDef, 'type="time"'))}${champ("Salle", inp("salle", r.salle ?? e.salle ?? ""))}</div>
       ${champ("Siège(s)", inp("siege", r.siege, 'placeholder="Rang D, 12-13"'))}
       ${prixHTML(r)}
-      ${accHTML(r.accompagnants)}
       ${champ("Billetterie (où acheté)", inp("billetterie", r.billetterie))}
       ${champ("Note", inp("note", r.note))}`, async (f) => {
       const date = val(f, "date") && val(f, "date") !== "autre" ? val(f, "date") : val(f, "date_autre");
       if (!date) throw new Error("Choisis une date.");
-      const res = { date, heure: val(f, "heure"), salle: val(f, "salle"), siege: val(f, "siege"), ...lirePrix(f), accompagnants: lireAcc(f), billetterie: val(f, "billetterie"), note: val(f, "note") };
+      const res = { date, heure: val(f, "heure"), salle: val(f, "salle"), siege: val(f, "siege"), ...lirePrix(f), billetterie: val(f, "billetterie"), note: val(f, "note") };
       const vus = confirmeConflits(etatLocal(), date, id);
       return ecrire(`Admin : ${r0 ? "réservation modifiée" : "réservé"} ${e.titre} le ${fmt(D(date))}`, (d) => {
         garde(r0, d.prive.reservations[id], "La réservation");
@@ -521,10 +525,9 @@
       ${champ(edit ? "Dates vues (AAAA-MM-JJ, séparées par des virgules)" : "Vu le", edit ? inp("vuLe", (e.vuLe || []).join(", ")) : inp("date", dDef, 'type="date"'))}
       ${champ("Ma note", sel("noteLeonard", [["", "Pas de note"], [4, "★★★★"], [3, "★★★"], [2, "★★"], [1, "★"]], e.noteLeonard ?? ""))}
       ${champ("Mon avis (public)", `<textarea name="avis" rows="3">${esc(e.avis || "")}</textarea>`)}
-      ${revu ? '<p class="cr">Places et prix de cette nouvelle fois : ils s’ajoutent aux précédents.</p>' : ""}${prixHTML(revu ? { places: nbPlaces(jp), tarif: jp.tarif, categoriePlace: jp.categoriePlace } : src)}
-      ${accHTML(src.accompagnants)}`, async (f) => {
+      ${revu ? '<p class="cr">Places et prix de cette nouvelle fois : ils s’ajoutent aux précédents.</p>' : ""}${prixHTML(revu ? { billets: [{ spectateur: "Moi" }] } : src)}`, async (f) => {
       const note = val(f, "noteLeonard") ? +val(f, "noteLeonard") : null, avis = val(f, "avis");
-      let priv = { ...lirePrix(f), accompagnants: lireAcc(f) };
+      let priv = lirePrix(f);
       let dates;
       if (edit) { dates = val(f, "vuLe").split(/[,;\s]+/).filter(Boolean); if (!dates.length || dates.some((x) => !ISO_RE.test(x))) throw new Error("Dates au format AAAA-MM-JJ, séparées par des virgules."); }
       else { const x = val(f, "date"); if (!ISO_RE.test(x)) throw new Error("Choisis la date."); dates = [x]; }
@@ -546,17 +549,10 @@
     }, { valider: edit ? "Enregistrer" : "Archiver au journal" });
   }
 
-  // Vu à nouveau : les places s’ajoutent, détaillées place par place.
-  function enBillets(r) {
-    if (r.billets && r.billets.length) return r.billets.map((b) => ({ ...b }));
-    const n = r.places || 1, u = num(r.prixPlace) != null ? num(r.prixPlace) : num(r.prix) != null ? num(r.prix) / n : null;
-    return Array.from({ length: n }, () => ({ pour: "", prix: u, ...(r.tarif ? { tarif: r.tarif } : {}), ...(r.categoriePlace ? { categoriePlace: r.categoriePlace } : {}) }));
-  }
+  // Vu à nouveau : les places de la nouvelle fois s’ajoutent aux précédentes.
   function cumuler(a, b) {
-    const billets = [...enBillets(a), ...enBillets(b)];
-    const out = { places: billets.length, billets, accompagnants: [...new Set([...(a.accompagnants || []), ...(b.accompagnants || [])])] };
-    if (a.tarif || b.tarif) out.tarif = b.tarif || a.tarif;
-    return out;
+    const billets = [...places(a), ...places(b)];
+    return { places: billets.length, billets, accompagnants: [...new Set(billets.map((x) => x.spectateur).filter((n) => n && !estMoi(n)))] };
   }
 
   /* ---------- Ajouter / modifier une sortie ---------- */
@@ -770,7 +766,9 @@
           for (const l of ok) {
             confirmeConflits(d, l.date, l.id, vus[l.id]);
             const prev = d.prive.reservations[l.id] || {};
-            d.prive.reservations[l.id] = { date: l.date, heure: l.heure, salle: l.salle, siege: l.siege, places: l.places, prixPlace: l.prixPlace, ...(l.tarif ? { tarif: l.tarif } : {}), accompagnants: prev.accompagnants || [], billetterie: prev.billetterie || "", note: prev.note || "" };
+            const autres = places(prev).filter((b) => !estMoi(b.spectateur));
+            const billets = Array.from({ length: l.places }, (_, k) => ({ spectateur: k === 0 ? "Moi" : autres[k - 1]?.spectateur || "", prix: l.prixPlace, paiement: k === 0 ? "moi" : autres[k - 1]?.paiement || "moi", ...(l.tarif ? { tarif: l.tarif } : {}) }));
+            d.prive.reservations[l.id] = { date: l.date, heure: l.heure, salle: l.salle, siege: l.siege, places: billets.length, billets, accompagnants: [...new Set(billets.map((b) => b.spectateur).filter((n) => n && !estMoi(n)))], billetterie: prev.billetterie || "", note: prev.note || "" };
             delete d.prive.envies[l.id];
             const s = d.affiche.sorties.find((x) => x.id === l.id); if (s) s.leonardYVa = true;
           }
@@ -844,10 +842,10 @@
 
   /* ---------- Budget ---------- */
   function depenses() {
-    const out = [];
-    for (const [id, r] of Object.entries(PRIVE.reservations)) out.push({ id, date: r.date, prix: totalPrix(r), plein: pleinTotal(r), places: nbPlaces(r), avenir: true });
-    for (const [id, j] of Object.entries(PRIVE.journalPrive)) { const e = BYID.get(id); out.push({ id, date: e && (e.vuLe || []).at(-1), prix: totalPrix(j), plein: pleinTotal(j), places: nbPlaces(j), avenir: false }); }
-    return out.map((x) => ({ ...x, cat: (BYID.get(x.id) || {}).categorie || "Autre" }));
+    const out = [], put = (id, date, r, avenir) => out.push({ id, date, avenir, c: comptes(r), places: nbPlaces(r), plein: pleinTotal(r), cat: (BYID.get(id) || {}).categorie || "Autre" });
+    for (const [id, r] of Object.entries(PRIVE.reservations)) put(id, r.date, r, true);
+    for (const [id, j] of Object.entries(PRIVE.journalPrive)) { const e = BYID.get(id); put(id, e && (e.vuLe || []).at(-1), j, false); }
+    return out;
   }
   function periode(p) {
     const y = TODAY.getMonth() >= 8 ? TODAY.getFullYear() : TODAY.getFullYear() - 1;
@@ -861,31 +859,41 @@
     const [a, b] = periode(BUDGET_P);
     const vus = (JOURNAL || []).filter((e) => (e.vuLe || []).some((x) => x >= a && x <= b)).length;
     const res = Object.values(PRIVE.reservations).filter((r) => r.date && r.date >= a && r.date <= b).length;
-    const L = depenses().filter((x) => x.date && x.date >= a && x.date <= b);
-    const P = L.filter((x) => x.prix != null);
-    const tot = P.reduce((s, x) => s + x.prix, 0), eco = P.filter((x) => x.plein != null).reduce((s, x) => s + (x.plein - x.prix), 0);
+    const L = depenses().filter((x) => x.date && x.date >= a && x.date <= b).sort((x, y) => x.date.localeCompare(y.date));
+    const P = L.filter((x) => x.c), S = (k) => P.reduce((s, x) => s + x.c[k], 0);
+    const engage = S("engage"), paye = S("paye"), benef = S("benef"), offert = S("offert"), nMoi = S("nMoi");
+    const eco = P.filter((x) => x.plein != null).reduce((s, x) => s + (x.plein - x.c.engage), 0);
     const parMois = {}, parCat = {};
-    P.forEach((x) => { const k = x.date.slice(0, 7); parMois[k] = (parMois[k] || 0) + x.prix; parCat[x.cat] = (parCat[x.cat] || 0) + x.prix; });
+    P.forEach((x) => { const k = x.date.slice(0, 7); parMois[k] = (parMois[k] || 0) + x.c.paye; parCat[x.cat] = (parCat[x.cat] || 0) + x.c.paye; });
     const barres = (rows) => { const mx = Math.max(1, ...rows.map((r) => r[1])); return `<div class="bars bars-e">${rows.map(([l, n]) => `<span class="bl">${esc(l)}</span><span class="bg" style="width:${Math.round((n / mx) * 100)}%" aria-hidden="true"></span><span class="bn">${esc(euros(n))}</span>`).join("")}</div>`; };
     const mois = Object.keys(parMois).sort().map((k) => [MOIS[+k.slice(5) - 1] + " " + k.slice(2, 4), parMois[k]]);
     const cats = Object.entries(parCat).sort((x, y) => y[1] - x[1]);
     const opts = [["saison", "Saison en cours"], ["prec", "Saison précédente"], ["annee", "Année civile"], ["12m", "12 derniers mois"], ["tout", "Tout"]];
+    const sansPrix = L.filter((x) => !x.c);
     return `<div class="tools"><label class="f" style="flex:1;margin:0"><span>Période</span>${sel("bp", opts, BUDGET_P).replace("<select", '<select id="bp"')}</label></div>
-    <div class="kpis"><div><b>${esc(euros(tot) || "0 €")}</b><span>dépensés</span></div><div><b>${P.length ? esc(euros(tot / P.reduce((s, x) => s + x.places, 0))) : "–"}</b><span>prix moyen par place</span></div><div><b>${vus + res}</b><span>sorties (${vus} vues, ${res} réservées)</span></div><div><b>${eco ? esc(euros(eco)) : "–"}</b><span>économies estimées</span></div></div>
-    <p class="cr">${plural(P.length, "sortie")} avec un prix connu sur ${L.length} (${plural(P.reduce((s, x) => s + x.places, 0), "place")}, y compris celles des accompagnants). Économies : seulement quand un plein tarif est saisi.</p>
-    <details class="box stats" open><summary>Par mois</summary>${mois.length ? barres(mois) : '<p class="cr" style="padding:0 12px">Aucune dépense sur la période.</p>'}</details>
-    <details class="box stats" open><summary>Par catégorie</summary>${cats.length ? barres(cats) : '<p class="cr" style="padding:0 12px">Aucune dépense sur la période.</p>'}</details>`;
+    <div class="kpis"><div><b>${esc(euros(engage) || "0 €")}</b><span>engagés (toutes les places)</span></div><div><b>${esc(euros(paye) || "0 €")}</b><span>payés par moi${offert ? `, dont ${esc(euros(offert))} offerts` : ""}</span></div><div><b>${esc(euros(benef) || "0 €")}</b><span>pour mon bénéfice (${plural(nMoi, "place")}${nMoi ? `, ${esc(euros(benef / nMoi))} en moyenne` : ""})</span></div><div><b>${vus + res}</b><span>sorties (${vus} vues, ${res} réservées)${eco ? ` · économies ${esc(euros(eco))}` : ""}</span></div></div>
+    <p class="cr">${plural(P.length, "sortie")} avec des prix sur ${L.length}. « Payés par moi » : mes places, plus celles que je paie ou offre à d’autres. « Pour mon bénéfice » : le prix de mes places.</p>
+    <details class="box stats" open><summary>Payé par moi, par mois</summary>${mois.length ? barres(mois) : '<p class="cr" style="padding:0 12px">Aucune dépense sur la période.</p>'}</details>
+    <details class="box stats"><summary>Payé par moi, par catégorie</summary>${cats.length ? barres(cats) : '<p class="cr" style="padding:0 12px">Aucune dépense sur la période.</p>'}</details>
+    <details class="box stats"><summary>Détail par sortie <span class="ml">${P.length}</span></summary><div style="padding:0 12px 10px;overflow-x:auto"><table class="t"><tr><th>Sortie</th><th>Engagé</th><th>Payé</th><th>Pour moi</th></tr>${P.map((x) => `<tr><td><a href="#sortie-${esc(x.id)}">${esc(titreDe(x.id))}</a><br><small class="cr">${esc(fmt(D(x.date)))}${x.avenir ? ", réservé" : ""}</small></td><td>${esc(euros(x.c.engage))}</td><td>${esc(euros(x.c.paye))}</td><td>${esc(euros(x.c.benef))}</td></tr>`).join("")}</table></div></details>
+    ${sansPrix.length ? `<details class="box"><summary>Sans prix <span class="ml">${sansPrix.length}</span></summary><ul class="vl">${sansPrix.map((x) => `<li><a href="#sortie-${esc(x.id)}"><span class="vd">${esc(fmt(D(x.date)))}</span><span class="vt"><b>${esc(titreDe(x.id))}</b></span></a></li>`).join("")}</ul></details>` : ""}`;
   }
 
   /* ---------- Accompagnants ---------- */
   function personnes() {
     const P = {};
-    const put = (n, id, date, avenir) => { const p = (P[n] ??= { nom: n, ids: new Set(), n: 0, dernier: null, prochain: null }); if (!p.ids.has(id)) { p.ids.add(id); p.n++; } if (date) { if (avenir && date >= todayISO()) { if (!p.prochain || date < p.prochain.date) p.prochain = { date, id }; } else if (!p.dernier || date > p.dernier.date) p.dernier = { date, id }; } };
-    for (const [id, r] of Object.entries(PRIVE.reservations)) (r.accompagnants || []).forEach((n) => put(n, id, r.date, true));
-    for (const [id, j] of Object.entries(PRIVE.journalPrive)) (j.accompagnants || []).forEach((n) => put(n, id, ((BYID.get(id) || {}).vuLe || []).at(-1), false));
+    const put = (b, id, date, avenir) => {
+      const n = b.spectateur; if (!n || estMoi(n)) return;
+      const p = (P[n] ??= { nom: n, ids: new Set(), n: 0, dernier: null, prochain: null, offert: 0, paye: 0 });
+      if (!p.ids.has(id)) { p.ids.add(id); p.n++; }
+      if (b.prix != null) { if (b.paiement === "offert") p.offert += b.prix; if (b.paiement === "moi") p.paye += b.prix; }
+      if (date) { if (avenir && date >= todayISO()) { if (!p.prochain || date < p.prochain.date) p.prochain = { date, id }; } else if (!p.dernier || date > p.dernier.date) p.dernier = { date, id }; }
+    };
+    for (const [id, r] of Object.entries(PRIVE.reservations)) places(r).forEach((b) => put(b, id, r.date, true));
+    for (const [id, j] of Object.entries(PRIVE.journalPrive)) places(j).forEach((b) => put(b, id, ((BYID.get(id) || {}).vuLe || []).at(-1), false));
     return Object.values(P).sort((a, b) => b.n - a.n || a.nom.localeCompare(b.nom, "fr"));
   }
-  function idsAvec(nom) { const s = new Set(); if (!PRIVE) return s; for (const [id, j] of Object.entries(PRIVE.journalPrive)) if ((j.accompagnants || []).includes(nom)) s.add(id); return s; }
+  function idsAvec(nom) { const s = new Set(); if (!PRIVE) return s; for (const [id, j] of Object.entries(PRIVE.journalPrive)) if (places(j).some((b) => b.spectateur === nom)) s.add(id); return s; }
   function accSelectHTML(v) {
     if (!PRIVE) return "";
     const p = personnes().filter((x) => x.dernier); if (!p.length) return "";
@@ -895,6 +903,7 @@
     const p = personnes();
     if (!p.length) return '<p class="empty">Aucun accompagnant enregistré pour l’instant.</p>';
     return `<div class="list">${p.map((x) => `<div class="ad"><h3>${esc(x.nom)} <small class="cr">${plural(x.n, "sortie")}</small></h3>
+      ${x.offert || x.paye ? `<p class="cr">${x.offert ? `Places offertes : ${esc(euros(x.offert))}` : ""}${x.offert && x.paye ? " · " : ""}${x.paye ? `payées par moi : ${esc(euros(x.paye))}` : ""}</p>` : ""}
       <p class="cr">${x.dernier ? `Dernière : <a href="#sortie-${esc(x.dernier.id)}">${esc(titreDe(x.dernier.id))}</a>, ${esc(fmtY(D(x.dernier.date)))}` : "Pas encore de sortie vue ensemble"}${x.prochain ? ` · Prochaine : <a href="#sortie-${esc(x.prochain.id)}">${esc(titreDe(x.prochain.id))}</a>, ${esc(fmt(D(x.prochain.date), true))}` : ""}</p>
       ${x.dernier ? `<button class="btn" type="button" data-javec="${esc(x.nom)}">Voir dans le journal</button>` : ""}</div>`).join("")}</div>`;
   }

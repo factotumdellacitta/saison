@@ -13,7 +13,7 @@ const ZONES = ["Paris", "Petite couronne", "Île-de-France", "Avignon", "Autre"]
 const STATUTS_LIEU = ["Public", "Privé"];
 // Clés interdites dans tout fichier public (données privées)
 const PRIVEES = new Set(["prix", "accompagnants", "places", "siege", "heure", "reserveLe", "icsToken",
-  "tarifPlein", "prixPlace", "pleinPlace", "billets", "categoriePlace", "envies", "journalPrive", "aCompleter", "priorite", "blocages", "jeton", "token"]);
+  "tarifPlein", "prixPlace", "pleinPlace", "billets", "categoriePlace", "spectateur", "paiement", "envies", "journalPrive", "aCompleter", "priorite", "blocages", "jeton", "token"]);
 
 const lire = (f) => {
   try { return JSON.parse(readFileSync(f, "utf8")); } catch (e) { erreurs.push(`${f} illisible : ${e.message}`); return null; }
