@@ -1,4 +1,4 @@
-/* Saison – interface publique (lots 2 et 3). Aucune dépendance. Le mode admin est dans assets/admin.js, chargé à la demande. */
+/* Factotum – interface publique (lots 2 et 3). Aucune dépendance. Le mode admin est dans assets/admin.js, chargé à la demande. */
 "use strict";
 const OWNER = "Léonard";
 const CATS = ["Théâtre", "Opéra", "Danse", "Comédie musicale", "Récital", "Concert", "Festival", "Exposition", "Cinéma", "Événement", "Sur scène", "Autre"];
@@ -107,9 +107,12 @@ function range(e) {
   if (+a === +b) return fmtY(a, true);
   return a.getFullYear() === b.getFullYear() ? fmt(a) + " – " + fmtY(b) : fmtY(a) + " – " + fmtY(b);
 }
+const NOTES_TXT = { 4: "incontournable", 3: "fortement recommandé", 2: "bon choix si disponible", 1: "curiosité" };
+// Note : quatre carrés (pleins jusqu’à la note), « P » en exposant pour une prévision.
 function stars(n, pro, label) {
   if (!n) return "";
-  return `<span class="st" role="img" aria-label="${label || "Note"} ${n} sur 4${pro ? ", pronostic" : ""}">${"★".repeat(n)}${pro ? "<sup>P</sup>" : ""}</span>`;
+  const lib = `${label ? label + " : " : ""}${n} sur 4${label ? "" : ", " + NOTES_TXT[n]}${pro ? ", prévision" : ""}`;
+  return `<span class="st" role="img" aria-label="${lib}">${[1, 2, 3, 4].map((i) => `<i${i <= n ? ' class="on"' : ""}></i>`).join("")}${pro ? '<sup aria-hidden="true">P</sup>' : ""}</span>`;
 }
 const booking = (e) => e.billetterie || lieu(e).billetterie || e.lien || lieu(e).site || "";
 const official = (e) => e.lien || lieu(e).site || "";
@@ -139,27 +142,31 @@ function stubHTML(e, mode) {
   }
   const p = span(e);
   if (!p) return `<span class="stub"><b>–</b><small>à venir</small></span>`;
-  if (running(e)) return `<span class="stub"><small>jusqu’au</small><b>${p[1].getDate()}</b><small>${MOIS[p[1].getMonth()]}</small></span>`;
+  if (running(e)) return `<span class="stub" title="jusqu’au ${fmtY(p[1])}"><small class="fin">fin<span class="vh"> le</span></small><b>${p[1].getDate()}</b><small>${MOIS[p[1].getMonth()]}</small></span>`;
   return `<span class="stub"><b>${p[0].getDate()}</b><small>${MOIS[p[0].getMonth()]}${p[0].getFullYear() !== TODAY.getFullYear() && p[0].getFullYear() !== TODAY.getFullYear() + 1 ? " " + p[0].getFullYear() : ""}</small></span>`;
 }
 function badges(e) {
   const b = [];
-  if (e.leonardYVa) b.push(`<span class="b yva" title="${OWNER} y va"><span class="vh">${OWNER} </span>Y va</span>`);
-  if (e.publicJeune) b.push(`<span class="b jeune" title="Adapté à un public jeune">Jeune<span class="vh"> public</span></span>`);
-  if (lastDays(e)) b.push(`<span class="b fin" title="Dernières dates">Fin<span class="vh"> proche, dernières dates</span></span>`);
-  if ((e.offres || []).length) b.push(`<span class="b offre" title="Offre jeune">Offre<span class="vh"> jeune</span></span>`);
+  if (e.leonardYVa) b.push(`<span class="b yva">${OWNER} y va</span>`);
+  if (e.publicJeune) b.push(`<span class="b">Public jeune</span>`);
+  if (lastDays(e)) b.push(`<span class="b">Dernières dates</span>`);
+  if ((e.offres || []).length) b.push(`<span class="b">Offre jeune</span>`);
   return b.length ? `<span class="bds">${b.join("")}</span>` : "";
 }
+// Artistes en tête de ligne : auteur, compositeur, mise en scène, chorégraphie, puis les autres ; trois au plus.
+const ORDRE_ART = ["auteur", "compositeur", "mise en scène", "chorégraphie", "direction musicale", "commissaire", "réalisation", "compagnie", "interprète", "artiste"];
+const artLigne = (e) => [...(e.artistes || [])].sort((a, b) => ORDRE_ART.indexOf(a.role) - ORDRE_ART.indexOf(b.role)).slice(0, 3).map((a) => a.nom).join(", ");
+const genre = (e) => e.categorie + (e.sousGenre ? " (" + e.sousGenre.toLowerCase() + ")" : "");
 function rowA(e) {
-  const sub = [court(e.lieuId), e.categorie + (e.sousGenre ? " (" + e.sousGenre.toLowerCase() + ")" : "")].filter(Boolean).join(" · ");
+  const meta = [court(e.lieuId), genre(e), e.horaires && e.horaires.length <= 40 ? e.horaires : ""].filter(Boolean).join(" · "), art = artLigne(e);
   return `<article class="row" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${esc(e.id)}">${stubHTML(e)}
-  <span class="mid"><span class="tt">${esc(e.titre)}</span><span class="ss">${esc(sub)}</span></span>
+  <span class="mid"><span class="tt nom">${esc(e.titre)}</span>${art ? `<span class="art nom">${esc(art)}</span>` : ""}<span class="ss">${esc(meta)}</span></span>
   <span class="end">${stars(e.note, e.pronostic)}${badges(e)}</span></button>${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}<div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
 }
 function rowJ(e) {
-  const sub = esc([court(e.lieuId), e.avis ? "" : e.categorie].filter(Boolean).join(" · ")) + (e.avis ? ` · <i>« ${esc(e.avis)} »</i>` : "");
+  const meta = [court(e.lieuId), genre(e)].filter(Boolean).join(" · ");
   return `<article class="row"><a class="rb" href="#sortie-${esc(e.id)}">${stubHTML(e, "vu")}
-  <span class="mid"><span class="tt">${esc(e.titre)}</span><span class="ss">${sub}</span></span>
+  <span class="mid"><span class="tt nom">${esc(e.titre)}</span>${e.avis ? `<span class="art">« ${esc(e.avis)} »</span>` : artLigne(e) ? `<span class="art nom">${esc(artLigne(e))}</span>` : ""}<span class="ss">${esc(meta)}</span></span>
   <span class="end">${e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : ""}</span></a></article>`;
 }
 function creditsHTML(e) {
@@ -209,13 +216,13 @@ function ficheCal(e) {
   for (let c = new Date(st.getFullYear(), st.getMonth(), 1); c <= p[1] && n < 6; c = new Date(c.getFullYear(), c.getMonth() + 1, 1), n++) {
     h += `<div class="cal mini"><div class="calh"><h3>${MOIS_L[c.getMonth()]} ${c.getFullYear()}</h3></div>` + monthGrid(c.getFullYear(), c.getMonth(), (d) => {
       const k = iso(d), on = playsOn(e, d) && d >= TODAY, busy = BUSY.has(k);
-      const cls = ["cell", on ? (busy ? "busy" : "play") : "", d < TODAY ? "past" : "", +d === +TODAY ? "today" : "", offers.has(k) ? "of" : ""].join(" ");
+      const cls = ["cell", on ? (busy ? "busy" : "play") : "", d < TODAY ? "past" : "", +d === +TODAY ? "today" : "", offers.has(k) ? "of" : "", (BUSY_SRC.reservations || []).includes(k) ? "va" : ""].filter(Boolean).join(" ");
       const lab = `${fmt(d, true)}${on ? (busy ? `, se joue, ${OWNER} pris` : `, se joue, ${OWNER} libre`) : ""}${offers.has(k) ? ", offre jeune" : ""}`;
       return `<div class="${cls}" role="img" aria-label="${lab}"><span class="n" aria-hidden="true">${d.getDate()}</span></div>`;
     }) + "</div>";
   }
-  return `<div class="mini-wrap">${h}</div><div class="legend"><span style="--sw:var(--play)">Se joue, ${OWNER} libre</span><span style="--sw:var(--busy)">${OWNER} pris</span><span class="dot" style="--sw:var(--accent)">Offre jeune</span></div>
-  <p class="cr" style="font-size:12px;margin-top:4px">Les relâches ne sont pas indiquées : vérifie le calendrier du lieu.</p>`;
+  return `<div class="mini-wrap">${h}</div><div class="legend"><span class="l-joue">Se joue, ${OWNER} libre</span><span class="l-pris">${OWNER} pris</span><span class="l-va">${OWNER} y va</span><span class="l-offre">Offre jeune</span><span class="l-auj">Aujourd’hui</span></div>
+  <p class="aide">Les relâches ne sont pas indiquées : vérifie le calendrier du lieu.</p>`;
 }
 
 /* ---------- Filtres de l’affiche (état dans l’URL) ---------- */
@@ -273,7 +280,7 @@ function activeList(f) {
   if (f.rac) lbl("rac", "", RAC[f.rac]);
   if (f.libre) lbl("libre", "", "Libre ce soir-là");
   f.cat.forEach((c) => lbl("cat", c, CATS.find((x) => slug(x) === c) || c));
-  if (f.note) lbl("note", "", f.note === 4 ? "★★★★" : f.note + "+ étoiles");
+  if (f.note) lbl("note", "", f.note === 4 ? "Note 4" : "Note " + f.note + " et +");
   f.zone.forEach((z) => lbl("zone", z, ZONES[z] || z));
   f.statut.forEach((s) => lbl("statut", s, STATUTS[s] || s));
   if (f.jeune) lbl("jeune", "", "Public jeune");
@@ -300,24 +307,25 @@ function renderAffiche(q) {
   let frise = "";
   for (let i = 0; i < 14; i++) {
     const d = add(TODAY, i), k = iso(d), busy = BUSY.has(k), n = LIVE.filter((e) => e.note >= 3 && playsOn(e, d)).length;
-    frise += `<button class="fd${busy ? " busy" : ""}${i === 0 ? " today" : ""}" type="button" data-jour="${k}" aria-pressed="false"><span class="dw">${i === 0 ? "auj." : JOURS[d.getDay()]}</span> <span class="dn">${d.getDate()}</span><span class="vh"> ${MOIS[d.getMonth()]}${busy ? `, ${OWNER} est pris` : ""}, </span>${n ? `<span class="pc">${n}</span><span class="vh"> ${n > 1 ? "sorties notées" : "sortie notée"} 3 étoiles ou plus</span>` : ""}</button>`;
+    const va = (BUSY_SRC.reservations || []).includes(k);
+    frise += `<button class="fd${busy ? " busy" : ""}${i === 0 ? " today" : ""}" type="button" data-jour="${k}" aria-pressed="false"><span class="dw">${i === 0 ? "auj." : JOURS[d.getDay()]}</span> <span class="dn">${d.getDate()}</span><span class="vh"> ${MOIS[d.getMonth()]}${va ? `, ${OWNER} y va` : busy ? `, ${OWNER} est pris` : ""}, </span>${va ? '<span class="pc" aria-hidden="true"></span>' : ""}${n ? `<span class="nb">${n}</span><span class="vh"> ${n > 1 ? "sorties notées" : "sortie notée"} 3 ou plus</span>` : ""}</button>`;
   }
   const chip = (g, v, t, extra = "") => `<button class="chip" type="button" data-g="${g}" data-v="${esc(v)}" aria-pressed="false"${extra}>${t}</button>`;
   $("#main").innerHTML = `<section id="aff"><h1 class="vh">À l’affiche</h1>
   <div class="frise" role="group" aria-label="Les 14 prochains jours">${frise}</div>
   <div class="tools"><div class="seg" role="group" aria-label="Affichage"><button type="button" data-vue="liste" aria-pressed="true">Liste</button><button type="button" data-vue="mois" aria-pressed="false">Mois</button></div>
-    <div class="chips" role="group" aria-label="Raccourcis">${Object.entries(RAC).map(([k, t]) => chip("rac", k, t)).join("")}${chip("libre", "1", "Libre ce soir-là")}</div></div>
-  <div class="fbar"><div class="chips" role="group" aria-label="Filtres">
-    <button class="chip" type="button" data-panel="pCat" aria-expanded="false" aria-controls="pCat">Catégorie <span id="nCat"></span> ▾</button>
-    ${chip("note", "2", "2+ ★")}${chip("note", "3", "3+ ★")}${chip("note", "4", "★★★★")}<span class="sep" aria-hidden="true"></span>
+    <div class="chips defile" role="group" aria-label="Raccourcis">${Object.entries(RAC).map(([k, t]) => chip("rac", k, t)).join("")}${chip("libre", "1", "Libre ce soir-là")}</div></div>
+  <div class="fbar"><div class="chips defile" role="group" aria-label="Filtres">
+    <button class="chip" type="button" data-panel="pCat" aria-expanded="false" aria-controls="pCat">Catégorie <span id="nCat"></span></button>
+    ${chip("note", "2", "Note 2 et +")}${chip("note", "3", "Note 3 et +")}${chip("note", "4", "Note 4")}<span class="sep" aria-hidden="true"></span>
     ${chip("zone", "paris", "Paris")}${chip("zone", "pc", "Petite couronne")}<span class="sep" aria-hidden="true"></span>
     ${chip("statut", "public", "Public")}${chip("statut", "prive", "Privé")}<span class="sep" aria-hidden="true"></span>
     ${chip("jeune", "1", "Public jeune")}${chip("offre", "1", "Offre jeune")}${chip("yva", "1", OWNER + " y va")}
-    <button class="chip" type="button" data-panel="pPlus" aria-expanded="false" aria-controls="pPlus">Plus ▾</button></div>
+    <button class="chip" type="button" data-panel="pPlus" aria-expanded="false" aria-controls="pPlus">Plus de filtres</button></div>
     <div class="fpanel" id="pCat" hidden><div class="chips wrap-ok" role="group" aria-label="Catégories">${cats.map((c) => chip("cat", slug(c), esc(c))).join("")}</div></div>
     <div class="fpanel" id="pPlus" hidden><div class="row2">
-      <label>Lieu<select id="fLieu"><option value="">Tous les lieux</option>${lieux.map((l) => `<option value="${esc(l)}">${esc(court(l))}</option>`).join("")}</select></label>
-      <label>Période<select id="fPer"><option value="">Toute la saison</option><option value="30">30 prochains jours</option>${months.map(([v, t]) => `<option value="${v}">${t}</option>`).join("")}</select></label></div></div>
+      <label class="f"><span>Lieu</span><select id="fLieu"><option value="">Tous les lieux</option>${lieux.map((l) => `<option value="${esc(l)}">${esc(court(l))}</option>`).join("")}</select></label>
+      <label class="f"><span>Période</span><select id="fPer"><option value="">Toute la saison</option><option value="30">30 prochains jours</option>${months.map(([v, t]) => `<option value="${v}">${t}</option>`).join("")}</select></label></div></div>
     <div class="active" id="active" aria-live="polite"></div></div>
   <div id="monthBox"></div>
   <details class="box" id="ventes"><summary>Ventes à venir <span class="ml" id="vNext"></span></summary><ul class="vl" id="vList"></ul></details>
@@ -364,7 +372,7 @@ function updateAffiche() {
   let items = LIVE.filter((e) => matchA(e, f, f.vue === "mois" && !f.jour));
   if (f.vue === "mois" && !f.jour) { const c = monthCursor(f); items = items.filter((e) => overlaps(e, c, new Date(c.getFullYear(), c.getMonth() + 1, 0))); }
   const act = activeList(f);
-  $("#active").innerHTML = `<span class="n">${plural(items.length, "sortie")}</span>${act.map((a) => `<button class="chip" type="button" data-rm="${a.k}" data-v="${esc(a.v)}" aria-label="Retirer le filtre ${esc(a.t)}">${esc(a.t)}<span class="x" aria-hidden="true">×</span></button>`).join("")}${act.length ? `<button class="linkbtn" type="button" id="clear">Effacer</button>` : ""}<button class="linkbtn ml" type="button" id="tri" title="Changer le tri">Tri : ${f.tri === "note" ? "note" : "date"}</button>`;
+  $("#active").innerHTML = `<span class="n">${plural(items.length, "sortie")}</span>${act.map((a) => `<button class="chip on" type="button" data-rm="${a.k}" data-v="${esc(a.v)}" aria-label="Retirer le filtre ${esc(a.t)}">${esc(a.t)}<span class="x" aria-hidden="true">×</span></button>`).join("")}${act.length ? `<button class="chip effacer" type="button" id="clear">Tout effacer</button>` : ""}<button class="linkbtn ml" type="button" id="tri" title="Changer le tri">Tri : ${f.tri === "note" ? "note" : "date"}</button>`;
   $("#active").onclick = (ev) => {
     const r = ev.target.closest("[data-rm]");
     if (r) return setF((x) => { const k = r.dataset.rm; if (x[k] instanceof Set) x[k].delete(r.dataset.v); else x[k] = typeof x[k] === "boolean" ? false : typeof x[k] === "number" ? 0 : ""; });
@@ -384,14 +392,14 @@ function updateAffiche() {
   const L = $("#alist"), w = window_(f);
   const byDate = (a, b) => sortKey(a) - sortKey(b) || a.titre.localeCompare(b.titre, "fr");
   let html = "";
-  if (f.jour) { const d = D(f.jour); html += `<h2 class="mh">${cap(fmt(d, true))} ${d.getFullYear()}${BUSY.has(f.jour) ? ` <small class="warn">${OWNER} est pris ce soir-là</small>` : ""}</h2>`; }
+  if (f.jour) { const d = D(f.jour); html += `<h2 class="jour">${cap(fmt(d, true))} ${d.getFullYear()}${BUSY.has(f.jour) ? ` <small>${OWNER} est pris ce soir-là</small>` : ""}</h2>`; }
   if (!items.length) html += `<p class="empty">Aucune sortie ne correspond. Retire un filtre ou élargis la période.</p>`;
   else if (f.tri === "note" || w) html += items.sort((a, b) => b.note - a.note || byDate(a, b)).map(rowA).join("");
   else {
     items.sort(byDate); let last = null;
     for (const e of items) {
       const g = groupOf(e);
-      if (g !== last) { html += `<h2 class="mh">${g}</h2>`; last = g; }
+      if (g !== last) { html += `<h2 class="jour">${g} <small>${plural(items.filter((x) => groupOf(x) === g).length, "sortie")}</small></h2>`; last = g; }
       html += rowA(e);
     }
   }
@@ -409,12 +417,12 @@ function monthHTML(f) {
   const base = LIVE.filter((e) => matchA(e, f, true));
   const prem = new Set(), offs = new Set();
   base.forEach((e) => { if (e.note >= 3 && e.debut) prem.add(e.debut); (e.offres || []).forEach((o) => o.date && offs.add(o.date)); });
-  return `<div class="cal"><div class="calh"><button class="btn" type="button" data-mnav="-1" aria-label="Mois précédent">‹</button><h2>${MOIS_L[m]} ${y}</h2><button class="btn" type="button" data-mnav="1" aria-label="Mois suivant">›</button></div>` +
+  return `<div class="cal"><div class="calh"><button class="btn" type="button" data-mnav="-1" aria-label="Mois précédent">Préc.</button><h2>${MOIS_L[m]} ${y}</h2><button class="btn" type="button" data-mnav="1" aria-label="Mois suivant">Suiv.</button></div>` +
     monthGrid(y, m, (d) => {
       const k = iso(d), busy = BUSY.has(k), n = base.filter((e) => e.note >= 3 && playsOn(e, d)).length;
-      const dots = (prem.has(k) ? '<i aria-hidden="true"></i>' : "") + (offs.has(k) ? '<i class="o" aria-hidden="true"></i>' : "");
-      return `<button type="button" class="cell${busy ? " busy" : ""}${+d === +TODAY ? " today" : ""}${d < TODAY ? " past" : ""}" data-day="${k}" aria-pressed="${f.jour === k}"><span class="n">${d.getDate()}</span><span class="vh"> ${MOIS[m]}${busy ? `, ${OWNER} pris` : ""}, </span>${n ? `<span class="pc">${n}</span><span class="vh"> ${n > 1 ? "sorties" : "sortie"} 3 étoiles ou plus</span>` : ""}${prem.has(k) ? '<span class="vh">, une première</span>' : ""}${offs.has(k) ? '<span class="vh">, une offre jeune</span>' : ""}<span class="dots">${dots}</span></button>`;
-    }) + `<div class="legend"><span style="--sw:var(--accent)">Nombre de sorties 3★ et plus</span><span class="dot" style="--sw:var(--accent)">Première</span><span class="dot" style="--sw:var(--ok)">Offre jeune</span><span style="--sw:var(--busy)">${OWNER} pris</span></div></div>`;
+      const va = (BUSY_SRC.reservations || []).includes(k);
+      return `<button type="button" class="cell${busy ? " busy" : ""}${+d === +TODAY ? " today" : ""}${d < TODAY ? " past" : ""}${va ? " va" : offs.has(k) ? " of" : ""}" data-day="${k}" aria-pressed="${f.jour === k}"><span class="n">${d.getDate()}</span><span class="vh"> ${MOIS[m]}${va ? `, ${OWNER} y va` : busy ? `, ${OWNER} pris` : ""}, </span>${n ? `<span class="nb">${n}</span><span class="vh"> ${n > 1 ? "sorties" : "sortie"} notées 3 ou plus</span>` : ""}${prem.has(k) ? '<span class="vh">, une première</span>' : ""}${offs.has(k) ? '<span class="vh">, une offre jeune</span>' : ""}</button>`;
+    }) + `<div class="legend"><span class="l-nb">Chiffre : sorties notées 3 et plus</span><span class="l-pris">${OWNER} pris</span><span class="l-va">${OWNER} y va</span><span class="l-offre">Offre jeune</span><span class="l-auj">Aujourd’hui</span></div></div>`;
 }
 
 /* ---------- Fiche ---------- */
@@ -424,12 +432,12 @@ async function openSheet(id) {
   if (!e) { try { await loadJournal(); } catch (_) {} e = BYID.get(id); }
   const box = $("#sheetIn");
   if (!e) {
-    box.innerHTML = `<div class="shtop"><button class="btn ico" type="button" data-close aria-label="Fermer">×</button><span class="k"></span></div><h2 id="sheetT" class="ph">Sortie introuvable</h2><p class="empty">Cette fiche n’existe plus ou a changé d’adresse.</p>`;
+    box.innerHTML = `<div class="shtop"><button class="btn" type="button" data-close>Fermer</button><span class="k"></span></div><h2 id="sheetT" class="mh">Sortie introuvable</h2><p class="empty">Cette fiche n’existe plus ou a changé d’adresse.</p>`;
   } else {
     const vu = e.statut === "vu", L = lieu(e), c = creditsHTML(e);
-    box.innerHTML = `<div class="shtop"><button class="btn ico" type="button" data-close aria-label="Fermer">×</button><span class="k">${esc([e.categorie, e.sousGenre].filter(Boolean).join(" · "))}${L.nom ? " · " + esc(court(e.lieuId)) : ""}</span><button class="btn" type="button" data-share="${esc(e.id)}">Partager</button></div>
-    <div class="shh">${stubHTML(e, vu ? "vu" : "")}<div class="mid"><h2 id="sheetT">${esc(e.titre)}</h2>
-      <span class="ss">${vu ? "Vu" : ""}${!vu && e.note ? stars(e.note, e.pronostic) + (e.pronostic ? " <small>pronostic, pas encore critiqué</small>" : "") : ""}</span>${badges(e)}</div></div>
+    box.innerHTML = `<div class="shtop"><button class="btn" type="button" data-close>Fermer</button><span class="k">${esc([e.categorie, e.sousGenre].filter(Boolean).join(" · "))}${L.nom ? " · " + esc(court(e.lieuId)) : ""}</span><button class="btn" type="button" data-share="${esc(e.id)}">Partager</button></div>
+    <div class="shh"><span class="meta">${esc(vu ? "Vu le " + (e.vuLe || []).map((d) => fmtY(D(d))).join(", ") : range(e))}</span><h2 id="sheetT" class="nom">${esc(e.titre)}</h2>
+      <div class="ligne">${!vu && e.note ? stars(e.note, e.pronostic) + (e.pronostic ? ' <span class="ss">prévision, pas encore critiqué</span>' : "") : ""}${vu && e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : ""}${badges(e)}</div></div>
     ${c ? `<p class="cr">${c}</p>` : ""}
     <dl class="dl"><dt>Lieu</dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}${L.ville && L.ville !== "Paris" ? " (" + esc(L.ville) + ")" : ""}</dd>
     ${vu ? `<dt>Vu le</dt><dd>${(e.vuLe || []).map((d) => fmtY(D(d), true)).join(", ")}</dd>` : `<dt>Dates</dt><dd>${esc(range(e))}</dd>`}
@@ -443,11 +451,11 @@ async function openSheet(id) {
   const s = $("#sheet");
   if (s.hidden) { SHEET_FROM = document.activeElement; s.hidden = false; document.documentElement.style.overflow = "hidden"; }
   box.scrollTop = 0; box.focus();
-  document.title = (e ? e.titre + " · " : "") + "Saison";
+  document.title = (e ? e.titre + " – " : "") + "Factotum";
 }
 function closeSheet() {
   const s = $("#sheet"); if (s.hidden) return;
-  s.hidden = true; document.documentElement.style.overflow = ""; document.title = "Saison 2026–2027 · Léonard";
+  s.hidden = true; document.documentElement.style.overflow = ""; document.title = TITRE_VUE || "Factotum";
   if (SHEET_FROM && document.contains(SHEET_FROM)) SHEET_FROM.focus({ preventScroll: true });
 }
 function requestClose() {
@@ -467,58 +475,70 @@ document.addEventListener("keydown", (ev) => {
 });
 
 /* ---------- Journal ---------- */
+const saisonLib = (cle) => "Saison " + saisonDe(new Date(+cle, 9, 1)).court;
 function renderJournal(q) {
   const p = new URLSearchParams(q || ""), L = (k) => new Set((p.get(k) || "").split(",").filter(Boolean));
-  const f = { cat: L("cat"), an: L("an"), mn: L("mn"), tri: p.get("tri") === "note" ? "note" : "date" };
+  const f = { cat: L("cat"), sa: L("sa"), mn: L("mn"), tri: p.get("tri") === "note" ? "note" : "date" };
   const all = JOURNAL.filter((e) => (e.vuLe || []).length);
-  const last = (e) => e.vuLe.at(-1);
-  const cats = CATS.filter((c) => all.some((e) => e.categorie === c));
-  const ans = [...new Set(all.map((e) => last(e).slice(0, 4)))].sort().reverse();
+  const last = (e) => e.vuLe.at(-1), sOf = (e) => saisonDe(D(last(e))).cle;
+  const saisons = [...new Set(all.map(sOf))].sort().reverse();
+  const parSaison = all.filter((e) => !f.sa.size || f.sa.has(sOf(e)));
+  const cats = CATS.filter((c) => parSaison.some((e) => e.categorie === c));
   if (!PRIVE || !ADMIN) JAVEC = "";
   const avec = JAVEC ? ADMIN.idsAvec(JAVEC) : null;
-  const items = all.filter((e) => (!f.cat.size || f.cat.has(slug(e.categorie))) && (!f.an.size || f.an.has(last(e).slice(0, 4))) && (!f.mn.size || f.mn.has(String(e.noteLeonard || 0))) && (!avec || avec.has(e.id)));
+  const items = parSaison.filter((e) => (!f.cat.size || f.cat.has(slug(e.categorie))) && (!f.mn.size || f.mn.has(String(e.noteLeonard || 0))) && (!avec || avec.has(e.id)));
   items.sort(f.tri === "note" ? (a, b) => (b.noteLeonard || 0) - (a.noteLeonard || 0) || last(b).localeCompare(last(a)) : (a, b) => last(b).localeCompare(last(a)) || a.titre.localeCompare(b.titre, "fr"));
-  const chip = (g, v, t) => `<a class="chip" href="#journal?${esc(jq(f, g, v))}" data-k="${g}-${esc(v)}" aria-pressed="${f[g].has(v)}" role="button">${t}</a>`;
-  let list = "", lastY = "";
-  for (const e of items) { const y = last(e).slice(0, 4); if (f.tri === "date" && y !== lastY) { list += `<h2 class="mh">${y} <small>${plural(items.filter((x) => last(x).startsWith(y)).length, "sortie")}</small></h2>`; lastY = y; } list += rowJ(e); }
-  const nAct = f.cat.size + f.an.size + f.mn.size;
+  const chip = (g, v, t, on = f[g].has(v)) => `<a class="chip" href="#journal?${esc(jq(f, g, v))}" data-k="${g}-${esc(v)}" aria-pressed="${on}" role="button">${t}</a>`;
+  let list = "", lastS = "";
+  for (const e of items) {
+    const sa = sOf(e);
+    if (f.tri === "date" && sa !== lastS) { list += `<h2 class="jour">${saisonLib(sa)} <small>${plural(items.filter((x) => sOf(x) === sa).length, "sortie")}</small></h2>`; lastS = sa; }
+    list += rowJ(e);
+  }
+  const nAct = f.cat.size + f.sa.size + f.mn.size;
   const accSel = PRIVE && ADMIN ? ADMIN.accSelectHTML(JAVEC) : "";
-  $("#main").innerHTML = `<div class="ph"><h1>Journal</h1><p>${plural(all.length, "sortie vue", "sorties vues")} par ${OWNER}${JMAJ ? ", à jour au " + fmtY(D(JMAJ)) : ""}.</p></div>
-  <details class="box stats"><summary>Statistiques</summary>${statsHTML(all)}</details>
-  <div class="fbar"><div class="chips" role="group" aria-label="Filtres du journal">${cats.map((c) => chip("cat", slug(c), esc(c))).join("")}<span class="sep" aria-hidden="true"></span>${ans.map((y) => chip("an", y, y)).join("")}<span class="sep" aria-hidden="true"></span>${[4, 3, 2, 1].map((n) => chip("mn", String(n), "★".repeat(n))).join("")}${chip("mn", "0", "Sans note")}</div>
-  <div class="active"><span class="n">${plural(items.length, "sortie")}</span>${nAct ? `<a class="linkbtn" href="#journal${f.tri === "note" ? "?tri=note" : ""}">Effacer</a>` : ""}<a class="linkbtn ml" href="#journal?${esc(jq(f, "tri", f.tri === "note" ? "date" : "note"))}">Tri : ${f.tri === "note" ? "ma note" : "date"}</a></div>${accSel}</div>
+  const libS = f.sa.size === 1 ? saisonLib([...f.sa][0]) : f.sa.size ? plural(f.sa.size, "saison") : "Toutes les saisons";
+  $("#main").innerHTML = `<div class="ph"><h1>Journal</h1><p>${plural(all.length, "sortie vue", "sorties vues")} par ${OWNER}${JMAJ ? ", à jour au " + fmtY(D(JMAJ)) : ""}</p></div>
+  <div class="chips" role="group" aria-label="Saison">${chip("sa", "*", "Toutes les saisons", !f.sa.size)}${saisons.map((y) => chip("sa", y, saisonLib(y))).join("")}</div>
+  <details class="box stats"><summary>Statistiques · ${esc(libS)}</summary>${statsHTML(parSaison, !f.sa.size)}</details>
+  <div class="fbar"><div class="chips defile" role="group" aria-label="Filtres du journal">${cats.map((c) => chip("cat", slug(c), esc(c))).join("")}<span class="sep" aria-hidden="true"></span>${[4, 3, 2, 1].map((n) => chip("mn", String(n), "Ma note " + n)).join("")}${chip("mn", "0", "Sans note")}</div>
+  <div class="active"><span class="n">${plural(items.length, "sortie")}</span>${nAct ? `<a class="chip effacer" href="#journal${f.tri === "note" ? "?tri=note" : ""}">Tout effacer</a>` : ""}<a class="linkbtn ml" href="#journal?${esc(jq(f, "tri", f.tri === "note" ? "date" : "note"))}">Tri : ${f.tri === "note" ? "ma note" : "date"}</a></div>${accSel}</div>
   <div class="list">${list || '<p class="empty">Aucune sortie ne correspond.</p>'}</div>`;
   const as = $("#jAvec"); if (as) as.onchange = () => { JAVEC = as.value; renderJournal(q); };
 }
 function jq(f, g, v) {
-  const n = { cat: new Set(f.cat), an: new Set(f.an), mn: new Set(f.mn), tri: f.tri };
-  if (g === "tri") n.tri = v; else n[g].has(v) ? n[g].delete(v) : n[g].add(v);
-  const p = []; for (const k of ["cat", "an", "mn"]) if (n[k].size) p.push(k + "=" + [...n[k]].map(encodeURIComponent).join(","));
+  const n = { cat: new Set(f.cat), sa: new Set(f.sa), mn: new Set(f.mn), tri: f.tri };
+  if (g === "tri") n.tri = v; else if (v === "*") n[g].clear(); else n[g].has(v) ? n[g].delete(v) : n[g].add(v);
+  const p = []; for (const k of ["sa", "cat", "mn"]) if (n[k].size) p.push(k + "=" + [...n[k]].map(encodeURIComponent).join(","));
   if (n.tri === "note") p.push("tri=note");
   return p.join("&");
 }
 function bars(rows) {
   const max = Math.max(1, ...rows.map((r) => r[1]));
-  return `<div class="bars">${rows.map(([l, n, href]) => `<span class="bl">${href ? `<a href="${href}">${esc(l)}</a>` : esc(l)}</span><span class="bg" style="width:${Math.round((n / max) * 100)}%" aria-hidden="true"></span><span class="bn">${n}</span>`).join("")}</div>`;
+  return `<div class="bars">${rows.map(([l, n, href]) => `<span class="bl">${href ? `<a href="${href}">${esc(l)}</a>` : esc(l)}</span><span class="bg" style="--v:${Math.round((n / max) * 100)}" aria-hidden="true"></span><span class="bn">${n}</span>`).join("")}</div>`;
 }
-function statsHTML(all) {
+function statsHTML(all, toutes) {
   const count = (fn) => { const o = new Map(); all.forEach((e) => [].concat(fn(e)).forEach((k) => k != null && k !== "" && o.set(k, (o.get(k) || 0) + 1))); return [...o]; };
-  const years = count((e) => e.vuLe.at(-1).slice(0, 4)).sort((a, b) => b[0].localeCompare(a[0]));
+  if (!all.length) return '<p class="empty">Aucune sortie vue sur cette période.</p>';
+  const saisons = count((e) => saisonDe(D(e.vuLe.at(-1))).cle).sort((a, b) => b[0].localeCompare(a[0])).map(([k, n]) => [saisonLib(k), n]);
   const cats = count((e) => e.categorie).sort((a, b) => b[1] - a[1]);
-  const lx = count((e) => e.lieuId).sort((a, b) => b[1] - a[1] || norm(court(a[0])).localeCompare(norm(court(b[0])))).slice(0, 5).map(([id, n]) => [court(id) || id, n, "#lieu-" + id]);
+  const lxAll = count((e) => e.lieuId);
+  const lx = lxAll.sort((a, b) => b[1] - a[1] || norm(court(a[0])).localeCompare(norm(court(b[0])))).slice(0, 5).map(([id, n]) => [court(id) || id, n, "#lieu-" + id]);
   const ar = count((e) => [...new Set((e.artistes || []).map((a) => a.nom))]).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "fr")).slice(0, 5).map(([nm, n]) => [nm, n, "#artiste-" + slug(nm)]);
-  const notes = [4, 3, 2, 1].map((n) => ["★".repeat(n), all.filter((e) => e.noteLeonard === n).length]).concat([["Sans note", all.filter((e) => !e.noteLeonard).length]]);
+  const notes = [4, 3, 2, 1].map((n) => [n + " – " + NOTES_TXT[n], all.filter((e) => e.noteLeonard === n).length]).concat([["Sans note", all.filter((e) => !e.noteLeonard).length]]);
+  const notees = all.filter((e) => e.noteLeonard), moy = notees.length ? (notees.reduce((s, e) => s + e.noteLeonard, 0) / notees.length).toFixed(1).replace(".", ",") : "–";
   const both = all.filter((e) => e.noteLeonard && e.note);
-  const cmp = both.length ? `<table class="t"><tr><th>Sortie</th><th>Ma note</th><th>Grille</th><th>Écart</th></tr>${both.map((e) => `<tr><td><a href="#sortie-${esc(e.id)}">${esc(e.titre)}</a></td><td>${e.noteLeonard}</td><td>${e.note}</td><td>${e.noteLeonard - e.note > 0 ? "+" : ""}${e.noteLeonard - e.note}</td></tr>`).join("")}</table><p class="cr">Écart moyen : ${(both.reduce((s, e) => s + e.noteLeonard - e.note, 0) / both.length).toFixed(1)}</p>` : `<p class="cr">Pas encore de sortie avec à la fois ma note et une note de la grille.</p>`;
-  return `<h2>Par année</h2>${bars(years)}<h2>Par catégorie</h2>${bars(cats)}<h2>Lieux les plus fréquentés</h2>${bars(lx)}<h2>Artistes les plus vus</h2>${bars(ar)}<h2>Mes notes</h2>${bars(notes)}<h2>Ma note et la grille</h2><div style="padding:0 12px 10px">${cmp}</div>`;
+  const cmp = both.length ? `<table class="t pile"><thead><tr><th>Sortie</th><th class="num">Ma note</th><th class="num">Grille</th><th class="num">Écart</th></tr></thead><tbody>${both.map((e) => `<tr><td><a href="#sortie-${esc(e.id)}">${esc(e.titre)}</a></td><td class="num" data-l="Ma note">${e.noteLeonard}</td><td class="num" data-l="Grille">${e.note}</td><td class="num" data-l="Écart">${e.noteLeonard - e.note > 0 ? "+" : e.noteLeonard - e.note < 0 ? "−" : ""}${Math.abs(e.noteLeonard - e.note)}</td></tr>`).join("")}</tbody></table><p class="cr">Écart moyen : ${(both.reduce((s, e) => s + e.noteLeonard - e.note, 0) / both.length).toFixed(1).replace(".", ",").replace("-", "−")}</p>` : `<p class="cr">Pas encore de sortie avec à la fois ma note et une note de la grille.</p>`;
+  return `<div class="kpis"><div><b>${all.length}</b><span>${all.length > 1 ? "sorties vues" : "sortie vue"}</span></div><div><b>${lxAll.length}</b><span>${lxAll.length > 1 ? "lieux" : "lieu"}</span></div><div><b>${count((e) => (e.artistes || []).map((a) => a.nom)).length}</b><span>artistes</span></div><div><b>${moy}</b><span>ma note moyenne</span></div></div>
+  ${toutes ? `<h3>Par saison</h3>${bars(saisons)}` : ""}<h3>Par catégorie</h3>${bars(cats)}<h3>Lieux les plus fréquentés</h3>${bars(lx)}<h3>Artistes les plus vus</h3>${bars(ar)}<h3>Mes notes</h3>${bars(notes)}<h3>Ma note et la grille</h3>${cmp}`;
 }
 
 /* ---------- Artistes & lieux ---------- */
 let ALQ = "";
 function renderAL(which) {
-  $("#main").innerHTML = `<div class="ph"><h1>Artistes &amp; lieux</h1></div>
+  $("#main").innerHTML = `<div class="ph"><h1>Artistes et lieux</h1></div>
   <div class="tools"><nav class="seg" aria-label="Index"><a href="#artistes"${which === "artistes" ? ' aria-current="page"' : ""}>Artistes</a><a href="#lieux"${which === "lieux" ? ' aria-current="page"' : ""}>Lieux</a></nav>
-  <input type="search" id="alq" placeholder="Rechercher un nom" aria-label="Rechercher un ${which === "lieux" ? "lieu" : "artiste"}" value="${esc(ALQ)}" style="flex:1"></div><div id="alist"></div>`;
+  <input type="search" id="alq" placeholder="Rechercher un nom" aria-label="Rechercher un ${which === "lieux" ? "lieu" : "artiste"}" value="${esc(ALQ)}" class="flex1" enterkeyhint="search" autocomplete="off"></div><div id="alist"></div>`;
   const draw = () => {
     const q = norm(ALQ).trim(); let h = "";
     if (which === "artistes") {
@@ -544,24 +564,24 @@ const byStart = (a, b) => sortKey(a) - sortKey(b);
 const byVu = (a, b) => (b.vuLe || []).at(-1).localeCompare((a.vuLe || []).at(-1));
 function renderArtiste(k) {
   const a = artistes()[k];
-  if (!a) { $("#main").innerHTML = `<a class="back" href="#artistes">‹ Artistes &amp; lieux</a><p class="empty">Artiste inconnu.</p>`; return; }
+  if (!a) { $("#main").innerHTML = `<a class="back" href="#artistes">Artistes et lieux</a><p class="empty">Artiste inconnu.</p>`; return; }
   const aff = a.aff.filter((e) => !ended(e)).sort(byStart), vus = a.vus.slice().sort(byVu);
-  $("#main").innerHTML = `<a class="back" href="#artistes">‹ Artistes &amp; lieux</a><div class="ph"><h1>${esc(a.nom)}</h1><p>${esc(cap(ROLES.filter((r) => a.roles.has(r)).join(", ")))} · ${plural(aff.length, "sortie")} à l’affiche, ${plural(vus.length, "vue", "vues")}</p></div>
+  $("#main").innerHTML = `<a class="back" href="#artistes">Artistes et lieux</a><div class="ph"><h1>${esc(a.nom)}</h1><p>${esc(cap(ROLES.filter((r) => a.roles.has(r)).join(", ")))} · ${plural(aff.length, "sortie")} à l’affiche, ${plural(vus.length, "vue", "vues")}</p></div>
   <h2 class="mh">À l’affiche</h2><div class="list">${aff.map(rowA).join("") || '<p class="empty">Rien à l’affiche en ce moment.</p>'}</div>
   <h2 class="mh">Vu</h2><div class="list">${vus.map(rowJ).join("") || '<p class="empty">Pas encore vu.</p>'}</div>`;
-  document.title = a.nom + " · Saison";
+  document.title = a.nom + " – Factotum";
 }
 function renderLieu(id) {
   const L = LIEUX[id];
-  if (!L) { $("#main").innerHTML = `<a class="back" href="#lieux">‹ Artistes &amp; lieux</a><p class="empty">Lieu inconnu.</p>`; return; }
+  if (!L) { $("#main").innerHTML = `<a class="back" href="#lieux">Artistes et lieux</a><p class="empty">Lieu inconnu.</p>`; return; }
   const aff = AFF.filter((e) => e.lieuId === id && e.statut === "a-voir" && !ended(e)).sort(byStart);
   const vus = (JOURNAL || []).filter((e) => e.lieuId === id).sort(byVu);
   const ext = (u, t) => u ? `<a href="${esc(u)}" target="_blank" rel="noopener">${t}</a>` : "";
-  $("#main").innerHTML = `<a class="back" href="#lieux">‹ Artistes &amp; lieux</a><div class="ph"><h1>${esc(L.nom)}</h1><p>${esc([L.ville, L.zone !== L.ville ? L.zone : ""].filter(Boolean).join(", "))} · lieu ${L.statut === "Public" ? "public" : "privé"}</p></div>
+  $("#main").innerHTML = `<a class="back" href="#lieux">Artistes et lieux</a><div class="ph"><h1>${esc(L.nom)}</h1><p>${esc([L.ville, L.zone !== L.ville ? L.zone : ""].filter(Boolean).join(", "))} · lieu ${L.statut === "Public" ? "public" : "privé"}</p></div>
   <dl class="dl inl">${L.tarifJeune ? `<dt>Tarif jeune</dt><dd>${esc(L.tarifJeune)}</dd>` : ""}${L.adresse ? `<dt>Adresse</dt><dd>${esc(L.adresse)}</dd>` : ""}${L.site ? `<dt>Site</dt><dd>${ext(L.site, esc(L.site.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")))}</dd>` : ""}${L.billetterie ? `<dt>Billetterie</dt><dd>${ext(L.billetterie, "Acheter des places")}</dd>` : ""}</dl>
   <h2 class="mh">À l’affiche <small>${aff.length}</small></h2><div class="list">${aff.map(rowA).join("") || '<p class="empty">Rien à l’affiche ici en ce moment.</p>'}</div>
   <h2 class="mh">Vu ici <small>${vus.length}</small></h2><div class="list">${vus.map(rowJ).join("") || '<p class="empty">Pas encore de sortie vue ici.</p>'}</div>`;
-  document.title = L.nom + " · Saison";
+  document.title = L.nom + " – Factotum";
 }
 
 /* ---------- Liens utiles ---------- */
@@ -569,19 +589,18 @@ const icsURL = (k) => `webcal://${location.host}${location.pathname.replace(/[^/
 const ORDRE_LIENS = ["Cartes et tarifs jeunes", "Calendriers de vente", "Billetteries", "Outils"];
 const INFO_LIENS = { "Cartes et tarifs jeunes": "Abonnements et offres pour les moins de 28 ans", "Calendriers de vente": "Programmations et ouvertures des ventes, lieu par lieu", Billetteries: "Acheter des places, par lieu", Outils: "" };
 const hote = (u) => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch (_) { return ""; } };
-const EXT = '<svg class="ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>';
 // Liens rangés par rubrique, dans l’ordre du fichier à l’intérieur de chaque rubrique.
 const liensParRubrique = (L) => ORDRE_LIENS.map((c) => [c, L.filter((l) => l.categorie === c)]);
 function renderLiens() {
   const groups = liensParRubrique(LIENS).filter(([, l]) => l.length);
   const ve = prochainesVentes(8);
-  const item = (x) => `<li data-q="${esc(norm(x.titre + " " + hote(x.url) + " " + (x.note || "")))}"><a href="${esc(x.url)}" target="_blank" rel="noopener"><span class="lt"><b>${esc(x.titre)}</b><small>${esc(hote(x.url))}${x.note ? " · " + esc(x.note) : ""}</small></span>${EXT}</a></li>`;
+  const item = (x) => `<li data-q="${esc(norm(x.titre + " " + hote(x.url) + " " + (x.note || "")))}"><a href="${esc(x.url)}" target="_blank" rel="noopener"><span class="lt"><b>${esc(x.titre)}</b><small>${esc(hote(x.url))}${x.note ? " · " + esc(x.note) : ""}</small></span><span class="vh"> (nouvel onglet)</span></a></li>`;
   const section = ([c, l]) => `<section class="lks" id="lk-${slug(c)}"><h2 class="mh">${esc(c)} <small>${l.length}</small></h2>${INFO_LIENS[c] ? `<p class="cr lkd">${esc(INFO_LIENS[c])}</p>` : ""}<ul class="lk${l.length > 6 ? " lk2" : ""}">${l.map(item).join("")}</ul></section>`;
-  const ventes = `<section class="lks" id="lk-ventes"><h2 class="mh">Prochaines ouvertures de ventes</h2><div class="box" style="background:var(--card);border:1px solid var(--line);border-radius:10px"><ul class="vl" style="padding-top:0">${ve.map(({ e, o }) => `<li><a href="#sortie-${esc(e.id)}"><span class="vd">${venteTxt(o)}</span><span class="vt"><b>${esc(e.titre)}</b> <span>· ${esc(o.type)}</span></span></a></li>`).join("") || "<li class=\"cr\" style=\"padding:10px 0\">Aucune ouverture connue.</li>"}</ul></div></section>`;
+  const ventes = `<section class="lks" id="lk-ventes"><h2 class="mh">Prochaines ouvertures de ventes</h2><ul class="vl">${ve.map(({ e, o }) => `<li><a href="#sortie-${esc(e.id)}"><span class="vd">${venteTxt(o)}</span><span class="vt"><b>${esc(e.titre)}</b> <span>· ${esc(o.type)}</span></span></a></li>`).join("") || "<li class=\"cr\">Aucune ouverture connue.</li>"}</ul></section>`;
   const blocs = []; groups.forEach((g) => { blocs.push(section(g)); if (g[0] === "Calendriers de vente") blocs.push(ventes); });
   if (!groups.some(([c]) => c === "Calendriers de vente")) blocs.unshift(ventes);
   $("#main").innerHTML = `<div class="ph"><h1>Liens utiles</h1><p>Cartes jeunes, calendriers de vente et billetteries des lieux suivis.</p></div>
-  <div class="tools"><input type="search" id="lkq" placeholder="Rechercher un lieu, une carte, un site…" aria-label="Rechercher un lien" style="flex:1"></div>
+  <div class="tools"><input type="search" id="lkq" placeholder="Rechercher un lieu, une carte, un site…" aria-label="Rechercher un lien" class="flex1" enterkeyhint="search" autocomplete="off"></div>
   <nav class="chips" aria-label="Rubriques">${groups.map(([c, l]) => `<button class="chip" type="button" data-lkgo="lk-${slug(c)}">${esc(c)}</button>`).join("")}<button class="chip" type="button" data-lkgo="lk-ventes">Ventes à venir</button></nav>
   ${blocs.join("")}<p class="empty" id="lkvide" hidden>Aucun lien ne correspond.</p>
   ${PRIVE ? `<h2 class="mh">Abonnements (admin)</h2>${subsHTML()}` : ""}`;
@@ -597,16 +616,16 @@ function renderLiens() {
   };
 }
 function subsHTML() {
-  return `<div class="cal"><p class="cr" style="margin:0 0 6px">Sur iPhone : Réglages, Calendrier, Comptes, Ajouter un compte, Autre, S’abonner à un calendrier, puis colle l’adresse.</p>
-  <p style="margin:6px 0 0"><b>Saison – réservations</b></p><code class="code">${esc(icsURL("agenda"))}</code><button class="btn" type="button" data-copy="${esc(icsURL("agenda"))}">Copier</button>
-  <p style="margin:10px 0 0"><b>Saison – ouvertures de ventes</b></p><code class="code">${esc(icsURL("ventes"))}</code><button class="btn" type="button" data-copy="${esc(icsURL("ventes"))}">Copier</button></div>`;
+  return `<div class="subs"><p class="cr">Sur iPhone : Réglages, Calendrier, Comptes, Ajouter un compte, Autre, S’abonner à un calendrier, puis colle l’adresse.</p>
+  <p><b>Factotum – réservations</b></p><code class="code">${esc(icsURL("agenda"))}</code><button class="btn" type="button" data-copy="${esc(icsURL("agenda"))}">Copier</button>
+  <p><b>Factotum – ouvertures de ventes</b></p><code class="code">${esc(icsURL("ventes"))}</code><button class="btn" type="button" data-copy="${esc(icsURL("ventes"))}">Copier</button></div>`;
 }
 
 /* ---------- Admin : le module est chargé à la première visite de l’onglet ---------- */
-function lockIcon() { $("#shackle").setAttribute("d", PRIVE ? "M8 10.5V8a4 4 0 0 1 7.6-1.7" : "M8 10.5V8a4 4 0 0 1 8 0v2.5"); $("#t-admin").setAttribute("aria-label", PRIVE ? "Admin, déverrouillé" : "Admin"); }
+function lockIcon() { const t = $("#t-admin"); t.classList.toggle("ouvert", !!PRIVE); t.setAttribute("aria-label", PRIVE ? "Admin, déverrouillé" : "Admin"); }
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=3.4"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.0"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -618,41 +637,32 @@ async function renderAdmin(q) {
 const TABS = { affiche: "affiche", journal: "journal", artistes: "artistes", lieux: "artistes", artiste: "artistes", lieu: "artistes", liens: "liens", admin: "admin" };
 let BASE = null, RENDERED = null;
 function setTab(t) {
-  $$(".tab").forEach((b) => { const on = b.dataset.tab === t; b.setAttribute("aria-selected", String(on)); b.tabIndex = on ? 0 : -1; });
-  $("#main").setAttribute("aria-labelledby", "t-" + t);
+  $$(".tab").forEach((b, i) => { const on = b.dataset.tab === t; b.setAttribute("aria-selected", String(on)); b.tabIndex = on || (!t && i === 0) ? 0 : -1; });
+  if (t) $("#main").setAttribute("aria-labelledby", "t-" + t);
 }
-/* Page #charte : référence de la charte Factotum (assets/charte.js et assets/factotum.css, chargés à la demande).
-   Tant que la charte n’est pas appliquée au site, elle remplace la feuille actuelle sur cette seule page. */
+/* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=3.4"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.0"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
-async function modeCharte(on) {
-  let l = $("#fxcss");
-  if (on && !l) {
-    l = document.createElement("link"); l.rel = "stylesheet"; l.id = "fxcss"; l.href = "assets/factotum.css?v=3.4";
-    await new Promise((ok) => { l.onload = l.onerror = ok; document.head.appendChild(l); });
-  }
-  if (l) l.disabled = !on;
-  const old = $("#ancien"); if (old) old.disabled = on;
-  $(".top").hidden = on;
-  document.body.classList.toggle("fx", on);
-  document.documentElement.classList.toggle("charte", on);
-}
+function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
+const TITRES = { affiche: "", journal: "Journal", artistes: "Artistes et lieux", lieux: "Artistes et lieux", liens: "Liens utiles", admin: "Admin" };
+let TITRE_VUE = "Factotum";
 async function renderView(h) {
   const [path, q = ""] = h.split("?");
   if (path === "charte") {
-    try { await Promise.all([loadCharte(), modeCharte(true)]); } catch (_) { $("#main").innerHTML = '<p class="empty">Impossible de charger la charte. Vérifie la connexion puis recharge.</p>'; return; }
+    modeCharte(true); setTab(null);
+    try { await loadCharte(); } catch (_) { $("#main").innerHTML = '<p class="empty">Impossible de charger la charte. Vérifie la connexion puis recharge.</p>'; return; }
     window.CHARTE.render($("#main"), { esc, cleF, saisonTxt, saisonDe, themeBouton });
-    document.title = "Charte – Factotum"; RENDERED = h; window.scrollTo(0, 0); return;
+    document.title = TITRE_VUE = "Charte – Factotum"; RENDERED = h; window.scrollTo(0, 0); return;
   }
-  if (document.body.classList.contains("fx")) await modeCharte(false);
+  modeCharte(false);
   const view = path.startsWith("artiste-") ? "artiste" : path.startsWith("lieu-") ? "lieu" : TABS[path] ? path : "affiche";
   const samePath = RENDERED && RENDERED.split("?")[0] === path;
   const focusK = samePath && document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.k : null;
   setTab(TABS[view]);
-  document.title = "Saison 2026–2027 · Léonard";
+  document.title = TITRE_VUE = TITRES[view] ? TITRES[view] + " – Factotum" : "Factotum";
   try {
     if (["journal", "artistes", "lieux", "artiste", "lieu"].includes(view) && !JOURNAL) { if (!samePath) $("#main").innerHTML = '<p class="load">Chargement…</p>'; await loadJournal(); }
     if (view === "liens" && !LIENS) await loadLiens();
@@ -714,7 +724,7 @@ document.addEventListener("click", async (ev) => {
   const sh = ev.target.closest("[data-share]");
   if (sh) {
     const e = BYID.get(sh.dataset.share), url = shareURL(sh.dataset.share);
-    try { if (navigator.share) { await navigator.share({ title: e ? e.titre : "Saison", text: e ? `${e.titre}, ${court(e.lieuId)} : la fiche et les soirs où ${OWNER} est libre.` : "", url }); return; } } catch (err) { if (err && err.name === "AbortError") return; }
+    try { if (navigator.share) { await navigator.share({ title: e ? e.titre : "Factotum", text: e ? `${e.titre}, ${court(e.lieuId)} : la fiche et les soirs où ${OWNER} est libre.` : "", url }); return; } } catch (err) { if (err && err.name === "AbortError") return; }
     try { await navigator.clipboard.writeText(url); toast("Lien copié"); } catch (_) { prompt("Copie ce lien :", url); }
     return;
   }
@@ -723,6 +733,11 @@ document.addEventListener("click", async (ev) => {
   const cp = ev.target.closest("[data-copy]");
   if (cp) { try { await navigator.clipboard.writeText(cp.dataset.copy); toast("Adresse copiée"); } catch (_) { prompt("Copie cette adresse :", cp.dataset.copy); } }
 });
+
+/* ---------- En-tête : saison calculée, thème, barre compacte au défilement ---------- */
+$("#saison").textContent = saisonTxt();
+themePose(themeLu());
+if ("IntersectionObserver" in window) new IntersectionObserver(([x]) => document.body.classList.toggle("compact", !x.isIntersecting)).observe($("#top"));
 
 /* ---------- Démarrage ---------- */
 (async () => {

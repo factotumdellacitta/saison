@@ -1,6 +1,6 @@
-# Projet « Saison » – règles pour Claude Code
+# Projet « Factotum » (dépôt `saison`) – règles pour Claude Code
 
-Site public de Léonard : https://factotumdellacitta.github.io/saison/
+Site public de Léonard, **Factotum** : https://factotumdellacitta.github.io/saison/ (le dépôt garde le nom `saison` : ne le renomme pas, l’adresse, les flux abonnés et les liens partagés en dépendent).
 Outil unique de **veille** (affiche notée), d'**agenda** (réservations, soirs pris, flux Apple Calendar) et d'**archive** (journal des sorties vues) pour toutes les sorties culturelles.
 Léonard écrit en français, style direct. Réponds en français, brièvement, sans préambule. Pas de tiret cadratin ni d'espace fine : utilise « – » ou la virgule.
 
@@ -15,13 +15,39 @@ Léonard écrit en français, style direct. Réponds en français, brièvement, 
 | `data/dispo.json` | `reservations` (généré), `manuel` (soirs pris déclarés), `calendrier` (généré par l'action depuis Apple Calendar) : dates seules | Oui |
 | `data/index-artistes.json`, `data/index-lieux.json` | Générés par `build.mjs`, ne pas modifier à la main | Oui |
 | `data/prive.enc` | Zone privée chiffrée (schéma ci-dessous) | Chiffré |
-| `data/agenda-<icsToken>.ics` | Flux « Saison – réservations », généré | Adresse non devinable |
-| `data/ventes-<icsToken>.ics` | Flux « Saison – ouvertures de ventes », généré | Adresse non devinable |
-| `index.html`, `assets/app.js`, `assets/admin.js`, `sw.js` | Le site (coque et CSS, logique publique, mode admin chargé à la demande, service worker). Ne les modifie que si Léonard demande un changement d'interface. | |
+| `data/agenda-<icsToken>.ics` | Flux « Factotum – réservations », généré | Adresse non devinable |
+| `data/ventes-<icsToken>.ics` | Flux « Factotum – ouvertures de ventes », généré | Adresse non devinable |
+| `index.html`, `assets/factotum.css`, `assets/app.js`, `assets/admin.js`, `assets/charte.js`, `sw.js` | Le site (coque, feuille unique, logique publique, mode admin et page `#charte` chargés à la demande, service worker). Ne les modifie que si Léonard demande un changement d'interface. | |
 
 Le site publié ne contient que `index.html`, `sw.js`, `assets/` et `data/`. Jamais `tools/`, `_setup/` ni fichier en clair.
-Après toute modification de `assets/app.js` ou `assets/admin.js` : incrémente `?v=` dans `index.html`, dans `loadAdmin` d'`app.js` et dans `SHELL` de `sw.js`, ainsi que `V` dans `sw.js` (sinon les téléphones gardent l'ancienne version en cache). Icônes et image de partage : `node tools/visuels.mjs` (une fois).
-Routes du site : `#affiche?filtres`, `#journal`, `#artistes`, `#lieux`, `#artiste-<slug>`, `#lieu-<id>`, `#liens`, `#sortie-<id>`, `#admin?v=res|envies|rapide|soirs|budget|acc|lieux|liens|abo` (les anciens `#fiche-<id>` redirigent).
+Après toute modification de `assets/app.js`, `assets/admin.js`, `assets/charte.js` ou `assets/factotum.css` : incrémente `?v=` partout où il apparaît (`index.html`, `loadAdmin` et `loadCharte` d'`app.js`, `SHELL` de `sw.js`) ainsi que `V` dans `sw.js` (sinon les téléphones gardent l'ancienne version en cache). Icônes, image de partage et visuels GitHub : `node tools/icones.mjs` (à relancer seulement si le symbole change).
+Routes du site : `#affiche?filtres`, `#journal`, `#artistes`, `#lieux`, `#artiste-<slug>`, `#lieu-<id>`, `#liens`, `#sortie-<id>`, `#admin?v=res|envies|rapide|soirs|budget|acc|lieux|liens|abo`, `#journal?sa=<année de début>` (filtre de saison), `#charte` (charte graphique, non liée dans la navigation) (les anciens `#fiche-<id>` redirigent).
+
+## Charte graphique (Factotum)
+Référence vivante : la page `#charte` (imprimable en PDF). Toute modification d'interface la respecte ; `tools/check.mjs` bloque les écarts mesurables.
+- **Nom** : Factotum (l'air de Figaro, *Largo al factotum della città*). Jamais d'année dans le nom. Titre de page : « Factotum » ou « Titre – Factotum ». Logotype : FACTOTUM en Schibsted Grotesk 800, capitales, approche −0,02em. Pied de page : « Largo al factotum della città. »
+- **Saison** : toujours calculée (`saisonDe()` dans `app.js`), de septembre à août : « Saison 26–27 ». Jamais écrite en dur. Le Journal et ses statistiques se filtrent par saison, avec « Toutes les saisons ».
+- **Symbole, la clé F** (`assets/logo.svg`, composant `cleF()` dans `app.js`) : clé passe-partout dont le panneton dessine un F, inclinée à 45° (anneau en bas à gauche, panneton en haut à droite), géométrie stricte. Blanc sur aplat rouge, ou encre sur fond clair ou sombre. Jamais rouge sur rouge, ni contour, ombre, autre rotation (ne jamais la redresser) ou animation. Taille minimale 16 px, zone de protection = épaisseur de la tige. Dans l'en-tête : hauteur des capitales du logotype. Usage réservé : en-tête, favicon, icônes PWA, image de partage, `#charte`. Jamais en ornement.
+- **Couleur** : rouge #E30613 en **aplats francs** ; tout le reste en noir et blanc. Sur un aplat rouge, texte blanc uniquement. Jetons sur `:root` dans `assets/factotum.css`, aucune couleur ni taille de police en dur ailleurs :
+
+  | Jeton | Clair | Sombre |
+  |---|---|---|
+  | `--fond` | #FFFFFF | #0E0E0E |
+  | `--surface` | #FFFFFF | #161616 |
+  | `--encre` | #111111 | #F2F2F2 |
+  | `--encre-2` | #5C5C5C | #A6A6A6 |
+  | `--filet` | #111111 | #F2F2F2 |
+  | `--filet-leger` | #D9D9D9 | #2E2E2E |
+  | `--rouge` | #E30613 | #E30613 |
+  | `--sur-rouge` | #FFFFFF | #FFFFFF |
+  | `--rouge-texte` | #E30613 | #FF5A4F |
+
+  Contrastes WCAG AA vérifiés par `tools/contrast.mjs` (appelé par `check.mjs`).
+- **Typographie** : Schibsted Grotesk seule, auto-hébergée (`assets/fonts/`, 400, 500, 700, 800 ; chiffres tabulaires limités aux chiffres). Échelle mobile / bureau : titre du site 44 / 72 px 800 capitales ; section 22 / 28 px 800 ; fiche 17 / 19 px 700 ; corps 15 / 16 px 400, interlignage 1,45 ; métadonnées 12 px 500 capitales +0,06em ; dates 13 / 14 px 800 capitales ; champs 16 px minimum. Guillemets « » avec espaces insécables, apostrophe ’, tiret demi-cadratin –. Ni cadratin ni espace fine dans les fichiers publiés (bloquant ; le mode admin les convertit à l'écriture).
+- **Mise en page** : grille de 12 colonnes, 1120 px au plus ; 4 colonnes et marges de 16 px sur mobile. Espacements 4, 8, 12, 16, 24, 32, 48. Angles droits (2 px au plus sur les champs). Filet 1 px entre les lignes, 3 px au-dessus des sections. Une ligne par représentation, sans cartes. Cibles tactiles de 44 px.
+- **Composants** : en-tête rouge (barre compacte au défilement sur mobile), navigation en capitales soulignée de rouge, ligne de spectacle (colonne de date de 64 px, filet pointillé), bandeaux de jour rouges collants, note en quatre carrés (« P » = prévision), badge « Léonard y va » en aplat rouge et autres badges en contour, boutons rectangulaires, puces à contour (active en rouge), hachures pour les soirs pris, fiche à en-tête rouge, statistiques en grands chiffres et barres rouges, messages en bandeau, mode admin à en-tête noir et confirmations intégrées (jamais `confirm()`).
+- **Interdits** : polices Inter, Roboto, Poppins, Montserrat, Space Grotesk ou système ; dégradés (sauf hachures fonctionnelles), glassmorphisme, ombres, flou ; arrondis au-delà de 2 px, pilules, cartes flottantes ; emoji, bibliothèques d'icônes, pictogrammes décoratifs ; violet, indigo, bleu ardoise ou toute couleur hors palette ; héros centré, grandes sections vides, texte marketing ; animations d'échelle, rebonds, révélations au défilement, squelettes. Seules les transitions de couleur et d'opacité de 120 ms, aucune en mouvement réduit. Aucune bibliothèque CSS ou JS, aucune ressource externe (polices comprises).
+- **Thème** : Auto (défaut), Clair, Sombre ; un bouton texte, choix dans `localStorage` (try/catch), `data-theme` posé avant le rendu.
 
 ## Sortie (affiche.json et journal.json)
 

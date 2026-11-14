@@ -1,4 +1,4 @@
-/* Saison – mode admin (lot 3). Chargé par app.js à la première visite de l’onglet Admin.
+/* Factotum – mode admin (lot 3). Chargé par app.js à la première visite de l’onglet Admin.
    Utilise les variables et fonctions globales d’app.js (AFF, JOURNAL, LIEUX, PRIVE, BYID, esc, fmt…).
    Sécurité : le mot de passe ne quitte jamais cette page et n’est pas conservé ; seule une clé AES non extractible
    reste en mémoire tant que l’admin est déverrouillé. Le jeton GitHub est rangé dans localStorage, chiffré avec une
@@ -200,6 +200,10 @@
     return err;
   }
 
+  /* Typographie de la charte : le tiret cadratin (souvent inséré par la correction automatique d’iOS) devient un
+     demi-cadratin, l’espace fine insécable une espace insécable normale. Sinon tools/check.mjs bloquerait la publication. */
+  const typo = (o) => typeof o === "string" ? o.replace(/\u2014/g, "–").replace(/\u202F/g, "\u00A0") : Array.isArray(o) ? o.map(typo) : o && typeof o === "object" ? Object.fromEntries(Object.entries(o).map(([k, v]) => [k, typo(v)])) : o;
+
   /* ---------- Écriture : un commit atomique par action ---------- */
   // fn(d, essai) modifie d (copie fraîche du dépôt). Elle peut lever Annule. Rejouée telle quelle si main a bougé.
   async function ecrire(message, fn) {
@@ -211,6 +215,7 @@
         const base = await lireDistant();
         const d = base.d, privAvant = JSON.stringify(d.prive);
         await fn(d, essai);
+        for (const k of ["affiche", "journal", "lieux", "liens", "prive"]) d[k] = typo(d[k]);
         const erreurs = valider(d);
         if (erreurs.length) throw new Error("Données refusées : " + erreurs.slice(0, 4).join(" "));
         const ser = (k) => (k === "dispo" ? JSON.stringify(d.dispo, null, 1) : JSON.stringify(d[k], null, 1) + "\n");
@@ -234,10 +239,31 @@
       throw e;
     } finally { OCCUPE = false; }
   }
+  /* Confirmation intégrée à la page (jamais de fenêtre système) : un bandeau près de l’action, deux boutons.
+     Résout vrai ou faux ; Échap ou « Garder » valent non. */
+  function demander(texte, { oui = "Confirmer", non = "Annuler", danger = true } = {}) {
+    $$(".confirme").forEach((x) => x._fin && x._fin(false));
+    const dl = $("#dlg"), sh = $("#sheet").hidden ? null : $("#sheetIn");
+    const box = document.createElement("div"); box.className = "confirme"; box.setAttribute("role", "alertdialog"); box.setAttribute("aria-live", "assertive");
+    box.innerHTML = `<p>${esc(texte).replace(/\n/g, "<br>")}</p><div class="acts"><button type="button" class="btn ${danger ? "danger" : "pri"}" data-oui>${esc(oui)}</button><button type="button" class="btn" data-non>${esc(non)}</button></div>`;
+    if (dl) { const a = dl.querySelector("form > .acts"); a.parentNode.insertBefore(box, a); }
+    else if (sh) sh.querySelector(".shtop").after(box);
+    else $("#main").prepend(box);
+    const avant = document.activeElement;
+    return new Promise((ok) => {
+      const fin = (v) => { box.remove(); document.removeEventListener("keydown", esc_, true); if (avant && document.contains(avant)) avant.focus({ preventScroll: true }); ok(v); };
+      const esc_ = (ev) => { if (ev.key === "Escape") { ev.preventDefault(); ev.stopImmediatePropagation(); fin(false); } };
+      box._fin = fin;
+      box.querySelector("[data-oui]").onclick = () => fin(true);
+      box.querySelector("[data-non]").onclick = () => fin(false);
+      document.addEventListener("keydown", esc_, true);
+      box.scrollIntoView({ block: "center" }); box.querySelector("[data-oui]").focus({ preventScroll: true });
+    });
+  }
   // En cas de modification concurrente du même objet : on demande.
-  function garde(avant, maintenant, quoi) {
+  async function garde(avant, maintenant, quoi) {
     if (avant === undefined) return;
-    if (JSON.stringify(avant ?? null) !== JSON.stringify(maintenant ?? null) && !confirm(`${quoi} a été modifié ailleurs (Claude Code ou un autre appareil) depuis l’ouverture du formulaire. Remplacer par ta version ?`)) throw new Annule();
+    if (JSON.stringify(avant ?? null) !== JSON.stringify(maintenant ?? null) && !await demander(`${quoi} a été modifié ailleurs (Claude Code ou un autre appareil) depuis l’ouverture du formulaire. Remplacer par ta version ?`, { oui: "Remplacer", non: "Garder la leur", danger: false })) throw new Annule();
   }
   // Applique des données fraîches à l’interface.
   function appliquer(d, force) {
@@ -352,7 +378,7 @@
     return `<fieldset class="fs" data-prix><legend>Spectateurs et prix</legend>
       <p class="cr">Une ligne par place. Ta place : « Moi » ; si on te l’offre, 0 € et « Offerte à moi ».</p>
       <div data-rows>${L.map(ligneHTML).join("")}</div>
-      <div class="acts" style="margin:0 0 10px"><button type="button" class="btn" data-addbillet>+ Spectateur</button><button type="button" class="btn" data-meme>Même prix et tarif partout</button></div>
+      <div class="acts acts-haut"><button type="button" class="btn" data-addbillet>+ Spectateur</button><button type="button" class="btn" data-meme>Même prix et tarif partout</button></div>
       ${champ("Plein tarif par place (€, facultatif, pour les économies)", inp("pleinPlace", r.pleinPlace ?? "", 'inputmode="decimal"'))}
       ${dl("dl-pour", ["Moi", ...nomsConnus()])}${dl("dl-tarifs", tarifsConnus())}
       <p class="total" data-total aria-live="polite"></p></fieldset>`;
@@ -411,18 +437,17 @@
     return out;
   }
   const etatLocal = () => ({ dispo: BUSY_SRC, prive: PRIVE });
-  function confirmeConflits(d, date, sansId, deja) {
+  async function confirmeConflits(d, date, sansId, deja) {
     const c = conflits(d, date, sansId).filter((x) => !(deja || []).includes(x));
-    if (c.length && !confirm(`Le ${fmtY(D(date), true)} est déjà pris :\n– ${c.join("\n– ")}\n\nConfirmer quand même ?`)) throw new Annule();
+    if (c.length && !await demander(`Le ${fmtY(D(date), true)} est déjà pris :\n– ${c.join("\n– ")}\n\nConfirmer quand même ?`, { oui: "Confirmer quand même", non: "Revenir", danger: false })) throw new Annule();
     return c;
   }
 
   /* ---------- Envies ---------- */
-  const HEART = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-9.2-8.6C1.3 8.5 3 5 6.4 5c2 0 3.3 1.1 4.1 2.4h3C14.3 6.1 15.6 5 17.6 5 21 5 22.7 8.5 21.2 11.4 19 15.6 12 20 12 20z"/></svg>';
   function heart(id) {
     if (!PRIVE) return "";
     const on = !!PRIVE.envies[id];
-    return `<button class="heart" type="button" data-envie="${esc(id)}" aria-pressed="${on}" aria-label="Ça m’intéresse : ${esc(titreDe(id))}">${HEART}</button>`;
+    return `<button class="envie" type="button" data-envie="${esc(id)}" aria-pressed="${on}" aria-label="Dans mes envies : ${esc(titreDe(id))}">Envie</button>`;
   }
   async function basculerEnvie(id, prio) {
     const on = !!PRIVE.envies[id] && prio == null;
@@ -454,9 +479,9 @@
     const acts = vu
       ? b("revu", "Vu à nouveau") + b("notes", "Ma note, spectateurs et prix") + b("editer", "Modifier la fiche") + b("supprimer", "Supprimer")
       : (r ? b("reserver", "Modifier la réservation", "pri") + b("annuler", "Annuler la réservation") : b("reserver", "Réserver", "pri")) +
-        b("vu", "Marquer vu") + `<button class="btn" type="button" data-envie="${esc(e.id)}" aria-pressed="${!!env}">${env ? "♥ Dans mes envies" : "♡ Ça m’intéresse"}</button>` +
+        b("vu", "Marquer vu") + `<button class="btn" type="button" data-envie="${esc(e.id)}" aria-pressed="${!!env}">${env ? "Dans mes envies" : "Ça m’intéresse"}</button>` +
         b("editer", "Modifier la fiche") + (e.statut === "ecarte" ? b("remettre", "Remettre à l’affiche") : b("ecarter", "Écarter")) + b("supprimer", "Supprimer");
-    return `<section class="admbox" aria-label="Admin"><h3 class="sec">Admin${e.statut === "ecarte" ? " · écartée (masquée du public)" : ""}</h3>${etat}${prio}<div class="acts">${acts}</div></section>`;
+    return `<section class="admbox" aria-label="Admin"><h3 class="adm-titre">Admin${e.statut === "ecarte" ? " · écartée (masquée du public)" : ""}</h3>${etat}${prio}<div class="acts">${acts}</div></section>`;
   }
   const detRes = (r) => {
     const t = [r.salle, r.places || (r.billets && r.billets.length) ? plural(nbPlaces(r), "place") : "", r.siege, resumePrix(r), (r.accompagnants || []).length ? "avec " + r.accompagnants.join(", ") : "", r.note].filter(Boolean).join(" · ");
@@ -488,10 +513,10 @@
       const date = val(f, "date") && val(f, "date") !== "autre" ? val(f, "date") : val(f, "date_autre");
       if (!date) throw new Error("Choisis une date.");
       const res = { date, heure: val(f, "heure"), salle: val(f, "salle"), siege: val(f, "siege"), ...lirePrix(f), billetterie: val(f, "billetterie"), note: val(f, "note") };
-      const vus = confirmeConflits(etatLocal(), date, id);
-      return ecrire(`Admin : ${r0 ? "réservation modifiée" : "réservé"} ${e.titre} le ${fmt(D(date))}`, (d) => {
-        garde(r0, d.prive.reservations[id], "La réservation");
-        confirmeConflits(d, date, id, vus);
+      const vus = await confirmeConflits(etatLocal(), date, id);
+      return ecrire(`Admin : ${r0 ? "réservation modifiée" : "réservé"} ${e.titre} le ${fmt(D(date))}`, async (d) => {
+        await garde(r0, d.prive.reservations[id], "La réservation");
+        await confirmeConflits(d, date, id, vus);
         d.prive.reservations[id] = res;
         delete d.prive.envies[id];
         const s = d.affiche.sorties.find((x) => x.id === id); if (s) s.leonardYVa = true;
@@ -509,7 +534,7 @@
 
   async function annulerRes(id) {
     const r = PRIVE.reservations[id]; if (!r) return;
-    if (!confirm(`Annuler la réservation de « ${titreDe(id)} » (${dCourt(r.date)}) ? Le soir sera libéré.`)) return;
+    if (!await demander(`Annuler la réservation de « ${titreDe(id)} » (${dCourt(r.date)}) ? Le soir sera libéré.`, { oui: "Oui, annuler", non: "Garder" })) return;
     await ecrire(`Admin : annulé ${titreDe(id)} (${dCourt(r.date)})`, (d) => {
       delete d.prive.reservations[id];
       const s = d.affiche.sorties.find((x) => x.id === id); if (s) s.leonardYVa = false;
@@ -526,7 +551,7 @@
     const dDef = edit ? (e.vuLe || []).at(-1) : r.date && D(r.date) <= TODAY ? r.date : revu || !r.date ? todayISO() : r.date;
     dlg(edit ? `Mes notes : ${e.titre}` : `Vu : ${e.titre}`, `
       ${champ(edit ? "Dates vues (AAAA-MM-JJ, séparées par des virgules)" : "Vu le", edit ? inp("vuLe", (e.vuLe || []).join(", ")) : inp("date", dDef, 'type="date"'))}
-      ${champ("Ma note", sel("noteLeonard", [["", "Pas de note"], [4, "★★★★"], [3, "★★★"], [2, "★★"], [1, "★"]], e.noteLeonard ?? ""))}
+      ${champ("Ma note", sel("noteLeonard", [["", "Pas de note"], [4, "4 · incontournable"], [3, "3 · fortement recommandé"], [2, "2 · bon choix"], [1, "1 · curiosité"]], e.noteLeonard ?? ""))}
       ${champ("Mon avis (public)", `<textarea name="avis" rows="3">${esc(e.avis || "")}</textarea>`)}
       ${revu ? '<p class="cr">Places et prix de cette nouvelle fois : ils s’ajoutent aux précédents.</p>' : ""}${prixHTML(revu ? { billets: [{ spectateur: "Moi" }] } : src)}`, async (f) => {
       const note = val(f, "noteLeonard") ? +val(f, "noteLeonard") : null, avis = val(f, "avis");
@@ -534,7 +559,7 @@
       let dates;
       if (edit) { dates = val(f, "vuLe").split(/[,;\s]+/).filter(Boolean); if (!dates.length || dates.some((x) => !ISO_RE.test(x))) throw new Error("Dates au format AAAA-MM-JJ, séparées par des virgules."); }
       else { const x = val(f, "date"); if (!ISO_RE.test(x)) throw new Error("Choisis la date."); dates = [x]; }
-      const etoiles = note ? ", " + "★".repeat(note) : "";
+      const etoiles = note ? `, ${note}/4` : "";
       return ecrire(edit ? `Admin : notes modifiées pour ${e.titre}` : `Admin : vu ${e.titre} le ${fmt(D(dates[0]))}${etoiles}`, (d) => {
         let s = d.journal.sorties.find((x) => x.id === id);
         const i = d.affiche.sorties.findIndex((x) => x.id === id);
@@ -610,15 +635,15 @@
       for (const k of ["datesTexte", "horaires"]) if (!champs[k]) delete champs[k];
       if (!e0) {
         const memes = [...AFF, ...(JOURNAL || [])].filter((x) => norm(x.titre) === norm(titre));
-        if (memes.length && !confirm(`« ${titre} » existe déjà (${memes.map((x) => [court(x.lieuId), range(x), x.statut === "vu" ? "vu" : ""].filter(Boolean).join(", ")).join(" ; ")}). Ajouter quand même ?`)) return false;
+        if (memes.length && !await demander(`« ${titre} » existe déjà (${memes.map((x) => [court(x.lieuId), range(x), x.statut === "vu" ? "vu" : ""].filter(Boolean).join(", ")).join(" ; ")}). Ajouter quand même ?`, { oui: "Ajouter quand même", non: "Revenir", danger: false })) return false;
       }
       const snap = e0 ? clone(e0) : undefined;
-      return ecrire(e0 ? `Admin : fiche modifiée ${titre}` : `Admin : ajouté ${titre}${lieuId ? " (" + (nouveauLieu ? nouveauLieu.l.nom : court(lieuId)) + ")" : ""}`, (d) => {
+      return ecrire(e0 ? `Admin : fiche modifiée ${titre}` : `Admin : ajouté ${titre}${lieuId ? " (" + (nouveauLieu ? nouveauLieu.l.nom : court(lieuId)) + ")" : ""}`, async (d) => {
         if (nouveauLieu && !d.lieux[nouveauLieu.id]) { d.lieux[nouveauLieu.id] = nouveauLieu.l; d.lieux = Object.fromEntries(Object.entries(d.lieux).sort(([a], [b]) => a.localeCompare(b))); }
         if (e0) {
           const s = d.affiche.sorties.find((x) => x.id === id) || d.journal.sorties.find((x) => x.id === id);
           if (!s) throw new Error("Cette sortie n’existe plus dans le dépôt.");
-          garde(snap, s, "La fiche");
+          await garde(snap, s, "La fiche");
           for (const k of ["datesTexte", "horaires"]) if (!(k in champs)) delete s[k];
           Object.assign(s, champs);
         } else {
@@ -645,7 +670,7 @@
 
   async function ecarter(id, statut) {
     const t = titreDe(id);
-    if (statut === "ecarte" && !confirm(`Écarter « ${t} » ? Elle sera masquée du public (réversible).`)) return;
+    if (statut === "ecarte" && !await demander(`Écarter « ${t} » ? Elle sera masquée du public (réversible).`, { oui: "Écarter" })) return;
     await ecrire(statut === "ecarte" ? `Admin : écarté ${t}` : `Admin : remis à l’affiche ${t}`, (d) => {
       const s = d.affiche.sorties.find((x) => x.id === id); if (!s) throw new Error("Cette sortie n’est plus à l’affiche.");
       s.statut = statut;
@@ -653,7 +678,7 @@
   }
   async function supprimer(id) {
     const t = titreDe(id), r = PRIVE.reservations[id];
-    if (!confirm(`Supprimer définitivement « ${t} » ?${r ? "\nSa réservation sera aussi supprimée." : ""}\nPour la masquer seulement, utilise plutôt « Écarter ».`)) return;
+    if (!await demander(`Supprimer définitivement « ${t} » ?${r ? "\nSa réservation sera aussi supprimée." : ""}\nPour la masquer seulement, utilise plutôt « Écarter ».`, { oui: "Supprimer" })) return;
     await ecrire(`Admin : supprimé ${t}`, (d) => {
       d.affiche.sorties = d.affiche.sorties.filter((x) => x.id !== id);
       d.journal.sorties = d.journal.sorties.filter((x) => x.id !== id);
@@ -763,11 +788,11 @@
       const ok = lignes.filter((l) => l.id && l.date), reste = lignes.filter((l) => !(l.id && l.date));
       const vus = {};
       try {
-        for (const l of ok) vus[l.id] = confirmeConflits(etatLocal(), l.date, l.id);
+        for (const l of ok) vus[l.id] = await confirmeConflits(etatLocal(), l.date, l.id);
         const msg = "Admin : saisie rapide" + (ok.length ? ", réservé " + ok.map((l) => `${titreDe(l.id)} le ${fmt(D(l.date))}`).join(", ") : "") + (reste.length ? ` ; ${reste.length} à compléter` : "");
-        await ecrire(msg, (d) => {
+        await ecrire(msg, async (d) => {
           for (const l of ok) {
-            confirmeConflits(d, l.date, l.id, vus[l.id]);
+            await confirmeConflits(d, l.date, l.id, vus[l.id]);
             const prev = d.prive.reservations[l.id] || {};
             const autres = places(prev).filter((b) => !estMoi(b.spectateur));
             const billets = Array.from({ length: l.places }, (_, k) => ({ spectateur: k === 0 ? "Moi" : autres[k - 1]?.spectateur || "", prix: l.prixPlace, paiement: k === 0 ? "moi" : autres[k - 1]?.paiement || "moi", ...(l.tarif ? { tarif: l.tarif } : {}) }));
@@ -781,7 +806,7 @@
       } catch (e) { if (!(e instanceof Annule)) { err.textContent = msgGH(e); err.hidden = false; } }
     };
     $$("[data-qdel]").forEach((b) => b.onclick = () => act(async () => {
-      const i = +b.dataset.qdel, x = PRIVE.aCompleter[i]; if (!confirm("Retirer cet élément de la file ?")) return;
+      const i = +b.dataset.qdel, x = PRIVE.aCompleter[i]; if (!await demander("Retirer cet élément de la file ?", { oui: "Retirer" })) return;
       await ecrire("Admin : file à compléter, un élément retiré", (d) => { const j = d.prive.aCompleter.findIndex((y) => y.ajouteLe === x.ajouteLe && y.texte === x.texte); if (j >= 0) d.prive.aCompleter.splice(j, 1); });
     }));
   }
@@ -802,7 +827,7 @@
         const k = iso(d), on = SOIRS.set.has(k), r = resPar[k], ic = cal.has(k), past = d < TODAY;
         if (r || ic) return `<div class="cell ${r ? "res" : "icl"}${past ? " past" : ""}" role="img" aria-label="${fmt(d, true)} : ${r ? "réservé, " + esc(r) : "Apple Calendar"}"><span class="n">${d.getDate()}</span><small class="lbl2">${r ? "résa" : "agenda"}</small></div>`;
         return `<button type="button" class="cell${on ? " busy" : ""}${past ? " past" : ""}${+d === +TODAY ? " today" : ""}${dansBloc(k) ? " blq" : ""}" data-soir="${k}" aria-pressed="${on}" aria-label="${fmt(d, true)}${on ? ", pris" : ", libre"}${dansBloc(k) ? ", période bloquée" : ""}"><span class="n">${d.getDate()}</span></button>`;
-      }) + `<div class="legend"><span style="--sw:var(--chip-on)">Pris (déclaré, public)</span><span style="--sw:var(--accent)">Réservation</span><span style="--sw:var(--warn-bg)">Apple Calendar</span><span class="blq-l">Période bloquée (privée)</span></div></div>
+      }) + `<div class="legend"><span class="l-pris">Pris (déclaré, public)</span><span class="l-va">Réservation</span><span class="l-icl">Apple Calendar</span><span class="l-blq">Période bloquée (privée)</span></div></div>
     <div class="acts"><button class="btn pri" type="button" id="sSave"${add_.length || rm.length ? "" : " disabled"}>Enregistrer${add_.length || rm.length ? ` (${add_.length ? "+" + add_.length : ""}${add_.length && rm.length ? " " : ""}${rm.length ? "−" + rm.length : ""})` : ""}</button>${add_.length || rm.length ? '<button class="btn" type="button" id="sRaz">Annuler les changements</button>' : ""}</div>
     <h2 class="mh">Périodes bloquées <small>privées</small></h2>
     <p class="cr">Comptées dans le contrôle des conflits quand tu réserves, mais jamais publiées : le site public ne les montre pas comme « pris », contrairement aux soirs ci-dessus.</p>
@@ -820,7 +845,7 @@
       if (ev.target.id === "sRaz") { SOIRS = null; return renderAdminVue("soirs"); }
       const bd = ev.target.closest("[data-bdel]");
       if (bd) return act(async () => {
-        const x = PRIVE.blocages[+bd.dataset.bdel]; if (!confirm("Supprimer cette période bloquée ?")) return;
+        const x = PRIVE.blocages[+bd.dataset.bdel]; if (!await demander("Supprimer cette période bloquée ?", { oui: "Supprimer" })) return;
         await ecrire("Admin : périodes bloquées mises à jour", (d) => { const j = d.prive.blocages.findIndex((y) => JSON.stringify(y) === JSON.stringify(x)); if (j >= 0) d.prive.blocages.splice(j, 1); });
         renderAdminVue("soirs"); toast("Période supprimée");
       });
@@ -868,17 +893,17 @@
     const eco = P.filter((x) => x.plein != null).reduce((s, x) => s + (x.plein - x.c.engage), 0);
     const parMois = {}, parCat = {};
     P.forEach((x) => { const k = x.date.slice(0, 7); parMois[k] = (parMois[k] || 0) + x.c.paye; parCat[x.cat] = (parCat[x.cat] || 0) + x.c.paye; });
-    const barres = (rows) => { const mx = Math.max(1, ...rows.map((r) => r[1])); return `<div class="bars bars-e">${rows.map(([l, n]) => `<span class="bl">${esc(l)}</span><span class="bg" style="width:${Math.round((n / mx) * 100)}%" aria-hidden="true"></span><span class="bn">${esc(euros(n))}</span>`).join("")}</div>`; };
+    const barres = (rows) => { const mx = Math.max(1, ...rows.map((r) => r[1])); return `<div class="bars bars-e">${rows.map(([l, n]) => `<span class="bl">${esc(l)}</span><span class="bg" style="--v:${Math.round((n / mx) * 100)}" aria-hidden="true"></span><span class="bn">${esc(euros(n))}</span>`).join("")}</div>`; };
     const mois = Object.keys(parMois).sort().map((k) => [MOIS[+k.slice(5) - 1] + " " + k.slice(2, 4), parMois[k]]);
     const cats = Object.entries(parCat).sort((x, y) => y[1] - x[1]);
     const opts = [["saison", "Saison en cours"], ["prec", "Saison précédente"], ["annee", "Année civile"], ["12m", "12 derniers mois"], ["tout", "Tout"]];
     const sansPrix = L.filter((x) => !x.c);
-    return `<div class="tools"><label class="f" style="flex:1;margin:0"><span>Période</span>${sel("bp", opts, BUDGET_P).replace("<select", '<select id="bp"')}</label></div>
+    return `<div class="tools"><label class="f f-outil"><span>Période</span>${sel("bp", opts, BUDGET_P).replace("<select", '<select id="bp"')}</label></div>
     <div class="kpis"><div><b>${esc(euros(engage) || "0 €")}</b><span>engagés (toutes les places)</span></div><div><b>${esc(euros(paye) || "0 €")}</b><span>payés par moi${offert ? `, dont ${esc(euros(offert))} offerts` : ""}</span></div><div><b>${esc(euros(benef) || "0 €")}</b><span>pour mon bénéfice (${plural(nMoi, "place")}${nMoi ? `, ${esc(euros(benef / nMoi))} en moyenne` : ""})</span></div><div><b>${vus + res}</b><span>sorties (${vus} vues, ${res} réservées)${eco ? ` · économies ${esc(euros(eco))}` : ""}</span></div></div>
     <p class="cr">${plural(P.length, "sortie")} avec des prix sur ${L.length}. « Payés par moi » : mes places, plus celles que je paie ou offre à d’autres. « Pour mon bénéfice » : le prix de mes places.</p>
-    <details class="box stats" open><summary>Payé par moi, par mois</summary>${mois.length ? barres(mois) : '<p class="cr" style="padding:0 12px">Aucune dépense sur la période.</p>'}</details>
-    <details class="box stats"><summary>Payé par moi, par catégorie</summary>${cats.length ? barres(cats) : '<p class="cr" style="padding:0 12px">Aucune dépense sur la période.</p>'}</details>
-    <details class="box stats"><summary>Détail par sortie <span class="ml">${P.length}</span></summary><div style="padding:0 12px 10px;overflow-x:auto"><table class="t"><tr><th>Sortie</th><th>Engagé</th><th>Payé</th><th>Pour moi</th></tr>${P.map((x) => `<tr><td><a href="#sortie-${esc(x.id)}">${esc(titreDe(x.id))}</a><br><small class="cr">${esc(fmt(D(x.date)))}${x.avenir ? ", réservé" : ""}</small></td><td>${esc(euros(x.c.engage))}</td><td>${esc(euros(x.c.paye))}</td><td>${esc(euros(x.c.benef))}</td></tr>`).join("")}</table></div></details>
+    <details class="box stats" open><summary>Payé par moi, par mois</summary>${mois.length ? barres(mois) : '<p class="cr">Aucune dépense sur la période.</p>'}</details>
+    <details class="box stats"><summary>Payé par moi, par catégorie</summary>${cats.length ? barres(cats) : '<p class="cr">Aucune dépense sur la période.</p>'}</details>
+    <details class="box stats"><summary>Détail par sortie <span class="ml">${P.length}</span></summary><table class="t pile"><thead><tr><th>Sortie</th><th class="num">Engagé</th><th class="num">Payé</th><th class="num">Pour moi</th></tr></thead><tbody>${P.map((x) => `<tr><td><a href="#sortie-${esc(x.id)}">${esc(titreDe(x.id))}</a><br><small class="cr">${esc(fmt(D(x.date)))}${x.avenir ? ", réservé" : ""}</small></td><td class="num" data-l="Engagé">${esc(euros(x.c.engage))}</td><td class="num" data-l="Payé">${esc(euros(x.c.paye))}</td><td class="num" data-l="Pour moi">${esc(euros(x.c.benef))}</td></tr>`).join("")}</tbody></table></details>
     ${sansPrix.length ? `<details class="box"><summary>Sans prix <span class="ml">${sansPrix.length}</span></summary><ul class="vl">${sansPrix.map((x) => `<li><a href="#sortie-${esc(x.id)}"><span class="vd">${esc(fmt(D(x.date)))}</span><span class="vt"><b>${esc(titreDe(x.id))}</b></span></a></li>`).join("")}</ul></details>` : ""}`;
   }
 
@@ -900,7 +925,7 @@
   function accSelectHTML(v) {
     if (!PRIVE) return "";
     const p = personnes().filter((x) => x.dernier); if (!p.length) return "";
-    return `<div class="tools"><label class="f" style="flex:1;margin:0"><span>Avec (admin)</span><select id="jAvec"><option value="">Tout le monde</option>${p.map((x) => `<option${x.nom === v ? " selected" : ""}>${esc(x.nom)}</option>`).join("")}</select></label></div>`;
+    return `<div class="tools"><label class="f f-outil"><span>Avec (admin)</span><select id="jAvec"><option value="">Tout le monde</option>${p.map((x) => `<option${x.nom === v ? " selected" : ""}>${esc(x.nom)}</option>`).join("")}</select></label></div>`;
   }
   function vueAcc() {
     const p = personnes();
@@ -915,16 +940,14 @@
   // Édition des liens : une ligne par lien, par rubrique ; glisser la poignée pour l’ordre (ou vers une autre rubrique).
   const rangeLiens = (L) => liensParRubrique(L).flatMap(([, l]) => l);
   const ICO = {
-    drag: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="6" r="1.4"/><circle cx="15" cy="6" r="1.4"/><circle cx="9" cy="12" r="1.4"/><circle cx="15" cy="12" r="1.4"/><circle cx="9" cy="18" r="1.4"/><circle cx="15" cy="18" r="1.4"/></svg>',
-    edit: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>',
-    del: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg>',
+    drag: '<svg viewBox="0 0 24 24" aria-hidden="true" class="grip"><circle cx="9" cy="6" r="1.4"/><circle cx="15" cy="6" r="1.4"/><circle cx="9" cy="12" r="1.4"/><circle cx="15" cy="12" r="1.4"/><circle cx="9" cy="18" r="1.4"/><circle cx="15" cy="18" r="1.4"/></svg>',
   };
   function vueLiens() {
     if (!LIENS_W) { const b = rangeLiens(clone(LIENS || [])); LIENS_W = { base: b, w: clone(b) }; }
     const modif = JSON.stringify(LIENS_W.base) !== JSON.stringify(LIENS_W.w);
     const ligne = (l, i) => `<li class="lka" data-i="${i}"><button type="button" class="poignee" data-drag aria-label="Déplacer « ${esc(l.titre)} » (flèches haut et bas)">${ICO.drag}</button>
       <span class="lt"><b>${esc(l.titre)}</b><small>${esc(hote(l.url))}${l.note ? " · " + esc(l.note) : ""}</small></span>
-      <button type="button" class="ico2" data-lk="edit" data-i="${i}" aria-label="Modifier « ${esc(l.titre)} »">${ICO.edit}</button><button type="button" class="ico2 rouge" data-lk="del" data-i="${i}" aria-label="Supprimer « ${esc(l.titre)} »">${ICO.del}</button></li>`;
+      <button type="button" class="ico2" data-lk="edit" data-i="${i}" aria-label="Modifier « ${esc(l.titre)} »">Modifier</button><button type="button" class="ico2 rouge" data-lk="del" data-i="${i}" aria-label="Supprimer « ${esc(l.titre)} »">Suppr.</button></li>`;
     const idx = LIENS_W.w.map((l, i) => [l, i]);
     return `<p class="cr">Glisse la poignée pour changer l’ordre, ou vers une autre rubrique. Rien n’est envoyé avant « Enregistrer ».</p>
     ${ORDRE_LIENS.map((c) => { const L = idx.filter(([l]) => l.categorie === c); return `<div class="lkg"><h2 class="mh">${esc(c)} <small>${L.length}</small><button type="button" class="linkbtn ml" data-lk="new" data-cat="${esc(c)}">+ Ajouter</button></h2>
@@ -958,7 +981,7 @@
       else if (k === "raz") LIENS_W = null;
       else if (k === "save") return act(async () => {
         const base = LIENS_W.base, nv = clone(LIENS_W.w);
-        await ecrire("Admin : liens utiles mis à jour", (d) => { garde(base, rangeLiens(d.liens), "La liste des liens"); d.liens = nv; });
+        await ecrire("Admin : liens utiles mis à jour", async (d) => { await garde(base, rangeLiens(d.liens), "La liste des liens"); d.liens = nv; });
         LIENS_W = null; renderAdminVue("liens"); toast("Liens enregistrés");
       });
       renderAdminVue("liens");
@@ -1007,7 +1030,7 @@
   const usages = (id) => [...AFF, ...(JOURNAL || [])].filter((e) => e.lieuId === id).length;
   function vueLieux() {
     const ids = Object.keys(LIEUX).sort((a, b) => norm(LIEUX[a].nom).localeCompare(norm(LIEUX[b].nom)));
-    return `<div class="tools"><input type="search" id="lq" placeholder="Rechercher un lieu" aria-label="Rechercher un lieu" style="flex:1"><button class="btn pri" type="button" data-lieu="new">+ Lieu</button></div>
+    return `<div class="tools"><input type="search" id="lq" placeholder="Rechercher un lieu" aria-label="Rechercher un lieu" class="flex1" enterkeyhint="search"><button class="btn pri" type="button" data-lieu="new">+ Lieu</button></div>
     <div class="list" id="ll">${ids.map((id) => { const L = LIEUX[id], n = usages(id); return `<div class="ad" data-q="${esc(norm([L.nom, court(id), L.ville, id].join(" ")))}"><h3>${esc(L.nom)}</h3><p class="cr">${esc([L.ville, L.zone !== L.ville ? L.zone : "", "lieu " + (L.statut === "Privé" ? "privé" : "public")].filter(Boolean).join(" · "))} · ${plural(n, "sortie")}</p>${L.tarifJeune ? `<p class="cr">Tarif jeune : ${esc(L.tarifJeune)}</p>` : ""}
       <div class="acts"><button class="btn" type="button" data-lieu="edit" data-id="${esc(id)}">Modifier</button>${n ? "" : `<button class="btn" type="button" data-lieu="del" data-id="${esc(id)}">Supprimer</button>`}<a class="btn" href="#lieu-${esc(id)}">Voir</a></div></div>`; }).join("")}</div>
     <p class="cr">Un lieu utilisé par une sortie ne peut pas être supprimé. Son identifiant ne change jamais, même si tu le renommes.</p>`;
@@ -1033,10 +1056,10 @@
       const nom = val(f, "nom"); if (!nom) throw new Error("Le nom est obligatoire.");
       const champs = { nom, ville: val(f, "ville"), zone: val(f, "zone"), statut: val(f, "statut"), site: val(f, "site") || null, billetterie: val(f, "billetterie") || null, tarifJeune: val(f, "tarifJeune") };
       const adresse = val(f, "adresse"), snap = L0 ? clone(L0) : undefined;
-      return ecrire(L0 ? `Admin : lieu modifié ${nom}` : `Admin : lieu ajouté ${nom}`, (d) => {
+      return ecrire(L0 ? `Admin : lieu modifié ${nom}` : `Admin : lieu ajouté ${nom}`, async (d) => {
         if (L0) {
           if (!d.lieux[id]) throw new Error("Ce lieu n’existe plus dans le dépôt.");
-          garde(snap, d.lieux[id], "Le lieu");
+          await garde(snap, d.lieux[id], "Le lieu");
           Object.assign(d.lieux[id], champs);
           if (adresse) d.lieux[id].adresse = adresse; else delete d.lieux[id].adresse;
         } else {
@@ -1048,7 +1071,7 @@
     }, { valider: L0 ? "Enregistrer" : "Ajouter" });
   }
   async function supprimerLieu(id) {
-    const L = LIEUX[id]; if (!L || !confirm(`Supprimer le lieu « ${L.nom} » ?`)) return;
+    const L = LIEUX[id]; if (!L || !await demander(`Supprimer le lieu « ${L.nom} » ?`, { oui: "Supprimer" })) return;
     await ecrire(`Admin : lieu supprimé ${L.nom}`, (d) => {
       if ([...d.affiche.sorties, ...d.journal.sorties].some((s) => s.lieuId === id)) throw new Error("Ce lieu est utilisé par une sortie : impossible de le supprimer.");
       delete d.lieux[id];
@@ -1157,13 +1180,13 @@
     if (location.hash.slice(1).split("?")[0] !== "admin") return;
     const nE = Object.keys(PRIVE.envies).length, nC = (PRIVE.aCompleter || []).length;
     const corps = { res: vueRes, envies: vueEnvies, rapide: vueRapide, soirs: vueSoirs, budget: vueBudget, acc: vueAcc, lieux: vueLieux, liens: vueLiens, abo: () => `<p class="cr">Deux agendas à ajouter une fois sur l’iPhone : Réglages › Apps › Calendrier › Comptes › Ajouter un compte › Autre › S’abonner à un calendrier, colle l’adresse, puis Suivant et Enregistrer. Mise à jour automatique (à peu près toutes les heures).</p>${subsHTML()}<p class="cr">Ces adresses sont secrètes : elles contiennent prix et accompagnants. Ne les partage pas.</p>` }[VUE] || vueRes;
-    $("#main").innerHTML = `<div class="ph"><h1>Admin</h1><p>${TOK ? "Connecté · chaque enregistrement publie le site" : '<span class="warn">Lecture seule sur cet appareil</span>'} · verrouillage après 30 min d’inactivité.</p></div>
-    <div class="acts" style="margin-top:0"><button class="btn pri" type="button" data-adm="ajouter">+ Ajouter une sortie</button>${TOK ? "" : '<button class="btn" type="button" id="aTok">Saisir le jeton</button>'}<button class="btn" type="button" id="aLock">Verrouiller</button></div>
-    <nav class="chips" aria-label="Espace admin" style="margin-top:6px">${ONGLETS.map(([k, t]) => `<a class="chip" href="#admin?v=${k}"${k === VUE ? ' aria-current="page"' : ""}>${t}${k === "envies" && nE ? ` (${nE})` : ""}${k === "rapide" && nC ? ` (${nC})` : ""}</a>`).join("")}</nav>
+    $("#main").innerHTML = `<div class="adm-tete"><h1>Admin</h1><p>${TOK ? "Connecté · chaque enregistrement publie le site" : "Lecture seule sur cet appareil"} · verrouillage après 30 min d’inactivité</p>
+    <nav class="chips" aria-label="Espace admin">${ONGLETS.map(([k, t]) => `<a class="chip" href="#admin?v=${k}"${k === VUE ? ' aria-current="page"' : ""}>${t}${k === "envies" && nE ? ` (${nE})` : ""}${k === "rapide" && nC ? ` (${nC})` : ""}</a>`).join("")}</nav></div>
+    <div class="acts"><button class="btn pri" type="button" data-adm="ajouter">+ Ajouter une sortie</button>${TOK ? "" : '<button class="btn" type="button" id="aTok">Saisir le jeton</button>'}<button class="btn" type="button" id="aLock">Verrouiller</button></div>
     <div id="av">${corps()}</div>
-    <p style="margin-top:24px"><button class="linkbtn" type="button" id="aForget">Oublier cet appareil (efface le jeton)</button></p>`;
+    <p class="pied-adm"><button class="linkbtn" type="button" id="aForget">Oublier cet appareil (efface le jeton)</button></p>`;
     $("#aLock").onclick = () => verrouiller("Verrouillé");
-    $("#aForget").onclick = () => { if (confirm("Effacer le jeton GitHub de cet appareil et verrouiller ? Il faudra le ressaisir à la prochaine connexion.")) { lsDel(LS_JETON); verrouiller("Appareil oublié : jeton effacé"); } };
+    $("#aForget").onclick = async () => { if (await demander("Effacer le jeton GitHub de cet appareil et verrouiller ? Il faudra le ressaisir à la prochaine connexion.", { oui: "Effacer le jeton" })) { lsDel(LS_JETON); verrouiller("Appareil oublié : jeton effacé"); } };
     if ($("#aTok")) $("#aTok").onclick = () => formJeton();
     const bp = $("#bp"); if (bp) bp.onchange = () => { BUDGET_P = bp.value; renderAdminVue(); };
     if (VUE === "rapide") brancherRapide();
