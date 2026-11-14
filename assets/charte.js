@@ -10,8 +10,8 @@
     { j: "3", m: "mars", t: "Les Noces de Figaro, ou la Folle Journée en version de concert intégrale", a: "Wolfgang Amadeus Mozart, Lorenzo Da Ponte, Orchestre des Remparts", g: "Opéra", l: "Salle Pleyel-sur-Seine · 19h", n: 1, b: [] },
   ];
   const badge = (x) => `<span class="b${x === "Léonard y va" ? " yva" : ""}">${x}</span>`;
-  const ligne = (d) => `<article class="row g-${FAM(d.g)}"><a class="rb" href="#charte"><span class="gb">${ICO(d.g)}<span class="gl">${d.g}</span></span><span class="stub"><b>${d.j}</b><small>${d.m}</small></span>
-    <span class="mid"><span class="l1"><span class="tt nom">${d.t}</span>${note(d.n, d.p)}</span><span class="art nom">${d.a}</span><span class="ss"><span class="ssm">${d.l}</span>${d.b.length ? `<span class="bds">${d.b.map(badge).join("")}</span>` : ""}</span></span></a></article>`;
+  const ligne = (d) => `<article class="row g-${FAM(d.g)}"><a class="rb" href="#charte"><span class="gb" aria-hidden="true"></span><span class="stub"><b>${d.j}</b><small>${d.m}</small></span>
+    <span class="mid"><span class="l1"><span class="tt nom">${ICO(d.g).replace('class="pi', 'class="pi gt')}${d.t}</span>${note(d.n, d.p)}</span><span class="art nom">${d.a}</span><span class="ss"><span class="ssm">${d.l}</span>${d.b.length ? `<span class="bds">${d.b.map(badge).join("")}</span>` : ""}</span></span></a></article>`;
 
   // Favicon : la clé (dont le dessin occupe 75 % × 60 % de sa boîte) laisse 18 % de marge et se centre optiquement
   let CLE = null, ICO = () => "", FAM = () => "neutre";
@@ -106,7 +106,7 @@
 
     ${duo("1. En-tête", entete)}
     ${duo("2. Navigation", nav, "Libellés courts sur mobile (barre fixe en bas), complets sur bureau (rangée collante sous l’en-tête). Onglet actif : soulignement rouge de 3 px.")}
-    ${duo("3. Ligne de spectacle", lignes, "Colonne de date de 64 px, filet vertical pointillé. Bande de genre verticale à gauche (aplat de la couleur du genre, icône et libellé en blanc). Titre, note puis cœur sur la première ligne ; badges au bout de la ligne lieu. Boutons dans le déroulé.")}
+    ${duo("3. Ligne de spectacle", lignes, "Colonne de date de 64 px, filet vertical pointillé. Bande pleine de la couleur du genre à gauche. Picto du genre (de sa couleur) devant le titre, note puis cœur à droite ; petits badges au bout de la ligne lieu. Boutons dans le déroulé.")}
     ${duo("4. Bandeaux de jour", bandeaux, "Collants en haut de la liste au défilement.")}
     ${duo("5. Note", notes)}
     ${duo("6. Badges", badges)}

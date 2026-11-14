@@ -22,7 +22,7 @@
   --police:"Schibsted Grotesk","Factotum secours","Helvetica Neue",Arial,sans-serif;
   --t-site:44px;--t-section:22px;--t-fiche:17px;--t-corps:15px;--t-champ:16px;--t-meta:12px;--t-date:13px;--t-chiffre:48px;--t-jour:22px;--t-barre:20px;
   --e1:4px;--e2:8px;--e3:12px;--e4:16px;--e6:24px;--e8:32px;--e12:48px;
-  --cible:44px;--marge:16px;--max:1120px;--colonne-date:60px;--bande:20px;--t-bande:11px;
+  --cible:44px;--marge:16px;--max:1120px;--colonne-date:60px;--bande:6px;--t-badge:10px;
   --sat:env(safe-area-inset-top,0px);--sab:env(safe-area-inset-bottom,0px);--sal:env(safe-area-inset-left,0px);--sar:env(safe-area-inset-right,0px);
   --barre:48px;--nav:52px;--collant:calc(var(--sat) + var(--barre));
   --duree:120ms;
@@ -123,11 +123,11 @@ body.compact .barre{visibility:visible}
 .row{position:relative;border-bottom:1px solid var(--filet-leger);background:var(--fond)}
 .mh+.row,.jour+.row,.list>.row:first-child{border-top:1px solid var(--filet-leger)}
 .rb{display:grid;grid-template-columns:var(--colonne-date) minmax(0,1fr);width:100%;min-height:var(--cible);padding:0;border:0;border-radius:0;background:none;color:inherit;text-align:left;text-decoration:none;cursor:pointer;transition:background-color var(--duree)}
-.stub{grid-row:span 2;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:var(--e3) var(--e2) var(--e3) 0;border-right:1px dotted var(--encre-2);line-height:1}
+.stub{grid-row:span 2;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:var(--e2) var(--e2) var(--e2) 0;border-right:1px dotted var(--encre-2);line-height:1}
 .stub b{font-size:var(--t-jour);font-weight:800;letter-spacing:-.01em}
 .stub small.fin{margin:0 0 var(--e1);font-size:var(--t-meta);font-weight:500;color:var(--encre-2)}
 .stub small{margin-top:var(--e1);font-size:var(--t-date);font-weight:800;text-transform:uppercase;letter-spacing:.02em;line-height:1.1}
-.mid{display:flex;flex-direction:column;gap:2px;min-width:0;padding:var(--e3) 0 var(--e3) var(--e3)}
+.mid{display:flex;flex-direction:column;gap:2px;min-width:0;padding:var(--e2) 0 var(--e2) var(--e3)}
 .tt{font-size:var(--t-fiche);font-weight:700;line-height:1.2}
 .art{color:var(--encre)}
 .ss{font-size:var(--t-meta);font-weight:500;text-transform:uppercase;letter-spacing:.06em;line-height:1.35}
@@ -164,7 +164,7 @@ body.compact .barre{visibility:visible}
 
 /* ---------- 6. Badges ---------- */
 .bds{display:flex;flex-wrap:wrap;gap:var(--e1)}
-.b{display:inline-block;padding:2px var(--e1);border:1px solid var(--encre);color:var(--encre);font-size:var(--t-meta);font-weight:700;text-transform:uppercase;letter-spacing:.06em;line-height:1.3;white-space:nowrap}
+.b{display:inline-block;padding:1px var(--e1);border:1px solid var(--encre);color:var(--encre);font-size:var(--t-badge);font-weight:700;text-transform:uppercase;letter-spacing:.04em;line-height:1.2;white-space:nowrap}
 .b.yva{background:var(--rouge);border-color:var(--rouge);color:var(--sur-rouge)}
 
 /* ---------- 7. Boutons ---------- */
@@ -408,7 +408,7 @@ details.box[open]>summary::before{content:"–"}
 @container liste (max-width:519.98px){.mid>.ss .hor{display:none}}
 /* Cœur des envies : toujours tout à droite de la première ligne. Public : cœur plein, non modifiable ; admin : bouton. */
 body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
-.row>.envie{position:absolute;top:calc(var(--e3) + 1px);right:0}
+.row>.envie{position:absolute;top:calc(var(--e2) + 1px);right:0}
 .coeur-l{flex:none;display:block;width:18px;height:18px;margin-top:1px;color:var(--rouge-texte)}
 .coeur-l .coeur{width:18px;height:18px;fill:currentColor}
 .envie{position:relative;z-index:1;display:block;width:18px;height:18px;padding:0;border:0;border-radius:0;background:none;color:var(--encre-2);cursor:pointer;transition:color var(--duree)}
@@ -567,9 +567,8 @@ body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
 /* Bande de genre à gauche de la ligne : aplat, icône et libellé en blanc, à la verticale (lu de bas en haut). */
 .rb:has(>.gb){grid-template-columns:var(--bande) var(--colonne-date) minmax(0,1fr)}
 .row:has(>.rb>.gb)>.det{margin-left:calc(var(--bande) + var(--colonne-date) - 1px)}
-.gb{grid-row:span 2;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:6px;padding:var(--e3) 0;background:var(--ga,var(--rouge));color:var(--sur-rouge)}
-.gb .pi{flex:none;width:14px;height:14px}
-.gb .gl{writing-mode:vertical-rl;transform:rotate(180deg);font-size:var(--t-bande);font-weight:700;text-transform:uppercase;letter-spacing:.06em;line-height:1;white-space:nowrap}
+.gb{grid-row:span 2;background:var(--ga,var(--rouge))}
+.tt .gt{display:inline-block;width:16px;height:16px;margin-right:6px;vertical-align:-2px;color:var(--g,var(--encre))}
 .rb:has(>.gb) .stub{padding-left:var(--e2)}
 .chip[class*=" g-"] .pi{color:var(--g)}
 .chip[class*=" g-"][aria-pressed="true"],.chip[class*=" g-"].on{background:var(--ga);border-color:var(--ga);color:var(--sur-rouge)}
