@@ -64,6 +64,7 @@ Référence vivante : la page `#charte` (imprimable en PDF). Toute modification 
 - `artistes[].role` ∈ auteur, compositeur, mise en scène, chorégraphie, direction musicale, interprète, commissaire, réalisation, compagnie, artiste (en cas de doute). Une seule graphie par artiste : nom complet, accents, apostrophe ’ (vérifie `data/index-artistes.json` avant d'ajouter un nom).
 - `lieuId` doit exister dans `lieux.json` (sinon ajoute le lieu). `null` toléré seulement dans le journal.
 - `datesTexte` (facultatif) : dates en clair quand `debut`/`fin` ne suffisent pas. `horaires` (facultatif) : heures, durée, matinées.
+- `relaches` (facultatif) : jours sans représentation entre `debut` et `fin`, jours de semaine (`"lun"` … `"dim"`) ou dates ISO (`["lun", "2027-01-17"]`). Le calendrier de la fiche les retire. À renseigner dès que le calendrier du lieu est connu (y compris dates isolées : liste des jours sans spectacle).
 - `offres[].vente` : `AAAA-MM-JJ` ou `AAAA-MM-JJTHH:MM` ; `venteApprox: true` si la date est estimée.
 - Journal : `statut: "vu"`, `vuLe` (liste de dates ISO), `noteLeonard` (1–4 ou null), `avis` (ses mots, jamais les tiens).
 - Passage à vu : la fiche **sort** de `affiche.json` et **entre** dans `journal.json` (même id).
