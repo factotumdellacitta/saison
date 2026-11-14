@@ -11,8 +11,7 @@
   ];
   const badge = (x) => `<span class="b${x === "Léonard y va" ? " yva" : ""}">${x}</span>`;
   const ligne = (d) => `<article class="row g-${FAM(d.g)}"><a class="rb" href="#charte"><span class="stub"><b>${d.j}</b><small>${d.m}</small></span>
-    <span class="mid"><span class="gk">${ICO(d.g)}${d.g}</span><span class="tt nom">${d.t}</span><span class="art nom">${d.a}</span><span class="ss">${d.l}</span></span>
-    <span class="end">${note(d.n, d.p)}${d.b.length ? `<span class="bds">${d.b.map(badge).join("")}</span>` : ""}</span></a></article>`;
+    <span class="mid"><span class="l1"><span class="gk">${ICO(d.g)}${d.g}</span>${note(d.n, d.p)}</span><span class="tt nom">${d.t}</span><span class="art nom">${d.a}</span><span class="ss"><span class="ssm">${d.l}</span>${d.b.length ? `<span class="bds">${d.b.map(badge).join("")}</span>` : ""}</span></span></a></article>`;
 
   // Favicon : la clé (dont le dessin occupe 75 % × 60 % de sa boîte) laisse 18 % de marge et se centre optiquement
   let CLE = null, ICO = () => "", FAM = () => "neutre";
@@ -36,8 +35,7 @@
     const lignes = `<div class="list">${DEMO.map(ligne).join("")}</div>`;
     // Radar : la colonne de date porte le jalon (compte à rebours de vente, ou fin) ; rouge quand il reste deux jours ou moins.
     const ligneR = (d) => `<article class="row"><a class="rb" href="#charte"><span class="stub"><small class="fin${d.u ? " urg" : ""}">${d.k}</small><b>${d.j}</b><small>${d.m}</small></span>
-    <span class="mid"><span class="tt nom">${d.t}</span><span class="art">${d.i}</span><span class="ss">${d.l}</span></span>
-    <span class="end">${note(d.n)}${d.b.length ? `<span class="bds">${d.b.map(badge).join("")}</span>` : ""}</span></a></article>`;
+    <span class="mid"><span class="l1"><span class="gk"></span>${note(d.n)}</span><span class="tt nom">${d.t}</span><span class="art">${d.i}</span><span class="ss"><span class="ssm">${d.l}</span>${d.b.length ? `<span class="bds">${d.b.map(badge).join("")}</span>` : ""}</span></span></a></article>`;
     const radar = `<a class="r-ligne" href="#charte"><b>Radar</b> <span>2 ventes cette semaine · 5 à réserver</span></a>
       <h3 class="mh">À réserver <small>notées 4, pas encore réservées</small></h3><div class="list">
       ${ligneR({ k: "auj.", u: true, j: "14", m: "nov.", t: "Werther", i: "Vente le sam. 14 nov. 12h <b class=\"warn\">(auj.)</b> · Avant-première jeunes, 10 € · 6 soirs libres", l: "Opéra Nord · Opéra", n: 4, b: ["Offre jeune"] })}
@@ -108,7 +106,7 @@
 
     ${duo("1. En-tête", entete)}
     ${duo("2. Navigation", nav, "Libellés courts sur mobile (barre fixe en bas), complets sur bureau (rangée collante sous l’en-tête). Onglet actif : soulignement rouge de 3 px.")}
-    ${duo("3. Ligne de spectacle", lignes, "Colonne de date de 64 px, filet vertical pointillé. Sur un conteneur large, la note et les badges passent à droite (@container).")}
+    ${duo("3. Ligne de spectacle", lignes, "Colonne de date de 64 px, filet vertical pointillé. Genre et note sur la première ligne (cœur des envies juste avant la note, en admin), badges au bout de la ligne lieu : aucune rangée en plus. Boutons dans le déroulé.")}
     ${duo("4. Bandeaux de jour", bandeaux, "Collants en haut de la liste au défilement.")}
     ${duo("5. Note", notes)}
     ${duo("6. Badges", badges)}
