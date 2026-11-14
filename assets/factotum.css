@@ -386,16 +386,23 @@ details.box[open]>summary::before{content:"–"}
 .row>.rb{grid-column:1/-1}
 .row>.end{grid-column:2;margin:0;padding:0 0 var(--e3) var(--e3);border-left:1px dotted var(--encre-2)}
 .row>.det{grid-column:1/-1}
+body.adm .row>.end{align-items:flex-start}
+.row>.envie{grid-column:1;grid-row:2;align-self:start;justify-self:start;height:10px;margin:0}
 @container liste (min-width:720px){
   .row:has(>.end){grid-template-columns:var(--colonne-date) minmax(0,1fr) 168px}
   .row>.rb{grid-column:1/3;grid-row:1}
-  .row>.end{position:relative;grid-column:3;grid-row:1;border-left:0;padding:var(--e3) 0}
-  .row>.end>.envie{position:absolute;left:0;top:var(--e3);margin:0}
+  .row>.end{grid-column:3;grid-row:1;border-left:0;padding:var(--e3) 0}
+  body.adm .row>.end{align-items:flex-end}
+  .row>.envie{grid-column:3;grid-row:1;align-self:start;justify-self:end;height:10px;margin:var(--e3) calc(49px + var(--e2)) 0 0}
+  .row:has(.st sup)>.envie{margin-right:calc(49px + 13px + var(--e2))}
 }
-.envie{position:relative;display:flex;align-items:center;justify-content:center;width:20px;height:20px;margin:-5px 0;padding:0;border:0;border-radius:0;background:none;color:var(--encre-2);cursor:pointer;transition:color var(--duree)}
-.envie::after{content:"";position:absolute;inset:-12px}
+/* Cœur (admin) : dans un espace vide, centré sur la ligne de la note (l’icône déborde du bouton, sans hauteur propre). Mobile : sous la date, à gauche du filet pointillé ;
+   bureau : à gauche de la note, dans la colonne de droite. Il ne crée jamais de hauteur. */
+
+.envie{position:relative;z-index:1;display:block;width:20px;height:20px;padding:0;border:0;border-radius:0;background:none;color:var(--encre-2);cursor:pointer;transition:color var(--duree)}
+.envie::after{content:"";position:absolute;inset:-17px -12px}
 .coeur{width:22px;height:22px;}
-.envie svg{width:20px;height:20px;}
+.envie svg{position:absolute;left:0;top:50%;transform:translateY(-50%);width:20px;height:20px;}
 .coeur,.envie svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:miter}
 .envie[aria-pressed="true"]{color:var(--rouge-texte)}
 .envie[aria-pressed="true"] svg,.tab[aria-selected="true"] .coeur{fill:currentColor}
