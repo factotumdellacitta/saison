@@ -551,13 +551,35 @@ function renderLieu(id) {
 
 /* ---------- Liens utiles ---------- */
 const icsURL = (k) => `webcal://${location.host}${location.pathname.replace(/[^/]*$/, "")}data/${k}-${PRIVE.icsToken}.ics`;
+const ORDRE_LIENS = ["Cartes et tarifs jeunes", "Calendriers de vente", "Billetteries", "Outils"];
+const INFO_LIENS = { "Cartes et tarifs jeunes": "Abonnements et offres pour les moins de 28 ans", "Calendriers de vente": "Programmations et ouvertures des ventes, lieu par lieu", Billetteries: "Acheter des places, par lieu", Outils: "" };
+const hote = (u) => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch (_) { return ""; } };
+const EXT = '<svg class="ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>';
+// Liens rangés par rubrique, dans l’ordre du fichier à l’intérieur de chaque rubrique.
+const liensParRubrique = (L) => ORDRE_LIENS.map((c) => [c, L.filter((l) => l.categorie === c)]);
 function renderLiens() {
-  const groups = CAT_LIENS.map((c) => [c, LIENS.filter((l) => l.categorie === c)]).filter(([, l]) => l.length);
-  const ve = prochainesVentes(15);
-  $("#main").innerHTML = `<div class="ph"><h1>Liens utiles</h1></div>
-  ${groups.map(([c, l]) => `<h2 class="mh">${esc(c)} <small>${l.length}</small></h2><ul class="lk">${l.map((x) => `<li><a href="${esc(x.url)}" target="_blank" rel="noopener"><b>${esc(x.titre)}</b>${x.note ? `<small>${esc(x.note)}</small>` : ""}</a></li>`).join("")}</ul>`).join("")}
-  <h2 class="mh">Prochaines ouvertures de ventes</h2><div class="box" style="background:var(--card);border:1px solid var(--line);border-radius:10px"><ul class="vl" style="padding-top:0">${ve.map(({ e, o }) => `<li><a href="#sortie-${esc(e.id)}"><span class="vd">${venteTxt(o)}</span><span class="vt"><b>${esc(e.titre)}</b> <span>· ${esc(o.type)}</span></span></a></li>`).join("") || "<li class=\"cr\" style=\"padding:10px 0\">Aucune ouverture connue.</li>"}</ul></div>
+  const groups = liensParRubrique(LIENS).filter(([, l]) => l.length);
+  const ve = prochainesVentes(8);
+  const item = (x) => `<li data-q="${esc(norm(x.titre + " " + hote(x.url) + " " + (x.note || "")))}"><a href="${esc(x.url)}" target="_blank" rel="noopener"><span class="lt"><b>${esc(x.titre)}</b><small>${esc(hote(x.url))}${x.note ? " · " + esc(x.note) : ""}</small></span>${EXT}</a></li>`;
+  const section = ([c, l]) => `<section class="lks" id="lk-${slug(c)}"><h2 class="mh">${esc(c)} <small>${l.length}</small></h2>${INFO_LIENS[c] ? `<p class="cr lkd">${esc(INFO_LIENS[c])}</p>` : ""}<ul class="lk${l.length > 6 ? " lk2" : ""}">${l.map(item).join("")}</ul></section>`;
+  const ventes = `<section class="lks" id="lk-ventes"><h2 class="mh">Prochaines ouvertures de ventes</h2><div class="box" style="background:var(--card);border:1px solid var(--line);border-radius:10px"><ul class="vl" style="padding-top:0">${ve.map(({ e, o }) => `<li><a href="#sortie-${esc(e.id)}"><span class="vd">${venteTxt(o)}</span><span class="vt"><b>${esc(e.titre)}</b> <span>· ${esc(o.type)}</span></span></a></li>`).join("") || "<li class=\"cr\" style=\"padding:10px 0\">Aucune ouverture connue.</li>"}</ul></div></section>`;
+  const blocs = []; groups.forEach((g) => { blocs.push(section(g)); if (g[0] === "Calendriers de vente") blocs.push(ventes); });
+  if (!groups.some(([c]) => c === "Calendriers de vente")) blocs.unshift(ventes);
+  $("#main").innerHTML = `<div class="ph"><h1>Liens utiles</h1><p>Cartes jeunes, calendriers de vente et billetteries des lieux suivis.</p></div>
+  <div class="tools"><input type="search" id="lkq" placeholder="Rechercher un lieu, une carte, un site…" aria-label="Rechercher un lien" style="flex:1"></div>
+  <nav class="chips" aria-label="Rubriques">${groups.map(([c, l]) => `<button class="chip" type="button" data-lkgo="lk-${slug(c)}">${esc(c)}</button>`).join("")}<button class="chip" type="button" data-lkgo="lk-ventes">Ventes à venir</button></nav>
+  ${blocs.join("")}<p class="empty" id="lkvide" hidden>Aucun lien ne correspond.</p>
   ${PRIVE ? `<h2 class="mh">Abonnements (admin)</h2>${subsHTML()}` : ""}`;
+  $("#main").querySelector("nav").onclick = (ev) => { const b = ev.target.closest("[data-lkgo]"); if (b) document.getElementById(b.dataset.lkgo).scrollIntoView({ behavior: "smooth", block: "start" }); };
+  $("#lkq").oninput = (ev) => {
+    const q = norm(ev.target.value).trim(); let n = 0;
+    $$("#main .lks").forEach((sec) => {
+      const lis = $$("li[data-q]", sec); if (!lis.length) { sec.hidden = !!q; return; }
+      let v = 0; lis.forEach((li) => { const ok = !q || li.dataset.q.includes(q); li.hidden = !ok; v += ok; });
+      sec.hidden = !v; n += v;
+    });
+    $("#lkvide").hidden = !q || n > 0;
+  };
 }
 function subsHTML() {
   return `<div class="cal"><p class="cr" style="margin:0 0 6px">Sur iPhone : Réglages, Calendrier, Comptes, Ajouter un compte, Autre, S’abonner à un calendrier, puis colle l’adresse.</p>
@@ -569,7 +591,7 @@ function subsHTML() {
 function lockIcon() { $("#shackle").setAttribute("d", PRIVE ? "M8 10.5V8a4 4 0 0 1 7.6-1.7" : "M8 10.5V8a4 4 0 0 1 8 0v2.5"); $("#t-admin").setAttribute("aria-label", PRIVE ? "Admin, déverrouillé" : "Admin"); }
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=3.2"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=3.3"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {

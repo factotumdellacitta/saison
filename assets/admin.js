@@ -240,18 +240,21 @@
     if (JSON.stringify(avant ?? null) !== JSON.stringify(maintenant ?? null) && !confirm(`${quoi} a été modifié ailleurs (Claude Code ou un autre appareil) depuis l’ouverture du formulaire. Remplacer par ta version ?`)) throw new Annule();
   }
   // Applique des données fraîches à l’interface.
-  function appliquer(d) {
+  function appliquer(d, force) {
     PRIVE = d.prive;
     const dispo = { ...d.dispo, reservations: [...new Set(Object.values(d.prive.reservations).map((r) => r.date).filter(Boolean))].sort() };
     applyData({ affiche: d.affiche, journal: d.journal, lieux: d.lieux, liens: d.liens, dispo });
-    rafraichir();
+    rafraichir(force);
   }
-  async function rafraichir() {
+  // Une saisie est-elle en cours dans la page (hors dialogue) ? On ne redessine pas sous les doigts.
+  const saisieEnCours = () => $$("#main input:not([type=search]), #main textarea").some((x) => (x.type === "checkbox" ? x.checked !== x.defaultChecked : x.value !== x.defaultValue)) || (document.activeElement && $("#main").contains(document.activeElement) && /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName) && document.activeElement.type !== "search");
+  async function rafraichir(force) {
     const h = location.hash.slice(1) || "affiche";
+    if (!force && !h.startsWith("sortie-") && saisieEnCours()) return;
     if (h.startsWith("sortie-")) { await renderView(BASE || "affiche"); openSheet(decodeURIComponent(h.slice(7))); }
     else await renderView(h);
   }
-  async function recharger(pw) { const b = await lireDistant(pw); appliquer(b.d); }
+  async function recharger(pw, force) { const b = await lireDistant(pw); appliquer(b.d, force); }
 
   /* ---------- Bandeau de publication ---------- */
   function bandeau(t, cls = "", lien) {
@@ -299,7 +302,7 @@
     PRIVE = null; TOK = null; KEY = null; SALT = null; PUB = null; JAVEC = ""; SOIRS = null; LIENS_W = null; RAPIDE = null;
     BLOBS.clear(); fermerDlg(); bandeau(""); document.body.classList.remove("adm"); lockIcon();
     if ($("#sheet").hidden) $("#sheetIn").innerHTML = ""; // fiche fermée : aucun reste du bloc admin dans la page
-    rafraichir(); if (msg) toast(msg);
+    rafraichir(true); if (msg) toast(msg);
   }
 
   /* ---------- Dialogue (formulaires) ---------- */
@@ -909,40 +912,94 @@
   }
 
   /* ---------- Liens utiles ---------- */
+  // Édition des liens : une ligne par lien, par rubrique ; glisser la poignée pour l’ordre (ou vers une autre rubrique).
+  const rangeLiens = (L) => liensParRubrique(L).flatMap(([, l]) => l);
+  const ICO = {
+    drag: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="6" r="1.4"/><circle cx="15" cy="6" r="1.4"/><circle cx="9" cy="12" r="1.4"/><circle cx="15" cy="12" r="1.4"/><circle cx="9" cy="18" r="1.4"/><circle cx="15" cy="18" r="1.4"/></svg>',
+    edit: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>',
+    del: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg>',
+  };
   function vueLiens() {
-    if (!LIENS_W) LIENS_W = { base: clone(LIENS || []), w: clone(LIENS || []) };
+    if (!LIENS_W) { const b = rangeLiens(clone(LIENS || [])); LIENS_W = { base: b, w: clone(b) }; }
     const modif = JSON.stringify(LIENS_W.base) !== JSON.stringify(LIENS_W.w);
-    return `<p class="cr">Modifie, réordonne, puis enregistre (un seul envoi).</p>
-    <div class="list">${LIENS_W.w.map((l, i) => `<div class="ad lnk"><div><b>${esc(l.titre)}</b><small class="cr">${esc(l.categorie)}${l.note ? " · " + esc(l.note) : ""}</small><small class="cr url">${esc(l.url)}</small></div>
-      <div class="acts"><button class="btn ico" type="button" data-lk="up" data-i="${i}" aria-label="Monter ${esc(l.titre)}"${i ? "" : " disabled"}>↑</button><button class="btn ico" type="button" data-lk="down" data-i="${i}" aria-label="Descendre ${esc(l.titre)}"${i < LIENS_W.w.length - 1 ? "" : " disabled"}>↓</button><button class="btn" type="button" data-lk="edit" data-i="${i}">Modifier</button><button class="btn" type="button" data-lk="del" data-i="${i}">Supprimer</button></div></div>`).join("")}</div>
-    <div class="acts"><button class="btn" type="button" data-lk="new">+ Ajouter un lien</button><button class="btn pri" type="button" data-lk="save"${modif ? "" : " disabled"}>Enregistrer les liens</button>${modif ? '<button class="btn" type="button" data-lk="raz">Annuler les changements</button>' : ""}</div>`;
+    const ligne = (l, i) => `<li class="lka" data-i="${i}"><button type="button" class="poignee" data-drag aria-label="Déplacer « ${esc(l.titre)} » (flèches haut et bas)">${ICO.drag}</button>
+      <span class="lt"><b>${esc(l.titre)}</b><small>${esc(hote(l.url))}${l.note ? " · " + esc(l.note) : ""}</small></span>
+      <button type="button" class="ico2" data-lk="edit" data-i="${i}" aria-label="Modifier « ${esc(l.titre)} »">${ICO.edit}</button><button type="button" class="ico2 rouge" data-lk="del" data-i="${i}" aria-label="Supprimer « ${esc(l.titre)} »">${ICO.del}</button></li>`;
+    const idx = LIENS_W.w.map((l, i) => [l, i]);
+    return `<p class="cr">Glisse la poignée pour changer l’ordre, ou vers une autre rubrique. Rien n’est envoyé avant « Enregistrer ».</p>
+    ${ORDRE_LIENS.map((c) => { const L = idx.filter(([l]) => l.categorie === c); return `<div class="lkg"><h2 class="mh">${esc(c)} <small>${L.length}</small><button type="button" class="linkbtn ml" data-lk="new" data-cat="${esc(c)}">+ Ajouter</button></h2>
+      <ul class="lkadm" data-cat="${esc(c)}">${L.map(([l, i]) => ligne(l, i)).join("")}</ul></div>`; }).join("")}
+    ${modif ? '<div class="savebar" role="region" aria-label="Modifications non enregistrées"><span>Modifications non enregistrées</span><button class="btn" type="button" data-lk="raz">Annuler</button><button class="btn pri" type="button" data-lk="save">Enregistrer</button></div>' : ""}`;
   }
-  function formLien(i) {
-    const l = i == null ? { categorie: CAT_LIENS[0] } : LIENS_W.w[i];
-    dlg(i == null ? "Ajouter un lien" : "Modifier le lien", `${champ("Catégorie", sel("categorie", CAT_LIENS, l.categorie))}${champ("Titre", inp("titre", l.titre))}${champ("Adresse", inp("url", l.url, 'type="url" placeholder="https://…"'))}${champ("Note", inp("note", l.note))}`, async (f) => {
+  function formLien(i, cat) {
+    const l = i == null ? { categorie: cat || ORDRE_LIENS[0] } : LIENS_W.w[i];
+    dlg(i == null ? "Ajouter un lien" : "Modifier le lien", `${champ("Rubrique", sel("categorie", ORDRE_LIENS, l.categorie))}${champ("Titre", inp("titre", l.titre))}${champ("Adresse", inp("url", l.url, 'type="url" placeholder="https://…" autocapitalize="off"'))}${champ("Note (facultative)", inp("note", l.note))}`, async (f) => {
       const n = { categorie: val(f, "categorie"), titre: val(f, "titre"), url: val(f, "url"), note: val(f, "note") };
       if (!n.titre || !URL_RE.test(n.url)) throw new Error("Titre et adresse (https://…) obligatoires.");
       if (i == null) LIENS_W.w.push(n); else LIENS_W.w[i] = n;
+      LIENS_W.w = rangeLiens(LIENS_W.w);
       renderAdminVue("liens");
     }, { valider: "Valider" });
+  }
+  // Ordre affiché (DOM) -> données
+  function ordreDepuisDOM() {
+    const w = LIENS_W.w, out = [];
+    $$("#av .lkadm").forEach((ul) => $$("li[data-i]", ul).forEach((li) => out.push({ ...w[+li.dataset.i], categorie: ul.dataset.cat })));
+    LIENS_W.w = out;
   }
   function brancherLiens() {
     const m = $("#av"); if (!m) return;
     m.onclick = (ev) => {
       const b = ev.target.closest("[data-lk]"); if (!b) return;
       const k = b.dataset.lk, i = +b.dataset.i, w = LIENS_W.w;
-      if (k === "up" && i > 0) [w[i - 1], w[i]] = [w[i], w[i - 1]];
-      else if (k === "down" && i < w.length - 1) [w[i + 1], w[i]] = [w[i], w[i + 1]];
-      else if (k === "del") { if (!confirm(`Supprimer « ${w[i].titre} » ?`)) return; w.splice(i, 1); }
+      if (k === "del") { const t = w[i].titre; w.splice(i, 1); toast(`« ${t} » retiré (Annuler pour revenir)`); }
       else if (k === "edit") return formLien(i);
-      else if (k === "new") return formLien(null);
+      else if (k === "new") return formLien(null, b.dataset.cat);
       else if (k === "raz") LIENS_W = null;
       else if (k === "save") return act(async () => {
         const base = LIENS_W.base, nv = clone(LIENS_W.w);
-        await ecrire("Admin : liens utiles mis à jour", (d) => { garde(base, d.liens, "La liste des liens"); d.liens = nv; });
+        await ecrire("Admin : liens utiles mis à jour", (d) => { garde(base, rangeLiens(d.liens), "La liste des liens"); d.liens = nv; });
         LIENS_W = null; renderAdminVue("liens"); toast("Liens enregistrés");
       });
       renderAdminVue("liens");
+    };
+    // Glisser-déposer au doigt ou à la souris (événements pointer : fonctionne sur iPhone)
+    let g = null;
+    m.onpointerdown = (ev) => {
+      const h = ev.target.closest("[data-drag]"); if (!h) return;
+      ev.preventDefault();
+      const li = h.closest("li"), r = li.getBoundingClientRect();
+      const fantome = li.cloneNode(true); fantome.classList.add("fantome");
+      Object.assign(fantome.style, { left: r.left + "px", top: r.top + "px", width: r.width + "px" });
+      document.body.appendChild(fantome); li.classList.add("trou");
+      g = { li, fantome, dy: ev.clientY - r.top, x0: ev.clientY, bouge: false };
+      try { h.setPointerCapture(ev.pointerId); } catch (_) {}
+    };
+    m.onpointermove = (ev) => {
+      if (!g) return; ev.preventDefault();
+      if (Math.abs(ev.clientY - g.x0) > 3) g.bouge = true;
+      g.fantome.style.top = ev.clientY - g.dy + "px";
+      const uls = $$(".lkadm", m);
+      let ul = uls[0], best = Infinity;
+      for (const u of uls) { const b = u.getBoundingClientRect(), dd = ev.clientY < b.top ? b.top - ev.clientY : ev.clientY > b.bottom ? ev.clientY - b.bottom : 0; if (dd < best) { best = dd; ul = u; } }
+      const apres = $$("li:not(.trou)", ul).find((x) => { const b = x.getBoundingClientRect(); return ev.clientY < b.top + b.height / 2; });
+      if (apres) { if (apres.previousElementSibling !== g.li) ul.insertBefore(g.li, apres); } else if (ul.lastElementChild !== g.li) ul.appendChild(g.li);
+      // défilement automatique seulement si le doigt va vers le bord (haut, ou bas au-dessus de la barre d’onglets)
+      const vers = ev.clientY - (g.y ?? ev.clientY); g.y = ev.clientY;
+      if (ev.clientY < 90 && vers < 0) window.scrollBy(0, -16); else if (ev.clientY > innerHeight - 140 && vers > 0) window.scrollBy(0, 16);
+    };
+    const fin = () => { if (!g) return; g.fantome.remove(); g.li.classList.remove("trou"); const b = g.bouge; g = null; if (b) { ordreDepuisDOM(); renderAdminVue("liens"); } };
+    m.onpointerup = fin; m.onpointercancel = fin;
+    // Clavier : flèches sur la poignée
+    m.onkeydown = (ev) => {
+      const h = ev.target.closest("[data-drag]"); if (!h || !["ArrowUp", "ArrowDown"].includes(ev.key)) return;
+      ev.preventDefault();
+      const li = h.closest("li"), ul = li.parentElement, uls = $$(".lkadm", m), k = uls.indexOf(ul);
+      if (ev.key === "ArrowUp") { if (li.previousElementSibling) ul.insertBefore(li, li.previousElementSibling); else if (k > 0) uls[k - 1].appendChild(li); else return; }
+      else { if (li.nextElementSibling) ul.insertBefore(li.nextElementSibling, li); else if (k < uls.length - 1) uls[k + 1].prepend(li); else return; }
+      const titre = li.querySelector("b").textContent;
+      ordreDepuisDOM(); renderAdminVue("liens");
+      const nh = $$("#av .lka").find((x) => x.querySelector("b").textContent === titre); if (nh) nh.querySelector("[data-drag]").focus();
     };
   }
 
@@ -1042,7 +1099,7 @@
         const avert = await testerJeton(tok);
         TOK = tok; await ranger(pw, tok);
         toast(avert || "Jeton vérifié et enregistré sur cet appareil");
-        ok(true); recharger().catch(() => rafraichir());
+        ok(true); recharger(undefined, true).catch(() => rafraichir(true));
       }, { valider: "Tester et enregistrer" });
     });
   }
@@ -1064,6 +1121,7 @@
     $("#pf").onsubmit = async (ev) => {
       ev.preventDefault();
       const err = $("#pErr"), go = $("#pGo"), pw = $("#pw").value, tok = $("#tok") ? $("#tok").value.trim() : "";
+      $("#pw").value = ""; document.activeElement.blur();
       const dire = (t) => { err.textContent = t; err.hidden = false; go.disabled = false; go.textContent = "Déverrouiller"; };
       err.hidden = true; go.disabled = true; go.textContent = "Vérification…";
       let p; try { p = await getJSON("data/prive.enc?t=" + Date.now(), { cache: "no-store" }); } catch (_) { return dire("Impossible de lire la zone privée : vérifie la connexion."); }
@@ -1083,8 +1141,8 @@
       KEY = key; SALT = p.salt; ITERP = p.iter; PRIVE = normPrive(prive); TOK = tk; LAST = Date.now();
       document.body.classList.add("adm"); lockIcon();
       let fait = false;
-      if (TOK) { go.textContent = "Lecture du dépôt…"; try { await recharger(pw); fait = true; } catch (e) { avert = "Lecture du dépôt impossible (" + msgGH(e) + ") : données du site affichées."; } }
-      if (!fait) await rafraichir();
+      if (TOK) { go.textContent = "Lecture du dépôt…"; try { await recharger(pw, true); fait = true; } catch (e) { avert = "Lecture du dépôt impossible (" + msgGH(e) + ") : données du site affichées."; } }
+      if (!fait) await rafraichir(true);
       if (avert) toast(avert);
     };
     $("#pw").focus();

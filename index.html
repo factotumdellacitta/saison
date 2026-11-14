@@ -234,11 +234,32 @@ blockquote{margin:6px 0;padding:8px 12px;background:var(--card);border-left:3px 
 .idx a{display:flex;justify-content:space-between;gap:6px;min-height:36px;align-items:center;text-decoration:none;border-bottom:1px solid var(--line)}
 .idx a span{color:var(--muted);font-size:12px}
 .letter{font:600 14px var(--serif);color:var(--accent);margin:12px 0 2px;column-span:all}
-.lk{list-style:none;margin:0;padding:0;background:var(--card);border:1px solid var(--line);border-radius:10px}
+.lk{list-style:none;margin:0;padding:0;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
 .lk li+li{border-top:1px solid var(--line)}
-.lk a{display:block;padding:9px 12px;min-height:44px;text-decoration:none}
-.lk a b{font-weight:600;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:2px}
-.lk small{display:block;color:var(--muted);font-size:12px}
+.lk a{display:flex;align-items:center;gap:10px;padding:9px 12px;min-height:52px;text-decoration:none}
+.lk a:active{background:var(--chip)}
+.lt{flex:1;min-width:0;display:flex;flex-direction:column}
+.lt b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lt small{display:block;color:var(--muted);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lk .ext{flex:none;width:18px;height:18px;fill:none;stroke:var(--muted);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.lkd{margin:-2px 2px 6px;font-size:12.5px}
+.lks{scroll-margin-top:calc(var(--sat) + 12px)}
+@media (min-width:640px){.lk2{display:grid;grid-template-columns:1fr 1fr}.lk2 li+li{border-top:0}.lk2 li{border-bottom:1px solid var(--line)}.lk2 li:nth-child(odd){border-right:1px solid var(--line)}}
+.lkadm{list-style:none;margin:0;padding:0;background:var(--card);border:1px solid var(--line);border-radius:10px;min-height:48px}
+.lkadm:empty::before{content:"Glisse un lien ici";display:block;padding:14px;color:var(--muted);font-size:13px}
+.lka{display:flex;align-items:center;gap:2px;min-height:52px;padding-right:4px;background:var(--card)}
+.lka+.lka{border-top:1px solid var(--line)}
+.lka.trou{opacity:.35;background:var(--chip)}
+.lka.fantome{position:fixed;z-index:50;border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.25);pointer-events:none}
+.poignee,.ico2{flex:none;width:44px;height:48px;border:0;background:none;color:var(--muted);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+.poignee{cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none}
+.poignee svg{width:20px;height:20px;fill:currentColor}
+.ico2 svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ico2.rouge{color:var(--accent)}
+.lkg .mh .linkbtn{min-height:32px}
+.savebar{position:sticky;bottom:calc(var(--tabh) + var(--sab) + 8px);z-index:15;display:flex;align-items:center;gap:8px;margin-top:12px;padding:8px 10px;background:var(--ink);color:var(--paper);border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.savebar span{flex:1;font-size:13px;font-weight:600}
+@media (min-width:900px){.savebar{bottom:12px}}
 .bars{display:grid;grid-template-columns:minmax(70px,max-content) 1fr 28px;gap:3px 8px;align-items:center;font-size:12.5px;padding:0 12px 10px}
 .bars .bl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:150px}
 .bars .bg{height:10px;background:var(--bar);border-radius:3px;min-width:2px}
@@ -333,6 +354,6 @@ body.adm .row .end{padding-right:40px}
 <main class="wrap"><div id="main" role="tabpanel" aria-labelledby="t-affiche" tabindex="-1"><p class="load">Chargement de la saison…</p></div></main>
 <div class="sheet" id="sheet" hidden><div class="sheet-in" id="sheetIn" role="dialog" aria-modal="true" aria-labelledby="sheetT" tabindex="-1"></div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="assets/app.js?v=3.2" defer></script>
+<script src="assets/app.js?v=3.3" defer></script>
 </body>
 </html>
