@@ -17,9 +17,11 @@ Léonard écrit en français, style direct. Réponds en français, brièvement, 
 | `data/prive.enc` | Zone privée chiffrée (schéma ci-dessous) | Chiffré |
 | `data/agenda-<icsToken>.ics` | Flux « Saison – réservations », généré | Adresse non devinable |
 | `data/ventes-<icsToken>.ics` | Flux « Saison – ouvertures de ventes », généré | Adresse non devinable |
-| `index.html` | Le site. Ne le modifie que si Léonard demande un changement d'interface. | |
+| `index.html`, `assets/app.js`, `sw.js` | Le site (coque et CSS, logique, service worker). Ne les modifie que si Léonard demande un changement d'interface. | |
 
-Le site publié ne contient que `index.html`, `assets/` et `data/`. Jamais `tools/`, `_setup/` ni fichier en clair.
+Le site publié ne contient que `index.html`, `sw.js`, `assets/` et `data/`. Jamais `tools/`, `_setup/` ni fichier en clair.
+Après toute modification de `assets/app.js` : incrémente `?v=` dans `index.html` et dans `SHELL` de `sw.js`, ainsi que `V` dans `sw.js` (sinon les téléphones gardent l'ancienne version en cache). Icônes et image de partage : `node tools/visuels.mjs` (une fois).
+Routes du site : `#affiche?filtres`, `#journal`, `#artistes`, `#lieux`, `#artiste-<slug>`, `#lieu-<id>`, `#liens`, `#sortie-<id>`, `#admin` (les anciens `#fiche-<id>` redirigent).
 
 ## Sortie (affiche.json et journal.json)
 

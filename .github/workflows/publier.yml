@@ -55,11 +55,11 @@ jobs:
       - name: Contrôle des données
         if: env.RIEN_A_PUBLIER != '1'
         run: node tools/check.mjs
-      - name: Préparer le site (index.html, assets, data uniquement)
+      - name: Préparer le site (index.html, sw.js, assets, data uniquement)
         if: env.RIEN_A_PUBLIER != '1'
         run: |
           mkdir -p _site
-          cp index.html _site/
+          cp index.html sw.js _site/
           if [ -d assets ]; then cp -r assets _site/assets; fi
           cp -r data _site/data
           rm -f _site/data/_prive.json

@@ -1,0 +1,17 @@
+{
+ "name": "Saison 2026–2027",
+ "short_name": "Saison",
+ "description": "Veille, agenda et journal des sorties culturelles de Léonard.",
+ "lang": "fr",
+ "start_url": "../#affiche",
+ "scope": "../",
+ "display": "standalone",
+ "background_color": "#F5F6F1",
+ "theme_color": "#F5F6F1",
+ "icons": [
+  {"src": "icon.svg", "sizes": "any", "type": "image/svg+xml"},
+  {"src": "icon-192.png", "sizes": "192x192", "type": "image/png"},
+  {"src": "icon-512.png", "sizes": "512x512", "type": "image/png"},
+  {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+ ]
+}
