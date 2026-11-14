@@ -53,7 +53,7 @@ function toast(t) { const el = $("#toast"); el.textContent = t; el.classList.add
 const getJSON = (u, o) => fetch(u, o).then((r) => { if (!r.ok) throw new Error(u); return r.json(); });
 
 /* ---------- Données ---------- */
-let AFF = [], LIVE = [], LIEUX = {}, BUSY = new Set(), BUSY_SRC = {}, MAJ = "", JOURNAL = null, JMAJ = "", LIENS = null, PRIVE = null;
+let ENVIES_PUB = [], AFF = [], LIVE = [], LIEUX = {}, BUSY = new Set(), BUSY_SRC = {}, MAJ = "", JOURNAL = null, JMAJ = "", LIENS = null, PRIVE = null;
 let ADMIN = null, JAVEC = ""; // ADMIN : module admin (assets/admin.js) ; JAVEC : filtre du journal par accompagnant (mémoire seulement)
 const BYID = new Map();
 let jP = null, lP = null;
@@ -61,6 +61,9 @@ const loadJournal = () => jP || (jP = getJSON("data/journal.json").then((j) => {
 const loadLiens = () => lP || (lP = getJSON("data/liens.json").then((l) => (LIENS = l)).catch((e) => { lP = null; throw e; }));
 
 // Remplace les données en mémoire (démarrage, ou données fraîches lues par l’admin via l’API).
+// Envies : liste publique (data/envies.json, générée) ou, en mode admin, la zone privée à jour.
+const enviesIds = () => new Set(PRIVE ? Object.keys(PRIVE.envies || {}) : ENVIES_PUB);
+const COEUR = '<svg class="coeur" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20.5 3.6 12.1a4.8 4.8 0 0 1 6.8-6.8L12 6.9l1.6-1.6a4.8 4.8 0 0 1 6.8 6.8z"/></svg>';
 function applyData({ affiche, lieux, dispo, journal, liens }) {
   if (affiche) { AFF = affiche.sorties; MAJ = affiche.maj; }
   if (lieux) LIEUX = lieux;
@@ -168,8 +171,8 @@ const genre = (e) => e.categorie + (e.sousGenre ? " (" + e.sousGenre.toLowerCase
 function rowA(e) {
   const meta = [court(e.lieuId), genre(e), e.horaires && e.horaires.length <= 40 ? e.horaires : ""].filter(Boolean).join(" · "), art = artLigne(e);
   return `<article class="row" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${esc(e.id)}">${stubHTML(e)}
-  <span class="mid"><span class="tt nom">${esc(e.titre)}</span>${art ? `<span class="art nom">${esc(art)}</span>` : ""}<span class="ss">${esc(meta)}</span></span>
-  <span class="end">${stars(e.note, e.pronostic)}${badges(e)}</span></button>${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}<div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
+  <span class="mid"><span class="tt nom">${esc(e.titre)}</span>${art ? `<span class="art nom">${esc(art)}</span>` : ""}<span class="ss">${esc(meta)}</span></span></button>
+  <span class="end">${stars(e.note, e.pronostic)}${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}${badges(e)}</span><div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
 }
 function rowJ(e) {
   const n = (e.vuLe || []).length;
@@ -615,6 +618,15 @@ const INFO_LIENS = { "Cartes et tarifs jeunes": "Abonnements et offres pour les 
 const hote = (u) => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch (_) { return ""; } };
 // Liens rangés par rubrique, dans l’ordre du fichier à l’intérieur de chaque rubrique.
 const liensParRubrique = (L) => ORDRE_LIENS.map((c) => [c, L.filter((l) => l.categorie === c)]);
+/* ---------- Envies (publiques) ---------- */
+function renderCoeur() {
+  const E = enviesIds();
+  const items = AFF.filter((e) => e.statut === "a-voir" && !ended(e) && E.has(e.id)).sort((a, b) => sortKey(a) - sortKey(b) || a.titre.localeCompare(b.titre, "fr"));
+  let html = "", last = null;
+  for (const e of items) { const g = groupOf(e); if (g !== last) { html += `<h2 class="jour">${g} <small>${plural(items.filter((x) => groupOf(x) === g).length, "sortie")}</small></h2>`; last = g; } html += rowA(e); }
+  $("#main").innerHTML = `<div class="ph"><h1>Envies</h1><p>Les sorties à l’affiche que ${OWNER} aimerait voir · ${plural(items.length, "sortie")}</p></div>
+  <div class="list">${html || `<p class="empty">Aucune envie notée pour le moment.</p>`}</div>`;
+}
 function renderLiens() {
   const groups = liensParRubrique(LIENS).filter(([, l]) => l.length);
   const ve = prochainesVentes(8);
@@ -654,7 +666,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.4"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.5"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -663,7 +675,7 @@ async function renderAdmin(q) {
 }
 
 /* ---------- Routeur ---------- */
-const TABS = { affiche: "affiche", journal: "journal", artistes: "artistes", lieux: "artistes", artiste: "artistes", lieu: "artistes", liens: "liens", admin: "admin" };
+const TABS = { affiche: "affiche", coeur: "coeur", journal: "journal", artistes: "artistes", lieux: "artistes", artiste: "artistes", lieu: "artistes", liens: "liens", admin: "admin" };
 let BASE = null, RENDERED = null;
 function setTab(t) {
   $$(".tab").forEach((b, i) => { const on = b.dataset.tab === t; b.setAttribute("aria-selected", String(on)); b.tabIndex = on || (!t && i === 0) ? 0 : -1; });
@@ -672,11 +684,11 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.4"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.5"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
-const TITRES = { affiche: "", journal: "Journal", artistes: "Artistes et lieux", lieux: "Artistes et lieux", liens: "Liens utiles", admin: "Admin" };
+const TITRES = { affiche: "", coeur: "Envies", journal: "Journal", artistes: "Artistes et lieux", lieux: "Artistes et lieux", liens: "Liens utiles", admin: "Admin" };
 let TITRE_VUE = "Factotum";
 async function renderView(h) {
   const [path, q = ""] = h.split("?");
@@ -702,6 +714,7 @@ async function renderView(h) {
   else if (view === "artiste") renderArtiste(decodeURIComponent(path.slice(8)));
   else if (view === "lieu") renderLieu(decodeURIComponent(path.slice(5)));
   else if (view === "liens") renderLiens();
+  else if (view === "coeur") renderCoeur();
   else if (view === "admin") await renderAdmin(q);
   RENDERED = h;
   if (!samePath) window.scrollTo(0, 0);
@@ -773,7 +786,8 @@ if ("IntersectionObserver" in window) new IntersectionObserver(([x]) => document
 /* ---------- Démarrage ---------- */
 (async () => {
   try {
-    const [a, l, d] = await Promise.all([getJSON("data/affiche.json"), getJSON("data/lieux.json"), getJSON("data/dispo.json").catch(() => ({}))]);
+    const [a, l, d, ev] = await Promise.all([getJSON("data/affiche.json"), getJSON("data/lieux.json"), getJSON("data/dispo.json").catch(() => ({})), getJSON("data/envies.json").catch(() => ({}))]);
+    ENVIES_PUB = Array.isArray(ev.ids) ? ev.ids : [];
     applyData({ affiche: a, lieux: l, dispo: d });
     await route();
     if (sessionVive()) loadAdmin().then(() => ADMIN.restaurer()).catch(() => {});

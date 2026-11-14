@@ -33,7 +33,7 @@ else {
 if (existsSync("data/spectacles.json")) erreurs.push("data/spectacles.json ne doit plus exister (remplacé par affiche.json et journal.json).");
 
 // ---------- Fichiers publics : aucune clé privée ----------
-const PUBLICS_ATTENDUS = new Set(["affiche.json", "journal.json", "lieux.json", "liens.json", "dispo.json", "index-artistes.json", "index-lieux.json", "prive.enc"]);
+const PUBLICS_ATTENDUS = new Set(["affiche.json", "journal.json", "lieux.json", "liens.json", "dispo.json", "index-artistes.json", "index-lieux.json", "envies.json", "prive.enc"]);
 function fouille(o, chemin, f) {
   if (Array.isArray(o)) o.forEach((v, i) => fouille(v, `${chemin}[${i}]`, f));
   else if (o && typeof o === "object")
@@ -51,6 +51,12 @@ for (const f of readdirSync("data")) {
   if (f === "prive.enc") continue;
   const o = lire(`data/${f}`);
   if (o) fouille(o, "", `data/${f}`);
+}
+
+// Envies publiques : identifiants seuls, rien d'autre
+if (existsSync("data/envies.json")) {
+  const e = lire("data/envies.json");
+  if (e && (Object.keys(e).join() !== "ids" || !Array.isArray(e.ids) || e.ids.some((x) => typeof x !== "string"))) erreurs.push("data/envies.json : seule une liste « ids » d'identifiants est permise.");
 }
 
 // ---------- Jetons et secrets : jamais dans un fichier publié ----------

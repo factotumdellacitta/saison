@@ -2,7 +2,7 @@
 // À lancer après toute modification. Il :
 //  1. génère data/index-artistes.json et data/index-lieux.json (toujours, même sans mot de passe) ;
 //  2. lit la zone privée (déchiffrée avec SAISON_MDP, ou _prive.json si elle est ouverte) ;
-//  3. met à jour data/dispo.json (champ "reservations" : dates seules, sans motif) ;
+//  3. met à jour data/dispo.json (champ "reservations" : dates seules, sans motif) et data/envies.json (identifiants seuls) ;
 //  4. régénère data/agenda-<jeton>.ics (réservations) et data/ventes-<jeton>.ics (ouvertures de ventes).
 // Sortie déterministe : rien ne change si les données n'ont pas changé (pas de commit inutile dans l'action).
 import { readFileSync, writeFileSync, existsSync, readdirSync, rmSync } from "node:fs";
@@ -128,6 +128,10 @@ async function main() {
     dispo.maj = new Date().toISOString().slice(0, 10);
     ecrire("data/dispo.json", JSON.stringify(dispo, null, 1));
   }
+  // 3b. Envies publiques : identifiants des sorties à l'affiche seulement (ni priorité, ni note, ni date d'ajout)
+  const aVoir = new Set(affiche.sorties.filter((s) => s.statut === "a-voir").map((s) => s.id));
+  const pub = json({ ids: Object.keys(envies).filter((id) => aVoir.has(id)).sort() });
+  if (!existsSync("data/envies.json") || readFileSync("data/envies.json", "utf8") !== pub) ecrire("data/envies.json", pub);
 
   // 4a. Flux des réservations
   const tok = prive.icsToken;

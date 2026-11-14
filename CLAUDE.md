@@ -14,6 +14,7 @@ Léonard écrit en français, style direct. Réponds en français, brièvement, 
 | `data/liens.json` | `[{categorie, titre, url, note}]` | Oui |
 | `data/dispo.json` | `reservations` (généré), `manuel` (soirs pris déclarés), `calendrier` (généré par l'action depuis Apple Calendar) : dates seules | Oui |
 | `data/index-artistes.json`, `data/index-lieux.json` | Générés par `build.mjs`, ne pas modifier à la main | Oui |
+| `data/envies.json` | `{ids:[…]}` : identifiants des sorties à l’affiche en envie, généré par `build.mjs` depuis la zone privée (ni priorité, ni note, ni date) | Oui |
 | `data/prive.enc` | Zone privée chiffrée (schéma ci-dessous) | Chiffré |
 | `data/agenda-<icsToken>.ics` | Flux « Factotum – réservations », généré | Adresse non devinable |
 | `data/ventes-<icsToken>.ics` | Flux « Factotum – ouvertures de ventes », généré | Adresse non devinable |
@@ -21,7 +22,7 @@ Léonard écrit en français, style direct. Réponds en français, brièvement, 
 
 Le site publié ne contient que `index.html`, `sw.js`, `assets/` et `data/`. Jamais `tools/`, `_setup/` ni fichier en clair.
 Après toute modification de `assets/app.js`, `assets/admin.js`, `assets/charte.js` ou `assets/factotum.css` : incrémente `?v=` partout où il apparaît (`index.html`, `loadAdmin` et `loadCharte` d'`app.js`, `SHELL` de `sw.js`) ainsi que `V` dans `sw.js` (sinon les téléphones gardent l'ancienne version en cache). Icônes, image de partage et visuels GitHub : `node tools/icones.mjs` (à relancer seulement si le symbole change).
-Routes du site : `#affiche?filtres`, `#journal`, `#artistes`, `#lieux`, `#artiste-<slug>`, `#lieu-<id>`, `#liens`, `#sortie-<id>`, `#admin?v=res|ranger|envies|rapide|soirs|budget|acc|lieux|liens|abo`, `#journal?sa=<année de début>` (filtre de saison), `#charte` (charte graphique, non liée dans la navigation) (les anciens `#fiche-<id>` redirigent).
+Routes du site : `#affiche?filtres`, `#journal`, `#artistes`, `#lieux`, `#artiste-<slug>`, `#lieu-<id>`, `#liens`, `#coeur` (envies, publique), `#sortie-<id>`, `#admin?v=res|ranger|envies|rapide|soirs|budget|acc|lieux|liens|abo`, `#journal?sa=<année de début>` (filtre de saison), `#charte` (charte graphique, non liée dans la navigation) (les anciens `#fiche-<id>` redirigent).
 
 ## Charte graphique (Factotum)
 Référence vivante : la page `#charte` (imprimable en PDF). Toute modification d'interface la respecte ; `tools/check.mjs` bloque les écarts mesurables.
@@ -45,7 +46,7 @@ Référence vivante : la page `#charte` (imprimable en PDF). Toute modification 
   Contrastes WCAG AA vérifiés par `tools/contrast.mjs` (appelé par `check.mjs`).
 - **Typographie** : Schibsted Grotesk seule, auto-hébergée (`assets/fonts/`, 400, 500, 700, 800 ; chiffres tabulaires limités aux chiffres). Échelle mobile / bureau : titre du site 44 / 72 px 800 capitales ; section 22 / 28 px 800 ; fiche 17 / 19 px 700 ; corps 15 / 16 px 400, interlignage 1,45 ; métadonnées 12 px 500 capitales +0,06em ; dates 13 / 14 px 800 capitales ; champs 16 px minimum. Guillemets « » avec espaces insécables, apostrophe ’, tiret demi-cadratin –. Ni cadratin ni espace fine dans les fichiers publiés (bloquant ; le mode admin les convertit à l'écriture).
 - **Mise en page** : grille de 12 colonnes, 1120 px au plus ; 4 colonnes et marges de 16 px sur mobile. Espacements 4, 8, 12, 16, 24, 32, 48. Angles droits (2 px au plus sur les champs). Filet 1 px entre les lignes, 3 px au-dessus des sections. Une ligne par représentation, sans cartes. Cibles tactiles de 44 px.
-- **Composants** : en-tête rouge (barre compacte au défilement sur mobile), navigation en capitales soulignée de rouge, ligne de spectacle (colonne de date de 64 px, filet pointillé), bandeaux de jour rouges collants, note en quatre carrés (« P » = prévision), badge « Léonard y va » en aplat rouge et autres badges en contour, boutons rectangulaires, puces à contour (active en rouge), hachures pour les soirs pris, fiche à en-tête rouge, statistiques en grands chiffres et barres rouges, messages en bandeau, mode admin à en-tête noir et confirmations intégrées (jamais `confirm()`).
+- **Composants** : en-tête rouge (barre compacte au défilement sur mobile), navigation en capitales soulignée de rouge, ligne de spectacle (colonne de date de 64 px, filet pointillé), bandeaux de jour rouges collants, note en quatre carrés (« P » = prévision), badge « Léonard y va » en aplat rouge et autres badges en contour, boutons rectangulaires, puces à contour (active en rouge), hachures pour les soirs pris, fiche à en-tête rouge, statistiques en grands chiffres et barres rouges, messages en bandeau, mode admin à en-tête noir et confirmations intégrées (jamais `confirm()`). Seule icône admise hors clé F : le cœur des envies (géométrie stricte, contour au repos, plein en rouge), dans la navigation et, en mode admin, juste après la note de chaque ligne, sans jamais rallonger la ligne.
 - **Interdits** : polices Inter, Roboto, Poppins, Montserrat, Space Grotesk ou système ; dégradés (sauf hachures fonctionnelles), glassmorphisme, ombres, flou ; arrondis au-delà de 2 px, pilules, cartes flottantes ; emoji, bibliothèques d'icônes, pictogrammes décoratifs ; violet, indigo, bleu ardoise ou toute couleur hors palette ; héros centré, grandes sections vides, texte marketing ; animations d'échelle, rebonds, révélations au défilement, squelettes. Seules les transitions de couleur et d'opacité de 120 ms, aucune en mouvement réduit. Aucune bibliothèque CSS ou JS, aucune ressource externe (polices comprises).
 - **Thème** : Auto (défaut), Clair, Sombre ; un bouton texte, choix dans `localStorage` (try/catch), `data-theme` posé avant le rendu.
 
@@ -71,7 +72,7 @@ Référence vivante : la page `#charte` (imprimable en PDF). Toute modification 
 - « Public jeune » = adapté à un public jeune (jamais « avec ton frère »).
 
 ## Confidentialité (bloquant dans check.mjs)
-**Jamais** dans un fichier public : `prix`, `accompagnants`, `places`, `siege`, `heure` (de réservation), date de réservation. Public = drapeau `leonardYVa` seulement. Tout le reste va dans la zone privée. Les flux `.ics` (adresse secrète) contiennent prix et accompagnants : c'est voulu.
+**Jamais** dans un fichier public : `prix`, `accompagnants`, `places`, `siege`, `heure` (de réservation), date de réservation. Public = drapeau `leonardYVa` et la liste des envies (`data/envies.json`, identifiants seuls, page publique « Envies » sous le cœur de la navigation) ; priorité, note et date d’ajout d’une envie restent privées. Tout le reste va dans la zone privée. Les flux `.ics` (adresse secrète) contiennent prix et accompagnants : c'est voulu.
 
 ## Grille de notation (note 0–4)
 Critique (presse nationale, prix, accueil à la création) + statut de l'œuvre et de l'artiste + opportunité (rareté, dernières dates, tarif jeune) + goûts de Léonard (classiques revisités, scène européenne Odéon/Festival d'Automne, opéra, Mouawad, Molière ; voir ses vus les mieux notés dans le journal).
@@ -108,7 +109,7 @@ Tableau de bord : **engagé** = toutes les places ; **payé par moi** = places d
 
 ## Fichiers générés (`node tools/build.mjs`)
 - `index-artistes.json` (`{slug: {nom, sorties}}`) et `index-lieux.json` (`{lieuId: {sorties}}`), même sans mot de passe.
-- `dispo.json.reservations`, flux agenda, flux ventes : avec `SAISON_MDP` (ou `_prive.json` ouvert).
+- `dispo.json.reservations`, `envies.json`, flux agenda, flux ventes : avec `SAISON_MDP` (ou `_prive.json` ouvert).
 - Flux ventes : un événement de 15 min à l'heure d'ouverture (10h si inconnue, « ~ » si approximative), alarme 15 min avant, pour toute offre dont la sortie est en envie, réservée, notée 4, ou de type avant-première.
 - L'action « Publier le site » relance `build.mjs` à chaque passage (avec le secret) et commite les fichiers générés. Sortie déterministe : pas de commit si rien n'a changé.
 
