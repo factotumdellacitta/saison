@@ -755,39 +755,6 @@
    "offres": []
   },
   {
-   "id": "vu-jerome-robbins",
-   "titre": "Jerome Robbins",
-   "categorie": "Danse",
-   "artistes": [
-    {
-     "nom": "Jerome Robbins",
-     "role": "chorégraphie"
-    },
-    {
-     "nom": "Ballet de l’Opéra de Paris",
-     "role": "compagnie"
-    }
-   ],
-   "lieuId": "palais-garnier",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": "https://www.operadeparis.fr/saison-23-24/ballet/jerome-robbins",
-   "billetterie": null,
-   "publicJeune": false,
-   "leonardYVa": false,
-   "statut": "vu",
-   "vuLe": [
-    "2023-10-23"
-   ],
-   "noteLeonard": null,
-   "avis": "",
-   "offres": []
-  },
-  {
    "id": "vu-la-distance",
    "titre": "La Distance",
    "categorie": "Théâtre",
