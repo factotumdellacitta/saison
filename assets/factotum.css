@@ -71,7 +71,7 @@ p{margin:0 0 var(--e2)}
 .top .in{max-width:var(--max);margin:0 auto;padding:var(--e4) calc(var(--marge) + var(--sar)) var(--e3) calc(var(--marge) + var(--sal));display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:var(--e2) var(--e3)}
 .brand{grid-column:1/-1;justify-self:start;text-decoration:none;min-width:0}
 .logo{display:block;font-size:min(var(--t-site),13vw);font-weight:800;line-height:.9;letter-spacing:-.02em;text-transform:uppercase;white-space:nowrap}
-.saison{font-size:var(--t-meta);font-weight:500;text-transform:uppercase;letter-spacing:.06em}
+.saison{white-space:nowrap;font-size:var(--t-meta);font-weight:500;text-transform:uppercase;letter-spacing:.06em}
 .top-acts{justify-self:end;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:var(--e2)}
 .theme{justify-self:end;flex:none;min-height:var(--cible);padding:0 var(--e3);border:1px solid var(--sur-rouge);border-radius:0;background:var(--rouge);color:var(--sur-rouge);font-size:var(--t-meta);font-weight:700;text-transform:uppercase;letter-spacing:.06em;cursor:pointer;transition:background-color var(--duree),color var(--duree)}
 @media (hover:hover){.theme:hover{background:var(--sur-rouge);color:var(--rouge)}}
@@ -88,6 +88,10 @@ body.compact .barre{visibility:visible}
 .tab{position:relative;display:flex;align-items:center;justify-content:center;min-height:var(--cible);padding:0 var(--e1);border:0;border-radius:0;background:var(--fond);color:var(--encre-2);font-size:var(--t-meta);font-weight:700;text-transform:uppercase;letter-spacing:.06em;line-height:1.1;text-align:center;text-decoration:none;cursor:pointer;transition:color var(--duree)}
 .tab[aria-selected="true"],.tab[aria-current="page"]{color:var(--encre)}
 .tab[aria-selected="true"]::after,.tab[aria-current="page"]::after{content:"";position:absolute;left:var(--e2);right:var(--e2);bottom:var(--e1);height:3px;background:var(--rouge)}
+
+.tab .coeur{flex:none}
+.tabs{grid-template-columns:minmax(0,1fr) 48px}
+@media (min-width:960px){.tabs{grid-template-columns:none}}
 .tab .long{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .tab.ouvert .court::after{content:"";display:inline-block;width:6px;height:6px;margin-left:var(--e1);vertical-align:2px;background:var(--rouge-texte)}
 @media (hover:hover){.tab:hover{color:var(--encre)}}
@@ -375,15 +379,25 @@ details.box[open]>summary::before{content:"–"}
 .warn{color:var(--rouge-texte);font-weight:700}
 
 /* ---------- Mode admin : pages ---------- */
-/* Cœur des envies : en bas de la colonne de date, sans rien recouvrir */
-body.adm .row{display:grid;grid-template-columns:var(--colonne-date) minmax(0,1fr)}
-body.adm .row>.rb{grid-area:1/1/2/3}
-body.adm .row>.det{grid-column:1/-1}
-body.adm .row .stub{padding-bottom:calc(var(--cible) + var(--e1))}
-.envie{grid-area:1/1/2/2;align-self:end;justify-self:start;z-index:1;display:flex;align-items:center;justify-content:flex-start;width:var(--cible);height:var(--cible);margin:0 0 var(--e1);padding:0;border:0;border-radius:0;background:none;color:var(--encre-2);cursor:pointer;transition:color var(--duree)}
-.envie svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:miter}
+/* Ligne d'affiche : la rangée note et badges est hors du bouton, le cœur des envies (admin) s'y range au bout,
+   sans rallonger la ligne (icône de la hauteur d'un badge, zone tactile de 44 px par un pseudo-élément). */
+.row:has(>.end){display:grid;grid-template-columns:var(--colonne-date) minmax(0,1fr)}
+.row>.rb{grid-column:1/-1}
+.row>.end{grid-column:2;margin:0;padding:0 0 var(--e3) var(--e3);border-left:1px dotted var(--encre-2)}
+.row>.det{grid-column:1/-1}
+@container liste (min-width:720px){
+  .row:has(>.end){grid-template-columns:var(--colonne-date) minmax(0,1fr) 168px}
+  .row>.rb{grid-column:1/3;grid-row:1}
+  .row>.end{position:relative;grid-column:3;grid-row:1;border-left:0;padding:var(--e3) 0}
+  .row>.end>.envie{position:absolute;left:0;top:var(--e3);margin:0}
+}
+.envie{position:relative;display:flex;align-items:center;justify-content:center;width:20px;height:20px;margin:-5px 0;padding:0;border:0;border-radius:0;background:none;color:var(--encre-2);cursor:pointer;transition:color var(--duree)}
+.envie::after{content:"";position:absolute;inset:-12px}
+.coeur{width:22px;height:22px;}
+.envie svg{width:20px;height:20px;}
+.coeur,.envie svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:miter}
 .envie[aria-pressed="true"]{color:var(--rouge-texte)}
-.envie[aria-pressed="true"] svg{fill:currentColor}
+.envie[aria-pressed="true"] svg,.tab[aria-selected="true"] .coeur{fill:currentColor}
 @media (hover:hover){.envie:hover{color:var(--rouge-texte)}}
 .admbox,.loginbox,.ad{margin:var(--e4) 0;padding:var(--e3) 0;border-top:3px solid var(--encre)}
 .adm-titre{display:inline-block;margin:0 0 var(--e2);padding:2px var(--e2);background:var(--encre);color:var(--fond);font-size:var(--t-meta);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
