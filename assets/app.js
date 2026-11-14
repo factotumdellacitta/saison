@@ -75,6 +75,10 @@ const ICO = {
   "lieu": "<path d=\"M12 21s-7-7-7-12a7 7 0 0 1 14 0c0 5-7 12-7 12z\"/><circle cx=\"12\" cy=\"9\" r=\"2.5\"/>",
   "horaires": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 7v5l3 3\"/>",
   "stats": "<path d=\"M5 21V12M12 21V4M19 21v-9\"/>",
+  "ajouter": "<path d=\"M12 4v16M4 12h16\"/>",
+  "modifier": "<path d=\"M4 20v-4L15 5l4 4L8 20zM12.5 7.5l4 4\"/>",
+  "supprimer": "<path d=\"M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7M14 10v7\"/>",
+  "poignee": "<g fill=\"currentColor\" stroke=\"none\"><circle cx=\"9\" cy=\"6\" r=\"1.5\"/><circle cx=\"15\" cy=\"6\" r=\"1.5\"/><circle cx=\"9\" cy=\"12\" r=\"1.5\"/><circle cx=\"15\" cy=\"12\" r=\"1.5\"/><circle cx=\"9\" cy=\"18\" r=\"1.5\"/><circle cx=\"15\" cy=\"18\" r=\"1.5\"/></g>",
   "ventes": "<path d=\"M6 17v-6a6 6 0 0 1 12 0v6M4 17h16M10 21h4\"/>",
 };
 const ico = (n, cls) => ICO[n] ? `<svg class="pi${cls ? " " + cls : ""}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true" focusable="false">${ICO[n]}</svg>` : "";
@@ -118,6 +122,7 @@ const loadLiens = () => lP || (lP = getJSON("data/liens.json").then((l) => (LIEN
 // Envies : liste publique (data/envies.json, générée) ou, en mode admin, la zone privée à jour.
 const enviesIds = () => new Set(PRIVE ? Object.keys(PRIVE.envies || {}) : ENVIES_PUB);
 const COEUR = '<svg class="coeur" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20.5 3.6 12.1a4.8 4.8 0 0 1 6.8-6.8L12 6.9l1.6-1.6a4.8 4.8 0 0 1 6.8 6.8z"/></svg>';
+const COEUR_APP = COEUR; // le cœur des envies, pour admin.js (qui a son propre COEUR local)
 function applyData({ affiche, lieux, dispo, journal, liens }) {
   if (affiche) { AFF = affiche.sorties; MAJ = affiche.maj; }
   if (lieux) LIEUX = lieux;
@@ -704,7 +709,7 @@ function renderLiens() {
   };
 }
 function subsHTML() {
-  return `<div class="subs"><p class="cr">Sur iPhone : Réglages, Calendrier, Comptes, Ajouter un compte, Autre, S’abonner à un calendrier, puis colle l’adresse.</p>
+  return `<div class="subs"><p class="cr">iPhone : Réglages › Apps › Calendrier › Comptes › Ajouter un compte › Autre › S’abonner à un calendrier, puis colle l’adresse.</p>
   <p><b>Factotum – réservations</b></p><code class="code">${esc(icsURL("agenda"))}</code><button class="btn" type="button" data-copy="${esc(icsURL("agenda"))}">Copier</button>
   <p><b>Factotum – ouvertures de ventes</b></p><code class="code">${esc(icsURL("ventes"))}</code><button class="btn" type="button" data-copy="${esc(icsURL("ventes"))}">Copier</button></div>`;
 }
@@ -718,7 +723,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.7"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.8"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -736,7 +741,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.7"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.8"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }

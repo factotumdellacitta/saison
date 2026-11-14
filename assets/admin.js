@@ -385,7 +385,7 @@
   function dlg(titre, corps, onSubmit, { valider: lbl = "Enregistrer", danger } = {}) {
     fermerDlg();
     const el = document.createElement("div"); el.className = "sheet"; el.id = "dlg";
-    el.innerHTML = `<div class="sheet-in" role="dialog" aria-modal="true" aria-labelledby="dlgT" tabindex="-1"><div class="shtop"><button class="btn ico" type="button" data-dlgclose aria-label="Fermer">×</button><h2 class="k" id="dlgT">${esc(titre)}</h2></div>
+    el.innerHTML = `<div class="sheet-in" role="dialog" aria-modal="true" aria-labelledby="dlgT" tabindex="-1"><div class="shtop"><button class="btn ico" type="button" data-dlgclose aria-label="Fermer">${ico("fermer")}</button><h2 class="k" id="dlgT">${esc(titre)}</h2></div>
     <form class="frm" novalidate autocomplete="off">${corps}<p class="err" role="alert" hidden></p><div class="acts"><button class="btn pri" type="submit">${esc(lbl)}</button>${danger || ""}<button class="btn" type="button" data-dlgclose>Annuler</button></div></form></div>`;
     document.body.appendChild(el); document.documentElement.style.overflow = "hidden";
     const form = el.querySelector("form"), errEl = form.querySelector(".err"), sub = form.querySelector('[type="submit"]');
@@ -430,9 +430,9 @@
   function prixHTML(r = {}) {
     const L = places(r);
     return `<fieldset class="fs" data-prix><legend>Spectateurs et prix</legend>
-      <p class="cr">Une ligne par place. Ta place : « Moi » ; si on te l’offre, 0 € et « Offerte à moi ».</p>
+      <p class="cr">Une ligne par place ; la tienne : « Moi ».</p>
       <div data-rows>${L.map(ligneHTML).join("")}</div>
-      <div class="acts acts-haut"><button type="button" class="btn" data-addbillet>+ Spectateur</button><button type="button" class="btn" data-meme>Même prix et tarif partout</button></div>
+      <div class="acts acts-haut"><button type="button" class="btn" data-addbillet>${ico("ajouter")}Spectateur</button><button type="button" class="btn" data-meme>Même prix et tarif partout</button></div>
       ${champ("Plein tarif par place (€, facultatif, pour les économies)", inp("pleinPlace", r.pleinPlace ?? "", 'inputmode="decimal"'))}
       ${dl("dl-pour", ["Moi", ...nomsConnus()])}${dl("dl-tarifs", tarifsConnus())}
       <p class="total" data-total aria-live="polite"></p></fieldset>`;
@@ -532,11 +532,11 @@
     if (vu && jp) etat += `<p>${esc([jp.places || (jp.billets && jp.billets.length) ? plural(nbPlaces(jp), "place") : "", resumePrix(jp), (jp.accompagnants || []).length ? "avec " + jp.accompagnants.join(", ") : ""].filter(Boolean).join(" · "))}</p>`;
     if (vu && jp && jp.notes) etat += `<p><b>Mes notes</b> (privées) : ${esc(jp.notes).replace(/\n/g, "<br>")}</p>`;
     if (env) etat += `<p><b>Dans mes envies</b> · priorité ${PRI[env.priorite || 2]}${env.note ? " · « " + esc(env.note) + " »" : ""}</p>`;
-    const prio = env ? `<div class="chips wrap-ok" role="group" aria-label="Priorité">${[1, 2, 3].map((p) => `<button class="chip" type="button" data-adm="prio" data-p="${p}" data-id="${esc(e.id)}" aria-pressed="${(env.priorite || 2) === p}">Priorité ${PRI[p]}</button>`).join("")}<button class="chip" type="button" data-adm="envie" data-id="${esc(e.id)}">Note</button></div>` : "";
+    const prio = env ? `<div class="chips wrap-ok" role="group" aria-label="Priorité">${[1, 2, 3].map((p) => `<button class="chip" type="button" data-adm="prio" data-p="${p}" data-id="${esc(e.id)}" aria-pressed="${(env.priorite || 2) === p}">${PRI[p]}</button>`).join("")}<button class="chip" type="button" data-adm="envie" data-id="${esc(e.id)}">Note</button></div>` : "";
     const acts = vu
       ? b("revu", "Ajouter une date vue", "pri") + b("notes", "Dates, note, avis et notes") + b("editer", "Modifier la fiche") + b("supprimer", "Supprimer")
-      : (r ? b("reserver", "Modifier la réservation", "pri") + b("annuler", "Annuler la réservation") : b("reserver", "Réserver", "pri")) +
-        b("vu", "Marquer vu") + `<button class="btn" type="button" data-envie="${esc(e.id)}" aria-pressed="${!!env}">${env ? "Dans mes envies" : "Ça m’intéresse"}</button>` +
+      : (r ? b("reserver", "Modifier la réservation", "pri") + b("annuler", "Annuler la réservation") : b("reserver", "J’ai réservé", "pri")) +
+        b("vu", "Marquer vu") + `<button class="btn" type="button" data-envie="${esc(e.id)}" aria-pressed="${!!env}" aria-label="${env ? "Retirer des envies" : "Ajouter aux envies"}">${COEUR_APP}Envie</button>` +
         b("editer", "Modifier la fiche") + (e.statut === "ecarte" ? b("remettre", "Remettre à l’affiche") : b("ecarter", "Écarter")) + b("supprimer", "Supprimer");
     return `<section class="admbox" aria-label="Admin"><h3 class="adm-titre">Admin${e.statut === "ecarte" ? " · écartée (masquée du public)" : ""}</h3>${etat}${prio}<div class="acts">${acts}</div></section>`;
   }
@@ -601,7 +601,7 @@
 
   /* ---------- Vu ---------- */
   const NOTES_L = [["", "Pas de note"], [4, "4 · incontournable"], [3, "3 · fortement recommandé"], [2, "2 · bon choix"], [1, "1 · curiosité"]];
-  const dateRow = (v = "") => `<div class="ar">${inp("vu_d", v, 'type="date" aria-label="Date vue"')}<button type="button" class="btn ico" data-del aria-label="Retirer cette date">×</button></div>`;
+  const dateRow = (v = "") => `<div class="ar">${inp("vu_d", v, 'type="date" aria-label="Date vue"')}<button type="button" class="btn ico" data-del aria-label="Retirer cette date">${ico("fermer")}</button></div>`;
   const notesHTML = (v) => champ("Mes notes (privées)", `<textarea name="notes" rows="3" placeholder="Souvenirs, contexte, distribution du soir…">${esc(v || "")}</textarea>`);
   // Spectateurs et prix, repliés quand rien n’est encore connu (une entrée de journal n’en a pas besoin).
   const prixReplie = (r, ouvert) => `<details class="box"${ouvert ? " open" : ""}><summary>Spectateurs et prix (facultatif)</summary>${prixHTML(r)}</details>`;
@@ -613,12 +613,12 @@
     const src = edit ? jp : { ...jp, ...r };
     const dDef = r.date && D(r.date) <= TODAY ? r.date : revu || !r.date ? todayISO() : r.date;
     const form = dlg(edit ? `Journal : ${e.titre}` : revu ? `Nouvelle date vue : ${e.titre}` : `Vu : ${e.titre}`, `
-      ${edit ? `<fieldset class="fs"><legend>Dates vues</legend><div data-dates>${(e.vuLe || []).map(dateRow).join("")}</div><button type="button" class="btn" data-adddate>+ Date</button></fieldset>` : champ("Vu le", inp("date", dDef, 'type="date"'))}
+      ${edit ? `<fieldset class="fs"><legend>Dates vues</legend><div data-dates>${(e.vuLe || []).map(dateRow).join("")}</div><button type="button" class="btn" data-adddate>${ico("ajouter")}Date</button></fieldset>` : champ("Vu le", inp("date", dDef, 'type="date"'))}
       ${revu && (e.vuLe || []).length ? `<p class="cr">Déjà vu le ${esc(e.vuLe.map((x) => fmtY(D(x))).join(", "))}.</p>` : ""}
       ${champ("Ma note", sel("noteLeonard", NOTES_L, e.noteLeonard ?? ""))}
       ${champ("Mon avis (public)", `<textarea name="avis" rows="3">${esc(e.avis || "")}</textarea>`)}
       ${notesHTML(jp.notes)}
-      ${revu ? '<p class="cr">Places et prix de cette nouvelle fois : ils s’ajoutent aux précédents.</p>' : ""}${prixReplie(revu ? { billets: [{ spectateur: "Moi" }] } : src, !revu && aDesPrix(src))}`, async (f) => {
+      ${revu ? '<p class="cr">Places de cette nouvelle fois.</p>' : ""}${prixReplie(revu ? { billets: [{ spectateur: "Moi" }] } : src, !revu && aDesPrix(src))}`, async (f) => {
       const note = val(f, "noteLeonard") ? +val(f, "noteLeonard") : null, avis = val(f, "avis"), notes = val(f, "notes");
       let priv = lirePrix(f);
       let dates;
@@ -653,7 +653,7 @@
   function journalForm(e) {
     const jp = PRIVE.journalPrive[e.id], k = esc(e.id), pr = jp && places(jp).length ? jp : { billets: [{ spectateur: "Moi" }] };
     return `<form class="frm jin" data-jid="${k}" novalidate autocomplete="off">
-      <fieldset class="fs"><legend>Dates vues</legend><div data-dates>${(e.vuLe || []).map(dateRow).join("")}</div><button type="button" class="btn" data-adddate>+ Date</button></fieldset>
+      <fieldset class="fs"><legend>Dates vues</legend><div data-dates>${(e.vuLe || []).map(dateRow).join("")}</div><button type="button" class="btn" data-adddate>${ico("ajouter")}Date</button></fieldset>
       ${champ("Ma note", sel("noteLeonard", NOTES_L, e.noteLeonard ?? ""))}
       ${champ("Mon avis (public)", `<textarea name="avis" rows="2">${esc(e.avis || "")}</textarea>`)}
       ${notesHTML(jp && jp.notes)}
@@ -662,11 +662,11 @@
       <div class="grid2">${champ("Catégorie", sel("categorie", CATS, e.categorie))}${champ("Sous-genre", inp("sousGenre", e.sousGenre))}</div>
       <div class="grid2">${champ("Lieu", inp("lieu", nomLieu(e.lieuId), 'list="dl-lieux" placeholder="Commence à taper…"'))}${champ("Salle", inp("salle", e.salle))}</div>
       <fieldset class="fs" data-nl hidden><legend>Nouveau lieu</legend><div class="grid2">${champ("Ville", inp("nl_ville", "Paris"))}${champ("Zone", sel("nl_zone", ZONES_L, "Paris"))}</div></fieldset>
-      <fieldset class="fs"><legend>Artistes</legend><div data-arts>${((e.artistes || []).length ? e.artistes : [{}]).map(artRow).join("")}</div><button type="button" class="btn" data-addart>+ Artiste</button></fieldset>
+      <fieldset class="fs"><legend>Artistes</legend><div data-arts>${((e.artistes || []).length ? e.artistes : [{}]).map(artRow).join("")}</div><button type="button" class="btn" data-addart>${ico("ajouter")}Artiste</button></fieldset>
       ${champ("Lien officiel", inp("lien", e.lien, 'type="url" placeholder="https://…"'))}
       ${$("#dl-art") ? "" : dl("dl-art", artsConnus())}${$("#dl-lieux") ? "" : dl("dl-lieux", lieuxNoms())}
       <p class="err" role="alert" hidden></p>
-      <div class="acts"><button class="btn pri" type="submit">Enregistrer</button><button class="btn" type="button" data-share="${k}">Partager</button><button class="btn danger" type="button" data-adm="supprimer" data-id="${k}">Supprimer</button></div></form>`;
+      <div class="acts"><button class="btn pri" type="submit">Enregistrer</button><button class="btn ico" type="button" data-share="${k}" aria-label="Partager">${ico("partager")}</button><button class="btn danger" type="button" data-adm="supprimer" data-id="${k}">Supprimer</button></div></form>`;
   }
   function brancherJournal(form) {
     const id = form.dataset.jid, e0 = BYID.get(id); if (!e0) return;
@@ -716,8 +716,7 @@
   async function formJournal() {
     try { await loadJournal(); } catch (_) {}
     const tous = [...AFF, ...(JOURNAL || [])];
-    const form = dlg("Entrée au journal", `<p class="cr">Cherche le spectacle vu. S’il n’a pas encore de fiche, crée-la avec « Nouvelle fiche ».</p>
-      ${champ("Spectacle", '<input type="search" name="q" placeholder="Titre, artiste, lieu…" autocomplete="off" enterkeyhint="search">')}
+    const form = dlg("Entrée au journal", `${champ("Spectacle", '<input type="search" name="q" placeholder="Titre, artiste, lieu…" autocomplete="off" enterkeyhint="search">')}
       <ul class="vl choix" data-res></ul>`, async (f) => { const t = val(f, "q"); fermerDlg(); formNouveauVu(t); return false; }, { valider: "Nouvelle fiche" });
     const q = form.elements.q, res = form.querySelector("[data-res]");
     const draw = () => {
@@ -738,7 +737,7 @@
     const form = dlg("Nouvelle entrée au journal", `
       ${champ("Titre", inp("titre", titre0, "required"))}
       <div class="grid2">${champ("Catégorie", sel("categorie", CATS, "Théâtre"))}${champ("Sous-genre (facultatif)", inp("sousGenre", "", 'placeholder="Cirque, Version de concert…"'))}</div>
-      <fieldset class="fs"><legend>Artistes</legend><div data-arts>${artRow({})}</div><button type="button" class="btn" data-addart>+ Artiste</button>${dl("dl-art", arts)}</fieldset>
+      <fieldset class="fs"><legend>Artistes</legend><div data-arts>${artRow({})}</div><button type="button" class="btn" data-addart>${ico("ajouter")}Artiste</button>${dl("dl-art", arts)}</fieldset>
       ${champ("Lieu", inp("lieu", "", 'list="dl-lieux" placeholder="Commence à taper…"') + dl("dl-lieux", lieuxNoms))}
       <fieldset class="fs" data-nl hidden><legend>Nouveau lieu</legend><div class="grid2">${champ("Ville", inp("nl_ville", "Paris"))}${champ("Zone", sel("nl_zone", ZONES_L, "Paris"))}</div></fieldset>
       ${champ("Salle (facultatif)", inp("salle", ""))}
@@ -796,7 +795,7 @@
     const n = norm(v).trim(); if (!n) return null;
     return Object.keys(LIEUX).find((id) => norm(LIEUX[id].nom) === n || norm(court(id)) === n || id === n) || null;
   }
-  const artRow = (a = {}) => `<div class="ar">${inp("a_nom", a.nom, 'list="dl-art" placeholder="Nom complet" aria-label="Nom de l’artiste"')}${sel("a_role", ROLES, a.role || "artiste")}<button type="button" class="btn ico" data-del aria-label="Retirer">×</button></div>`;
+  const artRow = (a = {}) => `<div class="ar">${inp("a_nom", a.nom, 'list="dl-art" placeholder="Nom complet" aria-label="Nom de l’artiste"')}${sel("a_role", ROLES, a.role || "artiste")}<button type="button" class="btn ico" data-del aria-label="Retirer">${ico("fermer")}</button></div>`;
   const offreRow = (o = {}) => { const [vd, vh] = (o.vente || "").split("T"); return `<fieldset class="fs of"><div class="grid2">${champ("Type", inp("o_type", o.type, 'list="dl-off"'))}${champ("Tarif", inp("o_tarif", o.tarif, 'placeholder="10 €"'))}</div><div class="grid2">${champ("Date du spectacle", inp("o_date", o.date, 'type="date"'))}${champ("Condition", inp("o_cond", o.condition, 'placeholder="Moins de 28 ans"'))}</div><div class="grid2">${champ("Ouverture de la vente", inp("o_vd", vd, 'type="date"'))}${champ("Heure", inp("o_vh", vh, 'type="time"'))}</div>${ck("o_approx", o.venteApprox, "Date de vente estimée")}<button type="button" class="linkbtn" data-del>Retirer cette offre</button></fieldset>`; };
   function formSortie(id) {
     const e0 = id ? BYID.get(id) : null, e = e0 || { categorie: "Théâtre", artistes: [], offres: [], note: 2, pronostic: false, publicJeune: false };
@@ -806,7 +805,7 @@
     const form = dlg(e0 ? `Modifier : ${e0.titre}` : "Ajouter un spectacle", `
       <div class="grid2">${champ("Catégorie", sel("categorie", CATS, e.categorie))}${champ("Sous-genre", inp("sousGenre", e.sousGenre, 'placeholder="Cirque, Version de concert…"'))}</div>
       ${champ("Titre", inp("titre", e.titre, "required"))}
-      <fieldset class="fs"><legend>Artistes</legend><div data-arts>${(e.artistes.length ? e.artistes : [{}]).map(artRow).join("")}</div><button type="button" class="btn" data-addart>+ Artiste</button>${dl("dl-art", arts)}</fieldset>
+      <fieldset class="fs"><legend>Artistes</legend><div data-arts>${(e.artistes.length ? e.artistes : [{}]).map(artRow).join("")}</div><button type="button" class="btn" data-addart>${ico("ajouter")}Artiste</button>${dl("dl-art", arts)}</fieldset>
       ${champ("Lieu", inp("lieu", nomLieu(e.lieuId), 'list="dl-lieux" placeholder="Commence à taper…"') + dl("dl-lieux", lieuxNoms))}
       <fieldset class="fs" data-nl hidden><legend>Nouveau lieu</legend>
         <div class="grid2">${champ("Ville", inp("nl_ville", "Paris"))}${champ("Zone", sel("nl_zone", ZONES_L, "Paris"))}</div>
@@ -814,7 +813,7 @@
         ${champ("Adresse", inp("nl_adr", ""))}${champ("Site", inp("nl_site", "", 'type="url" placeholder="https://…"'))}${champ("Billetterie", inp("nl_bil", "", 'type="url" placeholder="https://…"'))}</fieldset>
       ${champ("Salle", inp("salle", e.salle))}
       ${champ("Lien officiel", inp("lien", e.lien, 'type="url" placeholder="https://…"'))}
-      ${vu ? '<p class="cr">Fiche du journal : dates vues, note, avis et notes se modifient avec « Dates, note, avis et notes ».</p>' : ""}
+      ${vu ? '<p class="cr">Dates vues, note et avis : « Dates, note, avis et notes ».</p>' : ""}
       <div data-aff${vu ? " hidden" : ""}>
       <div class="grid2">${champ("Début", inp("debut", e.debut, 'type="date"'))}${champ("Fin", inp("fin", e.fin, 'type="date"'))}</div>
       ${champ("Dates en clair (facultatif)", inp("datesTexte", e.datesTexte, 'placeholder="15 oct. 2026 – 27 janv. 2027"'))}
@@ -822,7 +821,7 @@
       <div class="grid2">${champ("Note (grille)", sel("note", [[4, "4 · incontournable"], [3, "3 · fortement recommandé"], [2, "2 · bon choix"], [1, "1 · curiosité"], ...(vu ? [[0, "0 · sans note"]] : [])], e.note))}<div>${ck("pronostic", e.pronostic, "Pronostic (pas encore critiqué)")}${ck("publicJeune", e.publicJeune, "Adapté à un public jeune")}</div></div>
       ${champ("Pourquoi (une phrase factuelle)", `<textarea name="pourquoi" rows="2">${esc(e.pourquoi || "")}</textarea>`)}
       ${champ("Billetterie directe (facultatif)", inp("billetterie", e.billetterie, 'type="url" placeholder="https://…"'))}
-      <fieldset class="fs"><legend>Offres jeunes et ventes</legend><div data-offres>${(e.offres || []).map(offreRow).join("")}</div><button type="button" class="btn" data-addoff>+ Offre</button>${dl("dl-off", TYPES_OFFRE)}</fieldset></div>`, async (f) => {
+      <fieldset class="fs"><legend>Offres jeunes et ventes</legend><div data-offres>${(e.offres || []).map(offreRow).join("")}</div><button type="button" class="btn" data-addoff>${ico("ajouter")}Offre</button>${dl("dl-off", TYPES_OFFRE)}</fieldset></div>`, async (f) => {
       const titre = val(f, "titre"); if (!titre) throw new Error("Le titre est obligatoire.");
       let lieuId = lieuDepuisNom(val(f, "lieu")), nouveauLieu = null;
       if (!lieuId && val(f, "lieu")) {
@@ -977,11 +976,10 @@
       ${ck("q_ok", true, "Enregistrer ce billet")}</fieldset>`;
     };
     const file = PRIVE.aCompleter || [];
-    return `<p class="cr">Colle une ou plusieurs confirmations (texte d’e-mail ou de PDF). Sépare plusieurs billets par une ligne <code>---</code>. Rien n’est envoyé avant « Enregistrer tout ».</p>
-    <form id="qf" class="frm"><textarea id="qt" rows="8" placeholder="Colle ici le texte de la confirmation…">${esc(RAPIDE ? RAPIDE.texte : "")}</textarea><div class="acts"><button class="btn pri" type="submit">Analyser</button>${RAPIDE ? '<button class="btn" type="button" id="qraz">Effacer</button>' : ""}</div></form>
-    ${RAPIDE ? `<form id="qr" class="frm">${RAPIDE.lignes.map(ligne).join("") || '<p class="empty">Rien trouvé.</p>'}<p class="err" role="alert" hidden></p><div class="acts"><button class="btn pri" type="submit">Enregistrer tout (un seul envoi)</button></div></form>` : ""}
-    <h2 class="mh">À compléter par Claude Code <small>${file.length}</small></h2>
-    ${file.length ? `<div class="list">${file.map((x, i) => `<div class="ad"><p class="cr">Ajouté le ${esc(fmtY(D(x.ajouteLe)))}${x.extrait && x.extrait.date ? " · " + esc(dCourt(x.extrait.date)) : ""}</p><pre class="code">${esc(String(x.texte || "").slice(0, 400))}</pre><button class="btn" type="button" data-qdel="${i}">Retirer</button></div>`).join("")}</div><p class="cr">Lance <code>/veille</code> (ou demande à Claude Code « traite la file à compléter ») pour qu’il les enregistre.</p>` : '<p class="empty">File vide.</p>'}`;
+    return `<form id="qf" class="frm"><textarea id="qt" rows="8" placeholder="Confirmations collées, séparées par ---" aria-label="Confirmations de billets">${esc(RAPIDE ? RAPIDE.texte : "")}</textarea><div class="acts"><button class="btn pri" type="submit">Analyser</button>${RAPIDE ? '<button class="btn" type="button" id="qraz">Effacer</button>' : ""}</div></form>
+    ${RAPIDE ? `<form id="qr" class="frm">${RAPIDE.lignes.map(ligne).join("") || '<p class="empty">Rien trouvé.</p>'}<p class="err" role="alert" hidden></p><div class="acts"><button class="btn pri" type="submit">Enregistrer tout</button></div></form>` : ""}
+    <h2 class="mh">À compléter <small>${file.length}</small></h2>
+    ${file.length ? `<div class="list">${file.map((x, i) => `<div class="ad"><p class="cr">Ajouté le ${esc(fmtY(D(x.ajouteLe)))}${x.extrait && x.extrait.date ? " · " + esc(dCourt(x.extrait.date)) : ""}</p><pre class="code">${esc(String(x.texte || "").slice(0, 400))}</pre><button class="btn" type="button" data-qdel="${i}">Retirer</button></div>`).join("")}</div><p class="cr">Traités par <code>/veille</code>.</p>` : '<p class="empty">File vide.</p>'}`;
   }
   function brancherRapide() {
     const qf = $("#qf"); if (!qf) return;
@@ -1032,18 +1030,17 @@
     const add_ = [...SOIRS.set].filter((x) => !SOIRS.base.includes(x)), rm = SOIRS.base.filter((x) => !SOIRS.set.has(x));
     const y = c.getFullYear(), m = c.getMonth();
     const bl = blocages(), dansBloc = (k) => bl.some((x) => k >= x.debut && k <= x.fin);
-    return `<p class="cr">Touche un jour pour le bloquer ou le libérer, puis enregistre. Les soirs réservés et ceux d’Apple Calendar se gèrent ailleurs.</p>
-    <div class="cal"><div class="calh"><button class="btn" type="button" data-snav="-1" aria-label="Mois précédent">‹</button><h2>${MOIS_L[m]} ${y}</h2><button class="btn" type="button" data-snav="1" aria-label="Mois suivant">›</button></div>` +
+    return `<p class="cr">Touche un soir pour le prendre ou le libérer.</p>
+    <div class="cal"><div class="calh"><button class="btn ico" type="button" data-snav="-1" aria-label="Mois précédent">${ico("prec")}</button><h2>${MOIS_L[m]} ${y}</h2><button class="btn ico" type="button" data-snav="1" aria-label="Mois suivant">${ico("suiv")}</button></div>` +
       monthGrid(y, m, (d) => {
         const k = iso(d), on = SOIRS.set.has(k), r = resPar[k], ic = cal.has(k), past = d < TODAY;
         if (r || ic) return `<div class="cell ${r ? "res" : "icl"}${past ? " past" : ""}" role="img" aria-label="${fmt(d, true)} : ${r ? "réservé, " + esc(r) : "Apple Calendar"}"><span class="n">${d.getDate()}</span><small class="lbl2">${r ? "résa" : "agenda"}</small></div>`;
         return `<button type="button" class="cell${on ? " busy" : ""}${past ? " past" : ""}${+d === +TODAY ? " today" : ""}${dansBloc(k) ? " blq" : ""}" data-soir="${k}" aria-pressed="${on}" aria-label="${fmt(d, true)}${on ? ", pris" : ", libre"}${dansBloc(k) ? ", période bloquée" : ""}"><span class="n">${d.getDate()}</span></button>`;
-      }) + `<div class="legend"><span class="l-pris">Pris (déclaré, public)</span><span class="l-va">Réservation</span><span class="l-icl">Apple Calendar</span><span class="l-blq">Période bloquée (privée)</span></div></div>
-    <div class="acts"><button class="btn pri" type="button" id="sSave"${add_.length || rm.length ? "" : " disabled"}>Enregistrer${add_.length || rm.length ? ` (${add_.length ? "+" + add_.length : ""}${add_.length && rm.length ? " " : ""}${rm.length ? "−" + rm.length : ""})` : ""}</button>${add_.length || rm.length ? '<button class="btn" type="button" id="sRaz">Annuler les changements</button>' : ""}</div>
+      }) + `<div class="legend"><span class="l-pris">Pris</span><span class="l-va">Réservé</span><span class="l-icl">Agenda</span><span class="l-blq">Bloqué</span></div></div>
+    <div class="acts"><button class="btn pri" type="button" id="sSave"${add_.length || rm.length ? "" : " disabled"}>Enregistrer${add_.length || rm.length ? ` (${add_.length ? "+" + add_.length : ""}${add_.length && rm.length ? " " : ""}${rm.length ? "−" + rm.length : ""})` : ""}</button>${add_.length || rm.length ? '<button class="btn" type="button" id="sRaz">Annuler</button>' : ""}</div>
     <h2 class="mh">Périodes bloquées <small>privées</small></h2>
-    <p class="cr">Comptées dans le contrôle des conflits quand tu réserves, mais jamais publiées : le site public ne les montre pas comme « pris », contrairement aux soirs ci-dessus.</p>
     <div class="list">${bl.map((x) => `<div class="ad"><p><b>${x.debut === x.fin ? esc(cap(fmtY(D(x.debut), true))) : `Du ${esc(fmt(D(x.debut)))} au ${esc(fmtY(D(x.fin)))}`}</b>${x.motif ? " · " + esc(x.motif) : ""}</p><button class="btn" type="button" data-bdel="${x.i}">Supprimer</button></div>`).join("") || '<p class="empty">Aucune période bloquée.</p>'}</div>
-    <form id="bf" class="frm admbox" novalidate><div class="grid2">${champ("Du", '<input type="date" name="bdeb">')}${champ("Au (inclus)", '<input type="date" name="bfin">')}</div>${champ("Motif (privé)", '<input name="bmotif" placeholder="Vacances, examens…">')}<div class="acts"><button class="btn pri" type="submit">Bloquer cette période</button></div></form>`;
+    <form id="bf" class="frm admbox" novalidate><div class="grid2">${champ("Du", '<input type="date" name="bdeb">')}${champ("Au (inclus)", '<input type="date" name="bfin">')}</div>${champ("Motif (privé)", '<input name="bmotif" placeholder="Vacances, examens…">')}<div class="acts"><button class="btn pri" type="submit">Bloquer</button></div></form>`;
   }
   function blocages() {
     return (PRIVE.blocages || []).map((b, i) => typeof b === "string" ? { i, debut: b, fin: b, motif: "" } : { i, debut: b.debut || b.date, fin: b.fin || b.debut || b.date, motif: b.motif || "" }).filter((x) => x.debut).sort((a, b) => a.debut.localeCompare(b.debut));
@@ -1110,10 +1107,10 @@
     const opts = [["saison", "Saison en cours"], ["prec", "Saison précédente"], ["annee", "Année civile"], ["12m", "12 derniers mois"], ["tout", "Tout"]];
     const sansPrix = L.filter((x) => !x.c);
     return `<div class="tools"><label class="f f-outil"><span>Période</span>${sel("bp", opts, BUDGET_P).replace("<select", '<select id="bp"')}</label></div>
-    <div class="kpis"><div><b>${esc(euros(engage) || "0 €")}</b><span>engagés (toutes les places)</span></div><div><b>${esc(euros(paye) || "0 €")}</b><span>payés par moi${offert ? `, dont ${esc(euros(offert))} offerts` : ""}</span></div><div><b>${esc(euros(benef) || "0 €")}</b><span>pour mon bénéfice (${plural(nMoi, "place")}${nMoi ? `, ${esc(euros(benef / nMoi))} en moyenne` : ""})</span></div><div><b>${vus + res}</b><span>sorties (${vus} vues, ${res} réservées)${eco ? ` · économies ${esc(euros(eco))}` : ""}</span></div></div>
-    <p class="cr">${plural(P.length, "sortie")} avec des prix sur ${L.length}. « Payés par moi » : mes places, plus celles que je paie ou offre à d’autres. « Pour mon bénéfice » : le prix de mes places.</p>
-    <details class="box stats" open><summary>Payé par moi, par mois</summary>${mois.length ? barres(mois) : '<p class="cr">Aucune dépense sur la période.</p>'}</details>
-    <details class="box stats"><summary>Payé par moi, par catégorie</summary>${cats.length ? barres(cats) : '<p class="cr">Aucune dépense sur la période.</p>'}</details>
+    <div class="kpis"><div><b>${esc(euros(engage) || "0 €")}</b><span>engagés</span></div><div><b>${esc(euros(paye) || "0 €")}</b><span>payés par moi${offert ? `, dont ${esc(euros(offert))} offerts` : ""}</span></div><div><b>${esc(euros(benef) || "0 €")}</b><span>pour moi (${plural(nMoi, "place")}${nMoi ? `, ${esc(euros(benef / nMoi))} en moyenne` : ""})</span></div><div><b>${vus + res}</b><span>sorties (${vus} vues, ${res} réservées)${eco ? ` · économies ${esc(euros(eco))}` : ""}</span></div></div>
+    <p class="cr">Prix connus : ${P.length} sur ${L.length}.</p>
+    <details class="box stats" open><summary>Payé par moi, par mois</summary>${mois.length ? barres(mois) : '<p class="cr">Aucune dépense.</p>'}</details>
+    <details class="box stats"><summary>Payé par moi, par catégorie</summary>${cats.length ? barres(cats) : '<p class="cr">Aucune dépense.</p>'}</details>
     <details class="box stats"><summary>Détail par sortie <span class="ml">${P.length}</span></summary><table class="t pile"><thead><tr><th>Sortie</th><th class="num">Engagé</th><th class="num">Payé</th><th class="num">Pour moi</th></tr></thead><tbody>${P.map((x) => `<tr><td><a href="#sortie-${esc(x.id)}">${esc(titreDe(x.id))}</a><br><small class="cr">${esc(fmt(D(x.date)))}${x.avenir ? ", réservé" : ""}</small></td><td class="num" data-l="Engagé">${esc(euros(x.c.engage))}</td><td class="num" data-l="Payé">${esc(euros(x.c.paye))}</td><td class="num" data-l="Pour moi">${esc(euros(x.c.benef))}</td></tr>`).join("")}</tbody></table></details>
     ${sansPrix.length ? `<details class="box"><summary>Sans prix <span class="ml">${sansPrix.length}</span></summary><ul class="vl">${sansPrix.map((x) => `<li><a href="#sortie-${esc(x.id)}"><span class="vd">${esc(fmt(D(x.date)))}</span><span class="vt"><b>${esc(titreDe(x.id))}</b></span></a></li>`).join("")}</ul></details>` : ""}`;
   }
@@ -1140,30 +1137,27 @@
   }
   function vueAcc() {
     const p = personnes();
-    if (!p.length) return '<p class="empty">Aucun accompagnant enregistré pour l’instant.</p>';
+    if (!p.length) return '<p class="empty">Aucun accompagnant.</p>';
     return `<div class="list">${p.map((x) => `<div class="ad"><h3>${esc(x.nom)} <small class="cr">${plural(x.n, "sortie")}</small></h3>
       ${x.offert || x.paye ? `<p class="cr">${x.offert ? `Places offertes : ${esc(euros(x.offert))}` : ""}${x.offert && x.paye ? " · " : ""}${x.paye ? `payées par moi : ${esc(euros(x.paye))}` : ""}</p>` : ""}
-      <p class="cr">${x.dernier ? `Dernière : <a href="#sortie-${esc(x.dernier.id)}">${esc(titreDe(x.dernier.id))}</a>, ${esc(fmtY(D(x.dernier.date)))}` : "Pas encore de sortie vue ensemble"}${x.prochain ? ` · Prochaine : <a href="#sortie-${esc(x.prochain.id)}">${esc(titreDe(x.prochain.id))}</a>, ${esc(fmt(D(x.prochain.date), true))}` : ""}</p>
+      <p class="cr">${x.dernier ? `Dernière : <a href="#sortie-${esc(x.dernier.id)}">${esc(titreDe(x.dernier.id))}</a>, ${esc(fmtY(D(x.dernier.date)))}` : "Aucune sortie vue ensemble"}${x.prochain ? ` · Prochaine : <a href="#sortie-${esc(x.prochain.id)}">${esc(titreDe(x.prochain.id))}</a>, ${esc(fmt(D(x.prochain.date), true))}` : ""}</p>
       ${x.dernier ? `<button class="btn" type="button" data-javec="${esc(x.nom)}">Voir dans le journal</button>` : ""}</div>`).join("")}</div>`;
   }
 
   /* ---------- Liens utiles ---------- */
   // Édition des liens : une ligne par lien, par rubrique ; glisser la poignée pour l’ordre (ou vers une autre rubrique).
   const rangeLiens = (L) => liensParRubrique(L).flatMap(([, l]) => l);
-  const ICO = {
-    drag: '<svg viewBox="0 0 24 24" aria-hidden="true" class="grip"><circle cx="9" cy="6" r="1.4"/><circle cx="15" cy="6" r="1.4"/><circle cx="9" cy="12" r="1.4"/><circle cx="15" cy="12" r="1.4"/><circle cx="9" cy="18" r="1.4"/><circle cx="15" cy="18" r="1.4"/></svg>',
-  };
   function vueLiens() {
     if (!LIENS_W) { const b = rangeLiens(clone(LIENS || [])); LIENS_W = { base: b, w: clone(b) }; }
     const modif = JSON.stringify(LIENS_W.base) !== JSON.stringify(LIENS_W.w);
-    const ligne = (l, i) => `<li class="lka" data-i="${i}"><button type="button" class="poignee" data-drag aria-label="Déplacer « ${esc(l.titre)} » (flèches haut et bas)">${ICO.drag}</button>
+    const ligne = (l, i) => `<li class="lka" data-i="${i}"><button type="button" class="poignee" data-drag aria-label="Déplacer « ${esc(l.titre)} » (flèches haut et bas)">${ico("poignee", "grip")}</button>
       <span class="lt"><b>${esc(l.titre)}</b><small>${esc(hote(l.url))}${l.note ? " · " + esc(l.note) : ""}</small></span>
-      <button type="button" class="ico2" data-lk="edit" data-i="${i}" aria-label="Modifier « ${esc(l.titre)} »">Modifier</button><button type="button" class="ico2 rouge" data-lk="del" data-i="${i}" aria-label="Supprimer « ${esc(l.titre)} »">Suppr.</button></li>`;
+      <button type="button" class="ico2" data-lk="edit" data-i="${i}" aria-label="Modifier « ${esc(l.titre)} »">${ico("modifier")}</button><button type="button" class="ico2" data-lk="del" data-i="${i}" aria-label="Supprimer « ${esc(l.titre)} »">${ico("supprimer")}</button></li>`;
     const idx = LIENS_W.w.map((l, i) => [l, i]);
-    return `<p class="cr">Glisse la poignée pour changer l’ordre, ou vers une autre rubrique. Rien n’est envoyé avant « Enregistrer ».</p>
-    ${ORDRE_LIENS.map((c) => { const L = idx.filter(([l]) => l.categorie === c); return `<div class="lkg"><h2 class="mh">${esc(c)} <small>${L.length}</small><button type="button" class="linkbtn ml" data-lk="new" data-cat="${esc(c)}">+ Ajouter</button></h2>
+    return `<p class="cr">Glisse la poignée pour réordonner.</p>
+    ${ORDRE_LIENS.map((c) => { const L = idx.filter(([l]) => l.categorie === c); return `<div class="lkg"><h2 class="mh">${esc(c)} <small>${L.length}</small><button type="button" class="linkbtn ml" data-lk="new" data-cat="${esc(c)}" aria-label="Ajouter un lien">${ico("ajouter")}</button></h2>
       <ul class="lkadm" data-cat="${esc(c)}">${L.map(([l, i]) => ligne(l, i)).join("")}</ul></div>`; }).join("")}
-    ${modif ? '<div class="savebar" role="region" aria-label="Modifications non enregistrées"><span>Modifications non enregistrées</span><button class="btn" type="button" data-lk="raz">Annuler</button><button class="btn pri" type="button" data-lk="save">Enregistrer</button></div>' : ""}`;
+    ${modif ? '<div class="savebar" role="region" aria-label="Modifications non enregistrées"><span>Non enregistré</span><button class="btn" type="button" data-lk="raz">Annuler</button><button class="btn pri" type="button" data-lk="save">Enregistrer</button></div>' : ""}`;
   }
   function formLien(i, cat) {
     const l = i == null ? { categorie: cat || ORDRE_LIENS[0] } : LIENS_W.w[i];
@@ -1241,10 +1235,10 @@
   const usages = (id) => [...AFF, ...(JOURNAL || [])].filter((e) => e.lieuId === id).length;
   function vueLieux() {
     const ids = Object.keys(LIEUX).sort((a, b) => norm(LIEUX[a].nom).localeCompare(norm(LIEUX[b].nom)));
-    return `<div class="tools"><input type="search" id="lq" placeholder="Rechercher un lieu" aria-label="Rechercher un lieu" class="flex1" enterkeyhint="search"><button class="btn pri" type="button" data-lieu="new">+ Lieu</button></div>
+    return `<div class="tools">${rech("lq", "Rechercher un lieu")}<button class="btn pri" type="button" data-lieu="new">${ico("ajouter")}Lieu</button></div>
     <div class="list" id="ll">${ids.map((id) => { const L = LIEUX[id], n = usages(id); return `<div class="ad" data-q="${esc(norm([L.nom, court(id), L.ville, id].join(" ")))}"><h3>${esc(L.nom)}</h3><p class="cr">${esc([L.ville, L.zone !== L.ville ? L.zone : "", "lieu " + (L.statut === "Privé" ? "privé" : "public")].filter(Boolean).join(" · "))} · ${plural(n, "sortie")}</p>${L.tarifJeune ? `<p class="cr">Tarif jeune : ${esc(L.tarifJeune)}</p>` : ""}
       <div class="acts"><button class="btn" type="button" data-lieu="edit" data-id="${esc(id)}">Modifier</button>${n ? "" : `<button class="btn" type="button" data-lieu="del" data-id="${esc(id)}">Supprimer</button>`}<a class="btn" href="#lieu-${esc(id)}">Voir</a></div></div>`; }).join("")}</div>
-    <p class="cr">Un lieu utilisé par une sortie ne peut pas être supprimé. Son identifiant ne change jamais, même si tu le renommes.</p>`;
+`;
   }
   function brancherLieux() {
     const q = $("#lq"); if (q) q.oninput = () => { const t = norm(q.value).trim(); $$("#ll .ad").forEach((x) => (x.hidden = !!t && !x.dataset.q.includes(t))); };
@@ -1302,8 +1296,8 @@
     const carte = ([id, r], passe) => carteRes(id, r, passe, locD);
     const ec = AFF.filter((e) => e.statut === "ecarte");
     return `${past.length ? `<p class="warn"><a href="#admin?v=ranger">${plural(past.length, "réservation passée", "réservations passées")} à ranger</a></p>` : ""}
-    <h2 class="mh">À venir <small>${fut.length}</small></h2><div class="list">${fut.map((x) => carte(x, false)).join("") || '<p class="empty">Aucune réservation. Ouvre une fiche et touche « Réserver ».</p>'}</div>
-    ${ec.length ? `<details class="box"><summary>Sorties écartées <span class="ml">${ec.length}, masquées du public</span></summary><ul class="vl">${ec.map((e) => `<li><a href="#sortie-${esc(e.id)}"><span class="vt"><b>${esc(e.titre)}</b> <span>· ${esc(court(e.lieuId))}</span></span></a></li>`).join("")}</ul></details>` : ""}`;
+    <h2 class="mh">À venir <small>${fut.length}</small></h2><div class="list">${fut.map((x) => carte(x, false)).join("") || '<p class="empty">Aucune réservation.</p>'}</div>
+    ${ec.length ? `<details class="box"><summary>Écartées <span class="ml">${ec.length}</span></summary><ul class="vl">${ec.map((e) => `<li><a href="#sortie-${esc(e.id)}"><span class="vt"><b>${esc(e.titre)}</b> <span>· ${esc(court(e.lieuId))}</span></span></a></li>`).join("")}</ul></details>` : ""}`;
   }
   function carteRes(id, r, passe, locD) {
       const c = conflits(locD, r.date, id);
@@ -1319,26 +1313,26 @@
   const nRanger = () => { const { res, passees } = aRanger(); return res.length + passees.length; };
   function vueRanger() {
     const { res, passees } = aRanger(), locD = etatLocal();
-    if (!res.length && !passees.length) return '<p class="empty">Rien à ranger : aucune réservation passée, aucune sortie terminée à l’affiche.</p>';
+    if (!res.length && !passees.length) return '<p class="empty">Rien à ranger.</p>';
     const b = (a, id, t, cls = "") => `<button class="btn ${cls}" type="button" data-adm="${a}" data-id="${esc(id)}">${t}</button>`;
     return `${res.length ? `<h2 class="mh">Réservations passées <small>${res.length}</small></h2><div class="list">${res.map(([id, r]) => carteRes(id, r, true, locD)).join("")}</div>` : ""}
-    ${passees.length ? `<h2 class="mh">Terminées, encore à l’affiche <small>${passees.length}</small></h2><p class="cr">Vues : archive-les au journal. Sinon, écarte-les (masquées) ou supprime-les.</p><div class="list">${passees.map((e) => `<div class="ad"><h3><a href="#sortie-${esc(e.id)}">${esc(e.titre)}</a></h3><p class="cr">${esc([court(e.lieuId), range(e)].filter(Boolean).join(" · "))}</p>
+    ${passees.length ? `<h2 class="mh">Terminées, encore à l’affiche <small>${passees.length}</small></h2><div class="list">${passees.map((e) => `<div class="ad"><h3><a href="#sortie-${esc(e.id)}">${esc(e.titre)}</a></h3><p class="cr">${esc([court(e.lieuId), range(e)].filter(Boolean).join(" · "))}</p>
       <div class="acts">${b("vu", e.id, "Vu, au journal", "pri")}${b("ecarter", e.id, "Écarter")}${b("supprimer", e.id, "Supprimer")}</div></div>`).join("")}</div>` : ""}`;
   }
   function vueEnvies() {
     const L = Object.entries(PRIVE.envies).map(([id, v]) => ({ id, v, e: BYID.get(id) })).filter((x) => x.e);
     const k = (x) => { const pv = prochaineVente(x.e); return [pv ? +venteDate(pv) : 9e15, sortKey(x.e)]; };
     L.sort((a, b) => { const [a1, a2] = k(a), [b1, b2] = k(b); return a1 - b1 || a2 - b2; });
-    if (!L.length) return '<p class="empty">Aucune envie. Touche le cœur d’une sortie pour l’ajouter.</p>';
+    if (!L.length) return '<p class="empty">Aucune envie.</p>';
     return `<div class="list">${L.map(({ id, v, e }) => { const pv = prochaineVente(e); return `<div class="ad"><h3><a href="#sortie-${esc(id)}">${esc(e.titre)}</a> ${stars(e.note, e.pronostic)}</h3>
       <p class="cr">${esc(court(e.lieuId))} · ${esc(range(e))}${pv ? ` · <b class="warn">Vente ${esc(venteTxt(pv))}</b> (${esc(pv.type)})` : ""}</p>${v.note ? `<p>« ${esc(v.note)} »</p>` : ""}
-      <div class="chips wrap-ok" role="group" aria-label="Priorité">${[1, 2, 3].map((p) => `<button class="chip" type="button" data-adm="prio" data-p="${p}" data-id="${esc(id)}" aria-pressed="${(v.priorite || 2) === p}">${PRI[p]}</button>`).join("")}<button class="chip" type="button" data-adm="envie" data-id="${esc(id)}">Note</button><button class="chip" type="button" data-envie="${esc(id)}" aria-pressed="true">Retirer ♥</button><button class="chip" type="button" data-adm="reserver" data-id="${esc(id)}">Réserver</button></div></div>`; }).join("")}</div>`;
+      <div class="chips wrap-ok" role="group" aria-label="Priorité">${[1, 2, 3].map((p) => `<button class="chip" type="button" data-adm="prio" data-p="${p}" data-id="${esc(id)}" aria-pressed="${(v.priorite || 2) === p}">${PRI[p]}</button>`).join("")}<button class="chip" type="button" data-adm="envie" data-id="${esc(id)}">Note</button><button class="chip i" type="button" data-envie="${esc(id)}" aria-pressed="true" aria-label="Retirer des envies">${COEUR_APP}</button><button class="chip" type="button" data-adm="reserver" data-id="${esc(id)}">Réserver</button></div></div>`; }).join("")}</div>`;
   }
 
   /* ---------- Formulaires de connexion ---------- */
   function formJeton(msg) {
     return new Promise((ok) => {
-      dlg("Jeton GitHub de cet appareil", `<p class="cr">${msg ? esc(msg) + " " : ""}Pour enregistrer depuis ce site, colle le jeton « fine-grained » limité au dépôt saison (Contents : lecture et écriture ; Actions : lecture). Il sera rangé sur cet appareil, chiffré avec ton mot de passe.</p>
+      dlg("Jeton GitHub de cet appareil", `<p class="cr">${msg ? esc(msg) + " " : ""}Jeton « fine-grained » limité au dépôt saison (Contents : lecture et écriture ; Actions : lecture), rangé chiffré sur cet appareil.</p>
         ${IDENT}${MDP("Mot de passe (pour chiffrer le jeton)")}
         ${JETON("Jeton GitHub")}`, async (f) => {
         const pw = f.elements.password.value, tok = f.elements.tok.value.trim();
@@ -1363,16 +1357,15 @@
   }
   // Page #admin sans session : invitation à se connecter (le portail s’ouvre en surimpression).
   function vueConnexion() {
-    $("#main").innerHTML = `<div class="ph"><h1>Admin</h1><p>Réservé à ${OWNER}</p></div>
-    <p>Connecte-toi pour gérer réservations, envies, journal et soirs pris.</p><div class="acts"><button class="btn pri" type="button" data-cx>Se connecter</button></div>`;
+    $("#main").innerHTML = `<div class="ph"><h1>Admin</h1></div>
+    <div class="acts"><button class="btn pri" type="button" data-cx>Se connecter</button></div>`;
     if (!sessionVive() && !$("#dlg")) portail();
   }
   function portail() {
     if (PRIVE) return dlgSession();
     const aJeton = !!lsGet(LS_JETON), dDef = DUREES.some(([k]) => k === lsGet(LS_DUREE)) ? lsGet(LS_DUREE) : "jour";
-    const form = dlg("Connexion", `<p class="cr">Réservé à ${OWNER}. Le déchiffrement se fait dans le navigateur ; le mot de passe n’est jamais envoyé.</p>
-      ${IDENT}${MDP("Mot de passe")}
-      ${aJeton ? '<p class="cr">Cet appareil est enregistré : le mot de passe suffit.</p>' : `${JETON("Jeton GitHub (première connexion sur cet appareil)")}<p class="cr">Laisse vide pour consulter seulement (lecture seule). Le jeton sera rangé sur cet appareil, chiffré avec ton mot de passe.</p>`}
+    const form = dlg("Connexion", `${IDENT}${MDP("Mot de passe")}
+      ${aJeton ? "" : `${JETON("Jeton GitHub (facultatif : sans jeton, lecture seule)")}`}
       ${champ("Rester connecté", sel("duree", DUREES, dDef))}`, async (f) => {
       const pw = f.elements.password.value, tok = f.elements.tok ? f.elements.tok.value.trim() : "", duree = val(f, "duree");
       f.elements.password.value = "";
@@ -1402,10 +1395,10 @@
   }
   function dlgSession() {
     const form = dlg("Session", `<p>Connecté ${esc(jusqua())}.</p>
-      <p class="cr">${TOK ? "Cet appareil peut enregistrer : chaque modification publie le site." : "Lecture seule sur cet appareil (pas de jeton GitHub)."}</p>
+      ${TOK ? "" : '<p class="cr">Lecture seule (pas de jeton).</p>'}
       ${champ("Rester connecté à partir de maintenant", sel("duree", DUREES, MODE))}
       <p><a class="btn" href="#admin" data-dlgclose>Ouvrir l’admin</a></p>
-      <p><button class="linkbtn" type="button" data-oublier>Oublier cet appareil (efface le jeton et déconnecte)</button></p>`, async (f) => {
+      <p><button class="linkbtn" type="button" data-oublier>Oublier cet appareil</button></p>`, async (f) => {
       const d = val(f, "duree"); lsSet(LS_DUREE, d);
       try { await sauverSession(d); toast("Connecté " + jusqua()); } catch (_) { toast("Impossible de garder la session sur cet appareil."); }
       rafraichir();
@@ -1422,14 +1415,11 @@
     if (!PRIVE) return vueConnexion();
     if (location.hash.slice(1).split("?")[0] !== "admin") return;
     const nE = Object.keys(PRIVE.envies).length, nC = (PRIVE.aCompleter || []).length, nR = nRanger();
-    const corps = { res: vueRes, ranger: vueRanger, envies: vueEnvies, rapide: vueRapide, soirs: vueSoirs, budget: vueBudget, acc: vueAcc, lieux: vueLieux, liens: vueLiens, abo: () => `<p class="cr">Deux agendas à ajouter une fois sur l’iPhone : Réglages › Apps › Calendrier › Comptes › Ajouter un compte › Autre › S’abonner à un calendrier, colle l’adresse, puis Suivant et Enregistrer. Mise à jour automatique (à peu près toutes les heures).</p>${subsHTML()}<p class="cr">Ces adresses sont secrètes : elles contiennent prix et accompagnants. Ne les partage pas.</p>` }[VUE] || vueRes;
-    $("#main").innerHTML = `<div class="adm-tete"><h1>Admin</h1><p>${TOK ? "Chaque enregistrement publie le site" : "Lecture seule sur cet appareil"} · connecté ${esc(jusqua())}</p>
+    const corps = { res: vueRes, ranger: vueRanger, envies: vueEnvies, rapide: vueRapide, soirs: vueSoirs, budget: vueBudget, acc: vueAcc, lieux: vueLieux, liens: vueLiens, abo: () => `${subsHTML()}<p class="cr">Adresses secrètes : ne les partage pas.</p>` }[VUE] || vueRes;
+    $("#main").innerHTML = `<div class="adm-tete"><h1>Admin</h1>${TOK ? "" : "<p>Lecture seule</p>"}
     <nav class="chips" aria-label="Espace admin">${ONGLETS.map(([k, t]) => `<a class="chip" href="#admin?v=${k}"${k === VUE ? ' aria-current="page"' : ""}>${t}${k === "envies" && nE ? ` (${nE})` : ""}${k === "rapide" && nC ? ` (${nC})` : ""}${k === "ranger" && nR ? ` (${nR})` : ""}</a>`).join("")}</nav></div>
-    <div class="acts"><button class="btn pri" type="button" data-adm="ajouter">+ Ajouter un spectacle</button><button class="btn" type="button" data-adm="journal">+ Entrée au journal</button>${TOK ? "" : '<button class="btn" type="button" id="aTok">Saisir le jeton</button>'}<button class="btn" type="button" id="aLock">Se déconnecter</button></div>
-    <div id="av">${corps()}</div>
-    <p class="pied-adm"><button class="linkbtn" type="button" id="aForget">Oublier cet appareil (efface le jeton)</button></p>`;
-    $("#aLock").onclick = () => verrouiller("Déconnecté");
-    $("#aForget").onclick = async () => { if (await demander("Effacer le jeton GitHub de cet appareil et verrouiller ? Il faudra le ressaisir à la prochaine connexion.", { oui: "Effacer le jeton" })) { lsDel(LS_JETON); verrouiller("Appareil oublié : jeton effacé"); } };
+    <div class="acts"><button class="btn pri" type="button" data-adm="ajouter">${ico("ajouter")}Spectacle</button><button class="btn" type="button" data-adm="journal">${ico("ajouter")}Journal</button>${TOK ? "" : '<button class="btn" type="button" id="aTok">Saisir le jeton</button>'}</div>
+    <div id="av">${corps()}</div>`;
     if ($("#aTok")) $("#aTok").onclick = () => formJeton();
     const bp = $("#bp"); if (bp) bp.onchange = () => { BUDGET_P = bp.value; renderAdminVue(); };
     if (VUE === "rapide") brancherRapide();
