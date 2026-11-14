@@ -248,7 +248,7 @@ const gb = (e) => `<span class="gb" aria-hidden="true"></span>`; // bande pleine
 // Première ligne : picto du genre (de sa couleur) et titre à gauche, note puis cœur à droite.
 const l1 = (e, note) => `<span class="l1"><span class="tt nom">${genreIco(e, "gt")}<span class="vh">${esc(genre(e))} : </span>${esc(e.titre)}</span>${note}${coeurPub(e)}</span>`;
 const sousG = (e) => (e.sousGenre ? cap(e.sousGenre.toLowerCase()) : "");
-const ligneMeta = (meta, b) => (meta || b ? `<span class="ss">${meta ? `<span class="ssm">${meta}</span>` : ""}${b}</span>` : "");
+const ligneMeta = (meta, b) => (meta || b ? `<span class="ss">${b}${meta ? `<span class="ssm">${meta}</span>` : ""}</span>` : ""); // labels en tête
 function rowA(e) {
   const h = e.horaires && e.horaires.length <= 40 ? e.horaires : "", art = artLigne(e);
   const meta = esc([sousG(e), court(e.lieuId)].filter(Boolean).join(" · ")) + (h ? `<span class="hor"> · ${esc(h)}</span>` : ""); // horaires : bureau seulement (fiche dépliée sur mobile)
@@ -287,10 +287,14 @@ function actsHTML(e, details) {
 }
 function detHTML(e) {
   const c = creditsHTML(e);
-  // Journal : en admin, la fiche se modifie directement sous la ligne ; sinon, détail public déroulé.
+  // Journal : la fiche, comme en public ; en admin, mes infos privées et un bouton « Modifier » qui ouvre le formulaire complet.
   if (e.statut === "vu") {
-    if (PRIVE && ADMIN) return ADMIN.journalForm(e);
-    return `${c ? `<p class="cr">${c}</p>` : ""}${e.avis ? `<blockquote>${esc(e.avis)}</blockquote>` : ""}${actsHTML(e, true)}`;
+    const L = lieu(e), adm = PRIVE && ADMIN;
+    const mod = adm ? `<button class="btn ai" type="button" data-adm="jmodif" data-id="${esc(e.id)}" aria-label="Modifier les entrées et la fiche" title="Modifier les entrées et la fiche">${ico("modifier")}</button>` : "";
+    return `${c ? `<p class="cr">${c}</p>` : ""}
+    <dl class="dl"><dt>${ico("lieu")}<span class="vh">Lieu</span></dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}</dd>
+    <dt>${ico("mois")}<span class="vh">Vu le</span></dt><dd>${(e.vuLe || []).map((d) => fmtY(D(d), true)).join(", ")}</dd>${e.note ? `<dt>Grille</dt><dd>${stars(e.note, false, "Note de la grille")}</dd>` : ""}</dl>
+    ${e.avis ? `<blockquote>${esc(e.avis)}</blockquote>` : ""}${adm ? ADMIN.journalResume(e) : ""}${actsHTML(e, true).replace('<div class="acts">', `<div class="acts">${mod}`)}`;
   }
   return ficheCorps(e);
 }
@@ -856,7 +860,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.16"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.17"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -874,7 +878,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.16"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.17"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
@@ -950,7 +954,7 @@ document.addEventListener("click", async (ev) => {
   const rb = ev.target.closest("button.rb");
   if (rb) {
     const row = rb.closest(".row"), det = row.querySelector(".det"), open = det.hidden;
-    if (open && !det.innerHTML) { det.innerHTML = detHTML(BYID.get(row.dataset.id)); const jf = det.querySelector("form.jin"); if (jf && ADMIN) ADMIN.brancherJournal(jf); }
+    if (open && !det.innerHTML) { det.innerHTML = detHTML(BYID.get(row.dataset.id)); }
     det.hidden = !open; row.classList.toggle("open", open); rb.setAttribute("aria-expanded", String(open));
     return;
   }

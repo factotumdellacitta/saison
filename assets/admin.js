@@ -682,6 +682,23 @@
       <p class="err" role="alert" hidden></p>
       <div class="acts"><button class="btn pri" type="submit">Enregistrer</button><button class="btn ico" type="button" data-share="${k}" aria-label="Partager">${ico("partager")}</button><button class="btn danger" type="button" data-adm="supprimer" data-id="${k}">Supprimer</button></div></form>`;
   }
+  // Infos privées d’une entrée du journal (places, prix, accompagnants, notes), sans boutons.
+  function journalResume(e) {
+    const jp = PRIVE.journalPrive[e.id]; if (!jp) return "";
+    const l = [jp.places || (jp.billets && jp.billets.length) ? plural(nbPlaces(jp), "place") : "", resumePrix(jp), (jp.accompagnants || []).length ? "avec " + jp.accompagnants.join(", ") : ""].filter(Boolean).join(" · ");
+    return l || jp.notes ? `<section class="admbox" aria-label="Admin"><h3 class="adm-titre">Admin</h3>${l ? `<p>${esc(l)}</p>` : ""}${jp.notes ? `<p><b>Mes notes</b> (privées) : ${esc(jp.notes).replace(/\n/g, "<br>")}</p>` : ""}</section>` : "";
+  }
+  // Fenêtre superposée : formulaire complet du journal (dates, note, avis, places, notes, fiche).
+  function ouvrirJournal(id) {
+    const e = BYID.get(id); if (!e) return;
+    fermerDlg();
+    const el = document.createElement("div"); el.className = "sheet"; el.id = "dlg";
+    el.innerHTML = `<div class="sheet-in" role="dialog" aria-modal="true" aria-labelledby="dlgT" tabindex="-1"><div class="shtop"><button class="btn ico" type="button" data-dlgclose aria-label="Fermer">${ico("fermer")}</button><h2 class="k" id="dlgT">Journal : ${esc(e.titre)}</h2></div>${journalForm(e)}</div>`;
+    document.body.appendChild(el); document.documentElement.style.overflow = "hidden";
+    el.addEventListener("click", (ev) => { if (ev.target === el || ev.target.closest("[data-dlgclose]")) fermerDlg(); });
+    brancherJournal(el.querySelector("form.jin"));
+    el.querySelector(".sheet-in").focus();
+  }
   function brancherJournal(form) {
     const id = form.dataset.jid, e0 = BYID.get(id); if (!e0) return;
     const snap = clone(e0), snapP = clone(PRIVE.journalPrive[id] ?? null);
@@ -718,6 +735,7 @@
           // Pas de zone privée créée pour rien : seulement si elle existait, ou s’il y a des prix, des spectateurs ou des notes.
           if (d.prive.journalPrive[id] || aDesPrix(priv) || notes) { if (notes) priv.notes = notes; else delete priv.notes; d.prive.journalPrive[id] = priv; }
         });
+        if (form.closest("#dlg")) fermerDlg();
         await rafraichir(true);
         const rb = $(`.row[data-id="${CSS.escape(id)}"] > .rb`); if (rb) { rb.click(); rb.scrollIntoView({ block: "nearest" }); }
         toast("Enregistré");
@@ -1463,11 +1481,12 @@
     if (j) { JAVEC = j.dataset.javec; location.hash = "#journal"; return; }
     const b = ev.target.closest("[data-adm]"); if (!b) return;
     const id = b.dataset.id, a = b.dataset.adm;
-    if (!TOK && a !== "noop") { formJeton("Cet appareil est en lecture seule."); return; }
+    if (!TOK && a !== "noop" && a !== "jmodif") { formJeton("Cet appareil est en lecture seule."); return; }
     if (a === "reserver") formReserver(id);
     else if (a === "annuler") act(() => annulerRes(id));
     else if (a === "vu" || a === "revu" || a === "notes") formVu(id, a);
     else if (a === "editer") formSortie(id);
+    else if (a === "jmodif") ouvrirJournal(id);
     else if (a === "ajouter") formSortie(null);
     else if (a === "ecarter") act(() => ecarter(id, "ecarte"));
     else if (a === "remettre") act(() => ecarter(id, "a-voir"));
@@ -1476,5 +1495,5 @@
     else if (a === "journal") act(formJournal);
   });
 
-  ADMIN = { render, heart, ficheHTML, idsAvec, accSelectHTML, portail, restaurer, journalForm, brancherJournal };
+  ADMIN = { render, heart, ficheHTML, idsAvec, accSelectHTML, portail, restaurer, journalForm, brancherJournal, journalResume };
 })();
