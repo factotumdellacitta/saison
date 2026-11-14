@@ -6022,6 +6022,31 @@
    "leonardYVa": false,
    "statut": "a-voir",
    "offres": []
+  },
+  {
+   "id": "toute-l-histoire-de-la-peinture-en-moins-de-2-heures-parcours-rembrandt",
+   "titre": "Toute l’histoire de la peinture en moins de 2 heures – parcours Rembrandt",
+   "categorie": "Théâtre",
+   "sousGenre": "",
+   "artistes": [
+    {
+     "nom": "Hector Obalk",
+     "role": "artiste"
+    }
+   ],
+   "lieuId": "avignon-off",
+   "salle": "",
+   "debut": "2025-07-09",
+   "fin": "2025-07-09",
+   "note": 3,
+   "pronostic": false,
+   "pourquoi": "",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "offres": [],
+   "leonardYVa": false,
+   "statut": "a-voir"
   }
  ]
 }
