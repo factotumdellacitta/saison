@@ -74,6 +74,20 @@ URL:https://www.theatrechampselysees.fr/saison-2026-27/en-famille/l-histoir
  e-du-soldat
 END:VEVENT
 BEGIN:VEVENT
+UID:l-orfeo-2027-01-18@saison
+DTSTAMP:20261114T000000Z
+DTSTART;TZID=Europe/Paris:20270118T193000
+DTEND;TZID=Europe/Paris:20270118T220000
+SUMMARY:L’Orfeo (version de concert)
+LOCATION:Théâtre des Champs-Élysées
+DESCRIPTION:Claudio Monteverdi\, Stéphane Fuget\, Juan Sancho\, Les Épop
+ ées\nPlaces : 2\nPrix : Moi 20 € (Carte Jeune\, cat. 2) + Kerenn 20 €
+  (sa part\, Carte Jeune\, cat. 2) = 40 €\nAvec : Kerenn\nhttps://www.the
+ atrechampselysees.fr/saison-2026-27/opera-en-concert/l-orfeo
+URL:https://www.theatrechampselysees.fr/saison-2026-27/opera-en-concert/l-o
+ rfeo
+END:VEVENT
+BEGIN:VEVENT
 UID:nono-2027-01-21@saison
 DTSTAMP:20261114T000000Z
 DTSTART;TZID=Europe/Paris:20270121T200000

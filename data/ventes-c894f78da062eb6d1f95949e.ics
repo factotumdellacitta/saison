@@ -138,6 +138,23 @@ TRIGGER:-PT15M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:vente-l-orfeo-0-carte-jeunes-tce@saison
+DTSTAMP:20261114T000000Z
+DTSTART;TZID=Europe/Paris:20261018T100000
+DTEND;TZID=Europe/Paris:20261018T101500
+SUMMARY:~ Vente : Carte Jeunes TCE – L’Orfeo (version de concert)
+DESCRIPTION:Tarif : 20 €\nReprésentation : 2027-01-18\nCondition : Carte
+  Jeunes TCE\nBilletterie : https://www.theatrechampselysees.fr/saison-2026
+ -27/opera-en-concert/l-orfeo
+URL:https://www.theatrechampselysees.fr/saison-2026-27/opera-en-concert/l-o
+ rfeo
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vente : L’Orfeo (version de concert)
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:vente-la-fille-mal-gardee-0-avant-premiere-jeunes@saison
 DTSTAMP:20261114T000000Z
 DTSTART;TZID=Europe/Paris:20270415T120000
