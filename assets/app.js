@@ -156,6 +156,13 @@ function badges(e) {
 // Artistes en tête de ligne : auteur, compositeur, mise en scène, chorégraphie, puis les autres ; trois au plus.
 const ORDRE_ART = ["auteur", "compositeur", "mise en scène", "chorégraphie", "direction musicale", "commissaire", "réalisation", "compagnie", "interprète", "artiste"];
 const artLigne = (e) => [...(e.artistes || [])].sort((a, b) => ORDRE_ART.indexOf(a.role) - ORDRE_ART.indexOf(b.role)).slice(0, 3).map((a) => a.nom).join(", ");
+// Recherche plein texte (titre, artistes, lieu, salle, avis, années vues ; notes privées si connecté), sans accents, tous les mots.
+const normQ = (s) => norm(s).replace(/[’‘`]/g, "'");
+function texteDe(e) {
+  const L = lieu(e), jp = PRIVE && PRIVE.journalPrive ? PRIVE.journalPrive[e.id] : null;
+  return normQ([e.titre, e.sousGenre, e.categorie, ...(e.artistes || []).map((a) => a.nom), court(e.lieuId), L.nom, L.ville, e.salle, e.avis, e.pourquoi, ...(e.vuLe || []), jp && jp.notes].filter(Boolean).join(" "));
+}
+const cherche = (e, q) => { const t = normQ(q).trim(); if (!t) return true; const x = texteDe(e); return t.split(/\s+/).every((m) => x.includes(m)); };
 const genre = (e) => e.categorie + (e.sousGenre ? " (" + e.sousGenre.toLowerCase() + ")" : "");
 function rowA(e) {
   const meta = [court(e.lieuId), genre(e), e.horaires && e.horaires.length <= 40 ? e.horaires : ""].filter(Boolean).join(" · "), art = artLigne(e);
@@ -164,7 +171,8 @@ function rowA(e) {
   <span class="end">${stars(e.note, e.pronostic)}${badges(e)}</span></button>${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}<div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
 }
 function rowJ(e) {
-  const meta = [court(e.lieuId), genre(e)].filter(Boolean).join(" · ");
+  const n = (e.vuLe || []).length;
+  const meta = [court(e.lieuId), genre(e), n > 1 ? `vu ${n} fois : ${e.vuLe.map((d) => fmtY(D(d))).join(", ")}` : ""].filter(Boolean).join(" · ");
   return `<article class="row"><a class="rb" href="#sortie-${esc(e.id)}">${stubHTML(e, "vu")}
   <span class="mid"><span class="tt nom">${esc(e.titre)}</span>${e.avis ? `<span class="art">« ${esc(e.avis)} »</span>` : artLigne(e) ? `<span class="art nom">${esc(artLigne(e))}</span>` : ""}<span class="ss">${esc(meta)}</span></span>
   <span class="end">${e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : ""}</span></a></article>`;
@@ -231,7 +239,7 @@ const RAC = { soir: "Ce soir", we: "Ce week-end", semaine: "Cette semaine" };
 function parseF(q) {
   const p = new URLSearchParams(q || ""), L = (k) => (p.get(k) || "").split(",").filter(Boolean);
   return { cat: new Set(L("cat")), note: +p.get("note") || 0, zone: new Set(L("zone")), statut: new Set(L("statut")), jeune: p.has("jeune"), offre: p.has("offre"), yva: p.has("yva"),
-    lieu: p.get("lieu") || "", per: p.get("per") || "", jour: p.get("jour") || "", rac: p.get("rac") || "", libre: p.has("libre"), vue: p.get("vue") === "mois" ? "mois" : "liste", mois: p.get("mois") || "", tri: p.get("tri") === "note" ? "note" : "date" };
+    q: p.get("q") || "", lieu: p.get("lieu") || "", per: p.get("per") || "", jour: p.get("jour") || "", rac: p.get("rac") || "", libre: p.has("libre"), vue: p.get("vue") === "mois" ? "mois" : "liste", mois: p.get("mois") || "", tri: p.get("tri") === "note" ? "note" : "date" };
 }
 function serF(f) {
   const p = [], put = (k, v) => p.push(v === true ? k : k + "=" + [...(v instanceof Set ? v : [v])].map(encodeURIComponent).join(","));
@@ -242,6 +250,7 @@ function serF(f) {
   for (const k of ["jeune", "offre", "yva", "libre"]) if (f[k]) put(k, true);
   for (const k of ["lieu", "per", "jour", "rac"]) if (f[k]) put(k, f[k]);
   if (f.tri !== "date") put("tri", f.tri);
+  if (f.q.trim()) put("q", f.q.trim());
   return p.join("&");
 }
 function racWindow(r) {
@@ -260,6 +269,7 @@ function perWindow(f) {
 }
 function matchA(e, f, noWin) {
   const L = lieu(e);
+  if (f.q && !cherche(e, f.q)) return false;
   if (f.cat.size && !f.cat.has(slug(e.categorie))) return false;
   if (f.note && e.note < f.note) return false;
   if (f.zone.size && ![...f.zone].some((z) => ZONES[z] === L.zone)) return false;
@@ -276,6 +286,7 @@ function matchA(e, f, noWin) {
 }
 function activeList(f) {
   const a = [], lbl = (k, v, t) => a.push({ k, v, t });
+  if (f.q.trim()) lbl("q", "", "« " + f.q.trim() + " »");
   if (f.jour) lbl("jour", "", fmt(D(f.jour), true));
   if (f.rac) lbl("rac", "", RAC[f.rac]);
   if (f.libre) lbl("libre", "", "Libre ce soir-là");
@@ -312,6 +323,8 @@ function renderAffiche(q) {
   }
   const chip = (g, v, t, extra = "") => `<button class="chip" type="button" data-g="${g}" data-v="${esc(v)}" aria-pressed="false"${extra}>${t}</button>`;
   $("#main").innerHTML = `<section id="aff"><h1 class="vh">À l’affiche</h1>
+  ${PRIVE && ADMIN ? '<div class="acts acts-haut"><button class="btn pri" type="button" data-adm="ajouter">+ Ajouter un spectacle</button></div>' : ""}
+  <div class="tools"><input type="search" id="aq" class="flex1" placeholder="Rechercher un titre, un artiste, un lieu…" aria-label="Rechercher à l’affiche" value="${esc(F.q)}" enterkeyhint="search" autocomplete="off"></div>
   <div class="frise" role="group" aria-label="Les 14 prochains jours">${frise}</div>
   <div class="tools"><div class="seg" role="group" aria-label="Affichage"><button type="button" data-vue="liste" aria-pressed="true">Liste</button><button type="button" data-vue="mois" aria-pressed="false">Mois</button></div>
     <div class="chips defile" role="group" aria-label="Raccourcis">${Object.entries(RAC).map(([k, t]) => chip("rac", k, t)).join("")}${chip("libre", "1", "Libre ce soir-là")}</div></div>
@@ -351,6 +364,7 @@ function renderAffiche(q) {
       else if (f[g] instanceof Set) f[g].has(v) ? f[g].delete(v) : f[g].add(v);
     });
   });
+  $("#aq").oninput = (ev) => setF((f) => { f.q = ev.target.value; });
   $("#fLieu").onchange = (ev) => setF((f) => { f.lieu = ev.target.value; });
   $("#fPer").onchange = (ev) => setF((f) => { f.per = ev.target.value; });
   updateAffiche();
@@ -367,6 +381,7 @@ function updateAffiche() {
   m.querySelectorAll("[data-vue]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.vue === f.vue)));
   $("#nCat").textContent = f.cat.size ? "(" + f.cat.size + ")" : "";
   $("#fLieu").value = f.lieu; $("#fPer").value = f.per;
+  const aq = $("#aq"); if (aq && document.activeElement !== aq && aq.value !== f.q) aq.value = f.q;
   m.querySelector(".frise").hidden = f.vue === "mois";
   // Résultats
   let items = LIVE.filter((e) => matchA(e, f, f.vue === "mois" && !f.jour));
@@ -476,6 +491,7 @@ document.addEventListener("keydown", (ev) => {
 
 /* ---------- Journal ---------- */
 const saisonLib = (cle) => "Saison " + saisonDe(new Date(+cle, 9, 1)).court;
+let JQ = ""; // recherche du journal (mémoire seulement)
 function renderJournal(q) {
   const p = new URLSearchParams(q || ""), L = (k) => new Set((p.get(k) || "").split(",").filter(Boolean));
   const f = { cat: L("cat"), sa: L("sa"), mn: L("mn"), tri: p.get("tri") === "note" ? "note" : "date" };
@@ -489,21 +505,30 @@ function renderJournal(q) {
   const items = parSaison.filter((e) => (!f.cat.size || f.cat.has(slug(e.categorie))) && (!f.mn.size || f.mn.has(String(e.noteLeonard || 0))) && (!avec || avec.has(e.id)));
   items.sort(f.tri === "note" ? (a, b) => (b.noteLeonard || 0) - (a.noteLeonard || 0) || last(b).localeCompare(last(a)) : (a, b) => last(b).localeCompare(last(a)) || a.titre.localeCompare(b.titre, "fr"));
   const chip = (g, v, t, on = f[g].has(v)) => `<a class="chip" href="#journal?${esc(jq(f, g, v))}" data-k="${g}-${esc(v)}" aria-pressed="${on}" role="button">${t}</a>`;
-  let list = "", lastS = "";
-  for (const e of items) {
-    const sa = sOf(e);
-    if (f.tri === "date" && sa !== lastS) { list += `<h2 class="jour">${saisonLib(sa)} <small>${plural(items.filter((x) => sOf(x) === sa).length, "sortie")}</small></h2>`; lastS = sa; }
-    list += rowJ(e);
-  }
+  const draw = () => {
+    const vis = JQ.trim() ? items.filter((e) => cherche(e, JQ)) : items;
+    let list = "", lastS = "";
+    for (const e of vis) {
+      const sa = sOf(e);
+      if (f.tri === "date" && sa !== lastS) { list += `<h2 class="jour">${saisonLib(sa)} <small>${plural(vis.filter((x) => sOf(x) === sa).length, "sortie")}</small></h2>`; lastS = sa; }
+      list += rowJ(e);
+    }
+    $("#jlist").innerHTML = list || `<p class="empty">Aucune sortie ne correspond${JQ.trim() ? " à « " + esc(JQ.trim()) + " »" : ""}.</p>`;
+    $("#jn").textContent = plural(vis.length, "sortie");
+  };
   const nAct = f.cat.size + f.sa.size + f.mn.size;
   const accSel = PRIVE && ADMIN ? ADMIN.accSelectHTML(JAVEC) : "";
   const libS = f.sa.size === 1 ? saisonLib([...f.sa][0]) : f.sa.size ? plural(f.sa.size, "saison") : "Toutes les saisons";
   $("#main").innerHTML = `<div class="ph"><h1>Journal</h1><p>${plural(all.length, "sortie vue", "sorties vues")} par ${OWNER}${JMAJ ? ", à jour au " + fmtY(D(JMAJ)) : ""}</p></div>
+  ${PRIVE && ADMIN ? '<div class="acts acts-haut"><button class="btn pri" type="button" data-adm="journal">+ Entrée au journal</button></div>' : ""}
+  <div class="tools"><input type="search" id="jq" class="flex1" placeholder="Rechercher un titre, un artiste, un lieu, un avis…" aria-label="Rechercher dans le journal" value="${esc(JQ)}" enterkeyhint="search" autocomplete="off"></div>
   <div class="chips" role="group" aria-label="Saison">${chip("sa", "*", "Toutes les saisons", !f.sa.size)}${saisons.map((y) => chip("sa", y, saisonLib(y))).join("")}</div>
   <details class="box stats"><summary>Statistiques · ${esc(libS)}</summary>${statsHTML(parSaison, !f.sa.size)}</details>
   <div class="fbar"><div class="chips defile" role="group" aria-label="Filtres du journal">${cats.map((c) => chip("cat", slug(c), esc(c))).join("")}<span class="sep" aria-hidden="true"></span>${[4, 3, 2, 1].map((n) => chip("mn", String(n), "Ma note " + n)).join("")}${chip("mn", "0", "Sans note")}</div>
-  <div class="active"><span class="n">${plural(items.length, "sortie")}</span>${nAct ? `<a class="chip effacer" href="#journal${f.tri === "note" ? "?tri=note" : ""}">Tout effacer</a>` : ""}<a class="linkbtn ml" href="#journal?${esc(jq(f, "tri", f.tri === "note" ? "date" : "note"))}">Tri : ${f.tri === "note" ? "ma note" : "date"}</a></div>${accSel}</div>
-  <div class="list">${list || '<p class="empty">Aucune sortie ne correspond.</p>'}</div>`;
+  <div class="active"><span class="n" id="jn" aria-live="polite"></span>${nAct ? `<a class="chip effacer" href="#journal${f.tri === "note" ? "?tri=note" : ""}">Tout effacer</a>` : ""}<a class="linkbtn ml" href="#journal?${esc(jq(f, "tri", f.tri === "note" ? "date" : "note"))}">Tri : ${f.tri === "note" ? "ma note" : "date"}</a></div>${accSel}</div>
+  <div class="list" id="jlist"></div>`;
+  draw();
+  $("#jq").oninput = (ev) => { JQ = ev.target.value; draw(); };
   const as = $("#jAvec"); if (as) as.onchange = () => { JAVEC = as.value; renderJournal(q); };
 }
 function jq(f, g, v) {
@@ -622,7 +647,12 @@ function subsHTML() {
 }
 
 /* ---------- Admin : le module est chargé à la première visite de l’onglet ---------- */
-function lockIcon() { const t = $("#t-admin"); t.classList.toggle("ouvert", !!PRIVE); t.setAttribute("aria-label", PRIVE ? "Admin, déverrouillé" : "Admin"); }
+function lockIcon() {
+  const t = $("#t-admin"); t.hidden = !PRIVE; t.classList.toggle("ouvert", !!PRIVE); t.setAttribute("aria-label", PRIVE ? "Admin, connecté" : "Admin");
+  const c = $("#cx"); if (c) c.textContent = PRIVE ? "Session" : "Connexion";
+}
+// Session admin gardée sur cet appareil (échéance seule, aucune donnée sensible) : admin.js la restaure au démarrage.
+const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   const s = document.createElement("script"); s.src = "assets/admin.js?v=4.1"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
@@ -707,7 +737,7 @@ $$(".tab").forEach((b) => {
     location.hash = target;
   };
   b.onkeydown = (ev) => {
-    const tabs = $$(".tab"), i = tabs.indexOf(b);
+    const tabs = $$(".tab:not([hidden])"), i = tabs.indexOf(b);
     let j = ev.key === "ArrowRight" ? i + 1 : ev.key === "ArrowLeft" ? i - 1 : ev.key === "Home" ? 0 : ev.key === "End" ? tabs.length - 1 : null;
     if (j == null) return;
     ev.preventDefault(); j = (j + tabs.length) % tabs.length; tabs[j].focus(); tabs[j].click();
@@ -728,6 +758,8 @@ document.addEventListener("click", async (ev) => {
     try { await navigator.clipboard.writeText(url); toast("Lien copié"); } catch (_) { prompt("Copie ce lien :", url); }
     return;
   }
+  const cx = ev.target.closest("[data-cx]");
+  if (cx) { try { await loadAdmin(); ADMIN.portail(); } catch (_) { toast("Impossible de charger la connexion. Vérifie le réseau."); } return; }
   const tb = ev.target.closest("[data-theme-btn]");
   if (tb) { themePose(THEMES[(THEMES.indexOf(themeLu()) + 1) % 3]); return; }
   const cp = ev.target.closest("[data-copy]");
@@ -745,6 +777,7 @@ if ("IntersectionObserver" in window) new IntersectionObserver(([x]) => document
     const [a, l, d] = await Promise.all([getJSON("data/affiche.json"), getJSON("data/lieux.json"), getJSON("data/dispo.json").catch(() => ({}))]);
     applyData({ affiche: a, lieux: l, dispo: d });
     await route();
+    if (sessionVive()) loadAdmin().then(() => ADMIN.restaurer()).catch(() => {});
   } catch (err) {
     console.error(err);
     $("#main").innerHTML = '<p class="empty">Impossible de charger la saison. Vérifie la connexion puis recharge la page.</p>';
