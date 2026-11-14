@@ -388,7 +388,7 @@
     PRIVE = null; TOK = null; KEY = null; SALT = null; PUB = null; JAVEC = ""; SOIRS = null; LIENS_W = null; RAPIDE = null;
     BLOBS.clear(); fermerDlg(); bandeau(""); document.body.classList.remove("adm"); lockIcon();
     if ($("#sheet").hidden) $("#sheetIn").innerHTML = ""; // fiche fermée : aucun reste du bloc admin dans la page
-    if (/^#admin/.test(location.hash)) location.hash = "#radar"; else rafraichir(true);
+    if (/^#admin/.test(location.hash)) location.hash = "#affiche"; else rafraichir(true);
     if (msg) toast(msg);
   }
 
@@ -540,7 +540,8 @@
   function ficheHTML(e) {
     if (!PRIVE) return "";
     const vu = e.statut === "vu", r = PRIVE.reservations[e.id], env = PRIVE.envies[e.id], jp = PRIVE.journalPrive[e.id];
-    const b = (act, t, cls = "") => `<button class="btn ${cls}" type="button" data-adm="${act}" data-id="${esc(e.id)}">${t}</button>`;
+    // Actions en petits boutons à icône (libellé pour les lecteurs d’écran et en infobulle) ; seule l’action principale garde un mot.
+    const b = (act, t, icone, cls = "", mot = "") => `<button class="btn ai ${cls}" type="button" data-adm="${act}" data-id="${esc(e.id)}" aria-label="${t}" title="${t}">${ico(icone)}${mot ? `<span>${mot}</span>` : ""}</button>`;
     let etat = "";
     if (r) etat = `<p><b>Réservé</b> : ${r.date ? esc(fmtY(D(r.date), true)) : "date à préciser"}${r.heure ? " à " + esc(r.heure) : ""}${detRes(r)}</p>`;
     if (vu && jp) etat += `<p>${esc([jp.places || (jp.billets && jp.billets.length) ? plural(nbPlaces(jp), "place") : "", resumePrix(jp), (jp.accompagnants || []).length ? "avec " + jp.accompagnants.join(", ") : ""].filter(Boolean).join(" · "))}</p>`;
@@ -548,11 +549,10 @@
     if (env) etat += `<p><b>Dans mes envies</b>${env.note ? " · « " + esc(env.note) + " »" : ""}</p>`;
     const prio = env ? `<div class="chips wrap-ok" role="group" aria-label="Envie"><button class="chip" type="button" data-adm="envie" data-id="${esc(e.id)}">Note privée</button></div>` : "";
     const acts = vu
-      ? b("revu", "Ajouter une date vue", "pri") + b("notes", "Dates, note, avis et notes") + b("editer", "Modifier la fiche") + b("supprimer", "Supprimer")
-      : (r ? b("reserver", "Modifier la réservation", "pri") + b("annuler", "Annuler la réservation") : b("reserver", "J’ai réservé", "pri")) +
-        b("vu", "Marquer vu") + `<button class="btn" type="button" data-envie="${esc(e.id)}" aria-pressed="${!!env}" aria-label="${env ? "Retirer des envies" : "Ajouter aux envies"}">${COEUR_APP}Envie</button>` +
-        b("editer", "Modifier la fiche") + (e.statut === "ecarte" ? b("remettre", "Remettre à l’affiche") : b("ecarter", "Écarter")) + b("supprimer", "Supprimer");
-    return `<section class="admbox" aria-label="Admin"><h3 class="adm-titre">Admin${e.statut === "ecarte" ? " · écartée (masquée du public)" : ""}</h3>${etat}${prio}<div class="acts">${acts}</div></section>`;
+      ? b("revu", "Ajouter une date vue", "ajouter", "pri", "Revu") + b("notes", "Dates, note, avis et notes", "carres") + b("editer", "Modifier la fiche", "modifier") + b("supprimer", "Supprimer", "supprimer", "danger")
+      : (r ? b("reserver", "Modifier la réservation", "billet-ok", "pri", "Réservé") + b("annuler", "Annuler la réservation", "billet-barre", "danger") : b("reserver", "J’ai réservé", "billet-ok", "pri", "Réservé")) +
+        b("vu", "Marquer vu", "coche") + b("editer", "Modifier la fiche", "modifier") + (e.statut === "ecarte" ? b("remettre", "Remettre à l’affiche", "oeil") : b("ecarter", "Écarter (masquer du public)", "oeil-barre")) + b("supprimer", "Supprimer", "supprimer", "danger");
+    return `<section class="admbox" aria-label="Admin"><h3 class="adm-titre">Admin${e.statut === "ecarte" ? " · écartée (masquée du public)" : ""}</h3>${etat}${prio}<div class="acts acts-adm">${acts}</div></section>`;
   }
   const detRes = (r) => {
     const t = [r.salle, r.places || (r.billets && r.billets.length) ? plural(nbPlaces(r), "place") : "", r.siege, resumePrix(r), (r.accompagnants || []).length ? "avec " + r.accompagnants.join(", ") : "", r.note].filter(Boolean).join(" · ");

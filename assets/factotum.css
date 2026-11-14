@@ -139,7 +139,7 @@ body.compact .barre{visibility:visible}
 }
 @media (hover:hover){.rb:hover{background:var(--surface)}.rb:hover .tt{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}}
 .row.open .tt{color:var(--rouge-texte)}
-.det{margin-left:var(--colonne-date);padding:0 0 var(--e4) var(--e3);border-left:1px dotted var(--encre-2)}
+.det{margin-left:calc(var(--colonne-date) - 1px);padding:0 0 var(--e4) var(--e3);border-left:1px dotted var(--encre-2)}
 .det p{margin:0 0 var(--e2)}
 .det .jin{max-width:640px;padding-top:var(--e2)}
 .cr a,.pl a,.inl a{color:var(--encre)}
@@ -405,11 +405,11 @@ details.box[open]>summary::before{content:"–"}
 .l1 .st{flex:none;margin-top:3px}
 .mid>.ss{display:flex;flex-wrap:wrap;align-items:center;gap:var(--e1) var(--e2)}
 .mid>.ss .bds{display:inline-flex}
-/* Cœur des envies (admin) : juste avant la note, sur la ligne du genre ; positionné, il ne prend aucune place. */
-body.adm .row:has(>.envie) .l1 .st{margin-left:calc(18px + var(--e2))}
-.row>.envie{position:absolute;top:calc(var(--e3) - 1px);right:calc(49px + var(--e2))}
-.row:has(.l1 .st sup)>.envie{right:calc(49px + 13px + var(--e2))}
-.row:not(:has(.l1 .st))>.envie{right:0}
+/* Cœur des envies : toujours tout à droite de la première ligne. Public : cœur plein, non modifiable ; admin : bouton. */
+body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
+.row>.envie{position:absolute;top:calc(var(--e3) - 1px);right:0}
+.coeur-l{flex:none;display:block;width:18px;height:18px;margin-top:-1px;color:var(--rouge-texte)}
+.coeur-l .coeur{width:18px;height:18px;fill:currentColor}
 .envie{position:relative;z-index:1;display:block;width:18px;height:18px;padding:0;border:0;border-radius:0;background:none;color:var(--encre-2);cursor:pointer;transition:color var(--duree)}
 .envie::after{content:"";position:absolute;inset:-12px}
 .coeur{width:22px;height:22px;}
@@ -623,3 +623,10 @@ body.adm .row:has(>.envie) .l1 .st{margin-left:calc(18px + var(--e2))}
   #aff .r-ligne{display:none}
   .aff-g .frise{grid-template-columns:repeat(7,minmax(0,1fr))}
 }
+
+/* Actions admin : petits boutons à icône (cible de 44 px), un mot pour l’action principale seulement */
+.acts-adm{gap:var(--e1)}
+.btn.ai{min-width:var(--cible);padding:0 var(--e2);gap:6px}
+.btn.ai .pi{width:18px;height:18px}
+.btn.ai.danger{border-color:var(--filet-leger)}
+@media (hover:hover){.btn.ai.danger:hover{border-color:var(--rouge);background:var(--rouge);color:var(--sur-rouge)}}
