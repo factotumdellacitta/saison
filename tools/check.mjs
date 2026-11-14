@@ -12,7 +12,8 @@ const ROLES = ["auteur", "compositeur", "mise en scène", "chorégraphie", "dire
 const ZONES = ["Paris", "Petite couronne", "Île-de-France", "Avignon", "Autre"];
 const STATUTS_LIEU = ["Public", "Privé"];
 // Clés interdites dans tout fichier public (données privées)
-const PRIVEES = new Set(["prix", "accompagnants", "places", "siege", "heure", "reserveLe", "icsToken"]);
+const PRIVEES = new Set(["prix", "accompagnants", "places", "siege", "heure", "reserveLe", "icsToken",
+  "tarifPlein", "envies", "journalPrive", "aCompleter", "priorite", "blocages", "jeton", "token"]);
 
 const lire = (f) => {
   try { return JSON.parse(readFileSync(f, "utf8")); } catch (e) { erreurs.push(`${f} illisible : ${e.message}`); return null; }
@@ -26,6 +27,7 @@ if (!existsSync("data/prive.enc")) erreurs.push("data/prive.enc manquant.");
 else {
   const p = lire("data/prive.enc");
   if (p && !(p.ct && p.iv && p.salt && p.kdf)) erreurs.push("data/prive.enc n'a pas la forme d'un fichier chiffré.");
+  if (p && Object.keys(p).some((k) => !["v", "kdf", "iter", "salt", "iv", "ct"].includes(k))) erreurs.push("data/prive.enc contient des champs en clair.");
 }
 if (existsSync("data/spectacles.json")) erreurs.push("data/spectacles.json ne doit plus exister (remplacé par affiche.json et journal.json).");
 
@@ -48,6 +50,14 @@ for (const f of readdirSync("data")) {
   if (f === "prive.enc") continue;
   const o = lire(`data/${f}`);
   if (o) fouille(o, "", `data/${f}`);
+}
+
+// ---------- Jetons et secrets : jamais dans un fichier publié ----------
+const SECRET = /\b(gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})/;
+const publies = ["index.html", "sw.js", ...["assets", "data"].flatMap((d) => existsSync(d) ? readdirSync(d).map((f) => `${d}/${f}`) : [])];
+for (const f of publies) {
+  if (!/\.(html|js|json|enc|ics|webmanifest|svg|txt|md)$/.test(f)) continue;
+  if (SECRET.test(readFileSync(f, "utf8"))) erreurs.push(`${f} contient ce qui ressemble à un jeton GitHub : retire-le et révoque le jeton.`);
 }
 
 // ---------- Lieux ----------

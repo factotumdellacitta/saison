@@ -1,5 +1,7 @@
 // Chiffrement de la zone privée : PBKDF2-SHA256 + AES-256-GCM.
-// Mêmes paramètres que dans index.html (déchiffrement côté navigateur).
+// Mêmes paramètres que dans assets/admin.js (chiffrement et déchiffrement côté navigateur).
+// Le sel est conservé d'une écriture à l'autre (seul l'IV change, toujours aléatoire) : le navigateur garde
+// ainsi sa clé dérivée valable même quand Claude Code rechiffre la zone privée.
 import { webcrypto as crypto } from "node:crypto";
 
 const ITER = 310000;
@@ -19,9 +21,9 @@ async function deriveKey(password, salt, iter = ITER) {
   );
 }
 
-export async function chiffrer(objet, password) {
+export async function chiffrer(objet, password, saltB64) {
   if (!password) throw new Error("Mot de passe absent : définis SAISON_MDP dans l'environnement Claude Code.");
-  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const salt = saltB64 ? unb64(saltB64) : crypto.getRandomValues(new Uint8Array(16));
   const iv = crypto.getRandomValues(new Uint8Array(12));
   const key = await deriveKey(password, salt);
   const ct = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, enc.encode(JSON.stringify(objet)));
