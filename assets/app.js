@@ -189,7 +189,7 @@ function stars(n, pro, label) {
   const lib = `${label ? label + " : " : ""}${n} sur 4${label ? "" : ", " + NOTES_TXT[n]}${pro ? ", prévision" : ""}`;
   return `<span class="st" role="img" aria-label="${lib}">${[1, 2, 3, 4].map((i) => `<i${i <= n ? ' class="on"' : ""}></i>`).join("")}${pro ? '<sup aria-hidden="true">P</sup>' : ""}</span>`;
 }
-const booking = (e) => e.billetterie || lieu(e).billetterie || e.lien || lieu(e).site || "";
+const booking = (e) => e.billetterie || lieu(e).billetterie || ""; // adresse d’achat seulement (sinon : page officielle)
 const official = (e) => e.lien || lieu(e).site || "";
 const shareURL = (id) => location.origin + location.pathname + "#sortie-" + id;
 
@@ -242,20 +242,26 @@ const cherche = (e, q) => { const t = normQ(q).trim(); if (!t) return true; cons
 const genre = (e) => e.categorie + (e.sousGenre ? " (" + e.sousGenre.toLowerCase() + ")" : "");
 // Ligne : 1) genre à gauche, note à droite (cœur juste avant en admin) ; 2) titre ; 3) artistes ; 4) lieu et horaires, puis badges.
 const coeurPub = (e) => (!(PRIVE && ADMIN) && enviesIds().has(e.id) ? `<span class="coeur-l" role="img" aria-label="Dans les envies de ${OWNER}">${COEUR}</span>` : "");
-const l1 = (e, note) => `<span class="l1">${gk(e)}${note}${coeurPub(e)}</span>`;
+// Bande de genre : aplat de la couleur du genre, icône et libellé court en blanc, lus de bas en haut.
+const GENRE_COURT = { "Comédie musicale": "Musical", Exposition: "Expo", "Sur scène": "Scène" };
+const gb = (e) => `<span class="gb" title="${esc(genre(e))}">${genreIco(e)}<span class="gl">${esc(GENRE_COURT[e.categorie] || e.categorie || "Autre")}</span></span>`;
+// Première ligne : titre à gauche, note puis cœur à droite.
+const l1 = (e, note) => `<span class="l1"><span class="tt nom">${esc(e.titre)}</span>${note}${coeurPub(e)}</span>`;
+const sousG = (e) => (e.sousGenre ? cap(e.sousGenre.toLowerCase()) : "");
 const ligneMeta = (meta, b) => (meta || b ? `<span class="ss">${meta ? `<span class="ssm">${meta}</span>` : ""}${b}</span>` : "");
 function rowA(e) {
-  const meta = [court(e.lieuId), e.horaires && e.horaires.length <= 40 ? e.horaires : ""].filter(Boolean).join(" · "), art = artLigne(e);
-  return `<article class="row g-${famille(e.categorie)}" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${esc(e.id)}">${stubHTML(e)}
-  <span class="mid">${l1(e, stars(e.note, e.pronostic))}<span class="tt nom">${esc(e.titre)}</span>${art ? `<span class="art nom">${esc(art)}</span>` : ""}${ligneMeta(esc(meta), badges(e))}</span></button>${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}<div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
+  const h = e.horaires && e.horaires.length <= 40 ? e.horaires : "", art = artLigne(e);
+  const meta = esc([sousG(e), court(e.lieuId)].filter(Boolean).join(" · ")) + (h ? `<span class="hor"> · ${esc(h)}</span>` : ""); // horaires : bureau seulement (fiche dépliée sur mobile)
+  return `<article class="row g-${famille(e.categorie)}" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${esc(e.id)}">${gb(e)}${stubHTML(e)}
+  <span class="mid">${l1(e, stars(e.note, e.pronostic))}${art ? `<span class="art nom">${esc(art)}</span>` : ""}${ligneMeta(meta, badges(e))}</span></button>${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}<div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
 }
 function rowJ(e) {
   const n = (e.vuLe || []).length;
-  const meta = [court(e.lieuId), n > 1 ? `vu ${n} fois : ${e.vuLe.map((d) => fmtY(D(d))).join(", ")}` : ""].filter(Boolean).join(" · ");
+  const meta = [sousG(e), court(e.lieuId), n > 1 ? `vu ${n} fois : ${e.vuLe.map((d) => fmtY(D(d))).join(", ")}` : ""].filter(Boolean).join(" · ");
   // Admin : les personnes venues avec moi, en label sur la ligne.
   const jp = PRIVE && ADMIN && PRIVE.journalPrive ? PRIVE.journalPrive[e.id] : null, acc = jp ? [...new Set(jp.accompagnants || [])] : [];
-  return `<article class="row g-${famille(e.categorie)}" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${esc(e.id)}">${stubHTML(e, "vu")}
-  <span class="mid">${l1(e, e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : "")}<span class="tt nom">${esc(e.titre)}</span>${e.avis ? `<span class="art">« ${esc(e.avis)} »</span>` : artLigne(e) ? `<span class="art nom">${esc(artLigne(e))}</span>` : ""}${ligneMeta(esc(meta), acc.length ? `<span class="bds"><span class="b">avec ${esc(acc.join(", "))}</span></span>` : "")}</span></button><div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
+  return `<article class="row g-${famille(e.categorie)}" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${esc(e.id)}">${gb(e)}${stubHTML(e, "vu")}
+  <span class="mid">${l1(e, e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : "")}${e.avis ? `<span class="art">« ${esc(e.avis)} »</span>` : artLigne(e) ? `<span class="art nom">${esc(artLigne(e))}</span>` : ""}${ligneMeta(esc(meta), acc.length ? `<span class="bds"><span class="b">avec ${esc(acc.join(", "))}</span></span>` : "")}</span></button><div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
 }
 function creditsHTML(e) {
   const by = {};
@@ -276,8 +282,8 @@ function offresHTML(e) {
   return li.length ? `<ul class="off">${li.join("")}</ul>` : "";
 }
 function actsHTML(e, details) {
-  const b = booking(e), o = official(e);
-  return `<div class="acts">${b && e.statut !== "vu" ? `<a class="btn pri" href="${esc(b)}" target="_blank" rel="noopener">${ico("billet")}Billetterie</a>` : ""}${o && (o !== b || e.statut === "vu") ? `<a class="btn" href="${esc(o)}" target="_blank" rel="noopener">${ico("externe")}${e.statut === "vu" ? "Page archivée" : "Site officiel"}</a>` : ""}${details ? `<button class="btn ico" type="button" data-share="${esc(e.id)}" aria-label="Partager" title="Partager">${ico("partager")}</button>` : ""}</div>`;
+  const o = official(e), b0 = booking(e), b = b0 && b0 !== o ? b0 : "", vu = e.statut === "vu";
+  return `<div class="acts">${b && !vu ? `<a class="btn pri" href="${esc(b)}" target="_blank" rel="noopener">${ico("billet")}Billetterie</a>` : ""}${o ? `<a class="btn${!b && !vu ? " pri" : ""}" href="${esc(o)}" target="_blank" rel="noopener">${ico("externe")}${vu ? "Page archivée" : "Site officiel"}</a>` : ""}${details ? `<button class="btn ico" type="button" data-share="${esc(e.id)}" aria-label="Partager" title="Partager">${ico("partager")}</button>` : ""}</div>`;
 }
 function detHTML(e) {
   const c = creditsHTML(e);
@@ -594,9 +600,9 @@ const offreTxt = (o) => esc(o.type) + (o.tarif ? ", " + esc(o.tarif) : "");
 const libresTxt = (e) => { const n = soirsLibres(e); return n == null ? "" : n ? plural(n, "soir libre", "soirs libres") : `<b class="warn">aucun soir libre</b>`; };
 const stubR = (lbl, d, urg) => `<span class="stub"><small class="fin${urg ? " urg" : ""}">${lbl}</small><b>${d.getDate()}</b><small>${MOIS[d.getMonth()]}</small></span>`;
 function rowR(e, pre, stub, info) {
-  const k = esc(pre + "-" + e.id), meta = court(e.lieuId);
-  return `<article class="row g-${famille(e.categorie)}" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${k}">${stub}
-  <span class="mid">${l1(e, stars(e.note, e.pronostic))}<span class="tt nom">${esc(e.titre)}</span>${info ? `<span class="art">${info}</span>` : ""}${ligneMeta(esc(meta), badges(e).replace('<span class="b">Dernières dates</span>', "").replace('<span class="bds"></span>', ""))}</span></button>${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}<div class="det" id="d-${k}" hidden></div></article>`;
+  const k = esc(pre + "-" + e.id), meta = [sousG(e), court(e.lieuId)].filter(Boolean).join(" · ");
+  return `<article class="row g-${famille(e.categorie)}" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${k}">${gb(e)}${stub}
+  <span class="mid">${l1(e, stars(e.note, e.pronostic))}${info ? `<span class="art">${info}</span>` : ""}${ligneMeta(esc(meta), badges(e).replace('<span class="b">Dernières dates</span>', "").replace('<span class="bds"></span>', ""))}</span></button>${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}<div class="det" id="d-${k}" hidden></div></article>`;
 }
 function infoReserver({ e, o, rang }) {
   const f = finDe(e), li = libresTxt(e);
@@ -850,7 +856,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.14"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.15"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -868,7 +874,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.14"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.15"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }

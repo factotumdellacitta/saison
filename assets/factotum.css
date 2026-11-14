@@ -22,7 +22,7 @@
   --police:"Schibsted Grotesk","Factotum secours","Helvetica Neue",Arial,sans-serif;
   --t-site:44px;--t-section:22px;--t-fiche:17px;--t-corps:15px;--t-champ:16px;--t-meta:12px;--t-date:13px;--t-chiffre:48px;--t-jour:22px;--t-barre:20px;
   --e1:4px;--e2:8px;--e3:12px;--e4:16px;--e6:24px;--e8:32px;--e12:48px;
-  --cible:44px;--marge:16px;--max:1120px;--colonne-date:64px;
+  --cible:44px;--marge:16px;--max:1120px;--colonne-date:60px;--bande:20px;--t-bande:11px;
   --sat:env(safe-area-inset-top,0px);--sab:env(safe-area-inset-bottom,0px);--sal:env(safe-area-inset-left,0px);--sar:env(safe-area-inset-right,0px);
   --barre:48px;--nav:52px;--collant:calc(var(--sat) + var(--barre));
   --duree:120ms;
@@ -401,14 +401,15 @@ details.box[open]>summary::before{content:"–"}
    sans rallonger la ligne (icône de la hauteur d'un badge, zone tactile de 44 px par un pseudo-élément). */
 /* Ligne : genre et note sur la première ligne, badges au bout de la ligne lieu ; aucune rangée en plus. */
 .l1{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--e2)}
-.l1 .gk{flex:1;min-width:0;margin-bottom:0}
-.l1 .st{flex:none;margin-top:3px}
+.l1 .tt{flex:1;min-width:0}
+.l1 .st{flex:none;margin-top:5px}
 .mid>.ss{display:flex;flex-wrap:wrap;align-items:center;gap:var(--e1) var(--e2)}
 .mid>.ss .bds{display:inline-flex}
+@container liste (max-width:519.98px){.mid>.ss .hor{display:none}}
 /* Cœur des envies : toujours tout à droite de la première ligne. Public : cœur plein, non modifiable ; admin : bouton. */
 body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
-.row>.envie{position:absolute;top:calc(var(--e3) - 1px);right:0}
-.coeur-l{flex:none;display:block;width:18px;height:18px;margin-top:-1px;color:var(--rouge-texte)}
+.row>.envie{position:absolute;top:calc(var(--e3) + 1px);right:0}
+.coeur-l{flex:none;display:block;width:18px;height:18px;margin-top:1px;color:var(--rouge-texte)}
 .coeur-l .coeur{width:18px;height:18px;fill:currentColor}
 .envie{position:relative;z-index:1;display:block;width:18px;height:18px;padding:0;border:0;border-radius:0;background:none;color:var(--encre-2);cursor:pointer;transition:color var(--duree)}
 .envie::after{content:"";position:absolute;inset:-12px}
@@ -563,8 +564,13 @@ body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
 .g-danse{--g:var(--g-danse);--ga:var(--a-danse)}.g-images{--g:var(--g-images);--ga:var(--a-images)}.g-neutre{--g:var(--encre);--ga:var(--rouge)}
 .gk{display:flex;align-items:center;gap:6px;margin-bottom:2px;font-size:var(--t-meta);font-weight:700;text-transform:uppercase;letter-spacing:.06em;line-height:1.35;color:var(--g,var(--encre))}
 .gk .pi{width:16px;height:16px}
-.row[class*=" g-"] .stub{border-left:3px solid var(--g);padding-left:var(--e2)}
-.row.g-neutre .stub{border-left-color:transparent}
+/* Bande de genre à gauche de la ligne : aplat, icône et libellé en blanc, à la verticale (lu de bas en haut). */
+.rb:has(>.gb){grid-template-columns:var(--bande) var(--colonne-date) minmax(0,1fr)}
+.row:has(>.rb>.gb)>.det{margin-left:calc(var(--bande) + var(--colonne-date) - 1px)}
+.gb{grid-row:span 2;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:6px;padding:var(--e3) 0;background:var(--ga,var(--rouge));color:var(--sur-rouge)}
+.gb .pi{flex:none;width:14px;height:14px}
+.gb .gl{writing-mode:vertical-rl;transform:rotate(180deg);font-size:var(--t-bande);font-weight:700;text-transform:uppercase;letter-spacing:.06em;line-height:1;white-space:nowrap}
+.rb:has(>.gb) .stub{padding-left:var(--e2)}
 .chip[class*=" g-"] .pi{color:var(--g)}
 .chip[class*=" g-"][aria-pressed="true"],.chip[class*=" g-"].on{background:var(--ga);border-color:var(--ga);color:var(--sur-rouge)}
 .chip[class*=" g-"][aria-pressed="true"] .pi,.chip[class*=" g-"].on .pi{color:inherit}
@@ -630,3 +636,5 @@ body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
 .btn.ai .pi{width:18px;height:18px}
 .btn.ai.danger{border-color:var(--filet-leger)}
 @media (hover:hover){.btn.ai.danger:hover{border-color:var(--rouge);background:var(--rouge);color:var(--sur-rouge)}}
+@media print{.gb{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media (forced-colors:active){.gb{border-right:1px solid CanvasText}}
