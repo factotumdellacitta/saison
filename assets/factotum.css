@@ -51,6 +51,7 @@ p{margin:0 0 var(--e2)}
 .rouge :focus-visible,.top :focus-visible,.barre :focus-visible,.jour :focus-visible,.shh :focus-visible{outline-color:var(--sur-rouge)}
 [hidden]{display:none!important}
 .vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.masque{-webkit-text-security:disc}
 .skip{position:absolute;left:var(--e2);top:calc(var(--sat) + var(--e2));z-index:100;padding:var(--e3) var(--e4);background:var(--encre);color:var(--fond);font-size:var(--t-meta);font-weight:700;text-transform:uppercase;letter-spacing:.06em;transform:translateY(-200%)}
 .skip:focus{transform:none}
 .nom,.tt,.shh h2,.ph h1,.idx a{hyphens:auto;overflow-wrap:anywhere}
