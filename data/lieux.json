@@ -17,6 +17,15 @@
   "billetterie": null,
   "tarifJeune": ""
  },
+ "avignon-off": {
+  "nom": "Festival Off d’Avignon",
+  "ville": "Avignon",
+  "zone": "Avignon",
+  "statut": "Privé",
+  "site": "https://www.festivaloffavignon.com",
+  "billetterie": null,
+  "tarifJeune": "Carte Off : tarifs réduits dans la plupart des théâtres"
+ },
  "bouffes-du-nord": {
   "nom": "Théâtre des Bouffes du Nord",
   "ville": "Paris",
@@ -69,7 +78,7 @@
   "statut": "Public",
   "site": "https://www.comedie-francaise.fr",
   "billetterie": null,
-  "tarifJeune": "Carte Jeune CF : 24 / 17 / 12 € (Richelieu), 17 € (Vieux-Colombier), 15 € (Studio)"
+  "tarifJeune": "Moins de 28 ans : 27 / 18 / 12 € (Richelieu), 19 € (Vieux-Colombier), 18 € (Studio) ; places gratuites le lundi à Richelieu, 1h avant"
  },
  "edouard-vii": {
   "nom": "Théâtre Édouard VII",

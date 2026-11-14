@@ -10,6 +10,42 @@
    "magdalena-creation"
   ]
  },
+ "avignon-off": {
+  "sorties": [
+   "vu-1-2-3-pocquelin",
+   "vu-alors-on-en-est-ou",
+   "vu-antigone",
+   "vu-autopsie-dune-photo-de-famille",
+   "vu-conteneur",
+   "vu-dans-la-peau-de-cyrano",
+   "vu-fragment-s",
+   "vu-from-martin-to-eden",
+   "vu-gestion-de-la-ressource-humaine",
+   "vu-hubris",
+   "vu-jacques-et-chirac",
+   "vu-la-liste-de-mes-envies",
+   "vu-le-bain",
+   "vu-le-barbier-de-seville-avignon",
+   "vu-le-radeau-de-la-meduse",
+   "vu-le-revizor",
+   "vu-le-syndrome-dulysse",
+   "vu-les-enchanteurs",
+   "vu-letrangere",
+   "vu-lights-on-chaplin",
+   "vu-marc-tourneboeuf",
+   "vu-michel-et-claude",
+   "vu-miss-charity",
+   "vu-post",
+   "vu-refuge",
+   "vu-roberto-zucco",
+   "vu-toute-lhistoire-de-la-peinture-en-moins-de-2-heures",
+   "vu-ubu-roi-avignon",
+   "vu-une-operette-a-ravensbruck",
+   "vu-variations-pour-un-parapluie",
+   "vu-y-a-de-la-joie",
+   "vu-yongoyely"
+  ]
+ },
  "bouffes-du-nord": {
   "sorties": [
    "les-surs-hilton",
@@ -27,7 +63,6 @@
   "sorties": [
    "10000-gestes",
    "dancing-with-bob",
-   "delay-the-sadness",
    "gustavia",
    "impressions",
    "muette",
@@ -93,46 +128,14 @@
  },
  "festival-avignon": {
   "sorties": [
-   "vu-1-2-3-pocquelin",
-   "vu-alors-on-en-est-ou",
-   "vu-antigone",
-   "vu-autopsie-dune-photo-de-famille",
    "vu-brel",
-   "vu-conteneur",
-   "vu-dans-la-peau-de-cyrano",
-   "vu-fragment-s",
-   "vu-from-martin-to-eden",
-   "vu-gestion-de-la-ressource-humaine",
-   "vu-hubris",
-   "vu-jacques-et-chirac",
    "vu-la-distance",
-   "vu-la-liste-de-mes-envies",
    "vu-la-parabole-du-seum-avignon",
-   "vu-le-bain",
-   "vu-le-barbier-de-seville-avignon",
    "vu-le-proces-pelicot",
-   "vu-le-radeau-de-la-meduse",
-   "vu-le-revizor",
    "vu-le-soulier-de-satin",
-   "vu-le-syndrome-dulysse",
-   "vu-les-enchanteurs",
-   "vu-letrangere",
-   "vu-lights-on-chaplin",
-   "vu-marc-tourneboeuf",
-   "vu-michel-et-claude",
-   "vu-miss-charity",
    "vu-nous-ou-le-paradoxe-du-herisson",
    "vu-par-autan",
-   "vu-post",
-   "vu-refuge",
-   "vu-roberto-zucco",
-   "vu-taire",
-   "vu-toute-lhistoire-de-la-peinture-en-moins-de-2-heures",
-   "vu-ubu-roi-avignon",
-   "vu-une-operette-a-ravensbruck",
-   "vu-variations-pour-un-parapluie",
-   "vu-y-a-de-la-joie",
-   "vu-yongoyely"
+   "vu-taire"
   ]
  },
  "folies-bergere": {
@@ -211,7 +214,6 @@
    "le-chien",
    "madeleine-tornade",
    "piano-man",
-   "thesee",
    "une-odyssee"
   ]
  },
@@ -222,6 +224,7 @@
    "faust-castellucci",
    "fondre-gourfink",
    "food-court",
+   "la-nuee",
    "maldoror",
    "neanderthal-repetitions-publiques",
    "oedipe-roi",
@@ -247,6 +250,7 @@
    "le-trouvere",
    "raymonda",
    "rituels-lifar",
+   "romeo-et-juliette-jolly",
    "turandot",
    "vu-la-vestale",
    "werther"
@@ -259,18 +263,19 @@
  },
  "opera-de-paris": {
   "sorties": [
-   "kaguyahime",
-   "pulsations-childs",
    "repetitions-publiques-danse"
   ]
  },
  "palais-garnier": {
   "sorties": [
    "correspondances-nocturnes",
+   "don-pasquale",
    "giselle",
+   "kaguyahime",
    "la-clemence-de-titus",
    "la-fille-mal-gardee",
    "miroir-de-nos-peines",
+   "pulsations-childs",
    "vu-jerome-robbins",
    "vu-sylvia"
   ]
@@ -295,6 +300,7 @@
  },
  "rond-point": {
   "sorties": [
+   "delay-the-sadness",
    "diskoteekki",
    "ellen-babic",
    "merci-de-votre-collaboration",
@@ -327,6 +333,10 @@
    "hippolyte-et-aricie",
    "histoire-du-soldat-tce",
    "l-orfeo",
+   "la-griselda",
+   "la-rondine",
+   "le-barbier-de-seville",
+   "le-carnaval-baroque",
    "le-chateau-de-barbe-bleue",
    "lea-desandre",
    "les-pecheurs-de-perles",
@@ -339,6 +349,7 @@
    "orphee",
    "platee",
    "rinaldo",
+   "romeo-et-juliette-steibelt",
    "vu-puccini"
   ]
  },

@@ -30,7 +30,8 @@ DTEND;TZID=Europe/Paris:20261118T223000
 SUMMARY:La Folle Journée ou Le Mariage de Figaro
 LOCATION:Porte Saint-Martin\, Théâtre de la Porte Saint-Martin
 DESCRIPTION:Beaumarchais\, Alain Françon\, Vincent Dedienne\nHeure à pré
- ciser
+ ciser\nhttps://www.portestmartin.com/le-mariage-de-figaro
+URL:https://www.portestmartin.com/le-mariage-de-figaro
 END:VEVENT
 BEGIN:VEVENT
 UID:oedipe-roi-2026-11-19@saison
@@ -39,7 +40,10 @@ DTSTART;TZID=Europe/Paris:20261119T193000
 DTEND;TZID=Europe/Paris:20261119T220000
 SUMMARY:Œdipe roi
 LOCATION:Berthier\, Odéon – Théâtre de l’Europe
-DESCRIPTION:Sophocle\, Eddy D’Aranjo
+DESCRIPTION:Sophocle\, Eddy D’Aranjo\nhttps://www.theatre-odeon.eu/fr/sai
+ son-2026-2027/spectacles-2026-2027/eddy-d-aranjo-oedipe-roi-s26-27
+URL:https://www.theatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/e
+ ddy-d-aranjo-oedipe-roi-s26-27
 END:VEVENT
 BEGIN:VEVENT
 UID:esdeekid-2026-11-27@saison
@@ -48,7 +52,9 @@ DTSTART;TZID=Europe/Paris:20261127T200000
 DTEND;TZID=Europe/Paris:20261127T223000
 SUMMARY:EsDeeKid
 LOCATION:Olympia\, Olympia
-DESCRIPTION:EsDeeKid\nHeure à préciser
+DESCRIPTION:EsDeeKid\nHeure à préciser\nhttps://www.olympiahall.com/agend
+ a/esdeekid/
+URL:https://www.olympiahall.com/agenda/esdeekid/
 END:VEVENT
 BEGIN:VEVENT
 UID:histoire-du-soldat-tce-2027-01-17@saison
@@ -57,7 +63,11 @@ DTSTART;TZID=Europe/Paris:20270117T110000
 DTEND;TZID=Europe/Paris:20270117T133000
 SUMMARY:L’Histoire du soldat
 LOCATION:TCE\, Théâtre des Champs-Élysées
-DESCRIPTION:Igor Stravinsky
+DESCRIPTION:Igor Stravinsky\, Charles-Ferdinand Ramuz\, Lambert Wilson\, Le
+ manic Modern Ensemble\nhttps://www.theatrechampselysees.fr/saison-2026-27/
+ en-famille/l-histoire-du-soldat
+URL:https://www.theatrechampselysees.fr/saison-2026-27/en-famille/l-histoir
+ e-du-soldat
 END:VEVENT
 BEGIN:VEVENT
 UID:nono-2027-01-21@saison
@@ -75,7 +85,11 @@ DTSTART;TZID=Europe/Paris:20270122T200000
 DTEND;TZID=Europe/Paris:20270122T223000
 SUMMARY:Seppuku. El funeral de Mishima
 LOCATION:Odéon\, Odéon – Théâtre de l’Europe
-DESCRIPTION:Angélica Liddell\nPlaces : 2\nAvec : Alexandre
+DESCRIPTION:Angélica Liddell\, Yukio Mishima\nPlaces : 2\nAvec : Alexandre
+ \nhttps://www.theatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/an
+ gelica-liddell-seppuku-el-funeral-de-mishima-s26-27
+URL:https://www.theatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/a
+ ngelica-liddell-seppuku-el-funeral-de-mishima-s26-27
 END:VEVENT
 BEGIN:VEVENT
 UID:l-evenement-2027-01-28@saison
@@ -84,7 +98,10 @@ DTSTART;TZID=Europe/Paris:20270128T203000
 DTEND;TZID=Europe/Paris:20270128T230000
 SUMMARY:L’Événement
 LOCATION:Vieux-Colombier\, Comédie-Française
-DESCRIPTION:Annie Ernaux\nConflit : deux spectacles le même soir
+DESCRIPTION:Annie Ernaux\, Françoise Gillard\, Denis Podalydès\nConflit :
+  deux spectacles le même soir\nhttps://comedie-francaise.fr/2026-2027/lev
+ enement
+URL:https://comedie-francaise.fr/2026-2027/levenement
 END:VEVENT
 BEGIN:VEVENT
 UID:maldoror-2027-02-04@saison
@@ -93,7 +110,11 @@ DTSTART;TZID=Europe/Paris:20270204T183000
 DTEND;TZID=Europe/Paris:20270204T210000
 SUMMARY:Maldoror
 LOCATION:Berthier\, Odéon – Théâtre de l’Europe
-DESCRIPTION:Lautréamont\, Julien Gosselin
+DESCRIPTION:Lautréamont\, Roberto Bolaño\, Julien Gosselin\nhttps://www.t
+ heatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/julien-gosselin-m
+ aldoror-s26-27
+URL:https://www.theatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/j
+ ulien-gosselin-maldoror-s26-27
 END:VEVENT
 BEGIN:VEVENT
 UID:l-ecole-de-danse-2027-02-27@saison
@@ -102,16 +123,23 @@ DTSTART;TZID=Europe/Paris:20270227T140000
 DTEND;TZID=Europe/Paris:20270227T163000
 SUMMARY:L’École de danse
 LOCATION:Salle Richelieu\, Comédie-Française
-DESCRIPTION:Carlo Goldoni
+DESCRIPTION:Carlo Goldoni\, Clément Hervieu-Léger\, Denis Podalydès\, Fl
+ orence Viala\, Éric Génovèse\, Clotilde de Bayser\nhttps://comedie-fran
+ caise.fr/2026-2027/lecole-de-danse
+URL:https://comedie-francaise.fr/2026-2027/lecole-de-danse
 END:VEVENT
 BEGIN:VEVENT
 UID:capri-2027-03-04@saison
 DTSTAMP:20261114T000000Z
 DTSTART;TZID=Europe/Paris:20270304T180000
 DTEND;TZID=Europe/Paris:20270304T203000
-SUMMARY:Capri – wyspa uciekinierów
+SUMMARY:Capri – L’Île des fugitifs
 LOCATION:Odéon\, Odéon – Théâtre de l’Europe
-DESCRIPTION:Krystian Lupa
+DESCRIPTION:Curzio Malaparte\, Krystian Lupa\nhttps://www.theatre-odeon.eu/
+ fr/saison-2026-2027/spectacles-2026-2027/krystian-lupa-capri-wyspa-uciekin
+ ierow-s26-27
+URL:https://www.theatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/k
+ rystian-lupa-capri-wyspa-uciekinierow-s26-27
 END:VEVENT
 BEGIN:VEVENT
 UID:berlin-mon-garcon-2027-03-25@saison
@@ -120,7 +148,10 @@ DTSTART;TZID=Europe/Paris:20270325T203000
 DTEND;TZID=Europe/Paris:20270325T230000
 SUMMARY:Berlin mon garçon
 LOCATION:Vieux-Colombier\, Comédie-Française
-DESCRIPTION:Marie NDiaye
+DESCRIPTION:Marie NDiaye\, Mariame Clément\, Véronique Vella\, Françoise
+  Gillard\, Christian Hecq\, Mélissa Polonie\nhttps://comedie-francaise.fr
+ /2026-2027/berlin-mon-garcon
+URL:https://comedie-francaise.fr/2026-2027/berlin-mon-garcon
 END:VEVENT
 BEGIN:VEVENT
 UID:tame-impala-2027-06-13@saison

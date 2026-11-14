@@ -29,10 +29,10 @@ DTSTART;TZID=Europe/Paris:20270228T100000
 DTEND;TZID=Europe/Paris:20270228T101500
 SUMMARY:~ Vente : Carte Jeunes TCE – Asmik Grigorian\, Lukas Geniušas
 DESCRIPTION:Tarif : 15 €\nReprésentation : 2027-05-29\nCondition : Carte
-  Jeunes TCE\nBilletterie : https://www.theatrechampselysees.fr/en/season-2
- 026-27/sung-recital/asmik-grigorian-lukas-geniusas-1
-URL:https://www.theatrechampselysees.fr/en/season-2026-27/sung-recital/asmi
- k-grigorian-lukas-geniusas-1
+  Jeunes TCE\nBilletterie : https://www.theatrechampselysees.fr/saison-2026
+ -27/recital-chant/asmik-grigorian-lukas-geniusas
+URL:https://www.theatrechampselysees.fr/saison-2026-27/recital-chant/asmik-
+ grigorian-lukas-geniusas
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Vente : Asmik Grigorian\, Lukas Geniušas
@@ -44,15 +44,15 @@ UID:vente-attila-0-carte-jeunes-tce@saison
 DTSTAMP:20261114T000000Z
 DTSTART;TZID=Europe/Paris:20261206T100000
 DTEND;TZID=Europe/Paris:20261206T101500
-SUMMARY:~ Vente : Carte Jeunes TCE – Attila
+SUMMARY:~ Vente : Carte Jeunes TCE – Attila (version de concert)
 DESCRIPTION:Tarif : 20 €\nReprésentation : 2027-03-06\nCondition : Carte
-  Jeunes TCE\nBilletterie : https://www.theatrechampselysees.fr/en/season-2
- 026-27/opera-in-concert-version/attila-1
-URL:https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-
- version/attila-1
+  Jeunes TCE\nBilletterie : https://www.theatrechampselysees.fr/saison-2026
+ -27/opera-en-concert/attila
+URL:https://www.theatrechampselysees.fr/saison-2026-27/opera-en-concert/att
+ ila
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Vente : Attila
+DESCRIPTION:Vente : Attila (version de concert)
 TRIGGER:-PT15M
 END:VALARM
 END:VEVENT
@@ -154,16 +154,17 @@ TRIGGER:-PT15M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:vente-les-pecheurs-de-perles-0-avant-premiere-30-ans@saison
+UID:vente-les-pecheurs-de-perles-0-avant-premiere-jeunes-30-ans@saison
 DTSTAMP:20261114T000000Z
 DTSTART;TZID=Europe/Paris:20260903T100000
 DTEND;TZID=Europe/Paris:20260903T101500
-SUMMARY:~ Vente : Avant-première -30 ans – Les Pêcheurs de perles
-DESCRIPTION:Tarif : 20 €\nReprésentation : 2026-12-03\nCondition : Carte
-  Jeunes TCE\nBilletterie : https://www.theatrechampselysees.fr/en/season-2
- 026-27/previews-for-young-people-under-30/les-pecheurs-de-perles-2-2-1
-URL:https://www.theatrechampselysees.fr/en/season-2026-27/previews-for-youn
- g-people-under-30/les-pecheurs-de-perles-2-2-1
+SUMMARY:~ Vente : Avant-première jeunes -30 ans – Les Pêcheurs de perle
+ s
+DESCRIPTION:Tarif : 20 €\nReprésentation : 2026-12-03\nCondition : Moins
+  de 30 ans\, jeu. 3 déc. à 19h30\nBilletterie : https://www.theatrechamp
+ selysees.fr/saison-2026-27/opera-mis-en-scene/les-pecheurs-de-perles-2
+URL:https://www.theatrechampselysees.fr/saison-2026-27/opera-mis-en-scene/l
+ es-pecheurs-de-perles-2
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Vente : Les Pêcheurs de perles
@@ -177,10 +178,10 @@ DTSTART;TZID=Europe/Paris:20270111T100000
 DTEND;TZID=Europe/Paris:20270111T101500
 SUMMARY:~ Vente : Carte Jeunes TCE – Marina Rebeka\, Jonas Kaufmann
 DESCRIPTION:Tarif : 20 €\nReprésentation : 2027-04-11\nCondition : Carte
-  Jeunes TCE\nBilletterie : https://www.theatrechampselysees.fr/en/season-2
- 026-27/sung-recital/marina-rebeka-jonas-kaufmann-1
-URL:https://www.theatrechampselysees.fr/en/season-2026-27/sung-recital/mari
- na-rebeka-jonas-kaufmann-1
+  Jeunes TCE\nBilletterie : https://www.theatrechampselysees.fr/saison-2026
+ -27/recital-chant/marina-rebeka-jonas-kaufmann
+URL:https://www.theatrechampselysees.fr/saison-2026-27/recital-chant/marina
+ -rebeka-jonas-kaufmann
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Vente : Marina Rebeka\, Jonas Kaufmann
@@ -204,16 +205,16 @@ TRIGGER:-PT15M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:vente-orphee-0-avant-premiere-30-ans@saison
+UID:vente-orphee-0-avant-premiere-jeunes-30-ans@saison
 DTSTAMP:20261114T000000Z
 DTSTART;TZID=Europe/Paris:20270118T100000
 DTEND;TZID=Europe/Paris:20270118T101500
-SUMMARY:~ Vente : Avant-première -30 ans – Orphée
-DESCRIPTION:Tarif : 20 €\nReprésentation : 2027-04-18\nCondition : Carte
-  Jeunes TCE\nBilletterie : https://www.theatrechampselysees.fr/en/season-2
- 026-27/staged-opera/orphee-1
-URL:https://www.theatrechampselysees.fr/en/season-2026-27/staged-opera/orph
- ee-1
+SUMMARY:~ Vente : Avant-première jeunes -30 ans – Orphée
+DESCRIPTION:Tarif : 20 €\nReprésentation : 2027-04-18\nCondition : Moins
+  de 30 ans\, dim. 18 avril à 19h30\nBilletterie : https://www.theatrecham
+ pselysees.fr/saison-2026-27/opera-mis-en-scene/orphee
+URL:https://www.theatrechampselysees.fr/saison-2026-27/opera-mis-en-scene/o
+ rphee
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Vente : Orphée
@@ -237,16 +238,16 @@ TRIGGER:-PT15M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:vente-rinaldo-0-avant-premiere-30-ans@saison
+UID:vente-rinaldo-0-avant-premiere-jeunes-30-ans@saison
 DTSTAMP:20261114T000000Z
 DTSTART;TZID=Europe/Paris:20261120T100000
 DTEND;TZID=Europe/Paris:20261120T101500
-SUMMARY:~ Vente : Avant-première -30 ans – Rinaldo
-DESCRIPTION:Tarif : 20 €\nReprésentation : 2027-02-20\nCondition : Carte
-  Jeunes TCE\nBilletterie : https://www.theatrechampselysees.fr/en/season-2
- 026-27/staged-opera/rinaldo-2-1
-URL:https://www.theatrechampselysees.fr/en/season-2026-27/staged-opera/rina
- ldo-2-1
+SUMMARY:~ Vente : Avant-première jeunes -30 ans – Rinaldo
+DESCRIPTION:Tarif : 20 €\nReprésentation : 2027-02-20\nCondition : Moins
+  de 30 ans\, sam. 20 févr. à 19h30\nBilletterie : https://www.theatrecha
+ mpselysees.fr/saison-2026-27/opera-mis-en-scene/rinaldo-2
+URL:https://www.theatrechampselysees.fr/saison-2026-27/opera-mis-en-scene/r
+ inaldo-2
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Vente : Rinaldo
