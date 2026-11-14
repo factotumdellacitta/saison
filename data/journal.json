@@ -2332,43 +2332,6 @@
    "offres": []
   },
   {
-   "id": "vu-sylvia",
-   "titre": "Sylvia",
-   "categorie": "Danse",
-   "artistes": [
-    {
-     "nom": "Léo Delibes",
-     "role": "compositeur"
-    },
-    {
-     "nom": "Manuel Legris",
-     "role": "chorégraphie"
-    },
-    {
-     "nom": "Ballet de l’Opéra de Paris",
-     "role": "compagnie"
-    }
-   ],
-   "lieuId": "palais-garnier",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": "https://www.operadeparis.fr/saison-24-25/ballet/sylvia",
-   "billetterie": null,
-   "publicJeune": false,
-   "leonardYVa": false,
-   "statut": "vu",
-   "vuLe": [
-    "2025-05-16"
-   ],
-   "noteLeonard": null,
-   "avis": "",
-   "offres": []
-  },
-  {
    "id": "vu-taire",
    "titre": "TAIRE",
    "categorie": "Théâtre",
