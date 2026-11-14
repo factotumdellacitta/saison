@@ -82,6 +82,10 @@ const ICO = {
   "ventes": "<path d=\"M6 17v-6a6 6 0 0 1 12 0v6M4 17h16M10 21h4\"/>",
 };
 const ico = (n, cls) => ICO[n] ? `<svg class="pi${cls ? " " + cls : ""}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true" focusable="false">${ICO[n]}</svg>` : "";
+// Familles de genre (code couleur) : théâtre, musique, danse, images ; le reste est neutre.
+const FAMILLE = { "Théâtre": "theatre", "Opéra": "musique", "Récital": "musique", "Concert": "musique", "Comédie musicale": "musique", "Danse": "danse", "Exposition": "images", "Cinéma": "images" };
+const famille = (c) => FAMILLE[c] || "neutre";
+const gk = (e) => `<span class="gk">${genreIco(e)}${esc(genre(e))}</span>`;
 const genreIco = (e, cls) => ico(CATS.includes(e.categorie) ? e.categorie : "Autre", cls);
 const THEMES = ["auto", "light", "dark"], THEME_TXT = { auto: "Auto", light: "Clair", dark: "Sombre" }, THEME_ICO = { auto: "auto", light: "clair", dark: "sombre" };
 const themeLu = () => { try { const t = localStorage.getItem("factotum-theme"); return THEMES.includes(t) ? t : "auto"; } catch (_) { return "auto"; } };
@@ -228,18 +232,18 @@ function texteDe(e) {
 const cherche = (e, q) => { const t = normQ(q).trim(); if (!t) return true; const x = texteDe(e); return t.split(/\s+/).every((m) => x.includes(m)); };
 const genre = (e) => e.categorie + (e.sousGenre ? " (" + e.sousGenre.toLowerCase() + ")" : "");
 function rowA(e) {
-  const meta = [genre(e), court(e.lieuId), e.horaires && e.horaires.length <= 40 ? e.horaires : ""].filter(Boolean).join(" · "), art = artLigne(e);
-  return `<article class="row" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${esc(e.id)}">${stubHTML(e)}
-  <span class="mid"><span class="tt nom">${esc(e.titre)}</span>${art ? `<span class="art nom">${esc(art)}</span>` : ""}<span class="ss">${genreIco(e)}${esc(meta)}</span></span></button>
+  const meta = [court(e.lieuId), e.horaires && e.horaires.length <= 40 ? e.horaires : ""].filter(Boolean).join(" · "), art = artLigne(e);
+  return `<article class="row g-${famille(e.categorie)}" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${esc(e.id)}">${stubHTML(e)}
+  <span class="mid">${gk(e)}<span class="tt nom">${esc(e.titre)}</span>${art ? `<span class="art nom">${esc(art)}</span>` : ""}${meta ? `<span class="ss">${esc(meta)}</span>` : ""}</span></button>
   <span class="end">${stars(e.note, e.pronostic)}${badges(e)}</span>${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}<div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
 }
 function rowJ(e) {
   const n = (e.vuLe || []).length;
-  const meta = [genre(e), court(e.lieuId), n > 1 ? `vu ${n} fois : ${e.vuLe.map((d) => fmtY(D(d))).join(", ")}` : ""].filter(Boolean).join(" · ");
+  const meta = [court(e.lieuId), n > 1 ? `vu ${n} fois : ${e.vuLe.map((d) => fmtY(D(d))).join(", ")}` : ""].filter(Boolean).join(" · ");
   // Admin : les personnes venues avec moi, en label sur la ligne.
   const jp = PRIVE && ADMIN && PRIVE.journalPrive ? PRIVE.journalPrive[e.id] : null, acc = jp ? [...new Set(jp.accompagnants || [])] : [];
-  return `<article class="row" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${esc(e.id)}">${stubHTML(e, "vu")}
-  <span class="mid"><span class="tt nom">${esc(e.titre)}</span>${e.avis ? `<span class="art">« ${esc(e.avis)} »</span>` : artLigne(e) ? `<span class="art nom">${esc(artLigne(e))}</span>` : ""}<span class="ss">${genreIco(e)}${esc(meta)}</span></span>
+  return `<article class="row g-${famille(e.categorie)}" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${esc(e.id)}">${stubHTML(e, "vu")}
+  <span class="mid">${gk(e)}<span class="tt nom">${esc(e.titre)}</span>${e.avis ? `<span class="art">« ${esc(e.avis)} »</span>` : artLigne(e) ? `<span class="art nom">${esc(artLigne(e))}</span>` : ""}${meta ? `<span class="ss">${esc(meta)}</span>` : ""}</span>
   <span class="end">${e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : ""}${acc.length ? `<span class="bds"><span class="b">avec ${esc(acc.join(", "))}</span></span>` : ""}</span></button><div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
 }
 function creditsHTML(e) {
@@ -391,7 +395,7 @@ function renderAffiche(q) {
   <div class="frise" role="group" aria-label="Les 14 prochains jours">${frise}</div>
   <div class="tools"><div class="seg" role="group" aria-label="Affichage"><button class="i" type="button" data-vue="liste" aria-pressed="true" aria-label="Liste">${ico("liste")}</button><button class="i" type="button" data-vue="mois" aria-pressed="false" aria-label="Mois">${ico("mois")}</button></div>
     <div class="chips defile" role="group" aria-label="Raccourcis">${Object.entries(RAC).map(([k, t]) => chip("rac", k, t)).join("")}${chip("libre", "1", "Libre ce soir-là")}</div></div>
-  <div class="fbar"><div class="chips defile" role="group" aria-label="Genres">${cats.map((c) => chip("cat", slug(c), ico(c) + esc(c))).join("")}</div>
+  <div class="fbar"><div class="chips defile" role="group" aria-label="Genres">${cats.map((c) => chip("cat", slug(c), ico(c) + esc(c)).replace('class="chip"', `class="chip g-${famille(c)}"`)).join("")}</div>
     <div class="chips defile" role="group" aria-label="Filtres">
     ${chip("note", "2", carres(2, true), ' aria-label="Note 2 et plus"')}${chip("note", "3", carres(3, true), ' aria-label="Note 3 et plus"')}${chip("note", "4", carres(4), ' aria-label="Note 4"')}<span class="sep" aria-hidden="true"></span>
     ${chip("zone", "paris", "Paris")}${chip("zone", "pc", "Petite couronne")}<span class="sep" aria-hidden="true"></span>
@@ -448,7 +452,7 @@ function updateAffiche() {
   let items = LIVE.filter((e) => matchA(e, f, f.vue === "mois" && !f.jour));
   if (f.vue === "mois" && !f.jour) { const c = monthCursor(f); items = items.filter((e) => overlaps(e, c, new Date(c.getFullYear(), c.getMonth() + 1, 0))); }
   const act = activeList(f);
-  $("#active").innerHTML = `<span class="n">${plural(items.length, "sortie")}</span>${act.map((a) => `<button class="chip on" type="button" data-rm="${a.k}" data-v="${esc(a.v)}" aria-label="Retirer le filtre ${esc(a.t)}">${esc(a.t)}<span class="x" aria-hidden="true">×</span></button>`).join("")}${act.length ? `<button class="chip effacer" type="button" id="clear">Tout effacer</button>` : ""}<button class="linkbtn ml tri" type="button" id="tri" aria-label="Tri par ${f.tri === "note" ? "note" : "date"}, changer">${ico("tri")}${f.tri === "note" ? "Note" : "Date"}</button>`;
+  $("#active").innerHTML = `<span class="n">${plural(items.length, "sortie")}</span>${act.map((a) => `<button class="chip on${a.k === "cat" ? " g-" + famille(a.t) : ""}" type="button" data-rm="${a.k}" data-v="${esc(a.v)}" aria-label="Retirer le filtre ${esc(a.t)}">${esc(a.t)}<span class="x" aria-hidden="true">×</span></button>`).join("")}${act.length ? `<button class="chip effacer" type="button" id="clear">Tout effacer</button>` : ""}<button class="linkbtn ml tri" type="button" id="tri" aria-label="Tri par ${f.tri === "note" ? "note" : "date"}, changer">${ico("tri")}${f.tri === "note" ? "Note" : "Date"}</button>`;
   $("#active").onclick = (ev) => {
     const r = ev.target.closest("[data-rm]");
     if (r) return setF((x) => { const k = r.dataset.rm; if (x[k] instanceof Set) x[k].delete(r.dataset.v); else x[k] = typeof x[k] === "boolean" ? false : typeof x[k] === "number" ? 0 : ""; });
@@ -506,6 +510,7 @@ async function openSheet(id) {
   let e = BYID.get(id);
   if (!e) { try { await loadJournal(); } catch (_) {} e = BYID.get(id); }
   const box = $("#sheetIn");
+  box.className = "sheet-in" + (e ? " g-" + famille(e.categorie) : "");
   if (!e) {
     box.innerHTML = `<div class="shtop"><button class="btn ico" type="button" data-close aria-label="Fermer">${ico("fermer")}</button><span class="k"></span></div><h2 id="sheetT" class="mh">Sortie introuvable</h2><p class="empty">Cette fiche n’existe plus ou a changé d’adresse.</p>`;
   } else {
@@ -583,7 +588,7 @@ function renderJournal(q) {
   <div class="tools">${rech("jq", "Rechercher dans le journal", JQ)}</div>
   <div class="chips" role="group" aria-label="Saison">${chip("sa", "*", "Toutes", !f.sa.size)}${saisons.map((y) => chip("sa", y, saisonCourt(y), f.sa.has(y), saisonLib(y))).join("")}</div>
   <details class="box stats"><summary>${ico("stats")}Statistiques · ${esc(libS)}</summary>${statsHTML(parSaison, !f.sa.size)}</details>
-  <div class="fbar"><div class="chips defile" role="group" aria-label="Filtres du journal">${cats.map((c) => chip("cat", slug(c), ico(c) + esc(c))).join("")}<span class="sep" aria-hidden="true"></span>${[4, 3, 2, 1].map((n) => chip("mn", String(n), carres(n), f.mn.has(String(n)), "Ma note " + n)).join("")}${chip("mn", "0", "Sans note")}</div>
+  <div class="fbar"><div class="chips defile" role="group" aria-label="Filtres du journal">${cats.map((c) => chip("cat", slug(c), ico(c) + esc(c)).replace('class="chip"', `class="chip g-${famille(c)}"`)).join("")}<span class="sep" aria-hidden="true"></span>${[4, 3, 2, 1].map((n) => chip("mn", String(n), carres(n), f.mn.has(String(n)), "Ma note " + n)).join("")}${chip("mn", "0", "Sans note")}</div>
   <div class="active"><span class="n" id="jn" aria-live="polite"></span>${nAct ? `<a class="chip effacer" href="#journal${f.tri === "note" ? "?tri=note" : ""}">Tout effacer</a>` : ""}<a class="linkbtn ml tri" href="#journal?${esc(jq(f, "tri", f.tri === "note" ? "date" : "note"))}" aria-label="Tri par ${f.tri === "note" ? "ma note" : "date"}, changer">${ico("tri")}${f.tri === "note" ? "Ma note" : "Date"}</a></div>${accSel}</div>
   <div class="list" id="jlist"></div>`;
   draw();
@@ -599,7 +604,7 @@ function jq(f, g, v) {
 }
 function bars(rows) {
   const max = Math.max(1, ...rows.map((r) => r[1]));
-  return `<div class="bars">${rows.map(([l, n, href]) => `<span class="bl">${href ? `<a href="${href}">${esc(l)}</a>` : esc(l)}</span><span class="bg" style="--v:${Math.round((n / max) * 100)}" aria-hidden="true"></span><span class="bn">${n}</span>`).join("")}</div>`;
+  return `<div class="bars">${rows.map(([l, n, href, cls]) => `<span class="bl">${href ? `<a href="${href}">${esc(l)}</a>` : esc(l)}</span><span class="bg${cls ? " " + cls : ""}" style="--v:${Math.round((n / max) * 100)}" aria-hidden="true"></span><span class="bn">${n}</span>`).join("")}</div>`;
 }
 function statsHTML(all, toutes) {
   const count = (fn) => { const o = new Map(); all.forEach((e) => [].concat(fn(e)).forEach((k) => k != null && k !== "" && o.set(k, (o.get(k) || 0) + 1))); return [...o]; };
@@ -614,7 +619,7 @@ function statsHTML(all, toutes) {
   const both = all.filter((e) => e.noteLeonard && e.note);
   const cmp = both.length ? `<table class="t pile"><thead><tr><th>Sortie</th><th class="num">Ma note</th><th class="num">Grille</th><th class="num">Écart</th></tr></thead><tbody>${both.map((e) => `<tr><td><a href="#sortie-${esc(e.id)}">${esc(e.titre)}</a></td><td class="num" data-l="Ma note">${e.noteLeonard}</td><td class="num" data-l="Grille">${e.note}</td><td class="num" data-l="Écart">${e.noteLeonard - e.note > 0 ? "+" : e.noteLeonard - e.note < 0 ? "−" : ""}${Math.abs(e.noteLeonard - e.note)}</td></tr>`).join("")}</tbody></table><p class="cr">Écart moyen : ${(both.reduce((s, e) => s + e.noteLeonard - e.note, 0) / both.length).toFixed(1).replace(".", ",").replace("-", "−")}</p>` : `<p class="cr">Pas encore de sortie avec à la fois ma note et une note de la grille.</p>`;
   return `<div class="kpis"><div><b>${all.length}</b><span>${all.length > 1 ? "sorties vues" : "sortie vue"}</span></div><div><b>${lxAll.length}</b><span>${lxAll.length > 1 ? "lieux" : "lieu"}</span></div><div><b>${count((e) => (e.artistes || []).map((a) => a.nom)).length}</b><span>artistes</span></div><div><b>${moy}</b><span>ma note moyenne</span></div></div>
-  ${toutes ? `<h3>Par saison</h3>${bars(saisons)}` : ""}<h3>Par catégorie</h3>${bars(cats)}<h3>Lieux les plus fréquentés</h3>${bars(lx)}<h3>Artistes les plus vus</h3>${bars(ar)}<h3>Mes notes</h3>${bars(notes)}<h3>Ma note et la grille</h3>${cmp}`;
+  ${toutes ? `<h3>Par saison</h3>${bars(saisons)}` : ""}<h3>Par catégorie</h3>${bars(cats.map(([c, n]) => [c, n, null, "g-" + famille(c)]))}<h3>Lieux les plus fréquentés</h3>${bars(lx)}<h3>Artistes les plus vus</h3>${bars(ar)}<h3>Mes notes</h3>${bars(notes)}<h3>Ma note et la grille</h3>${cmp}`;
 }
 
 /* ---------- Artistes & lieux ---------- */
@@ -722,7 +727,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.10"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.11"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -740,7 +745,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.10"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.11"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
@@ -751,7 +756,7 @@ async function renderView(h) {
   if (path === "charte") {
     modeCharte(true); setTab(null);
     try { await loadCharte(); } catch (_) { $("#main").innerHTML = '<p class="empty">Impossible de charger la charte. Vérifie la connexion puis recharge.</p>'; return; }
-    window.CHARTE.render($("#main"), { esc, cleF, saisonTxt, saisonDe, themeBouton, ico, ICONES: ICO, CATS });
+    window.CHARTE.render($("#main"), { esc, cleF, saisonTxt, saisonDe, themeBouton, ico, ICONES: ICO, CATS, famille });
     document.title = TITRE_VUE = "Charte – Factotum"; RENDERED = h; window.scrollTo(0, 0); return;
   }
   modeCharte(false);
