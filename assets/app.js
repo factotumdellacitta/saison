@@ -177,9 +177,11 @@ function rowA(e) {
 function rowJ(e) {
   const n = (e.vuLe || []).length;
   const meta = [court(e.lieuId), genre(e), n > 1 ? `vu ${n} fois : ${e.vuLe.map((d) => fmtY(D(d))).join(", ")}` : ""].filter(Boolean).join(" · ");
-  return `<article class="row"><a class="rb" href="#sortie-${esc(e.id)}">${stubHTML(e, "vu")}
+  // Admin : les personnes venues avec moi, en label sur la ligne.
+  const jp = PRIVE && ADMIN && PRIVE.journalPrive ? PRIVE.journalPrive[e.id] : null, acc = jp ? [...new Set(jp.accompagnants || [])] : [];
+  return `<article class="row" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${esc(e.id)}">${stubHTML(e, "vu")}
   <span class="mid"><span class="tt nom">${esc(e.titre)}</span>${e.avis ? `<span class="art">« ${esc(e.avis)} »</span>` : artLigne(e) ? `<span class="art nom">${esc(artLigne(e))}</span>` : ""}<span class="ss">${esc(meta)}</span></span>
-  <span class="end">${e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : ""}</span></a></article>`;
+  <span class="end">${e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : ""}${acc.length ? `<span class="bds"><span class="b">avec ${esc(acc.join(", "))}</span></span>` : ""}</span></button><div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
 }
 function creditsHTML(e) {
   const by = {};
@@ -205,10 +207,15 @@ function actsHTML(e, details) {
 function placeHTML(e) {
   const L = lieu(e);
   const nom = e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "Lieu à préciser";
-  return [nom + (e.salle ? ", " + esc(e.salle) : "") + (L.zone && L.zone !== "Paris" ? ` (${esc(L.ville || L.zone)})` : ""), esc(range(e)), esc(e.horaires || "")].filter(Boolean).join(" · ");
+  return [nom + (e.salle ? ", " + esc(e.salle) : "") + (L.zone && L.zone !== "Paris" ? ` (${esc(L.ville || L.zone)})` : ""), e.statut === "vu" ? "" : esc(range(e)), esc(e.horaires || "")].filter(Boolean).join(" · ");
 }
 function detHTML(e) {
   const c = creditsHTML(e);
+  // Journal : en admin, la fiche se modifie directement sous la ligne ; sinon, détail public déroulé.
+  if (e.statut === "vu") {
+    if (PRIVE && ADMIN) return ADMIN.journalForm(e);
+    return `${c ? `<p class="cr">${c}</p>` : ""}<p class="pl">${placeHTML(e)}</p><p class="cr">Vu le ${(e.vuLe || []).map((d) => fmtY(D(d), true)).join(", ")}</p>${e.avis ? `<blockquote>${esc(e.avis)}</blockquote>` : ""}${actsHTML(e, false)}`;
+  }
   return `${c ? `<p class="cr">${c}</p>` : ""}<p class="pl">${placeHTML(e)}</p>${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${offresHTML(e)}${actsHTML(e, true)}`;
 }
 
@@ -666,7 +673,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.5"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.6"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -684,7 +691,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.5"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.6"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
@@ -759,7 +766,7 @@ document.addEventListener("click", async (ev) => {
   const rb = ev.target.closest("button.rb");
   if (rb) {
     const row = rb.closest(".row"), det = row.querySelector(".det"), open = det.hidden;
-    if (open && !det.innerHTML) det.innerHTML = detHTML(BYID.get(row.dataset.id));
+    if (open && !det.innerHTML) { det.innerHTML = detHTML(BYID.get(row.dataset.id)); const jf = det.querySelector("form.jin"); if (jf && ADMIN) ADMIN.brancherJournal(jf); }
     det.hidden = !open; row.classList.toggle("open", open); rb.setAttribute("aria-expanded", String(open));
     return;
   }

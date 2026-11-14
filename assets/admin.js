@@ -647,6 +647,71 @@
     });
   }
 
+  /* ---------- Journal : édition directe sous la ligne (tout est modifiable, un seul bouton) ---------- */
+  const lieuxNoms = () => Object.keys(LIEUX).map((k) => LIEUX[k].nom).sort((a, b) => a.localeCompare(b, "fr"));
+  const artsConnus = () => [...new Set([...AFF, ...(JOURNAL || [])].flatMap((x) => (x.artistes || []).map((a) => a.nom)))].sort((a, b) => a.localeCompare(b, "fr"));
+  function journalForm(e) {
+    const jp = PRIVE.journalPrive[e.id], k = esc(e.id), pr = jp && places(jp).length ? jp : { billets: [{ spectateur: "Moi" }] };
+    return `<form class="frm jin" data-jid="${k}" novalidate autocomplete="off">
+      <fieldset class="fs"><legend>Dates vues</legend><div data-dates>${(e.vuLe || []).map(dateRow).join("")}</div><button type="button" class="btn" data-adddate>+ Date</button></fieldset>
+      ${champ("Ma note", sel("noteLeonard", NOTES_L, e.noteLeonard ?? ""))}
+      ${champ("Mon avis (public)", `<textarea name="avis" rows="2">${esc(e.avis || "")}</textarea>`)}
+      ${notesHTML(jp && jp.notes)}
+      ${prixReplie(pr, aDesPrix(jp))}
+      ${champ("Titre", inp("titre", e.titre, "required"))}
+      <div class="grid2">${champ("Catégorie", sel("categorie", CATS, e.categorie))}${champ("Sous-genre", inp("sousGenre", e.sousGenre))}</div>
+      <div class="grid2">${champ("Lieu", inp("lieu", nomLieu(e.lieuId), 'list="dl-lieux" placeholder="Commence à taper…"'))}${champ("Salle", inp("salle", e.salle))}</div>
+      <fieldset class="fs" data-nl hidden><legend>Nouveau lieu</legend><div class="grid2">${champ("Ville", inp("nl_ville", "Paris"))}${champ("Zone", sel("nl_zone", ZONES_L, "Paris"))}</div></fieldset>
+      <fieldset class="fs"><legend>Artistes</legend><div data-arts>${((e.artistes || []).length ? e.artistes : [{}]).map(artRow).join("")}</div><button type="button" class="btn" data-addart>+ Artiste</button></fieldset>
+      ${champ("Lien officiel", inp("lien", e.lien, 'type="url" placeholder="https://…"'))}
+      ${$("#dl-art") ? "" : dl("dl-art", artsConnus())}${$("#dl-lieux") ? "" : dl("dl-lieux", lieuxNoms())}
+      <p class="err" role="alert" hidden></p>
+      <div class="acts"><button class="btn pri" type="submit">Enregistrer</button><button class="btn" type="button" data-share="${k}">Partager</button><button class="btn danger" type="button" data-adm="supprimer" data-id="${k}">Supprimer</button></div></form>`;
+  }
+  function brancherJournal(form) {
+    const id = form.dataset.jid, e0 = BYID.get(id); if (!e0) return;
+    const snap = clone(e0), snapP = clone(PRIVE.journalPrive[id] ?? null);
+    const errEl = form.querySelector(".err"), sub = form.querySelector('[type="submit"]');
+    brancherPrix(form);
+    const nl = form.querySelector("[data-nl]"), lieuIn = form.elements.lieu;
+    lieuIn.addEventListener("input", () => { nl.hidden = !lieuIn.value.trim() || !!lieuDepuisNom(lieuIn.value); });
+    form.addEventListener("click", (ev) => {
+      if (ev.target.closest("[data-adddate]")) { form.querySelector("[data-dates]").insertAdjacentHTML("beforeend", dateRow()); form.querySelector("[data-dates] .ar:last-child input").focus(); }
+      if (ev.target.closest("[data-addart]")) form.querySelector("[data-arts]").insertAdjacentHTML("beforeend", artRow());
+      const del = ev.target.closest("[data-del]"); if (del && del.closest("[data-dates],[data-arts]")) del.closest(".ar").remove();
+    });
+    form.onsubmit = async (ev) => {
+      ev.preventDefault(); errEl.hidden = true; sub.disabled = true;
+      try {
+        const f = form, titre = val(f, "titre"); if (!titre) throw new Error("Le titre est obligatoire.");
+        const dates = [...new Set([...f.querySelectorAll('[name="vu_d"]')].map((x) => x.value).filter(Boolean))].sort();
+        if (!dates.length || dates.some((x) => !ISO_RE.test(x))) throw new Error("Indique au moins une date vue.");
+        let lieuId = lieuDepuisNom(val(f, "lieu")), nouveauLieu = null;
+        if (!lieuId && val(f, "lieu")) {
+          const nom = val(f, "lieu"); let k = slug(nom), i = 2; while (LIEUX[k]) k = slug(nom) + "-" + i++;
+          nouveauLieu = { id: k, l: { nom, ville: val(f, "nl_ville") || "Paris", zone: val(f, "nl_zone"), statut: "Public", site: null, billetterie: null, tarifJeune: "" } }; lieuId = k;
+        }
+        const artistes = [...f.querySelectorAll("[data-arts] .ar")].map((r) => ({ nom: r.querySelector('[name="a_nom"]').value.trim().replace(/'/g, "’"), role: r.querySelector('[name="a_role"]').value })).filter((a) => a.nom);
+        const lien = val(f, "lien") || null; if (lien && !URL_RE.test(lien)) throw new Error("Le lien doit commencer par https://");
+        const champs = { titre, categorie: val(f, "categorie"), sousGenre: val(f, "sousGenre"), artistes, lieuId: lieuId || null, salle: val(f, "salle"), lien, vuLe: dates, noteLeonard: val(f, "noteLeonard") ? +val(f, "noteLeonard") : null, avis: val(f, "avis") };
+        const notes = val(f, "notes"), priv = lirePrix(f);
+        await ecrire(`Admin : journal modifié pour ${titre}`, async (d) => {
+          if (nouveauLieu && !d.lieux[nouveauLieu.id]) { d.lieux[nouveauLieu.id] = nouveauLieu.l; d.lieux = Object.fromEntries(Object.entries(d.lieux).sort(([a], [b]) => a.localeCompare(b))); }
+          const s = d.journal.sorties.find((x) => x.id === id); if (!s) throw new Error("Cette sortie n’existe plus dans le dépôt.");
+          await garde(snap, s, "La fiche");
+          await garde(snapP, d.prive.journalPrive[id] ?? null, "Les places et notes");
+          Object.assign(s, champs);
+          // Pas de zone privée créée pour rien : seulement si elle existait, ou s’il y a des prix, des spectateurs ou des notes.
+          if (d.prive.journalPrive[id] || aDesPrix(priv) || notes) { if (notes) priv.notes = notes; else delete priv.notes; d.prive.journalPrive[id] = priv; }
+        });
+        await rafraichir(true);
+        const rb = $(`.row[data-id="${CSS.escape(id)}"] > .rb`); if (rb) { rb.click(); rb.scrollIntoView({ block: "nearest" }); }
+        toast("Enregistré");
+      } catch (e) { if (!(e instanceof Annule)) { errEl.textContent = msgGH(e); errEl.hidden = false; } }
+      finally { sub.disabled = false; }
+    };
+  }
+
   /* ---------- Entrée au journal : fiche existante ou nouvelle fiche simplifiée ---------- */
   async function formJournal() {
     try { await loadJournal(); } catch (_) {}
@@ -830,7 +895,7 @@
       d.journal.sorties = d.journal.sorties.filter((x) => x.id !== id);
       delete d.prive.reservations[id]; delete d.prive.envies[id]; delete d.prive.journalPrive[id];
     });
-    if (location.hash === "#sortie-" + id) location.hash = "#admin";
+    if (location.hash === "#sortie-" + id) location.hash = "#admin"; else rafraichir(true);
     toast("Sortie supprimée");
   }
 
@@ -1402,5 +1467,5 @@
     else if (a === "journal") act(formJournal);
   });
 
-  ADMIN = { render, heart, ficheHTML, idsAvec, accSelectHTML, portail, restaurer };
+  ADMIN = { render, heart, ficheHTML, idsAvec, accSelectHTML, portail, restaurer, journalForm, brancherJournal };
 })();
