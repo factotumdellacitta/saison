@@ -1,0 +1,690 @@
+/* Saison – interface publique (lot 2). Aucune dépendance. */
+"use strict";
+const OWNER = "Léonard";
+const CATS = ["Théâtre", "Opéra", "Danse", "Comédie musicale", "Récital", "Concert", "Festival", "Exposition", "Cinéma", "Événement", "Sur scène", "Autre"];
+const ROLES = ["auteur", "compositeur", "mise en scène", "chorégraphie", "direction musicale", "réalisation", "commissaire", "compagnie", "interprète", "artiste"];
+const CAT_LIENS = ["Billetteries", "Cartes et tarifs jeunes", "Calendriers de vente", "Outils"];
+const MOIS = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."];
+const MOIS_L = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+const JOURS = ["dim.", "lun.", "mar.", "mer.", "jeu.", "ven.", "sam."];
+const COURT = {
+  "comedie-francaise": "Comédie-Française", odeon: "Odéon", "la-colline": "La Colline", tce: "TCE", chaillot: "Chaillot",
+  "opera-bastille": "Bastille", "palais-garnier": "Garnier", "opera-de-paris": "Opéra de Paris", "opera-comique": "Opéra-Comique",
+  "theatre-de-la-ville": "Th. de la Ville", athenee: "Athénée", "comedie-des-champs-elysees": "Comédie des Champs-Él.",
+  "grande-halle-villette": "Grande Halle", "zenith-paris": "Zénith", "theatre-cite-internationale": "Cité internationale",
+  t2g: "T2G", tgp: "TGP", "theatre-public-montreuil": "Th. de Montreuil", "nanterre-amandiers": "Amandiers",
+  "festival-avignon": "Avignon", "rond-point": "Rond-Point", "theatre-du-gymnase": "Gymnase", "theatre-du-soleil": "Th. du Soleil",
+  "theatre-de-paris": "Th. de Paris", "poche-montparnasse": "Poche-Montparnasse", "seine-musicale": "Seine Musicale", lido: "Lido 2",
+};
+
+/* ---------- Outils ---------- */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const TODAY = new Date(); TODAY.setHours(0, 0, 0, 0);
+const NOW = new Date();
+const D = (s) => { if (!s) return null; const [y, m, d] = String(s).slice(0, 10).split("-").map(Number); return new Date(y, m - 1, d); };
+const iso = (d) => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+const add = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+const jj = (d) => d.getDate() + (d.getDate() === 1 ? "er" : "");
+const fmt = (d, wd) => d ? (wd ? JOURS[d.getDay()] + " " : "") + jj(d) + " " + MOIS[d.getMonth()] : "";
+const fmtY = (d, wd) => d ? fmt(d, wd) + " " + d.getFullYear() : "";
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+const norm = (s) => String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/œ/g, "oe").replace(/æ/g, "ae");
+const slug = (s) => String(s).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase()
+  .replace(/[œ]/g, "oe").replace(/[æ]/g, "ae").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const plural = (n, s, p) => n + " " + (n > 1 ? (p || s + "s") : s);
+const cap = (s) => s ? s[0].toUpperCase() + s.slice(1) : s;
+function toast(t) { const el = $("#toast"); el.textContent = t; el.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove("show"), 2600); }
+const getJSON = (u, o) => fetch(u, o).then((r) => { if (!r.ok) throw new Error(u); return r.json(); });
+
+/* ---------- Données ---------- */
+let AFF = [], LIVE = [], LIEUX = {}, BUSY = new Set(), BUSY_SRC = {}, MAJ = "", JOURNAL = null, JMAJ = "", LIENS = null, PRIVE = null;
+const BYID = new Map();
+let jP = null, lP = null;
+const loadJournal = () => jP || (jP = getJSON("data/journal.json").then((j) => { JOURNAL = j.sorties; JMAJ = j.maj; JOURNAL.forEach((e) => BYID.set(e.id, e)); ART = null; return JOURNAL; }).catch((e) => { jP = null; throw e; }));
+const loadLiens = () => lP || (lP = getJSON("data/liens.json").then((l) => (LIENS = l)).catch((e) => { lP = null; throw e; }));
+
+const lieu = (e) => LIEUX[e.lieuId] || {};
+function court(id) {
+  if (!id || !LIEUX[id]) return "";
+  if (COURT[id]) return COURT[id];
+  return LIEUX[id].nom.replace(/^Théâtre (du |de la |de l’|des |de )/, "").replace(/^Théâtre /, "Th. ").replace(/ – .*/, "").replace(/ \(.*\)/, "");
+}
+const ended = (e) => { const b = D(e.fin) || D(e.debut); return b && b < TODAY; };
+const span = (e) => { const a = D(e.debut); return a ? [a, D(e.fin) || a] : null; };
+const playsOn = (e, d) => { const s = span(e); return s && d >= s[0] && d <= s[1]; };
+const overlaps = (e, s, t) => { const p = span(e); return p && p[0] <= t && p[1] >= s; };
+function freeIn(e, s, t) {
+  const p = span(e); if (!p) return false;
+  let d = new Date(Math.max(+p[0], +s, +TODAY)); const end = new Date(Math.min(+p[1], +t));
+  for (let i = 0; d <= end && i < 500; d = add(d, 1), i++) if (!BUSY.has(iso(d))) return true;
+  return false;
+}
+const running = (e) => { const p = span(e); return p && p[0] < TODAY && p[1] >= TODAY && +p[0] !== +p[1]; };
+const lastDays = (e) => { const p = span(e); return p && +p[0] !== +p[1] && p[1] >= TODAY && (p[1] - TODAY) / 864e5 <= 10; };
+const venteDate = (o) => { const [d, t = "10:00"] = o.vente.split("T"); const [y, m, j] = d.split("-").map(Number); const [h, mi] = t.split(":").map(Number); return new Date(y, m - 1, j, h, mi); };
+function venteTxt(o) {
+  const h = /T(\d\d):(\d\d)/.exec(o.vente);
+  return (o.venteApprox ? "~ " : "") + fmt(D(o.vente), true) + (h ? " " + (+h[1]) + "h" + (h[2] !== "00" ? h[2] : "") : "");
+}
+function prochainesVentes(n) {
+  const rows = [];
+  LIVE.forEach((e) => (e.offres || []).forEach((o) => { if (o.vente && venteDate(o) >= NOW) rows.push({ e, o, v: venteDate(o) }); }));
+  return rows.sort((a, b) => a.v - b.v || a.e.titre.localeCompare(b.e.titre, "fr")).slice(0, n);
+}
+function range(e) {
+  if (e.datesTexte) return e.datesTexte;
+  const p = span(e); if (!p) return "Dates à préciser";
+  const [a, b] = p;
+  if (+a === +b) return fmtY(a, true);
+  return a.getFullYear() === b.getFullYear() ? fmt(a) + " – " + fmtY(b) : fmtY(a) + " – " + fmtY(b);
+}
+function stars(n, pro, label) {
+  if (!n) return "";
+  return `<span class="st" role="img" aria-label="${label || "Note"} ${n} sur 4${pro ? ", pronostic" : ""}">${"★".repeat(n)}${pro ? "<sup>P</sup>" : ""}</span>`;
+}
+const booking = (e) => e.billetterie || lieu(e).billetterie || e.lien || lieu(e).site || "";
+const official = (e) => e.lien || lieu(e).site || "";
+const shareURL = (id) => location.origin + location.pathname + "#sortie-" + id;
+
+/* ---------- Index artistes ---------- */
+let ART = null;
+function artistes() {
+  if (ART) return ART;
+  ART = {};
+  const put = (e, vu) => (e.artistes || []).forEach((a) => {
+    const k = slug(a.nom); if (!k) return;
+    const r = (ART[k] ??= { slug: k, nom: a.nom, roles: new Set(), aff: [], vus: [] });
+    r.roles.add(a.role);
+    const l = vu ? r.vus : r.aff; if (!l.includes(e)) l.push(e);
+  });
+  AFF.filter((e) => e.statut === "a-voir").forEach((e) => put(e, false));
+  (JOURNAL || []).forEach((e) => put(e, true));
+  return ART;
+}
+
+/* ---------- Fragments ---------- */
+function stubHTML(e, mode) {
+  if (mode === "vu") {
+    const v = D((e.vuLe || []).at(-1));
+    return v ? `<span class="stub"><b>${v.getDate()}</b><small>${MOIS[v.getMonth()]} ${String(v.getFullYear()).slice(2)}</small></span>` : `<span class="stub"><b>–</b></span>`;
+  }
+  const p = span(e);
+  if (!p) return `<span class="stub"><b>–</b><small>à venir</small></span>`;
+  if (running(e)) return `<span class="stub"><small>jusqu’au</small><b>${p[1].getDate()}</b><small>${MOIS[p[1].getMonth()]}</small></span>`;
+  return `<span class="stub"><b>${p[0].getDate()}</b><small>${MOIS[p[0].getMonth()]}${p[0].getFullYear() !== TODAY.getFullYear() && p[0].getFullYear() !== TODAY.getFullYear() + 1 ? " " + p[0].getFullYear() : ""}</small></span>`;
+}
+function badges(e) {
+  const b = [];
+  if (e.leonardYVa) b.push(`<span class="b yva" title="${OWNER} y va"><span class="vh">${OWNER} </span>Y va</span>`);
+  if (e.publicJeune) b.push(`<span class="b jeune" title="Adapté à un public jeune">Jeune<span class="vh"> public</span></span>`);
+  if (lastDays(e)) b.push(`<span class="b fin" title="Dernières dates">Fin<span class="vh"> proche, dernières dates</span></span>`);
+  if ((e.offres || []).length) b.push(`<span class="b offre" title="Offre jeune">Offre<span class="vh"> jeune</span></span>`);
+  return b.length ? `<span class="bds">${b.join("")}</span>` : "";
+}
+function rowA(e) {
+  const sub = [court(e.lieuId), e.categorie + (e.sousGenre ? " (" + e.sousGenre.toLowerCase() + ")" : "")].filter(Boolean).join(" · ");
+  return `<article class="row" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${esc(e.id)}">${stubHTML(e)}
+  <span class="mid"><span class="tt">${esc(e.titre)}</span><span class="ss">${esc(sub)}</span></span>
+  <span class="end">${stars(e.note, e.pronostic)}${badges(e)}</span></button><div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
+}
+function rowJ(e) {
+  const sub = esc([court(e.lieuId), e.avis ? "" : e.categorie].filter(Boolean).join(" · ")) + (e.avis ? ` · <i>« ${esc(e.avis)} »</i>` : "");
+  return `<article class="row"><a class="rb" href="#sortie-${esc(e.id)}">${stubHTML(e, "vu")}
+  <span class="mid"><span class="tt">${esc(e.titre)}</span><span class="ss">${sub}</span></span>
+  <span class="end">${e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : ""}</span></a></article>`;
+}
+function creditsHTML(e) {
+  const by = {};
+  (e.artistes || []).forEach((a) => (by[a.role] ??= []).push(a));
+  return ROLES.filter((r) => by[r]).map((r) => `<span class="ro">${esc(r)}</span> ${by[r].map((a) => `<a href="#artiste-${slug(a.nom)}">${esc(a.nom)}</a>`).join(", ")}`).join(" · ");
+}
+function offresHTML(e) {
+  const L = lieu(e);
+  const li = (e.offres || []).map((o) => {
+    const v = o.vente ? venteDate(o) : null;
+    let t = `<b>${esc(o.type)}</b>${o.date ? " le " + fmt(D(o.date), true) : ""}${o.tarif ? ", " + esc(o.tarif) : ""}`;
+    if (v) t += v <= NOW ? ", en vente" : `, vente ${o.venteApprox ? "vers le " : "le "}${venteTxt(o).replace(/^~ /, "")}`;
+    if (o.condition) t += ` <span class="cr">(${esc(o.condition)})</span>`;
+    return `<li>${t}</li>`;
+  });
+  if (L.tarifJeune) li.push(`<li class="soft">Tarif jeune du lieu : ${esc(L.tarifJeune)}</li>`);
+  return li.length ? `<ul class="off">${li.join("")}</ul>` : "";
+}
+function actsHTML(e, details) {
+  const b = booking(e), o = official(e);
+  return `<div class="acts">${b && e.statut !== "vu" ? `<a class="btn pri" href="${esc(b)}" target="_blank" rel="noopener">Réserver</a>` : ""}${o && (o !== b || e.statut === "vu") ? `<a class="btn" href="${esc(o)}" target="_blank" rel="noopener">${e.statut === "vu" ? "Page archivée" : "Site officiel"}</a>` : ""}<button class="btn" type="button" data-share="${esc(e.id)}">Partager</button>${details ? `<a class="btn" href="#sortie-${esc(e.id)}">Détails</a>` : ""}</div>`;
+}
+function placeHTML(e) {
+  const L = lieu(e);
+  const nom = e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "Lieu à préciser";
+  return [nom + (e.salle ? ", " + esc(e.salle) : "") + (L.zone && L.zone !== "Paris" ? ` (${esc(L.ville || L.zone)})` : ""), esc(range(e)), esc(e.horaires || "")].filter(Boolean).join(" · ");
+}
+function detHTML(e) {
+  const c = creditsHTML(e);
+  return `${c ? `<p class="cr">${c}</p>` : ""}<p class="pl">${placeHTML(e)}</p>${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${offresHTML(e)}${actsHTML(e, true)}`;
+}
+
+/* ---------- Calendriers ---------- */
+function monthGrid(y, m, cellFn) {
+  const first = new Date(y, m, 1), last = new Date(y, m + 1, 0);
+  let h = '<div class="grid">' + ["lun.", "mar.", "mer.", "jeu.", "ven.", "sam.", "dim."].map((d) => `<div class="dow" aria-hidden="true">${d}</div>`).join("");
+  for (let i = 0, p = (first.getDay() + 6) % 7; i < p; i++) h += '<div class="cell out" aria-hidden="true"></div>';
+  for (let d = 1; d <= last.getDate(); d++) h += cellFn(new Date(y, m, d));
+  return h + "</div>";
+}
+function ficheCal(e) {
+  const p = span(e); if (!p) return '<p class="empty">Les dates ne sont pas encore connues.</p>';
+  const offers = new Set((e.offres || []).map((o) => o.date).filter(Boolean));
+  const st = p[0] < TODAY ? TODAY : p[0];
+  let h = "", n = 0;
+  for (let c = new Date(st.getFullYear(), st.getMonth(), 1); c <= p[1] && n < 6; c = new Date(c.getFullYear(), c.getMonth() + 1, 1), n++) {
+    h += `<div class="cal mini"><div class="calh"><h3>${MOIS_L[c.getMonth()]} ${c.getFullYear()}</h3></div>` + monthGrid(c.getFullYear(), c.getMonth(), (d) => {
+      const k = iso(d), on = playsOn(e, d) && d >= TODAY, busy = BUSY.has(k);
+      const cls = ["cell", on ? (busy ? "busy" : "play") : "", d < TODAY ? "past" : "", +d === +TODAY ? "today" : "", offers.has(k) ? "of" : ""].join(" ");
+      const lab = `${fmt(d, true)}${on ? (busy ? `, se joue, ${OWNER} pris` : `, se joue, ${OWNER} libre`) : ""}${offers.has(k) ? ", offre jeune" : ""}`;
+      return `<div class="${cls}" role="img" aria-label="${lab}"><span class="n" aria-hidden="true">${d.getDate()}</span></div>`;
+    }) + "</div>";
+  }
+  return `<div class="mini-wrap">${h}</div><div class="legend"><span style="--sw:var(--play)">Se joue, ${OWNER} libre</span><span style="--sw:var(--busy)">${OWNER} pris</span><span class="dot" style="--sw:var(--accent)">Offre jeune</span></div>
+  <p class="cr" style="font-size:12px;margin-top:4px">Les relâches ne sont pas indiquées : vérifie le calendrier du lieu.</p>`;
+}
+
+/* ---------- Filtres de l’affiche (état dans l’URL) ---------- */
+const ZONES = { paris: "Paris", pc: "Petite couronne" }, STATUTS = { public: "Public", prive: "Privé" };
+const RAC = { soir: "Ce soir", we: "Ce week-end", semaine: "Cette semaine" };
+function parseF(q) {
+  const p = new URLSearchParams(q || ""), L = (k) => (p.get(k) || "").split(",").filter(Boolean);
+  return { cat: new Set(L("cat")), note: +p.get("note") || 0, zone: new Set(L("zone")), statut: new Set(L("statut")), jeune: p.has("jeune"), offre: p.has("offre"), yva: p.has("yva"),
+    lieu: p.get("lieu") || "", per: p.get("per") || "", jour: p.get("jour") || "", rac: p.get("rac") || "", libre: p.has("libre"), vue: p.get("vue") === "mois" ? "mois" : "liste", mois: p.get("mois") || "", tri: p.get("tri") === "note" ? "note" : "date" };
+}
+function serF(f) {
+  const p = [], put = (k, v) => p.push(v === true ? k : k + "=" + [...(v instanceof Set ? v : [v])].map(encodeURIComponent).join(","));
+  if (f.vue === "mois") put("vue", "mois");
+  if (f.vue === "mois" && f.mois) put("mois", f.mois);
+  for (const k of ["cat", "zone", "statut"]) if (f[k].size) put(k, f[k]);
+  if (f.note) put("note", f.note);
+  for (const k of ["jeune", "offre", "yva", "libre"]) if (f[k]) put(k, true);
+  for (const k of ["lieu", "per", "jour", "rac"]) if (f[k]) put(k, f[k]);
+  if (f.tri !== "date") put("tri", f.tri);
+  return p.join("&");
+}
+function racWindow(r) {
+  const d = TODAY.getDay();
+  if (r === "soir") return [TODAY, TODAY];
+  const sun = add(TODAY, (7 - d) % 7);
+  if (r === "semaine") return [TODAY, sun];
+  if (r === "we") { if (d === 0 || d === 6 || d === 5) return [TODAY, sun]; const fri = add(TODAY, 5 - d); return [fri, add(fri, 2)]; }
+  return null;
+}
+function window_(f) { if (f.jour) { const d = D(f.jour); return [d, d]; } return f.rac ? racWindow(f.rac) : null; }
+function perWindow(f) {
+  if (!f.per) return null;
+  if (f.per === "30") return [TODAY, add(TODAY, 30)];
+  const [y, m] = f.per.split("-").map(Number); return [new Date(y, m - 1, 1), new Date(y, m, 0)];
+}
+function matchA(e, f, noWin) {
+  const L = lieu(e);
+  if (f.cat.size && !f.cat.has(slug(e.categorie))) return false;
+  if (f.note && e.note < f.note) return false;
+  if (f.zone.size && ![...f.zone].some((z) => ZONES[z] === L.zone)) return false;
+  if (f.statut.size && ![...f.statut].some((s) => STATUTS[s] === L.statut)) return false;
+  if (f.jeune && !e.publicJeune) return false;
+  if (f.offre && !(e.offres || []).length) return false;
+  if (f.yva && !e.leonardYVa) return false;
+  if (f.lieu && e.lieuId !== f.lieu) return false;
+  const pw = perWindow(f); if (pw && !overlaps(e, pw[0], pw[1])) return false;
+  const w = noWin ? null : window_(f);
+  if (w && !overlaps(e, w[0], w[1])) return false;
+  if (f.libre) { const ww = w || pw || [TODAY, new Date(9e15)]; if (!freeIn(e, ww[0], ww[1])) return false; }
+  return true;
+}
+function activeList(f) {
+  const a = [], lbl = (k, v, t) => a.push({ k, v, t });
+  if (f.jour) lbl("jour", "", fmt(D(f.jour), true));
+  if (f.rac) lbl("rac", "", RAC[f.rac]);
+  if (f.libre) lbl("libre", "", "Libre ce soir-là");
+  f.cat.forEach((c) => lbl("cat", c, CATS.find((x) => slug(x) === c) || c));
+  if (f.note) lbl("note", "", f.note === 4 ? "★★★★" : f.note + "+ étoiles");
+  f.zone.forEach((z) => lbl("zone", z, ZONES[z] || z));
+  f.statut.forEach((s) => lbl("statut", s, STATUTS[s] || s));
+  if (f.jeune) lbl("jeune", "", "Public jeune");
+  if (f.offre) lbl("offre", "", "Offre jeune");
+  if (f.yva) lbl("yva", "", OWNER + " y va");
+  if (f.lieu) lbl("lieu", "", court(f.lieu) || f.lieu);
+  if (f.per) lbl("per", "", f.per === "30" ? "30 prochains jours" : MOIS_L[+f.per.slice(5) - 1] + " " + f.per.slice(0, 4));
+  return a;
+}
+
+/* ---------- Vue « À l’affiche » ---------- */
+let F = parseF(""), LAST_AFF = "affiche";
+function setF(mut) {
+  mut(F);
+  history.replaceState(null, "", "#affiche" + (serF(F) ? "?" + serF(F) : ""));
+  BASE = RENDERED = LAST_AFF = location.hash.slice(1);
+  updateAffiche();
+}
+function renderAffiche(q) {
+  F = parseF(q); LAST_AFF = "affiche" + (q ? "?" + q : "");
+  const cats = CATS.filter((c) => LIVE.some((e) => e.categorie === c));
+  const lieux = [...new Set(LIVE.map((e) => e.lieuId).filter(Boolean))].sort((a, b) => norm(court(a)).localeCompare(norm(court(b))));
+  const months = []; for (let i = 0; i < 10; i++) { const d = new Date(TODAY.getFullYear(), TODAY.getMonth() + i, 1); months.push([iso(d).slice(0, 7), cap(MOIS_L[d.getMonth()]) + " " + d.getFullYear()]); }
+  let frise = "";
+  for (let i = 0; i < 14; i++) {
+    const d = add(TODAY, i), k = iso(d), busy = BUSY.has(k), n = LIVE.filter((e) => e.note >= 3 && playsOn(e, d)).length;
+    frise += `<button class="fd${busy ? " busy" : ""}${i === 0 ? " today" : ""}" type="button" data-jour="${k}" aria-pressed="false"><span class="dw">${i === 0 ? "auj." : JOURS[d.getDay()]}</span> <span class="dn">${d.getDate()}</span><span class="vh"> ${MOIS[d.getMonth()]}${busy ? `, ${OWNER} est pris` : ""}, </span>${n ? `<span class="pc">${n}</span><span class="vh"> ${n > 1 ? "sorties notées" : "sortie notée"} 3 étoiles ou plus</span>` : ""}</button>`;
+  }
+  const chip = (g, v, t, extra = "") => `<button class="chip" type="button" data-g="${g}" data-v="${esc(v)}" aria-pressed="false"${extra}>${t}</button>`;
+  $("#main").innerHTML = `<section id="aff"><h1 class="vh">À l’affiche</h1>
+  <div class="frise" role="group" aria-label="Les 14 prochains jours">${frise}</div>
+  <div class="tools"><div class="seg" role="group" aria-label="Affichage"><button type="button" data-vue="liste" aria-pressed="true">Liste</button><button type="button" data-vue="mois" aria-pressed="false">Mois</button></div>
+    <div class="chips" role="group" aria-label="Raccourcis">${Object.entries(RAC).map(([k, t]) => chip("rac", k, t)).join("")}${chip("libre", "1", "Libre ce soir-là")}</div></div>
+  <div class="fbar"><div class="chips" role="group" aria-label="Filtres">
+    <button class="chip" type="button" data-panel="pCat" aria-expanded="false" aria-controls="pCat">Catégorie <span id="nCat"></span> ▾</button>
+    ${chip("note", "2", "2+ ★")}${chip("note", "3", "3+ ★")}${chip("note", "4", "★★★★")}<span class="sep" aria-hidden="true"></span>
+    ${chip("zone", "paris", "Paris")}${chip("zone", "pc", "Petite couronne")}<span class="sep" aria-hidden="true"></span>
+    ${chip("statut", "public", "Public")}${chip("statut", "prive", "Privé")}<span class="sep" aria-hidden="true"></span>
+    ${chip("jeune", "1", "Public jeune")}${chip("offre", "1", "Offre jeune")}${chip("yva", "1", OWNER + " y va")}
+    <button class="chip" type="button" data-panel="pPlus" aria-expanded="false" aria-controls="pPlus">Plus ▾</button></div>
+    <div class="fpanel" id="pCat" hidden><div class="chips wrap-ok" role="group" aria-label="Catégories">${cats.map((c) => chip("cat", slug(c), esc(c))).join("")}</div></div>
+    <div class="fpanel" id="pPlus" hidden><div class="row2">
+      <label>Lieu<select id="fLieu"><option value="">Tous les lieux</option>${lieux.map((l) => `<option value="${esc(l)}">${esc(court(l))}</option>`).join("")}</select></label>
+      <label>Période<select id="fPer"><option value="">Toute la saison</option><option value="30">30 prochains jours</option>${months.map(([v, t]) => `<option value="${v}">${t}</option>`).join("")}</select></label></div></div>
+    <div class="active" id="active" aria-live="polite"></div></div>
+  <div id="monthBox"></div>
+  <details class="box" id="ventes"><summary>Ventes à venir <span class="ml" id="vNext"></span></summary><ul class="vl" id="vList"></ul></details>
+  <div id="alist" class="list"></div></section>`;
+  const ve = prochainesVentes(5);
+  $("#vNext").textContent = ve.length ? "prochaine : " + venteTxt(ve[0].o) : "aucune";
+  $("#vList").innerHTML = ve.map(({ e, o }) => `<li><a href="#sortie-${esc(e.id)}"><span class="vd">${venteTxt(o)}</span><span class="vt"><b>${esc(e.titre)}</b> <span>· ${esc(o.type)}${o.tarif ? ", " + esc(o.tarif) : ""}</span></span></a></li>`).join("") || `<li><span class="cr">Aucune ouverture connue.</span></li>`;
+  const m = $("#aff");
+  m.querySelector(".frise").onclick = (ev) => { const b = ev.target.closest("[data-jour]"); if (b) setF((f) => { f.jour = f.jour === b.dataset.jour ? "" : b.dataset.jour; f.rac = ""; }); };
+  m.querySelector(".seg").onclick = (ev) => { const b = ev.target.closest("[data-vue]"); if (b) setF((f) => { f.vue = b.dataset.vue; }); };
+  m.querySelectorAll("[data-panel]").forEach((b) => b.onclick = () => {
+    const p = $("#" + b.dataset.panel), open = p.hidden;
+    m.querySelectorAll("[data-panel]").forEach((x) => { $("#" + x.dataset.panel).hidden = true; x.setAttribute("aria-expanded", "false"); });
+    p.hidden = !open; b.setAttribute("aria-expanded", String(open));
+  });
+  m.addEventListener("click", (ev) => {
+    const b = ev.target.closest("[data-g]"); if (!b || !m.contains(b)) return;
+    const g = b.dataset.g, v = b.dataset.v;
+    setF((f) => {
+      if (g === "rac") { f.rac = f.rac === v ? "" : v; f.jour = ""; }
+      else if (g === "note") f.note = f.note === +v ? 0 : +v;
+      else if (["libre", "jeune", "offre", "yva"].includes(g)) f[g] = !f[g];
+      else if (f[g] instanceof Set) f[g].has(v) ? f[g].delete(v) : f[g].add(v);
+    });
+  });
+  $("#fLieu").onchange = (ev) => setF((f) => { f.lieu = ev.target.value; });
+  $("#fPer").onchange = (ev) => setF((f) => { f.per = ev.target.value; });
+  updateAffiche();
+  const sel = m.querySelector('.fd[aria-pressed="true"]'); if (sel) sel.scrollIntoView({ inline: "nearest", block: "nearest" });
+}
+function updateAffiche() {
+  const m = $("#aff"), f = F;
+  m.querySelectorAll("[data-g]").forEach((b) => {
+    const g = b.dataset.g, v = b.dataset.v;
+    const on = g === "rac" ? f.rac === v : g === "note" ? f.note === +v : typeof f[g] === "boolean" ? f[g] : f[g] instanceof Set ? f[g].has(v) : false;
+    b.setAttribute("aria-pressed", String(!!on));
+  });
+  m.querySelectorAll(".fd").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.jour === f.jour)));
+  m.querySelectorAll("[data-vue]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.vue === f.vue)));
+  $("#nCat").textContent = f.cat.size ? "(" + f.cat.size + ")" : "";
+  $("#fLieu").value = f.lieu; $("#fPer").value = f.per;
+  m.querySelector(".frise").hidden = f.vue === "mois";
+  // Résultats
+  let items = LIVE.filter((e) => matchA(e, f, f.vue === "mois" && !f.jour));
+  if (f.vue === "mois" && !f.jour) { const c = monthCursor(f); items = items.filter((e) => overlaps(e, c, new Date(c.getFullYear(), c.getMonth() + 1, 0))); }
+  const act = activeList(f);
+  $("#active").innerHTML = `<span class="n">${plural(items.length, "sortie")}</span>${act.map((a) => `<button class="chip" type="button" data-rm="${a.k}" data-v="${esc(a.v)}" aria-label="Retirer le filtre ${esc(a.t)}">${esc(a.t)}<span class="x" aria-hidden="true">×</span></button>`).join("")}${act.length ? `<button class="linkbtn" type="button" id="clear">Effacer</button>` : ""}<button class="linkbtn ml" type="button" id="tri" title="Changer le tri">Tri : ${f.tri === "note" ? "note" : "date"}</button>`;
+  $("#active").onclick = (ev) => {
+    const r = ev.target.closest("[data-rm]");
+    if (r) return setF((x) => { const k = r.dataset.rm; if (x[k] instanceof Set) x[k].delete(r.dataset.v); else x[k] = typeof x[k] === "boolean" ? false : typeof x[k] === "number" ? 0 : ""; });
+    if (ev.target.id === "clear") return setF((x) => { const keep = { vue: x.vue, mois: x.mois, tri: x.tri }; Object.assign(x, parseF(""), keep); });
+    if (ev.target.id === "tri") setF((x) => { x.tri = x.tri === "note" ? "date" : "note"; });
+  };
+  // Mois
+  $("#monthBox").innerHTML = f.vue === "mois" ? monthHTML(f) : "";
+  if (f.vue === "mois") {
+    $("#monthBox").onclick = (ev) => {
+      const nav = ev.target.closest("[data-mnav]");
+      if (nav) return setF((x) => { const c = monthCursor(x); x.mois = iso(new Date(c.getFullYear(), c.getMonth() + +nav.dataset.mnav, 1)).slice(0, 7); x.jour = ""; });
+      const c = ev.target.closest("[data-day]"); if (c) setF((x) => { x.jour = x.jour === c.dataset.day ? "" : c.dataset.day; x.rac = ""; });
+    };
+  }
+  // Liste
+  const L = $("#alist"), w = window_(f);
+  const byDate = (a, b) => sortKey(a) - sortKey(b) || a.titre.localeCompare(b.titre, "fr");
+  let html = "";
+  if (f.jour) { const d = D(f.jour); html += `<h2 class="mh">${cap(fmt(d, true))} ${d.getFullYear()}${BUSY.has(f.jour) ? ` <small class="warn">${OWNER} est pris ce soir-là</small>` : ""}</h2>`; }
+  if (!items.length) html += `<p class="empty">Aucune sortie ne correspond. Retire un filtre ou élargis la période.</p>`;
+  else if (f.tri === "note" || w) html += items.sort((a, b) => b.note - a.note || byDate(a, b)).map(rowA).join("");
+  else {
+    items.sort(byDate); let last = null;
+    for (const e of items) {
+      const g = groupOf(e);
+      if (g !== last) { html += `<h2 class="mh">${g}</h2>`; last = g; }
+      html += rowA(e);
+    }
+  }
+  L.innerHTML = html;
+}
+const sortKey = (e) => { const p = span(e); return p ? (running(e) ? +p[1] - 1e13 : +p[0]) : 9e15; };
+function groupOf(e) {
+  const p = span(e); if (!p) return "Dates à préciser";
+  if (p[0] <= TODAY) return "En ce moment";
+  return cap(MOIS_L[p[0].getMonth()]) + " " + p[0].getFullYear();
+}
+const monthCursor = (f) => { if (f.jour) { const d = D(f.jour); return new Date(d.getFullYear(), d.getMonth(), 1); } if (f.mois) { const [y, m] = f.mois.split("-").map(Number); return new Date(y, m - 1, 1); } return new Date(TODAY.getFullYear(), TODAY.getMonth(), 1); };
+function monthHTML(f) {
+  const c = monthCursor(f), y = c.getFullYear(), m = c.getMonth();
+  const base = LIVE.filter((e) => matchA(e, f, true));
+  const prem = new Set(), offs = new Set();
+  base.forEach((e) => { if (e.note >= 3 && e.debut) prem.add(e.debut); (e.offres || []).forEach((o) => o.date && offs.add(o.date)); });
+  return `<div class="cal"><div class="calh"><button class="btn" type="button" data-mnav="-1" aria-label="Mois précédent">‹</button><h2>${MOIS_L[m]} ${y}</h2><button class="btn" type="button" data-mnav="1" aria-label="Mois suivant">›</button></div>` +
+    monthGrid(y, m, (d) => {
+      const k = iso(d), busy = BUSY.has(k), n = base.filter((e) => e.note >= 3 && playsOn(e, d)).length;
+      const dots = (prem.has(k) ? '<i aria-hidden="true"></i>' : "") + (offs.has(k) ? '<i class="o" aria-hidden="true"></i>' : "");
+      return `<button type="button" class="cell${busy ? " busy" : ""}${+d === +TODAY ? " today" : ""}${d < TODAY ? " past" : ""}" data-day="${k}" aria-pressed="${f.jour === k}"><span class="n">${d.getDate()}</span><span class="vh"> ${MOIS[m]}${busy ? `, ${OWNER} pris` : ""}, </span>${n ? `<span class="pc">${n}</span><span class="vh"> ${n > 1 ? "sorties" : "sortie"} 3 étoiles ou plus</span>` : ""}${prem.has(k) ? '<span class="vh">, une première</span>' : ""}${offs.has(k) ? '<span class="vh">, une offre jeune</span>' : ""}<span class="dots">${dots}</span></button>`;
+    }) + `<div class="legend"><span style="--sw:var(--accent)">Nombre de sorties 3★ et plus</span><span class="dot" style="--sw:var(--accent)">Première</span><span class="dot" style="--sw:var(--ok)">Offre jeune</span><span style="--sw:var(--busy)">${OWNER} pris</span></div></div>`;
+}
+
+/* ---------- Fiche ---------- */
+let SHEET_FROM = null, FROM_APP = false;
+async function openSheet(id) {
+  let e = BYID.get(id);
+  if (!e) { try { await loadJournal(); } catch (_) {} e = BYID.get(id); }
+  const box = $("#sheetIn");
+  if (!e) {
+    box.innerHTML = `<div class="shtop"><button class="btn ico" type="button" data-close aria-label="Fermer">×</button><span class="k"></span></div><h2 id="sheetT" class="ph">Sortie introuvable</h2><p class="empty">Cette fiche n’existe plus ou a changé d’adresse.</p>`;
+  } else {
+    const vu = e.statut === "vu", L = lieu(e), c = creditsHTML(e);
+    box.innerHTML = `<div class="shtop"><button class="btn ico" type="button" data-close aria-label="Fermer">×</button><span class="k">${esc([e.categorie, e.sousGenre].filter(Boolean).join(" · "))}${L.nom ? " · " + esc(court(e.lieuId)) : ""}</span><button class="btn" type="button" data-share="${esc(e.id)}">Partager</button></div>
+    <div class="shh">${stubHTML(e, vu ? "vu" : "")}<div class="mid"><h2 id="sheetT">${esc(e.titre)}</h2>
+      <span class="ss">${vu ? "Vu" : ""}${!vu && e.note ? stars(e.note, e.pronostic) + (e.pronostic ? " <small>pronostic, pas encore critiqué</small>" : "") : ""}</span>${badges(e)}</div></div>
+    ${c ? `<p class="cr">${c}</p>` : ""}
+    <dl class="dl"><dt>Lieu</dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}${L.ville && L.ville !== "Paris" ? " (" + esc(L.ville) + ")" : ""}</dd>
+    ${vu ? `<dt>Vu le</dt><dd>${(e.vuLe || []).map((d) => fmtY(D(d), true)).join(", ")}</dd>` : `<dt>Dates</dt><dd>${esc(range(e))}</dd>`}
+    ${e.horaires ? `<dt>Horaires</dt><dd>${esc(e.horaires)}</dd>` : ""}
+    ${vu ? `<dt>Ma note</dt><dd>${e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : "pas de note"}</dd>${e.note ? `<dt>Grille</dt><dd>${stars(e.note, false, "Note de la grille")}</dd>` : ""}` : ""}</dl>
+    ${vu && e.avis ? `<blockquote>${esc(e.avis)}</blockquote>` : ""}
+    ${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}
+    ${vu ? actsHTML(e, false) : `${(e.offres || []).length || L.tarifJeune ? `<h3 class="sec">Offres et ventes</h3>${offresHTML(e)}` : ""}${actsHTML(e, false)}<h3 class="sec">Dates et disponibilités de ${OWNER}</h3>${ficheCal(e)}`}`;
+  }
+  const s = $("#sheet");
+  if (s.hidden) { SHEET_FROM = document.activeElement; s.hidden = false; document.documentElement.style.overflow = "hidden"; }
+  box.scrollTop = 0; box.focus();
+  document.title = (e ? e.titre + " · " : "") + "Saison";
+}
+function closeSheet() {
+  const s = $("#sheet"); if (s.hidden) return;
+  s.hidden = true; document.documentElement.style.overflow = ""; document.title = "Saison 2026–2027 · Léonard";
+  if (SHEET_FROM && document.contains(SHEET_FROM)) SHEET_FROM.focus({ preventScroll: true });
+}
+function requestClose() {
+  if (FROM_APP) history.back();
+  else { history.replaceState(null, "", "#" + (BASE || "affiche")); route(); }
+}
+$("#sheet").addEventListener("click", (ev) => { if (ev.target.id === "sheet" || ev.target.closest("[data-close]")) requestClose(); });
+document.addEventListener("keydown", (ev) => {
+  if ($("#sheet").hidden) return;
+  if (ev.key === "Escape") { ev.preventDefault(); requestClose(); }
+  if (ev.key === "Tab") {
+    const f = $$('a[href],button:not([disabled]),input,select,[tabindex="0"]', $("#sheetIn")).filter((x) => x.offsetParent);
+    if (!f.length) return;
+    if (ev.shiftKey && (document.activeElement === f[0] || document.activeElement === $("#sheetIn"))) { ev.preventDefault(); f.at(-1).focus(); }
+    else if (!ev.shiftKey && document.activeElement === f.at(-1)) { ev.preventDefault(); f[0].focus(); }
+  }
+});
+
+/* ---------- Journal ---------- */
+function renderJournal(q) {
+  const p = new URLSearchParams(q || ""), L = (k) => new Set((p.get(k) || "").split(",").filter(Boolean));
+  const f = { cat: L("cat"), an: L("an"), mn: L("mn"), tri: p.get("tri") === "note" ? "note" : "date" };
+  const all = JOURNAL.filter((e) => (e.vuLe || []).length);
+  const last = (e) => e.vuLe.at(-1);
+  const cats = CATS.filter((c) => all.some((e) => e.categorie === c));
+  const ans = [...new Set(all.map((e) => last(e).slice(0, 4)))].sort().reverse();
+  const items = all.filter((e) => (!f.cat.size || f.cat.has(slug(e.categorie))) && (!f.an.size || f.an.has(last(e).slice(0, 4))) && (!f.mn.size || f.mn.has(String(e.noteLeonard || 0))));
+  items.sort(f.tri === "note" ? (a, b) => (b.noteLeonard || 0) - (a.noteLeonard || 0) || last(b).localeCompare(last(a)) : (a, b) => last(b).localeCompare(last(a)) || a.titre.localeCompare(b.titre, "fr"));
+  const chip = (g, v, t) => `<a class="chip" href="#journal?${esc(jq(f, g, v))}" data-k="${g}-${esc(v)}" aria-pressed="${f[g].has(v)}" role="button">${t}</a>`;
+  let list = "", lastY = "";
+  for (const e of items) { const y = last(e).slice(0, 4); if (f.tri === "date" && y !== lastY) { list += `<h2 class="mh">${y} <small>${plural(items.filter((x) => last(x).startsWith(y)).length, "sortie")}</small></h2>`; lastY = y; } list += rowJ(e); }
+  const nAct = f.cat.size + f.an.size + f.mn.size;
+  $("#main").innerHTML = `<div class="ph"><h1>Journal</h1><p>${plural(all.length, "sortie vue", "sorties vues")} par ${OWNER}${JMAJ ? ", à jour au " + fmtY(D(JMAJ)) : ""}.</p></div>
+  <details class="box stats"><summary>Statistiques</summary>${statsHTML(all)}</details>
+  <div class="fbar"><div class="chips" role="group" aria-label="Filtres du journal">${cats.map((c) => chip("cat", slug(c), esc(c))).join("")}<span class="sep" aria-hidden="true"></span>${ans.map((y) => chip("an", y, y)).join("")}<span class="sep" aria-hidden="true"></span>${[4, 3, 2, 1].map((n) => chip("mn", String(n), "★".repeat(n))).join("")}${chip("mn", "0", "Sans note")}</div>
+  <div class="active"><span class="n">${plural(items.length, "sortie")}</span>${nAct ? `<a class="linkbtn" href="#journal${f.tri === "note" ? "?tri=note" : ""}">Effacer</a>` : ""}<a class="linkbtn ml" href="#journal?${esc(jq(f, "tri", f.tri === "note" ? "date" : "note"))}">Tri : ${f.tri === "note" ? "ma note" : "date"}</a></div></div>
+  <div class="list">${list || '<p class="empty">Aucune sortie ne correspond.</p>'}</div>`;
+}
+function jq(f, g, v) {
+  const n = { cat: new Set(f.cat), an: new Set(f.an), mn: new Set(f.mn), tri: f.tri };
+  if (g === "tri") n.tri = v; else n[g].has(v) ? n[g].delete(v) : n[g].add(v);
+  const p = []; for (const k of ["cat", "an", "mn"]) if (n[k].size) p.push(k + "=" + [...n[k]].map(encodeURIComponent).join(","));
+  if (n.tri === "note") p.push("tri=note");
+  return p.join("&");
+}
+function bars(rows) {
+  const max = Math.max(1, ...rows.map((r) => r[1]));
+  return `<div class="bars">${rows.map(([l, n, href]) => `<span class="bl">${href ? `<a href="${href}">${esc(l)}</a>` : esc(l)}</span><span class="bg" style="width:${Math.round((n / max) * 100)}%" aria-hidden="true"></span><span class="bn">${n}</span>`).join("")}</div>`;
+}
+function statsHTML(all) {
+  const count = (fn) => { const o = new Map(); all.forEach((e) => [].concat(fn(e)).forEach((k) => k != null && k !== "" && o.set(k, (o.get(k) || 0) + 1))); return [...o]; };
+  const years = count((e) => e.vuLe.at(-1).slice(0, 4)).sort((a, b) => b[0].localeCompare(a[0]));
+  const cats = count((e) => e.categorie).sort((a, b) => b[1] - a[1]);
+  const lx = count((e) => e.lieuId).sort((a, b) => b[1] - a[1] || norm(court(a[0])).localeCompare(norm(court(b[0])))).slice(0, 5).map(([id, n]) => [court(id) || id, n, "#lieu-" + id]);
+  const ar = count((e) => [...new Set((e.artistes || []).map((a) => a.nom))]).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "fr")).slice(0, 5).map(([nm, n]) => [nm, n, "#artiste-" + slug(nm)]);
+  const notes = [4, 3, 2, 1].map((n) => ["★".repeat(n), all.filter((e) => e.noteLeonard === n).length]).concat([["Sans note", all.filter((e) => !e.noteLeonard).length]]);
+  const both = all.filter((e) => e.noteLeonard && e.note);
+  const cmp = both.length ? `<table class="t"><tr><th>Sortie</th><th>Ma note</th><th>Grille</th><th>Écart</th></tr>${both.map((e) => `<tr><td><a href="#sortie-${esc(e.id)}">${esc(e.titre)}</a></td><td>${e.noteLeonard}</td><td>${e.note}</td><td>${e.noteLeonard - e.note > 0 ? "+" : ""}${e.noteLeonard - e.note}</td></tr>`).join("")}</table><p class="cr">Écart moyen : ${(both.reduce((s, e) => s + e.noteLeonard - e.note, 0) / both.length).toFixed(1)}</p>` : `<p class="cr">Pas encore de sortie avec à la fois ma note et une note de la grille.</p>`;
+  return `<h2>Par année</h2>${bars(years)}<h2>Par catégorie</h2>${bars(cats)}<h2>Lieux les plus fréquentés</h2>${bars(lx)}<h2>Artistes les plus vus</h2>${bars(ar)}<h2>Mes notes</h2>${bars(notes)}<h2>Ma note et la grille</h2><div style="padding:0 12px 10px">${cmp}</div>`;
+}
+
+/* ---------- Artistes & lieux ---------- */
+let ALQ = "";
+function renderAL(which) {
+  $("#main").innerHTML = `<div class="ph"><h1>Artistes &amp; lieux</h1></div>
+  <div class="tools"><nav class="seg" aria-label="Index"><a href="#artistes"${which === "artistes" ? ' aria-current="page"' : ""}>Artistes</a><a href="#lieux"${which === "lieux" ? ' aria-current="page"' : ""}>Lieux</a></nav>
+  <input type="search" id="alq" placeholder="Rechercher un nom" aria-label="Rechercher un ${which === "lieux" ? "lieu" : "artiste"}" value="${esc(ALQ)}" style="flex:1"></div><div id="alist"></div>`;
+  const draw = () => {
+    const q = norm(ALQ).trim(); let h = "";
+    if (which === "artistes") {
+      const A = Object.values(artistes()), n = (a) => a.aff.length + a.vus.length;
+      const hit = A.filter((a) => !q || norm(a.nom).includes(q)).sort((a, b) => norm(a.nom).localeCompare(norm(b.nom)));
+      const item = (a) => `<li><a href="#artiste-${a.slug}">${esc(a.nom)}<span>${n(a)}</span></a></li>`;
+      const top = hit.filter((a) => n(a) >= 2).sort((a, b) => n(b) - n(a) || norm(a.nom).localeCompare(norm(b.nom)));
+      if (top.length && !q) h += `<h2 class="mh">Les plus présents <small>2 sorties ou plus</small></h2><ul class="idx">${top.map(item).join("")}</ul><h2 class="mh">Tous <small>${plural(hit.length, "artiste")}</small></h2>`;
+      let L = "", ul = "";
+      for (const a of hit) { const l = /[a-z]/.test(norm(a.nom)[0]) ? norm(a.nom)[0].toUpperCase() : "#"; if (l !== L) { ul += `${L ? "</ul>" : ""}<h3 class="letter">${l}</h3><ul class="idx">`; L = l; } ul += item(a); }
+      h += ul ? ul + "</ul>" : '<p class="empty">Aucun artiste trouvé.</p>';
+    } else {
+      const ids = Object.keys(LIEUX).filter((id) => !q || norm(LIEUX[id].nom + " " + court(id) + " " + (LIEUX[id].ville || "")).includes(q)).sort((a, b) => norm(court(a)).localeCompare(norm(court(b))));
+      const cnt = (id) => AFF.filter((e) => e.lieuId === id && e.statut === "a-voir").length + (JOURNAL || []).filter((e) => e.lieuId === id).length;
+      h = ids.length ? `<ul class="idx">${ids.map((id) => `<li><a href="#lieu-${id}">${esc(court(id))}<span>${esc(LIEUX[id].zone === "Paris" ? "" : LIEUX[id].ville || LIEUX[id].zone)} ${cnt(id)}</span></a></li>`).join("")}</ul>` : '<p class="empty">Aucun lieu trouvé.</p>';
+    }
+    $("#alist").innerHTML = h;
+  };
+  $("#alq").oninput = (ev) => { ALQ = ev.target.value; draw(); };
+  draw();
+}
+const byStart = (a, b) => sortKey(a) - sortKey(b);
+const byVu = (a, b) => (b.vuLe || []).at(-1).localeCompare((a.vuLe || []).at(-1));
+function renderArtiste(k) {
+  const a = artistes()[k];
+  if (!a) { $("#main").innerHTML = `<a class="back" href="#artistes">‹ Artistes &amp; lieux</a><p class="empty">Artiste inconnu.</p>`; return; }
+  const aff = a.aff.filter((e) => !ended(e)).sort(byStart), vus = a.vus.slice().sort(byVu);
+  $("#main").innerHTML = `<a class="back" href="#artistes">‹ Artistes &amp; lieux</a><div class="ph"><h1>${esc(a.nom)}</h1><p>${esc(cap(ROLES.filter((r) => a.roles.has(r)).join(", ")))} · ${plural(aff.length, "sortie")} à l’affiche, ${plural(vus.length, "vue", "vues")}</p></div>
+  <h2 class="mh">À l’affiche</h2><div class="list">${aff.map(rowA).join("") || '<p class="empty">Rien à l’affiche en ce moment.</p>'}</div>
+  <h2 class="mh">Vu</h2><div class="list">${vus.map(rowJ).join("") || '<p class="empty">Pas encore vu.</p>'}</div>`;
+  document.title = a.nom + " · Saison";
+}
+function renderLieu(id) {
+  const L = LIEUX[id];
+  if (!L) { $("#main").innerHTML = `<a class="back" href="#lieux">‹ Artistes &amp; lieux</a><p class="empty">Lieu inconnu.</p>`; return; }
+  const aff = AFF.filter((e) => e.lieuId === id && e.statut === "a-voir" && !ended(e)).sort(byStart);
+  const vus = (JOURNAL || []).filter((e) => e.lieuId === id).sort(byVu);
+  const ext = (u, t) => u ? `<a href="${esc(u)}" target="_blank" rel="noopener">${t}</a>` : "";
+  $("#main").innerHTML = `<a class="back" href="#lieux">‹ Artistes &amp; lieux</a><div class="ph"><h1>${esc(L.nom)}</h1><p>${esc([L.ville, L.zone !== L.ville ? L.zone : ""].filter(Boolean).join(", "))} · lieu ${L.statut === "Public" ? "public" : "privé"}</p></div>
+  <dl class="dl inl">${L.tarifJeune ? `<dt>Tarif jeune</dt><dd>${esc(L.tarifJeune)}</dd>` : ""}${L.adresse ? `<dt>Adresse</dt><dd>${esc(L.adresse)}</dd>` : ""}${L.site ? `<dt>Site</dt><dd>${ext(L.site, esc(L.site.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")))}</dd>` : ""}${L.billetterie ? `<dt>Billetterie</dt><dd>${ext(L.billetterie, "Acheter des places")}</dd>` : ""}</dl>
+  <h2 class="mh">À l’affiche <small>${aff.length}</small></h2><div class="list">${aff.map(rowA).join("") || '<p class="empty">Rien à l’affiche ici en ce moment.</p>'}</div>
+  <h2 class="mh">Vu ici <small>${vus.length}</small></h2><div class="list">${vus.map(rowJ).join("") || '<p class="empty">Pas encore de sortie vue ici.</p>'}</div>`;
+  document.title = L.nom + " · Saison";
+}
+
+/* ---------- Liens utiles ---------- */
+const icsURL = (k) => `webcal://${location.host}${location.pathname.replace(/[^/]*$/, "")}data/${k}-${PRIVE.icsToken}.ics`;
+function renderLiens() {
+  const groups = CAT_LIENS.map((c) => [c, LIENS.filter((l) => l.categorie === c)]).filter(([, l]) => l.length);
+  const ve = prochainesVentes(15);
+  $("#main").innerHTML = `<div class="ph"><h1>Liens utiles</h1></div>
+  ${groups.map(([c, l]) => `<h2 class="mh">${esc(c)} <small>${l.length}</small></h2><ul class="lk">${l.map((x) => `<li><a href="${esc(x.url)}" target="_blank" rel="noopener"><b>${esc(x.titre)}</b>${x.note ? `<small>${esc(x.note)}</small>` : ""}</a></li>`).join("")}</ul>`).join("")}
+  <h2 class="mh">Prochaines ouvertures de ventes</h2><div class="box" style="background:var(--card);border:1px solid var(--line);border-radius:10px"><ul class="vl" style="padding-top:0">${ve.map(({ e, o }) => `<li><a href="#sortie-${esc(e.id)}"><span class="vd">${venteTxt(o)}</span><span class="vt"><b>${esc(e.titre)}</b> <span>· ${esc(o.type)}</span></span></a></li>`).join("") || "<li class=\"cr\" style=\"padding:10px 0\">Aucune ouverture connue.</li>"}</ul></div>
+  ${PRIVE ? `<h2 class="mh">Abonnements (admin)</h2>${subsHTML()}` : ""}`;
+}
+function subsHTML() {
+  return `<div class="cal"><p class="cr" style="margin:0 0 6px">Sur iPhone : Réglages, Calendrier, Comptes, Ajouter un compte, Autre, S’abonner à un calendrier, puis colle l’adresse.</p>
+  <p style="margin:6px 0 0"><b>Saison – réservations</b></p><code class="code">${esc(icsURL("agenda"))}</code><button class="btn" type="button" data-copy="${esc(icsURL("agenda"))}">Copier</button>
+  <p style="margin:10px 0 0"><b>Saison – ouvertures de ventes</b></p><code class="code">${esc(icsURL("ventes"))}</code><button class="btn" type="button" data-copy="${esc(icsURL("ventes"))}">Copier</button></div>`;
+}
+
+/* ---------- Admin (lecture seule, lot 3 à venir) ---------- */
+const unb64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+async function decrypt(p, pw) {
+  const base = await crypto.subtle.importKey("raw", new TextEncoder().encode(pw), "PBKDF2", false, ["deriveKey"]);
+  const key = await crypto.subtle.deriveKey({ name: "PBKDF2", hash: "SHA-256", salt: unb64(p.salt), iterations: p.iter }, base, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
+  return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({ name: "AES-GCM", iv: unb64(p.iv) }, key, unb64(p.ct))));
+}
+function lockIcon() { $("#shackle").setAttribute("d", PRIVE ? "M8 10.5V8a4 4 0 0 1 7.6-1.7" : "M8 10.5V8a4 4 0 0 1 8 0v2.5"); $("#t-admin").setAttribute("aria-label", PRIVE ? "Admin, déverrouillé" : "Admin"); }
+async function renderAdmin() {
+  if (!PRIVE) {
+    $("#main").innerHTML = `<div class="ph"><h1>Admin</h1><p>Réservé à ${OWNER}. Le déchiffrement se fait dans le navigateur, rien n’est envoyé.</p></div>
+    <form id="pf" class="tools" style="gap:8px"><input type="password" id="pw" autocomplete="current-password" placeholder="Mot de passe" aria-label="Mot de passe" style="flex:1"><button class="btn pri">Ouvrir</button></form>`;
+    $("#pf").onsubmit = async (ev) => {
+      ev.preventDefault();
+      try { const p = await getJSON("data/prive.enc", { cache: "no-store" }); PRIVE = await decrypt(p, $("#pw").value); lockIcon(); renderAdmin(); }
+      catch (_) { toast("Mot de passe incorrect"); }
+    };
+    return;
+  }
+  try { await loadJournal(); } catch (_) {}
+  const T = (id) => (BYID.get(id) || { titre: id }).titre;
+  const res = Object.entries(PRIVE.reservations || {}).sort((a, b) => (a[1].date || "9").localeCompare(b[1].date || "9"));
+  const cnt = {}; res.forEach(([, r]) => r.date && (cnt[r.date] = (cnt[r.date] || 0) + 1));
+  const other = new Set([...(BUSY_SRC.manuel || []), ...(BUSY_SRC.calendrier || [])]);
+  const line = ([id, r]) => {
+    const conf = r.date && (cnt[r.date] > 1 || other.has(r.date));
+    const det = [r.places ? plural(r.places, "place") : "", r.tarif, r.prix != null && r.prix !== "" ? (typeof r.prix === "number" ? r.prix + " €" : r.prix) : "", (r.accompagnants || []).length ? "avec " + r.accompagnants.join(", ") : "", r.siege, r.note].filter(Boolean).join(" · ");
+    return `<tr${r.date && D(r.date) < TODAY ? ' style="opacity:.6"' : ""}><td>${r.date ? fmt(D(r.date), true) + " " + String(D(r.date).getFullYear()).slice(2) : "À préciser"}${r.heure ? "<br>" + esc(r.heure) : ""}</td><td><a href="#sortie-${esc(id)}">${esc(T(id))}</a>${r.salle ? "<br><small>" + esc(r.salle) + "</small>" : ""}</td><td>${esc(det)}${conf ? '<br><span class="warn">Conflit</span>' : ""}</td></tr>`;
+  };
+  const fut = res.filter(([, r]) => !r.date || D(r.date) >= TODAY), past = res.filter(([, r]) => r.date && D(r.date) < TODAY);
+  const env = Object.entries(PRIVE.envies || {}).sort((a, b) => (a[1].priorite || 2) - (b[1].priorite || 2));
+  const PRI = { 1: "forte", 2: "normale", 3: "faible" };
+  $("#main").innerHTML = `<div class="ph"><h1>Admin</h1><p>Lecture seule. L’édition arrive avec le lot 3.</p></div>
+  <h2 class="mh">Réservations à venir <small>${fut.length}</small></h2><div class="cal" style="overflow-x:auto"><table class="t"><tr><th>Date</th><th>Sortie</th><th>Détails</th></tr>${fut.map(line).join("") || '<tr><td colspan="3">Aucune.</td></tr>'}</table></div>
+  ${past.length ? `<details class="box"><summary>Réservations passées <span class="ml">${past.length}, à archiver avec /vu</span></summary><div style="padding:0 12px 8px;overflow-x:auto"><table class="t">${past.map(line).join("")}</table></div></details>` : ""}
+  <h2 class="mh">Envies <small>${env.length}</small></h2>${env.length ? `<ul class="lk">${env.map(([id, v]) => `<li><a href="#sortie-${esc(id)}"><b>${esc(T(id))}</b><small>Priorité ${PRI[v.priorite] || "normale"}${v.note ? " · " + esc(v.note) : ""}</small></a></li>`).join("")}</ul>` : '<p class="empty">Aucune envie.</p>'}
+  <h2 class="mh">Abonnements</h2>${subsHTML()}
+  <p style="margin-top:14px"><button class="btn" type="button" id="lock">Verrouiller</button></p>`;
+  $("#lock").onclick = () => { PRIVE = null; lockIcon(); renderAdmin(); };
+}
+
+/* ---------- Routeur ---------- */
+const TABS = { affiche: "affiche", journal: "journal", artistes: "artistes", lieux: "artistes", artiste: "artistes", lieu: "artistes", liens: "liens", admin: "admin" };
+let BASE = null, RENDERED = null;
+function setTab(t) {
+  $$(".tab").forEach((b) => { const on = b.dataset.tab === t; b.setAttribute("aria-selected", String(on)); b.tabIndex = on ? 0 : -1; });
+  $("#main").setAttribute("aria-labelledby", "t-" + t);
+}
+async function renderView(h) {
+  const [path, q = ""] = h.split("?");
+  const view = path.startsWith("artiste-") ? "artiste" : path.startsWith("lieu-") ? "lieu" : TABS[path] ? path : "affiche";
+  const samePath = RENDERED && RENDERED.split("?")[0] === path;
+  const focusK = samePath && document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.k : null;
+  setTab(TABS[view]);
+  document.title = "Saison 2026–2027 · Léonard";
+  try {
+    if (["journal", "artistes", "lieux", "artiste", "lieu"].includes(view) && !JOURNAL) { if (!samePath) $("#main").innerHTML = '<p class="load">Chargement…</p>'; await loadJournal(); }
+    if (view === "liens" && !LIENS) await loadLiens();
+  } catch (_) { $("#main").innerHTML = '<p class="empty">Impossible de charger ces données. Vérifie la connexion puis recharge.</p>'; return; }
+  if (view === "affiche") renderAffiche(q);
+  else if (view === "journal") renderJournal(q);
+  else if (view === "artistes" || view === "lieux") renderAL(view);
+  else if (view === "artiste") renderArtiste(decodeURIComponent(path.slice(8)));
+  else if (view === "lieu") renderLieu(decodeURIComponent(path.slice(5)));
+  else if (view === "liens") renderLiens();
+  else if (view === "admin") renderAdmin();
+  RENDERED = h;
+  if (!samePath) window.scrollTo(0, 0);
+  else if (focusK) { const el = $(`[data-k="${focusK}"]`); if (el) el.focus({ preventScroll: true }); }
+}
+const LEGACY = { calendrier: "affiche?vue=mois", vus: "journal", prive: "admin", ventes: "affiche", catalogue: "affiche" };
+async function route() {
+  let h = location.hash.slice(1);
+  if (h.startsWith("fiche-")) { history.replaceState(null, "", "#sortie-" + h.slice(6)); h = "sortie-" + h.slice(6); }
+  else if (h.startsWith("vue-")) { h = LEGACY[h.slice(4)] || "affiche"; history.replaceState(null, "", "#" + h); }
+  if (!h) h = "affiche";
+  if (h.startsWith("sortie-")) {
+    FROM_APP = BASE !== null;
+    if (BASE === null) BASE = "affiche";
+    if (RENDERED === null) await renderView(BASE);
+    return openSheet(decodeURIComponent(h.slice(7)));
+  }
+  const wasOpen = !$("#sheet").hidden;
+  closeSheet();
+  BASE = h;
+  if (wasOpen && RENDERED === h) return;
+  await renderView(h);
+}
+window.addEventListener("hashchange", route);
+
+/* ---------- Événements globaux ---------- */
+$$(".tab").forEach((b) => {
+  b.onclick = () => {
+    const t = b.dataset.tab;
+    const target = t === "affiche" ? LAST_AFF : t;
+    if (location.hash.slice(1) === target) { window.scrollTo({ top: 0 }); return; }
+    location.hash = target;
+  };
+  b.onkeydown = (ev) => {
+    const tabs = $$(".tab"), i = tabs.indexOf(b);
+    let j = ev.key === "ArrowRight" ? i + 1 : ev.key === "ArrowLeft" ? i - 1 : ev.key === "Home" ? 0 : ev.key === "End" ? tabs.length - 1 : null;
+    if (j == null) return;
+    ev.preventDefault(); j = (j + tabs.length) % tabs.length; tabs[j].focus(); tabs[j].click();
+  };
+});
+document.addEventListener("click", async (ev) => {
+  const rb = ev.target.closest("button.rb");
+  if (rb) {
+    const row = rb.closest(".row"), det = row.querySelector(".det"), open = det.hidden;
+    if (open && !det.innerHTML) det.innerHTML = detHTML(BYID.get(row.dataset.id));
+    det.hidden = !open; row.classList.toggle("open", open); rb.setAttribute("aria-expanded", String(open));
+    return;
+  }
+  const sh = ev.target.closest("[data-share]");
+  if (sh) {
+    const e = BYID.get(sh.dataset.share), url = shareURL(sh.dataset.share);
+    try { if (navigator.share) { await navigator.share({ title: e ? e.titre : "Saison", text: e ? `${e.titre}, ${court(e.lieuId)} : la fiche et les soirs où ${OWNER} est libre.` : "", url }); return; } } catch (err) { if (err && err.name === "AbortError") return; }
+    try { await navigator.clipboard.writeText(url); toast("Lien copié"); } catch (_) { prompt("Copie ce lien :", url); }
+    return;
+  }
+  const cp = ev.target.closest("[data-copy]");
+  if (cp) { try { await navigator.clipboard.writeText(cp.dataset.copy); toast("Adresse copiée"); } catch (_) { prompt("Copie cette adresse :", cp.dataset.copy); } }
+});
+
+/* ---------- Démarrage ---------- */
+(async () => {
+  try {
+    const [a, l, d] = await Promise.all([getJSON("data/affiche.json"), getJSON("data/lieux.json"), getJSON("data/dispo.json").catch(() => ({}))]);
+    AFF = a.sorties; LIEUX = l; MAJ = a.maj;
+    AFF.forEach((e) => BYID.set(e.id, e));
+    LIVE = AFF.filter((e) => e.statut === "a-voir" && !ended(e));
+    BUSY_SRC = d; BUSY = new Set([...(d.reservations || []), ...(d.manuel || []), ...(d.calendrier || [])]);
+    $("#maj").textContent = "À jour au " + fmt(D(MAJ));
+    await route();
+  } catch (err) {
+    console.error(err);
+    $("#main").innerHTML = '<p class="empty">Impossible de charger la saison. Vérifie la connexion puis recharge la page.</p>';
+  }
+})();
+if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost"))
+  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
