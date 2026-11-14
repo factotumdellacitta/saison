@@ -2,11 +2,15 @@
    Utilise les variables et fonctions globales d’app.js (AFF, JOURNAL, LIEUX, PRIVE, BYID, esc, fmt…).
    Sécurité : le mot de passe ne quitte jamais cette page et n’est pas conservé ; seule une clé AES non extractible
    reste en mémoire tant que l’admin est déverrouillé. Le jeton GitHub est rangé dans localStorage, chiffré avec une
-   clé dérivée du mot de passe. Rien n’est jamais écrit dans la console, l’URL ou un fichier. */
+   clé dérivée du mot de passe. Session gardée (1 jour, 7 jours ou l’onglet) : la clé AES non extractible est rangée
+   dans IndexedDB (jamais lisible, seulement utilisable par ce site sur cet appareil), effacée à l’échéance ou à la déconnexion. Rien n’est jamais écrit dans la console, l’URL ou un fichier. */
 "use strict";
 (() => {
   const REPO = "factotumdellacitta/saison", API = "https://api.github.com", BRANCHE = "main", WF = "publier.yml";
-  const ITER = 310000, LS_JETON = "saison.jeton", INACTIF = 30 * 60e3, POLL = 6000;
+  const ITER = 310000, LS_JETON = "saison.jeton", POLL = 6000;
+  const LS_SESSION = "factotum-session", LS_DUREE = "factotum-duree", SS_ONGLET = "factotum-onglet";
+  const DUREES = [["jour", "1 jour"], ["semaine", "7 jours"], ["onglet", "Jusqu’à la fermeture de l’onglet"]];
+  const DUREE_MS = { jour: 864e5, semaine: 7 * 864e5, onglet: 864e5 };
   const FICHIERS = { affiche: "data/affiche.json", journal: "data/journal.json", lieux: "data/lieux.json", liens: "data/liens.json", dispo: "data/dispo.json", prive: "data/prive.enc" };
   const ZONES_L = ["Paris", "Petite couronne", "Île-de-France", "Avignon", "Autre"];
   const PRI = { 1: "forte", 2: "normale", 3: "faible" };
@@ -15,7 +19,7 @@
   const enc = new TextEncoder(), dec = new TextDecoder();
 
   /* ---------- État ---------- */
-  let ITERP = ITER, KEY = null, SALT = null, TOK = null, LAST = Date.now(), OCCUPE = false, PUB = null, SOIRS = null, LIENS_W = null, RAPIDE = null;
+  let ITERP = ITER, KEY = null, SALT = null, TOK = null, EXP = 0, MODE = "jour", OCCUPE = false, PUB = null, SOIRS = null, LIENS_W = null, RAPIDE = null;
   let VUE_SOIRS = null, BUDGET_P = "saison";
   const BLOBS = new Map();
 
@@ -67,6 +71,9 @@
   const lsGet = (k) => { try { return localStorage.getItem(k); } catch (_) { return null; } };
   const lsSet = (k, v) => { try { localStorage.setItem(k, v); return true; } catch (_) { return false; } };
   const lsDel = (k) => { try { localStorage.removeItem(k); } catch (_) {} };
+  const ssGet = (k) => { try { return sessionStorage.getItem(k); } catch (_) { return null; } };
+  const ssSet = (k, v) => { try { sessionStorage.setItem(k, v); } catch (_) {} };
+  const ssDel = (k) => { try { sessionStorage.removeItem(k); } catch (_) {} };
   class Annule extends Error {}
 
   /* ---------- Chiffrement (mêmes paramètres que tools/crypto.mjs) ---------- */
@@ -136,6 +143,7 @@
       // Zone privée rechiffrée avec un autre sel (mot de passe changé ?) : il faut le mot de passe.
       const mdp = pw || (await demanderMdp());
       KEY = await derive(mdp, unb64(paquet.salt), paquet.iter); SALT = paquet.salt; ITERP = paquet.iter;
+      if (EXP) sauverSession().catch(() => {});
     }
     try { d.prive = await ouvrirPaquet(KEY, paquet); }
     catch (_) { KEY = null; throw new Error("La zone privée du dépôt ne s’ouvre pas avec ce mot de passe."); }
@@ -318,17 +326,57 @@
     }
   }
 
-  /* ---------- Verrouillage ---------- */
-  const actif = () => { LAST = Date.now(); };
-  ["pointerdown", "keydown", "input"].forEach((t) => document.addEventListener(t, actif, { passive: true, capture: true }));
-  const verifInactif = () => { if (PRIVE && Date.now() - LAST > INACTIF) verrouiller("Verrouillé après 30 min d’inactivité"); };
-  setInterval(verifInactif, 20e3);
-  document.addEventListener("visibilitychange", () => { if (!document.hidden) verifInactif(); });
+  /* ---------- Session gardée sur l’appareil ---------- */
+  function idb(mode, fn) {
+    return new Promise((ok, ko) => {
+      let r; try { r = indexedDB.open("factotum", 1); } catch (e) { return ko(e); }
+      r.onupgradeneeded = () => r.result.createObjectStore("session");
+      r.onerror = () => ko(r.error);
+      r.onsuccess = () => {
+        const db = r.result; let tx;
+        try { tx = db.transaction("session", mode); } catch (e) { db.close(); return ko(e); }
+        const q = fn(tx.objectStore("session"));
+        tx.oncomplete = () => { db.close(); ok(q ? q.result : undefined); };
+        tx.onerror = tx.onabort = () => { db.close(); ko(tx.error); };
+      };
+    });
+  }
+  // duree : nouvelle durée à partir de maintenant ; sans durée, garde l’échéance en cours (mise à jour du jeton ou de la clé).
+  async function sauverSession(duree) {
+    if (duree) { MODE = duree; EXP = Date.now() + DUREE_MS[duree]; }
+    const tok = TOK ? await fermerPaquet(KEY, SALT, ITERP, { jeton: TOK }) : null;
+    await idb("readwrite", (st) => st.put({ key: KEY, salt: SALT, iter: ITERP, tok, exp: EXP, mode: MODE }, "s"));
+    lsSet(LS_SESSION, String(EXP));
+    if (MODE === "onglet") ssSet(SS_ONGLET, "1"); else ssDel(SS_ONGLET);
+  }
+  async function effacerSession() { lsDel(LS_SESSION); ssDel(SS_ONGLET); try { await idb("readwrite", (st) => st.delete("s")); } catch (_) {} }
+  async function restaurer() {
+    if (PRIVE) return;
+    let rec = null; try { rec = await idb("readonly", (st) => st.get("s")); } catch (_) { return; }
+    if (!rec || !rec.key || !(rec.exp > Date.now()) || (rec.mode === "onglet" && ssGet(SS_ONGLET) !== "1")) return effacerSession();
+    let p; try { p = await getJSON("data/prive.enc?t=" + Date.now(), { cache: "no-store" }); } catch (_) { return; } // hors ligne : on réessaiera au prochain chargement
+    if (PRIVE) return;
+    if (p.salt !== rec.salt) return effacerSession(); // mot de passe changé
+    try {
+      const prive = await ouvrirPaquet(rec.key, p), tok = rec.tok ? (await ouvrirPaquet(rec.key, rec.tok)).jeton : null;
+      KEY = rec.key; SALT = rec.salt; ITERP = rec.iter; EXP = rec.exp; MODE = rec.mode || "jour"; TOK = tok; PRIVE = normPrive(prive);
+    } catch (_) { return effacerSession(); }
+    document.body.classList.add("adm"); lockIcon();
+    if (TOK) { try { await recharger(undefined, true); return; } catch (_) {} }
+    await rafraichir(true);
+  }
+  const echeance = () => { const d = new Date(EXP); return fmt(d, true) + " à " + d.getHours() + " h " + String(d.getMinutes()).padStart(2, "0"); };
+  const jusqua = () => (MODE === "onglet" ? "jusqu’à la fermeture de l’onglet" : "jusqu’au " + echeance());
+  const verifExp = () => { if (PRIVE && EXP && Date.now() > EXP) verrouiller("Session expirée : reconnecte-toi."); };
+  setInterval(verifExp, 30e3);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) verifExp(); });
   function verrouiller(msg) {
+    effacerSession(); EXP = 0;
     PRIVE = null; TOK = null; KEY = null; SALT = null; PUB = null; JAVEC = ""; SOIRS = null; LIENS_W = null; RAPIDE = null;
     BLOBS.clear(); fermerDlg(); bandeau(""); document.body.classList.remove("adm"); lockIcon();
     if ($("#sheet").hidden) $("#sheetIn").innerHTML = ""; // fiche fermée : aucun reste du bloc admin dans la page
-    rafraichir(true); if (msg) toast(msg);
+    if (/^#admin/.test(location.hash)) location.hash = "#affiche"; else rafraichir(true);
+    if (msg) toast(msg);
   }
 
   /* ---------- Dialogue (formulaires) ---------- */
@@ -476,10 +524,11 @@
     let etat = "";
     if (r) etat = `<p><b>Réservé</b> : ${r.date ? esc(fmtY(D(r.date), true)) : "date à préciser"}${r.heure ? " à " + esc(r.heure) : ""}${detRes(r)}</p>`;
     if (vu && jp) etat += `<p>${esc([jp.places || (jp.billets && jp.billets.length) ? plural(nbPlaces(jp), "place") : "", resumePrix(jp), (jp.accompagnants || []).length ? "avec " + jp.accompagnants.join(", ") : ""].filter(Boolean).join(" · "))}</p>`;
+    if (vu && jp && jp.notes) etat += `<p><b>Mes notes</b> (privées) : ${esc(jp.notes).replace(/\n/g, "<br>")}</p>`;
     if (env) etat += `<p><b>Dans mes envies</b> · priorité ${PRI[env.priorite || 2]}${env.note ? " · « " + esc(env.note) + " »" : ""}</p>`;
     const prio = env ? `<div class="chips wrap-ok" role="group" aria-label="Priorité">${[1, 2, 3].map((p) => `<button class="chip" type="button" data-adm="prio" data-p="${p}" data-id="${esc(e.id)}" aria-pressed="${(env.priorite || 2) === p}">Priorité ${PRI[p]}</button>`).join("")}<button class="chip" type="button" data-adm="envie" data-id="${esc(e.id)}">Note</button></div>` : "";
     const acts = vu
-      ? b("revu", "Vu à nouveau") + b("notes", "Ma note, spectateurs et prix") + b("editer", "Modifier la fiche") + b("supprimer", "Supprimer")
+      ? b("revu", "Ajouter une date vue", "pri") + b("notes", "Dates, note, avis et notes") + b("editer", "Modifier la fiche") + b("supprimer", "Supprimer")
       : (r ? b("reserver", "Modifier la réservation", "pri") + b("annuler", "Annuler la réservation") : b("reserver", "Réserver", "pri")) +
         b("vu", "Marquer vu") + `<button class="btn" type="button" data-envie="${esc(e.id)}" aria-pressed="${!!env}">${env ? "Dans mes envies" : "Ça m’intéresse"}</button>` +
         b("editer", "Modifier la fiche") + (e.statut === "ecarte" ? b("remettre", "Remettre à l’affiche") : b("ecarter", "Écarter")) + b("supprimer", "Supprimer");
@@ -545,21 +594,29 @@
   }
 
   /* ---------- Vu ---------- */
+  const NOTES_L = [["", "Pas de note"], [4, "4 · incontournable"], [3, "3 · fortement recommandé"], [2, "2 · bon choix"], [1, "1 · curiosité"]];
+  const dateRow = (v = "") => `<div class="ar">${inp("vu_d", v, 'type="date" aria-label="Date vue"')}<button type="button" class="btn ico" data-del aria-label="Retirer cette date">×</button></div>`;
+  const notesHTML = (v) => champ("Mes notes (privées)", `<textarea name="notes" rows="3" placeholder="Souvenirs, contexte, distribution du soir…">${esc(v || "")}</textarea>`);
+  // Spectateurs et prix, repliés quand rien n’est encore connu (une entrée de journal n’en a pas besoin).
+  const prixReplie = (r, ouvert) => `<details class="box"${ouvert ? " open" : ""}><summary>Spectateurs et prix (facultatif)</summary>${prixHTML(r)}</details>`;
+  const aDesPrix = (r) => !!(r && ((r.billets || []).some((b) => b.prix != null || (b.spectateur && !estMoi(b.spectateur))) || r.prix != null || r.prixPlace != null || (r.accompagnants || []).length));
   function formVu(id, mode) {
     const e = BYID.get(id); if (!e) return;
     const r = PRIVE.reservations[id] || {}, jp = PRIVE.journalPrive[id] || {};
     const edit = mode === "notes", revu = mode === "revu";
     const src = edit ? jp : { ...jp, ...r };
-    const dDef = edit ? (e.vuLe || []).at(-1) : r.date && D(r.date) <= TODAY ? r.date : revu || !r.date ? todayISO() : r.date;
-    dlg(edit ? `Mes notes : ${e.titre}` : `Vu : ${e.titre}`, `
-      ${champ(edit ? "Dates vues (AAAA-MM-JJ, séparées par des virgules)" : "Vu le", edit ? inp("vuLe", (e.vuLe || []).join(", ")) : inp("date", dDef, 'type="date"'))}
-      ${champ("Ma note", sel("noteLeonard", [["", "Pas de note"], [4, "4 · incontournable"], [3, "3 · fortement recommandé"], [2, "2 · bon choix"], [1, "1 · curiosité"]], e.noteLeonard ?? ""))}
+    const dDef = r.date && D(r.date) <= TODAY ? r.date : revu || !r.date ? todayISO() : r.date;
+    const form = dlg(edit ? `Journal : ${e.titre}` : revu ? `Nouvelle date vue : ${e.titre}` : `Vu : ${e.titre}`, `
+      ${edit ? `<fieldset class="fs"><legend>Dates vues</legend><div data-dates>${(e.vuLe || []).map(dateRow).join("")}</div><button type="button" class="btn" data-adddate>+ Date</button></fieldset>` : champ("Vu le", inp("date", dDef, 'type="date"'))}
+      ${revu && (e.vuLe || []).length ? `<p class="cr">Déjà vu le ${esc(e.vuLe.map((x) => fmtY(D(x))).join(", "))}.</p>` : ""}
+      ${champ("Ma note", sel("noteLeonard", NOTES_L, e.noteLeonard ?? ""))}
       ${champ("Mon avis (public)", `<textarea name="avis" rows="3">${esc(e.avis || "")}</textarea>`)}
-      ${revu ? '<p class="cr">Places et prix de cette nouvelle fois : ils s’ajoutent aux précédents.</p>' : ""}${prixHTML(revu ? { billets: [{ spectateur: "Moi" }] } : src)}`, async (f) => {
-      const note = val(f, "noteLeonard") ? +val(f, "noteLeonard") : null, avis = val(f, "avis");
+      ${notesHTML(jp.notes)}
+      ${revu ? '<p class="cr">Places et prix de cette nouvelle fois : ils s’ajoutent aux précédents.</p>' : ""}${prixReplie(revu ? { billets: [{ spectateur: "Moi" }] } : src, !revu && aDesPrix(src))}`, async (f) => {
+      const note = val(f, "noteLeonard") ? +val(f, "noteLeonard") : null, avis = val(f, "avis"), notes = val(f, "notes");
       let priv = lirePrix(f);
       let dates;
-      if (edit) { dates = val(f, "vuLe").split(/[,;\s]+/).filter(Boolean); if (!dates.length || dates.some((x) => !ISO_RE.test(x))) throw new Error("Dates au format AAAA-MM-JJ, séparées par des virgules."); }
+      if (edit) { dates = [...f.querySelectorAll('[name="vu_d"]')].map((x) => x.value).filter(Boolean); if (!dates.length || dates.some((x) => !ISO_RE.test(x))) throw new Error("Indique au moins une date vue."); }
       else { const x = val(f, "date"); if (!ISO_RE.test(x)) throw new Error("Choisis la date."); dates = [x]; }
       const etoiles = note ? `, ${note}/4` : "";
       return ecrire(edit ? `Admin : notes modifiées pour ${e.titre}` : `Admin : vu ${e.titre} le ${fmt(D(dates[0]))}${etoiles}`, (d) => {
@@ -573,10 +630,87 @@
         s.noteLeonard = note; s.avis = avis;
         const old = d.prive.journalPrive[id];
         if (revu && old) priv = cumuler(old, priv);
+        if (notes) priv.notes = notes; else delete priv.notes;
         d.prive.journalPrive[id] = priv;
         if (!edit) { delete d.prive.reservations[id]; delete d.prive.envies[id]; }
       });
-    }, { valider: edit ? "Enregistrer" : "Archiver au journal" });
+    }, { valider: edit ? "Enregistrer" : revu ? "Ajouter la date" : "Archiver au journal" });
+    form.addEventListener("click", (ev) => {
+      if (ev.target.closest("[data-adddate]")) { form.querySelector("[data-dates]").insertAdjacentHTML("beforeend", dateRow()); form.querySelector("[data-dates] .ar:last-child input").focus(); }
+      const del = ev.target.closest("[data-del]"); if (del && del.closest("[data-dates]")) del.closest(".ar").remove();
+    });
+  }
+
+  /* ---------- Entrée au journal : fiche existante ou nouvelle fiche simplifiée ---------- */
+  async function formJournal() {
+    try { await loadJournal(); } catch (_) {}
+    const tous = [...AFF, ...(JOURNAL || [])];
+    const form = dlg("Entrée au journal", `<p class="cr">Cherche le spectacle vu. S’il n’a pas encore de fiche, crée-la avec « Nouvelle fiche ».</p>
+      ${champ("Spectacle", '<input type="search" name="q" placeholder="Titre, artiste, lieu…" autocomplete="off" enterkeyhint="search">')}
+      <ul class="vl choix" data-res></ul>`, async (f) => { const t = val(f, "q"); fermerDlg(); formNouveauVu(t); return false; }, { valider: "Nouvelle fiche" });
+    const q = form.elements.q, res = form.querySelector("[data-res]");
+    const draw = () => {
+      const t = q.value.trim();
+      const L = t ? tous.filter((e) => cherche(e, t)).sort((a, b) => (b.statut === "vu") - (a.statut === "vu") || a.titre.localeCompare(b.titre, "fr")).slice(0, 15) : [];
+      res.innerHTML = L.map((e) => `<li><button type="button" data-choix="${esc(e.id)}"><span class="vd">${e.statut === "vu" ? "Journal" : "Affiche"}</span><span class="vt"><b>${esc(e.titre)}</b> <span>· ${esc([court(e.lieuId), e.statut === "vu" ? "vu le " + e.vuLe.map((x) => fmtY(D(x))).join(", ") : range(e)].filter(Boolean).join(" · "))}</span></span></button></li>`).join("")
+        || (t ? '<li><span class="cr">Aucune fiche trouvée : touche « Nouvelle fiche ».</span></li>' : "");
+    };
+    q.addEventListener("input", draw);
+    q.addEventListener("keydown", (ev) => { if (ev.key === "Enter") { ev.preventDefault(); const b = res.querySelector("[data-choix]"); if (b && res.querySelectorAll("[data-choix]").length === 1) b.click(); } });
+    res.addEventListener("click", (ev) => { const b = ev.target.closest("[data-choix]"); if (!b) return; const e = BYID.get(b.dataset.choix); fermerDlg(); formVu(e.id, e.statut === "vu" ? "revu" : "vu"); });
+    q.focus();
+  }
+  function formNouveauVu(titre0) {
+    const arts = [...new Set([...AFF, ...(JOURNAL || [])].flatMap((x) => (x.artistes || []).map((a) => a.nom)))].sort((a, b) => a.localeCompare(b, "fr"));
+    const lieuxNoms = Object.keys(LIEUX).map((k) => LIEUX[k].nom).sort((a, b) => a.localeCompare(b, "fr"));
+    let ajoutId = null;
+    const form = dlg("Nouvelle entrée au journal", `
+      ${champ("Titre", inp("titre", titre0, "required"))}
+      <div class="grid2">${champ("Catégorie", sel("categorie", CATS, "Théâtre"))}${champ("Sous-genre (facultatif)", inp("sousGenre", "", 'placeholder="Cirque, Version de concert…"'))}</div>
+      <fieldset class="fs"><legend>Artistes</legend><div data-arts>${artRow({})}</div><button type="button" class="btn" data-addart>+ Artiste</button>${dl("dl-art", arts)}</fieldset>
+      ${champ("Lieu", inp("lieu", "", 'list="dl-lieux" placeholder="Commence à taper…"') + dl("dl-lieux", lieuxNoms))}
+      <fieldset class="fs" data-nl hidden><legend>Nouveau lieu</legend><div class="grid2">${champ("Ville", inp("nl_ville", "Paris"))}${champ("Zone", sel("nl_zone", ZONES_L, "Paris"))}</div></fieldset>
+      ${champ("Salle (facultatif)", inp("salle", ""))}
+      ${champ("Vu le", inp("date", "", 'type="date" required'))}
+      ${champ("Ma note", sel("noteLeonard", NOTES_L, ""))}
+      ${champ("Mon avis (public)", '<textarea name="avis" rows="3"></textarea>')}
+      ${notesHTML("")}
+      ${champ("Lien officiel (facultatif)", inp("lien", "", 'type="url" placeholder="https://…"'))}
+      ${prixReplie({ billets: [{ spectateur: "Moi" }] }, false)}`, async (f) => {
+      const titre = val(f, "titre"); if (!titre) throw new Error("Le titre est obligatoire.");
+      const date = val(f, "date"); if (!ISO_RE.test(date)) throw new Error("Indique la date à laquelle tu l’as vu.");
+      let lieuId = lieuDepuisNom(val(f, "lieu")), nouveauLieu = null;
+      if (!lieuId && val(f, "lieu")) {
+        const nom = val(f, "lieu"); let k = slug(nom), i = 2; while (LIEUX[k]) k = slug(nom) + "-" + i++;
+        nouveauLieu = { id: k, l: { nom, ville: val(f, "nl_ville") || "Paris", zone: val(f, "nl_zone"), statut: "Public", site: null, billetterie: null, tarifJeune: "" } };
+        lieuId = k;
+      }
+      const artistes = [...f.querySelectorAll("[data-arts] .ar")].map((r) => ({ nom: r.querySelector('[name="a_nom"]').value.trim().replace(/'/g, "’"), role: r.querySelector('[name="a_role"]').value })).filter((a) => a.nom);
+      const note = val(f, "noteLeonard") ? +val(f, "noteLeonard") : null, avis = val(f, "avis"), notes = val(f, "notes"), lien = val(f, "lien") || null;
+      if (lien && !URL_RE.test(lien)) throw new Error("Le lien doit commencer par https://");
+      const priv = lirePrix(f); if (notes) priv.notes = notes;
+      const memes = [...AFF, ...(JOURNAL || [])].filter((x) => norm(x.titre) === norm(titre));
+      if (memes.length && !await demander(`« ${titre} » a déjà une fiche (${memes.map((x) => [court(x.lieuId), x.statut === "vu" ? "au journal" : "à l’affiche"].filter(Boolean).join(", ")).join(" ; ")}). Mieux vaut l’ajouter à cette fiche. Créer quand même une nouvelle fiche ?`, { oui: "Créer quand même", non: "Revenir", danger: false })) return false;
+      return ecrire(`Admin : vu ${titre} le ${fmtY(D(date))}${note ? `, ${note}/4` : ""}`, (d) => {
+        if (nouveauLieu && !d.lieux[nouveauLieu.id]) { d.lieux[nouveauLieu.id] = nouveauLieu.l; d.lieux = Object.fromEntries(Object.entries(d.lieux).sort(([a], [b]) => a.localeCompare(b))); }
+        const tous = new Set([...d.affiche.sorties, ...d.journal.sorties].map((x) => x.id));
+        const base = "vu-" + (slug(titre) || "sortie"); let nid = base, i = 2;
+        if (tous.has(nid) && lieuId) nid = base + "-" + lieuId; while (tous.has(nid)) nid = base + "-" + i++;
+        d.journal.sorties.unshift({ id: nid, titre, categorie: val(f, "categorie"), sousGenre: val(f, "sousGenre"), artistes, lieuId: lieuId || null, salle: val(f, "salle"), debut: null, fin: null,
+          note: 0, pronostic: false, pourquoi: "", lien, billetterie: null, publicJeune: false, leonardYVa: false, statut: "vu", vuLe: [date], noteLeonard: note, avis, offres: [] });
+        d.prive.journalPrive[nid] = priv;
+        ajoutId = nid;
+      });
+    }, { valider: "Ajouter au journal" });
+    const nl = form.querySelector("[data-nl]"), lieuIn = form.elements.lieu;
+    lieuIn.addEventListener("input", () => { nl.hidden = !lieuIn.value.trim() || !!lieuDepuisNom(lieuIn.value); });
+    form.addEventListener("click", (ev) => {
+      if (ev.target.closest("[data-addart]")) form.querySelector("[data-arts]").insertAdjacentHTML("beforeend", artRow());
+      const del = ev.target.closest("[data-del]"); if (del && del.closest("[data-arts]")) del.closest(".ar").remove();
+    });
+    const sub = form.onsubmit;
+    form.onsubmit = async (ev) => { ajoutId = null; await sub(ev); if (ajoutId && !$("#dlg")) location.hash = "#sortie-" + ajoutId; };
+    (titre0 ? form.elements.date : form.elements.titre).focus();
   }
 
   // Vu à nouveau : les places de la nouvelle fois s’ajoutent aux précédentes.
@@ -598,7 +732,7 @@
     const vu = e.statut === "vu";
     const arts = [...new Set([...AFF, ...(JOURNAL || [])].flatMap((x) => (x.artistes || []).map((a) => a.nom)))].sort((a, b) => a.localeCompare(b, "fr"));
     const lieuxNoms = Object.keys(LIEUX).map((k) => LIEUX[k].nom).sort((a, b) => a.localeCompare(b, "fr"));
-    const form = dlg(e0 ? `Modifier : ${e0.titre}` : "Ajouter une sortie", `
+    const form = dlg(e0 ? `Modifier : ${e0.titre}` : "Ajouter un spectacle", `
       <div class="grid2">${champ("Catégorie", sel("categorie", CATS, e.categorie))}${champ("Sous-genre", inp("sousGenre", e.sousGenre, 'placeholder="Cirque, Version de concert…"'))}</div>
       ${champ("Titre", inp("titre", e.titre, "required"))}
       <fieldset class="fs"><legend>Artistes</legend><div data-arts>${(e.artistes.length ? e.artistes : [{}]).map(artRow).join("")}</div><button type="button" class="btn" data-addart>+ Artiste</button>${dl("dl-art", arts)}</fieldset>
@@ -608,14 +742,16 @@
         <div class="grid2">${champ("Statut", sel("nl_statut", ["Public", "Privé"], "Public"))}${champ("Tarif jeune du lieu", inp("nl_tj", ""))}</div>
         ${champ("Adresse", inp("nl_adr", ""))}${champ("Site", inp("nl_site", "", 'type="url" placeholder="https://…"'))}${champ("Billetterie", inp("nl_bil", "", 'type="url" placeholder="https://…"'))}</fieldset>
       ${champ("Salle", inp("salle", e.salle))}
+      ${champ("Lien officiel", inp("lien", e.lien, 'type="url" placeholder="https://…"'))}
+      ${vu ? '<p class="cr">Fiche du journal : dates vues, note, avis et notes se modifient avec « Dates, note, avis et notes ».</p>' : ""}
+      <div data-aff${vu ? " hidden" : ""}>
       <div class="grid2">${champ("Début", inp("debut", e.debut, 'type="date"'))}${champ("Fin", inp("fin", e.fin, 'type="date"'))}</div>
       ${champ("Dates en clair (facultatif)", inp("datesTexte", e.datesTexte, 'placeholder="15 oct. 2026 – 27 janv. 2027"'))}
       ${champ("Horaires (facultatif)", inp("horaires", e.horaires, 'placeholder="20h, dim. 15h · 2h45"'))}
       <div class="grid2">${champ("Note (grille)", sel("note", [[4, "4 · incontournable"], [3, "3 · fortement recommandé"], [2, "2 · bon choix"], [1, "1 · curiosité"], ...(vu ? [[0, "0 · sans note"]] : [])], e.note))}<div>${ck("pronostic", e.pronostic, "Pronostic (pas encore critiqué)")}${ck("publicJeune", e.publicJeune, "Adapté à un public jeune")}</div></div>
       ${champ("Pourquoi (une phrase factuelle)", `<textarea name="pourquoi" rows="2">${esc(e.pourquoi || "")}</textarea>`)}
-      ${champ("Lien officiel", inp("lien", e.lien, 'type="url" placeholder="https://…"'))}
       ${champ("Billetterie directe (facultatif)", inp("billetterie", e.billetterie, 'type="url" placeholder="https://…"'))}
-      <fieldset class="fs"><legend>Offres jeunes et ventes</legend><div data-offres>${(e.offres || []).map(offreRow).join("")}</div><button type="button" class="btn" data-addoff>+ Offre</button>${dl("dl-off", TYPES_OFFRE)}</fieldset>`, async (f) => {
+      <fieldset class="fs"><legend>Offres jeunes et ventes</legend><div data-offres>${(e.offres || []).map(offreRow).join("")}</div><button type="button" class="btn" data-addoff>+ Offre</button>${dl("dl-off", TYPES_OFFRE)}</fieldset></div>`, async (f) => {
       const titre = val(f, "titre"); if (!titre) throw new Error("Le titre est obligatoire.");
       let lieuId = lieuDepuisNom(val(f, "lieu")), nouveauLieu = null;
       if (!lieuId && val(f, "lieu")) {
@@ -635,6 +771,7 @@
       const champs = { titre, categorie: val(f, "categorie"), sousGenre: val(f, "sousGenre"), artistes, lieuId: lieuId || null, salle: val(f, "salle"), debut: val(f, "debut"), fin: val(f, "fin") || val(f, "debut"),
         datesTexte: val(f, "datesTexte"), horaires: val(f, "horaires"), note: +val(f, "note"), pronostic: f.elements.pronostic.checked, pourquoi: val(f, "pourquoi"), lien: val(f, "lien") || null, billetterie: val(f, "billetterie") || null, publicJeune: f.elements.publicJeune.checked, offres };
       for (const k of ["datesTexte", "horaires"]) if (!champs[k]) delete champs[k];
+      if (vu) for (const k of ["debut", "fin", "datesTexte", "horaires", "note", "pronostic", "pourquoi", "billetterie", "publicJeune", "offres"]) delete champs[k];
       if (!e0) {
         const memes = [...AFF, ...(JOURNAL || [])].filter((x) => norm(x.titre) === norm(titre));
         if (memes.length && !await demander(`« ${titre} » existe déjà (${memes.map((x) => [court(x.lieuId), range(x), x.statut === "vu" ? "vu" : ""].filter(Boolean).join(", ")).join(" ; ")}). Ajouter quand même ?`, { oui: "Ajouter quand même", non: "Revenir", danger: false })) return false;
@@ -646,7 +783,7 @@
           const s = d.affiche.sorties.find((x) => x.id === id) || d.journal.sorties.find((x) => x.id === id);
           if (!s) throw new Error("Cette sortie n’existe plus dans le dépôt.");
           await garde(snap, s, "La fiche");
-          for (const k of ["datesTexte", "horaires"]) if (!(k in champs)) delete s[k];
+          if (!vu) for (const k of ["datesTexte", "horaires"]) if (!(k in champs)) delete s[k];
           Object.assign(s, champs);
         } else {
           const tous = new Set([...d.affiche.sorties, ...d.journal.sorties].map((x) => x.id));
@@ -658,6 +795,7 @@
       });
     }, { valider: e0 ? "Enregistrer" : "Ajouter" });
     let ajoutId = null;
+    if (!e0) form.elements.titre.focus();
     const nl = form.querySelector("[data-nl]"), lieuIn = form.elements.lieu;
     const majLieu = () => { nl.hidden = !lieuIn.value.trim() || !!lieuDepuisNom(lieuIn.value); };
     lieuIn.addEventListener("input", majLieu); majLieu();
@@ -1090,15 +1228,31 @@
     const res = Object.entries(PRIVE.reservations).sort((a, b) => (a[1].date || "9").localeCompare(b[1].date || "9"));
     const fut = res.filter(([, r]) => !r.date || D(r.date) >= TODAY), past = res.filter(([, r]) => r.date && D(r.date) < TODAY);
     const locD = etatLocal();
-    const carte = ([id, r], passe) => {
+    const carte = ([id, r], passe) => carteRes(id, r, passe, locD);
+    const ec = AFF.filter((e) => e.statut === "ecarte");
+    return `${past.length ? `<p class="warn"><a href="#admin?v=ranger">${plural(past.length, "réservation passée", "réservations passées")} à ranger</a></p>` : ""}
+    <h2 class="mh">À venir <small>${fut.length}</small></h2><div class="list">${fut.map((x) => carte(x, false)).join("") || '<p class="empty">Aucune réservation. Ouvre une fiche et touche « Réserver ».</p>'}</div>
+    ${ec.length ? `<details class="box"><summary>Sorties écartées <span class="ml">${ec.length}, masquées du public</span></summary><ul class="vl">${ec.map((e) => `<li><a href="#sortie-${esc(e.id)}"><span class="vt"><b>${esc(e.titre)}</b> <span>· ${esc(court(e.lieuId))}</span></span></a></li>`).join("")}</ul></details>` : ""}`;
+  }
+  function carteRes(id, r, passe, locD) {
       const c = conflits(locD, r.date, id);
       return `<div class="ad"><h3><a href="#sortie-${esc(id)}">${esc(titreDe(id))}</a></h3><p><b>${r.date ? esc(cap(fmtY(D(r.date), true))) : "Date à préciser"}</b>${r.heure ? " · " + esc(r.heure) : ""}${detRes(r)}</p>${c.length ? `<p class="warn">Conflit : ${esc(c.join(", "))}</p>` : ""}
       ${passe ? `<p class="warn">C’est passé : tu l’as vu ?</p>` : ""}<div class="acts">${passe ? `<button class="btn pri" type="button" data-adm="vu" data-id="${esc(id)}">Oui, marquer vu</button>` : `<button class="btn" type="button" data-adm="reserver" data-id="${esc(id)}">Modifier</button><button class="btn" type="button" data-adm="vu" data-id="${esc(id)}">Vu</button>`}<button class="btn" type="button" data-adm="annuler" data-id="${esc(id)}">${passe ? "Non, supprimer" : "Annuler"}</button></div></div>`;
-    };
-    const ec = AFF.filter((e) => e.statut === "ecarte");
-    return `${past.length ? `<h2 class="mh">À confirmer <small>${past.length}</small></h2><div class="list">${past.map((x) => carte(x, true)).join("")}</div>` : ""}
-    <h2 class="mh">À venir <small>${fut.length}</small></h2><div class="list">${fut.map((x) => carte(x, false)).join("") || '<p class="empty">Aucune réservation. Ouvre une fiche et touche « Réserver ».</p>'}</div>
-    ${ec.length ? `<details class="box"><summary>Sorties écartées <span class="ml">${ec.length}, masquées du public</span></summary><ul class="vl">${ec.map((e) => `<li><a href="#sortie-${esc(e.id)}"><span class="vt"><b>${esc(e.titre)}</b> <span>· ${esc(court(e.lieuId))}</span></span></a></li>`).join("")}</ul></details>` : ""}`;
+  }
+  /* À ranger : réservations passées et sorties à l’affiche dont la date est passée. */
+  function aRanger() {
+    const res = Object.entries(PRIVE.reservations).filter(([, r]) => r.date && D(r.date) < TODAY).sort((a, b) => a[1].date.localeCompare(b[1].date));
+    const passees = AFF.filter((e) => e.statut === "a-voir" && e.fin && D(e.fin) < TODAY && !PRIVE.reservations[e.id]).sort(byStart); // sans fin : à l’affiche « à partir du », pas terminée
+    return { res, passees };
+  }
+  const nRanger = () => { const { res, passees } = aRanger(); return res.length + passees.length; };
+  function vueRanger() {
+    const { res, passees } = aRanger(), locD = etatLocal();
+    if (!res.length && !passees.length) return '<p class="empty">Rien à ranger : aucune réservation passée, aucune sortie terminée à l’affiche.</p>';
+    const b = (a, id, t, cls = "") => `<button class="btn ${cls}" type="button" data-adm="${a}" data-id="${esc(id)}">${t}</button>`;
+    return `${res.length ? `<h2 class="mh">Réservations passées <small>${res.length}</small></h2><div class="list">${res.map(([id, r]) => carteRes(id, r, true, locD)).join("")}</div>` : ""}
+    ${passees.length ? `<h2 class="mh">Terminées, encore à l’affiche <small>${passees.length}</small></h2><p class="cr">Vues : archive-les au journal. Sinon, écarte-les (masquées) ou supprime-les.</p><div class="list">${passees.map((e) => `<div class="ad"><h3><a href="#sortie-${esc(e.id)}">${esc(e.titre)}</a></h3><p class="cr">${esc([court(e.lieuId), range(e)].filter(Boolean).join(" · "))}</p>
+      <div class="acts">${b("vu", e.id, "Vu, au journal", "pri")}${b("ecarter", e.id, "Écarter")}${b("supprimer", e.id, "Supprimer")}</div></div>`).join("")}</div>` : ""}`;
   }
   function vueEnvies() {
     const L = Object.entries(PRIVE.envies).map(([id, v]) => ({ id, v, e: BYID.get(id) })).filter((x) => x.e);
@@ -1123,6 +1277,7 @@
         try { await ouvrirPaquet(await derive(pw, unb64(p.salt), p.iter), p); } catch (_) { throw new Error("Mot de passe incorrect."); }
         const avert = await testerJeton(tok);
         TOK = tok; await ranger(pw, tok);
+        if (EXP) sauverSession().catch(() => {});
         toast(avert || "Jeton vérifié et enregistré sur cet appareil");
         ok(true); recharger(undefined, true).catch(() => rafraichir(true));
       }, { valider: "Tester et enregistrer" });
@@ -1135,59 +1290,76 @@
       obs.observe(document.body, { childList: true });
     });
   }
+  // Page #admin sans session : invitation à se connecter (le portail s’ouvre en surimpression).
   function vueConnexion() {
-    const aJeton = !!lsGet(LS_JETON);
-    $("#main").innerHTML = `<div class="ph"><h1>Admin</h1><p>Réservé à ${OWNER}. Le déchiffrement se fait dans le navigateur ; le mot de passe n’est jamais envoyé.</p></div>
-    <form id="pf" class="frm loginbox" autocomplete="on">
-      ${champ("Mot de passe", '<input type="password" id="pw" name="pw" autocomplete="current-password" required>')}
-      ${aJeton ? '<p class="cr">Cet appareil est enregistré : le mot de passe suffit.</p>' : `${champ("Jeton GitHub (première connexion sur cet appareil)", '<input type="password" id="tok" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="github_pat_…">')}<p class="cr">Laisse vide pour consulter seulement (lecture seule). Le jeton sera rangé sur cet appareil, chiffré avec ton mot de passe.</p>`}
-      <p class="err" role="alert" id="pErr" hidden></p>
-      <div class="acts"><button class="btn pri" type="submit" id="pGo">Déverrouiller</button></div></form>`;
-    $("#pf").onsubmit = async (ev) => {
-      ev.preventDefault();
-      const err = $("#pErr"), go = $("#pGo"), pw = $("#pw").value, tok = $("#tok") ? $("#tok").value.trim() : "";
-      $("#pw").value = ""; document.activeElement.blur();
-      const dire = (t) => { err.textContent = t; err.hidden = false; go.disabled = false; go.textContent = "Déverrouiller"; };
-      err.hidden = true; go.disabled = true; go.textContent = "Vérification…";
-      let p; try { p = await getJSON("data/prive.enc?t=" + Date.now(), { cache: "no-store" }); } catch (_) { return dire("Impossible de lire la zone privée : vérifie la connexion."); }
+    $("#main").innerHTML = `<div class="ph"><h1>Admin</h1><p>Réservé à ${OWNER}</p></div>
+    <p>Connecte-toi pour gérer réservations, envies, journal et soirs pris.</p><div class="acts"><button class="btn pri" type="button" data-cx>Se connecter</button></div>`;
+    if (!sessionVive() && !$("#dlg")) portail();
+  }
+  function portail() {
+    if (PRIVE) return dlgSession();
+    const aJeton = !!lsGet(LS_JETON), dDef = DUREES.some(([k]) => k === lsGet(LS_DUREE)) ? lsGet(LS_DUREE) : "jour";
+    const form = dlg("Connexion", `<p class="cr">Réservé à ${OWNER}. Le déchiffrement se fait dans le navigateur ; le mot de passe n’est jamais envoyé.</p>
+      <input type="text" name="username" value="Factotum" autocomplete="username" class="vh" tabindex="-1" aria-hidden="true">
+      ${champ("Mot de passe", '<input type="password" name="pw" autocomplete="current-password" required>')}
+      ${aJeton ? '<p class="cr">Cet appareil est enregistré : le mot de passe suffit.</p>' : `${champ("Jeton GitHub (première connexion sur cet appareil)", '<input type="password" name="tok" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="github_pat_…">')}<p class="cr">Laisse vide pour consulter seulement (lecture seule). Le jeton sera rangé sur cet appareil, chiffré avec ton mot de passe.</p>`}
+      ${champ("Rester connecté", sel("duree", DUREES, dDef))}`, async (f) => {
+      const pw = f.elements.pw.value, tok = f.elements.tok ? f.elements.tok.value.trim() : "", duree = val(f, "duree");
+      f.elements.pw.value = "";
+      let p; try { p = await getJSON("data/prive.enc?t=" + Date.now(), { cache: "no-store" }); } catch (_) { throw new Error("Impossible de lire la zone privée : vérifie la connexion."); }
       let key, prive;
-      try { key = await derive(pw, unb64(p.salt), p.iter); prive = await ouvrirPaquet(key, p); } catch (_) { return dire("Mot de passe incorrect."); }
+      try { key = await derive(pw, unb64(p.salt), p.iter); prive = await ouvrirPaquet(key, p); } catch (_) { throw new Error("Mot de passe incorrect."); }
       let tk = null, avert = "";
       const st = lsGet(LS_JETON);
       if (st) {
-        try { const s = JSON.parse(st); tk = (await ouvrirPaquet(await derive(pw, unb64(s.salt), s.iter), s)).jeton; }
-        catch (_) { lsDel(LS_JETON); return vueConnexion(), toast("Le jeton rangé sur cet appareil ne s’ouvre plus : saisis-le à nouveau."); }
+        try { const x = JSON.parse(st); tk = (await ouvrirPaquet(await derive(pw, unb64(x.salt), x.iter), x)).jeton; }
+        catch (_) { lsDel(LS_JETON); portail(); toast("Le jeton rangé sur cet appareil ne s’ouvre plus : saisis-le à nouveau."); throw new Annule(); }
       } else if (tok) {
-        go.textContent = "Test du jeton…";
-        try { avert = await testerJeton(tok); } catch (e) { return dire(e.message); }
+        avert = await testerJeton(tok);
         tk = tok;
         if (!(await ranger(pw, tok))) avert = "Jeton valable, mais impossible de le ranger sur cet appareil (navigation privée ?) : il faudra le ressaisir.";
       }
-      KEY = key; SALT = p.salt; ITERP = p.iter; PRIVE = normPrive(prive); TOK = tk; LAST = Date.now();
-      document.body.classList.add("adm"); lockIcon();
+      KEY = key; SALT = p.salt; ITERP = p.iter; PRIVE = normPrive(prive); TOK = tk;
+      lsSet(LS_DUREE, duree);
+      try { await sauverSession(duree); } catch (_) { avert = avert || "Connecté, mais la session ne pourra pas être gardée sur cet appareil (navigation privée ?)."; }
+      document.body.classList.add("adm"); lockIcon(); fermerDlg();
       let fait = false;
-      if (TOK) { go.textContent = "Lecture du dépôt…"; try { await recharger(pw, true); fait = true; } catch (e) { avert = "Lecture du dépôt impossible (" + msgGH(e) + ") : données du site affichées."; } }
+      if (TOK) { try { await recharger(pw, true); fait = true; } catch (e) { avert = "Lecture du dépôt impossible (" + msgGH(e) + ") : données du site affichées."; } }
       if (!fait) await rafraichir(true);
-      if (avert) toast(avert);
-    };
-    $("#pw").focus();
+      toast(avert || "Connecté " + jusqua());
+    }, { valider: "Se connecter" });
+    form.setAttribute("autocomplete", "on");
+    form.elements.pw.focus();
+  }
+  function dlgSession() {
+    const form = dlg("Session", `<p>Connecté ${esc(jusqua())}.</p>
+      <p class="cr">${TOK ? "Cet appareil peut enregistrer : chaque modification publie le site." : "Lecture seule sur cet appareil (pas de jeton GitHub)."}</p>
+      ${champ("Rester connecté à partir de maintenant", sel("duree", DUREES, MODE))}
+      <p><a class="btn" href="#admin" data-dlgclose>Ouvrir l’admin</a></p>
+      <p><button class="linkbtn" type="button" data-oublier>Oublier cet appareil (efface le jeton et déconnecte)</button></p>`, async (f) => {
+      const d = val(f, "duree"); lsSet(LS_DUREE, d);
+      try { await sauverSession(d); toast("Connecté " + jusqua()); } catch (_) { toast("Impossible de garder la session sur cet appareil."); }
+      rafraichir();
+    }, { valider: "Prolonger", danger: '<button class="btn danger" type="button" data-deco>Se déconnecter</button>' });
+    form.querySelector("[data-deco]").onclick = () => verrouiller("Déconnecté");
+    form.querySelector("[data-oublier]").onclick = async () => { if (await demander("Effacer le jeton GitHub de cet appareil et se déconnecter ? Il faudra le ressaisir à la prochaine connexion.", { oui: "Effacer le jeton" })) { lsDel(LS_JETON); verrouiller("Appareil oublié : jeton effacé"); } };
   }
 
   /* ---------- Espace admin ---------- */
-  const ONGLETS = [["res", "Réservations"], ["envies", "Mes envies"], ["rapide", "Saisie rapide"], ["soirs", "Soirs pris"], ["budget", "Budget"], ["acc", "Accompagnants"], ["lieux", "Lieux"], ["liens", "Liens"], ["abo", "Abonnements"]];
+  const ONGLETS = [["res", "Réservations"], ["ranger", "À ranger"], ["envies", "Mes envies"], ["rapide", "Saisie rapide"], ["soirs", "Soirs pris"], ["budget", "Budget"], ["acc", "Accompagnants"], ["lieux", "Lieux"], ["liens", "Liens"], ["abo", "Abonnements"]];
   let VUE = "res";
   function renderAdminVue(v) {
     if (v) VUE = v;
     if (!PRIVE) return vueConnexion();
     if (location.hash.slice(1).split("?")[0] !== "admin") return;
-    const nE = Object.keys(PRIVE.envies).length, nC = (PRIVE.aCompleter || []).length;
-    const corps = { res: vueRes, envies: vueEnvies, rapide: vueRapide, soirs: vueSoirs, budget: vueBudget, acc: vueAcc, lieux: vueLieux, liens: vueLiens, abo: () => `<p class="cr">Deux agendas à ajouter une fois sur l’iPhone : Réglages › Apps › Calendrier › Comptes › Ajouter un compte › Autre › S’abonner à un calendrier, colle l’adresse, puis Suivant et Enregistrer. Mise à jour automatique (à peu près toutes les heures).</p>${subsHTML()}<p class="cr">Ces adresses sont secrètes : elles contiennent prix et accompagnants. Ne les partage pas.</p>` }[VUE] || vueRes;
-    $("#main").innerHTML = `<div class="adm-tete"><h1>Admin</h1><p>${TOK ? "Connecté · chaque enregistrement publie le site" : "Lecture seule sur cet appareil"} · verrouillage après 30 min d’inactivité</p>
-    <nav class="chips" aria-label="Espace admin">${ONGLETS.map(([k, t]) => `<a class="chip" href="#admin?v=${k}"${k === VUE ? ' aria-current="page"' : ""}>${t}${k === "envies" && nE ? ` (${nE})` : ""}${k === "rapide" && nC ? ` (${nC})` : ""}</a>`).join("")}</nav></div>
-    <div class="acts"><button class="btn pri" type="button" data-adm="ajouter">+ Ajouter une sortie</button>${TOK ? "" : '<button class="btn" type="button" id="aTok">Saisir le jeton</button>'}<button class="btn" type="button" id="aLock">Verrouiller</button></div>
+    const nE = Object.keys(PRIVE.envies).length, nC = (PRIVE.aCompleter || []).length, nR = nRanger();
+    const corps = { res: vueRes, ranger: vueRanger, envies: vueEnvies, rapide: vueRapide, soirs: vueSoirs, budget: vueBudget, acc: vueAcc, lieux: vueLieux, liens: vueLiens, abo: () => `<p class="cr">Deux agendas à ajouter une fois sur l’iPhone : Réglages › Apps › Calendrier › Comptes › Ajouter un compte › Autre › S’abonner à un calendrier, colle l’adresse, puis Suivant et Enregistrer. Mise à jour automatique (à peu près toutes les heures).</p>${subsHTML()}<p class="cr">Ces adresses sont secrètes : elles contiennent prix et accompagnants. Ne les partage pas.</p>` }[VUE] || vueRes;
+    $("#main").innerHTML = `<div class="adm-tete"><h1>Admin</h1><p>${TOK ? "Chaque enregistrement publie le site" : "Lecture seule sur cet appareil"} · connecté ${esc(jusqua())}</p>
+    <nav class="chips" aria-label="Espace admin">${ONGLETS.map(([k, t]) => `<a class="chip" href="#admin?v=${k}"${k === VUE ? ' aria-current="page"' : ""}>${t}${k === "envies" && nE ? ` (${nE})` : ""}${k === "rapide" && nC ? ` (${nC})` : ""}${k === "ranger" && nR ? ` (${nR})` : ""}</a>`).join("")}</nav></div>
+    <div class="acts"><button class="btn pri" type="button" data-adm="ajouter">+ Ajouter un spectacle</button><button class="btn" type="button" data-adm="journal">+ Entrée au journal</button>${TOK ? "" : '<button class="btn" type="button" id="aTok">Saisir le jeton</button>'}<button class="btn" type="button" id="aLock">Se déconnecter</button></div>
     <div id="av">${corps()}</div>
     <p class="pied-adm"><button class="linkbtn" type="button" id="aForget">Oublier cet appareil (efface le jeton)</button></p>`;
-    $("#aLock").onclick = () => verrouiller("Verrouillé");
+    $("#aLock").onclick = () => verrouiller("Déconnecté");
     $("#aForget").onclick = async () => { if (await demander("Effacer le jeton GitHub de cet appareil et verrouiller ? Il faudra le ressaisir à la prochaine connexion.", { oui: "Effacer le jeton" })) { lsDel(LS_JETON); verrouiller("Appareil oublié : jeton effacé"); } };
     if ($("#aTok")) $("#aTok").onclick = () => formJeton();
     const bp = $("#bp"); if (bp) bp.onchange = () => { BUDGET_P = bp.value; renderAdminVue(); };
@@ -1223,7 +1395,8 @@
     else if (a === "supprimer") act(() => supprimer(id));
     else if (a === "prio") act(() => basculerEnvie(id, +b.dataset.p));
     else if (a === "envie") formEnvie(id);
+    else if (a === "journal") act(formJournal);
   });
 
-  ADMIN = { render, heart, ficheHTML, idsAvec, accSelectHTML };
+  ADMIN = { render, heart, ficheHTML, idsAvec, accSelectHTML, portail, restaurer };
 })();
