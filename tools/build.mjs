@@ -89,7 +89,7 @@ const VTZ = [
 ];
 // DTSTAMP fixe (dérivé de la date de mise à jour des données) pour un fichier stable
 const DTSTAMP = (affiche.maj || "2026-01-01").replace(/-/g, "") + "T000000Z";
-const entete = (nom) => ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//saison//FR", "CALSCALE:GREGORIAN", "METHOD:PUBLISH", `X-WR-CALNAME:${nom}`, "X-WR-TIMEZONE:Europe/Paris", ...VTZ];
+const entete = (nom) => ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//factotum//FR", "CALSCALE:GREGORIAN", "METHOD:PUBLISH", `X-WR-CALNAME:${nom}`, "X-WR-TIMEZONE:Europe/Paris", ...VTZ];
 const fichierIcs = (lignes) => lignes.map(plie).join("\r\n") + "\r\n";
 // Places et prix : prix par place × places, ou détail place par place (billets). Ancien champ « prix » = total.
 const num = (v) => (v == null || v === "" ? null : typeof v === "number" ? v : (() => { const m = String(v).replace(",", ".").match(/-?\d+(\.\d+)?/); return m ? +m[0] : null; })());
@@ -133,7 +133,7 @@ async function main() {
   const tok = prive.icsToken;
   for (const f of readdirSync("data"))
     if (/^(agenda|ventes)-.*\.ics$/.test(f) && f !== `agenda-${tok}.ics` && f !== `ventes-${tok}.ics`) rmSync(`data/${f}`);
-  const ag = entete("Saison – réservations");
+  const ag = entete("Factotum – réservations");
   let nRes = 0;
   for (const [id, r] of Object.entries(res).sort((a, b) => (a[1].date || "").localeCompare(b[1].date || "") || a[0].localeCompare(b[0]))) {
     if (!r.date) continue;
@@ -162,7 +162,7 @@ async function main() {
   ecrire(`data/agenda-${tok}.ics`, fichierIcs(ag));
 
   // 4b. Flux des ouvertures de ventes
-  const ve = entete("Saison – ouvertures de ventes");
+  const ve = entete("Factotum – ouvertures de ventes");
   let nVe = 0;
   for (const s of [...affiche.sorties].sort((a, b) => a.id.localeCompare(b.id))) {
     const suivie = envies[s.id] || res[s.id] || s.note === 4;
