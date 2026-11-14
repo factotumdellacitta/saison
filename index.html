@@ -30,7 +30,8 @@
 <link rel="manifest" href="assets/manifest.webmanifest">
 <link rel="preload" href="assets/literata.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="data/affiche.json" as="fetch" crossorigin>
-<style>
+<script>try{var t=localStorage.getItem("factotum-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<style id="ancien">
 @font-face{font-family:"Literata";src:url(assets/literata.woff2) format("woff2");font-weight:600;font-style:normal;font-display:swap;unicode-range:U+0020-007E,U+00A0-00FF,U+0152-0153,U+0178,U+2013,U+2018-201E,U+2026,U+20AC,U+2122}
 :root{
   --paper:#F5F6F1;--card:#FFFFFF;--stub:#DCEAE1;--stub-ink:#1F4733;
@@ -354,6 +355,6 @@ body.adm .row .end{padding-right:40px}
 <main class="wrap"><div id="main" role="tabpanel" aria-labelledby="t-affiche" tabindex="-1"><p class="load">Chargement de la saison…</p></div></main>
 <div class="sheet" id="sheet" hidden><div class="sheet-in" id="sheetIn" role="dialog" aria-modal="true" aria-labelledby="sheetT" tabindex="-1"></div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="assets/app.js?v=3.3" defer></script>
+<script src="assets/app.js?v=3.4" defer></script>
 </body>
 </html>

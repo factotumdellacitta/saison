@@ -1,5 +1,6 @@
 // node tools/check.mjs  –  bloque la publication si les données sont incohérentes ou si une donnée privée fuit.
-import { readFileSync, existsSync, readdirSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
+import { verifierContrastes } from "./contrast.mjs";
 
 const erreurs = [];
 const warn = [];
@@ -59,6 +60,35 @@ for (const f of publies) {
   if (!/\.(html|js|json|enc|ics|webmanifest|svg|txt|md)$/.test(f)) continue;
   if (SECRET.test(readFileSync(f, "utf8"))) erreurs.push(`${f} contient ce qui ressemble à un jeton GitHub : retire-le et révoque le jeton.`);
 }
+
+// ---------- Charte Factotum : typographie et feuille de style ----------
+// Fichiers publiés, sous-dossiers compris (assets/fonts…)
+const arbo = (d) => readdirSync(d).flatMap((f) => statSync(`${d}/${f}`).isDirectory() ? arbo(`${d}/${f}`) : [`${d}/${f}`]);
+const textes = ["index.html", "sw.js", ...["assets", "data"].flatMap((d) => existsSync(d) ? arbo(d) : [])].filter((f) => /\.(html|js|css|json|ics|webmanifest|svg|txt|md)$/.test(f));
+for (const f of textes) {
+  const t = readFileSync(f, "utf8");
+  t.split("\n").forEach((l, i) => {
+    if (l.includes("—")) erreurs.push(`${f}:${i + 1} contient un tiret cadratin (—) : utilise « – » ou une virgule.`);
+    if (l.includes(" ")) erreurs.push(`${f}:${i + 1} contient une espace fine insécable : utilise une espace insécable normale.`);
+  });
+}
+// Feuilles : aucune couleur ni taille de police en dur hors des jetons, rien de la liste des interdits.
+// (La feuille <style id="ancien"> d'index.html est l'ancienne charte, retirée quand Factotum s'applique à tout le site.)
+const feuilles = [...textes.filter((f) => f.endsWith(".css")).map((f) => [f, readFileSync(f, "utf8")]),
+  ...[...readFileSync("index.html", "utf8").matchAll(/<style(?![^>]*id="ancien")[^>]*>([\s\S]*?)<\/style>/g)].map((m) => ["index.html <style>", m[1]])];
+for (const [f, css] of feuilles) {
+  const decl = css.replace(/\/\*[\s\S]*?\*\//g, "").replace(/@font-face\s*\{[^}]*\}/g, "")
+    .split(/[;{}]/).map((d) => d.trim()).filter((d) => /^[a-z][a-z-]*\s*:/.test(d));
+  for (const d of decl) {
+    const [prop, ...v] = d.split(":"), val = v.join(":");
+    if (/#[0-9a-f]{3,8}\b|\b(rgba?|hsla?|hwb|lab|lch|oklch|color-mix)\(|\b(white|black|red|blue|purple|indigo|violet|slateblue|gray|grey)\b/i.test(val)) erreurs.push(`${f} : couleur en dur hors des jetons (${d}).`);
+    if (/^font(-size)?$/.test(prop.trim()) && /\d(px|pt|rem|em)\b/.test(val) && !/var\(--t-/.test(val)) erreurs.push(`${f} : taille de police en dur hors des jetons (${d}).`);
+    if (/^border(-[a-z-]+)?-radius$/.test(prop.trim()) && val.match(/(\d+(\.\d+)?)px/g)?.some((x) => parseFloat(x) > 2)) erreurs.push(`${f} : angle arrondi au-delà de 2 px (${d}).`);
+    if (/^(box-shadow|text-shadow|backdrop-filter)$/.test(prop.trim()) || /\bblur\(|(?<!repeating-)linear-gradient|radial-gradient|conic-gradient/.test(val)) erreurs.push(`${f} : effet interdit par la charte (${d}).`);
+    if (/\b(Inter|Roboto|Poppins|Montserrat|Space Grotesk|system-ui|-apple-system|Segoe UI)\b/.test(val)) erreurs.push(`${f} : police interdite par la charte (${d}).`);
+  }
+}
+if (existsSync("assets/factotum.css")) erreurs.push(...verifierContrastes("assets/factotum.css").erreurs);
 
 // ---------- Lieux ----------
 const lieux = lire("data/lieux.json") || {};
