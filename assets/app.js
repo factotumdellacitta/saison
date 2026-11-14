@@ -41,14 +41,68 @@ const saisonTxt = (d) => "Saison " + saisonDe(d).court;
 // La clé F (assets/logo.svg) : passe-partout incliné à 45°, panneton en F. Ne jamais la redresser ni l’animer.
 const CLE_F = '<g transform="translate(24 24) rotate(45) scale(.88) translate(-23.5 -25)"><rect x="18" y="5" width="5" height="25"/><rect x="18" y="5" width="17" height="5"/><rect x="18" y="14" width="12" height="5"/><circle cx="20.5" cy="36" r="6.5" fill="none" stroke="currentColor" stroke-width="5"/></g>';
 const cleF = (cls = "cle", px) => `<svg class="${cls}" viewBox="0 0 48 48" fill="currentColor" aria-hidden="true" focusable="false"${px ? ` width="${px}" height="${px}"` : ""}>${CLE_F}</svg>`;
-const THEMES = ["auto", "light", "dark"], THEME_TXT = { auto: "auto", light: "clair", dark: "sombre" };
+/* Icônes Factotum : trait 2 px sur une grille de 24, extrémités carrées, angles vifs, en encre (jamais en rouge sur fond clair).
+   Elles remplacent un mot (le libellé reste pour l’accessibilité) ou accompagnent le genre ; jamais décoratives. */
+const ICO = {
+  "Théâtre": "<path d=\"M13 7.5V3h9.5v5.5A4.75 4.75 0 0 1 15 12.37M15 6.3l1.6-.8M20.5 6.3l-1.6-.8M16 10a3 3 0 0 1 3.5 0\" stroke-linecap=\"butt\"/><path d=\"M1.5 10H12v4.5a5.25 5.25 0 0 1-10.5 0z\"/><path d=\"M3.9 12.4h2M7.6 12.4h2M4.75 15.2a3 3 0 0 0 4 0\" stroke-linecap=\"butt\"/>",
+  "Opéra": "<path d=\"M3 21h18M5 21V12h14v9M9 12v9M12 12v9M15 12v9M4 12h16M6 12a6 6 0 0 1 12 0M12 6V3\"/>",
+  "Danse": "<path d=\"M3 16c0-1.7 1.3-3 3-3h5c3.5 0 7 1.8 10 4v3H6.5C4.6 20 3 18.4 3 16.5z\"/><path d=\"M7 13 12 4M11 13 6 4\" stroke-linecap=\"butt\"/>",
+  "Comédie musicale": "<path d=\"M1.5 7H12v4.5a5.25 5.25 0 0 1-10.5 0z\"/><path d=\"M3.9 9.4h2M7.6 9.4h2M4.75 12.2a3 3 0 0 0 4 0\" stroke-linecap=\"butt\"/><path d=\"M18 16.94V3.5M18 3.5c0 3 3.4 3.5 3.4 7.5\" stroke-linecap=\"butt\"/><ellipse cx=\"16.4\" cy=\"17.4\" rx=\"2.7\" ry=\"1.95\" transform=\"rotate(-22 16.4 17.4)\" fill=\"currentColor\" stroke=\"none\"/>",
+  "Récital": "<path d=\"M4 3h5c0 7 11 6 11 13v5H4zM4 17h16M8 17v4M12 17v4M16 17v4\"/>",
+  "Concert": "<path d=\"M8 17.74V6.4l10-2v11.34\" stroke-linecap=\"butt\"/><ellipse cx=\"6.4\" cy=\"18.2\" rx=\"2.7\" ry=\"1.95\" transform=\"rotate(-22 6.4 18.2)\" fill=\"currentColor\" stroke=\"none\"/><ellipse cx=\"16.4\" cy=\"16.2\" rx=\"2.7\" ry=\"1.95\" transform=\"rotate(-22 16.4 16.2)\" fill=\"currentColor\" stroke=\"none\"/>",
+  "Festival": "<path d=\"M3.6 20 12 6.6 20.4 20M10 20l2-4.5 2 4.5M12 6.6V3\" stroke-linecap=\"butt\"/><path d=\"M12 2h4.5v3H12z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M2 20h20\"/>",
+  "Exposition": "<path d=\"M3 4h18v16H3zM7 8h10v8H7z\"/>",
+  "Cinéma": "<path d=\"M3 10h18v10H3zM3 5h18v5H3z\"/><path d=\"M9.5 5 7 10M15.5 5 13 10\" stroke-linecap=\"butt\"/>",
+  "Événement": "<path d=\"M7 3h10l-1 7a4 4 0 0 1-8 0zM12 14v6M8 21h8\"/>",
+  "Sur scène": "<path d=\"M12 2v3M8 5h8l-1 4H9zM9 9L5 20M15 9l4 11M3 21h18\"/>",
+  "Autre": "<circle cx=\"5\" cy=\"12\" r=\"1.5\" fill=\"currentColor\"/><circle cx=\"12\" cy=\"12\" r=\"1.5\" fill=\"currentColor\"/><circle cx=\"19\" cy=\"12\" r=\"1.5\" fill=\"currentColor\"/>",
+  "clair": "<circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1\"/>",
+  "sombre": "<path d=\"M20 14.5A8.5 8.5 0 1 1 9.5 4 6.5 6.5 0 0 0 20 14.5z\"/>",
+  "auto": "<circle cx=\"12\" cy=\"12\" r=\"8\"/><path d=\"M12 4a8 8 0 0 1 0 16z\" fill=\"currentColor\"/>",
+  "cadenas": "<path d=\"M5 11h14v10H5zM8 11V7a4 4 0 0 1 8 0v4\"/>",
+  "cadenas-ouvert": "<path d=\"M5 11h14v10H5zM8 11V7a4 4 0 0 1 7.5-2\"/>",
+  "loupe": "<circle cx=\"10\" cy=\"10\" r=\"6\"/><path d=\"M14.5 14.5 21 21\"/>",
+  "liste": "<path d=\"M3 6h18M3 12h18M3 18h18\"/>",
+  "mois": "<path d=\"M3 5h18v16H3zM3 10h18M8 3v4M16 3v4\"/>",
+  "filtres": "<path d=\"M3 6h18M6 12h12M10 18h4\"/>",
+  "tri": "<path d=\"M7 4v16M3 16l4 4 4-4M17 20V4M13 8l4-4 4 4\"/>",
+  "prec": "<path d=\"M15 4l-8 8 8 8\"/>",
+  "suiv": "<path d=\"M9 4l8 8-8 8\"/>",
+  "fermer": "<path d=\"M5 5l14 14M19 5 5 19\"/>",
+  "partager": "<path d=\"M12 3v12M7 8l5-5 5 5M5 12v9h14v-9\"/>",
+  "billet": "<path d=\"M3 7h18v3a2 2 0 0 0 0 4v3H3v-3a2 2 0 0 0 0-4z\"/><path d=\"M15 7.5v9\" stroke-dasharray=\"1.5 1.5\" stroke-linecap=\"butt\"/>",
+  "externe": "<path d=\"M14 4h6v6M20 4l-9 9M18 14v6H4V6h6\"/>",
+  "lieu": "<path d=\"M12 21s-7-7-7-12a7 7 0 0 1 14 0c0 5-7 12-7 12z\"/><circle cx=\"12\" cy=\"9\" r=\"2.5\"/>",
+  "horaires": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 7v5l3 3\"/>",
+  "stats": "<path d=\"M5 21V12M12 21V4M19 21v-9\"/>",
+  "ventes": "<path d=\"M6 17v-6a6 6 0 0 1 12 0v6M4 17h16M10 21h4\"/>",
+};
+const ico = (n, cls) => ICO[n] ? `<svg class="pi${cls ? " " + cls : ""}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true" focusable="false">${ICO[n]}</svg>` : "";
+const genreIco = (e, cls) => ico(CATS.includes(e.categorie) ? e.categorie : "Autre", cls);
+const THEMES = ["auto", "light", "dark"], THEME_TXT = { auto: "Auto", light: "Clair", dark: "Sombre" }, THEME_ICO = { auto: "auto", light: "clair", dark: "sombre" };
 const themeLu = () => { try { const t = localStorage.getItem("factotum-theme"); return THEMES.includes(t) ? t : "auto"; } catch (_) { return "auto"; } };
 function themePose(t) {
   if (t === "auto") delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = t;
   try { if (t === "auto") localStorage.removeItem("factotum-theme"); else localStorage.setItem("factotum-theme", t); } catch (_) {}
-  $$("[data-theme-btn]").forEach((b) => { b.textContent = "Thème : " + THEME_TXT[t]; });
+  $$("[data-theme-btn]").forEach((b) => { b.innerHTML = ico(THEME_ICO[t]); b.setAttribute("aria-label", "Thème : " + THEME_TXT[t].toLowerCase()); });
+  $$("[data-theme-set]").forEach((b) => b.setAttribute("aria-checked", String(b.dataset.themeSet === t)));
 }
-const themeBouton = () => `<button class="theme" type="button" data-theme-btn>Thème : ${THEME_TXT[themeLu()]}</button>`;
+// Bouton du thème : l’icône montre le réglage en cours ; un appui ouvre le menu Auto / Clair / Sombre.
+const themeBouton = () => { const t = themeLu(); return `<span class="tm"><button class="theme ic" type="button" data-theme-btn aria-haspopup="menu" aria-expanded="false" aria-label="Thème : ${THEME_TXT[t].toLowerCase()}">${ico(THEME_ICO[t])}</button></span>`; };
+function themeFerme() { $$(".tmenu").forEach((m) => { const b = m.parentElement.querySelector("[data-theme-btn]"); m.remove(); if (b) b.setAttribute("aria-expanded", "false"); }); }
+function themeMenu(b) {
+  const box = b.parentElement, ouvert = box.querySelector(".tmenu");
+  themeFerme(); if (ouvert) return;
+  const t = themeLu(), m = document.createElement("div");
+  m.className = "tmenu"; m.setAttribute("role", "menu"); m.setAttribute("aria-label", "Thème");
+  m.innerHTML = THEMES.map((k) => `<button type="button" role="menuitemradio" aria-checked="${k === t}" data-theme-set="${k}">${ico(THEME_ICO[k])}${THEME_TXT[k]}</button>`).join("");
+  box.appendChild(m); b.setAttribute("aria-expanded", "true");
+  m.querySelector('[aria-checked="true"]').focus();
+}
+// Champ de recherche à loupe : « Rechercher », sans phrase d’exemple.
+const rech = (id, lab, val = "") => `<label class="rech flex1">${ico("loupe")}<input type="search" id="${id}" placeholder="Rechercher" aria-label="${lab}" value="${esc(val)}" enterkeyhint="search" autocomplete="off"></label>`;
+// Note en carrés pour les puces de filtre (« 3 et + »).
+const carres = (n, plus) => `<span class="st" aria-hidden="true">${[1, 2, 3, 4].map((i) => `<i${i <= n ? ' class="on"' : ""}></i>`).join("")}</span>${plus ? "+" : ""}`;
 function toast(t) { const el = $("#toast"); el.textContent = t; el.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove("show"), 2600); }
 const getJSON = (u, o) => fetch(u, o).then((r) => { if (!r.ok) throw new Error(u); return r.json(); });
 
@@ -169,18 +223,18 @@ function texteDe(e) {
 const cherche = (e, q) => { const t = normQ(q).trim(); if (!t) return true; const x = texteDe(e); return t.split(/\s+/).every((m) => x.includes(m)); };
 const genre = (e) => e.categorie + (e.sousGenre ? " (" + e.sousGenre.toLowerCase() + ")" : "");
 function rowA(e) {
-  const meta = [court(e.lieuId), genre(e), e.horaires && e.horaires.length <= 40 ? e.horaires : ""].filter(Boolean).join(" · "), art = artLigne(e);
+  const meta = [genre(e), court(e.lieuId), e.horaires && e.horaires.length <= 40 ? e.horaires : ""].filter(Boolean).join(" · "), art = artLigne(e);
   return `<article class="row" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${esc(e.id)}">${stubHTML(e)}
-  <span class="mid"><span class="tt nom">${esc(e.titre)}</span>${art ? `<span class="art nom">${esc(art)}</span>` : ""}<span class="ss">${esc(meta)}</span></span></button>
+  <span class="mid"><span class="tt nom">${esc(e.titre)}</span>${art ? `<span class="art nom">${esc(art)}</span>` : ""}<span class="ss">${genreIco(e)}${esc(meta)}</span></span></button>
   <span class="end">${stars(e.note, e.pronostic)}${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}${badges(e)}</span><div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
 }
 function rowJ(e) {
   const n = (e.vuLe || []).length;
-  const meta = [court(e.lieuId), genre(e), n > 1 ? `vu ${n} fois : ${e.vuLe.map((d) => fmtY(D(d))).join(", ")}` : ""].filter(Boolean).join(" · ");
+  const meta = [genre(e), court(e.lieuId), n > 1 ? `vu ${n} fois : ${e.vuLe.map((d) => fmtY(D(d))).join(", ")}` : ""].filter(Boolean).join(" · ");
   // Admin : les personnes venues avec moi, en label sur la ligne.
   const jp = PRIVE && ADMIN && PRIVE.journalPrive ? PRIVE.journalPrive[e.id] : null, acc = jp ? [...new Set(jp.accompagnants || [])] : [];
   return `<article class="row" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${esc(e.id)}">${stubHTML(e, "vu")}
-  <span class="mid"><span class="tt nom">${esc(e.titre)}</span>${e.avis ? `<span class="art">« ${esc(e.avis)} »</span>` : artLigne(e) ? `<span class="art nom">${esc(artLigne(e))}</span>` : ""}<span class="ss">${esc(meta)}</span></span>
+  <span class="mid"><span class="tt nom">${esc(e.titre)}</span>${e.avis ? `<span class="art">« ${esc(e.avis)} »</span>` : artLigne(e) ? `<span class="art nom">${esc(artLigne(e))}</span>` : ""}<span class="ss">${genreIco(e)}${esc(meta)}</span></span>
   <span class="end">${e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : ""}${acc.length ? `<span class="bds"><span class="b">avec ${esc(acc.join(", "))}</span></span>` : ""}</span></button><div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
 }
 function creditsHTML(e) {
@@ -202,21 +256,16 @@ function offresHTML(e) {
 }
 function actsHTML(e, details) {
   const b = booking(e), o = official(e);
-  return `<div class="acts">${b && e.statut !== "vu" ? `<a class="btn pri" href="${esc(b)}" target="_blank" rel="noopener">Réserver</a>` : ""}${o && (o !== b || e.statut === "vu") ? `<a class="btn" href="${esc(o)}" target="_blank" rel="noopener">${e.statut === "vu" ? "Page archivée" : "Site officiel"}</a>` : ""}<button class="btn" type="button" data-share="${esc(e.id)}">Partager</button>${details ? `<a class="btn" href="#sortie-${esc(e.id)}">Détails</a>` : ""}</div>`;
-}
-function placeHTML(e) {
-  const L = lieu(e);
-  const nom = e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "Lieu à préciser";
-  return [nom + (e.salle ? ", " + esc(e.salle) : "") + (L.zone && L.zone !== "Paris" ? ` (${esc(L.ville || L.zone)})` : ""), e.statut === "vu" ? "" : esc(range(e)), esc(e.horaires || "")].filter(Boolean).join(" · ");
+  return `<div class="acts">${b && e.statut !== "vu" ? `<a class="btn pri" href="${esc(b)}" target="_blank" rel="noopener">${ico("billet")}Réserver</a>` : ""}${o && (o !== b || e.statut === "vu") ? `<a class="btn" href="${esc(o)}" target="_blank" rel="noopener">${ico("externe")}${e.statut === "vu" ? "Page archivée" : "Site officiel"}</a>` : ""}${details ? `<a class="btn" href="#sortie-${esc(e.id)}">Détails</a><button class="btn ico" type="button" data-share="${esc(e.id)}" aria-label="Partager">${ico("partager")}</button>` : ""}</div>`;
 }
 function detHTML(e) {
   const c = creditsHTML(e);
   // Journal : en admin, la fiche se modifie directement sous la ligne ; sinon, détail public déroulé.
   if (e.statut === "vu") {
     if (PRIVE && ADMIN) return ADMIN.journalForm(e);
-    return `${c ? `<p class="cr">${c}</p>` : ""}<p class="pl">${placeHTML(e)}</p><p class="cr">Vu le ${(e.vuLe || []).map((d) => fmtY(D(d), true)).join(", ")}</p>${e.avis ? `<blockquote>${esc(e.avis)}</blockquote>` : ""}${actsHTML(e, false)}`;
+    return `${c ? `<p class="cr">${c}</p>` : ""}${e.avis ? `<blockquote>${esc(e.avis)}</blockquote>` : ""}${actsHTML(e, true)}`;
   }
-  return `${c ? `<p class="cr">${c}</p>` : ""}<p class="pl">${placeHTML(e)}</p>${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${offresHTML(e)}${actsHTML(e, true)}`;
+  return `${c ? `<p class="cr">${c}</p>` : ""}${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${offresHTML(e)}${actsHTML(e, true)}`;
 }
 
 /* ---------- Calendriers ---------- */
@@ -228,7 +277,7 @@ function monthGrid(y, m, cellFn) {
   return h + "</div>";
 }
 function ficheCal(e) {
-  const p = span(e); if (!p) return '<p class="empty">Les dates ne sont pas encore connues.</p>';
+  const p = span(e); if (!p) return '<p class="empty">Dates inconnues.</p>';
   const offers = new Set((e.offres || []).map((o) => o.date).filter(Boolean));
   const st = p[0] < TODAY ? TODAY : p[0];
   let h = "", n = 0;
@@ -240,8 +289,8 @@ function ficheCal(e) {
       return `<div class="${cls}" role="img" aria-label="${lab}"><span class="n" aria-hidden="true">${d.getDate()}</span></div>`;
     }) + "</div>";
   }
-  return `<div class="mini-wrap">${h}</div><div class="legend"><span class="l-joue">Se joue, ${OWNER} libre</span><span class="l-pris">${OWNER} pris</span><span class="l-offre">Offre jeune</span><span class="l-auj">Aujourd’hui</span></div>
-  <p class="aide">${e.relaches ? "Relâches connues retirées du calendrier" : "Relâches non renseignées"} : en cas de doute, vérifie le calendrier du lieu.</p>`;
+  return `<div class="mini-wrap">${h}</div><div class="legend"><span class="l-joue">Libre</span><span class="l-pris">Pris</span><span class="l-offre">Offre jeune</span><span class="l-auj">Aujourd’hui</span></div>
+  ${e.relaches ? "" : '<p class="aide">Relâches non renseignées.</p>'}`;
 }
 
 /* ---------- Filtres de l’affiche (état dans l’URL) ---------- */
@@ -334,27 +383,26 @@ function renderAffiche(q) {
   const chip = (g, v, t, extra = "") => `<button class="chip" type="button" data-g="${g}" data-v="${esc(v)}" aria-pressed="false"${extra}>${t}</button>`;
   $("#main").innerHTML = `<section id="aff"><h1 class="vh">À l’affiche</h1>
   ${PRIVE && ADMIN ? '<div class="acts acts-haut"><button class="btn pri" type="button" data-adm="ajouter">+ Ajouter un spectacle</button></div>' : ""}
-  <div class="tools"><input type="search" id="aq" class="flex1" placeholder="Rechercher un titre, un artiste, un lieu…" aria-label="Rechercher à l’affiche" value="${esc(F.q)}" enterkeyhint="search" autocomplete="off"></div>
+  <div class="tools">${rech("aq", "Rechercher à l’affiche", F.q)}</div>
   <div class="frise" role="group" aria-label="Les 14 prochains jours">${frise}</div>
-  <div class="tools"><div class="seg" role="group" aria-label="Affichage"><button type="button" data-vue="liste" aria-pressed="true">Liste</button><button type="button" data-vue="mois" aria-pressed="false">Mois</button></div>
+  <div class="tools"><div class="seg" role="group" aria-label="Affichage"><button class="i" type="button" data-vue="liste" aria-pressed="true" aria-label="Liste">${ico("liste")}</button><button class="i" type="button" data-vue="mois" aria-pressed="false" aria-label="Mois">${ico("mois")}</button></div>
     <div class="chips defile" role="group" aria-label="Raccourcis">${Object.entries(RAC).map(([k, t]) => chip("rac", k, t)).join("")}${chip("libre", "1", "Libre ce soir-là")}</div></div>
-  <div class="fbar"><div class="chips defile" role="group" aria-label="Filtres">
-    <button class="chip" type="button" data-panel="pCat" aria-expanded="false" aria-controls="pCat">Catégorie <span id="nCat"></span></button>
-    ${chip("note", "2", "Note 2 et +")}${chip("note", "3", "Note 3 et +")}${chip("note", "4", "Note 4")}<span class="sep" aria-hidden="true"></span>
+  <div class="fbar"><div class="chips defile" role="group" aria-label="Genres">${cats.map((c) => chip("cat", slug(c), ico(c) + esc(c))).join("")}</div>
+    <div class="chips defile" role="group" aria-label="Filtres">
+    ${chip("note", "2", carres(2, true), ' aria-label="Note 2 et plus"')}${chip("note", "3", carres(3, true), ' aria-label="Note 3 et plus"')}${chip("note", "4", carres(4), ' aria-label="Note 4"')}<span class="sep" aria-hidden="true"></span>
     ${chip("zone", "paris", "Paris")}${chip("zone", "pc", "Petite couronne")}<span class="sep" aria-hidden="true"></span>
     ${chip("statut", "public", "Public")}${chip("statut", "prive", "Privé")}<span class="sep" aria-hidden="true"></span>
     ${chip("jeune", "1", "Public jeune")}${chip("offre", "1", "Offre jeune")}${chip("yva", "1", OWNER + " y va")}
-    <button class="chip" type="button" data-panel="pPlus" aria-expanded="false" aria-controls="pPlus">Plus de filtres</button></div>
-    <div class="fpanel" id="pCat" hidden><div class="chips wrap-ok" role="group" aria-label="Catégories">${cats.map((c) => chip("cat", slug(c), esc(c))).join("")}</div></div>
+    <button class="chip i" type="button" data-panel="pPlus" aria-expanded="false" aria-controls="pPlus" aria-label="Plus de filtres">${ico("filtres")}</button></div>
     <div class="fpanel" id="pPlus" hidden><div class="row2">
       <label class="f"><span>Lieu</span><select id="fLieu"><option value="">Tous les lieux</option>${lieux.map((l) => `<option value="${esc(l)}">${esc(court(l))}</option>`).join("")}</select></label>
       <label class="f"><span>Période</span><select id="fPer"><option value="">Toute la saison</option><option value="30">30 prochains jours</option>${months.map(([v, t]) => `<option value="${v}">${t}</option>`).join("")}</select></label></div></div>
     <div class="active" id="active" aria-live="polite"></div></div>
   <div id="monthBox"></div>
-  <details class="box" id="ventes"><summary>Ventes à venir <span class="ml" id="vNext"></span></summary><ul class="vl" id="vList"></ul></details>
+  <details class="box" id="ventes"><summary>${ico("ventes")}Ventes <span class="ml" id="vNext"></span></summary><ul class="vl" id="vList"></ul></details>
   <div id="alist" class="list"></div></section>`;
   const ve = prochainesVentes(5);
-  $("#vNext").textContent = ve.length ? "prochaine : " + venteTxt(ve[0].o) : "aucune";
+  $("#vNext").textContent = ve.length ? venteTxt(ve[0].o) : "aucune";
   $("#vList").innerHTML = ve.map(({ e, o }) => `<li><a href="#sortie-${esc(e.id)}"><span class="vd">${venteTxt(o)}</span><span class="vt"><b>${esc(e.titre)}</b> <span>· ${esc(o.type)}${o.tarif ? ", " + esc(o.tarif) : ""}</span></span></a></li>`).join("") || `<li><span class="cr">Aucune ouverture connue.</span></li>`;
   const m = $("#aff");
   m.querySelector(".frise").onclick = (ev) => { const b = ev.target.closest("[data-jour]"); if (b) setF((f) => { f.jour = f.jour === b.dataset.jour ? "" : b.dataset.jour; f.rac = ""; }); };
@@ -389,7 +437,6 @@ function updateAffiche() {
   });
   m.querySelectorAll(".fd").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.jour === f.jour)));
   m.querySelectorAll("[data-vue]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.vue === f.vue)));
-  $("#nCat").textContent = f.cat.size ? "(" + f.cat.size + ")" : "";
   $("#fLieu").value = f.lieu; $("#fPer").value = f.per;
   const aq = $("#aq"); if (aq && document.activeElement !== aq && aq.value !== f.q) aq.value = f.q;
   m.querySelector(".frise").hidden = f.vue === "mois";
@@ -397,12 +444,12 @@ function updateAffiche() {
   let items = LIVE.filter((e) => matchA(e, f, f.vue === "mois" && !f.jour));
   if (f.vue === "mois" && !f.jour) { const c = monthCursor(f); items = items.filter((e) => overlaps(e, c, new Date(c.getFullYear(), c.getMonth() + 1, 0))); }
   const act = activeList(f);
-  $("#active").innerHTML = `<span class="n">${plural(items.length, "sortie")}</span>${act.map((a) => `<button class="chip on" type="button" data-rm="${a.k}" data-v="${esc(a.v)}" aria-label="Retirer le filtre ${esc(a.t)}">${esc(a.t)}<span class="x" aria-hidden="true">×</span></button>`).join("")}${act.length ? `<button class="chip effacer" type="button" id="clear">Tout effacer</button>` : ""}<button class="linkbtn ml" type="button" id="tri" title="Changer le tri">Tri : ${f.tri === "note" ? "note" : "date"}</button>`;
+  $("#active").innerHTML = `<span class="n">${plural(items.length, "sortie")}</span>${act.map((a) => `<button class="chip on" type="button" data-rm="${a.k}" data-v="${esc(a.v)}" aria-label="Retirer le filtre ${esc(a.t)}">${esc(a.t)}<span class="x" aria-hidden="true">×</span></button>`).join("")}${act.length ? `<button class="chip effacer" type="button" id="clear">Tout effacer</button>` : ""}<button class="linkbtn ml tri" type="button" id="tri" aria-label="Tri par ${f.tri === "note" ? "note" : "date"}, changer">${ico("tri")}${f.tri === "note" ? "Note" : "Date"}</button>`;
   $("#active").onclick = (ev) => {
     const r = ev.target.closest("[data-rm]");
     if (r) return setF((x) => { const k = r.dataset.rm; if (x[k] instanceof Set) x[k].delete(r.dataset.v); else x[k] = typeof x[k] === "boolean" ? false : typeof x[k] === "number" ? 0 : ""; });
     if (ev.target.id === "clear") return setF((x) => { const keep = { vue: x.vue, mois: x.mois, tri: x.tri }; Object.assign(x, parseF(""), keep); });
-    if (ev.target.id === "tri") setF((x) => { x.tri = x.tri === "note" ? "date" : "note"; });
+    if (ev.target.closest("#tri")) setF((x) => { x.tri = x.tri === "note" ? "date" : "note"; });
   };
   // Mois
   $("#monthBox").innerHTML = f.vue === "mois" ? monthHTML(f) : "";
@@ -417,14 +464,14 @@ function updateAffiche() {
   const L = $("#alist"), w = window_(f);
   const byDate = (a, b) => sortKey(a) - sortKey(b) || a.titre.localeCompare(b.titre, "fr");
   let html = "";
-  if (f.jour) { const d = D(f.jour); html += `<h2 class="jour">${cap(fmt(d, true))} ${d.getFullYear()}${BUSY.has(f.jour) ? ` <small>${OWNER} est pris ce soir-là</small>` : ""}</h2>`; }
-  if (!items.length) html += `<p class="empty">Aucune sortie ne correspond. Retire un filtre ou élargis la période.</p>`;
+  if (f.jour) { const d = D(f.jour); html += `<h2 class="jour">${cap(fmt(d, true))} ${d.getFullYear()}${BUSY.has(f.jour) ? ` <small>Pris</small>` : ""}</h2>`; }
+  if (!items.length) html += `<p class="empty">Aucune sortie.</p>`;
   else if (f.tri === "note" || w) html += items.sort((a, b) => b.note - a.note || byDate(a, b)).map(rowA).join("");
   else {
     items.sort(byDate); let last = null;
     for (const e of items) {
       const g = groupOf(e);
-      if (g !== last) { html += `<h2 class="jour">${g} <small>${plural(items.filter((x) => groupOf(x) === g).length, "sortie")}</small></h2>`; last = g; }
+      if (g !== last) { html += `<h2 class="jour">${g}</h2>`; last = g; }
       html += rowA(e);
     }
   }
@@ -442,11 +489,11 @@ function monthHTML(f) {
   const base = LIVE.filter((e) => matchA(e, f, true));
   const prem = new Set(), offs = new Set();
   base.forEach((e) => { if (e.note >= 3 && e.debut) prem.add(e.debut); (e.offres || []).forEach((o) => o.date && offs.add(o.date)); });
-  return `<div class="cal"><div class="calh"><button class="btn" type="button" data-mnav="-1" aria-label="Mois précédent">Préc.</button><h2>${MOIS_L[m]} ${y}</h2><button class="btn" type="button" data-mnav="1" aria-label="Mois suivant">Suiv.</button></div>` +
+  return `<div class="cal"><div class="calh"><button class="btn ico" type="button" data-mnav="-1" aria-label="Mois précédent">${ico("prec")}</button><h2>${MOIS_L[m]} ${y}</h2><button class="btn ico" type="button" data-mnav="1" aria-label="Mois suivant">${ico("suiv")}</button></div>` +
     monthGrid(y, m, (d) => {
       const k = iso(d), busy = BUSY.has(k), n = base.filter((e) => e.note >= 3 && playsOn(e, d)).length;
       return `<button type="button" class="cell${busy ? " busy" : ""}${+d === +TODAY ? " today" : ""}${d < TODAY ? " past" : ""}${offs.has(k) ? " of" : ""}" data-day="${k}" aria-pressed="${f.jour === k}"><span class="n">${d.getDate()}</span><span class="vh"> ${MOIS[m]}${busy ? `, ${OWNER} pris` : ""}, </span>${n ? `<span class="nb">${n}</span><span class="vh"> ${n > 1 ? "sorties" : "sortie"} notées 3 ou plus</span>` : ""}${prem.has(k) ? '<span class="vh">, une première</span>' : ""}${offs.has(k) ? '<span class="vh">, une offre jeune</span>' : ""}</button>`;
-    }) + `<div class="legend"><span class="l-nb">Chiffre : sorties notées 3 et plus</span><span class="l-pris">${OWNER} pris</span><span class="l-offre">Offre jeune</span><span class="l-auj">Aujourd’hui</span></div></div>`;
+    }) + `<div class="legend"><span class="l-nb">Chiffre : notées 3 et +</span><span class="l-pris">Pris</span><span class="l-offre">Offre jeune</span><span class="l-auj">Aujourd’hui</span></div></div>`;
 }
 
 /* ---------- Fiche ---------- */
@@ -456,21 +503,20 @@ async function openSheet(id) {
   if (!e) { try { await loadJournal(); } catch (_) {} e = BYID.get(id); }
   const box = $("#sheetIn");
   if (!e) {
-    box.innerHTML = `<div class="shtop"><button class="btn" type="button" data-close>Fermer</button><span class="k"></span></div><h2 id="sheetT" class="mh">Sortie introuvable</h2><p class="empty">Cette fiche n’existe plus ou a changé d’adresse.</p>`;
+    box.innerHTML = `<div class="shtop"><button class="btn ico" type="button" data-close aria-label="Fermer">${ico("fermer")}</button><span class="k"></span></div><h2 id="sheetT" class="mh">Sortie introuvable</h2><p class="empty">Cette fiche n’existe plus ou a changé d’adresse.</p>`;
   } else {
     const vu = e.statut === "vu", L = lieu(e), c = creditsHTML(e);
-    box.innerHTML = `<div class="shtop"><button class="btn" type="button" data-close>Fermer</button><span class="k">${esc([e.categorie, e.sousGenre].filter(Boolean).join(" · "))}${L.nom ? " · " + esc(court(e.lieuId)) : ""}</span><button class="btn" type="button" data-share="${esc(e.id)}">Partager</button></div>
-    <div class="shh"><span class="meta">${esc(vu ? "Vu le " + (e.vuLe || []).map((d) => fmtY(D(d))).join(", ") : range(e))}</span><h2 id="sheetT" class="nom">${esc(e.titre)}</h2>
-      <div class="ligne">${!vu && e.note ? stars(e.note, e.pronostic) + (e.pronostic ? ' <span class="ss">prévision, pas encore critiqué</span>' : "") : ""}${vu && e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : ""}${badges(e)}</div></div>
+    box.innerHTML = `<div class="shtop"><button class="btn ico" type="button" data-close aria-label="Fermer">${ico("fermer")}</button><span class="k">${esc([e.categorie, e.sousGenre].filter(Boolean).join(" · "))}${L.nom ? " · " + esc(court(e.lieuId)) : ""}</span><button class="btn ico" type="button" data-share="${esc(e.id)}" aria-label="Partager">${ico("partager")}</button></div>
+    <div class="shh"><span class="meta">${esc(vu ? "Vu le " + (e.vuLe || []).map((d) => fmtY(D(d), true)).join(", ") : range(e))}</span><div class="tit">${genreIco(e, "g")}<h2 id="sheetT" class="nom">${esc(e.titre)}</h2></div>
+      <div class="ligne">${!vu && e.note ? stars(e.note, e.pronostic) : ""}${vu && e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : ""}${badges(e)}</div></div>
     ${c ? `<p class="cr">${c}</p>` : ""}
-    <dl class="dl"><dt>Lieu</dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}${L.ville && L.ville !== "Paris" ? " (" + esc(L.ville) + ")" : ""}</dd>
-    ${vu ? `<dt>Vu le</dt><dd>${(e.vuLe || []).map((d) => fmtY(D(d), true)).join(", ")}</dd>` : `<dt>Dates</dt><dd>${esc(range(e))}</dd>`}
-    ${e.horaires ? `<dt>Horaires</dt><dd>${esc(e.horaires)}</dd>` : ""}
+    <dl class="dl"><dt>${ico("lieu")}<span class="vh">Lieu</span></dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}${L.ville && L.ville !== "Paris" ? " (" + esc(L.ville) + ")" : ""}</dd>
+    ${e.horaires ? `<dt>${ico("horaires")}<span class="vh">Horaires</span></dt><dd>${esc(e.horaires)}</dd>` : ""}
     ${vu ? `<dt>Ma note</dt><dd>${e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : "pas de note"}</dd>${e.note ? `<dt>Grille</dt><dd>${stars(e.note, false, "Note de la grille")}</dd>` : ""}` : ""}</dl>
     ${vu && e.avis ? `<blockquote>${esc(e.avis)}</blockquote>` : ""}
     ${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}
     ${PRIVE && ADMIN ? ADMIN.ficheHTML(e) : ""}
-    ${vu ? actsHTML(e, false) : `${(e.offres || []).length || L.tarifJeune ? `<h3 class="sec">Offres et ventes</h3>${offresHTML(e)}` : ""}${actsHTML(e, false)}<h3 class="sec">Dates et disponibilités de ${OWNER}</h3>${ficheCal(e)}`}`;
+    ${vu ? actsHTML(e, false) : `${(e.offres || []).length || L.tarifJeune ? `<h3 class="sec">Offres</h3>${offresHTML(e)}` : ""}${actsHTML(e, false)}<h3 class="sec">Dates</h3>${ficheCal(e)}`}`;
   }
   const s = $("#sheet");
   if (s.hidden) { SHEET_FROM = document.activeElement; s.hidden = false; document.documentElement.style.overflow = "hidden"; }
@@ -499,7 +545,7 @@ document.addEventListener("keydown", (ev) => {
 });
 
 /* ---------- Journal ---------- */
-const saisonLib = (cle) => "Saison " + saisonDe(new Date(+cle, 9, 1)).court;
+const saisonCourt = (cle) => saisonDe(new Date(+cle, 9, 1)).court, saisonLib = (cle) => "Saison " + saisonCourt(cle);
 let JQ = ""; // recherche du journal (mémoire seulement)
 function renderJournal(q) {
   const p = new URLSearchParams(q || ""), L = (k) => new Set((p.get(k) || "").split(",").filter(Boolean));
@@ -513,13 +559,13 @@ function renderJournal(q) {
   const avec = JAVEC ? ADMIN.idsAvec(JAVEC) : null;
   const items = parSaison.filter((e) => (!f.cat.size || f.cat.has(slug(e.categorie))) && (!f.mn.size || f.mn.has(String(e.noteLeonard || 0))) && (!avec || avec.has(e.id)));
   items.sort(f.tri === "note" ? (a, b) => (b.noteLeonard || 0) - (a.noteLeonard || 0) || last(b).localeCompare(last(a)) : (a, b) => last(b).localeCompare(last(a)) || a.titre.localeCompare(b.titre, "fr"));
-  const chip = (g, v, t, on = f[g].has(v)) => `<a class="chip" href="#journal?${esc(jq(f, g, v))}" data-k="${g}-${esc(v)}" aria-pressed="${on}" role="button">${t}</a>`;
+  const chip = (g, v, t, on = f[g].has(v), lab) => `<a class="chip" href="#journal?${esc(jq(f, g, v))}" data-k="${g}-${esc(v)}" aria-pressed="${on}" role="button"${lab ? ` aria-label="${esc(lab)}"` : ""}>${t}</a>`;
   const draw = () => {
     const vis = JQ.trim() ? items.filter((e) => cherche(e, JQ)) : items;
     let list = "", lastS = "";
     for (const e of vis) {
       const sa = sOf(e);
-      if (f.tri === "date" && sa !== lastS) { list += `<h2 class="jour">${saisonLib(sa)} <small>${plural(vis.filter((x) => sOf(x) === sa).length, "sortie")}</small></h2>`; lastS = sa; }
+      if (f.tri === "date" && sa !== lastS) { list += `<h2 class="jour">${saisonLib(sa)}</h2>`; lastS = sa; }
       list += rowJ(e);
     }
     $("#jlist").innerHTML = list || `<p class="empty">Aucune sortie ne correspond${JQ.trim() ? " à « " + esc(JQ.trim()) + " »" : ""}.</p>`;
@@ -527,14 +573,14 @@ function renderJournal(q) {
   };
   const nAct = f.cat.size + f.sa.size + f.mn.size;
   const accSel = PRIVE && ADMIN ? ADMIN.accSelectHTML(JAVEC) : "";
-  const libS = f.sa.size === 1 ? saisonLib([...f.sa][0]) : f.sa.size ? plural(f.sa.size, "saison") : "Toutes les saisons";
-  $("#main").innerHTML = `<div class="ph"><h1>Journal</h1><p>${plural(all.length, "sortie vue", "sorties vues")} par ${OWNER}${JMAJ ? ", à jour au " + fmtY(D(JMAJ)) : ""}</p></div>
+  const libS = f.sa.size === 1 ? saisonCourt([...f.sa][0]) : f.sa.size ? plural(f.sa.size, "saison") : "Toutes";
+  $("#main").innerHTML = `<div class="ph"><h1>Journal</h1></div>
   ${PRIVE && ADMIN ? '<div class="acts acts-haut"><button class="btn pri" type="button" data-adm="journal">+ Entrée au journal</button></div>' : ""}
-  <div class="tools"><input type="search" id="jq" class="flex1" placeholder="Rechercher un titre, un artiste, un lieu, un avis…" aria-label="Rechercher dans le journal" value="${esc(JQ)}" enterkeyhint="search" autocomplete="off"></div>
-  <div class="chips" role="group" aria-label="Saison">${chip("sa", "*", "Toutes les saisons", !f.sa.size)}${saisons.map((y) => chip("sa", y, saisonLib(y))).join("")}</div>
-  <details class="box stats"><summary>Statistiques · ${esc(libS)}</summary>${statsHTML(parSaison, !f.sa.size)}</details>
-  <div class="fbar"><div class="chips defile" role="group" aria-label="Filtres du journal">${cats.map((c) => chip("cat", slug(c), esc(c))).join("")}<span class="sep" aria-hidden="true"></span>${[4, 3, 2, 1].map((n) => chip("mn", String(n), "Ma note " + n)).join("")}${chip("mn", "0", "Sans note")}</div>
-  <div class="active"><span class="n" id="jn" aria-live="polite"></span>${nAct ? `<a class="chip effacer" href="#journal${f.tri === "note" ? "?tri=note" : ""}">Tout effacer</a>` : ""}<a class="linkbtn ml" href="#journal?${esc(jq(f, "tri", f.tri === "note" ? "date" : "note"))}">Tri : ${f.tri === "note" ? "ma note" : "date"}</a></div>${accSel}</div>
+  <div class="tools">${rech("jq", "Rechercher dans le journal", JQ)}</div>
+  <div class="chips" role="group" aria-label="Saison">${chip("sa", "*", "Toutes", !f.sa.size)}${saisons.map((y) => chip("sa", y, saisonCourt(y), f.sa.has(y), saisonLib(y))).join("")}</div>
+  <details class="box stats"><summary>${ico("stats")}Statistiques · ${esc(libS)}</summary>${statsHTML(parSaison, !f.sa.size)}</details>
+  <div class="fbar"><div class="chips defile" role="group" aria-label="Filtres du journal">${cats.map((c) => chip("cat", slug(c), ico(c) + esc(c))).join("")}<span class="sep" aria-hidden="true"></span>${[4, 3, 2, 1].map((n) => chip("mn", String(n), carres(n), f.mn.has(String(n)), "Ma note " + n)).join("")}${chip("mn", "0", "Sans note")}</div>
+  <div class="active"><span class="n" id="jn" aria-live="polite"></span>${nAct ? `<a class="chip effacer" href="#journal${f.tri === "note" ? "?tri=note" : ""}">Tout effacer</a>` : ""}<a class="linkbtn ml tri" href="#journal?${esc(jq(f, "tri", f.tri === "note" ? "date" : "note"))}" aria-label="Tri par ${f.tri === "note" ? "ma note" : "date"}, changer">${ico("tri")}${f.tri === "note" ? "Ma note" : "Date"}</a></div>${accSel}</div>
   <div class="list" id="jlist"></div>`;
   draw();
   $("#jq").oninput = (ev) => { JQ = ev.target.value; draw(); };
@@ -572,7 +618,7 @@ let ALQ = "";
 function renderAL(which) {
   $("#main").innerHTML = `<div class="ph"><h1>Artistes et lieux</h1></div>
   <div class="tools"><nav class="seg" aria-label="Index"><a href="#artistes"${which === "artistes" ? ' aria-current="page"' : ""}>Artistes</a><a href="#lieux"${which === "lieux" ? ' aria-current="page"' : ""}>Lieux</a></nav>
-  <input type="search" id="alq" placeholder="Rechercher un nom" aria-label="Rechercher un ${which === "lieux" ? "lieu" : "artiste"}" value="${esc(ALQ)}" class="flex1" enterkeyhint="search" autocomplete="off"></div><div id="alist"></div>`;
+  ${rech("alq", "Rechercher un " + (which === "lieux" ? "lieu" : "artiste"), ALQ)}</div><div id="alist"></div>`;
   const draw = () => {
     const q = norm(ALQ).trim(); let h = "";
     if (which === "artistes") {
@@ -580,7 +626,7 @@ function renderAL(which) {
       const hit = A.filter((a) => !q || norm(a.nom).includes(q)).sort((a, b) => norm(a.nom).localeCompare(norm(b.nom)));
       const item = (a) => `<li><a href="#artiste-${a.slug}">${esc(a.nom)}<span>${n(a)}</span></a></li>`;
       const top = hit.filter((a) => n(a) >= 2).sort((a, b) => n(b) - n(a) || norm(a.nom).localeCompare(norm(b.nom)));
-      if (top.length && !q) h += `<h2 class="mh">Les plus présents <small>2 sorties ou plus</small></h2><ul class="idx">${top.map(item).join("")}</ul><h2 class="mh">Tous <small>${plural(hit.length, "artiste")}</small></h2>`;
+      if (top.length && !q) h += `<h2 class="mh">Les plus présents</h2><ul class="idx">${top.map(item).join("")}</ul><h2 class="mh">Tous <small>${hit.length}</small></h2>`;
       let L = "", ul = "";
       for (const a of hit) { const l = /[a-z]/.test(norm(a.nom)[0]) ? norm(a.nom)[0].toUpperCase() : "#"; if (l !== L) { ul += `${L ? "</ul>" : ""}<h3 class="letter">${l}</h3><ul class="idx">`; L = l; } ul += item(a); }
       h += ul ? ul + "</ul>" : '<p class="empty">Aucun artiste trouvé.</p>';
@@ -601,7 +647,7 @@ function renderArtiste(k) {
   if (!a) { $("#main").innerHTML = `<a class="back" href="#artistes">Artistes et lieux</a><p class="empty">Artiste inconnu.</p>`; return; }
   const aff = a.aff.filter((e) => !ended(e)).sort(byStart), vus = a.vus.slice().sort(byVu);
   $("#main").innerHTML = `<a class="back" href="#artistes">Artistes et lieux</a><div class="ph"><h1>${esc(a.nom)}</h1><p>${esc(cap(ROLES.filter((r) => a.roles.has(r)).join(", ")))} · ${plural(aff.length, "sortie")} à l’affiche, ${plural(vus.length, "vue", "vues")}</p></div>
-  <h2 class="mh">À l’affiche</h2><div class="list">${aff.map(rowA).join("") || '<p class="empty">Rien à l’affiche en ce moment.</p>'}</div>
+  <h2 class="mh">À l’affiche</h2><div class="list">${aff.map(rowA).join("") || '<p class="empty">Rien à l’affiche.</p>'}</div>
   <h2 class="mh">Vu</h2><div class="list">${vus.map(rowJ).join("") || '<p class="empty">Pas encore vu.</p>'}</div>`;
   document.title = a.nom + " – Factotum";
 }
@@ -613,15 +659,14 @@ function renderLieu(id) {
   const ext = (u, t) => u ? `<a href="${esc(u)}" target="_blank" rel="noopener">${t}</a>` : "";
   $("#main").innerHTML = `<a class="back" href="#lieux">Artistes et lieux</a><div class="ph"><h1>${esc(L.nom)}</h1><p>${esc([L.ville, L.zone !== L.ville ? L.zone : ""].filter(Boolean).join(", "))} · lieu ${L.statut === "Public" ? "public" : "privé"}</p></div>
   <dl class="dl inl">${L.tarifJeune ? `<dt>Tarif jeune</dt><dd>${esc(L.tarifJeune)}</dd>` : ""}${L.adresse ? `<dt>Adresse</dt><dd>${esc(L.adresse)}</dd>` : ""}${L.site ? `<dt>Site</dt><dd>${ext(L.site, esc(L.site.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")))}</dd>` : ""}${L.billetterie ? `<dt>Billetterie</dt><dd>${ext(L.billetterie, "Acheter des places")}</dd>` : ""}</dl>
-  <h2 class="mh">À l’affiche <small>${aff.length}</small></h2><div class="list">${aff.map(rowA).join("") || '<p class="empty">Rien à l’affiche ici en ce moment.</p>'}</div>
-  <h2 class="mh">Vu ici <small>${vus.length}</small></h2><div class="list">${vus.map(rowJ).join("") || '<p class="empty">Pas encore de sortie vue ici.</p>'}</div>`;
+  <h2 class="mh">À l’affiche <small>${aff.length}</small></h2><div class="list">${aff.map(rowA).join("") || '<p class="empty">Rien à l’affiche.</p>'}</div>
+  <h2 class="mh">Vu ici <small>${vus.length}</small></h2><div class="list">${vus.map(rowJ).join("") || '<p class="empty">Aucune.</p>'}</div>`;
   document.title = L.nom + " – Factotum";
 }
 
 /* ---------- Liens utiles ---------- */
 const icsURL = (k) => `webcal://${location.host}${location.pathname.replace(/[^/]*$/, "")}data/${k}-${PRIVE.icsToken}.ics`;
 const ORDRE_LIENS = ["Cartes et tarifs jeunes", "Calendriers de vente", "Billetteries", "Outils"];
-const INFO_LIENS = { "Cartes et tarifs jeunes": "Abonnements et offres pour les moins de 28 ans", "Calendriers de vente": "Programmations et ouvertures des ventes, lieu par lieu", Billetteries: "Acheter des places, par lieu", Outils: "" };
 const hote = (u) => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch (_) { return ""; } };
 // Liens rangés par rubrique, dans l’ordre du fichier à l’intérieur de chaque rubrique.
 const liensParRubrique = (L) => ORDRE_LIENS.map((c) => [c, L.filter((l) => l.categorie === c)]);
@@ -630,23 +675,23 @@ function renderCoeur() {
   const E = enviesIds();
   const items = AFF.filter((e) => e.statut === "a-voir" && !ended(e) && E.has(e.id)).sort((a, b) => sortKey(a) - sortKey(b) || a.titre.localeCompare(b.titre, "fr"));
   let html = "", last = null;
-  for (const e of items) { const g = groupOf(e); if (g !== last) { html += `<h2 class="jour">${g} <small>${plural(items.filter((x) => groupOf(x) === g).length, "sortie")}</small></h2>`; last = g; } html += rowA(e); }
-  $("#main").innerHTML = `<div class="ph"><h1>Envies</h1><p>Les sorties à l’affiche que ${OWNER} aimerait voir · ${plural(items.length, "sortie")}</p></div>
-  <div class="list">${html || `<p class="empty">Aucune envie notée pour le moment.</p>`}</div>`;
+  for (const e of items) { const g = groupOf(e); if (g !== last) { html += `<h2 class="jour">${g}</h2>`; last = g; } html += rowA(e); }
+  $("#main").innerHTML = `<div class="ph"><h1>Envies</h1><p>${plural(items.length, "sortie")}</p></div>
+  <div class="list">${html || `<p class="empty">Aucune envie.</p>`}</div>`;
 }
 function renderLiens() {
   const groups = liensParRubrique(LIENS).filter(([, l]) => l.length);
   const ve = prochainesVentes(8);
   const item = (x) => `<li data-q="${esc(norm(x.titre + " " + hote(x.url) + " " + (x.note || "")))}"><a href="${esc(x.url)}" target="_blank" rel="noopener"><span class="lt"><b>${esc(x.titre)}</b><small>${esc(hote(x.url))}${x.note ? " · " + esc(x.note) : ""}</small></span><span class="vh"> (nouvel onglet)</span></a></li>`;
-  const section = ([c, l]) => `<section class="lks" id="lk-${slug(c)}"><h2 class="mh">${esc(c)} <small>${l.length}</small></h2>${INFO_LIENS[c] ? `<p class="cr lkd">${esc(INFO_LIENS[c])}</p>` : ""}<ul class="lk${l.length > 6 ? " lk2" : ""}">${l.map(item).join("")}</ul></section>`;
-  const ventes = `<section class="lks" id="lk-ventes"><h2 class="mh">Prochaines ouvertures de ventes</h2><ul class="vl">${ve.map(({ e, o }) => `<li><a href="#sortie-${esc(e.id)}"><span class="vd">${venteTxt(o)}</span><span class="vt"><b>${esc(e.titre)}</b> <span>· ${esc(o.type)}</span></span></a></li>`).join("") || "<li class=\"cr\">Aucune ouverture connue.</li>"}</ul></section>`;
+  const section = ([c, l]) => `<section class="lks" id="lk-${slug(c)}"><h2 class="mh">${esc(c)} <small>${l.length}</small></h2><ul class="lk${l.length > 6 ? " lk2" : ""}">${l.map(item).join("")}</ul></section>`;
+  const ventes = `<section class="lks" id="lk-ventes"><h2 class="mh">Ventes à venir</h2><ul class="vl">${ve.map(({ e, o }) => `<li><a href="#sortie-${esc(e.id)}"><span class="vd">${venteTxt(o)}</span><span class="vt"><b>${esc(e.titre)}</b> <span>· ${esc(o.type)}</span></span></a></li>`).join("") || "<li class=\"cr\">Aucune ouverture connue.</li>"}</ul></section>`;
   const blocs = []; groups.forEach((g) => { blocs.push(section(g)); if (g[0] === "Calendriers de vente") blocs.push(ventes); });
   if (!groups.some(([c]) => c === "Calendriers de vente")) blocs.unshift(ventes);
-  $("#main").innerHTML = `<div class="ph"><h1>Liens utiles</h1><p>Cartes jeunes, calendriers de vente et billetteries des lieux suivis.</p></div>
-  <div class="tools"><input type="search" id="lkq" placeholder="Rechercher un lieu, une carte, un site…" aria-label="Rechercher un lien" class="flex1" enterkeyhint="search" autocomplete="off"></div>
-  <nav class="chips" aria-label="Rubriques">${groups.map(([c, l]) => `<button class="chip" type="button" data-lkgo="lk-${slug(c)}">${esc(c)}</button>`).join("")}<button class="chip" type="button" data-lkgo="lk-ventes">Ventes à venir</button></nav>
+  $("#main").innerHTML = `<div class="ph"><h1>Liens utiles</h1></div>
+  <div class="tools">${rech("lkq", "Rechercher un lien")}</div>
+  <nav class="chips" aria-label="Rubriques">${groups.map(([c, l]) => `<button class="chip" type="button" data-lkgo="lk-${slug(c)}">${esc(c)}</button>`).join("")}<button class="chip" type="button" data-lkgo="lk-ventes">Ventes</button></nav>
   ${blocs.join("")}<p class="empty" id="lkvide" hidden>Aucun lien ne correspond.</p>
-  ${PRIVE ? `<h2 class="mh">Abonnements (admin)</h2>${subsHTML()}` : ""}`;
+  ${PRIVE ? `<h2 class="mh">Abonnements</h2>${subsHTML()}` : ""}`;
   $("#main").querySelector("nav").onclick = (ev) => { const b = ev.target.closest("[data-lkgo]"); if (b) document.getElementById(b.dataset.lkgo).scrollIntoView({ behavior: "smooth", block: "start" }); };
   $("#lkq").oninput = (ev) => {
     const q = norm(ev.target.value).trim(); let n = 0;
@@ -667,13 +712,13 @@ function subsHTML() {
 /* ---------- Admin : le module est chargé à la première visite de l’onglet ---------- */
 function lockIcon() {
   const t = $("#t-admin"); t.hidden = !PRIVE; t.classList.toggle("ouvert", !!PRIVE); t.setAttribute("aria-label", PRIVE ? "Admin, connecté" : "Admin");
-  const c = $("#cx"); if (c) c.textContent = PRIVE ? "Session" : "Connexion";
+  const c = $("#cx"); if (c) { c.innerHTML = ico(PRIVE ? "cadenas-ouvert" : "cadenas"); c.setAttribute("aria-label", PRIVE ? "Session" : "Connexion"); }
 }
 // Session admin gardée sur cet appareil (échéance seule, aucune donnée sensible) : admin.js la restaure au démarrage.
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.6"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.7"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -691,7 +736,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.6"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.7"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
@@ -702,7 +747,7 @@ async function renderView(h) {
   if (path === "charte") {
     modeCharte(true); setTab(null);
     try { await loadCharte(); } catch (_) { $("#main").innerHTML = '<p class="empty">Impossible de charger la charte. Vérifie la connexion puis recharge.</p>'; return; }
-    window.CHARTE.render($("#main"), { esc, cleF, saisonTxt, saisonDe, themeBouton });
+    window.CHARTE.render($("#main"), { esc, cleF, saisonTxt, saisonDe, themeBouton, ico, ICONES: ICO, CATS });
     document.title = TITRE_VUE = "Charte – Factotum"; RENDERED = h; window.scrollTo(0, 0); return;
   }
   modeCharte(false);
@@ -763,6 +808,7 @@ $$(".tab").forEach((b) => {
   };
 });
 document.addEventListener("click", async (ev) => {
+  if (!ev.target.closest(".tm")) themeFerme();
   const rb = ev.target.closest("button.rb");
   if (rb) {
     const row = rb.closest(".row"), det = row.querySelector(".det"), open = det.hidden;
@@ -780,14 +826,17 @@ document.addEventListener("click", async (ev) => {
   const cx = ev.target.closest("[data-cx]");
   if (cx) { try { await loadAdmin(); ADMIN.portail(); } catch (_) { toast("Impossible de charger la connexion. Vérifie le réseau."); } return; }
   const tb = ev.target.closest("[data-theme-btn]");
-  if (tb) { themePose(THEMES[(THEMES.indexOf(themeLu()) + 1) % 3]); return; }
+  if (tb) { themeMenu(tb); return; }
+  const ts = ev.target.closest("[data-theme-set]");
+  if (ts) { const b = ts.closest(".tm").querySelector("[data-theme-btn]"); themePose(ts.dataset.themeSet); themeFerme(); b.focus(); return; }
   const cp = ev.target.closest("[data-copy]");
   if (cp) { try { await navigator.clipboard.writeText(cp.dataset.copy); toast("Adresse copiée"); } catch (_) { prompt("Copie cette adresse :", cp.dataset.copy); } }
 });
 
 /* ---------- En-tête : saison calculée, thème, barre compacte au défilement ---------- */
 $("#saison").textContent = saisonTxt();
-themePose(themeLu());
+themePose(themeLu()); lockIcon();
+document.addEventListener("keydown", (ev) => { const m = $(".tmenu"); if (ev.key === "Escape" && m) { const b = m.parentElement.querySelector("[data-theme-btn]"); themeFerme(); b.focus(); } });
 if ("IntersectionObserver" in window) new IntersectionObserver(([x]) => document.body.classList.toggle("compact", !x.isIntersecting)).observe($("#top"));
 
 /* ---------- Démarrage ---------- */
