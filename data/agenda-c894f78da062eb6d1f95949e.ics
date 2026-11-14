@@ -75,8 +75,7 @@ DTSTART;TZID=Europe/Paris:20270122T200000
 DTEND;TZID=Europe/Paris:20270122T223000
 SUMMARY:Seppuku. El funeral de Mishima
 LOCATION:Odéon\, Odéon – Théâtre de l’Europe
-DESCRIPTION:Angélica Liddell\nPlaces : 2\nAvec : Alexandre\nConflit : deux
-  spectacles le même soir
+DESCRIPTION:Angélica Liddell\nPlaces : 2\nAvec : Alexandre
 END:VEVENT
 BEGIN:VEVENT
 UID:l-evenement-2027-01-28@saison
