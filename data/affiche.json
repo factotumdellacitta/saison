@@ -15,16 +15,17 @@
    "salle": "Berthier Paris 17",
    "debut": "2027-04-16",
    "fin": "2027-04-24",
-   "datesTexte": "16 – 24 avril 2027",
+   "datesTexte": "pièce du 16 au 20 avril, lecture du 21 au 23, conférence le 24 avril 2027",
+   "horaires": "pièce 1h30",
    "note": 1,
    "pronostic": true,
    "pourquoi": "Trois performances autour du langage, avec Théo Mercier et Rebeka Warrior.",
-   "lien": "https://www.theatre-odeon.eu/en/season-2026-2027/performances-2026-2027/laura-vazquez-10-000-langages-le-soleil-se-couche-parce-quil-est-lourd-s26-27-en",
+   "lien": "https://www.theatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/laura-vazquez-10-000-langages-le-soleil-se-couche-parce-quil-est-lourd-s26-27",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "10000-gestes",
@@ -37,7 +38,7 @@
     }
    ],
    "lieuId": "chaillot",
-   "salle": "",
+   "salle": "Hors les murs, Théâtre de la Ville – Sarah Bernhardt",
    "debut": "2027-04-09",
    "fin": "2027-04-12",
    "datesTexte": "9 – 12 avril 2027",
@@ -48,8 +49,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "4-48-psychose",
@@ -71,17 +72,19 @@
    ],
    "lieuId": "theatre-de-l-atelier",
    "salle": "",
-   "debut": null,
-   "fin": null,
+   "debut": "2026-09-24",
+   "fin": "2026-11-15",
+   "datesTexte": "24 sept. – 15 nov. 2026",
+   "horaires": "jeu. – sam. 19h, dim. 15h ; 1h20",
    "note": 3,
    "pronostic": false,
    "pourquoi": "Seule en scène, très bien reçu par la critique.",
-   "lien": "https://www.offi.fr/theatre/theatre-de-latelier-1472/448-psychose-106897.html",
+   "lien": "https://www.theatre-atelier.com/event/4-48-psychose-sarah-kane-sandrine-bonnaire-2026/",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "7-minutes",
@@ -101,16 +104,17 @@
    "salle": "Abbesses",
    "debut": "2027-01-15",
    "fin": "2027-01-23",
-   "datesTexte": "15 – 23 janv. 2027",
+   "datesTexte": "15 – 23 janv. 2027, relâche le mardi",
+   "horaires": "20h, dim. 17 et sam. 23 à 15h",
    "note": 3,
    "pronostic": false,
    "pourquoi": "11 interprètes.",
-   "lien": "https://www.theatredelaville-paris.com/en/spectacles/saison-26-27/theatre/7-minutes-stefano-massini-maelle-poesy",
+   "lien": "https://www.theatredelaville-paris.com/fr/spectacles/saison-26-27/theatre/7-minutes-stefano-massini-maelle-poesy",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "a-la-renverse",
@@ -130,7 +134,8 @@
    "salle": "",
    "debut": "2027-02-24",
    "fin": "2027-03-07",
-   "datesTexte": "24 févr. – 7 mars 2027",
+   "datesTexte": "24 févr. – 7 mars 2027, relâche le mardi",
+   "horaires": "19h30, sam. 17h, dim. 15h ; 1h30 ; dès 15 ans",
    "note": 2,
    "pronostic": true,
    "pourquoi": "Création.",
@@ -138,8 +143,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "amadoca",
@@ -153,13 +158,22 @@
     {
      "nom": "Jules Audry",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Alexandra Gentil",
+     "role": "interprète"
+    },
+    {
+     "nom": "Yuriy Zavalnyouk",
+     "role": "interprète"
     }
    ],
    "lieuId": "la-colline",
    "salle": "",
    "debut": "2027-01-07",
    "fin": "2027-01-31",
-   "datesTexte": "7 – 31 janv. 2027",
+   "datesTexte": "7 – 31 janv. 2027, relâche le lundi et le dim. 10 janv.",
+   "horaires": "20h, mar. 19h, sam. 17h30, dim. 16h",
    "note": 2,
    "pronostic": true,
    "pourquoi": "Roman ukrainien, en français et ukrainien surtitré.",
@@ -167,8 +181,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "anna-netrebko-brian-jagde-george-petean",
@@ -186,6 +200,10 @@
     {
      "nom": "George Petean",
      "role": "interprète"
+    },
+    {
+     "nom": "Marco Armiliato",
+     "role": "direction musicale"
     }
    ],
    "lieuId": "tce",
@@ -193,13 +211,15 @@
    "debut": "2027-03-14",
    "fin": "2027-03-14",
    "datesTexte": "dim. 14 mars 2027",
+   "horaires": "20h",
    "note": 3,
    "pronostic": false,
-   "pourquoi": "Verdi, Puccini. Date fermée aux groupes : forte demande, réserver dès l’ouverture.",
-   "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/sung-recital/anna-netrebko-brian-jagde-george-petean-1",
+   "pourquoi": "Airs, duos et trios de Verdi et Puccini, avec orchestre. Date fermée aux groupes : forte demande, réserver dès l’ouverture.",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/recital-chant/anna-netrebko-brian-jagde-george-petean",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
      "type": "Carte Jeunes TCE",
@@ -209,8 +229,7 @@
      "venteApprox": true,
      "condition": "Carte Jeunes TCE"
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "apres-guerre",
@@ -238,8 +257,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "aria-da-capo",
@@ -255,16 +274,17 @@
    "salle": "Abbesses",
    "debut": "2026-12-10",
    "fin": "2026-12-18",
-   "datesTexte": "10 – 18 déc. 2026",
+   "datesTexte": "10 – 18 déc. 2026, relâche le dimanche",
+   "horaires": "20h",
    "note": 2,
    "pronostic": false,
    "pourquoi": "",
-   "lien": "https://www.theatredelaville-paris.com/en/spectacles/saison-26-27/theatre/aria-da-capo-severine-chavrier",
+   "lien": "https://www.theatredelaville-paris.com/fr/spectacles/saison-26-27/theatre/aria-da-capo-severine-chavrier",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "asmik-grigorian-lukas-geniusas",
@@ -285,13 +305,15 @@
    "debut": "2027-05-29",
    "fin": "2027-05-29",
    "datesTexte": "sam. 29 mai 2027",
+   "horaires": "20h",
    "note": 4,
    "pronostic": false,
-   "pourquoi": "Rachmaninov. L'une des voix majeures du moment.",
-   "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/sung-recital/asmik-grigorian-lukas-geniusas-1",
+   "pourquoi": "Mélodies de Rachmaninov, piano et voix. L’une des voix majeures du moment.",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/recital-chant/asmik-grigorian-lukas-geniusas",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
      "type": "Carte Jeunes TCE",
@@ -301,32 +323,53 @@
      "venteApprox": true,
      "condition": "Carte Jeunes TCE"
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "attila",
-   "titre": "Attila",
+   "titre": "Attila (version de concert)",
    "categorie": "Opéra",
    "sousGenre": "Version de concert",
    "artistes": [
     {
      "nom": "Giuseppe Verdi",
      "role": "compositeur"
+    },
+    {
+     "nom": "Riccardo Muti",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Lidia Fridman",
+     "role": "interprète"
+    },
+    {
+     "nom": "Maharram Huseynov",
+     "role": "interprète"
+    },
+    {
+     "nom": "Iván Ayón-Rivas",
+     "role": "interprète"
+    },
+    {
+     "nom": "Orchestre National de France",
+     "role": "interprète"
     }
    ],
    "lieuId": "tce",
    "salle": "",
    "debut": "2027-03-04",
    "fin": "2027-03-06",
-   "datesTexte": "4 et 6 mars 2027",
+   "datesTexte": "jeu. 4 et sam. 6 mars 2027",
+   "horaires": "19h30 ; 2h20 environ",
    "note": 4,
    "pronostic": false,
-   "pourquoi": "Riccardo Muti.",
-   "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-version/attila-1",
+   "pourquoi": "Version de concert dirigée par Riccardo Muti, avec l’Orchestre National de France et le Chœur de Radio France.",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-en-concert/attila",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
      "type": "Carte Jeunes TCE",
@@ -336,8 +379,7 @@
      "venteApprox": true,
      "condition": "Carte Jeunes TCE"
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "berlin-mon-garcon",
@@ -347,21 +389,42 @@
     {
      "nom": "Marie NDiaye",
      "role": "auteur"
+    },
+    {
+     "nom": "Mariame Clément",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Véronique Vella",
+     "role": "interprète"
+    },
+    {
+     "nom": "Françoise Gillard",
+     "role": "interprète"
+    },
+    {
+     "nom": "Christian Hecq",
+     "role": "interprète"
+    },
+    {
+     "nom": "Mélissa Polonie",
+     "role": "interprète"
     }
    ],
    "lieuId": "comedie-francaise",
    "salle": "Vieux-Colombier",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
+   "debut": "2027-02-24",
+   "fin": "2027-03-26",
+   "datesTexte": "24 févr. – 26 mars 2027",
+   "note": 3,
+   "pronostic": true,
+   "pourquoi": "Création et entrée au répertoire de Marie NDiaye : une mère part chercher son fils disparu à Berlin.",
+   "lien": "https://comedie-francaise.fr/2026-2027/berlin-mon-garcon",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": true,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "c-est-beau",
@@ -375,6 +438,22 @@
     {
      "nom": "Clément Hervieu-Léger",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Suliane Brahim",
+     "role": "interprète"
+    },
+    {
+     "nom": "Alexandre Pavloff",
+     "role": "interprète"
+    },
+    {
+     "nom": "Véronique Vella",
+     "role": "interprète"
+    },
+    {
+     "nom": "Nicolas Lormeau",
+     "role": "interprète"
     }
    ],
    "lieuId": "comedie-francaise",
@@ -389,8 +468,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "cabaret-teheran",
@@ -404,18 +483,19 @@
    ],
    "lieuId": "theatre-de-la-bastille",
    "salle": "",
-   "debut": "2027-01-01",
-   "fin": "2027-01-31",
-   "datesTexte": "janvier 2027",
+   "debut": "2027-01-08",
+   "fin": "2027-01-19",
+   "datesTexte": "8 – 19 janv. 2027, relâche le dimanche",
+   "horaires": "21h, sam. 18h ; 2h",
    "note": 2,
    "pronostic": true,
    "pourquoi": "Cabaret transformiste sur la pop iranienne, par un artiste associé de la maison.",
-   "lien": "https://www.theatre-bastille.com/",
+   "lien": "https://www.theatre-bastille.com/saison-26-27/cabaret-teheran",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "capra-une-chevre",
@@ -431,40 +511,47 @@
    "salle": "",
    "debut": "2026-12-02",
    "fin": "2026-12-13",
-   "datesTexte": "2 – 13 déc. 2026",
+   "datesTexte": "2 – 13 déc. 2026, relâche le mardi",
+   "horaires": "19h30, sam. 17h, dim. 15h ; 2h",
    "note": 3,
-   "pronostic": true,
+   "pronostic": false,
    "pourquoi": "Création.",
    "lien": "https://tgp.theatregerardphilipe.com/spectacle/capra-une-chevre/",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "capri",
-   "titre": "Capri – wyspa uciekinierów",
+   "titre": "Capri – L’Île des fugitifs",
    "categorie": "Théâtre",
    "artistes": [
+    {
+     "nom": "Curzio Malaparte",
+     "role": "auteur"
+    },
     {
      "nom": "Krystian Lupa",
      "role": "mise en scène"
     }
    ],
    "lieuId": "odeon",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
+   "salle": "Odéon Paris 6",
+   "debut": "2027-02-24",
+   "fin": "2027-03-07",
+   "datesTexte": "24 févr. – 7 mars 2027",
+   "horaires": "5h15 avec entractes ; en polonais surtitré",
+   "note": 3,
    "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
+   "pourquoi": "Krystian Lupa adapte Kaputt et La Peau de Malaparte. Grande fresque polonaise de 5h15.",
+   "lien": "https://www.theatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/krystian-lupa-capri-wyspa-uciekinierow-s26-27",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": true,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "ce-que-j-appelle-oubli",
@@ -474,6 +561,10 @@
     {
      "nom": "Laurent Mauvignier",
      "role": "auteur"
+    },
+    {
+     "nom": "Denis Podalydès",
+     "role": "interprète"
     }
    ],
    "lieuId": "comedie-francaise",
@@ -481,15 +572,16 @@
    "debut": "2027-06-02",
    "fin": "2027-07-04",
    "datesTexte": "2 juin – 4 juill. 2027",
+   "horaires": "1h15",
    "note": 3,
-   "pronostic": true,
+   "pronostic": false,
    "pourquoi": "Seul-en-scène de Denis Podalydès.",
    "lien": "https://comedie-francaise.fr/2026-2027/ce-que-jappelle-oubli",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "ceci-n-est-pas-nous",
@@ -506,19 +598,20 @@
     }
    ],
    "lieuId": "nanterre-amandiers",
-   "salle": "",
+   "salle": "Petite Salle",
    "debut": "2027-01-07",
    "fin": "2027-01-24",
    "datesTexte": "7 – 24 janv. 2027",
+   "horaires": "1h30 environ",
    "note": 1,
    "pronostic": true,
    "pourquoi": "Petite salle.",
-   "lien": "https://nanterre-amandiers.com/",
+   "lien": "https://nanterre-amandiers.com/saison/saison-2026-2027/ceci-n-est-pas-nous",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "celle-qui-doute",
@@ -534,7 +627,8 @@
    "salle": "Petit théâtre",
    "debut": "2026-11-12",
    "fin": "2026-12-12",
-   "datesTexte": "12 nov. – 12 déc. 2026",
+   "datesTexte": "12 nov. – 12 déc. 2026, relâche dimanche et lundi",
+   "horaires": "20h30, sam. 18h",
    "note": 2,
    "pronostic": true,
    "pourquoi": "Seule en scène, 1h15. Nouveaux horaires : 20h30 en semaine, 18h le samedi.",
@@ -542,8 +636,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "ces-filles-qu-on-attend",
@@ -563,7 +657,8 @@
    "salle": "",
    "debut": "2026-11-18",
    "fin": "2026-11-29",
-   "datesTexte": "18 – 29 nov. 2026",
+   "datesTexte": "18 – 29 nov. 2026, relâche le mardi",
+   "horaires": "20h, sam. 17h30, dim. 15h30 ; 1h15",
    "note": 2,
    "pronostic": true,
    "pourquoi": "Création.",
@@ -571,8 +666,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "chante-et-tais-toi",
@@ -584,15 +679,16 @@
    "debut": null,
    "fin": null,
    "datesTexte": "automne 2026",
+   "horaires": "mer. – sam. 21h, sam. et dim. 15h",
    "note": 1,
    "pronostic": false,
    "pourquoi": "Laurent Ruquier et Vincent Niclo.",
-   "lien": "https://www.offi.fr/theatre/comedie-des-champs-elysees-1908/chante-et-tais-toi-106701.html",
-   "billetterie": null,
+   "lien": "https://www.comediedeschampselysees.com/spectacle/83/chante-et-tais-toi",
+   "billetterie": "https://billetterie-comediedeschampselysees.tickandlive.com/evenement/chante-et-tais-toi",
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "chiens",
@@ -608,7 +704,8 @@
    "salle": "",
    "debut": "2027-03-15",
    "fin": "2027-03-21",
-   "datesTexte": "15 – 21 mars 2027",
+   "datesTexte": "15 – 21 mars 2027, relâche le mercredi 17",
+   "horaires": "20h, sam. 18h, dim. 17h ; 2h ; dès 16 ans",
    "note": 2,
    "pronostic": true,
    "pourquoi": "Dès 16 ans.",
@@ -616,8 +713,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "chiens-de-navarre-i-will-survive",
@@ -625,7 +722,11 @@
    "categorie": "Théâtre",
    "artistes": [
     {
-     "nom": "Chiens de Navarre",
+     "nom": "Jean-Christophe Meurisse",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Les Chiens de Navarre",
      "role": "compagnie"
     }
    ],
@@ -634,15 +735,16 @@
    "debut": "2027-01-26",
    "fin": "2027-01-29",
    "datesTexte": "26 – 29 janv. 2027",
+   "horaires": "2h ; déconseillé aux moins de 16 ans",
    "note": 3,
    "pronostic": false,
    "pourquoi": "Comédie, 2h.",
-   "lien": "https://www.mc93.com/",
+   "lien": "https://www.mc93.com/saison/i-will-survive",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "concert-tres-chic",
@@ -661,8 +763,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "correspondances-nocturnes",
@@ -680,16 +782,18 @@
    ],
    "lieuId": "palais-garnier",
    "salle": "",
-   "debut": "2027-02-01",
-   "fin": "2027-02-28",
-   "datesTexte": "février 2027",
+   "debut": "2027-02-12",
+   "fin": "2027-03-08",
+   "datesTexte": "12 févr. – 8 mars 2027",
+   "horaires": "1h55 avec entracte",
    "note": 2,
    "pronostic": false,
-   "pourquoi": "Avant-première jeunes le 11 fév.",
+   "pourquoi": "Deux ballets sur Chopin : Thierry Malandain (entrée au répertoire) et création de Cathy Marston sur George Sand.",
    "lien": "https://www.operadeparis.fr/saison-26-27/ballet/correspondances-nocturnes",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
      "type": "Avant-première jeunes",
@@ -699,8 +803,7 @@
      "venteApprox": false,
      "condition": "Nés après le 1er janvier 1998, 2 places max."
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "dancing-with-bob",
@@ -713,7 +816,7 @@
     }
    ],
    "lieuId": "chaillot",
-   "salle": "",
+   "salle": "Hors les murs, La Villette",
    "debut": "2027-04-08",
    "fin": "2027-04-16",
    "datesTexte": "8 – 16 avril 2027",
@@ -724,8 +827,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "delay-the-sadness",
@@ -737,20 +840,21 @@
      "role": "chorégraphie"
     }
    ],
-   "lieuId": "chaillot",
+   "lieuId": "rond-point",
    "salle": "",
    "debut": "2026-12-16",
    "fin": "2026-12-19",
    "datesTexte": "16 – 19 déc. 2026",
+   "horaires": "21h, sam. 20h",
    "note": 3,
    "pronostic": false,
    "pourquoi": "Huit danseurs, pièce sur le deuil. Aussi aux Gémeaux fin novembre. Plus tôt qu'à Chaillot.",
-   "lien": "https://theatre-chaillot.fr/fr/programmation",
+   "lien": "https://www.theatredurondpoint.fr/fr/programmation/saison-26-27/danse/delay-the-sadness",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "deshonoree",
@@ -764,6 +868,10 @@
     {
      "nom": "Françoise Gillard",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Anna Cervinka",
+     "role": "interprète"
     }
    ],
    "lieuId": "comedie-francaise",
@@ -778,8 +886,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "deux-trois-choses-qu-elle-nous-dit-d-elle",
@@ -803,25 +911,39 @@
    "salle": "Sarah Bernhardt, Studio",
    "debut": "2026-12-01",
    "fin": "2026-12-19",
-   "datesTexte": "1er – 19 déc. 2026",
+   "datesTexte": "1er – 19 déc. 2026, relâche les dimanches et les 5, 14, 15 et 17 déc.",
+   "horaires": "20h",
    "note": 2,
    "pronostic": true,
    "pourquoi": "Création.",
-   "lien": "https://www.theatredelaville-paris.com/en/spectacles/saison-26-27/theatre/simone-de-beauvoir-deux-trois-choses-quelle-nous-dit-delle",
+   "lien": "https://www.theatredelaville-paris.com/fr/spectacles/saison-26-27/theatre/simone-de-beauvoir-deux-trois-choses-quelle-nous-dit-delle",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "didon-et-enee",
-   "titre": "Didon et Énée",
+   "titre": "Didon et Énée (version de concert)",
    "categorie": "Opéra",
+   "sousGenre": "Version de concert",
    "artistes": [
     {
      "nom": "Henry Purcell",
      "role": "compositeur"
+    },
+    {
+     "nom": "Vincent Dumestre",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Adèle Charvet",
+     "role": "interprète"
+    },
+    {
+     "nom": "Le Poème Harmonique",
+     "role": "interprète"
     }
    ],
    "lieuId": "tce",
@@ -829,13 +951,15 @@
    "debut": "2027-03-13",
    "fin": "2027-03-13",
    "datesTexte": "sam. 13 mars 2027",
+   "horaires": "19h30 ; 1h environ",
    "note": 3,
    "pronostic": false,
-   "pourquoi": "Adèle Charvet. Court et bouleversant.",
-   "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-version/dido-and-aeneas-1",
+   "pourquoi": "Version de concert. Adèle Charvet en Didon, Le Poème Harmonique et Vincent Dumestre. Court et bouleversant.",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-en-concert/didon-et-enee-2",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
      "type": "Carte Jeunes TCE",
@@ -845,8 +969,7 @@
      "venteApprox": true,
      "condition": "Carte Jeunes TCE"
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "dipe-antigone",
@@ -866,16 +989,17 @@
    "salle": "Sarah Bernhardt, Grande salle",
    "debut": "2027-01-21",
    "fin": "2027-02-06",
-   "datesTexte": "21 janv. – 6 févr. 2027",
+   "datesTexte": "21 janv. – 6 févr. 2027, relâche le lundi",
+   "horaires": "19h30, dim. et sam. 6 à 15h",
    "note": 3,
    "pronostic": true,
    "pourquoi": "Création d'après trois tragédies de Sophocle.",
-   "lien": "https://www.theatredelaville-paris.com/en/spectacles/saison-26-27/theatre/oedipe-antigone-stephane-braunschweig",
+   "lien": "https://www.theatredelaville-paris.com/fr/spectacles/saison-26-27/theatre/oedipe-antigone-stephane-braunschweig",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "diplomatie",
@@ -899,24 +1023,46 @@
    "salle": "",
    "debut": null,
    "fin": null,
+   "datesTexte": "jusqu’au 23 déc. 2026 au moins",
    "note": 2,
    "pronostic": false,
    "pourquoi": "Huis clos historique, Paris 1944.",
-   "lien": "https://www.offi.fr/theatre/theatre-hebertot-2446/diplomatie-106413.html",
+   "lien": "https://www.theatrehebertot.com/spectacle/diplomatie",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "dipus-rex",
-   "titre": "Œdipus Rex",
+   "titre": "Œdipus Rex (version de concert)",
    "categorie": "Opéra",
+   "sousGenre": "Version de concert",
    "artistes": [
     {
      "nom": "Igor Stravinsky",
      "role": "compositeur"
+    },
+    {
+     "nom": "Alan Gilbert",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Michael Schade",
+     "role": "interprète"
+    },
+    {
+     "nom": "Jamie Barton",
+     "role": "interprète"
+    },
+    {
+     "nom": "Matthias Goerne",
+     "role": "interprète"
+    },
+    {
+     "nom": "NDR Elbphilharmonie Orchester",
+     "role": "interprète"
     }
    ],
    "lieuId": "tce",
@@ -924,13 +1070,15 @@
    "debut": "2027-05-24",
    "fin": "2027-05-24",
    "datesTexte": "lun. 24 mai 2027",
+   "horaires": "19h30 ; 1h40 environ",
    "note": 3,
    "pronostic": false,
-   "pourquoi": "Alan Gilbert, avec Le Sacre.",
-   "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-version/dipus-rex-1",
+   "pourquoi": "Version de concert, précédée du Sacre du printemps. Alan Gilbert et l’orchestre de l’Elbphilharmonie, Matthias Goerne en Créon.",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-en-concert/dipus-rex",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
      "type": "Carte Jeunes TCE",
@@ -940,8 +1088,7 @@
      "venteApprox": true,
      "condition": "Carte Jeunes TCE"
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "diskoteekki",
@@ -958,15 +1105,16 @@
    "debut": "2026-11-18",
    "fin": "2026-11-22",
    "datesTexte": "18 – 22 nov. 2026",
+   "horaires": "21h, sam. 20h, dim. 17h",
    "note": 2,
    "pronostic": true,
    "pourquoi": "Théâtre musical avec les Percussions de Strasbourg.",
-   "lien": "https://www.theatredurondpoint.fr/files/44dfdad8/brochure_saison_26_27.pdf",
+   "lien": "https://www.theatredurondpoint.fr/fr/programmation/saison-26-27/theatre/diskoteekki-1",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "don-giovanni",
@@ -976,13 +1124,30 @@
     {
      "nom": "Wolfgang Amadeus Mozart",
      "role": "compositeur"
+    },
+    {
+     "nom": "Louisa Proske",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Stephanie Childress",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Peter Mattei",
+     "role": "interprète"
+    },
+    {
+     "nom": "Davide Luciano",
+     "role": "interprète"
     }
    ],
    "lieuId": "opera-bastille",
    "salle": "",
    "debut": "2027-01-28",
    "fin": "2027-06-24",
-   "datesTexte": "28 janv. – 24 juin 2027",
+   "datesTexte": "28 janv. – 24 juin 2027, en deux séries (janv.-févr., puis mai-juin)",
+   "horaires": "3h20 avec entracte ; Peter Mattei en janv.-févr., Davide Luciano en mai-juin",
    "note": 2,
    "pronostic": false,
    "pourquoi": "Avant-première jeunes 10 € le 25 janv. (vente le 7 janv. à midi).",
@@ -990,6 +1155,7 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
      "type": "Avant-première jeunes",
@@ -999,8 +1165,7 @@
      "venteApprox": false,
      "condition": "Nés après le 1er janvier 1998, 2 places max."
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "du-charbon-dans-les-veines",
@@ -1024,8 +1189,8 @@
    "billetterie": null,
    "publicJeune": true,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "ellen-babic",
@@ -1045,16 +1210,17 @@
    "salle": "",
    "debut": "2027-01-12",
    "fin": "2027-01-24",
-   "datesTexte": "12 – 24 janv. 2027",
+   "datesTexte": "12 – 24 janv. 2027, relâche le lundi",
+   "horaires": "19h30, sam. 18h30, dim. 15h",
    "note": 2,
    "pronostic": true,
    "pourquoi": "Avec Constance Dollé.",
-   "lien": "https://www.theatredurondpoint.fr/files/44dfdad8/brochure_saison_26_27.pdf",
+   "lien": "https://www.theatredurondpoint.fr/fr/programmation/saison-26-27/theatre/ellen-babic-1",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "esdeekid",
@@ -1068,17 +1234,19 @@
    ],
    "lieuId": "olympia",
    "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
+   "debut": "2026-11-27",
+   "fin": "2026-11-27",
+   "datesTexte": "ven. 27 nov. 2026",
+   "horaires": "20h",
+   "note": 2,
    "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
+   "pourquoi": "Le rappeur de Liverpool en concert à l’Olympia.",
+   "lien": "https://www.olympiahall.com/agenda/esdeekid/",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": true,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "et-jamais-nous-ne-serons-separes",
@@ -1099,6 +1267,7 @@
    "debut": "2026-11-27",
    "fin": "2026-12-03",
    "datesTexte": "27 nov. – 3 déc. 2026",
+   "horaires": "1h30",
    "note": 2,
    "pronostic": false,
    "pourquoi": "1h30.",
@@ -1106,17 +1275,34 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "faust",
-   "titre": "Faust",
+   "titre": "Faust (version de concert)",
    "categorie": "Opéra",
+   "sousGenre": "Version de concert",
    "artistes": [
     {
      "nom": "Charles Gounod",
      "role": "compositeur"
+    },
+    {
+     "nom": "Bastien Stil",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Iván Ayón-Rivas",
+     "role": "interprète"
+    },
+    {
+     "nom": "Nicolas Testé",
+     "role": "interprète"
+    },
+    {
+     "nom": "Angélique Boudeville",
+     "role": "interprète"
     }
    ],
    "lieuId": "tce",
@@ -1124,13 +1310,15 @@
    "debut": "2027-03-23",
    "fin": "2027-03-23",
    "datesTexte": "mar. 23 mars 2027",
+   "horaires": "19h30 ; 3h10 environ",
    "note": 2,
    "pronostic": false,
-   "pourquoi": "Christian Van Horn. Écho au Faust de Castellucci. Date fermée aux groupes.",
-   "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-version/faust-1",
+   "pourquoi": "Version de concert. Iván Ayón-Rivas, Nicolas Testé, Angélique Boudeville, Garde républicaine. Écho au Faust de Castellucci.",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-en-concert/faust",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
      "type": "Carte Jeunes TCE",
@@ -1140,8 +1328,7 @@
      "venteApprox": true,
      "condition": "Carte Jeunes TCE"
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "focus-ben-duke",
@@ -1155,18 +1342,18 @@
    ],
    "lieuId": "theatre-de-la-ville",
    "salle": "Abbesses, Sarah Bernhardt",
-   "debut": "2026-11-01",
+   "debut": "2026-09-22",
    "fin": "2026-11-21",
-   "datesTexte": "jusqu'au 21 nov. 2026",
+   "datesTexte": "22 sept. – 21 nov. 2026, plusieurs spectacles",
    "note": 2,
    "pronostic": false,
    "pourquoi": "Danse-théâtre britannique.",
-   "lien": "https://www.theatredelaville-paris.com/en/spectacles/saison-26-27/danse/focus-ben-duke",
+   "lien": "https://www.theatredelaville-paris.com/fr/spectacles/saison-26-27/danse/focus-ben-duke",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "fondre-gourfink",
@@ -1182,16 +1369,17 @@
    "salle": "Petit Odéon",
    "debut": "2026-11-10",
    "fin": "2026-12-10",
-   "datesTexte": "10 – 21 nov., puis 25 nov. – 10 déc. 2026",
+   "datesTexte": "Arche du 10 au 21 nov., Almasty du 25 nov. au 10 déc. 2026",
+   "horaires": "1h10",
    "note": 1,
    "pronostic": false,
    "pourquoi": "Danse, format intime, 1h10. Danse lente, format intime, 1h10.",
-   "lien": "https://www.theatre-odeon.eu/en/season-2026-2027/performances-2026-2027/myriam-gourfink-fondre-arche-s26-27-en",
+   "lien": "https://www.theatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/myriam-gourfink-fondre-arche-s26-27",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "food-court",
@@ -1201,6 +1389,10 @@
     {
      "nom": "Back to Back Theatre",
      "role": "compagnie"
+    },
+    {
+     "nom": "Bruce Gladwin",
+     "role": "mise en scène"
     }
    ],
    "lieuId": "odeon",
@@ -1208,15 +1400,16 @@
    "debut": "2026-12-04",
    "fin": "2026-12-19",
    "datesTexte": "4 – 19 déc. 2026",
+   "horaires": "1h ; en anglais surtitré",
    "note": 3,
    "pronostic": false,
    "pourquoi": "1h, musique de The Necks.",
-   "lien": "https://www.theatre-odeon.eu/en/season-2026-2027/performances-2026-2027/back-to-back-theatre-food-court-s26-27-en",
+   "lien": "https://www.theatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/back-to-back-theatre-food-court-s26-27",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "ganesh-versus-the-third-reich",
@@ -1233,15 +1426,16 @@
    "debut": "2026-11-17",
    "fin": "2026-11-21",
    "datesTexte": "17 – 21 nov. 2026",
+   "horaires": "20h, jeu. 19h, sam. 18h ; en anglais surtitré",
    "note": 4,
    "pronostic": false,
    "pourquoi": "Lion d'or Venise 2024, en anglais.",
-   "lien": "https://www.theatredelaville-paris.com/en/spectacles/saison-26-27/theatre/ganesh-versus-the-third-reich-back-to-back-theatre",
+   "lien": "https://www.theatredelacite.com/ganesh-versus-the-third-reich",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "giselle",
@@ -1255,16 +1449,18 @@
    ],
    "lieuId": "palais-garnier",
    "salle": "",
-   "debut": "2027-06-01",
-   "fin": "2027-06-30",
-   "datesTexte": "juin 2027",
+   "debut": "2027-06-25",
+   "fin": "2027-07-14",
+   "datesTexte": "25 juin – 14 juill. 2027",
+   "horaires": "1h50 avec entracte",
    "note": 2,
    "pronostic": true,
-   "pourquoi": "Relecture contemporaine. Avant-première jeunes le 24 juin.",
+   "pourquoi": "Création : Giselle relue par Johan Inger, musique nouvelle de Grégoire Hetzel.",
    "lien": "https://www.operadeparis.fr/saison-26-27/ballet/giselle",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
      "type": "Avant-première jeunes",
@@ -1274,8 +1470,7 @@
      "venteApprox": false,
      "condition": "Nés après le 1er janvier 1998, 2 places max."
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "gustavia",
@@ -1292,7 +1487,7 @@
     }
    ],
    "lieuId": "chaillot",
-   "salle": "",
+   "salle": "Salle Firmin Gémier",
    "debut": "2027-03-17",
    "fin": "2027-03-20",
    "datesTexte": "17 – 20 mars 2027",
@@ -1303,8 +1498,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "heaven-hell",
@@ -1314,22 +1509,34 @@
     {
      "nom": "Pascal Dusapin",
      "role": "compositeur"
+    },
+    {
+     "nom": "William Blake",
+     "role": "auteur"
+    },
+    {
+     "nom": "Netia Jones",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Mathieu Romano",
+     "role": "direction musicale"
     }
    ],
    "lieuId": "opera-comique",
-   "salle": "",
+   "salle": "Grand Palais (festival Grand Palais d’été)",
    "debut": "2027-06-11",
    "fin": "2027-06-13",
    "datesTexte": "11 – 13 juin 2027",
    "note": 2,
    "pronostic": true,
    "pourquoi": "Contemporain.",
-   "lien": "https://www.opera-comique.com/en/shows/2026-2027",
+   "lien": "https://www.opera-comique.com/fr/spectacles/heaven-hell",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "hernani",
@@ -1349,7 +1556,8 @@
    "salle": "",
    "debut": "2026-11-01",
    "fin": "2026-11-14",
-   "datesTexte": "jusqu'au 14 nov. 2026",
+   "datesTexte": "6 – 14 nov. 2026, relâche lundi et mardi",
+   "horaires": "20h, sam. 18h, dim. 17h",
    "note": 2,
    "pronostic": false,
    "pourquoi": "Dernières dates. Hugo après Ruy Blas.",
@@ -1357,17 +1565,30 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "hippolyte-et-aricie",
-   "titre": "Hippolyte et Aricie",
+   "titre": "Hippolyte et Aricie (version de concert)",
    "categorie": "Opéra",
+   "sousGenre": "Version de concert",
    "artistes": [
     {
      "nom": "Jean-Philippe Rameau",
      "role": "compositeur"
+    },
+    {
+     "nom": "Marc Minkowski",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Cyrille Dubois",
+     "role": "interprète"
+    },
+    {
+     "nom": "Les Musiciens du Louvre",
+     "role": "interprète"
     }
    ],
    "lieuId": "tce",
@@ -1375,13 +1596,15 @@
    "debut": "2027-05-28",
    "fin": "2027-05-28",
    "datesTexte": "ven. 28 mai 2027",
+   "horaires": "19h30 ; 2h10 environ",
    "note": 3,
    "pronostic": false,
-   "pourquoi": "Minkowski.",
-   "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-version/hippolyte-et-aricie-1",
+   "pourquoi": "Version de concert. Marc Minkowski et Les Musiciens du Louvre, Cyrille Dubois en Hippolyte.",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-en-concert/hippolyte-et-aricie",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
      "type": "Carte Jeunes TCE",
@@ -1391,8 +1614,7 @@
      "venteApprox": true,
      "condition": "Carte Jeunes TCE"
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "histoire-du-soldat",
@@ -1420,32 +1642,47 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "histoire-du-soldat-tce",
    "titre": "L’Histoire du soldat",
    "categorie": "Opéra",
+   "sousGenre": "Théâtre musical, concert du dimanche 11h",
    "artistes": [
     {
      "nom": "Igor Stravinsky",
      "role": "compositeur"
+    },
+    {
+     "nom": "Charles-Ferdinand Ramuz",
+     "role": "auteur"
+    },
+    {
+     "nom": "Lambert Wilson",
+     "role": "interprète"
+    },
+    {
+     "nom": "Lemanic Modern Ensemble",
+     "role": "interprète"
     }
    ],
    "lieuId": "tce",
    "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
+   "debut": "2027-01-17",
+   "fin": "2027-01-17",
+   "datesTexte": "dim. 17 janv. 2027",
+   "horaires": "11h ; 1h10 sans entracte",
+   "note": 2,
    "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
+   "pourquoi": "Lambert Wilson seul pour les trois rôles (soldat, diable, narrateur). Dès 8 ans.",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/en-famille/l-histoire-du-soldat",
    "billetterie": null,
-   "publicJeune": false,
+   "publicJeune": true,
    "leonardYVa": true,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "ici-sont-les-dragons",
@@ -1461,16 +1698,16 @@
    "salle": "",
    "debut": "2026-11-01",
    "fin": "2026-11-29",
-   "datesTexte": "jusqu'au 28 – 29 nov. 2026",
+   "datesTexte": "jusqu’au 29 nov. 2026 (première et deuxième époques)",
    "note": 4,
    "pronostic": false,
    "pourquoi": "Dernières dates. Une époque 15 – 35 €.",
-   "lien": "https://www.theatre-du-soleil.fr/public_data/download/event/1781021789/dossier_pedagogique-isld2-120626.pdf",
+   "lien": "https://www.theatre-du-soleil.fr/fr/notre-theatre/les-spectacles/ici-sont-les-dragons-2024-2470",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "idomeneo",
@@ -1484,13 +1721,30 @@
     {
      "nom": "Wajdi Mouawad",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Antonello Manacorda",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Allan Clayton",
+     "role": "interprète"
+    },
+    {
+     "nom": "Lea Desandre",
+     "role": "interprète"
+    },
+    {
+     "nom": "Elsa Dreisig",
+     "role": "interprète"
     }
    ],
    "lieuId": "opera-bastille",
    "salle": "",
-   "debut": "2027-04-30",
+   "debut": "2027-05-03",
    "fin": "2027-05-25",
-   "datesTexte": "30 avril – 25 mai 2027",
+   "datesTexte": "3 – 25 mai 2027 (avant-première jeunes le 30 avril)",
+   "horaires": "3h15 avec entracte",
    "note": 4,
    "pronostic": true,
    "pourquoi": "Lea Desandre, Elsa Dreisig. 3h15. Avant-première jeunes le 30 avril (vente le 8 avril).",
@@ -1498,6 +1752,7 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
      "type": "Avant-première jeunes",
@@ -1507,8 +1762,7 @@
      "venteApprox": false,
      "condition": "Nés après le 1er janvier 1998, 2 places max."
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "impressions",
@@ -1532,8 +1786,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "ivanov",
@@ -1550,19 +1804,20 @@
     }
    ],
    "lieuId": "nanterre-amandiers",
-   "salle": "",
+   "salle": "Grande Salle",
    "debut": "2027-01-06",
    "fin": "2027-01-30",
    "datesTexte": "6 – 30 janv. 2027",
+   "horaires": "2h30 ; dès 16 ans",
    "note": 3,
-   "pronostic": true,
-   "pourquoi": "Grand Tchekhov.",
-   "lien": "https://nanterre-amandiers.com/",
+   "pronostic": false,
+   "pourquoi": "Tchekhov par Jean-François Sivadier et sa troupe, salué par Le Monde : « une virtuose dinguerie ».",
+   "lien": "https://nanterre-amandiers.com/saison/saison-2026-2027/ivanov",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "j-ai-une-theorie",
@@ -1578,16 +1833,17 @@
    "salle": "Sarah Bernhardt, Studio",
    "debut": "2026-11-10",
    "fin": "2026-11-20",
-   "datesTexte": "10 – 20 nov. 2026",
+   "datesTexte": "10 – 20 nov. 2026, relâche le dimanche",
+   "horaires": "19h ou 20h selon les soirs",
    "note": 1,
    "pronostic": false,
    "pourquoi": "",
-   "lien": "https://www.theatredelaville-paris.com/en/spectacles/saison-26-27/theatre/jai-une-theorie-scali-delpeyrat",
+   "lien": "https://www.theatredelaville-paris.com/fr/spectacles/saison-26-27/theatre/jai-une-theorie-scali-delpeyrat",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "josef-nadj-dialogues-dans-le-reve",
@@ -1604,15 +1860,16 @@
    "debut": "2027-02-04",
    "fin": "2027-02-07",
    "datesTexte": "4 – 7 févr. 2027",
+   "horaires": "19h30, sam. 18h30, dim. 15h30",
    "note": 2,
    "pronostic": false,
    "pourquoi": "Danse et marionnettes.",
-   "lien": "https://www.mc93.com/",
+   "lien": "https://www.mc93.com/saison/dialogues-dans-le-reve",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "joyaux",
@@ -1622,13 +1879,18 @@
     {
      "nom": "George Balanchine",
      "role": "chorégraphie"
+    },
+    {
+     "nom": "Christian Lacroix",
+     "role": "artiste"
     }
    ],
    "lieuId": "opera-bastille",
    "salle": "",
-   "debut": "2027-04-01",
-   "fin": "2027-04-30",
-   "datesTexte": "avril 2027",
+   "debut": "2027-04-05",
+   "fin": "2027-05-18",
+   "datesTexte": "5 avril – 18 mai 2027",
+   "horaires": "1h50 avec entracte",
    "note": 4,
    "pronostic": false,
    "pourquoi": "Avant-première jeunes le 3 avril. Incontournable.",
@@ -1636,6 +1898,7 @@
    "billetterie": null,
    "publicJeune": true,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
      "type": "Avant-première jeunes",
@@ -1645,8 +1908,7 @@
      "venteApprox": false,
      "condition": "Nés après le 1er janvier 1998, 2 places max."
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "kaguyahime",
@@ -1654,45 +1916,63 @@
    "categorie": "Danse",
    "artistes": [
     {
+     "nom": "Jo Kanamori",
+     "role": "chorégraphie"
+    },
+    {
+     "nom": "Claude Debussy",
+     "role": "compositeur"
+    },
+    {
      "nom": "Tokyo Ballet",
      "role": "compagnie"
     }
    ],
-   "lieuId": "opera-de-paris",
+   "lieuId": "palais-garnier",
    "salle": "",
-   "debut": null,
-   "fin": null,
-   "datesTexte": "saison 2026-27",
+   "debut": "2027-05-26",
+   "fin": "2027-05-29",
+   "datesTexte": "26 – 29 mai 2027",
+   "horaires": "2h40 avec 2 entractes",
    "note": 2,
    "pronostic": false,
-   "pourquoi": "Compagnie invitée.",
-   "lien": "https://www.operadeparis.fr/programmation/saison-26-27",
+   "pourquoi": "Le Tokyo Ballet invité dans le ballet de Jo Kanamori sur la musique de Debussy.",
+   "lien": "https://www.operadeparis.fr/saison-26-27/ballet/kaguyahime",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "l-amant",
    "titre": "L'Amant",
    "categorie": "Théâtre",
-   "artistes": [],
+   "artistes": [
+    {
+     "nom": "Marguerite Duras",
+     "role": "auteur"
+    },
+    {
+     "nom": "Noémie Gantier",
+     "role": "mise en scène"
+    }
+   ],
    "lieuId": "nanterre-amandiers",
-   "salle": "",
+   "salle": "Petite Salle",
    "debut": "2027-04-23",
    "fin": "2027-05-09",
-   "datesTexte": "23 avril – 9 mai 2027",
-   "horaires": "En deux parties ou en intégrale",
+   "datesTexte": "23 avril – 9 mai 2027 : parties 1-2 les ven. 23 avril et 7 mai, parties 3-4 les sam. 24 avril et 8 mai, intégrales les dim. 25 avril et 9 mai",
+   "horaires": "5h en intégrale",
    "note": 2,
    "pronostic": true,
    "pourquoi": "Intégrales les 25 avril et 9 mai.",
-   "lien": "https://nanterre-amandiers.com/",
+   "lien": "https://nanterre-amandiers.com/saison/saison-2026-2027/l-amant",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "l-ange-du-foyer",
@@ -1708,7 +1988,8 @@
    "salle": "Grand théâtre",
    "debut": "2027-01-13",
    "fin": "2027-02-07",
-   "datesTexte": "13 janv. – 7 févr. 2027",
+   "datesTexte": "13 janv. – 7 févr. 2027, relâche le lundi et le dim. 17 janv.",
+   "horaires": "20h30, mar. 19h30, sam. 17h, dim. 15h30 ; en italien surtitré",
    "note": 3,
    "pronostic": false,
    "pourquoi": "Fable noire sur les féminicides, 1h05, en italien surtitré.",
@@ -1716,8 +1997,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "l-ecole-de-danse",
@@ -1727,21 +2008,43 @@
     {
      "nom": "Carlo Goldoni",
      "role": "auteur"
+    },
+    {
+     "nom": "Clément Hervieu-Léger",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Denis Podalydès",
+     "role": "interprète"
+    },
+    {
+     "nom": "Florence Viala",
+     "role": "interprète"
+    },
+    {
+     "nom": "Éric Génovèse",
+     "role": "interprète"
+    },
+    {
+     "nom": "Clotilde de Bayser",
+     "role": "interprète"
     }
    ],
    "lieuId": "comedie-francaise",
    "salle": "Richelieu",
-   "debut": null,
-   "fin": null,
-   "note": 0,
+   "debut": "2026-12-18",
+   "fin": "2027-03-22",
+   "datesTexte": "18 déc. 2026 – 22 mars 2027, en alternance",
+   "horaires": "2h sans entracte",
+   "note": 3,
    "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
+   "pourquoi": "Goldoni par Clément Hervieu-Léger : un cours de danse, son maître cupide et ses élèves rebelles. Décor d’Éric Ruf.",
+   "lien": "https://comedie-francaise.fr/2026-2027/lecole-de-danse",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": true,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "l-elixir-d-amour",
@@ -1751,6 +2054,26 @@
     {
      "nom": "Gaetano Donizetti",
      "role": "compositeur"
+    },
+    {
+     "nom": "Laurent Pelly",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Evelino Pidò",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Pretty Yende",
+     "role": "interprète"
+    },
+    {
+     "nom": "René Barbera",
+     "role": "interprète"
+    },
+    {
+     "nom": "Ambrogio Maestri",
+     "role": "interprète"
     }
    ],
    "lieuId": "opera-bastille",
@@ -1758,15 +2081,16 @@
    "debut": "2027-03-23",
    "fin": "2027-04-13",
    "datesTexte": "23 mars – 13 avril 2027",
+   "horaires": "2h45 avec entracte",
    "note": 2,
    "pronostic": false,
    "pourquoi": "Plus léger.",
-   "lien": "https://www.operadeparis.fr/programmation/saison-26-27",
+   "lien": "https://www.operadeparis.fr/saison-26-27/opera/lelixir-damour",
    "billetterie": null,
    "publicJeune": true,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "l-envers-du-music-hall",
@@ -1776,6 +2100,14 @@
     {
      "nom": "Colette",
      "role": "auteur"
+    },
+    {
+     "nom": "Danièle Lebrun",
+     "role": "interprète"
+    },
+    {
+     "nom": "Serge Bagdassarian",
+     "role": "mise en scène"
     }
    ],
    "lieuId": "comedie-francaise",
@@ -1783,15 +2115,16 @@
    "debut": "2027-05-27",
    "fin": "2027-06-27",
    "datesTexte": "27 mai – 27 juin 2027",
+   "horaires": "1h20",
    "note": 2,
-   "pronostic": true,
+   "pronostic": false,
    "pourquoi": "Seule-en-scène de Danièle Lebrun.",
    "lien": "https://comedie-francaise.fr/2026-2027/lenvers-du-music-hall",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "l-evenement",
@@ -1801,30 +2134,53 @@
     {
      "nom": "Annie Ernaux",
      "role": "auteur"
+    },
+    {
+     "nom": "Françoise Gillard",
+     "role": "interprète"
+    },
+    {
+     "nom": "Denis Podalydès",
+     "role": "mise en scène"
     }
    ],
    "lieuId": "comedie-francaise",
    "salle": "Vieux-Colombier",
-   "debut": null,
-   "fin": null,
-   "note": 0,
+   "debut": "2027-01-12",
+   "fin": "2027-01-31",
+   "datesTexte": "12 – 31 janv. 2027",
+   "horaires": "1h05",
+   "note": 3,
    "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
+   "pourquoi": "Seule en scène, Françoise Gillard dit le récit d’Annie Ernaux sur son avortement clandestin (collaboration artistique Denis Podalydès).",
+   "lien": "https://comedie-francaise.fr/2026-2027/levenement",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": true,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "l-orfeo",
-   "titre": "L'Orfeo",
+   "titre": "L’Orfeo (version de concert)",
    "categorie": "Opéra",
+   "sousGenre": "Version de concert",
    "artistes": [
     {
      "nom": "Claudio Monteverdi",
      "role": "compositeur"
+    },
+    {
+     "nom": "Stéphane Fuget",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Juan Sancho",
+     "role": "interprète"
+    },
+    {
+     "nom": "Les Épopées",
+     "role": "interprète"
     }
    ],
    "lieuId": "tce",
@@ -1832,13 +2188,15 @@
    "debut": "2027-01-18",
    "fin": "2027-01-18",
    "datesTexte": "lun. 18 janv. 2027",
+   "horaires": "19h30 ; 1h50 environ",
    "note": 3,
    "pronostic": false,
-   "pourquoi": "Les Épopées, Stéphane Fuget. Le premier chef-d'œuvre de l'opéra.",
-   "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-version/l-orfeo-1",
+   "pourquoi": "Version de concert. Les Épopées, Stéphane Fuget, Juan Sancho en Orfeo. Le premier chef-d’œuvre de l’opéra.",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-en-concert/l-orfeo",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
      "type": "Carte Jeunes TCE",
@@ -1848,8 +2206,7 @@
      "venteApprox": true,
      "condition": "Carte Jeunes TCE"
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "la-cerisaie",
@@ -1885,8 +2242,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "la-clemence-de-titus",
@@ -1896,6 +2253,26 @@
     {
      "nom": "Wolfgang Amadeus Mozart",
      "role": "compositeur"
+    },
+    {
+     "nom": "Willy Decker",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Harry Bicket",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Matthew Polenzani",
+     "role": "interprète"
+    },
+    {
+     "nom": "Emily D’Angelo",
+     "role": "interprète"
+    },
+    {
+     "nom": "Hanna-Elisabeth Müller",
+     "role": "interprète"
     }
    ],
    "lieuId": "palais-garnier",
@@ -1903,15 +2280,16 @@
    "debut": "2026-11-24",
    "fin": "2026-12-25",
    "datesTexte": "24 nov. – 25 déc. 2026",
+   "horaires": "2h45 avec entracte",
    "note": 2,
    "pronostic": false,
    "pourquoi": "",
-   "lien": "https://www.operadeparis.fr/programmation/saison-26-27",
+   "lien": "https://www.operadeparis.fr/saison-26-27/opera/la-clemence-de-titus",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "la-fete",
@@ -1924,19 +2302,20 @@
     }
    ],
    "lieuId": "nanterre-amandiers",
-   "salle": "",
+   "salle": "Grande Salle",
    "debut": "2026-11-19",
    "fin": "2026-11-29",
    "datesTexte": "19 – 29 nov. 2026",
+   "horaires": "2h45 environ ; dès 15 ans",
    "note": 3,
    "pronostic": true,
    "pourquoi": "Grande salle.",
-   "lien": "https://nanterre-amandiers.com/",
+   "lien": "https://nanterre-amandiers.com/saison/saison-2026-2027/la-fete",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "la-fille-mal-gardee",
@@ -1950,9 +2329,10 @@
    ],
    "lieuId": "palais-garnier",
    "salle": "",
-   "debut": "2027-05-01",
-   "fin": "2027-05-31",
-   "datesTexte": "mai 2027",
+   "debut": "2027-05-07",
+   "fin": "2027-05-22",
+   "datesTexte": "7 – 22 mai 2027",
+   "horaires": "2h05 avec entracte",
    "note": 3,
    "pronostic": false,
    "pourquoi": "Avant-première jeunes le 5 mai.",
@@ -1960,6 +2340,7 @@
    "billetterie": null,
    "publicJeune": true,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
      "type": "Avant-première jeunes",
@@ -1969,8 +2350,7 @@
      "venteApprox": false,
      "condition": "Nés après le 1er janvier 1998, 2 places max."
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "la-fournaise",
@@ -1982,12 +2362,24 @@
      "role": "auteur"
     },
     {
-     "nom": "William Shakespeare",
-     "role": "auteur"
-    },
-    {
      "nom": "Lolita Tergémina",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Birane Ba",
+     "role": "interprète"
+    },
+    {
+     "nom": "Morgane Real",
+     "role": "interprète"
+    },
+    {
+     "nom": "Sefa Yeboah",
+     "role": "interprète"
+    },
+    {
+     "nom": "Noam Morgensztern",
+     "role": "interprète"
     }
    ],
    "lieuId": "comedie-francaise",
@@ -2002,8 +2394,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "la-guerre-n-a-pas-un-visage-de-femme",
@@ -2023,7 +2415,8 @@
    "salle": "",
    "debut": "2027-05-06",
    "fin": "2027-05-28",
-   "datesTexte": "6 – 28 mai 2027",
+   "datesTexte": "6 – 28 mai 2027, relâche le dimanche",
+   "horaires": "20h30, mar. 19h30",
    "note": 3,
    "pronostic": false,
    "pourquoi": "Première saison de Deliquet à la direction.",
@@ -2031,8 +2424,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "la-jalousie",
@@ -2045,22 +2438,32 @@
     },
     {
      "nom": "Michel Fau",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Michel Fau",
+     "role": "interprète"
+    },
+    {
+     "nom": "Gwendoline Hamon",
      "role": "interprète"
     }
    ],
    "lieuId": "theatre-de-la-michodiere",
    "salle": "",
-   "debut": null,
+   "debut": "2026-11-05",
    "fin": null,
+   "datesTexte": "à partir du 5 nov. 2026",
+   "horaires": "1h45",
    "note": 2,
    "pronostic": false,
    "pourquoi": "Reprise, Guitry par Fau.",
-   "lien": "https://www.offi.fr/theatre/theatre-de-la-michodiere-2784/la-jalousie-101767.html",
+   "lien": "https://www.michodiere.com/evenement/la-jalousie-1/",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "la-mort-du-mome",
@@ -2076,7 +2479,8 @@
    "salle": "Grand théâtre",
    "debut": "2026-11-06",
    "fin": "2026-12-12",
-   "datesTexte": "6 nov. – 12 déc. 2026",
+   "datesTexte": "6 nov. – 12 déc. 2026, relâche dimanche et lundi",
+   "horaires": "19h30, sam. 17h",
    "note": 3,
    "pronostic": true,
    "pourquoi": "Création, Festival d'Automne. Reda Kateb, Élodie Bouchez, Oulaya Amamra. 3h. 6 nov. – 12 déc. 2026, Festival d'Automne.",
@@ -2084,8 +2488,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "la-parabole-du-seum",
@@ -2105,7 +2509,8 @@
    "salle": "",
    "debut": "2026-11-26",
    "fin": "2026-12-12",
-   "datesTexte": "26 nov. – 12 déc. 2026",
+   "datesTexte": "26 nov. – 12 déc. 2026, relâche le dimanche et les jeudis 3 et 10 déc.",
+   "horaires": "20h, sam. 18h ; 2h30",
    "note": 2,
    "pronostic": true,
    "pourquoi": "",
@@ -2113,8 +2518,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "la-religieuse",
@@ -2135,6 +2540,7 @@
    "debut": "2027-04-28",
    "fin": "2027-04-30",
    "datesTexte": "28 – 30 avril 2027",
+   "horaires": "20h",
    "note": 2,
    "pronostic": false,
    "pourquoi": "",
@@ -2142,8 +2548,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "la-souriciere",
@@ -2164,6 +2570,7 @@
    "debut": "2027-06-09",
    "fin": "2027-07-18",
    "datesTexte": "9 juin – 18 juill. 2027",
+   "horaires": "1h40",
    "note": 2,
    "pronostic": false,
    "pourquoi": "Polar en huis clos.",
@@ -2171,8 +2578,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "la-tour-de-constance",
@@ -2189,6 +2596,7 @@
    "debut": "2027-04-20",
    "fin": "2027-04-30",
    "datesTexte": "20 – 30 avril 2027",
+   "horaires": "1h40",
    "note": 2,
    "pronostic": true,
    "pourquoi": "1h40.",
@@ -2196,8 +2604,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "la-tour-de-nesle",
@@ -2218,6 +2626,7 @@
    "debut": "2027-07-06",
    "fin": "2027-07-31",
    "datesTexte": "6 – 31 juill. 2027",
+   "horaires": "Billetterie ouverte en mai 2027 sur le site du festival Paris l’été",
    "note": 3,
    "pronostic": true,
    "pourquoi": "Plein air, entrée au Répertoire.",
@@ -2225,8 +2634,8 @@
    "billetterie": null,
    "publicJeune": true,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "la-vie-est-un-songe",
@@ -2246,7 +2655,8 @@
    "salle": "Richelieu",
    "debut": "2027-03-11",
    "fin": "2027-06-20",
-   "datesTexte": "11 mars – 20 juin 2027",
+   "datesTexte": "11 mars – 20 juin 2027, en alternance",
+   "horaires": "2h20 sans entracte",
    "note": 3,
    "pronostic": true,
    "pourquoi": "Création baroque avec trio de musiciens.",
@@ -2254,17 +2664,37 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "la-walkyrie",
-   "titre": "La Walkyrie",
+   "titre": "La Walkyrie (Festival Ring)",
    "categorie": "Opéra",
    "artistes": [
     {
      "nom": "Richard Wagner",
      "role": "compositeur"
+    },
+    {
+     "nom": "Calixto Bieito",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Stanislas de Barbeyrac",
+     "role": "interprète"
+    },
+    {
+     "nom": "Elza van den Heever",
+     "role": "interprète"
+    },
+    {
+     "nom": "Tamara Wilson",
+     "role": "interprète"
+    },
+    {
+     "nom": "Christopher Maltman",
+     "role": "interprète"
     }
    ],
    "lieuId": "opera-bastille",
@@ -2272,15 +2702,16 @@
    "debut": "2026-11-07",
    "fin": "2026-11-17",
    "datesTexte": "7 – 17 nov. 2026",
+   "horaires": "5h avec 2 entractes",
    "note": 3,
    "pronostic": false,
    "pourquoi": "Barbeyrac, Maltman, van den Heever.",
-   "lien": "https://www.operadeparis.fr/programmation/saison-26-27",
+   "lien": "https://www.operadeparis.fr/saison-26-27/opera/la-walkyrie",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "lady-macbeth-de-mzensk",
@@ -2290,6 +2721,22 @@
     {
      "nom": "Dmitri Chostakovitch",
      "role": "compositeur"
+    },
+    {
+     "nom": "Krzysztof Warlikowski",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Ingo Metzmacher",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Aušrinė Stundytė",
+     "role": "interprète"
+    },
+    {
+     "nom": "Pavel Černoch",
+     "role": "interprète"
     }
    ],
    "lieuId": "opera-bastille",
@@ -2297,15 +2744,16 @@
    "debut": "2027-03-13",
    "fin": "2027-03-28",
    "datesTexte": "13 – 28 mars 2027",
+   "horaires": "3h25 avec entracte",
    "note": 3,
    "pronostic": false,
    "pourquoi": "",
-   "lien": "https://www.operadeparis.fr/programmation/saison-26-27",
+   "lien": "https://www.operadeparis.fr/saison-26-27/opera/lady-macbeth-de-mzensk",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "le-birgit-kabarett-7",
@@ -2322,6 +2770,7 @@
    "debut": "2027-04-21",
    "fin": "2027-04-25",
    "datesTexte": "21 – 25 avril 2027",
+   "horaires": "mer. – ven. 20h, sam. 17h30, dim. 15h30 ; 1h45",
    "note": 2,
    "pronostic": false,
    "pourquoi": "Cabaret politique.",
@@ -2329,8 +2778,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "le-bourgeois-gentilhomme",
@@ -2354,7 +2803,8 @@
    "salle": "Richelieu",
    "debut": "2027-04-16",
    "fin": "2027-07-25",
-   "datesTexte": "16 avril – 25 juill. 2027",
+   "datesTexte": "16 avril – 25 juill. 2027, en alternance",
+   "horaires": "2h20 sans entracte",
    "note": 3,
    "pronostic": false,
    "pourquoi": "Mise en scène de Valérie Lesort et Christian Hecq, reprise.",
@@ -2362,8 +2812,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "le-canard-sauvage",
@@ -2383,7 +2833,8 @@
    "salle": "",
    "debut": "2027-01-21",
    "fin": "2027-01-31",
-   "datesTexte": "21 – 31 janv. 2027",
+   "datesTexte": "21 – 31 janv. 2027, relâche le lundi 25",
+   "horaires": "20h, dim. 17h ; 2h45 avec entracte",
    "note": 4,
    "pronostic": false,
    "pourquoi": "",
@@ -2391,8 +2842,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "le-cercle-de-craie-caucasien",
@@ -2410,18 +2861,19 @@
    ],
    "lieuId": "theatre-de-la-ville",
    "salle": "Sarah Bernhardt",
-   "debut": "2027-03-01",
-   "fin": "2027-04-30",
-   "datesTexte": "mars – avril 2027",
+   "debut": "2027-03-17",
+   "fin": "2027-04-04",
+   "datesTexte": "17 mars – 4 avril 2027, relâche le dimanche (sauf le 4 avril) et le lundi 29 mars",
+   "horaires": "20h, sam. 27 mars et dim. 4 avril à 15h",
    "note": 3,
    "pronostic": false,
    "pourquoi": "Troupe du TDV, 5 à 35 €.",
-   "lien": "https://www.theatredelaville-paris.com/en/spectacles/saison-26-27/theatre/le-cercle-de-craie-caucasien-bertolt-brecht-emmanuel-demarcy-mota",
+   "lien": "https://www.theatredelaville-paris.com/fr/spectacles/saison-26-27/theatre/le-cercle-de-craie-caucasien-bertolt-brecht-emmanuel-demarcy-mota",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "le-chameau",
@@ -2439,26 +2891,40 @@
    ],
    "lieuId": "edouard-vii",
    "salle": "",
-   "debut": "2026-12-01",
+   "debut": "2026-10-12",
    "fin": "2026-12-31",
+   "datesTexte": "à partir du 12 oct. 2026",
    "note": 1,
    "pronostic": false,
    "pourquoi": "1er – 31 déc. 2026, premier seul-en-scène.",
-   "lien": null,
+   "lien": "https://www.theatreedouard7.com/spectacles/jean-reno-le-chameau",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "le-chateau-de-barbe-bleue",
-   "titre": "Le Château de Barbe-Bleue",
+   "titre": "Le Château de Barbe-Bleue (version de concert)",
    "categorie": "Opéra",
+   "sousGenre": "Version de concert",
    "artistes": [
     {
      "nom": "Béla Bartók",
      "role": "compositeur"
+    },
+    {
+     "nom": "Lio Kuokman",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Elīna Garanča",
+     "role": "interprète"
+    },
+    {
+     "nom": "Christian Van Horn",
+     "role": "interprète"
     }
    ],
    "lieuId": "tce",
@@ -2466,13 +2932,15 @@
    "debut": "2027-06-22",
    "fin": "2027-06-22",
    "datesTexte": "mar. 22 juin 2027",
+   "horaires": "19h30 ; 1h environ",
    "note": 3,
    "pronostic": false,
-   "pourquoi": "Elīna Garanča.",
-   "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-version/duke-bluebeard-s-castle",
+   "pourquoi": "Version de concert. Elīna Garanča et Christian Van Horn, Orchestre philharmonique de Monte-Carlo.",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-en-concert/le-chateau-de-barbe-bleue-1",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
      "type": "Carte Jeunes TCE",
@@ -2482,8 +2950,7 @@
      "venteApprox": true,
      "condition": "Carte Jeunes TCE"
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "le-chien",
@@ -2500,19 +2967,20 @@
     }
    ],
    "lieuId": "nanterre-amandiers",
-   "salle": "",
+   "salle": "Salle Transformable",
    "debut": "2027-03-11",
    "fin": "2027-03-27",
    "datesTexte": "11 – 27 mars 2027",
+   "horaires": "1h25 ; complet à ce jour",
    "note": 2,
    "pronostic": true,
    "pourquoi": "",
-   "lien": "https://nanterre-amandiers.com/",
+   "lien": "https://nanterre-amandiers.com/saison/saison-2026-2027/le-chien-la-nuit-et-le-couteau",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "le-cid",
@@ -2526,22 +2994,35 @@
     {
      "nom": "Denis Podalydès",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Suliane Brahim",
+     "role": "interprète"
+    },
+    {
+     "nom": "Christian Gonon",
+     "role": "interprète"
+    },
+    {
+     "nom": "Bakary Sangaré",
+     "role": "interprète"
     }
    ],
    "lieuId": "comedie-francaise",
    "salle": "Richelieu",
    "debut": "2027-01-15",
    "fin": "2027-06-01",
-   "datesTexte": "15 janv. – 1er juin 2027",
+   "datesTexte": "15 janv. – 1er juin 2027, en alternance",
+   "horaires": "2h30 sans entracte",
    "note": 3,
-   "pronostic": true,
+   "pronostic": false,
    "pourquoi": "Première fois à Richelieu.",
    "lien": "https://comedie-francaise.fr/2026-2027/le-cid",
    "billetterie": null,
    "publicJeune": true,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "le-discours-d-un-roi",
@@ -2568,8 +3049,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "le-fantome-de-l-opera",
@@ -2593,8 +3074,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "le-mariage-de-figaro",
@@ -2616,17 +3097,19 @@
    ],
    "lieuId": "porte-saint-martin",
    "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
+   "debut": "2026-09-26",
+   "fin": "2026-12-31",
+   "datesTexte": "26 sept. – 31 déc. 2026",
+   "horaires": "mer. – ven. 20h, sam. 16h et 20h30, dim. 16h ; 2h15",
+   "note": 3,
    "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "billetterie": null,
+   "pourquoi": "Beaumarchais par Alain Françon, Vincent Dedienne en Figaro.",
+   "lien": "https://www.portestmartin.com/le-mariage-de-figaro",
+   "billetterie": "https://billetterie.portestmartin.fr/fr/manifestation/68/le_mariage_de_figaro",
    "publicJeune": false,
    "leonardYVa": true,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "le-pere",
@@ -2653,12 +3136,12 @@
    "note": 3,
    "pronostic": false,
    "pourquoi": "Nouvelle mise en scène de Zeller, Arditi dans le rôle d'André.",
-   "lien": "https://www.offi.fr/theatre/theatre-edouard-vii-2027/le-pere-106201.html",
-   "billetterie": null,
+   "lien": "https://www.theatreedouard7.com/spectacles/le-pere",
+   "billetterie": "https://billetterie-pld.tickandlive.com/evenement/le-pere?idwl=1",
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "le-petit-cirque",
@@ -2684,6 +3167,7 @@
    "debut": "2026-12-16",
    "fin": "2026-12-18",
    "datesTexte": "16 – 18 déc. 2026",
+   "horaires": "20h, ven. 19h",
    "note": 2,
    "pronostic": false,
    "pourquoi": "",
@@ -2691,8 +3175,8 @@
    "billetterie": null,
    "publicJeune": true,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "le-roi-lion",
@@ -2711,8 +3195,8 @@
    "billetterie": null,
    "publicJeune": true,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "le-serment-d-europe",
@@ -2726,22 +3210,35 @@
     {
      "nom": "Wajdi Mouawad",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Juliette Binoche",
+     "role": "interprète"
+    },
+    {
+     "nom": "Emmanuel Schwartz",
+     "role": "interprète"
+    },
+    {
+     "nom": "Leora Rivlin",
+     "role": "interprète"
     }
    ],
    "lieuId": "la-colline",
    "salle": "Grand théâtre",
    "debut": "2027-03-10",
    "fin": "2027-04-10",
-   "datesTexte": "10 mars – 10 avril 2027",
+   "datesTexte": "10 mars – 10 avril 2027, relâche dimanche et lundi",
+   "horaires": "20h30, mar. 19h30, sam. 17h ; dès 16 ans",
    "note": 4,
    "pronostic": false,
-   "pourquoi": "Avec Juliette Binoche. 2h20, dès 16 ans, en anglais, français et grec surtitrés. Créé à Épidaure en août 2025. Prix : 11 – 36,50 € ; 10 € étudiant -30 ans.",
+   "pourquoi": "Création d’Épidaure (2025) de Wajdi Mouawad, avec Juliette Binoche : Europe retrouve les trois filles qu’elle a abandonnées.",
    "lien": "https://www.colline.fr/spectacles/le-serment-deurope-0",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "le-silence",
@@ -2752,7 +3249,8 @@
    "salle": "Petit théâtre",
    "debut": "2027-05-18",
    "fin": "2027-06-12",
-   "datesTexte": "18 mai – 12 juin 2027",
+   "datesTexte": "18 mai – 12 juin 2027, relâche dimanche et lundi",
+   "horaires": "20h, mar. 19h",
    "note": 1,
    "pronostic": true,
    "pourquoi": "Inspiré d'Antonioni, 1h45.",
@@ -2760,8 +3258,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "le-temps-d-aimer",
@@ -2785,8 +3283,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "le-trouvere",
@@ -2798,24 +3296,45 @@
      "role": "compositeur"
     },
     {
-     "nom": "Àlex Ollé",
+     "nom": "Alex Ollé",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Timur Zangiev",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Tamara Wilson",
+     "role": "interprète"
+    },
+    {
+     "nom": "Saioa Hernández",
+     "role": "interprète"
+    },
+    {
+     "nom": "Yusif Eyvazov",
+     "role": "interprète"
+    },
+    {
+     "nom": "Quinn Kelsey",
+     "role": "interprète"
     }
    ],
    "lieuId": "opera-bastille",
    "salle": "",
    "debut": "2027-01-16",
    "fin": "2027-02-27",
-   "datesTexte": "16 janv. – 27 fév. 2027",
+   "datesTexte": "16 janv. – 27 févr. 2027",
+   "horaires": "2h50 avec entracte",
    "note": 2,
    "pronostic": false,
    "pourquoi": "Quinn Kelsey, Tamara Wilson.",
-   "lien": "https://www.operadeparis.fr/programmation/saison-26-27",
+   "lien": "https://www.operadeparis.fr/saison-26-27/opera/le-trouvere",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "le-ventre-de-paris",
@@ -2835,7 +3354,8 @@
    "salle": "",
    "debut": "2027-01-27",
    "fin": "2027-02-07",
-   "datesTexte": "27 janv. – 7 févr. 2027",
+   "datesTexte": "27 janv. – 7 févr. 2027, relâche le mardi",
+   "horaires": "19h30, sam. 17h, dim. 15h ; 3h avec entracte",
    "note": 2,
    "pronostic": true,
    "pourquoi": "Création.",
@@ -2843,8 +3363,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "lea-desandre",
@@ -2854,6 +3374,10 @@
     {
      "nom": "Lea Desandre",
      "role": "interprète"
+    },
+    {
+     "nom": "Thomas Dunford",
+     "role": "interprète"
     }
    ],
    "lieuId": "tce",
@@ -2861,13 +3385,15 @@
    "debut": "2027-06-02",
    "fin": "2027-06-02",
    "datesTexte": "mer. 2 juin 2027",
+   "horaires": "20h",
    "note": 2,
    "pronostic": false,
-   "pourquoi": "Avec Thomas Dunford au luth. Elle chante aussi dans Idomeneo à Bastille.",
-   "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/sung-recital/lea-desandre-1",
+   "pourquoi": "Programme « Manifest » (Haendel, Lully, Telemann) avec Thomas Dunford au luth. Elle chante aussi dans Idomeneo à Bastille.",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/recital-chant/lea-desandre",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
      "type": "Carte Jeunes TCE",
@@ -2877,8 +3403,7 @@
      "venteApprox": true,
      "condition": "Carte Jeunes TCE"
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "les-fausses-confidences",
@@ -2898,7 +3423,7 @@
    "salle": "Richelieu",
    "debut": "2027-06-03",
    "fin": "2027-07-25",
-   "datesTexte": "3 juin – 25 juill. 2027",
+   "datesTexte": "3 juin – 25 juill. 2027, en alternance",
    "note": 3,
    "pronostic": true,
    "pourquoi": "Création.",
@@ -2906,8 +3431,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "les-femmes-savantes",
@@ -2927,7 +3452,8 @@
    "salle": "Richelieu",
    "debut": "2027-04-02",
    "fin": "2027-07-15",
-   "datesTexte": "2 avril – 15 juill. 2027",
+   "datesTexte": "2 avril – 15 juill. 2027, en alternance",
+   "horaires": "2h10 sans entracte",
    "note": 3,
    "pronostic": false,
    "pourquoi": "Molière par Emma Dante.",
@@ -2935,8 +3461,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "les-miserables",
@@ -2956,51 +3482,78 @@
    "note": 3,
    "pronostic": false,
    "pourquoi": "Reprise de la production 2024. Tarif -30 ans à 10 € sur une sélection de dates.",
-   "lien": "https://www.tesla-mag.com/les-miserables-chatelet-2026/",
+   "lien": "https://www.chatelet.com/programmation/26-27/les-miserables-2026/",
    "billetterie": null,
    "publicJeune": true,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "les-pecheurs-de-perles",
    "titre": "Les Pêcheurs de perles",
    "categorie": "Opéra",
+   "sousGenre": "Mis en scène",
    "artistes": [
     {
      "nom": "Georges Bizet",
      "role": "compositeur"
+    },
+    {
+     "nom": "Pierre-André Weitz",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Marc Minkowski",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Pretty Yende",
+     "role": "interprète"
+    },
+    {
+     "nom": "Florian Sempey",
+     "role": "interprète"
+    },
+    {
+     "nom": "Amitai Pati",
+     "role": "interprète"
+    },
+    {
+     "nom": "Les Musiciens du Louvre",
+     "role": "interprète"
     }
    ],
    "lieuId": "tce",
    "salle": "",
    "debut": "2026-12-05",
    "fin": "2026-12-14",
-   "datesTexte": "5 – 14 déc. 2026",
+   "datesTexte": "sam. 5, lun. 7, mer. 9, ven. 11 et lun. 14 déc. 2026",
+   "horaires": "19h30, sam. 5 à 18h ; 2h environ",
    "note": 3,
    "pronostic": true,
-   "pourquoi": "Pretty Yende, Minkowski, nouvelle production. Nouvelle production Weitz, Pretty Yende, Minkowski. 2h. Représentations du 5 au 14 déc.",
-   "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/previews-for-young-people-under-30/les-pecheurs-de-perles-2-2-1",
+   "pourquoi": "Opéra mis en scène, nouvelle production de Pierre-André Weitz. Pretty Yende, Florian Sempey, Marc Minkowski.",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-mis-en-scene/les-pecheurs-de-perles-2",
    "billetterie": null,
    "publicJeune": true,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
-     "type": "Avant-première -30 ans",
+     "type": "Avant-première jeunes -30 ans",
      "date": "2026-12-03",
      "tarif": "20 €",
      "vente": "2026-09-03T10:00",
      "venteApprox": true,
-     "condition": "Carte Jeunes TCE"
+     "condition": "Moins de 30 ans, jeu. 3 déc. à 19h30"
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "les-sept-peches-capitaux",
-   "titre": "Les Sept Péchés capitaux",
+   "titre": "Les Sept Péchés capitaux (version de concert)",
    "categorie": "Opéra",
+   "sousGenre": "Version de concert",
    "artistes": [
     {
      "nom": "Kurt Weill",
@@ -3009,6 +3562,14 @@
     {
      "nom": "Bertolt Brecht",
      "role": "auteur"
+    },
+    {
+     "nom": "H. K. Gruber",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Nina Stemme",
+     "role": "interprète"
     }
    ],
    "lieuId": "tce",
@@ -3016,13 +3577,15 @@
    "debut": "2027-03-30",
    "fin": "2027-03-30",
    "datesTexte": "mar. 30 mars 2027",
+   "horaires": "19h30",
    "note": 2,
    "pronostic": false,
-   "pourquoi": "Nina Stemme.",
-   "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-version/die-sieben-todsunden-1",
+   "pourquoi": "Ballet chanté en version de concert, créé dans ce théâtre en 1933. Nina Stemme.",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-en-concert/les-sept-peches-capitaux-1",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
      "type": "Carte Jeunes TCE",
@@ -3032,8 +3595,7 @@
      "venteApprox": true,
      "condition": "Carte Jeunes TCE"
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "les-surs-hilton",
@@ -3060,8 +3622,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "les-trois-mousquetaires",
@@ -3090,8 +3652,8 @@
    "billetterie": null,
    "publicJeune": true,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "lorenzaccio",
@@ -3111,7 +3673,8 @@
    "salle": "",
    "debut": "2027-03-16",
    "fin": "2027-04-10",
-   "datesTexte": "16 mars – 10 avril 2027",
+   "datesTexte": "16 mars – 10 avril 2027, relâche dimanche et lundi",
+   "horaires": "19h (horaire avancé), sam. 17h ; 3h20 avec entracte",
    "note": 3,
    "pronostic": true,
    "pourquoi": "Grand drame romantique.",
@@ -3119,8 +3682,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "madame-de-sade",
@@ -3132,6 +3695,14 @@
      "role": "auteur"
     },
     {
+     "nom": "Stanislas Nordey",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Mélanie Thierry",
+     "role": "interprète"
+    },
+    {
      "nom": "Anne Brochet",
      "role": "interprète"
     }
@@ -3139,20 +3710,22 @@
    "lieuId": "bouffes-du-nord",
    "salle": "",
    "debut": null,
-   "fin": null,
+   "fin": "2026-11-22",
+   "datesTexte": "jusqu’au 22 nov. 2026, relâche le lundi",
+   "horaires": "20h, dim. 16h",
    "note": 2,
    "pronostic": false,
    "pourquoi": "Mishima, par Anne Brochet.",
-   "lien": "https://www.offi.fr/theatre/theatre-des-bouffes-du-nord-1562/madame-de-sade-107115.html",
+   "lien": "https://www.bouffesdunord.com/fr/la-saison/madame-de-sade",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "madeleine-tornade",
-   "titre": "Madeleine Tornade",
+   "titre": "Mais où est donc passée Madeleine Tornade ?",
    "categorie": "Théâtre",
    "artistes": [
     {
@@ -3161,40 +3734,55 @@
     }
    ],
    "lieuId": "nanterre-amandiers",
-   "salle": "",
+   "salle": "Petite Salle",
    "debut": "2026-11-26",
    "fin": "2026-12-05",
    "datesTexte": "26 nov. – 5 déc. 2026",
+   "horaires": "1h",
    "note": 1,
    "pronostic": true,
    "pourquoi": "Petite salle.",
-   "lien": "https://nanterre-amandiers.com/",
+   "lien": "https://nanterre-amandiers.com/saison/saison-2026-2027/mais-ou-est-donc-passee-madeleine-tornade",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "magdalena-creation",
    "titre": "Magdalena",
    "categorie": "Opéra",
-   "sousGenre": "Création mondiale",
-   "artistes": [],
+   "sousGenre": "Théâtre musical, création",
+   "artistes": [
+    {
+     "nom": "Joséphine Stephenson",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Ambre Kahan",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Julie Fuchs",
+     "role": "interprète"
+    }
+   ],
    "lieuId": "athenee",
-   "salle": "",
+   "salle": "Grande Salle",
    "debut": "2027-01-28",
    "fin": "2027-02-13",
    "datesTexte": "28 janv. – 13 fév. 2027",
-   "note": 1,
+   "horaires": "1h45",
+   "note": 2,
    "pronostic": true,
-   "pourquoi": "Création mondiale.",
-   "lien": null,
+   "pourquoi": "Spectacle musical d’Ambre Kahan sur Marie Madeleine, entre baroque, musiques orientales et électroniques, avec Julie Fuchs.",
+   "lien": "https://www.athenee-theatre.com/saison/spectacle/magdalena.htm",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "maldoror",
@@ -3206,32 +3794,51 @@
      "role": "auteur"
     },
     {
+     "nom": "Roberto Bolaño",
+     "role": "auteur"
+    },
+    {
      "nom": "Julien Gosselin",
      "role": "mise en scène"
     }
    ],
    "lieuId": "odeon",
-   "salle": "Berthier",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
+   "salle": "Berthier Paris 17",
+   "debut": "2027-01-15",
+   "fin": "2027-02-06",
+   "datesTexte": "15 janv. – 6 févr. 2027",
+   "horaires": "5h environ ; plusieurs langues surtitrées",
+   "note": 3,
+   "pronostic": true,
+   "pourquoi": "Création de Julien Gosselin, directeur de l’Odéon, d’après Les Chants de Maldoror et Roberto Bolaño.",
+   "lien": "https://www.theatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/julien-gosselin-maldoror-s26-27",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": true,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "maria-stuarda",
-   "titre": "Maria Stuarda",
+   "titre": "Maria Stuarda (version de concert)",
    "categorie": "Opéra",
+   "sousGenre": "Version de concert",
    "artistes": [
     {
      "nom": "Gaetano Donizetti",
      "role": "compositeur"
+    },
+    {
+     "nom": "Clelia Cafiero",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Ermonela Jaho",
+     "role": "interprète"
+    },
+    {
+     "nom": "Anastasia Bartoli",
+     "role": "interprète"
     }
    ],
    "lieuId": "tce",
@@ -3239,13 +3846,15 @@
    "debut": "2027-04-01",
    "fin": "2027-04-01",
    "datesTexte": "jeu. 1er avril 2027",
+   "horaires": "19h30 ; 2h15 environ",
    "note": 3,
    "pronostic": false,
-   "pourquoi": "Ermonela Jaho.",
-   "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-version/maria-stuarda-1",
+   "pourquoi": "Version de concert. Ermonela Jaho face à Anastasia Bartoli (qui remplace Marina Viotti).",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-en-concert/maria-stuarda",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
      "type": "Carte Jeunes TCE",
@@ -3255,8 +3864,7 @@
      "venteApprox": true,
      "condition": "Carte Jeunes TCE"
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "marina-rebeka-jonas-kaufmann",
@@ -3270,6 +3878,10 @@
     {
      "nom": "Jonas Kaufmann",
      "role": "interprète"
+    },
+    {
+     "nom": "Jochen Rieder",
+     "role": "direction musicale"
     }
    ],
    "lieuId": "tce",
@@ -3277,13 +3889,15 @@
    "debut": "2027-04-11",
    "fin": "2027-04-11",
    "datesTexte": "dim. 11 avril 2027",
+   "horaires": "20h",
    "note": 4,
    "pronostic": false,
-   "pourquoi": "Tout Verdi.",
-   "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/sung-recital/marina-rebeka-jonas-kaufmann-1",
+   "pourquoi": "Tout Verdi, avec orchestre : Aida, Un bal masqué, Otello, Don Carlo.",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/recital-chant/marina-rebeka-jonas-kaufmann",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
      "type": "Carte Jeunes TCE",
@@ -3293,8 +3907,7 @@
      "venteApprox": true,
      "condition": "Carte Jeunes TCE"
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "may-b",
@@ -3311,6 +3924,7 @@
    "debut": "2027-02-26",
    "fin": "2027-02-28",
    "datesTexte": "26 – 28 févr. 2027",
+   "horaires": "ven. 20h, sam. 18h, dim. 17h",
    "note": 4,
    "pronostic": false,
    "pourquoi": "Chef-d'œuvre de la danse d'après Beckett.",
@@ -3318,8 +3932,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "merci-de-votre-collaboration",
@@ -3337,18 +3951,19 @@
    ],
    "lieuId": "rond-point",
    "salle": "",
-   "debut": "2026-11-01",
+   "debut": "2026-11-04",
    "fin": "2026-11-14",
-   "datesTexte": "jusqu'au 14 nov. 2026",
+   "datesTexte": "4 – 14 nov. 2026, du mercredi au dimanche",
+   "horaires": "20h30, sam. 19h30, dim. 15h",
    "note": 3,
    "pronostic": true,
    "pourquoi": "Première pièce de Lola Lafon, avec Zita Hanrot. 1h40. Reprise ensuite au Théâtre de l'Atelier du 15 janv. au 28 févr. 2027.",
-   "lien": "https://www.theatredurondpoint.fr/files/44dfdad8/brochure_saison_26_27.pdf",
+   "lien": "https://www.theatredurondpoint.fr/fr/programmation/saison-26-27/theatre/merci-de-votre-collaboration",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "miroir-de-nos-peines",
@@ -3358,20 +3973,38 @@
     {
      "nom": "Hèctor Parra",
      "role": "compositeur"
+    },
+    {
+     "nom": "Mariame Clément",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Ingo Metzmacher",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Vannina Santoni",
+     "role": "interprète"
+    },
+    {
+     "nom": "Laurent Naouri",
+     "role": "interprète"
     }
    ],
    "lieuId": "palais-garnier",
    "salle": "",
-   "debut": "2027-04-01",
-   "fin": "2027-04-30",
-   "datesTexte": "avril 2027",
+   "debut": "2027-04-24",
+   "fin": "2027-05-11",
+   "datesTexte": "24 avril – 11 mai 2027",
+   "horaires": "3h avec entracte",
    "note": 2,
    "pronostic": true,
-   "pourquoi": "Création. Avant-première jeunes le 21 avril.",
+   "pourquoi": "Création mondiale d’Hèctor Parra d’après Pierre Lemaitre, mise en scène de Mariame Clément.",
    "lien": "https://www.operadeparis.fr/saison-26-27/opera/miroir-de-nos-peines",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
      "type": "Avant-première jeunes",
@@ -3381,17 +4014,29 @@
      "venteApprox": false,
      "condition": "Nés après le 1er janvier 1998, 2 places max."
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "mitridate",
-   "titre": "Mitridate",
+   "titre": "Mitridate (version de concert)",
    "categorie": "Opéra",
+   "sousGenre": "Version de concert",
    "artistes": [
     {
      "nom": "Nicola Porpora",
      "role": "compositeur"
+    },
+    {
+     "nom": "Andrea Buccarella",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Michael Spyres",
+     "role": "interprète"
+    },
+    {
+     "nom": "Il Pomo d’Oro",
+     "role": "interprète"
     }
    ],
    "lieuId": "tce",
@@ -3399,13 +4044,15 @@
    "debut": "2027-04-26",
    "fin": "2027-04-26",
    "datesTexte": "lun. 26 avril 2027",
+   "horaires": "19h30 ; 2h30 environ",
    "note": 2,
    "pronostic": false,
-   "pourquoi": "Michael Spyres. Rareté.",
-   "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-version/mitridate-1",
+   "pourquoi": "Version de concert. Michael Spyres, Il Pomo d’Oro. Rareté, un mois après le Mitridate de Mozart.",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-en-concert/mitridate",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
      "type": "Carte Jeunes TCE",
@@ -3415,17 +4062,25 @@
      "venteApprox": true,
      "condition": "Carte Jeunes TCE"
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "mitridate-re-di-ponto",
-   "titre": "Mitridate, re di Ponto",
+   "titre": "Mitridate, re di Ponto (version de concert)",
    "categorie": "Opéra",
+   "sousGenre": "Version de concert",
    "artistes": [
     {
      "nom": "Wolfgang Amadeus Mozart",
      "role": "compositeur"
+    },
+    {
+     "nom": "Francesco Corti",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Kammerorchester Basel",
+     "role": "interprète"
     }
    ],
    "lieuId": "tce",
@@ -3433,13 +4088,15 @@
    "debut": "2027-03-12",
    "fin": "2027-03-12",
    "datesTexte": "ven. 12 mars 2027",
+   "horaires": "19h30 ; 3h environ",
    "note": 2,
    "pronostic": false,
-   "pourquoi": "Francesco Corti. À coupler avec le Mitridate de Porpora en avril.",
-   "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-version/mitridate-re-di-ponto-1",
+   "pourquoi": "Version de concert. Francesco Corti et le Kammerorchester Basel. À coupler avec le Mitridate de Porpora en avril.",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-en-concert/mitridate-re-di-ponto",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
      "type": "Carte Jeunes TCE",
@@ -3449,8 +4106,7 @@
      "venteApprox": true,
      "condition": "Carte Jeunes TCE"
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "mon-vrai-nom-est-elisabeth",
@@ -3461,16 +4117,17 @@
    "salle": "",
    "debut": "2027-02-23",
    "fin": "2027-03-14",
-   "datesTexte": "23 févr. – 14 mars 2027",
+   "datesTexte": "23 févr. – 14 mars 2027, relâche le lundi et le dim. 28 févr.",
+   "horaires": "19h30, sam. 18h30, dim. 15h30",
    "note": 1,
    "pronostic": true,
    "pourquoi": "",
-   "lien": "https://www.theatredurondpoint.fr/files/44dfdad8/brochure_saison_26_27.pdf",
+   "lien": "https://www.theatredurondpoint.fr/fr/programmation/saison-26-27/theatre/mon-vrai-nom-est-elisabeth",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "muette",
@@ -3494,8 +4151,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "my-fierce-ignorant-step",
@@ -3511,7 +4168,8 @@
    "salle": "",
    "debut": "2027-03-26",
    "fin": "2027-03-27",
-   "datesTexte": "26 – 27 mars 2027",
+   "datesTexte": "ven. 26 et sam. 27 mars 2027 (aussi au Rond-Point du 10 au 12 déc. 2026)",
+   "horaires": "ven. 20h, sam. 18h ; 1h",
    "note": 3,
    "pronostic": false,
    "pourquoi": "Danse.",
@@ -3519,8 +4177,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "neanderthal-repetitions-publiques",
@@ -3545,8 +4203,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "nocturne-parade",
@@ -3563,6 +4221,7 @@
    "debut": "2027-03-20",
    "fin": "2027-03-23",
    "datesTexte": "20 – 23 mars 2027",
+   "horaires": "1h05 ; dès 10 ans",
    "note": 3,
    "pronostic": false,
    "pourquoi": "Aussi au TPM fin février.",
@@ -3570,8 +4229,8 @@
    "billetterie": null,
    "publicJeune": true,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "noh-climax",
@@ -3588,15 +4247,16 @@
    "debut": "2026-12-03",
    "fin": "2026-12-06",
    "datesTexte": "3 – 6 déc. 2026",
+   "horaires": "20h, matinées sam. et dim. à 15h",
    "note": 3,
    "pronostic": true,
    "pourquoi": "Création mondiale, avec Atsuo Kanze.",
-   "lien": "https://www.theatredelaville-paris.com/en/spectacles/saison-26-27/theatre/hiroshi-sugimoto-noh-climax",
+   "lien": "https://www.theatredelaville-paris.com/fr/spectacles/saison-26-27/theatre/hiroshi-sugimoto-noh-climax",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "nono",
@@ -3610,17 +4270,18 @@
    ],
    "lieuId": "zenith-paris",
    "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
+   "debut": "2027-01-21",
+   "fin": "2027-01-21",
+   "datesTexte": "jeu. 21 janv. 2027",
+   "note": 2,
    "pronostic": false,
-   "pourquoi": "",
+   "pourquoi": "Concert au Zénith.",
    "lien": null,
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": true,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "oedipe-roi",
@@ -3637,18 +4298,20 @@
     }
    ],
    "lieuId": "odeon",
-   "salle": "Berthier",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
+   "salle": "Berthier Paris 17",
+   "debut": "2026-11-14",
+   "fin": "2026-11-29",
+   "datesTexte": "14 – 29 nov. 2026",
+   "horaires": "4h avec entracte ; dès 16 ans",
+   "note": 2,
+   "pronostic": true,
+   "pourquoi": "Eddy D’Aranjo relit Œdipe roi à partir de sa propre histoire familiale. Quatre heures.",
+   "lien": "https://www.theatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/eddy-d-aranjo-oedipe-roi-s26-27",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": true,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "olalaland",
@@ -3666,9 +4329,9 @@
    ],
    "lieuId": "theatre-de-la-bastille",
    "salle": "",
-   "debut": "2027-03-01",
-   "fin": "2027-03-31",
-   "datesTexte": "mars 2027",
+   "debut": "2027-03-11",
+   "fin": "2027-03-18",
+   "datesTexte": "11 – 18 mars 2027",
    "note": 2,
    "pronostic": false,
    "pourquoi": "",
@@ -3676,13 +4339,14 @@
    "billetterie": null,
    "publicJeune": true,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "orphee",
    "titre": "Orphée",
    "categorie": "Opéra",
+   "sousGenre": "Mis en scène",
    "artistes": [
     {
      "nom": "Christoph Willibald Gluck",
@@ -3691,32 +4355,48 @@
     {
      "nom": "Hector Berlioz",
      "role": "compositeur"
+    },
+    {
+     "nom": "Ted Huffman",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Speranza Scappucci",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Marie-Nicole Lemieux",
+     "role": "interprète"
+    },
+    {
+     "nom": "Les Siècles",
+     "role": "interprète"
     }
    ],
    "lieuId": "tce",
    "salle": "",
-   "debut": "2027-04-18",
+   "debut": "2027-04-20",
    "fin": "2027-04-29",
-   "datesTexte": "dim. 18 avril 2027, 19h30",
-   "horaires": "19h30",
+   "datesTexte": "mar. 20, ven. 23, dim. 25, mar. 27 et jeu. 29 avril 2027",
+   "horaires": "19h30, dim. 25 à 17h ; 1h40 environ",
    "note": 3,
    "pronostic": true,
-   "pourquoi": "Puis 20 – 29 avril.",
-   "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/staged-opera/orphee-1",
+   "pourquoi": "Opéra mis en scène par Ted Huffman, version Berlioz. Marie-Nicole Lemieux en Orphée, Les Siècles, Speranza Scappucci.",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-mis-en-scene/orphee",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
-     "type": "Avant-première -30 ans",
+     "type": "Avant-première jeunes -30 ans",
      "date": "2027-04-18",
      "tarif": "20 €",
      "vente": "2027-01-18T10:00",
      "venteApprox": true,
-     "condition": "Carte Jeunes TCE"
+     "condition": "Moins de 30 ans, dim. 18 avril à 19h30"
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "oum",
@@ -3733,15 +4413,16 @@
    "debut": "2027-01-14",
    "fin": "2027-01-17",
    "datesTexte": "14 – 17 janv. 2027",
+   "horaires": "21h, sam. 20h, dim. 17h",
    "note": 2,
    "pronostic": false,
    "pourquoi": "Six danseurs et deux musiciens autour d'Oum Kalthoum.",
-   "lien": "https://www.theatredurondpoint.fr/files/44dfdad8/brochure_saison_26_27.pdf",
+   "lien": "https://www.theatredurondpoint.fr/fr/programmation/saison-26-27/danse/oum",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "piano-man",
@@ -3751,31 +4432,49 @@
     {
      "nom": "Marcus Lindeen",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Marianne Ségol",
+     "role": "artiste"
     }
    ],
    "lieuId": "nanterre-amandiers",
-   "salle": "",
+   "salle": "Petite Salle",
    "debut": "2026-11-12",
    "fin": "2026-11-22",
    "datesTexte": "12 – 22 nov. 2026",
+   "horaires": "1h20 ; sam. 14 et 21 à 18h30, dim. 22 à 15h30",
    "note": 2,
    "pronostic": false,
    "pourquoi": "Théâtre documentaire.",
-   "lien": "https://nanterre-amandiers.com/",
+   "lien": "https://nanterre-amandiers.com/saison/saison-2026-2027/piano-man",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "platee",
-   "titre": "Platée",
+   "titre": "Platée (version de concert)",
    "categorie": "Opéra",
+   "sousGenre": "Version de concert",
    "artistes": [
     {
      "nom": "Jean-Philippe Rameau",
      "role": "compositeur"
+    },
+    {
+     "nom": "Camille Delaforge",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Cyrille Dubois",
+     "role": "interprète"
+    },
+    {
+     "nom": "Il Caravaggio",
+     "role": "interprète"
     }
    ],
    "lieuId": "tce",
@@ -3783,13 +4482,15 @@
    "debut": "2027-06-24",
    "fin": "2027-06-24",
    "datesTexte": "jeu. 24 juin 2027",
+   "horaires": "19h30 ; 2h15 environ",
    "note": 2,
    "pronostic": false,
-   "pourquoi": "Trois heures de comédie lyrique.",
-   "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/opera-in-concert-version/platee-2-1",
+   "pourquoi": "Version de concert. Cyrille Dubois en Platée, Il Caravaggio et Camille Delaforge.",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-en-concert/platee-2",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
      "type": "Carte Jeunes TCE",
@@ -3799,8 +4500,7 @@
      "venteApprox": true,
      "condition": "Carte Jeunes TCE"
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "pulsations-childs",
@@ -3824,20 +4524,21 @@
      "role": "chorégraphie"
     }
    ],
-   "lieuId": "opera-de-paris",
+   "lieuId": "palais-garnier",
    "salle": "",
-   "debut": null,
-   "fin": null,
-   "datesTexte": "saison 2026-27",
+   "debut": "2026-12-04",
+   "fin": "2027-01-02",
+   "datesTexte": "4 déc. 2026 – 2 janv. 2027",
+   "horaires": "1h50 avec entracte",
    "note": 2,
    "pronostic": false,
-   "pourquoi": "Programme contemporain.",
-   "lien": "https://www.operadeparis.fr/programmation/saison-26-27",
+   "pourquoi": "Programme mixte : création de Lucinda Childs sur Max Richter, Martha Graham, Sol León et Paul Lightfoot.",
+   "lien": "https://www.operadeparis.fr/saison-26-27/ballet/pulsations",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "race-d-ep",
@@ -3858,6 +4559,7 @@
    "debut": "2027-05-25",
    "fin": "2027-05-27",
    "datesTexte": "25 – 27 mai 2027",
+   "horaires": "2h environ",
    "note": 2,
    "pronostic": true,
    "pourquoi": "",
@@ -3865,8 +4567,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "ravage-tout-court",
@@ -3883,6 +4585,7 @@
    "debut": "2027-05-25",
    "fin": "2027-05-28",
    "datesTexte": "25 – 28 mai 2027",
+   "horaires": "20h ; 1h30",
    "note": 2,
    "pronostic": false,
    "pourquoi": "Théâtre documentaire.",
@@ -3890,8 +4593,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "rave-l-age-d-or",
@@ -3919,8 +4622,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "raymonda",
@@ -3934,9 +4637,10 @@
    ],
    "lieuId": "opera-bastille",
    "salle": "",
-   "debut": "2027-06-01",
-   "fin": "2027-06-30",
-   "datesTexte": "juin 2027",
+   "debut": "2027-06-15",
+   "fin": "2027-07-14",
+   "datesTexte": "15 juin – 14 juill. 2027",
+   "horaires": "3h05 avec 2 entractes",
    "note": 3,
    "pronostic": false,
    "pourquoi": "Avant-première jeunes le 14 juin. Grand classique Noureev.",
@@ -3944,6 +4648,7 @@
    "billetterie": null,
    "publicJeune": true,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
      "type": "Avant-première jeunes",
@@ -3953,8 +4658,7 @@
      "venteApprox": false,
      "condition": "Nés après le 1er janvier 1998, 2 places max."
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "repetitions-publiques-danse",
@@ -3973,8 +4677,8 @@
    "billetterie": null,
    "publicJeune": true,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "restart",
@@ -3991,15 +4695,16 @@
    "debut": "2026-12-17",
    "fin": "2026-12-19",
    "datesTexte": "17 – 19 déc. 2026",
+   "horaires": "20h",
    "note": 2,
    "pronostic": true,
    "pourquoi": "12 danseurs, première en France.",
-   "lien": "https://www.theatredelaville-paris.com/en/spectacles/saison-26-27/danse/jacob-jonas-restart",
+   "lien": "https://www.theatredelaville-paris.com/fr/spectacles/saison-26-27/danse/jacob-jonas-restart",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "resurrection-un-cas-de-conscience",
@@ -4017,6 +4722,22 @@
     {
      "nom": "Simon Delétang",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Guillaume Gallienne",
+     "role": "interprète"
+    },
+    {
+     "nom": "Loïc Corbery",
+     "role": "interprète"
+    },
+    {
+     "nom": "Marina Hands",
+     "role": "interprète"
+    },
+    {
+     "nom": "Christian Gonon",
+     "role": "interprète"
     }
    ],
    "lieuId": "comedie-francaise",
@@ -4031,8 +4752,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "rhinoceros",
@@ -4050,23 +4771,25 @@
    ],
    "lieuId": "theatre-de-la-ville",
    "salle": "Sarah Bernhardt",
-   "debut": null,
-   "fin": null,
-   "datesTexte": "saison 26-27, dates à vérifier",
+   "debut": "2027-02-23",
+   "fin": "2027-03-07",
+   "datesTexte": "23 févr. – 7 mars 2027, relâche les lundis et vendredis",
+   "horaires": "20h, dim. à 15h",
    "note": 3,
    "pronostic": false,
    "pourquoi": "Reprise du spectacle phare de la maison.",
-   "lien": "https://www.theatredelaville-paris.com/en/spectacles/saison-26-27/theatre/rhinoceros-eugene-ionesco-emmanuel-demarcy-mota",
+   "lien": "https://www.theatredelaville-paris.com/fr/spectacles/saison-26-27/theatre/rhinoceros-eugene-ionesco-emmanuel-demarcy-mota",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "rinaldo",
    "titre": "Rinaldo",
    "categorie": "Opéra",
+   "sousGenre": "Mis en scène",
    "artistes": [
     {
      "nom": "Georg Friedrich Haendel",
@@ -4075,31 +4798,52 @@
     {
      "nom": "Valentina Carrasco",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Philippe Jaroussky",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Carlo Vistoli",
+     "role": "interprète"
+    },
+    {
+     "nom": "Karine Deshayes",
+     "role": "interprète"
+    },
+    {
+     "nom": "Regula Mühlemann",
+     "role": "interprète"
+    },
+    {
+     "nom": "Ensemble Artaserse",
+     "role": "interprète"
     }
    ],
    "lieuId": "tce",
    "salle": "",
    "debut": "2027-02-22",
    "fin": "2027-02-28",
-   "datesTexte": "22 – 28 fév. 2027",
+   "datesTexte": "lun. 22, mer. 24, ven. 26 et dim. 28 févr. 2027",
+   "horaires": "19h30, dim. 28 à 17h ; 2h30 environ",
    "note": 3,
    "pronostic": true,
-   "pourquoi": "Jaroussky à la direction. Mise en scène Valentina Carrasco, Jaroussky à la direction. Puis 22 – 28 févr.",
-   "lien": "https://www.theatrechampselysees.fr/en/season-2026-27/staged-opera/rinaldo-2-1",
+   "pourquoi": "Opéra mis en scène par Valentina Carrasco, Philippe Jaroussky à la direction. Carlo Vistoli, Karine Deshayes.",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-mis-en-scene/rinaldo-2",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
-     "type": "Avant-première -30 ans",
+     "type": "Avant-première jeunes -30 ans",
      "date": "2027-02-20",
      "tarif": "20 €",
      "vente": "2026-11-20T10:00",
      "venteApprox": true,
-     "condition": "Carte Jeunes TCE"
+     "condition": "Moins de 30 ans, sam. 20 févr. à 19h30"
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "rituel-4-le-grand-debat",
@@ -4113,13 +4857,26 @@
     {
      "nom": "Louise Hémon",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Emmanuelle Lafon",
+     "role": "interprète"
+    },
+    {
+     "nom": "Laurent Poitrenaux",
+     "role": "interprète"
+    },
+    {
+     "nom": "Laurent Capelluto",
+     "role": "interprète"
     }
    ],
    "lieuId": "la-colline",
    "salle": "Petit théâtre",
    "debut": "2027-02-23",
    "fin": "2027-03-26",
-   "datesTexte": "23 févr. – 26 mars 2027",
+   "datesTexte": "23 févr. – 26 mars 2027, relâche dimanche et lundi",
+   "horaires": "20h, mar. 19h, sam. 17h30",
    "note": 2,
    "pronostic": true,
    "pourquoi": "Forme courte, 1h.",
@@ -4127,8 +4884,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "rituels-lifar",
@@ -4140,7 +4897,7 @@
      "role": "chorégraphie"
     },
     {
-     "nom": "Binyamini",
+     "nom": "Shahar Binyamini",
      "role": "chorégraphie"
     },
     {
@@ -4153,15 +4910,16 @@
    "debut": "2026-12-02",
    "fin": "2027-01-02",
    "datesTexte": "2 déc. 2026 – 2 janv. 2027",
+   "horaires": "2h25 avec 2 entractes",
    "note": 3,
    "pronostic": false,
-   "pourquoi": "Programme mixte, 25 – 175 €.",
-   "lien": "https://www.operadeparis.fr/programmation/saison-26-27",
+   "pourquoi": "Programme mixte Lifar, Shahar Binyamini et Pina Bausch.",
+   "lien": "https://www.operadeparis.fr/saison-26-27/ballet/rituels",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "robert-badinter-l-enrage-de-justice",
@@ -4184,8 +4942,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "ruy-blas",
@@ -4199,22 +4957,47 @@
     {
      "nom": "Julie Duclos",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Stéphane Varupenne",
+     "role": "interprète"
+    },
+    {
+     "nom": "Morgane Real",
+     "role": "interprète"
+    },
+    {
+     "nom": "Thierry Hancisse",
+     "role": "interprète"
+    },
+    {
+     "nom": "Sébastien Pouderoux",
+     "role": "interprète"
+    },
+    {
+     "nom": "Laurent Stocker",
+     "role": "interprète"
+    },
+    {
+     "nom": "Danièle Lebrun",
+     "role": "interprète"
     }
    ],
    "lieuId": "comedie-francaise",
    "salle": "Richelieu",
    "debut": "2026-10-15",
    "fin": "2027-01-27",
-   "datesTexte": "15 oct. 2026 – 27 janv. 2027",
+   "datesTexte": "15 oct. 2026 – 27 janv. 2027, en alternance",
+   "horaires": "2h45 avec entracte ; au cinéma en direct le 3 déc.",
    "note": 3,
-   "pronostic": true,
+   "pronostic": false,
    "pourquoi": "Création, absent de la CF depuis 25 ans. 2h45.",
    "lien": "https://comedie-francaise.fr/2026-2027/ruy-blas",
    "billetterie": null,
    "publicJeune": true,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "seppuku",
@@ -4224,21 +5007,31 @@
     {
      "nom": "Angélica Liddell",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Yukio Mishima",
+     "role": "auteur"
+    },
+    {
+     "nom": "Angélica Liddell",
+     "role": "interprète"
     }
    ],
    "lieuId": "odeon",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
+   "salle": "Odéon Paris 6",
+   "debut": "2027-01-19",
+   "fin": "2027-02-05",
+   "datesTexte": "19 janv. – 5 févr. 2027",
+   "horaires": "2h ; en japonais et espagnol surtitrés",
+   "note": 3,
    "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
+   "pourquoi": "Dernier volet de la Trilogie des funérailles d’Angélica Liddell, autour de la mort rituelle de Mishima et du nô Hagoromo.",
+   "lien": "https://www.theatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/angelica-liddell-seppuku-el-funeral-de-mishima-s26-27",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": true,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "shabaab",
@@ -4255,15 +5048,16 @@
    "debut": "2027-02-01",
    "fin": "2027-02-03",
    "datesTexte": "1er – 3 févr. 2027",
+   "horaires": "20h ; 1h",
    "note": 1,
    "pronostic": false,
    "pourquoi": "Danse.",
-   "lien": "https://www.theatre-bastille.com/",
+   "lien": "https://www.theatre-bastille.com/saison-26-27/shabaab",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "shrek-le-musical",
@@ -4273,17 +5067,17 @@
    "lieuId": "folies-bergere",
    "salle": "",
    "debut": "2026-10-02",
-   "fin": "2027-01-17",
-   "datesTexte": "2 oct. 2026 – 17 janv. 2027",
+   "fin": "2027-01-20",
+   "datesTexte": "jusqu’au 20 janv. 2027",
    "note": 1,
    "pronostic": false,
    "pourquoi": "Plutôt familial, avec Chantal Ladesou.",
-   "lien": "https://www.sortiraparis.com/scenes/spectacle/guides/197336-spectacles-musicaux-paris",
+   "lien": "https://www.foliesbergere.com/fr/Shrek-Le-Musical-Le-Spectacle-2-Octobre-2026-Au-17-Janvier-2027-Billetterie-Paris",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "singin-in-the-rain",
@@ -4302,8 +5096,8 @@
    "billetterie": null,
    "publicJeune": true,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "steven-cohen-people-will-people-you",
@@ -4319,16 +5113,17 @@
    "salle": "",
    "debut": "2026-11-24",
    "fin": "2026-12-05",
-   "datesTexte": "24 nov. – 5 déc. 2026",
+   "datesTexte": "24 nov. – 5 déc. 2026, sept représentations",
+   "horaires": "1h10 ; en anglais traduit",
    "note": 2,
    "pronostic": false,
    "pourquoi": "Performance.",
-   "lien": "https://www.mc93.com/",
+   "lien": "https://www.mc93.com/saison/people-will-people-you",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "suzanne",
@@ -4342,17 +5137,19 @@
    ],
    "lieuId": "theatre-montparnasse",
    "salle": "",
-   "debut": null,
+   "debut": "2026-09-25",
    "fin": null,
+   "datesTexte": "depuis le 25 sept. 2026",
+   "horaires": "mer. et jeu. 21h, ven. et sam. 19h, dim. 17h ; 10 € pour les moins de 26 ans",
    "note": 2,
    "pronostic": false,
    "pourquoi": "Ancienne sociétaire de la CF.",
-   "lien": "https://www.offi.fr/theatre/theatre-montparnasse-2825/suzanne-107288.html",
+   "lien": "https://www.theatremontparnasse.com/spectacle/suzanne/",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "tame-impala",
@@ -4366,17 +5163,19 @@
    ],
    "lieuId": "accor-arena",
    "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
+   "debut": "2027-06-12",
+   "fin": "2027-06-13",
+   "datesTexte": "sam. 12 et dim. 13 juin 2027",
+   "horaires": "19h45 ; Wet Leg en première partie",
+   "note": 2,
    "pronostic": false,
-   "pourquoi": "",
+   "pourquoi": "Tournée Deadbeat de Kevin Parker, deux soirs à l’Accor Arena.",
    "lien": null,
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": true,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "tartuffe-van-hove",
@@ -4403,37 +5202,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
-  },
-  {
-   "id": "thesee",
-   "titre": "Thésée",
-   "categorie": "Théâtre",
-   "artistes": [
-    {
-     "nom": "Valérie Dréville",
-     "role": "interprète"
-    },
-    {
-     "nom": "Guy Cassiers",
-     "role": "mise en scène"
-    }
-   ],
-   "lieuId": "nanterre-amandiers",
-   "salle": "",
-   "debut": "2027-04-23",
-   "fin": "2027-04-25",
-   "datesTexte": "23 – 25 avril 2027",
-   "note": 2,
-   "pronostic": false,
-   "pourquoi": "Aussi aux Gémeaux en décembre.",
-   "lien": "https://nanterre-amandiers.com/",
-   "billetterie": null,
-   "publicJeune": false,
-   "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "ecarte",
+   "offres": []
   },
   {
    "id": "thesee-sa-vie-nouvelle",
@@ -4441,28 +5211,33 @@
    "categorie": "Théâtre",
    "artistes": [
     {
-     "nom": "Valérie Dréville",
-     "role": "interprète"
+     "nom": "Camille de Toledo",
+     "role": "auteur"
     },
     {
      "nom": "Guy Cassiers",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Valérie Dréville",
+     "role": "interprète"
     }
    ],
    "lieuId": "les-gemeaux",
    "salle": "",
    "debut": "2026-12-09",
    "fin": "2026-12-11",
-   "datesTexte": "9 – 11 déc. 2026",
+   "datesTexte": "9 – 11 déc. 2026 aux Gémeaux, puis 23 – 25 avril 2027 à Nanterre-Amandiers",
+   "horaires": "20h ; 1h30",
    "note": 3,
    "pronostic": false,
-   "pourquoi": "",
+   "pourquoi": "Guy Cassiers adapte le roman de Camille de Toledo, avec Valérie Dréville. TTT Télérama.",
    "lien": "https://www.lesgemeaux.com/spectacles/thesee-sa-vie-nouvelle/",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "thrice",
@@ -4486,8 +5261,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "tout-doit-disparaitre",
@@ -4503,7 +5278,8 @@
    "salle": "",
    "debut": "2027-05-21",
    "fin": "2027-06-01",
-   "datesTexte": "21 mai – 1er juin 2027",
+   "datesTexte": "21 mai – 1er juin 2027, relâche le dimanche",
+   "horaires": "20h, sam. 18h, 31 mai et 1er juin à 21h ; 1h15",
    "note": 2,
    "pronostic": false,
    "pourquoi": "Seule en scène entre théâtre et philosophie, en dialogue avec la voix enregistrée de son père.",
@@ -4511,8 +5287,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "turandot",
@@ -4526,6 +5302,22 @@
     {
      "nom": "Robert Wilson",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Eun Sun Kim",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Elza van den Heever",
+     "role": "interprète"
+    },
+    {
+     "nom": "Anna Pirozzi",
+     "role": "interprète"
+    },
+    {
+     "nom": "Yusif Eyvazov",
+     "role": "interprète"
     }
    ],
    "lieuId": "opera-bastille",
@@ -4533,15 +5325,16 @@
    "debut": "2026-11-27",
    "fin": "2026-12-27",
    "datesTexte": "27 nov. – 27 déc. 2026",
+   "horaires": "2h40 avec entracte",
    "note": 3,
    "pronostic": false,
    "pourquoi": "Tamara Wilson, Eun Sun Kim.",
-   "lien": "https://www.operadeparis.fr/programmation/saison-26-27",
+   "lien": "https://www.operadeparis.fr/saison-26-27/opera/turandot",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "ubu-roi",
@@ -4568,8 +5361,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "un-coin-de-paradis",
@@ -4601,8 +5394,8 @@
    "billetterie": null,
    "publicJeune": true,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "un-hamlet-de-moins",
@@ -4622,7 +5415,8 @@
    "salle": "",
    "debut": "2027-03-03",
    "fin": "2027-03-12",
-   "datesTexte": "3 – 12 mars 2027",
+   "datesTexte": "3 – 12 mars 2027, relâche le dimanche",
+   "horaires": "20h, sam. 18h ; 1h15",
    "note": 2,
    "pronostic": false,
    "pourquoi": "",
@@ -4630,8 +5424,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "un-peu-pour-mon-cur",
@@ -4655,28 +5449,38 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "une-odyssee",
    "titre": "Une odyssée",
    "categorie": "Théâtre",
-   "artistes": [],
+   "artistes": [
+    {
+     "nom": "Emili Hufnagel",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Michel Laubu",
+     "role": "mise en scène"
+    }
+   ],
    "lieuId": "nanterre-amandiers",
-   "salle": "",
+   "salle": "Salle Transformable",
    "debut": "2027-05-19",
    "fin": "2027-05-22",
    "datesTexte": "19 – 22 mai 2027",
+   "horaires": "1h10 ; dès 8 ans",
    "note": 1,
    "pronostic": true,
    "pourquoi": "",
-   "lien": "https://nanterre-amandiers.com/",
+   "lien": "https://nanterre-amandiers.com/saison/saison-2026-2027/une-odyssee",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "vampire-s-mountain",
@@ -4693,15 +5497,24 @@
    "debut": "2027-03-20",
    "fin": "2027-04-04",
    "datesTexte": "20 mars – 4 avril 2027",
+   "horaires": "1h50 ; plusieurs langues surtitrées",
    "note": 3,
    "pronostic": false,
    "pourquoi": "Théâtre d'images, 1h50, surtitré. 42 €.",
-   "lien": "https://www.theatre-odeon.eu/en/season-2026-2027/performances-2026-2027",
+   "lien": "https://www.theatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/philippe-quesne-vampires-mountain-s26-27",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Ouverture des ventes hors abonnement",
+     "vente": "2026-11-24",
+     "venteApprox": false,
+     "tarif": "de 7 à 21 €",
+     "condition": "Moins de 28 ans, sur justificatif"
+    }
+   ]
   },
   {
    "id": "vertige-manhattan-transfer",
@@ -4725,8 +5538,8 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": []
   },
   {
    "id": "werther",
@@ -4740,13 +5553,30 @@
     {
      "nom": "Robert Carsen",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Nathalie Stutzmann",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Benjamin Bernheim",
+     "role": "interprète"
+    },
+    {
+     "nom": "Aigul Akhmetshina",
+     "role": "interprète"
+    },
+    {
+     "nom": "Léo Vermot-Desroches",
+     "role": "interprète"
     }
    ],
    "lieuId": "opera-bastille",
    "salle": "",
    "debut": "2027-02-11",
    "fin": "2027-03-12",
-   "datesTexte": "11 fév. – 12 mars 2027",
+   "datesTexte": "11 févr. – 12 mars 2027",
+   "horaires": "2h50 avec entracte ; Benjamin Bernheim du 11 au 20 févr., puis Léo Vermot-Desroches",
    "note": 4,
    "pronostic": false,
    "pourquoi": "Bernheim, Spyres, Stutzmann. Avant-première jeunes le 8 fév. (vente le 14 janv.).",
@@ -4754,6 +5584,7 @@
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
+   "statut": "a-voir",
    "offres": [
     {
      "type": "Avant-première jeunes",
@@ -4763,8 +5594,7 @@
      "venteApprox": false,
      "condition": "Nés après le 1er janvier 1998, 2 places max."
     }
-   ],
-   "statut": "a-voir"
+   ]
   },
   {
    "id": "zero",
@@ -4785,15 +5615,413 @@
    "debut": "2027-04-30",
    "fin": "2027-05-05",
    "datesTexte": "30 avril – 5 mai 2027",
+   "horaires": "2h environ",
    "note": 1,
    "pronostic": true,
    "pourquoi": "2h.",
-   "lien": "https://www.theatre-odeon.eu/en/season-2026-2027/performances-2026-2027",
+   "lien": "https://www.theatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/hubert-colas-zero-s26-27",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
-   "offres": [],
-   "statut": "a-voir"
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Ouverture des ventes hors abonnement",
+     "vente": "2027-02-23",
+     "venteApprox": false,
+     "tarif": "19 €",
+     "condition": "Moins de 28 ans, sur justificatif"
+    }
+   ]
+  },
+  {
+   "id": "la-rondine",
+   "titre": "La Rondine (version de concert)",
+   "categorie": "Opéra",
+   "sousGenre": "Version de concert",
+   "artistes": [
+    {
+     "nom": "Giacomo Puccini",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Roberto Kalb",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Mané Galoyan",
+     "role": "interprète"
+    },
+    {
+     "nom": "Pene Pati",
+     "role": "interprète"
+    },
+    {
+     "nom": "Orchestre national Bordeaux Aquitaine",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "tce",
+   "salle": "",
+   "debut": "2026-11-19",
+   "fin": "2026-11-19",
+   "datesTexte": "jeu. 19 nov. 2026",
+   "horaires": "19h30 ; 1h45 avec entracte",
+   "note": 2,
+   "pronostic": false,
+   "pourquoi": "Version de concert d’un Puccini rarement donné, quelques jours après Manon Lescaut. Pene Pati, Mané Galoyan.",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-en-concert/la-rondine",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Carte Jeunes TCE",
+     "date": "2026-11-19",
+     "tarif": "20 €",
+     "vente": "2026-08-19T10:00",
+     "venteApprox": true,
+     "condition": "Carte Jeunes TCE (16 – 29 ans), vente de 3 mois avant à la dernière minute"
+    }
+   ]
+  },
+  {
+   "id": "le-barbier-de-seville",
+   "titre": "Le Barbier de Séville (version de concert)",
+   "categorie": "Opéra",
+   "sousGenre": "Version de concert",
+   "artistes": [
+    {
+     "nom": "Gioachino Rossini",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Marc Leroy-Calatayud",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Cyrille Dubois",
+     "role": "interprète"
+    },
+    {
+     "nom": "Juliette Mey",
+     "role": "interprète"
+    },
+    {
+     "nom": "Stefan Astakhov",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "tce",
+   "salle": "",
+   "debut": "2027-01-20",
+   "fin": "2027-01-20",
+   "datesTexte": "mer. 20 janv. 2027",
+   "horaires": "19h30 ; 2h30 environ",
+   "note": 2,
+   "pronostic": false,
+   "pourquoi": "Version de concert. Cyrille Dubois en Almaviva, Juliette Mey en Rosine, orchestre et chœur de l’Opéra de Tours.",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-en-concert/le-barbier-de-seville",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Carte Jeunes TCE",
+     "date": "2027-01-20",
+     "tarif": "20 €",
+     "vente": "2026-10-20T10:00",
+     "venteApprox": true,
+     "condition": "Carte Jeunes TCE (16 – 29 ans), vente de 3 mois avant à la dernière minute"
+    }
+   ]
+  },
+  {
+   "id": "le-carnaval-baroque",
+   "titre": "Le Carnaval baroque",
+   "categorie": "Opéra",
+   "sousGenre": "Spectacle musical mis en scène",
+   "artistes": [
+    {
+     "nom": "Vincent Dumestre",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Cécile Roussat",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Le Poème Harmonique",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "tce",
+   "salle": "",
+   "debut": "2027-03-09",
+   "fin": "2027-03-09",
+   "datesTexte": "mar. 9 mars 2027",
+   "horaires": "20h ; 1h20 sans entracte",
+   "note": 2,
+   "pronostic": false,
+   "pourquoi": "Mis en scène : musique italienne du XVIIe siècle, cirque, acrobates et masques, par Le Poème Harmonique.",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-en-concert/le-carnaval-baroque-2",
+   "billetterie": null,
+   "publicJeune": true,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Carte Jeunes TCE",
+     "date": "2027-03-09",
+     "tarif": "20 €",
+     "vente": "2026-12-09T10:00",
+     "venteApprox": true,
+     "condition": "Carte Jeunes TCE (16 – 29 ans), vente de 3 mois avant à la dernière minute"
+    }
+   ]
+  },
+  {
+   "id": "la-griselda",
+   "titre": "La Griselda (version de concert)",
+   "categorie": "Opéra",
+   "sousGenre": "Version de concert",
+   "artistes": [
+    {
+     "nom": "Antonio Vivaldi",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Carlo Goldoni",
+     "role": "auteur"
+    },
+    {
+     "nom": "Julien Chauvin",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Lucile Richardot",
+     "role": "interprète"
+    },
+    {
+     "nom": "Bruno de Sá",
+     "role": "interprète"
+    },
+    {
+     "nom": "Le Concert de la Loge",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "tce",
+   "salle": "",
+   "debut": "2027-05-12",
+   "fin": "2027-05-12",
+   "datesTexte": "mer. 12 mai 2027",
+   "horaires": "19h30 ; 2h35 environ",
+   "note": 2,
+   "pronostic": false,
+   "pourquoi": "Version de concert. Vivaldi sur un livret de Goldoni, Lucile Richardot, Le Concert de la Loge.",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-en-concert/la-griselda",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Carte Jeunes TCE",
+     "date": "2027-05-12",
+     "tarif": "20 €",
+     "vente": "2027-02-12T10:00",
+     "venteApprox": true,
+     "condition": "Carte Jeunes TCE (16 – 29 ans), vente de 3 mois avant à la dernière minute"
+    }
+   ]
+  },
+  {
+   "id": "romeo-et-juliette-steibelt",
+   "titre": "Roméo et Juliette (version de concert)",
+   "categorie": "Opéra",
+   "sousGenre": "Version de concert",
+   "artistes": [
+    {
+     "nom": "Daniel Steibelt",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Christophe Rousset",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Mélissa Petit",
+     "role": "interprète"
+    },
+    {
+     "nom": "Cyrille Dubois",
+     "role": "interprète"
+    },
+    {
+     "nom": "Les Talens Lyriques",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "tce",
+   "salle": "",
+   "debut": "2027-06-09",
+   "fin": "2027-06-09",
+   "datesTexte": "mer. 9 juin 2027",
+   "horaires": "19h30 ; 1h50 environ",
+   "note": 2,
+   "pronostic": false,
+   "pourquoi": "Version de concert. Rareté de 1793 exhumée par Christophe Rousset et Les Talens Lyriques.",
+   "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-en-concert/romeo-et-juliette-5",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Carte Jeunes TCE",
+     "date": "2027-06-09",
+     "tarif": "20 €",
+     "vente": "2027-03-09T10:00",
+     "venteApprox": true,
+     "condition": "Carte Jeunes TCE (16 – 29 ans), vente de 3 mois avant à la dernière minute"
+    }
+   ]
+  },
+  {
+   "id": "la-nuee",
+   "titre": "La Nuée",
+   "categorie": "Danse",
+   "sousGenre": "",
+   "artistes": [
+    {
+     "nom": "Nacera Belaza",
+     "role": "chorégraphie"
+    }
+   ],
+   "lieuId": "odeon",
+   "salle": "Berthier Paris 17",
+   "debut": "2027-02-25",
+   "fin": "2027-03-14",
+   "datesTexte": "25 févr. – 14 mars 2027",
+   "horaires": "1h",
+   "note": 2,
+   "pronostic": true,
+   "pourquoi": "Nouvelle pièce de groupe de Nacera Belaza, rotations hypnotiques, avec le Festival d’Automne.",
+   "lien": "https://www.theatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/nacera-belaza-la-nue-s26-27",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Ouverture des ventes hors abonnement",
+     "vente": "2026-11-24",
+     "venteApprox": false,
+     "tarif": "19 €",
+     "condition": "Moins de 28 ans, sur justificatif"
+    }
+   ]
+  },
+  {
+   "id": "romeo-et-juliette-jolly",
+   "titre": "Roméo et Juliette",
+   "categorie": "Opéra",
+   "sousGenre": "",
+   "artistes": [
+    {
+     "nom": "Charles Gounod",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Thomas Jolly",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Fabien Gabel",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Pene Pati",
+     "role": "interprète"
+    },
+    {
+     "nom": "Juan Diego Flórez",
+     "role": "interprète"
+    },
+    {
+     "nom": "Amina Edris",
+     "role": "interprète"
+    },
+    {
+     "nom": "Nadine Sierra",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "opera-bastille",
+   "salle": "",
+   "debut": "2027-06-07",
+   "fin": "2027-07-10",
+   "datesTexte": "7 juin – 10 juill. 2027",
+   "horaires": "3h15 avec entracte ; Pene Pati jusqu’au 28 juin, Juan Diego Flórez en juillet",
+   "note": 3,
+   "pronostic": false,
+   "pourquoi": "Reprise de la mise en scène de Thomas Jolly, avec Pene Pati puis Juan Diego Flórez en Roméo.",
+   "lien": "https://www.operadeparis.fr/saison-26-27/opera/romeo-et-juliette",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": []
+  },
+  {
+   "id": "don-pasquale",
+   "titre": "Don Pasquale",
+   "categorie": "Opéra",
+   "sousGenre": "",
+   "artistes": [
+    {
+     "nom": "Gaetano Donizetti",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Damiano Michieletto",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Speranza Scappucci",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Lawrence Brownlee",
+     "role": "interprète"
+    },
+    {
+     "nom": "Olga Kulchynska",
+     "role": "interprète"
+    },
+    {
+     "nom": "Pietro Spagnoli",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "palais-garnier",
+   "salle": "",
+   "debut": "2027-06-12",
+   "fin": "2027-07-10",
+   "datesTexte": "12 juin – 10 juill. 2027",
+   "horaires": "2h45 avec entracte",
+   "note": 2,
+   "pronostic": false,
+   "pourquoi": "Reprise de la production de Damiano Michieletto, Lawrence Brownlee en Ernesto.",
+   "lien": "https://www.operadeparis.fr/saison-26-27/opera/don-pasquale",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": []
   }
  ]
 }

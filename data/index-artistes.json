@@ -1,4 +1,25 @@
 {
+ "adama-diop": {
+  "nom": "Adama Diop",
+  "sorties": [
+   "vu-la-distance",
+   "vu-le-proces-pelicot"
+  ]
+ },
+ "adele-charvet": {
+  "nom": "Adèle Charvet",
+  "sorties": [
+   "didon-et-enee"
+  ]
+ },
+ "adeline-d-hermy": {
+  "nom": "Adeline d’Hermy",
+  "sorties": [
+   "vu-la-musica-deuxieme",
+   "vu-le-suicide",
+   "vu-une-mouette"
+  ]
+ },
  "adeline-rosenstein": {
   "nom": "Adeline Rosenstein",
   "sorties": [
@@ -11,14 +32,38 @@
    "la-souriciere"
   ]
  },
+ "aigul-akhmetshina": {
+  "nom": "Aigul Akhmetshina",
+  "sorties": [
+   "werther"
+  ]
+ },
+ "ailyn-perez": {
+  "nom": "Ailyn Pérez",
+  "sorties": [
+   "manon-lescaut"
+  ]
+ },
  "alain-francon": {
   "nom": "Alain Françon",
   "sorties": [
    "le-mariage-de-figaro"
   ]
  },
+ "alain-lenglet": {
+  "nom": "Alain Lenglet",
+  "sorties": [
+   "vu-lavare"
+  ]
+ },
+ "alan-gilbert": {
+  "nom": "Alan Gilbert",
+  "sorties": [
+   "dipus-rex"
+  ]
+ },
  "alex-olle": {
-  "nom": "Àlex Ollé",
+  "nom": "Alex Ollé",
   "sorties": [
    "le-trouvere"
   ]
@@ -29,11 +74,25 @@
    "vu-points-de-non-retour-quais-de-seine"
   ]
  },
+ "alexandra-gentil": {
+  "nom": "Alexandra Gentil",
+  "sorties": [
+   "amadoca"
+  ]
+ },
  "alexandre-dumas": {
   "nom": "Alexandre Dumas",
   "sorties": [
    "la-tour-de-nesle",
    "les-trois-mousquetaires"
+  ]
+ },
+ "alexandre-pavloff": {
+  "nom": "Alexandre Pavloff",
+  "sorties": [
+   "c-est-beau",
+   "vu-la-musica-deuxieme",
+   "vu-la-puce-a-loreille"
   ]
  },
  "alexis-michalik": {
@@ -54,16 +113,64 @@
    "ubu-roi"
   ]
  },
+ "alison-dechamps": {
+  "nom": "Alison Dechamps",
+  "sorties": [
+   "vu-la-distance"
+  ]
+ },
+ "allan-clayton": {
+  "nom": "Allan Clayton",
+  "sorties": [
+   "idomeneo"
+  ]
+ },
+ "ambre-kahan": {
+  "nom": "Ambre Kahan",
+  "sorties": [
+   "magdalena-creation"
+  ]
+ },
+ "ambrogio-maestri": {
+  "nom": "Ambrogio Maestri",
+  "sorties": [
+   "l-elixir-d-amour"
+  ]
+ },
+ "amina-edris": {
+  "nom": "Amina Edris",
+  "sorties": [
+   "romeo-et-juliette-jolly"
+  ]
+ },
+ "amitai-pati": {
+  "nom": "Amitai Pati",
+  "sorties": [
+   "les-pecheurs-de-perles"
+  ]
+ },
  "ananda-devi": {
   "nom": "Ananda Devi",
   "sorties": [
    "la-fournaise"
   ]
  },
+ "anastasia-bartoli": {
+  "nom": "Anastasia Bartoli",
+  "sorties": [
+   "maria-stuarda"
+  ]
+ },
  "andre-marcon": {
   "nom": "André Marcon",
   "sorties": [
    "ubu-roi"
+  ]
+ },
+ "andrea-buccarella": {
+  "nom": "Andrea Buccarella",
+  "sorties": [
+   "mitridate"
   ]
  },
  "angelica-liddell": {
@@ -78,10 +185,30 @@
    "impressions"
   ]
  },
+ "angelique-boudeville": {
+  "nom": "Angélique Boudeville",
+  "sorties": [
+   "faust"
+  ]
+ },
+ "anna-cervinka": {
+  "nom": "Anna Cervinka",
+  "sorties": [
+   "deshonoree",
+   "vu-lavare",
+   "vu-les-bonnes"
+  ]
+ },
  "anna-netrebko": {
   "nom": "Anna Netrebko",
   "sorties": [
    "anna-netrebko-brian-jagde-george-petean"
+  ]
+ },
+ "anna-pirozzi": {
+  "nom": "Anna Pirozzi",
+  "sorties": [
+   "turandot"
   ]
  },
  "anne-barbot": {
@@ -142,10 +269,34 @@
    "vu-une-mouette"
   ]
  },
+ "antonello-manacorda": {
+  "nom": "Antonello Manacorda",
+  "sorties": [
+   "idomeneo"
+  ]
+ },
+ "antonio-vivaldi": {
+  "nom": "Antonio Vivaldi",
+  "sorties": [
+   "la-griselda"
+  ]
+ },
+ "ariane-ascaride": {
+  "nom": "Ariane Ascaride",
+  "sorties": [
+   "vu-le-proces-pelicot"
+  ]
+ },
  "ariane-mnouchkine": {
   "nom": "Ariane Mnouchkine",
   "sorties": [
    "ici-sont-les-dragons"
+  ]
+ },
+ "armelle-dufau": {
+  "nom": "Armelle Dufau",
+  "sorties": [
+   "vu-from-martin-to-eden"
   ]
  },
  "arnaud-desplechin": {
@@ -161,6 +312,18 @@
    "asmik-grigorian-lukas-geniusas"
   ]
  },
+ "ausrine-stundyte": {
+  "nom": "Aušrinė Stundytė",
+  "sorties": [
+   "lady-macbeth-de-mzensk"
+  ]
+ },
+ "bachar-mar-khalife": {
+  "nom": "Bachar Mar-Khalifé",
+  "sorties": [
+   "vu-taire"
+  ]
+ },
  "back-to-back-theatre": {
   "nom": "Back to Back Theatre",
   "sorties": [
@@ -169,16 +332,30 @@
    "neanderthal-repetitions-publiques"
   ]
  },
+ "bakary-sangare": {
+  "nom": "Bakary Sangaré",
+  "sorties": [
+   "le-cid",
+   "vu-les-fourberies-de-scapin"
+  ]
+ },
  "ballet-de-l-opera-de-paris": {
   "nom": "Ballet de l’Opéra de Paris",
   "sorties": [
-   "vu-jerome-robbins"
+   "vu-jerome-robbins",
+   "vu-sylvia"
   ]
  },
  "ballet-de-lorraine": {
   "nom": "Ballet de Lorraine",
   "sorties": [
    "rave-l-age-d-or"
+  ]
+ },
+ "bastien-stil": {
+  "nom": "Bastien Stil",
+  "sorties": [
+   "faust"
   ]
  },
  "beaumarchais": {
@@ -205,6 +382,18 @@
    "focus-ben-duke"
   ]
  },
+ "benjamin-bernheim": {
+  "nom": "Benjamin Bernheim",
+  "sorties": [
+   "werther"
+  ]
+ },
+ "benjamin-lavernhe": {
+  "nom": "Benjamin Lavernhe",
+  "sorties": [
+   "vu-le-mariage-force"
+  ]
+ },
  "benjamin-lazar": {
   "nom": "Benjamin Lazar",
   "sorties": [
@@ -217,6 +406,12 @@
    "le-fantome-de-l-opera"
   ]
  },
+ "bernard-marie-koltes": {
+  "nom": "Bernard-Marie Koltès",
+  "sorties": [
+   "vu-roberto-zucco"
+  ]
+ },
  "bertolt-brecht": {
   "nom": "Bertolt Brecht",
   "sorties": [
@@ -224,10 +419,17 @@
    "les-sept-peches-capitaux"
   ]
  },
- "binyamini": {
-  "nom": "Binyamini",
+ "bertrand-de-billy": {
+  "nom": "Bertrand de Billy",
   "sorties": [
-   "rituels-lifar"
+   "vu-la-vestale"
+  ]
+ },
+ "birane-ba": {
+  "nom": "Birane Ba",
+  "sorties": [
+   "la-fournaise",
+   "vu-une-mouette"
   ]
  },
  "boris-charmatz": {
@@ -243,16 +445,53 @@
    "anna-netrebko-brian-jagde-george-petean"
   ]
  },
+ "bruce-gladwin": {
+  "nom": "Bruce Gladwin",
+  "sorties": [
+   "food-court"
+  ]
+ },
+ "bruno-de-sa": {
+  "nom": "Bruno de Sá",
+  "sorties": [
+   "la-griselda"
+  ]
+ },
  "bruno-putzulu": {
   "nom": "Bruno Putzulu",
   "sorties": [
    "diplomatie"
   ]
  },
+ "calixto-bieito": {
+  "nom": "Calixto Bieito",
+  "sorties": [
+   "la-walkyrie"
+  ]
+ },
+ "camille-de-toledo": {
+  "nom": "Camille de Toledo",
+  "sorties": [
+   "thesee-sa-vie-nouvelle"
+  ]
+ },
+ "camille-delaforge": {
+  "nom": "Camille Delaforge",
+  "sorties": [
+   "platee"
+  ]
+ },
  "carlo-goldoni": {
   "nom": "Carlo Goldoni",
   "sorties": [
-   "l-ecole-de-danse"
+   "l-ecole-de-danse",
+   "la-griselda"
+  ]
+ },
+ "carlo-vistoli": {
+  "nom": "Carlo Vistoli",
+  "sorties": [
+   "rinaldo"
   ]
  },
  "carme-portaceli": {
@@ -273,29 +512,71 @@
    "correspondances-nocturnes"
   ]
  },
+ "cecile-roussat": {
+  "nom": "Cécile Roussat",
+  "sorties": [
+   "le-carnaval-baroque"
+  ]
+ },
  "celine-champinot": {
   "nom": "Céline Champinot",
   "sorties": [
-   "la-parabole-du-seum"
+   "la-parabole-du-seum",
+   "vu-la-parabole-du-seum-avignon"
+  ]
+ },
+ "charles-ferdinand-ramuz": {
+  "nom": "Charles-Ferdinand Ramuz",
+  "sorties": [
+   "histoire-du-soldat-tce"
   ]
  },
  "charles-gounod": {
   "nom": "Charles Gounod",
   "sorties": [
-   "faust"
+   "faust",
+   "romeo-et-juliette-jolly"
   ]
  },
- "chiens-de-navarre": {
-  "nom": "Chiens de Navarre",
+ "charlie-fabert": {
+  "nom": "Charlie Fabert",
   "sorties": [
-   "chiens-de-navarre-i-will-survive"
+   "vu-bestioles"
+  ]
+ },
+ "charly-paillet": {
+  "nom": "Charly Paillet",
+  "sorties": [
+   "vu-from-martin-to-eden"
+  ]
+ },
+ "christian-gonon": {
+  "nom": "Christian Gonon",
+  "sorties": [
+   "le-cid",
+   "resurrection-un-cas-de-conscience",
+   "vu-la-puce-a-loreille",
+   "vu-le-suicide"
   ]
  },
  "christian-hecq": {
   "nom": "Christian Hecq",
   "sorties": [
+   "berlin-mon-garcon",
    "le-bourgeois-gentilhomme",
    "les-surs-hilton"
+  ]
+ },
+ "christian-lacroix": {
+  "nom": "Christian Lacroix",
+  "sorties": [
+   "joyaux"
+  ]
+ },
+ "christian-van-horn": {
+  "nom": "Christian Van Horn",
+  "sorties": [
+   "le-chateau-de-barbe-bleue"
   ]
  },
  "christoph-willibald-gluck": {
@@ -316,16 +597,40 @@
    "vu-les-enchanteurs"
   ]
  },
+ "christophe-montenez": {
+  "nom": "Christophe Montenez",
+  "sorties": [
+   "vu-le-soulier-de-satin"
+  ]
+ },
  "christophe-pellet": {
   "nom": "Christophe Pellet",
   "sorties": [
    "ceci-n-est-pas-nous"
   ]
  },
+ "christophe-rousset": {
+  "nom": "Christophe Rousset",
+  "sorties": [
+   "romeo-et-juliette-steibelt"
+  ]
+ },
+ "christopher-maltman": {
+  "nom": "Christopher Maltman",
+  "sorties": [
+   "la-walkyrie"
+  ]
+ },
  "christos-papadopoulos": {
   "nom": "Christos Papadopoulos",
   "sorties": [
    "my-fierce-ignorant-step"
+  ]
+ },
+ "claude-debussy": {
+  "nom": "Claude Debussy",
+  "sorties": [
+   "kaguyahime"
   ]
  },
  "claudine-galea": {
@@ -340,6 +645,12 @@
    "l-orfeo"
   ]
  },
+ "clelia-cafiero": {
+  "nom": "Clelia Cafiero",
+  "sorties": [
+   "maria-stuarda"
+  ]
+ },
  "clemence-jeanguillaume": {
   "nom": "Clémence Jeanguillaume",
   "sorties": [
@@ -349,13 +660,28 @@
  "clement-hervieu-leger": {
   "nom": "Clément Hervieu-Léger",
   "sorties": [
-   "c-est-beau"
+   "c-est-beau",
+   "l-ecole-de-danse",
+   "vu-angels-in-america"
+  ]
+ },
+ "clotilde-de-bayser": {
+  "nom": "Clotilde de Bayser",
+  "sorties": [
+   "l-ecole-de-danse",
+   "vu-la-puce-a-loreille"
   ]
  },
  "colette": {
   "nom": "Colette",
   "sorties": [
    "l-envers-du-music-hall"
+  ]
+ },
+ "comedie-francaise": {
+  "nom": "Comédie-Française",
+  "sorties": [
+   "vu-le-soulier-de-satin"
   ]
  },
  "compagnie-paizo": {
@@ -370,16 +696,37 @@
    "apres-guerre"
   ]
  },
+ "curzio-malaparte": {
+  "nom": "Curzio Malaparte",
+  "sorties": [
+   "capri"
+  ]
+ },
  "cyril-gely": {
   "nom": "Cyril Gely",
   "sorties": [
    "diplomatie"
   ]
  },
+ "cyrille-dubois": {
+  "nom": "Cyrille Dubois",
+  "sorties": [
+   "hippolyte-et-aricie",
+   "le-barbier-de-seville",
+   "platee",
+   "romeo-et-juliette-steibelt"
+  ]
+ },
  "dalila-belaza": {
   "nom": "Dalila Belaza",
   "sorties": [
    "un-peu-pour-mon-cur"
+  ]
+ },
+ "damiano-michieletto": {
+  "nom": "Damiano Michieletto",
+  "sorties": [
+   "don-pasquale"
   ]
  },
  "damien-jalet": {
@@ -394,10 +741,30 @@
    "et-jamais-nous-ne-serons-separes"
   ]
  },
+ "daniel-steibelt": {
+  "nom": "Daniel Steibelt",
+  "sorties": [
+   "romeo-et-juliette-steibelt"
+  ]
+ },
+ "daniele-lebrun": {
+  "nom": "Danièle Lebrun",
+  "sorties": [
+   "l-envers-du-music-hall",
+   "ruy-blas",
+   "vu-le-soulier-de-satin"
+  ]
+ },
  "david-bobee": {
   "nom": "David Bobée",
   "sorties": [
    "lorenzaccio"
+  ]
+ },
+ "davide-luciano": {
+  "nom": "Davide Luciano",
+  "sorties": [
+   "don-giovanni"
   ]
  },
  "denis-diderot": {
@@ -409,14 +776,30 @@
  "denis-podalydes": {
   "nom": "Denis Podalydès",
   "sorties": [
+   "ce-que-j-appelle-oubli",
+   "l-ecole-de-danse",
+   "l-evenement",
    "le-cid",
+   "vu-hecube-pas-hecube",
    "vu-les-fourberies-de-scapin"
+  ]
+ },
+ "didier-sandre": {
+  "nom": "Didier Sandre",
+  "sorties": [
+   "vu-le-soulier-de-satin"
   ]
  },
  "dmitri-chostakovitch": {
   "nom": "Dmitri Chostakovitch",
   "sorties": [
    "lady-macbeth-de-mzensk"
+  ]
+ },
+ "dominique-blanc": {
+  "nom": "Dominique Blanc",
+  "sorties": [
+   "vu-angels-in-america"
   ]
  },
  "dominique-pinon": {
@@ -437,10 +820,35 @@
    "oedipe-roi"
   ]
  },
+ "edith-proust": {
+  "nom": "Edith Proust",
+  "sorties": [
+   "vu-les-bonnes"
+  ]
+ },
  "el-conde-de-torrefiel": {
   "nom": "El Conde de Torrefiel",
   "sorties": [
    "vu-lexikon"
+  ]
+ },
+ "elina-garanca": {
+  "nom": "Elīna Garanča",
+  "sorties": [
+   "le-chateau-de-barbe-bleue"
+  ]
+ },
+ "elissa-alloula": {
+  "nom": "Élissa Alloula",
+  "sorties": [
+   "vu-les-bonnes",
+   "vu-les-fourberies-de-scapin"
+  ]
+ },
+ "elsa-dreisig": {
+  "nom": "Elsa Dreisig",
+  "sorties": [
+   "idomeneo"
   ]
  },
  "elsa-granat": {
@@ -450,16 +858,42 @@
    "vu-une-mouette"
   ]
  },
+ "elsa-lepoivre": {
+  "nom": "Elsa Lepoivre",
+  "sorties": [
+   "vu-hecube-pas-hecube"
+  ]
+ },
+ "elza-van-den-heever": {
+  "nom": "Elza van den Heever",
+  "sorties": [
+   "la-walkyrie",
+   "turandot",
+   "vu-la-vestale"
+  ]
+ },
  "emile-zola": {
   "nom": "Émile Zola",
   "sorties": [
    "le-ventre-de-paris"
   ]
  },
+ "emili-hufnagel": {
+  "nom": "Emili Hufnagel",
+  "sorties": [
+   "une-odyssee"
+  ]
+ },
  "emilie-rousset": {
   "nom": "Émilie Rousset",
   "sorties": [
    "rituel-4-le-grand-debat"
+  ]
+ },
+ "emily-d-angelo": {
+  "nom": "Emily D’Angelo",
+  "sorties": [
+   "la-clemence-de-titus"
   ]
  },
  "emma-dante": {
@@ -488,10 +922,42 @@
    "merci-de-votre-collaboration"
   ]
  },
+ "emmanuel-schwartz": {
+  "nom": "Emmanuel Schwartz",
+  "sorties": [
+   "le-serment-d-europe"
+  ]
+ },
+ "emmanuelle-lafon": {
+  "nom": "Emmanuelle Lafon",
+  "sorties": [
+   "rituel-4-le-grand-debat"
+  ]
+ },
+ "ensemble-artaserse": {
+  "nom": "Ensemble Artaserse",
+  "sorties": [
+   "rinaldo"
+  ]
+ },
+ "eric-genovese": {
+  "nom": "Éric Génovèse",
+  "sorties": [
+   "l-ecole-de-danse",
+   "vu-hecube-pas-hecube"
+  ]
+ },
  "eric-ruf": {
   "nom": "Éric Ruf",
   "sorties": [
-   "la-cerisaie"
+   "la-cerisaie",
+   "vu-le-soulier-de-satin"
+  ]
+ },
+ "ermonela-jaho": {
+  "nom": "Ermonela Jaho",
+  "sorties": [
+   "maria-stuarda"
   ]
  },
  "esdeekid": {
@@ -506,6 +972,45 @@
    "rhinoceros"
   ]
  },
+ "eun-sun-kim": {
+  "nom": "Eun Sun Kim",
+  "sorties": [
+   "turandot"
+  ]
+ },
+ "eve-maud-hubeaux": {
+  "nom": "Eve-Maud Hubeaux",
+  "sorties": [
+   "vu-la-vestale"
+  ]
+ },
+ "evelino-pido": {
+  "nom": "Evelino Pidò",
+  "sorties": [
+   "l-elixir-d-amour"
+  ]
+ },
+ "fabien-gabel": {
+  "nom": "Fabien Gabel",
+  "sorties": [
+   "romeo-et-juliette-jolly"
+  ]
+ },
+ "florence-viala": {
+  "nom": "Florence Viala",
+  "sorties": [
+   "l-ecole-de-danse",
+   "vu-angels-in-america",
+   "vu-le-soulier-de-satin",
+   "vu-le-suicide"
+  ]
+ },
+ "florian-sempey": {
+  "nom": "Florian Sempey",
+  "sorties": [
+   "les-pecheurs-de-perles"
+  ]
+ },
  "florian-zeller": {
   "nom": "Florian Zeller",
   "sorties": [
@@ -518,16 +1023,31 @@
    "oum"
   ]
  },
+ "francesco-corti": {
+  "nom": "Francesco Corti",
+  "sorties": [
+   "mitridate-re-di-ponto"
+  ]
+ },
  "francis-huster": {
   "nom": "Francis Huster",
   "sorties": [
    "le-discours-d-un-roi"
   ]
  },
+ "francois-tanguy": {
+  "nom": "François Tanguy",
+  "sorties": [
+   "vu-par-autan"
+  ]
+ },
  "francoise-gillard": {
   "nom": "Françoise Gillard",
   "sorties": [
-   "deshonoree"
+   "berlin-mon-garcon",
+   "deshonoree",
+   "l-evenement",
+   "vu-lavare"
   ]
  },
  "frederick-ashton": {
@@ -536,9 +1056,18 @@
    "la-fille-mal-gardee"
   ]
  },
+ "gael-kamilindi": {
+  "nom": "Gaël Kamilindi",
+  "sorties": [
+   "vu-angels-in-america",
+   "vu-hecube-pas-hecube",
+   "vu-le-mariage-force"
+  ]
+ },
  "gaetano-donizetti": {
   "nom": "Gaetano Donizetti",
   "sorties": [
+   "don-pasquale",
    "l-elixir-d-amour",
    "maria-stuarda"
   ]
@@ -585,17 +1114,33 @@
    "vu-la-puce-a-loreille"
   ]
  },
+ "geraldine-martineau": {
+  "nom": "Géraldine Martineau",
+  "sorties": [
+   "vu-orso-et-moi"
+  ]
+ },
  "giacomo-puccini": {
   "nom": "Giacomo Puccini",
   "sorties": [
+   "la-rondine",
    "manon-lescaut",
    "turandot",
    "vu-puccini"
   ]
  },
+ "gilles-david": {
+  "nom": "Gilles David",
+  "sorties": [
+   "vu-les-fourberies-de-scapin",
+   "vu-une-mouette",
+   "vu-willy-protagoras-enferme-dans-les-toilettes"
+  ]
+ },
  "gioachino-rossini": {
   "nom": "Gioachino Rossini",
   "sorties": [
+   "le-barbier-de-seville",
    "vu-le-barbier-de-seville"
   ]
  },
@@ -624,6 +1169,12 @@
    "race-d-ep"
   ]
  },
+ "guillaume-gallienne": {
+  "nom": "Guillaume Gallienne",
+  "sorties": [
+   "resurrection-un-cas-de-conscience"
+  ]
+ },
  "guillaume-vincent": {
   "nom": "Guillaume Vincent",
   "sorties": [
@@ -645,14 +1196,43 @@
  "guy-cassiers": {
   "nom": "Guy Cassiers",
   "sorties": [
-   "thesee",
    "thesee-sa-vie-nouvelle"
+  ]
+ },
+ "gwendoline-hamon": {
+  "nom": "Gwendoline Hamon",
+  "sorties": [
+   "la-jalousie"
+  ]
+ },
+ "h-k-gruber": {
+  "nom": "H. K. Gruber",
+  "sorties": [
+   "les-sept-peches-capitaux"
+  ]
+ },
+ "hanna-elisabeth-muller": {
+  "nom": "Hanna-Elisabeth Müller",
+  "sorties": [
+   "la-clemence-de-titus"
+  ]
+ },
+ "harry-bicket": {
+  "nom": "Harry Bicket",
+  "sorties": [
+   "la-clemence-de-titus"
   ]
  },
  "hector-berlioz": {
   "nom": "Hector Berlioz",
   "sorties": [
    "orphee"
+  ]
+ },
+ "hector-obalk": {
+  "nom": "Hector Obalk",
+  "sorties": [
+   "vu-toute-lhistoire-de-la-peinture-en-moins-de-2-heures"
   ]
  },
  "hector-parra": {
@@ -685,12 +1265,37 @@
    "zero"
   ]
  },
+ "hugo-schnitzler": {
+  "nom": "Hugo Schnitzler",
+  "sorties": [
+   "vu-from-martin-to-eden"
+  ]
+ },
  "igor-stravinsky": {
   "nom": "Igor Stravinsky",
   "sorties": [
    "dipus-rex",
    "histoire-du-soldat",
    "histoire-du-soldat-tce"
+  ]
+ },
+ "il-caravaggio": {
+  "nom": "Il Caravaggio",
+  "sorties": [
+   "platee"
+  ]
+ },
+ "il-pomo-d-oro": {
+  "nom": "Il Pomo d’Oro",
+  "sorties": [
+   "mitridate"
+  ]
+ },
+ "ingo-metzmacher": {
+  "nom": "Ingo Metzmacher",
+  "sorties": [
+   "lady-macbeth-de-mzensk",
+   "miroir-de-nos-peines"
   ]
  },
  "isabelle-adjani": {
@@ -711,16 +1316,35 @@
    "celle-qui-doute"
   ]
  },
+ "ivan-ayon-rivas": {
+  "nom": "Iván Ayón-Rivas",
+  "sorties": [
+   "attila",
+   "faust"
+  ]
+ },
  "ivo-van-hove": {
   "nom": "Ivo van Hove",
   "sorties": [
    "tartuffe-van-hove"
   ]
  },
+ "jack-london": {
+  "nom": "Jack London",
+  "sorties": [
+   "vu-from-martin-to-eden"
+  ]
+ },
  "jacob-jonas": {
   "nom": "Jacob Jonas",
   "sorties": [
    "restart"
+  ]
+ },
+ "jacques-brel": {
+  "nom": "Jacques Brel",
+  "sorties": [
+   "vu-brel"
   ]
  },
  "jacques-offenbach": {
@@ -739,6 +1363,18 @@
   "nom": "Jacques Weber",
   "sorties": [
    "la-cerisaie"
+  ]
+ },
+ "jamie-barton": {
+  "nom": "Jamie Barton",
+  "sorties": [
+   "dipus-rex"
+  ]
+ },
+ "jean-christophe-meurisse": {
+  "nom": "Jean-Christophe Meurisse",
+  "sorties": [
+   "chiens-de-navarre-i-will-survive"
   ]
  },
  "jean-francois-sivadier": {
@@ -778,10 +1414,36 @@
    "capra-une-chevre"
   ]
  },
+ "jennifer-decker": {
+  "nom": "Jennifer Decker",
+  "sorties": [
+   "vu-angels-in-america",
+   "vu-une-mouette"
+  ]
+ },
+ "jeremy-lopez": {
+  "nom": "Jérémy Lopez",
+  "sorties": [
+   "vu-angels-in-america",
+   "vu-la-puce-a-loreille"
+  ]
+ },
  "jerome-robbins": {
   "nom": "Jerome Robbins",
   "sorties": [
    "vu-jerome-robbins"
+  ]
+ },
+ "jo-kanamori": {
+  "nom": "Jo Kanamori",
+  "sorties": [
+   "kaguyahime"
+  ]
+ },
+ "jochen-rieder": {
+  "nom": "Jochen Rieder",
+  "sorties": [
+   "marina-rebeka-jonas-kaufmann"
   ]
  },
  "johan-inger": {
@@ -814,10 +1476,28 @@
    "josef-nadj-dialogues-dans-le-reve"
   ]
  },
+ "josephine-stephenson": {
+  "nom": "Joséphine Stephenson",
+  "sorties": [
+   "magdalena-creation"
+  ]
+ },
  "josette-baiz": {
   "nom": "Josette Baïz",
   "sorties": [
    "un-coin-de-paradis"
+  ]
+ },
+ "juan-diego-florez": {
+  "nom": "Juan Diego Flórez",
+  "sorties": [
+   "romeo-et-juliette-jolly"
+  ]
+ },
+ "juan-sancho": {
+  "nom": "Juan Sancho",
+  "sorties": [
+   "l-orfeo"
   ]
  },
  "jules-audry": {
@@ -844,10 +1524,65 @@
    "ruy-blas"
   ]
  },
+ "julie-fuchs": {
+  "nom": "Julie Fuchs",
+  "sorties": [
+   "magdalena-creation"
+  ]
+ },
+ "julie-sicard": {
+  "nom": "Julie Sicard",
+  "sorties": [
+   "vu-le-mariage-force",
+   "vu-le-suicide"
+  ]
+ },
+ "julien-chauvin": {
+  "nom": "Julien Chauvin",
+  "sorties": [
+   "la-griselda"
+  ]
+ },
+ "julien-frison": {
+  "nom": "Julien Frison",
+  "sorties": [
+   "vu-angels-in-america"
+  ]
+ },
  "julien-gosselin": {
   "nom": "Julien Gosselin",
   "sorties": [
    "maldoror"
+  ]
+ },
+ "juliette-binoche": {
+  "nom": "Juliette Binoche",
+  "sorties": [
+   "le-serment-d-europe"
+  ]
+ },
+ "juliette-mey": {
+  "nom": "Juliette Mey",
+  "sorties": [
+   "le-barbier-de-seville"
+  ]
+ },
+ "justine-heynemann": {
+  "nom": "Justine Heynemann",
+  "sorties": [
+   "vu-orso-et-moi"
+  ]
+ },
+ "kammerorchester-basel": {
+  "nom": "Kammerorchester Basel",
+  "sorties": [
+   "mitridate-re-di-ponto"
+  ]
+ },
+ "karine-deshayes": {
+  "nom": "Karine Deshayes",
+  "sorties": [
+   "rinaldo"
   ]
  },
  "karole-armitage": {
@@ -860,6 +1595,12 @@
   "nom": "Krystian Lupa",
   "sorties": [
    "capri"
+  ]
+ },
+ "krzysztof-warlikowski": {
+  "nom": "Krzysztof Warlikowski",
+  "sorties": [
+   "lady-macbeth-de-mzensk"
   ]
  },
  "kurt-weill": {
@@ -880,10 +1621,22 @@
    "gustavia"
   ]
  },
+ "lachlan-philpott": {
+  "nom": "Lachlan Philpott",
+  "sorties": [
+   "vu-bestioles"
+  ]
+ },
  "ladislas-chollat": {
   "nom": "Ladislas Chollat",
   "sorties": [
    "les-miserables"
+  ]
+ },
+ "lambert-wilson": {
+  "nom": "Lambert Wilson",
+  "sorties": [
+   "histoire-du-soldat-tce"
   ]
  },
  "laura-vazquez": {
@@ -893,10 +1646,22 @@
    "zero"
   ]
  },
+ "laurence-cote": {
+  "nom": "Laurence Côte",
+  "sorties": [
+   "vu-roberto-zucco"
+  ]
+ },
  "laurent-brethome": {
   "nom": "Laurent Brethome",
   "sorties": [
    "hernani"
+  ]
+ },
+ "laurent-capelluto": {
+  "nom": "Laurent Capelluto",
+  "sorties": [
+   "rituel-4-le-grand-debat"
   ]
  },
  "laurent-mauvignier": {
@@ -905,10 +1670,42 @@
    "ce-que-j-appelle-oubli"
   ]
  },
+ "laurent-naouri": {
+  "nom": "Laurent Naouri",
+  "sorties": [
+   "miroir-de-nos-peines"
+  ]
+ },
+ "laurent-pelly": {
+  "nom": "Laurent Pelly",
+  "sorties": [
+   "l-elixir-d-amour"
+  ]
+ },
+ "laurent-poitrenaux": {
+  "nom": "Laurent Poitrenaux",
+  "sorties": [
+   "rituel-4-le-grand-debat"
+  ]
+ },
+ "laurent-stocker": {
+  "nom": "Laurent Stocker",
+  "sorties": [
+   "ruy-blas",
+   "vu-lavare",
+   "vu-le-soulier-de-satin"
+  ]
+ },
  "lautreamont": {
   "nom": "Lautréamont",
   "sorties": [
    "maldoror"
+  ]
+ },
+ "lawrence-brownlee": {
+  "nom": "Lawrence Brownlee",
+  "sorties": [
+   "don-pasquale"
   ]
  },
  "le-birgit-ensemble": {
@@ -917,16 +1714,37 @@
    "le-birgit-kabarett-7"
   ]
  },
+ "le-concert-de-la-loge": {
+  "nom": "Le Concert de la Loge",
+  "sorties": [
+   "la-griselda"
+  ]
+ },
  "le-grenier-de-babouchka": {
   "nom": "Le Grenier de Babouchka",
   "sorties": [
    "les-trois-mousquetaires"
   ]
  },
+ "le-poeme-harmonique": {
+  "nom": "Le Poème Harmonique",
+  "sorties": [
+   "didon-et-enee",
+   "le-carnaval-baroque"
+  ]
+ },
  "lea-desandre": {
   "nom": "Lea Desandre",
   "sorties": [
+   "idomeneo",
    "lea-desandre"
+  ]
+ },
+ "lea-lopez": {
+  "nom": "Léa Lopez",
+  "sorties": [
+   "vu-art-majeur",
+   "vu-bestioles"
   ]
  },
  "leila-slimani": {
@@ -935,10 +1753,22 @@
    "resurrection-un-cas-de-conscience"
   ]
  },
+ "lemanic-modern-ensemble": {
+  "nom": "Lemanic Modern Ensemble",
+  "sorties": [
+   "histoire-du-soldat-tce"
+  ]
+ },
  "leo-delibes": {
   "nom": "Léo Delibes",
   "sorties": [
    "vu-sylvia"
+  ]
+ },
+ "leo-vermot-desroches": {
+  "nom": "Léo Vermot-Desroches",
+  "sorties": [
+   "werther"
   ]
  },
  "leon-tolstoi": {
@@ -953,6 +1783,49 @@
    "vertige-manhattan-transfer"
   ]
  },
+ "leora-rivlin": {
+  "nom": "Leora Rivlin",
+  "sorties": [
+   "le-serment-d-europe"
+  ]
+ },
+ "les-chiens-de-navarre": {
+  "nom": "Les Chiens de Navarre",
+  "sorties": [
+   "chiens-de-navarre-i-will-survive"
+  ]
+ },
+ "les-epopees": {
+  "nom": "Les Épopées",
+  "sorties": [
+   "l-orfeo"
+  ]
+ },
+ "les-musiciens-du-louvre": {
+  "nom": "Les Musiciens du Louvre",
+  "sorties": [
+   "hippolyte-et-aricie",
+   "les-pecheurs-de-perles"
+  ]
+ },
+ "les-siecles": {
+  "nom": "Les Siècles",
+  "sorties": [
+   "orphee"
+  ]
+ },
+ "les-talens-lyriques": {
+  "nom": "Les Talens Lyriques",
+  "sorties": [
+   "romeo-et-juliette-steibelt"
+  ]
+ },
+ "lidia-fridman": {
+  "nom": "Lidia Fridman",
+  "sorties": [
+   "attila"
+  ]
+ },
  "lilo-baur": {
   "nom": "Lilo Baur",
   "sorties": [
@@ -961,10 +1834,29 @@
    "vu-lavare"
   ]
  },
+ "lio-kuokman": {
+  "nom": "Lio Kuokman",
+  "sorties": [
+   "le-chateau-de-barbe-bleue"
+  ]
+ },
+ "lionel-abelanski": {
+  "nom": "Lionel Abelanski",
+  "sorties": [
+   "vu-willy-protagoras-enferme-dans-les-toilettes"
+  ]
+ },
  "lionel-dray": {
   "nom": "Lionel Dray",
   "sorties": [
    "olalaland"
+  ]
+ },
+ "loic-corbery": {
+  "nom": "Loïc Corbery",
+  "sorties": [
+   "resurrection-un-cas-de-conscience",
+   "vu-hecube-pas-hecube"
   ]
  },
  "lola-lafon": {
@@ -977,6 +1869,12 @@
   "nom": "Lolita Tergémina",
   "sorties": [
    "la-fournaise"
+  ]
+ },
+ "lorenzo-passerini": {
+  "nom": "Lorenzo Passerini",
+  "sorties": [
+   "manon-lescaut"
   ]
  },
  "lorraine-de-sagazan": {
@@ -992,10 +1890,28 @@
    "vu-le-mariage-force"
   ]
  },
+ "louis-joly": {
+  "nom": "Louis Joly",
+  "sorties": [
+   "vu-from-martin-to-eden"
+  ]
+ },
+ "louisa-proske": {
+  "nom": "Louisa Proske",
+  "sorties": [
+   "don-giovanni"
+  ]
+ },
  "louise-hemon": {
   "nom": "Louise Hémon",
   "sorties": [
    "rituel-4-le-grand-debat"
+  ]
+ },
+ "lucile-richardot": {
+  "nom": "Lucile Richardot",
+  "sorties": [
+   "la-griselda"
   ]
  },
  "lucinda-childs": {
@@ -1010,6 +1926,12 @@
    "asmik-grigorian-lukas-geniusas"
   ]
  },
+ "lydia-steier": {
+  "nom": "Lydia Steier",
+  "sorties": [
+   "vu-la-vestale"
+  ]
+ },
  "maelle-poesy": {
   "nom": "Maëlle Poésy",
   "sorties": [
@@ -1022,16 +1944,47 @@
    "may-b"
   ]
  },
+ "maharram-huseynov": {
+  "nom": "Maharram Huseynov",
+  "sorties": [
+   "attila"
+  ]
+ },
+ "mane-galoyan": {
+  "nom": "Mané Galoyan",
+  "sorties": [
+   "la-rondine"
+  ]
+ },
  "manuel-legris": {
   "nom": "Manuel Legris",
   "sorties": [
    "vu-sylvia"
   ]
  },
+ "marc-leroy-calatayud": {
+  "nom": "Marc Leroy-Calatayud",
+  "sorties": [
+   "le-barbier-de-seville"
+  ]
+ },
+ "marc-minkowski": {
+  "nom": "Marc Minkowski",
+  "sorties": [
+   "hippolyte-et-aricie",
+   "les-pecheurs-de-perles"
+  ]
+ },
  "marcel-bozonnet": {
   "nom": "Marcel Bozonnet",
   "sorties": [
    "deux-trois-choses-qu-elle-nous-dit-d-elle"
+  ]
+ },
+ "marco-armiliato": {
+  "nom": "Marco Armiliato",
+  "sorties": [
+   "anna-netrebko-brian-jagde-george-petean"
   ]
  },
  "marcus-lindeen": {
@@ -1043,7 +1996,21 @@
  "marguerite-duras": {
   "nom": "Marguerite Duras",
   "sorties": [
+   "l-amant",
    "vu-la-musica-deuxieme"
+  ]
+ },
+ "mariame-clement": {
+  "nom": "Mariame Clément",
+  "sorties": [
+   "berlin-mon-garcon",
+   "miroir-de-nos-peines"
+  ]
+ },
+ "marianne-segol": {
+  "nom": "Marianne Ségol",
+  "sorties": [
+   "piano-man"
   ]
  },
  "marie-armelle-deguy": {
@@ -1062,6 +2029,27 @@
   "nom": "Marie NDiaye",
   "sorties": [
    "berlin-mon-garcon"
+  ]
+ },
+ "marie-nicole-lemieux": {
+  "nom": "Marie-Nicole Lemieux",
+  "sorties": [
+   "orphee"
+  ]
+ },
+ "marie-oppert": {
+  "nom": "Marie Oppert",
+  "sorties": [
+   "vu-bestioles",
+   "vu-les-fourberies-de-scapin"
+  ]
+ },
+ "marina-hands": {
+  "nom": "Marina Hands",
+  "sorties": [
+   "resurrection-un-cas-de-conscience",
+   "vu-le-soulier-de-satin",
+   "vu-une-mouette"
   ]
  },
  "marina-rebeka": {
@@ -1089,16 +2077,96 @@
    "pulsations-childs"
   ]
  },
+ "mathieu-romano": {
+  "nom": "Mathieu Romano",
+  "sorties": [
+   "heaven-hell"
+  ]
+ },
  "mathilde-monnier": {
   "nom": "Mathilde Monnier",
   "sorties": [
    "gustavia"
   ]
  },
+ "matthew-polenzani": {
+  "nom": "Matthew Polenzani",
+  "sorties": [
+   "la-clemence-de-titus"
+  ]
+ },
+ "matthias-goerne": {
+  "nom": "Matthias Goerne",
+  "sorties": [
+   "dipus-rex"
+  ]
+ },
+ "maud-saint-jean": {
+  "nom": "Maud Saint-Jean",
+  "sorties": [
+   "vu-post"
+  ]
+ },
+ "melanie-thierry": {
+  "nom": "Mélanie Thierry",
+  "sorties": [
+   "madame-de-sade"
+  ]
+ },
+ "melissa-petit": {
+  "nom": "Mélissa Petit",
+  "sorties": [
+   "romeo-et-juliette-steibelt"
+  ]
+ },
+ "melissa-polonie": {
+  "nom": "Mélissa Polonie",
+  "sorties": [
+   "berlin-mon-garcon",
+   "vu-bestioles"
+  ]
+ },
+ "micha-lescot": {
+  "nom": "Micha Lescot",
+  "sorties": [
+   "vu-willy-protagoras-enferme-dans-les-toilettes"
+  ]
+ },
+ "michael-schade": {
+  "nom": "Michael Schade",
+  "sorties": [
+   "dipus-rex"
+  ]
+ },
+ "michael-spyres": {
+  "nom": "Michael Spyres",
+  "sorties": [
+   "mitridate",
+   "vu-la-vestale"
+  ]
+ },
  "michel-fau": {
   "nom": "Michel Fau",
   "sorties": [
    "la-jalousie"
+  ]
+ },
+ "michel-laubu": {
+  "nom": "Michel Laubu",
+  "sorties": [
+   "une-odyssee"
+  ]
+ },
+ "michel-vuillermoz": {
+  "nom": "Michel Vuillermoz",
+  "sorties": [
+   "vu-angels-in-america"
+  ]
+ },
+ "milo-rau": {
+  "nom": "Milo Rau",
+  "sorties": [
+   "vu-le-proces-pelicot"
   ]
  },
  "moliere": {
@@ -1114,10 +2182,41 @@
    "vu-les-fourberies-de-scapin"
   ]
  },
+ "morgane-real": {
+  "nom": "Morgane Real",
+  "sorties": [
+   "la-fournaise",
+   "ruy-blas"
+  ]
+ },
+ "muriel-imbach": {
+  "nom": "Muriel Imbach",
+  "sorties": [
+   "vu-nous-ou-le-paradoxe-du-herisson"
+  ]
+ },
  "myriam-gourfink": {
   "nom": "Myriam Gourfink",
   "sorties": [
    "fondre-gourfink"
+  ]
+ },
+ "nacera-belaza": {
+  "nom": "Nacera Belaza",
+  "sorties": [
+   "la-nuee"
+  ]
+ },
+ "nadine-sierra": {
+  "nom": "Nadine Sierra",
+  "sorties": [
+   "romeo-et-juliette-jolly"
+  ]
+ },
+ "natalia-bacalov": {
+  "nom": "Natalia Bacalov",
+  "sorties": [
+   "vu-roberto-zucco"
   ]
  },
  "nathalie-garraud": {
@@ -1132,10 +2231,47 @@
    "c-est-beau"
   ]
  },
+ "nathalie-stutzmann": {
+  "nom": "Nathalie Stutzmann",
+  "sorties": [
+   "werther"
+  ]
+ },
+ "ndr-elbphilharmonie-orchester": {
+  "nom": "NDR Elbphilharmonie Orchester",
+  "sorties": [
+   "dipus-rex"
+  ]
+ },
+ "netia-jones": {
+  "nom": "Netia Jones",
+  "sorties": [
+   "heaven-hell"
+  ]
+ },
  "nicola-porpora": {
   "nom": "Nicola Porpora",
   "sorties": [
    "mitridate"
+  ]
+ },
+ "nicolas-devort": {
+  "nom": "Nicolas Devort",
+  "sorties": [
+   "vu-dans-la-peau-de-cyrano"
+  ]
+ },
+ "nicolas-lormeau": {
+  "nom": "Nicolas Lormeau",
+  "sorties": [
+   "c-est-beau",
+   "vu-lavare"
+  ]
+ },
+ "nicolas-teste": {
+  "nom": "Nicolas Testé",
+  "sorties": [
+   "faust"
   ]
  },
  "nicole-genovese": {
@@ -1151,6 +2287,24 @@
    "vu-le-suicide-double-jeu"
   ]
  },
+ "nina-stemme": {
+  "nom": "Nina Stemme",
+  "sorties": [
+   "les-sept-peches-capitaux"
+  ]
+ },
+ "noam-morgensztern": {
+  "nom": "Noam Morgensztern",
+  "sorties": [
+   "la-fournaise"
+  ]
+ },
+ "noemie-gantier": {
+  "nom": "Noémie Gantier",
+  "sorties": [
+   "l-amant"
+  ]
+ },
  "noemie-ksicova": {
   "nom": "Noëmie Ksicova",
   "sorties": [
@@ -1163,10 +2317,41 @@
    "nono"
   ]
  },
+ "olga-kulchynska": {
+  "nom": "Olga Kulchynska",
+  "sorties": [
+   "don-pasquale"
+  ]
+ },
+ "oliver-mears": {
+  "nom": "Oliver Mears",
+  "sorties": [
+   "manon-lescaut"
+  ]
+ },
  "olivier-saccomano": {
   "nom": "Olivier Saccomano",
   "sorties": [
    "un-hamlet-de-moins"
+  ]
+ },
+ "orchestre-national-bordeaux-aquitaine": {
+  "nom": "Orchestre national Bordeaux Aquitaine",
+  "sorties": [
+   "la-rondine"
+  ]
+ },
+ "orchestre-national-de-france": {
+  "nom": "Orchestre National de France",
+  "sorties": [
+   "attila",
+   "manon-lescaut"
+  ]
+ },
+ "pablo-gisbert": {
+  "nom": "Pablo Gisbert",
+  "sorties": [
+   "vu-lexikon"
   ]
  },
  "pascal-dusapin": {
@@ -1181,10 +2366,22 @@
    "ellen-babic"
   ]
  },
+ "paul-claudel": {
+  "nom": "Paul Claudel",
+  "sorties": [
+   "vu-le-soulier-de-satin"
+  ]
+ },
  "paul-lightfoot": {
   "nom": "Paul Lightfoot",
   "sorties": [
    "pulsations-childs"
+  ]
+ },
+ "pavel-cernoch": {
+  "nom": "Pavel Černoch",
+  "sorties": [
+   "lady-macbeth-de-mzensk"
   ]
  },
  "pedro-calderon-de-la-barca": {
@@ -1193,10 +2390,29 @@
    "la-vie-est-un-songe"
   ]
  },
+ "pene-pati": {
+  "nom": "Pene Pati",
+  "sorties": [
+   "la-rondine",
+   "romeo-et-juliette-jolly"
+  ]
+ },
+ "peter-mattei": {
+  "nom": "Peter Mattei",
+  "sorties": [
+   "don-giovanni"
+  ]
+ },
  "phia-menard": {
   "nom": "Phia Ménard",
   "sorties": [
    "nocturne-parade"
+  ]
+ },
+ "philippe-jaroussky": {
+  "nom": "Philippe Jaroussky",
+  "sorties": [
+   "rinaldo"
   ]
  },
  "philippe-quesne": {
@@ -1209,6 +2425,12 @@
   "nom": "Philippe Torreton",
   "sorties": [
    "le-discours-d-un-roi"
+  ]
+ },
+ "pierre-andre-weitz": {
+  "nom": "Pierre-André Weitz",
+  "sorties": [
+   "les-pecheurs-de-perles"
   ]
  },
  "pierre-arditi": {
@@ -1224,6 +2446,12 @@
    "vu-le-cid"
   ]
  },
+ "pietro-spagnoli": {
+  "nom": "Pietro Spagnoli",
+  "sorties": [
+   "don-pasquale"
+  ]
+ },
  "pina-bausch": {
   "nom": "Pina Bausch",
   "sorties": [
@@ -1236,11 +2464,42 @@
    "le-petit-cirque"
   ]
  },
+ "pretty-yende": {
+  "nom": "Pretty Yende",
+  "sorties": [
+   "l-elixir-d-amour",
+   "les-pecheurs-de-perles"
+  ]
+ },
+ "quinn-kelsey": {
+  "nom": "Quinn Kelsey",
+  "sorties": [
+   "le-trouvere"
+  ]
+ },
  "rebecca-chaillon": {
   "nom": "Rébecca Chaillon",
   "sorties": [
    "la-parabole-du-seum",
    "vu-la-parabole-du-seum-avignon"
+  ]
+ },
+ "regula-muhlemann": {
+  "nom": "Regula Mühlemann",
+  "sorties": [
+   "rinaldo"
+  ]
+ },
+ "renato-ribeiro": {
+  "nom": "Renato Ribeiro",
+  "sorties": [
+   "vu-hubris"
+  ]
+ },
+ "rene-barbera": {
+  "nom": "René Barbera",
+  "sorties": [
+   "l-elixir-d-amour"
   ]
  },
  "rene-crevel": {
@@ -1253,6 +2512,12 @@
   "nom": "Reynaldo Hahn",
   "sorties": [
    "le-temps-d-aimer"
+  ]
+ },
+ "riccardo-muti": {
+  "nom": "Riccardo Muti",
+  "sorties": [
+   "attila"
   ]
  },
  "richard-wagner": {
@@ -1273,6 +2538,24 @@
    "turandot"
   ]
  },
+ "roberto-alagna": {
+  "nom": "Roberto Alagna",
+  "sorties": [
+   "manon-lescaut"
+  ]
+ },
+ "roberto-bolano": {
+  "nom": "Roberto Bolaño",
+  "sorties": [
+   "maldoror"
+  ]
+ },
+ "roberto-kalb": {
+  "nom": "Roberto Kalb",
+  "sorties": [
+   "la-rondine"
+  ]
+ },
  "romeo-castellucci": {
   "nom": "Romeo Castellucci",
   "sorties": [
@@ -1289,6 +2572,12 @@
   "nom": "Sacha Guitry",
   "sorties": [
    "la-jalousie"
+  ]
+ },
+ "saioa-hernandez": {
+  "nom": "Saioa Hernández",
+  "sorties": [
+   "le-trouvere"
   ]
  },
  "samar-haddad-king": {
@@ -1321,10 +2610,45 @@
    "j-ai-une-theorie"
   ]
  },
+ "scott-gibbons": {
+  "nom": "Scott Gibbons",
+  "sorties": [
+   "faust-castellucci"
+  ]
+ },
  "sebastien-kheroufi": {
   "nom": "Sébastien Kheroufi",
   "sorties": [
    "la-mort-du-mome"
+  ]
+ },
+ "sebastien-pouderoux": {
+  "nom": "Sébastien Pouderoux",
+  "sorties": [
+   "ruy-blas",
+   "vu-une-mouette"
+  ]
+ },
+ "sefa-yeboah": {
+  "nom": "Sefa Yeboah",
+  "sorties": [
+   "la-fournaise"
+  ]
+ },
+ "sephora-pondi": {
+  "nom": "Séphora Pondi",
+  "sorties": [
+   "vu-bestioles"
+  ]
+ },
+ "serge-bagdassarian": {
+  "nom": "Serge Bagdassarian",
+  "sorties": [
+   "l-envers-du-music-hall",
+   "vu-la-puce-a-loreille",
+   "vu-lavare",
+   "vu-le-soulier-de-satin",
+   "vu-le-suicide"
   ]
  },
  "serge-lifar": {
@@ -1337,6 +2661,12 @@
   "nom": "Séverine Chavrier",
   "sorties": [
    "aria-da-capo"
+  ]
+ },
+ "shahar-binyamini": {
+  "nom": "Shahar Binyamini",
+  "sorties": [
+   "rituels-lifar"
   ]
  },
  "sharon-eyal": {
@@ -1383,6 +2713,31 @@
    "oedipe-roi"
   ]
  },
+ "speranza-scappucci": {
+  "nom": "Speranza Scappucci",
+  "sorties": [
+   "don-pasquale",
+   "orphee"
+  ]
+ },
+ "stanislas-de-barbeyrac": {
+  "nom": "Stanislas de Barbeyrac",
+  "sorties": [
+   "la-walkyrie"
+  ]
+ },
+ "stanislas-nordey": {
+  "nom": "Stanislas Nordey",
+  "sorties": [
+   "madame-de-sade"
+  ]
+ },
+ "stefan-astakhov": {
+  "nom": "Stefan Astakhov",
+  "sorties": [
+   "le-barbier-de-seville"
+  ]
+ },
  "stefano-massini": {
   "nom": "Stefano Massini",
   "sorties": [
@@ -1395,6 +2750,12 @@
    "dipe-antigone"
   ]
  },
+ "stephane-fuget": {
+  "nom": "Stéphane Fuget",
+  "sorties": [
+   "l-orfeo"
+  ]
+ },
  "stephane-guillon": {
   "nom": "Stéphane Guillon",
   "sorties": [
@@ -1404,6 +2765,7 @@
  "stephane-varupenne": {
   "nom": "Stéphane Varupenne",
   "sorties": [
+   "ruy-blas",
    "vu-le-suicide"
   ]
  },
@@ -1413,10 +2775,24 @@
    "tout-doit-disparaitre"
   ]
  },
+ "stephanie-childress": {
+  "nom": "Stephanie Childress",
+  "sorties": [
+   "don-giovanni"
+  ]
+ },
  "steven-cohen": {
   "nom": "Steven Cohen",
   "sorties": [
    "steven-cohen-people-will-people-you"
+  ]
+ },
+ "suliane-brahim": {
+  "nom": "Suliane Brahim",
+  "sorties": [
+   "c-est-beau",
+   "le-cid",
+   "vu-le-soulier-de-satin"
   ]
  },
  "svetlana-alexievitch": {
@@ -1425,10 +2801,48 @@
    "la-guerre-n-a-pas-un-visage-de-femme"
   ]
  },
+ "sylvain-berdjane": {
+  "nom": "Sylvain Berdjane",
+  "sorties": [
+   "vu-dans-la-peau-de-cyrano"
+  ]
+ },
+ "sylvia-berge": {
+  "nom": "Sylvia Bergé",
+  "sorties": [
+   "vu-le-mariage-force",
+   "vu-le-suicide"
+  ]
+ },
+ "tamara-al-saadi": {
+  "nom": "Tamara Al Saadi",
+  "sorties": [
+   "vu-taire"
+  ]
+ },
+ "tamara-wilson": {
+  "nom": "Tamara Wilson",
+  "sorties": [
+   "la-walkyrie",
+   "le-trouvere"
+  ]
+ },
  "tame-impala": {
   "nom": "Tame Impala",
   "sorties": [
    "tame-impala"
+  ]
+ },
+ "tanya-beyeler": {
+  "nom": "Tanya Beyeler",
+  "sorties": [
+   "vu-lexikon"
+  ]
+ },
+ "ted-huffman": {
+  "nom": "Ted Huffman",
+  "sorties": [
+   "orphee"
   ]
  },
  "tennessee-williams": {
@@ -1437,16 +2851,38 @@
    "vu-un-tramway-nomme-desir"
   ]
  },
+ "theatre-du-radeau": {
+  "nom": "Théâtre du Radeau",
+  "sorties": [
+   "vu-par-autan"
+  ]
+ },
+ "thierry-hancisse": {
+  "nom": "Thierry Hancisse",
+  "sorties": [
+   "ruy-blas",
+   "vu-art-majeur",
+   "vu-la-puce-a-loreille",
+   "vu-les-fourberies-de-scapin"
+  ]
+ },
  "thierry-malandain": {
   "nom": "Thierry Malandain",
   "sorties": [
    "correspondances-nocturnes"
   ]
  },
+ "thomas-dunford": {
+  "nom": "Thomas Dunford",
+  "sorties": [
+   "lea-desandre"
+  ]
+ },
  "thomas-jolly": {
   "nom": "Thomas Jolly",
   "sorties": [
-   "la-tour-de-nesle"
+   "la-tour-de-nesle",
+   "romeo-et-juliette-jolly"
   ]
  },
  "thomas-ostermeier": {
@@ -1460,6 +2896,12 @@
   "sorties": [
    "vu-hecube-pas-hecube",
    "vu-la-distance"
+  ]
+ },
+ "timur-zangiev": {
+  "nom": "Timur Zangiev",
+  "sorties": [
+   "le-trouvere"
   ]
  },
  "tokyo-ballet": {
@@ -1489,7 +2931,6 @@
  "valerie-dreville": {
   "nom": "Valérie Dréville",
   "sorties": [
-   "thesee",
    "thesee-sa-vie-nouvelle"
   ]
  },
@@ -1498,6 +2939,20 @@
   "sorties": [
    "le-bourgeois-gentilhomme",
    "les-surs-hilton"
+  ]
+ },
+ "vannina-santoni": {
+  "nom": "Vannina Santoni",
+  "sorties": [
+   "miroir-de-nos-peines"
+  ]
+ },
+ "veronique-vella": {
+  "nom": "Véronique Vella",
+  "sorties": [
+   "berlin-mon-garcon",
+   "c-est-beau",
+   "vu-art-majeur"
   ]
  },
  "victor-hugo": {
@@ -1514,6 +2969,13 @@
    "vu-un-soir-de-gala"
   ]
  },
+ "vincent-dumestre": {
+  "nom": "Vincent Dumestre",
+  "sorties": [
+   "didon-et-enee",
+   "le-carnaval-baroque"
+  ]
+ },
  "wajdi-mouawad": {
   "nom": "Wajdi Mouawad",
   "sorties": [
@@ -1522,10 +2984,16 @@
    "vu-willy-protagoras-enferme-dans-les-toilettes"
   ]
  },
- "william-shakespeare": {
-  "nom": "William Shakespeare",
+ "william-blake": {
+  "nom": "William Blake",
   "sorties": [
-   "la-fournaise"
+   "heaven-hell"
+  ]
+ },
+ "willy-decker": {
+  "nom": "Willy Decker",
+  "sorties": [
+   "la-clemence-de-titus"
   ]
  },
  "wolfgang-amadeus-mozart": {
@@ -1547,7 +3015,21 @@
  "yukio-mishima": {
   "nom": "Yukio Mishima",
   "sorties": [
-   "madame-de-sade"
+   "madame-de-sade",
+   "seppuku"
+  ]
+ },
+ "yuriy-zavalnyouk": {
+  "nom": "Yuriy Zavalnyouk",
+  "sorties": [
+   "amadoca"
+  ]
+ },
+ "yusif-eyvazov": {
+  "nom": "Yusif Eyvazov",
+  "sorties": [
+   "le-trouvere",
+   "turandot"
   ]
  }
 }
