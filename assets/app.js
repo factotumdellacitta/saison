@@ -234,11 +234,13 @@ function texteDe(e) {
 }
 const cherche = (e, q) => { const t = normQ(q).trim(); if (!t) return true; const x = texteDe(e); return t.split(/\s+/).every((m) => x.includes(m)); };
 const genre = (e) => e.categorie + (e.sousGenre ? " (" + e.sousGenre.toLowerCase() + ")" : "");
+// Ligne : 1) genre à gauche, note à droite (cœur juste avant en admin) ; 2) titre ; 3) artistes ; 4) lieu et horaires, puis badges.
+const l1 = (e, note) => `<span class="l1">${gk(e)}${note}</span>`;
+const ligneMeta = (meta, b) => (meta || b ? `<span class="ss">${meta ? `<span class="ssm">${meta}</span>` : ""}${b}</span>` : "");
 function rowA(e) {
   const meta = [court(e.lieuId), e.horaires && e.horaires.length <= 40 ? e.horaires : ""].filter(Boolean).join(" · "), art = artLigne(e);
   return `<article class="row g-${famille(e.categorie)}" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${esc(e.id)}">${stubHTML(e)}
-  <span class="mid">${gk(e)}<span class="tt nom">${esc(e.titre)}</span>${art ? `<span class="art nom">${esc(art)}</span>` : ""}${meta ? `<span class="ss">${esc(meta)}</span>` : ""}</span></button>
-  <span class="end">${stars(e.note, e.pronostic)}${badges(e)}</span>${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}<div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
+  <span class="mid">${l1(e, stars(e.note, e.pronostic))}<span class="tt nom">${esc(e.titre)}</span>${art ? `<span class="art nom">${esc(art)}</span>` : ""}${ligneMeta(esc(meta), badges(e))}</span></button>${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}<div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
 }
 function rowJ(e) {
   const n = (e.vuLe || []).length;
@@ -246,8 +248,7 @@ function rowJ(e) {
   // Admin : les personnes venues avec moi, en label sur la ligne.
   const jp = PRIVE && ADMIN && PRIVE.journalPrive ? PRIVE.journalPrive[e.id] : null, acc = jp ? [...new Set(jp.accompagnants || [])] : [];
   return `<article class="row g-${famille(e.categorie)}" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${esc(e.id)}">${stubHTML(e, "vu")}
-  <span class="mid">${gk(e)}<span class="tt nom">${esc(e.titre)}</span>${e.avis ? `<span class="art">« ${esc(e.avis)} »</span>` : artLigne(e) ? `<span class="art nom">${esc(artLigne(e))}</span>` : ""}${meta ? `<span class="ss">${esc(meta)}</span>` : ""}</span>
-  <span class="end">${e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : ""}${acc.length ? `<span class="bds"><span class="b">avec ${esc(acc.join(", "))}</span></span>` : ""}</span></button><div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
+  <span class="mid">${l1(e, e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : "")}<span class="tt nom">${esc(e.titre)}</span>${e.avis ? `<span class="art">« ${esc(e.avis)} »</span>` : artLigne(e) ? `<span class="art nom">${esc(artLigne(e))}</span>` : ""}${ligneMeta(esc(meta), acc.length ? `<span class="bds"><span class="b">avec ${esc(acc.join(", "))}</span></span>` : "")}</span></button><div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
 }
 function creditsHTML(e) {
   const by = {};
@@ -269,7 +270,7 @@ function offresHTML(e) {
 }
 function actsHTML(e, details) {
   const b = booking(e), o = official(e);
-  return `<div class="acts">${b && e.statut !== "vu" ? `<a class="btn pri" href="${esc(b)}" target="_blank" rel="noopener">${ico("billet")}Réserver</a>` : ""}${o && (o !== b || e.statut === "vu") ? `<a class="btn" href="${esc(o)}" target="_blank" rel="noopener">${ico("externe")}${e.statut === "vu" ? "Page archivée" : "Site officiel"}</a>` : ""}${details ? `<a class="btn" href="#sortie-${esc(e.id)}">Détails</a><button class="btn ico" type="button" data-share="${esc(e.id)}" aria-label="Partager">${ico("partager")}</button>` : ""}</div>`;
+  return `<div class="acts">${b && e.statut !== "vu" ? `<a class="btn pri" href="${esc(b)}" target="_blank" rel="noopener">${ico("billet")}Réserver</a>` : ""}${o && (o !== b || e.statut === "vu") ? `<a class="btn" href="${esc(o)}" target="_blank" rel="noopener">${ico("externe")}${e.statut === "vu" ? "Page archivée" : "Site officiel"}</a>` : ""}${PRIVE && ADMIN && e.statut === "a-voir" && !reservee(e) ? `<button class="btn" type="button" data-adm="reserver" data-id="${esc(e.id)}">Réservé</button>` : ""}${details ? `<a class="btn" href="#sortie-${esc(e.id)}">Détails</a><button class="btn ico" type="button" data-share="${esc(e.id)}" aria-label="Partager">${ico("partager")}</button>` : ""}</div>`;
 }
 function detHTML(e) {
   const c = creditsHTML(e);
@@ -362,7 +363,7 @@ function activeList(f) {
   if (f.q.trim()) lbl("q", "", "« " + f.q.trim() + " »");
   if (f.jour) lbl("jour", "", fmt(D(f.jour), true));
   if (f.rac) lbl("rac", "", RAC[f.rac]);
-  if (f.libre) lbl("libre", "", "Libre ce soir-là");
+  if (f.libre) lbl("libre", "", "Soirs libres");
   f.cat.forEach((c) => lbl("cat", c, CATS.find((x) => slug(x) === c) || c));
   if (f.note) lbl("note", "", f.note === 4 ? "Note 4" : "Note " + f.note + " et +");
   f.zone.forEach((z) => lbl("zone", z, ZONES[z] || z));
@@ -388,34 +389,25 @@ function renderAffiche(q) {
   const cats = CATS.filter((c) => LIVE.some((e) => e.categorie === c));
   const lieux = [...new Set(LIVE.map((e) => e.lieuId).filter(Boolean))].sort((a, b) => norm(court(a)).localeCompare(norm(court(b))));
   const months = []; for (let i = 0; i < 10; i++) { const d = new Date(TODAY.getFullYear(), TODAY.getMonth() + i, 1); months.push([iso(d).slice(0, 7), cap(MOIS_L[d.getMonth()]) + " " + d.getFullYear()]); }
-  let frise = "";
-  for (let i = 0; i < 14; i++) {
-    const d = add(TODAY, i), k = iso(d), busy = BUSY.has(k), n = LIVE.filter((e) => e.note >= 3 && playsOn(e, d)).length;
-    frise += `<button class="fd${busy ? " busy" : ""}${i === 0 ? " today" : ""}" type="button" data-jour="${k}" aria-pressed="false"><span class="dw">${i === 0 ? "auj." : JOURS[d.getDay()]}</span> <span class="dn">${d.getDate()}</span><span class="vh"> ${MOIS[d.getMonth()]}${busy ? `, ${OWNER} est pris` : ""}, </span>${n ? `<span class="nb">${n}</span><span class="vh"> ${n > 1 ? "sorties notées" : "sortie notée"} 3 ou plus</span>` : ""}</button>`;
-  }
   const chip = (g, v, t, extra = "") => `<button class="chip" type="button" data-g="${g}" data-v="${esc(v)}" aria-pressed="false"${extra}>${t}</button>`;
   const rd = radar();
   $("#main").innerHTML = `<div class="aff-g"><section id="aff"><h1 class="vh">À l’affiche</h1>
   ${radarLigne(rd)}
-  <div class="tools">${rech("aq", "Rechercher à l’affiche", F.q)}</div>
-  <div class="frise" role="group" aria-label="Les 14 prochains jours">${frise}</div>
-  <div class="tools"><div class="seg" role="group" aria-label="Affichage"><button class="i" type="button" data-vue="liste" aria-pressed="true" aria-label="Liste">${ico("liste")}</button><button class="i" type="button" data-vue="mois" aria-pressed="false" aria-label="Mois">${ico("mois")}</button></div>
-    <div class="chips defile" role="group" aria-label="Raccourcis">${Object.entries(RAC).map(([k, t]) => chip("rac", k, t)).join("")}${chip("libre", "1", "Libre ce soir-là")}</div></div>
+  <div class="tools barre-f">${rech("aq", "Rechercher à l’affiche", F.q)}<div class="seg" role="group" aria-label="Affichage"><button class="i" type="button" data-vue="liste" aria-pressed="true" aria-label="Liste">${ico("liste")}</button><button class="i" type="button" data-vue="mois" aria-pressed="false" aria-label="Calendrier">${ico("mois")}</button></div>
+    <button class="chip filtres" type="button" data-panel="pF" aria-expanded="false" aria-controls="pF">${ico("filtres")}<span class="lbf">Filtres</span><span class="nf" id="nF"></span></button></div>
   <div class="fbar"><div class="chips defile" role="group" aria-label="Genres">${cats.map((c) => chip("cat", slug(c), ico(c) + esc(c)).replace('class="chip"', `class="chip g-${famille(c)}"`)).join("")}</div>
-    <div class="chips defile" role="group" aria-label="Filtres">
-    ${chip("note", "2", carres(2, true), ' aria-label="Note 2 et plus"')}${chip("note", "3", carres(3, true), ' aria-label="Note 3 et plus"')}${chip("note", "4", carres(4), ' aria-label="Note 4"')}<span class="sep" aria-hidden="true"></span>
-    ${chip("zone", "paris", "Paris")}${chip("zone", "pc", "Petite couronne")}<span class="sep" aria-hidden="true"></span>
-    ${chip("statut", "public", "Public")}${chip("statut", "prive", "Privé")}<span class="sep" aria-hidden="true"></span>
-    ${chip("jeune", "1", "Public jeune")}${chip("offre", "1", "Offre jeune")}${chip("yva", "1", OWNER + " y va")}
-    <button class="chip i" type="button" data-panel="pPlus" aria-expanded="false" aria-controls="pPlus" aria-label="Plus de filtres">${ico("filtres")}</button></div>
-    <div class="fpanel" id="pPlus" hidden><div class="row2">
-      <label class="f"><span>Lieu</span><select id="fLieu"><option value="">Tous les lieux</option>${lieux.map((l) => `<option value="${esc(l)}">${esc(court(l))}</option>`).join("")}</select></label>
-      <label class="f"><span>Période</span><select id="fPer"><option value="">Toute la saison</option><option value="30">30 prochains jours</option>${months.map(([v, t]) => `<option value="${v}">${t}</option>`).join("")}</select></label></div></div>
+    <div class="fpanel" id="pF" hidden>
+      <div class="fgr" role="group" aria-labelledby="fgN"><span class="fl" id="fgN">Note</span><div class="chips">${chip("note", "2", carres(2, true), ' aria-label="Note 2 et plus"')}${chip("note", "3", carres(3, true), ' aria-label="Note 3 et plus"')}${chip("note", "4", carres(4), ' aria-label="Note 4"')}</div></div>
+      <div class="fgr" role="group" aria-labelledby="fgO"><span class="fl" id="fgO">Où</span><div><div class="chips">${chip("zone", "paris", "Paris")}${chip("zone", "pc", "Petite couronne")}<span class="sep" aria-hidden="true"></span>${chip("statut", "public", "Lieu public")}${chip("statut", "prive", "Lieu privé")}</div>
+        <label class="f"><span>Lieu</span><select id="fLieu"><option value="">Tous les lieux</option>${lieux.map((l) => `<option value="${esc(l)}">${esc(court(l))}</option>`).join("")}</select></label></div></div>
+      <div class="fgr" role="group" aria-labelledby="fgQ"><span class="fl" id="fgQ">Quand</span><div><label class="f"><span>Période</span><select id="fPer"><option value="">Toute la saison</option><option value="30">30 prochains jours</option>${months.map(([v, t]) => `<option value="${v}">${t}</option>`).join("")}</select></label>
+        <div class="chips">${chip("libre", "1", "Soirs libres", ` aria-label="Seulement les soirs où ${OWNER} est libre"`)}</div></div></div>
+      <div class="fgr" role="group" aria-labelledby="fgP"><span class="fl" id="fgP">Pour</span><div class="chips">${chip("jeune", "1", "Public jeune")}${chip("offre", "1", "Offre jeune")}${chip("yva", "1", OWNER + " y va")}</div></div>
+    </div>
     <div class="active" id="active" aria-live="polite"></div></div>
   <div id="monthBox"></div>
   <div id="alist" class="list"></div></section>${radarLateral(rd)}</div>`;
   const m = $("#aff");
-  m.querySelector(".frise").onclick = (ev) => { const b = ev.target.closest("[data-jour]"); if (b) setF((f) => { f.jour = f.jour === b.dataset.jour ? "" : b.dataset.jour; f.rac = ""; }); };
   m.querySelector(".seg").onclick = (ev) => { const b = ev.target.closest("[data-vue]"); if (b) setF((f) => { f.vue = b.dataset.vue; }); };
   m.querySelectorAll("[data-panel]").forEach((b) => b.onclick = () => {
     const p = $("#" + b.dataset.panel), open = p.hidden;
@@ -436,7 +428,6 @@ function renderAffiche(q) {
   $("#fLieu").onchange = (ev) => setF((f) => { f.lieu = ev.target.value; });
   $("#fPer").onchange = (ev) => setF((f) => { f.per = ev.target.value; });
   updateAffiche();
-  const sel = m.querySelector('.fd[aria-pressed="true"]'); if (sel) sel.scrollIntoView({ inline: "nearest", block: "nearest" });
 }
 function updateAffiche() {
   const m = $("#aff"), f = F;
@@ -445,11 +436,11 @@ function updateAffiche() {
     const on = g === "rac" ? f.rac === v : g === "note" ? f.note === +v : typeof f[g] === "boolean" ? f[g] : f[g] instanceof Set ? f[g].has(v) : false;
     b.setAttribute("aria-pressed", String(!!on));
   });
-  m.querySelectorAll(".fd").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.jour === f.jour)));
+  const nF = (f.note ? 1 : 0) + f.zone.size + f.statut.size + (f.lieu ? 1 : 0) + (f.per ? 1 : 0) + [f.libre, f.jeune, f.offre, f.yva].filter(Boolean).length;
+  $("#nF").textContent = nF ? " " + nF : ""; m.querySelector("[data-panel=pF]").setAttribute("aria-label", "Filtres" + (nF ? `, ${nF} actif${nF > 1 ? "s" : ""}` : ""));
   m.querySelectorAll("[data-vue]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.vue === f.vue)));
   $("#fLieu").value = f.lieu; $("#fPer").value = f.per;
   const aq = $("#aq"); if (aq && document.activeElement !== aq && aq.value !== f.q) aq.value = f.q;
-  m.querySelector(".frise").hidden = f.vue === "mois";
   // Résultats
   let items = LIVE.filter((e) => matchA(e, f, f.vue === "mois" && !f.jour));
   if (f.vue === "mois" && !f.jour) { const c = monthCursor(f); items = items.filter((e) => overlaps(e, c, new Date(c.getFullYear(), c.getMonth() + 1, 0))); }
@@ -592,11 +583,10 @@ const heureV = (o) => { const h = /T(\d\d):(\d\d)/.exec(o.vente); return h ? (+h
 const offreTxt = (o) => esc(o.type) + (o.tarif ? ", " + esc(o.tarif) : "");
 const libresTxt = (e) => { const n = soirsLibres(e); return n == null ? "" : n ? plural(n, "soir libre", "soirs libres") : `<b class="warn">aucun soir libre</b>`; };
 const stubR = (lbl, d, urg) => `<span class="stub"><small class="fin${urg ? " urg" : ""}">${lbl}</small><b>${d.getDate()}</b><small>${MOIS[d.getMonth()]}</small></span>`;
-function rowR(e, pre, stub, info, extra = "") {
+function rowR(e, pre, stub, info) {
   const k = esc(pre + "-" + e.id), meta = court(e.lieuId);
   return `<article class="row g-${famille(e.categorie)}" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${k}">${stub}
-  <span class="mid">${gk(e)}<span class="tt nom">${esc(e.titre)}</span>${info ? `<span class="art">${info}</span>` : ""}${meta ? `<span class="ss">${esc(meta)}</span>` : ""}</span></button>
-  <span class="end">${stars(e.note, e.pronostic)}${badges(e).replace('<span class="b">Dernières dates</span>', "")}${extra}</span>${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}<div class="det" id="d-${k}" hidden></div></article>`;
+  <span class="mid">${l1(e, stars(e.note, e.pronostic))}<span class="tt nom">${esc(e.titre)}</span>${info ? `<span class="art">${info}</span>` : ""}${ligneMeta(esc(meta), badges(e).replace('<span class="b">Dernières dates</span>', "").replace('<span class="bds"></span>', ""))}</span></button>${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}<div class="det" id="d-${k}" hidden></div></article>`;
 }
 function infoReserver({ e, o, rang }) {
   const f = finDe(e), li = libresTxt(e);
@@ -644,7 +634,7 @@ function renderRadar() {
   ${nC ? `<div class="msg">${plural(nC, "billet")} à compléter <a href="#admin?v=rapide">Traiter</a></div>` : ""}
   <div class="r-g"><div class="r-col">
     <section class="r-b r-reserver" id="r-reserver"><h2 class="mh">À réserver <small>notées 4</small></h2>
-      ${r.aReserver.length ? `<div class="list">${r.aReserver.map((x) => rowR(x.e, "r", stubReserver(x), infoReserver(x), adm ? `<button class="chip" type="button" data-adm="reserver" data-id="${esc(x.e.id)}">Réservé</button>` : "")).join("")}</div>` : `<p class="empty">Tous les incontournables sont réservés.</p>`}</section>
+      ${r.aReserver.length ? `<div class="list">${r.aReserver.map((x) => rowR(x.e, "r", stubReserver(x), infoReserver(x))).join("")}</div>` : `<p class="empty">Tous les incontournables sont réservés.</p>`}</section>
     <section class="r-b r-chances" id="r-chances"><h2 class="mh">Dernières chances <small>notées 3 et +</small></h2>
       ${r.chances.length ? `<div class="list">${r.chances.map((e) => rowR(e, "c", stubR("fin", finDe(e), dansJ(finDe(e)) <= 7), [`Jusqu’au ${fmt(finDe(e), true)}`, libresTxt(e)].filter(Boolean).join(" · "))).join("")}</div>` : `<p class="empty">Rien de noté 3 ou plus ne s’arrête dans les ${R_FIN} jours.</p>`}</section>
   </div><div class="r-col r-lat2">
@@ -850,7 +840,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.12"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.13"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -868,7 +858,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.12"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.13"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
