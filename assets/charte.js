@@ -4,21 +4,27 @@
   const NOTES = { 4: "incontournable", 3: "fortement recommandé", 2: "bon choix si disponible", 1: "curiosité" };
   const note = (n, pro) => `<span class="st" role="img" aria-label="${n} sur 4, ${NOTES[n]}${pro ? ", prévision" : ""}">${[1, 2, 3, 4].map((i) => `<i${i <= n ? ' class="on"' : ""}></i>`).join("")}${pro ? '<sup aria-hidden="true">P</sup>' : ""}</span>`;
   const DEMO = [
-    { j: "15", m: "oct.", t: "Ruy Blas", a: "Victor Hugo, Claire Dumas", l: "Théâtre du Quai · Théâtre · 20h · 2h45", n: 3, b: ["Léonard y va"] },
-    { j: "8", m: "févr.", t: "Werther", a: "Jules Massenet, Paul Arnaud (direction musicale)", l: "Opéra Nord · Opéra · 19h30", n: 4, b: ["Carte Jeunes"] },
-    { j: "21", m: "janv.", t: "La Mouette", a: "Anton Tchekhov, Ivan Sorel", l: "Atelier Lumière · Théâtre · 20h", n: 2, p: true, b: ["Public jeune", "Dernières places"] },
-    { j: "3", m: "mars", t: "Les Noces de Figaro, ou la Folle Journée en version de concert intégrale", a: "Wolfgang Amadeus Mozart, Lorenzo Da Ponte, Orchestre des Remparts", l: "Salle Pleyel-sur-Seine · Opéra (version de concert) · 19h", n: 1, b: [] },
+    { j: "15", m: "oct.", t: "Ruy Blas", a: "Victor Hugo, Claire Dumas", g: "Théâtre", l: "Théâtre · Théâtre du Quai · 20h · 2h45", n: 3, b: ["Léonard y va"] },
+    { j: "8", m: "févr.", t: "Werther", a: "Jules Massenet, Paul Arnaud (direction musicale)", g: "Opéra", l: "Opéra · Opéra Nord · 19h30", n: 4, b: ["Carte Jeunes"] },
+    { j: "21", m: "janv.", t: "La Mouette", a: "Anton Tchekhov, Ivan Sorel", g: "Théâtre", l: "Théâtre · Atelier Lumière · 20h", n: 2, p: true, b: ["Public jeune", "Dernières places"] },
+    { j: "3", m: "mars", t: "Les Noces de Figaro, ou la Folle Journée en version de concert intégrale", a: "Wolfgang Amadeus Mozart, Lorenzo Da Ponte, Orchestre des Remparts", g: "Opéra", l: "Opéra (version de concert) · Salle Pleyel-sur-Seine · 19h", n: 1, b: [] },
   ];
   const badge = (x) => `<span class="b${x === "Léonard y va" ? " yva" : ""}">${x}</span>`;
   const ligne = (d) => `<article class="row"><a class="rb" href="#charte"><span class="stub"><b>${d.j}</b><small>${d.m}</small></span>
-    <span class="mid"><span class="tt nom">${d.t}</span><span class="art nom">${d.a}</span><span class="ss">${d.l}</span></span>
+    <span class="mid"><span class="tt nom">${d.t}</span><span class="art nom">${d.a}</span><span class="ss">${ICO(d.g)}${d.l}</span></span>
     <span class="end">${note(d.n, d.p)}${d.b.length ? `<span class="bds">${d.b.map(badge).join("")}</span>` : ""}</span></a></article>`;
 
   // Favicon : la clé (dont le dessin occupe 75 % × 60 % de sa boîte) laisse 18 % de marge et se centre optiquement
-  let CLE = null;
+  let CLE = null, ICO = () => "";
   const carre = (n) => { const t = n * 0.85, d = (t * 1.5) / 48; return CLE("", Math.round(t)).replace("<svg ", `<svg style="transform:translate(${-d}px,${d}px)" `); };
-  function render(main, { cleF, saisonTxt, themeBouton }) {
-    CLE = cleF; const S = saisonTxt();
+  function render(main, { cleF, saisonTxt, themeBouton, ico, ICONES, CATS }) {
+    CLE = cleF; ICO = ico; const S = saisonTxt();
+    const carres = (n) => `<span class="st" aria-hidden="true">${[1, 2, 3, 4].map((i) => `<i${i <= n ? ' class="on"' : ""}></i>`).join("")}</span>`;
+    const tuile = (k, lib) => `<figure><span class="ch-ico">${ico(k)}</span><span class="ch-ico p">${ico(k)}</span><figcaption class="meta muet">${lib}</figcaption></figure>`;
+    const LIB_UI = { clair: "Thème clair", sombre: "Thème sombre", auto: "Thème auto", cadenas: "Connexion", "cadenas-ouvert": "Session", loupe: "Rechercher", liste: "Liste", mois: "Mois", filtres: "Plus de filtres", tri: "Tri", prec: "Précédent", suiv: "Suivant", fermer: "Fermer", partager: "Partager", billet: "Réserver", externe: "Site officiel", lieu: "Lieu", horaires: "Horaires", stats: "Statistiques", ventes: "Ventes" };
+    const icones = `<section class="ch-section"><h2 class="mh">Icônes</h2><p>Un jeu unique, dessiné pour Factotum : trait de 2 px sur une grille de 24, extrémités carrées, angles vifs, rien ne dépasse la grille, aucun trait ne se touche à l’intérieur d’une icône. En encre (blanc sur aplat rouge), jamais en rouge sur fond clair. Une icône remplace un mot, dont le libellé reste pour l’accessibilité, ou accompagne le genre (« Théâtre · Les Gémeaux »). Jamais décorative, jamais seule pour un genre. Tailles : 14 px dans les métadonnées, 18 à 22 px dans les boutons, 40 à 48 px à côté du titre de la fiche. Hors de ce jeu, seuls la clé F et le cœur des envies.</p>
+      <h3 class="sec">Genres</h3><div class="ch-icos">${CATS.map((c) => tuile(c, c)).join("")}</div>
+      <h3 class="sec">Interface</h3><div class="ch-icos">${Object.keys(LIB_UI).filter((k) => ICONES[k]).map((k) => tuile(k, LIB_UI[k])).join("")}</div></section>`;
     const logo = `<span class="logo">${cleF()}Factotum</span>`;
     const duo = (titre, html, note) => `<section class="ch-section"><h2 class="mh">${titre}</h2>${note ? `<p class="cr">${note}</p>` : ""}
       <div class="ch-duo"><div class="ch-planche" data-theme="light"><span class="meta">Clair</span>${html}</div><div class="ch-planche" data-theme="dark"><span class="meta">Sombre</span>${html}</div></div></section>`;
@@ -28,13 +34,13 @@
     const nav = `<nav class="tabs" aria-label="Exemple de navigation">${[["Affiche", "À\u00a0l’affiche"], ["Journal", "Journal"], ["Index", "Artistes et lieux"], ["Liens", "Liens utiles"], ["Admin", "Admin"]]
       .map(([c, l], i) => `<a class="tab${i === 4 ? " lock" : ""}" href="#charte"${i === 0 ? ' aria-current="page"' : ""}><span class="court">${c}</span><span class="long">${l}</span></a>`).join("")}</nav>`;
     const lignes = `<div class="list">${DEMO.map(ligne).join("")}</div>`;
-    const bandeaux = `<div class="list"><h3 class="jour">Jeudi 15 octobre <small>2 représentations</small></h3>${ligne(DEMO[0])}${ligne({ ...DEMO[2], j: "15", m: "oct." })}
-      <h3 class="jour">Vendredi 16 octobre <small>1 représentation</small></h3>${ligne({ ...DEMO[1], j: "16", m: "oct." })}</div>`;
+    const bandeaux = `<div class="list"><h3 class="jour">Jeudi 15 octobre</h3>${ligne(DEMO[0])}${ligne({ ...DEMO[2], j: "15", m: "oct." })}
+      <h3 class="jour">Vendredi 16 octobre</h3>${ligne({ ...DEMO[1], j: "16", m: "oct." })}</div>`;
     const notes = `<table class="t"><tbody>${[4, 3, 2, 1].map((n) => `<tr><td>${note(n)}</td><td>${n} – ${NOTES[n]}</td></tr>`).join("")}<tr><td>${note(3, true)}</td><td>Prévision : création pas encore critiquée</td></tr></tbody></table>`;
     const badges = `<div class="bds">${["Léonard y va", "Public jeune", "Carte Jeunes", "Dernières places", "Offre jeune"].map(badge).join("")}</div>`;
-    const boutons = `<div class="acts"><a class="btn pri" href="#charte">Réserver</a><a class="btn" href="#charte">Site officiel</a><button class="btn" type="button">Partager</button><button class="btn danger" type="button">Annuler la réservation</button><button class="btn" type="button" disabled>Indisponible</button></div>`;
-    const puces = `<div class="chips"><button class="chip" type="button" aria-pressed="true">Théâtre</button><button class="chip" type="button" aria-pressed="false">Opéra</button><button class="chip" type="button" aria-pressed="false">Danse</button><button class="chip" type="button" aria-pressed="true">3 carrés et plus</button><button class="chip" type="button" aria-pressed="false">Libre ce soir-là</button><button class="chip effacer" type="button">Tout effacer</button></div>
-      <div class="active"><span class="n">12 sorties</span><span>2 filtres actifs</span></div><div class="seg" role="group" aria-label="Affichage"><button type="button" aria-pressed="true">Liste</button><button type="button" aria-pressed="false">Mois</button></div>`;
+    const boutons = `<div class="acts"><a class="btn pri" href="#charte">${ico("billet")}Réserver</a><a class="btn" href="#charte">${ico("externe")}Site officiel</a><button class="btn ico" type="button" aria-label="Partager">${ico("partager")}</button><button class="btn danger" type="button">Annuler la réservation</button><button class="btn" type="button" disabled>Indisponible</button></div>`;
+    const puces = `<div class="chips"><button class="chip" type="button" aria-pressed="true">${ico("Théâtre")}Théâtre</button><button class="chip" type="button" aria-pressed="false">${ico("Opéra")}Opéra</button><button class="chip" type="button" aria-pressed="false">${ico("Danse")}Danse</button><button class="chip" type="button" aria-pressed="true" aria-label="Note 3 et plus">${carres(3)}+</button><button class="chip i" type="button" aria-label="Plus de filtres">${ico("filtres")}</button><button class="chip" type="button" aria-pressed="false">Libre ce soir-là</button><button class="chip effacer" type="button">Tout effacer</button></div>
+      <div class="active"><span class="n">12 sorties</span><span>2 filtres actifs</span></div><div class="seg" role="group" aria-label="Affichage"><button class="i" type="button" aria-pressed="true" aria-label="Liste">${ico("liste")}</button><button class="i" type="button" aria-pressed="false" aria-label="Mois">${ico("mois")}</button></div>`;
     const JOURS = ["sam.", "dim.", "lun.", "mar.", "mer.", "jeu.", "ven."];
     const frise = `<div class="frise" role="group" aria-label="Les 14 prochains jours (exemple)">${Array.from({ length: 14 }, (_, i) => {
       const busy = [2, 6, 7].includes(i), va = [4, 10].includes(i), sel = i === 9;
@@ -44,12 +50,12 @@
       const d = i + 1, c = ["cell", d < 14 ? "past" : "", d === 14 ? "today" : "", [16, 20, 21].includes(d) ? "busy" : "", [18, 24].includes(d) ? "va" : "", d >= 17 && d <= 29 && ![16, 20, 21].includes(d) ? "play" : ""].filter(Boolean).join(" ");
       return `<div class="${c}"><span class="n">${d}</span></div>`;
     }).join("")}</div></div><div class="legend"><span class="l-auj">Aujourd’hui</span><span class="l-pris">Soir pris</span><span class="l-va">Léonard y va</span><span class="l-joue">Se joue</span><span class="l-offre">Offre jeune</span></div>`;
-    const fiche = `<div class="sheet-demo"><div class="shtop"><button class="btn ico" type="button" aria-label="Fermer">×</button><span class="k">Théâtre · Théâtre du Quai</span><button class="btn" type="button">Partager</button></div>
-      <div class="shh"><span class="meta">15 oct. 2026 – 27 janv. 2027</span><h3 class="nom h2-demo">Ruy Blas</h3><div class="ligne">${note(3)}<span class="bds">${badge("Léonard y va")}${badge("Public jeune")}</span></div></div>
+    const fiche = `<div class="sheet-demo"><div class="shtop"><button class="btn ico" type="button" aria-label="Fermer">${ico("fermer")}</button><span class="k">Théâtre · Théâtre du Quai</span><button class="btn ico" type="button" aria-label="Partager">${ico("partager")}</button></div>
+      <div class="shh"><span class="meta">15 oct. 2026 – 27 janv. 2027</span><div class="tit">${ico("Théâtre", "g")}<h3 class="nom h2-demo">Ruy Blas</h3></div><div class="ligne">${note(3)}<span class="bds">${badge("Léonard y va")}${badge("Public jeune")}</span></div></div>
       <p class="cr"><span class="ro">auteur</span> <a href="#charte">Victor Hugo</a> · <span class="ro">mise en scène</span> <a href="#charte">Claire Dumas</a></p>
-      <dl class="dl"><dt>Lieu</dt><dd><a href="#charte">Théâtre du Quai</a>, salle Richelieu</dd><dt>Dates</dt><dd>15 oct. 2026 – 27 janv. 2027</dd><dt>Horaires</dt><dd>20h, dimanche 15h · 2h45 avec entracte</dd><dt>Tarif jeune</dt><dd>10 € (moins de 28 ans)</dd></dl>
+      <dl class="dl"><dt>${ico("lieu")}<span class="vh">Lieu</span></dt><dd><a href="#charte">Théâtre du Quai</a>, salle Richelieu</dd><dt>${ico("horaires")}<span class="vh">Horaires</span></dt><dd>20h, dimanche 15h · 2h45 avec entracte</dd><dt>Tarif jeune</dt><dd>10 € (moins de 28 ans)</dd></dl>
       <p class="why">Une phrase factuelle : la mise en scène a été saluée par la presse nationale à sa création.</p>
-      <div class="acts"><a class="btn pri" href="#charte">Réserver</a><a class="btn" href="#charte">Site officiel</a></div></div>`;
+      <div class="acts"><a class="btn pri" href="#charte">${ico("billet")}Réserver</a><a class="btn" href="#charte">${ico("externe")}Site officiel</a></div></div>`;
     const stats = `<div class="kpis"><div><b>48</b><span>sorties vues</span></div><div><b>17</b><span>lieux</span></div><div><b>3,1</b><span>note moyenne</span></div><div><b>12</b><span>cette saison</span></div></div>
       <div class="stats"><h3>Par catégorie</h3><div class="bars">${[["Théâtre", 21], ["Opéra", 12], ["Danse", 7], ["Concert", 5], ["Exposition", 3]].map(([l, n]) => `<span class="bl">${l}</span><span class="bg" style="--v:${Math.round((n / 21) * 100)}" aria-hidden="true"></span><span class="bn">${n}</span>`).join("")}</div></div>`;
     const champs = `<form class="frm" onsubmit="return false"><label class="f"><span>Titre</span><input type="text" value="Ruy Blas" autocomplete="off" enterkeyhint="next"></label>
@@ -66,7 +72,7 @@
       ${[["Werther", "36,00 €", "18,00 €", "44,00 €"], ["Ruy Blas", "10,00 €", "10,00 €", "32,00 €"], ["La Mouette", "24,00 €", "12,00 €", "16,00 €"]].map((r) => `<tr><td>${r[0]}</td><td class="num" data-l="Engagé">${r[1]}</td><td class="num" data-l="Payé par moi">${r[2]}</td><td class="num" data-l="Économie">${r[3]}</td></tr>`).join("")}
       <tr class="total"><td>Total</td><td class="num" data-l="Engagé">70,00 €</td><td class="num" data-l="Payé par moi">40,00 €</td><td class="num" data-l="Économie">92,00 €</td></tr></tbody></table>`;
 
-    const tailles = [["Titre du site", "logo", "Factotum"], ["Titre de section", "mh-demo", "Journal de la saison"], ["Titre de fiche", "tt", "La Folle Journée ou le Mariage de Figaro"], ["Corps", "corps", "Une brochure de saison transposée à l’écran : typographique, dense, franche et lisible."], ["Métadonnées", "ss", "Théâtre du Quai · Théâtre · 20h"], ["Dates", "jour-demo", "Jeudi 15 octobre"], ["Chiffres", "kpi-demo", "1 234"]];
+    const tailles = [["Titre du site", "logo", "Factotum"], ["Titre de section", "mh-demo", "Journal de la saison"], ["Titre de fiche", "tt", "La Folle Journée ou le Mariage de Figaro"], ["Corps", "corps", "Une brochure de saison transposée à l’écran : typographique, dense, franche et lisible."], ["Métadonnées", "ss", "Théâtre · Théâtre du Quai · 20h"], ["Dates", "jour-demo", "Jeudi 15 octobre"], ["Chiffres", "kpi-demo", "1 234"]];
 
     main.innerHTML = `<a class="skip" href="#ch-contenu">Aller au contenu</a>
     <div class="ch-couv rouge"><span class="logo">${cleF()}Factotum</span><p class="meta">Charte graphique · ${S}</p><p>Largo al factotum della città. Le site de veille, d’agenda et de journal des sorties, comme une brochure de saison.</p><p><a class="theme" href="#affiche">Retour au site</a> ${themeBouton()}</p></div>
@@ -77,6 +83,7 @@
     <section class="ch-section"><h2 class="mh">Symbole : la clé F</h2><p>Une clé passe-partout dont le panneton dessine un F, inclinée à 45° (anneau en bas à gauche, panneton en haut à droite). Géométrie stricte, extrémités carrées. Blanc sur aplat rouge, ou encre sur fond clair ou sombre. Jamais rouge sur rouge, ni contour, ombre, rotation ou animation. Taille minimale 16 px ; zone de protection : l’épaisseur de la tige. Usage réservé : en-tête, favicon, icônes, image de partage et cette page.</p>
       <div class="ch-cles">${[180, 32, 16].map((n) => `<figure><span class="carre" style="width:${n}px;height:${n}px">${carre(n)}</span><figcaption class="meta muet">${n} px</figcaption></figure>`).join("")}
       ${[64, 32, 16].map((n) => `<figure>${cleF("", n)}<figcaption class="meta muet">${n} px, encre</figcaption></figure>`).join("")}</div></section>
+    ${icones}
 
     <section class="ch-section"><h2 class="mh">Couleur</h2><p>Rouge #E30613 en aplats francs ; tout le reste en noir et blanc. Sur un aplat rouge, texte blanc uniquement. Le rouge employé comme couleur de texte passe à #FF5A4F sur fond sombre. Ni ombre, ni dégradé (hachures fonctionnelles exceptées), ni flou, ni transparence décorative.</p>
       <div class="ch-duo"><div class="ch-planche" data-theme="light"><span class="meta">Clair</span><div class="ch-jetons" data-jetons></div></div><div class="ch-planche" data-theme="dark"><span class="meta">Sombre</span><div class="ch-jetons" data-jetons></div></div></div>
@@ -106,7 +113,7 @@
 
     <section class="ch-section"><h2 class="mh">Interdits</h2><ul class="ch-interdits">
       <li>Polices Inter, Roboto, Poppins, Montserrat, Space Grotesk ou police système par défaut</li><li>Dégradés (hachures fonctionnelles exceptées), glassmorphisme, ombres portées, flou d’arrière-plan</li>
-      <li>Coins arrondis au-delà de 2 px, boutons en pilule, cartes flottantes</li><li>Icônes emoji, bibliothèques d’icônes, pictogrammes décoratifs</li>
+      <li>Coins arrondis au-delà de 2 px, boutons en pilule, cartes flottantes</li><li>Emoji, bibliothèques d’icônes, pictogrammes décoratifs ; toute icône hors du jeu Factotum, de la clé F et du cœur</li>
       <li>Violet, indigo, bleu ardoise ou toute couleur hors palette</li><li>Héros centré avec accroche, grandes sections vides, texte d’accueil marketing</li>
       <li>Animations d’échelle, rebonds, révélations au défilement, squelettes de chargement : seules les transitions de couleur et d’opacité de 120 ms, aucune en mouvement réduit</li>
       <li>Texte noir sur aplat rouge ; clé F rouge sur rouge, redressée, ombrée ou animée</li></ul></section>

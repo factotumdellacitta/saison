@@ -252,7 +252,7 @@ blockquote{margin:var(--e3) 0;padding:0 0 0 var(--e3);border-left:3px solid var(
 .t th{font-size:var(--t-meta);font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--encre-2)}
 .t .num,.t td.num,.t th.num{text-align:right;padding-right:0;white-space:nowrap}
 .t tfoot td,.t tr.total td{border-top:1px solid var(--filet);font-weight:800}
-.dl{display:grid;grid-template-columns:minmax(96px,max-content) minmax(0,1fr)}
+.dl{display:grid;grid-template-columns:minmax(32px,max-content) minmax(0,1fr)}
 .dl dt,.dl dd{margin:0;padding:var(--e2) 0;border-bottom:1px solid var(--filet-leger)}
 .dl dt{padding-right:var(--e4);font-size:var(--t-meta);font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--encre-2);line-height:1.8}
 .defile-x{overflow-x:auto;max-width:100%}
@@ -525,3 +525,35 @@ details.box[open]>summary::before{content:"–"}
   .ch-planche,.ch-jetons,.ch-cles{break-inside:avoid}
   .ch-section>.mh{break-after:avoid}
 }
+
+/* ---------- Icônes Factotum (trait 2 px, grille 24, en encre) ---------- */
+.pi{flex:none;display:inline-block;width:20px;height:20px;vertical-align:middle}
+.theme.ic{display:inline-flex;align-items:center;justify-content:center;width:var(--cible);padding:0}
+.theme.ic .pi{width:22px;height:22px}
+.tm{position:relative;display:inline-flex}
+.tmenu{position:absolute;right:0;top:calc(100% + var(--e1));z-index:60;display:flex;flex-direction:column;min-width:168px;border:1px solid var(--filet);background:var(--fond)}
+.tmenu button{display:flex;align-items:center;gap:var(--e3);min-height:var(--cible);padding:0 var(--e3);border:0;border-top:1px solid var(--filet-leger);border-radius:0;background:var(--fond);color:var(--encre);font-family:var(--police);font-size:var(--t-corps);font-weight:500;text-align:left;cursor:pointer;transition:background-color var(--duree),color var(--duree)}
+.tmenu button:first-child{border-top:0}
+.tmenu button[aria-checked="true"]{background:var(--rouge);color:var(--sur-rouge)}
+@media (hover:hover){.tmenu button[aria-checked="false"]:hover{background:var(--encre);color:var(--fond)}}
+.rech{position:relative;display:flex;align-items:center}
+.rech .pi{position:absolute;left:var(--e3);width:18px;height:18px;color:var(--encre-2);pointer-events:none}
+.rech input[type=search]{width:100%;padding-left:40px}
+.ss .pi{width:14px;height:14px;margin:-2px var(--e1) 0 0}
+.chip .pi{width:18px;height:18px}
+.chip.i{justify-content:center;width:var(--cible);padding:0}
+.chip[aria-pressed="true"] .st{color:var(--sur-rouge)}
+.btn .pi{width:18px;height:18px}
+.btn.ico .pi{width:20px;height:20px}
+.seg .i{min-width:var(--cible);padding:0}
+.tri{display:inline-flex;align-items:center;gap:var(--e1)}
+.tri .pi{width:16px;height:16px}
+.box summary .pi{width:18px;height:18px;margin:-2px var(--e2) 0 0}
+.shh .tit{display:flex;align-items:center;gap:var(--e3)}
+.shh .tit .pi{width:40px;height:40px}
+@media (min-width:960px){.shh .tit .pi{width:48px;height:48px}}
+.dl dt .pi{width:18px;height:18px;color:var(--encre-2)}
+.ch-icos{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));border-top:1px solid var(--filet-leger);border-left:1px solid var(--filet-leger)}
+.ch-icos figure{display:flex;flex-direction:column;align-items:center;gap:var(--e2);margin:0;padding:var(--e4) var(--e2) var(--e3);border-right:1px solid var(--filet-leger);border-bottom:1px solid var(--filet-leger);text-align:center}
+.ch-ico .pi{width:48px;height:48px}
+.ch-ico.p .pi{width:16px;height:16px}
