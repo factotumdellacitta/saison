@@ -69,6 +69,16 @@ LOCATION:Zénith\, Zénith Paris – La Villette
 DESCRIPTION:Nono la Grinta\nHeure à préciser
 END:VEVENT
 BEGIN:VEVENT
+UID:seppuku-2027-01-22@saison
+DTSTAMP:20261113T000000Z
+DTSTART;TZID=Europe/Paris:20270122T200000
+DTEND;TZID=Europe/Paris:20270122T223000
+SUMMARY:Seppuku. El funeral de Mishima
+LOCATION:Odéon\, Odéon – Théâtre de l’Europe
+DESCRIPTION:Angélica Liddell\nPlaces : 2\nAvec : Alexandre\nConflit : deux
+  spectacles le même soir
+END:VEVENT
+BEGIN:VEVENT
 UID:l-evenement-2027-01-28@saison
 DTSTAMP:20261113T000000Z
 DTSTART;TZID=Europe/Paris:20270128T203000
@@ -76,15 +86,6 @@ DTEND;TZID=Europe/Paris:20270128T230000
 SUMMARY:L’Événement
 LOCATION:Vieux-Colombier\, Comédie-Française
 DESCRIPTION:Annie Ernaux\nConflit : deux spectacles le même soir
-END:VEVENT
-BEGIN:VEVENT
-UID:seppuku-2027-01-28@saison
-DTSTAMP:20261113T000000Z
-DTSTART;TZID=Europe/Paris:20270128T200000
-DTEND;TZID=Europe/Paris:20270128T223000
-SUMMARY:Seppuku. El funeral de Mishima
-LOCATION:Odéon\, Odéon – Théâtre de l’Europe
-DESCRIPTION:Angélica Liddell\nConflit : deux spectacles le même soir
 END:VEVENT
 BEGIN:VEVENT
 UID:maldoror-2027-02-04@saison
