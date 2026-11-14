@@ -241,7 +241,7 @@ function texteDe(e) {
 const cherche = (e, q) => { const t = normQ(q).trim(); if (!t) return true; const x = texteDe(e); return t.split(/\s+/).every((m) => x.includes(m)); };
 const genre = (e) => e.categorie + (e.sousGenre ? " (" + e.sousGenre.toLowerCase() + ")" : "");
 // Ligne : 1) genre à gauche, note à droite (cœur juste avant en admin) ; 2) titre ; 3) artistes ; 4) lieu et horaires, puis badges.
-const coeurPub = (e) => (!(PRIVE && ADMIN) && enviesIds().has(e.id) ? `<span class="coeur-l" role="img" aria-label="Dans les envies de ${OWNER}">${COEUR}</span>` : "");
+const coeurPub = (e) => (!(PRIVE && ADMIN) && enviesIds().has(e.id) ? `<span class="coeur-l" role="img" aria-label="Coup de cœur de ${OWNER}">${COEUR}</span>` : "");
 // Bande de genre : aplat fin de la couleur du genre, à gauche de la ligne.
 const gb = (e) => `<span class="gb" aria-hidden="true"></span>`; // bande pleine de la couleur du genre, sans contenu
 // Première ligne : titre à gauche, note puis cœur à droite.
@@ -419,7 +419,7 @@ function renderAffiche(q) {
   const chip = (g, v, t, extra = "") => `<button class="chip" type="button" data-g="${g}" data-v="${esc(v)}" aria-pressed="false"${extra}>${t}</button>`;
   const rd = radar();
   $("#main").innerHTML = `<div class="aff-g"><section id="aff"><h1 class="vh">À l’affiche</h1>
-  ${radarLigne(rd)}
+  ${radarLigne(rd)}${coeurLigne()}
   <div class="tools barre-f">${rech("aq", "Rechercher à l’affiche", F.q)}<div class="seg" role="group" aria-label="Affichage"><button class="i" type="button" data-vue="liste" aria-pressed="true" aria-label="Liste">${ico("liste")}</button><button class="i" type="button" data-vue="mois" aria-pressed="false" aria-label="Calendrier">${ico("mois")}</button></div>
     <button class="chip filtres" type="button" data-panel="pF" aria-expanded="false" aria-controls="pF">${ico("filtres")}<span class="lbf">Filtres</span><span class="nf" id="nF"></span></button></div>
   <div class="fbar"><div class="chips defile" role="group" aria-label="Genres">${cats.map((c) => chip("cat", slug(c), ico(c) + esc(c)).replace('class="chip"', `class="chip g-${famille(c)}"`)).join("")}</div>
@@ -433,7 +433,7 @@ function renderAffiche(q) {
     </div>
     <div class="active" id="active" aria-live="polite"></div></div>
   <div id="monthBox"></div>
-  <div id="alist" class="list"></div></section>${radarLateral(rd)}</div>`;
+  <div id="alist" class="list"></div></section>${radarLateral()}</div>`;
   const m = $("#aff");
   m.querySelector(".seg").onclick = (ev) => { const b = ev.target.closest("[data-vue]"); if (b) setF((f) => { f.vue = b.dataset.vue; }); };
   m.querySelectorAll("[data-panel]").forEach((b) => b.onclick = () => {
@@ -660,7 +660,7 @@ function renderRadar() {
   </div><div class="r-col r-lat2">
     <section class="r-b r-semaine" id="r-semaine"><h2 class="mh">Cette semaine</h2>${blocSemaine(r)}</section>
     <section class="r-b r-suite" id="r-suite"><h2 class="mh">Ouvertures suivantes</h2>
-      <div class="seg" role="group" aria-label="Ouvertures affichées"><button type="button" data-rf="suivies" aria-pressed="${RF === "suivies"}" title="Notées 4 ou en envie">Suivies (${nSuivies})</button><button type="button" data-rf="tout" aria-pressed="${RF === "tout"}">Toutes (${r.suite.length})</button></div>
+      <div class="seg" role="group" aria-label="Ouvertures affichées"><button type="button" data-rf="suivies" aria-pressed="${RF === "suivies"}" title="Notées 4 ou coups de cœur">Suivies (${nSuivies})</button><button type="button" data-rf="tout" aria-pressed="${RF === "tout"}">Toutes (${r.suite.length})</button></div>
       <div id="rSuite">${blocSuite(r)}</div></section>
   </div></div>
   <section class="r-b" id="r-liens"><h2 class="mh">Billetteries et calendriers de vente</h2>${LIENS ? liensHTML() : '<p class="empty">Liens indisponibles hors connexion.</p>'}</section>
@@ -683,14 +683,17 @@ function envLat() {
   const E = enviesIds(), L = LIVE.filter((e) => E.has(e.id)).sort((a, b) => sortKey(a) - sortKey(b) || a.titre.localeCompare(b.titre, "fr"));
   const li = L.slice(0, 6).map((e) => { const p = span(e), j = !p ? "à venir" : running(e) ? "fin " + fmt(p[1]) : fmt(p[0]);
     return `<li><a href="#sortie-${esc(e.id)}"><span class="vd">${esc(j)}</span><span class="vt"><b>${esc(e.titre)}</b> <span>· ${esc(court(e.lieuId))}</span></span></a></li>`; }).join("");
-  return `<h2 class="mh">Envies <small>${L.length}</small></h2>${li ? `<ul class="vl">${li}</ul>` : '<p class="cr">Aucune envie notée pour le moment.</p>'}
-  <div class="acts"><a class="btn" href="#coeur">${COEUR}Toutes les envies</a></div>`;
+  return `<h2 class="mh">Coups de cœur <small>${L.length}</small></h2>${li ? `<ul class="vl">${li}</ul>` : '<p class="cr">Aucun coup de cœur pour le moment.</p>'}
+  <div class="acts"><a class="btn pri" href="#coeur">${COEUR}Coups de cœur de ${OWNER}</a></div>`;
 }
-function radarLateral(r) {
-  const sem = r.semaine.map(({ e, o, v }) => `<li><a href="#sortie-${esc(e.id)}"><span class="vd">${jTxt(dansJ(v))}${heureV(o) ? " " + heureV(o) : ""}</span><span class="vt"><b>${esc(e.titre)}</b> <span>· ${esc(o.type)}</span></span></a></li>`).join("");
-  return `<aside class="r-lat" aria-label="Radar"><h2 class="mh">Cette semaine</h2>${sem ? `<ul class="vl">${sem}</ul>` : '<p class="cr">Aucune ouverture dans les 7 jours.</p>'}
-  ${envLat()}
-  <div class="acts"><a class="btn pri" href="#radar">Voir tout le radar</a></div></aside>`;
+// Colonne de droite de l’Affiche (bureau) : les coups de cœur seulement (« Cette semaine » reste sur la page Radar).
+function radarLateral() {
+  return `<aside class="r-lat" aria-label="Coups de cœur de ${OWNER}">${envLat()}</aside>`;
+}
+// Bandeau mobile de l’Affiche vers les coups de cœur.
+function coeurLigne() {
+  const E = enviesIds(), n = LIVE.filter((e) => E.has(e.id)).length;
+  return `<a class="r-ligne c-ligne" href="#coeur">${COEUR}<b>Coups de cœur de ${OWNER}</b> <span>${n ? plural(n, "sortie") : "aucun pour le moment"}</span></a>`;
 }
 
 /* ---------- Journal ---------- */
@@ -819,14 +822,14 @@ const ORDRE_LIENS = ["Cartes et tarifs jeunes", "Calendriers de vente", "Billett
 const hote = (u) => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch (_) { return ""; } };
 // Liens rangés par rubrique, dans l’ordre du fichier à l’intérieur de chaque rubrique.
 const liensParRubrique = (L) => ORDRE_LIENS.map((c) => [c, L.filter((l) => l.categorie === c)]);
-/* ---------- Envies (publiques) ---------- */
+/* ---------- Coups de cœur (envies, publiques) ---------- */
 function renderCoeur() {
   const E = enviesIds();
   const items = AFF.filter((e) => e.statut === "a-voir" && !ended(e) && E.has(e.id)).sort((a, b) => sortKey(a) - sortKey(b) || a.titre.localeCompare(b.titre, "fr"));
   let html = "", last = null;
   for (const e of items) { const g = groupOf(e); if (g !== last) { html += `<h2 class="jour">${g}</h2>`; last = g; } html += rowA(e); }
-  $("#main").innerHTML = `<div class="ph"><h1>Envies</h1><p>${plural(items.length, "sortie")}</p></div>
-  <div class="list">${html || `<p class="empty">Aucune envie.</p>`}</div>`;
+  $("#main").innerHTML = `<div class="ph"><h1>Coups de cœur de ${OWNER}</h1><p>${plural(items.length, "sortie")} à l’affiche</p></div>
+  <div class="list">${html || `<p class="empty">Aucun coup de cœur pour le moment.</p>`}</div>`;
 }
 // Billetteries, cartes jeunes et calendriers de vente : section du Radar (l’ancienne page Liens, #liens y mène).
 function liensHTML() {
@@ -864,7 +867,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.18"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.19"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -882,11 +885,11 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.18"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.19"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
-const TITRES = { radar: "Radar", affiche: "", coeur: "Envies", journal: "Journal", artistes: "Artistes et lieux", lieux: "Artistes et lieux", admin: "Admin" };
+const TITRES = { radar: "Radar", affiche: "", coeur: "Coups de cœur", journal: "Journal", artistes: "Artistes et lieux", lieux: "Artistes et lieux", admin: "Admin" };
 let TITRE_VUE = "Factotum";
 async function renderView(h) {
   const [path, q = ""] = h.split("?");

@@ -651,3 +651,8 @@ body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
 #hcoeur[aria-current="page"]{background:var(--sur-rouge);color:var(--rouge)}
 #hcoeur[aria-current="page"] .coeur{fill:currentColor}
 .r-lat .acts .btn .coeur{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2}
+
+/* Bandeau mobile de l’Affiche vers les coups de cœur (même forme que celui du Radar, juste dessous) */
+.c-ligne{margin-top:var(--e1)}
+.c-ligne .coeur{width:18px;height:18px;fill:currentColor;stroke:currentColor;stroke-width:2}
+.r-lat .acts .btn.pri .coeur{fill:currentColor}
