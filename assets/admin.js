@@ -444,10 +444,12 @@
   }
 
   /* ---------- Envies ---------- */
+  // Cœur des envies : géométrie stricte (deux arcs, une pointe), contour au repos, plein quand l’envie est notée.
+  const COEUR = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20.5 3.6 12.1a4.8 4.8 0 0 1 6.8-6.8L12 6.9l1.6-1.6a4.8 4.8 0 0 1 6.8 6.8z"/></svg>';
   function heart(id) {
     if (!PRIVE) return "";
     const on = !!PRIVE.envies[id];
-    return `<button class="envie" type="button" data-envie="${esc(id)}" aria-pressed="${on}" aria-label="Dans mes envies : ${esc(titreDe(id))}">Envie</button>`;
+    return `<button class="envie" type="button" data-envie="${esc(id)}" aria-pressed="${on}" aria-label="Dans mes envies : ${esc(titreDe(id))}">${COEUR}</button>`;
   }
   async function basculerEnvie(id, prio) {
     const on = !!PRIVE.envies[id] && prio == null;
