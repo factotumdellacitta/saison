@@ -658,12 +658,12 @@
       ${champ("Mon avis (public)", `<textarea name="avis" rows="2">${esc(e.avis || "")}</textarea>`)}
       ${notesHTML(jp && jp.notes)}
       ${prixReplie(pr, aDesPrix(jp))}
-      ${champ("Titre", inp("titre", e.titre, "required"))}
+      <details class="box"><summary>Fiche</summary>${champ("Titre", inp("titre", e.titre, "required"))}
       <div class="grid2">${champ("Catégorie", sel("categorie", CATS, e.categorie))}${champ("Sous-genre", inp("sousGenre", e.sousGenre))}</div>
       <div class="grid2">${champ("Lieu", inp("lieu", nomLieu(e.lieuId), 'list="dl-lieux" placeholder="Commence à taper…"'))}${champ("Salle", inp("salle", e.salle))}</div>
       <fieldset class="fs" data-nl hidden><legend>Nouveau lieu</legend><div class="grid2">${champ("Ville", inp("nl_ville", "Paris"))}${champ("Zone", sel("nl_zone", ZONES_L, "Paris"))}</div></fieldset>
       <fieldset class="fs"><legend>Artistes</legend><div data-arts>${((e.artistes || []).length ? e.artistes : [{}]).map(artRow).join("")}</div><button type="button" class="btn" data-addart>${ico("ajouter")}Artiste</button></fieldset>
-      ${champ("Lien officiel", inp("lien", e.lien, 'type="url" placeholder="https://…"'))}
+      ${champ("Lien officiel", inp("lien", e.lien, 'type="url" placeholder="https://…"'))}</details>
       ${$("#dl-art") ? "" : dl("dl-art", artsConnus())}${$("#dl-lieux") ? "" : dl("dl-lieux", lieuxNoms())}
       <p class="err" role="alert" hidden></p>
       <div class="acts"><button class="btn pri" type="submit">Enregistrer</button><button class="btn ico" type="button" data-share="${k}" aria-label="Partager">${ico("partager")}</button><button class="btn danger" type="button" data-adm="supprimer" data-id="${k}">Supprimer</button></div></form>`;
