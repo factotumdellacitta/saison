@@ -667,10 +667,10 @@
   function journalForm(e) {
     const jp = PRIVE.journalPrive[e.id], k = esc(e.id), pr = jp && places(jp).length ? jp : { billets: [{ spectateur: "Moi" }] };
     return `<form class="frm jin" data-jid="${k}" novalidate autocomplete="off">
-      <fieldset class="fs"><legend>Dates vues</legend><div data-dates>${(e.vuLe || []).map(dateRow).join("")}</div><button type="button" class="btn" data-adddate>${ico("ajouter")}Date</button></fieldset>
-      ${champ("Ma note", sel("noteLeonard", NOTES_L, e.noteLeonard ?? ""))}
-      ${champ("Mon avis (public)", `<textarea name="avis" rows="2">${esc(e.avis || "")}</textarea>`)}
-      ${notesHTML(jp && jp.notes)}
+      <div class="jgrid"><fieldset class="fs"><legend>Dates vues</legend><div data-dates>${(e.vuLe || []).map(dateRow).join("")}</div><button type="button" class="btn ai" data-adddate>${ico("ajouter")}<span>Date</span></button></fieldset>
+      ${champ("Ma note", sel("noteLeonard", NOTES_L, e.noteLeonard ?? ""))}</div>
+      <div class="jgrid jtxt">${champ("Mon avis (public)", `<textarea name="avis" rows="3">${esc(e.avis || "")}</textarea>`)}
+      ${notesHTML(jp && jp.notes)}</div>
       ${prixReplie(pr, aDesPrix(jp))}
       <details class="box"><summary>Fiche</summary>${champ("Titre", inp("titre", e.titre, "required"))}
       <div class="grid2">${champ("Catégorie", sel("categorie", CATS, e.categorie))}${champ("Sous-genre", inp("sousGenre", e.sousGenre))}</div>
@@ -680,7 +680,7 @@
       ${champ("Lien officiel", inp("lien", e.lien, 'type="url" placeholder="https://…"'))}</details>
       ${$("#dl-art") ? "" : dl("dl-art", artsConnus())}${$("#dl-lieux") ? "" : dl("dl-lieux", lieuxNoms())}
       <p class="err" role="alert" hidden></p>
-      <div class="acts"><button class="btn pri" type="submit">Enregistrer</button><button class="btn ico" type="button" data-share="${k}" aria-label="Partager">${ico("partager")}</button><button class="btn danger" type="button" data-adm="supprimer" data-id="${k}">Supprimer</button></div></form>`;
+      <div class="acts jacts"><button class="btn pri" type="submit">Enregistrer</button><button class="btn ai danger ml" type="button" data-adm="supprimer" data-id="${k}" aria-label="Supprimer cette entrée du journal" title="Supprimer cette entrée du journal">${ico("supprimer")}</button></div></form>`;
   }
   // Infos privées d’une entrée du journal (places, prix, accompagnants, notes), sans boutons.
   function journalResume(e) {

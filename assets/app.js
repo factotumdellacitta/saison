@@ -678,14 +678,18 @@ function radarLigne(r) {
   const t = [r.semaine.length ? plural(r.semaine.length, "vente") + " cette semaine" : "", r.aReserver.length ? r.aReserver.length + " à réserver" : "", r.chances.length ? plural(r.chances.length, "dernière chance", "dernières chances") : ""].filter(Boolean).join(" · ");
   return `<a class="r-ligne" href="#radar">${ico("ventes")}<b>Radar</b> <span>${t || "rien d’urgent"}</span></a>`;
 }
+// Colonne de droite de l’Affiche : les envies (à la place de « À réserver »), avec un lien vers la page de toutes les envies.
+function envLat() {
+  const E = enviesIds(), L = LIVE.filter((e) => E.has(e.id)).sort((a, b) => sortKey(a) - sortKey(b) || a.titre.localeCompare(b.titre, "fr"));
+  const li = L.slice(0, 6).map((e) => { const p = span(e), j = !p ? "à venir" : running(e) ? "fin " + fmt(p[1]) : fmt(p[0]);
+    return `<li><a href="#sortie-${esc(e.id)}"><span class="vd">${esc(j)}</span><span class="vt"><b>${esc(e.titre)}</b> <span>· ${esc(court(e.lieuId))}</span></span></a></li>`; }).join("");
+  return `<h2 class="mh">Envies <small>${L.length}</small></h2>${li ? `<ul class="vl">${li}</ul>` : '<p class="cr">Aucune envie notée pour le moment.</p>'}
+  <div class="acts"><a class="btn" href="#coeur">${COEUR}Toutes les envies</a></div>`;
+}
 function radarLateral(r) {
   const sem = r.semaine.map(({ e, o, v }) => `<li><a href="#sortie-${esc(e.id)}"><span class="vd">${jTxt(dansJ(v))}${heureV(o) ? " " + heureV(o) : ""}</span><span class="vt"><b>${esc(e.titre)}</b> <span>· ${esc(o.type)}</span></span></a></li>`).join("");
-  const res = r.aReserver.slice(0, 5).map((x) => {
-    const f = finDe(x.e), j = (x.rang === 0 || x.rang === 3) && x.o ? "vente " + fmt(venteDate(x.o)) : x.rang === 4 ? "complet" : x.rang === 1 ? "fin " + fmt(f) : "en vente";
-    return `<li><a href="#sortie-${esc(x.e.id)}"><span class="vd">${esc(j)}</span><span class="vt"><b>${esc(x.e.titre)}</b> <span>· ${esc(court(x.e.lieuId))}</span></span></a></li>`;
-  }).join("");
   return `<aside class="r-lat" aria-label="Radar"><h2 class="mh">Cette semaine</h2>${sem ? `<ul class="vl">${sem}</ul>` : '<p class="cr">Aucune ouverture dans les 7 jours.</p>'}
-  <h2 class="mh">À réserver <small>${r.aReserver.length}</small></h2>${res ? `<ul class="vl">${res}</ul>` : '<p class="cr">Tous les incontournables sont réservés.</p>'}
+  ${envLat()}
   <div class="acts"><a class="btn pri" href="#radar">Voir tout le radar</a></div></aside>`;
 }
 
@@ -860,7 +864,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.17"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.18"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -878,7 +882,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.17"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.18"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
@@ -908,6 +912,7 @@ async function renderView(h) {
   else if (view === "artiste") renderArtiste(decodeURIComponent(path.slice(8)));
   else if (view === "lieu") renderLieu(decodeURIComponent(path.slice(5)));
   else if (view === "coeur") renderCoeur();
+  const hc = $("#hcoeur"); if (hc) { if (view === "coeur") hc.setAttribute("aria-current", "page"); else hc.removeAttribute("aria-current"); }
   else if (view === "admin") await renderAdmin(q);
   RENDERED = h;
   if (path === "liens") { const l = $("#r-liens"); if (l) l.scrollIntoView({ block: "start" }); }
