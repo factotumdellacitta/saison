@@ -389,6 +389,7 @@
     <form class="frm" novalidate autocomplete="off">${corps}<p class="err" role="alert" hidden></p><div class="acts"><button class="btn pri" type="submit">${esc(lbl)}</button>${danger || ""}<button class="btn" type="button" data-dlgclose>Annuler</button></div></form></div>`;
     document.body.appendChild(el); document.documentElement.style.overflow = "hidden";
     const form = el.querySelector("form"), errEl = form.querySelector(".err"), sub = form.querySelector('[type="submit"]');
+    if (form.querySelector('[type="password"]')) { form.setAttribute("autocomplete", "on"); form.method = "post"; form.action = location.pathname; }
     el.addEventListener("click", (ev) => { if (ev.target === el || ev.target.closest("[data-dlgclose]")) fermerDlg(); });
     form.onsubmit = async (ev) => {
       ev.preventDefault(); errEl.hidden = true; sub.disabled = true;
@@ -400,6 +401,11 @@
     el.querySelector(".sheet-in").focus();
     return form;
   }
+  /* Gestionnaires de mots de passe (trousseau iCloud, 1Password, Bitwarden…) : identifiant + un seul champ password.
+     Le jeton GitHub est un champ texte masqué par CSS, marqué « à ignorer », pour ne pas faire croire à une création de compte. */
+  const IDENT = '<input type="text" name="username" value="Factotum" autocomplete="username" class="vh" tabindex="-1">';
+  const MDP = (lab) => champ(lab, '<input type="password" name="password" autocomplete="current-password" required>');
+  const JETON = (lab) => champ(lab, '<input type="text" name="tok" class="masque" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" data-1p-ignore data-lpignore="true" data-bwignore data-form-type="other" placeholder="github_pat_…">');
   const val = (f, n) => { const e = f.elements[n]; return e ? String(e.value ?? "").trim() : ""; };
   const champ = (lab, html, cls = "") => `<label class="f ${cls}"><span>${lab}</span>${html}</label>`;
   const inp = (name, v, attrs = "") => `<input name="${name}" value="${esc(v ?? "")}" ${attrs}>`;
@@ -1268,10 +1274,10 @@
   function formJeton(msg) {
     return new Promise((ok) => {
       dlg("Jeton GitHub de cet appareil", `<p class="cr">${msg ? esc(msg) + " " : ""}Pour enregistrer depuis ce site, colle le jeton « fine-grained » limité au dépôt saison (Contents : lecture et écriture ; Actions : lecture). Il sera rangé sur cet appareil, chiffré avec ton mot de passe.</p>
-        ${champ("Mot de passe (pour chiffrer le jeton)", '<input type="password" name="pw" autocomplete="current-password" required>')}
-        ${champ("Jeton GitHub", '<input type="password" name="tok" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="github_pat_…" required>')}`, async (f) => {
-        const pw = f.elements.pw.value, tok = f.elements.tok.value.trim();
-        f.elements.pw.value = ""; f.elements.tok.value = "";
+        ${IDENT}${MDP("Mot de passe (pour chiffrer le jeton)")}
+        ${JETON("Jeton GitHub")}`, async (f) => {
+        const pw = f.elements.password.value, tok = f.elements.tok.value.trim();
+        f.elements.password.value = ""; f.elements.tok.value = "";
         if (!tok) throw new Error("Colle le jeton.");
         const p = await getJSON("data/prive.enc?t=" + Date.now(), { cache: "no-store" });
         try { await ouvrirPaquet(await derive(pw, unb64(p.salt), p.iter), p); } catch (_) { throw new Error("Mot de passe incorrect."); }
@@ -1285,7 +1291,7 @@
   }
   function demanderMdp() {
     return new Promise((ok, ko) => {
-      const form = dlg("Mot de passe", `<p class="cr">La zone privée a été rechiffrée (nouveau mot de passe ?). Saisis le mot de passe actuel.</p>${champ("Mot de passe", '<input type="password" name="pw" autocomplete="current-password">')}`, async (f) => { const v = f.elements.pw.value; f.elements.pw.value = ""; ok(v); }, { valider: "Continuer" });
+      const form = dlg("Mot de passe", `<p class="cr">La zone privée a été rechiffrée (nouveau mot de passe ?). Saisis le mot de passe actuel.</p>${IDENT}${MDP("Mot de passe")}`, async (f) => { const v = f.elements.password.value; f.elements.password.value = ""; ok(v); }, { valider: "Continuer" });
       const obs = new MutationObserver(() => { if (!document.contains(form)) { obs.disconnect(); ko(new Annule()); } });
       obs.observe(document.body, { childList: true });
     });
@@ -1300,12 +1306,11 @@
     if (PRIVE) return dlgSession();
     const aJeton = !!lsGet(LS_JETON), dDef = DUREES.some(([k]) => k === lsGet(LS_DUREE)) ? lsGet(LS_DUREE) : "jour";
     const form = dlg("Connexion", `<p class="cr">Réservé à ${OWNER}. Le déchiffrement se fait dans le navigateur ; le mot de passe n’est jamais envoyé.</p>
-      <input type="text" name="username" value="Factotum" autocomplete="username" class="vh" tabindex="-1" aria-hidden="true">
-      ${champ("Mot de passe", '<input type="password" name="pw" autocomplete="current-password" required>')}
-      ${aJeton ? '<p class="cr">Cet appareil est enregistré : le mot de passe suffit.</p>' : `${champ("Jeton GitHub (première connexion sur cet appareil)", '<input type="password" name="tok" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="github_pat_…">')}<p class="cr">Laisse vide pour consulter seulement (lecture seule). Le jeton sera rangé sur cet appareil, chiffré avec ton mot de passe.</p>`}
+      ${IDENT}${MDP("Mot de passe")}
+      ${aJeton ? '<p class="cr">Cet appareil est enregistré : le mot de passe suffit.</p>' : `${JETON("Jeton GitHub (première connexion sur cet appareil)")}<p class="cr">Laisse vide pour consulter seulement (lecture seule). Le jeton sera rangé sur cet appareil, chiffré avec ton mot de passe.</p>`}
       ${champ("Rester connecté", sel("duree", DUREES, dDef))}`, async (f) => {
-      const pw = f.elements.pw.value, tok = f.elements.tok ? f.elements.tok.value.trim() : "", duree = val(f, "duree");
-      f.elements.pw.value = "";
+      const pw = f.elements.password.value, tok = f.elements.tok ? f.elements.tok.value.trim() : "", duree = val(f, "duree");
+      f.elements.password.value = "";
       let p; try { p = await getJSON("data/prive.enc?t=" + Date.now(), { cache: "no-store" }); } catch (_) { throw new Error("Impossible de lire la zone privée : vérifie la connexion."); }
       let key, prive;
       try { key = await derive(pw, unb64(p.salt), p.iter); prive = await ouvrirPaquet(key, p); } catch (_) { throw new Error("Mot de passe incorrect."); }
@@ -1328,8 +1333,7 @@
       if (!fait) await rafraichir(true);
       toast(avert || "Connecté " + jusqua());
     }, { valider: "Se connecter" });
-    form.setAttribute("autocomplete", "on");
-    form.elements.pw.focus();
+    form.elements.password.focus();
   }
   function dlgSession() {
     const form = dlg("Session", `<p>Connecté ${esc(jusqua())}.</p>
