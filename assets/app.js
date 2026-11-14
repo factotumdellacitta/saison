@@ -34,6 +34,21 @@ const slug = (s) => String(s).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCa
   .replace(/[œ]/g, "oe").replace(/[æ]/g, "ae").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const plural = (n, s, p) => n + " " + (n > 1 ? (p || s + "s") : s);
 const cap = (s) => s ? s[0].toUpperCase() + s.slice(1) : s;
+/* ---------- Identité Factotum : saison calculée, clé F, thème ---------- */
+// Saison de septembre à août : « Saison 26–27 ». Jamais écrite en dur.
+const saisonDe = (d = TODAY) => { const y = d.getMonth() >= 8 ? d.getFullYear() : d.getFullYear() - 1; return { debut: y, cle: String(y), court: String(y % 100).padStart(2, "0") + "–" + String((y + 1) % 100).padStart(2, "0") }; };
+const saisonTxt = (d) => "Saison " + saisonDe(d).court;
+// La clé F (assets/logo.svg) : passe-partout incliné à 45°, panneton en F. Ne jamais la redresser ni l’animer.
+const CLE_F = '<g transform="translate(24 24) rotate(45) scale(.88) translate(-23.5 -25)"><rect x="18" y="5" width="5" height="25"/><rect x="18" y="5" width="17" height="5"/><rect x="18" y="14" width="12" height="5"/><circle cx="20.5" cy="36" r="6.5" fill="none" stroke="currentColor" stroke-width="5"/></g>';
+const cleF = (cls = "cle", px) => `<svg class="${cls}" viewBox="0 0 48 48" fill="currentColor" aria-hidden="true" focusable="false"${px ? ` width="${px}" height="${px}"` : ""}>${CLE_F}</svg>`;
+const THEMES = ["auto", "light", "dark"], THEME_TXT = { auto: "auto", light: "clair", dark: "sombre" };
+const themeLu = () => { try { const t = localStorage.getItem("factotum-theme"); return THEMES.includes(t) ? t : "auto"; } catch (_) { return "auto"; } };
+function themePose(t) {
+  if (t === "auto") delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = t;
+  try { if (t === "auto") localStorage.removeItem("factotum-theme"); else localStorage.setItem("factotum-theme", t); } catch (_) {}
+  $$("[data-theme-btn]").forEach((b) => { b.textContent = "Thème : " + THEME_TXT[t]; });
+}
+const themeBouton = () => `<button class="theme" type="button" data-theme-btn>Thème : ${THEME_TXT[themeLu()]}</button>`;
 function toast(t) { const el = $("#toast"); el.textContent = t; el.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove("show"), 2600); }
 const getJSON = (u, o) => fetch(u, o).then((r) => { if (!r.ok) throw new Error(u); return r.json(); });
 
@@ -591,7 +606,7 @@ function subsHTML() {
 function lockIcon() { $("#shackle").setAttribute("d", PRIVE ? "M8 10.5V8a4 4 0 0 1 7.6-1.7" : "M8 10.5V8a4 4 0 0 1 8 0v2.5"); $("#t-admin").setAttribute("aria-label", PRIVE ? "Admin, déverrouillé" : "Admin"); }
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=3.3"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=3.4"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -606,8 +621,33 @@ function setTab(t) {
   $$(".tab").forEach((b) => { const on = b.dataset.tab === t; b.setAttribute("aria-selected", String(on)); b.tabIndex = on ? 0 : -1; });
   $("#main").setAttribute("aria-labelledby", "t-" + t);
 }
+/* Page #charte : référence de la charte Factotum (assets/charte.js et assets/factotum.css, chargés à la demande).
+   Tant que la charte n’est pas appliquée au site, elle remplace la feuille actuelle sur cette seule page. */
+let chP = null;
+const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=3.4"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  document.head.appendChild(s);
+}));
+async function modeCharte(on) {
+  let l = $("#fxcss");
+  if (on && !l) {
+    l = document.createElement("link"); l.rel = "stylesheet"; l.id = "fxcss"; l.href = "assets/factotum.css?v=3.4";
+    await new Promise((ok) => { l.onload = l.onerror = ok; document.head.appendChild(l); });
+  }
+  if (l) l.disabled = !on;
+  const old = $("#ancien"); if (old) old.disabled = on;
+  $(".top").hidden = on;
+  document.body.classList.toggle("fx", on);
+  document.documentElement.classList.toggle("charte", on);
+}
 async function renderView(h) {
   const [path, q = ""] = h.split("?");
+  if (path === "charte") {
+    try { await Promise.all([loadCharte(), modeCharte(true)]); } catch (_) { $("#main").innerHTML = '<p class="empty">Impossible de charger la charte. Vérifie la connexion puis recharge.</p>'; return; }
+    window.CHARTE.render($("#main"), { esc, cleF, saisonTxt, saisonDe, themeBouton });
+    document.title = "Charte – Factotum"; RENDERED = h; window.scrollTo(0, 0); return;
+  }
+  if (document.body.classList.contains("fx")) await modeCharte(false);
   const view = path.startsWith("artiste-") ? "artiste" : path.startsWith("lieu-") ? "lieu" : TABS[path] ? path : "affiche";
   const samePath = RENDERED && RENDERED.split("?")[0] === path;
   const focusK = samePath && document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.k : null;
@@ -678,6 +718,8 @@ document.addEventListener("click", async (ev) => {
     try { await navigator.clipboard.writeText(url); toast("Lien copié"); } catch (_) { prompt("Copie ce lien :", url); }
     return;
   }
+  const tb = ev.target.closest("[data-theme-btn]");
+  if (tb) { themePose(THEMES[(THEMES.indexOf(themeLu()) + 1) % 3]); return; }
   const cp = ev.target.closest("[data-copy]");
   if (cp) { try { await navigator.clipboard.writeText(cp.dataset.copy); toast("Adresse copiée"); } catch (_) { prompt("Copie cette adresse :", cp.dataset.copy); } }
 });
