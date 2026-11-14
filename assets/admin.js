@@ -516,7 +516,7 @@
   function heart(id) {
     if (!PRIVE) return "";
     const on = !!PRIVE.envies[id];
-    return `<button class="envie" type="button" data-envie="${esc(id)}" aria-pressed="${on}" aria-label="Dans mes envies : ${esc(titreDe(id))}">${COEUR}</button>`;
+    return `<button class="envie" type="button" data-envie="${esc(id)}" aria-pressed="${on}" aria-label="Coup de cœur : ${esc(titreDe(id))}">${COEUR}</button>`;
   }
   // Une envie est binaire : pas de hiérarchie (ni priorité, ni rang). La note de veille n’en dépend jamais.
   async function basculerEnvie(id) {
@@ -529,10 +529,10 @@
 
   function formEnvie(id) {
     const v = PRIVE.envies[id] || {};
-    const form = dlg(`Envie : ${titreDe(id)}`, `${champ("Note (privée)", `<textarea name="note" rows="3" placeholder="Avec qui, quel soir, quel tarif viser…">${esc(v.note || "")}</textarea>`)}`, async (f) => {
+    const form = dlg(`Coup de cœur : ${titreDe(id)}`, `${champ("Note (privée)", `<textarea name="note" rows="3" placeholder="Avec qui, quel soir, quel tarif viser…">${esc(v.note || "")}</textarea>`)}`, async (f) => {
       const note = val(f, "note");
       return ecrire("Admin : envies mises à jour", (d) => { const old = d.prive.envies[id] || {}; d.prive.envies[id] = { ajouteLe: old.ajouteLe || todayISO(), note }; });
-    }, { danger: PRIVE.envies[id] ? '<button class="btn" type="button" data-envdel>Retirer des envies</button>' : "" });
+    }, { danger: PRIVE.envies[id] ? '<button class="btn" type="button" data-envdel>Retirer des coups de cœur</button>' : "" });
     const del = form.querySelector("[data-envdel]"); if (del) del.onclick = () => { fermerDlg(); act(() => basculerEnvie(id)); };
   }
 
@@ -546,8 +546,8 @@
     if (r) etat = `<p><b>Réservé</b> : ${r.date ? esc(fmtY(D(r.date), true)) : "date à préciser"}${r.heure ? " à " + esc(r.heure) : ""}${detRes(r)}</p>`;
     if (vu && jp) etat += `<p>${esc([jp.places || (jp.billets && jp.billets.length) ? plural(nbPlaces(jp), "place") : "", resumePrix(jp), (jp.accompagnants || []).length ? "avec " + jp.accompagnants.join(", ") : ""].filter(Boolean).join(" · "))}</p>`;
     if (vu && jp && jp.notes) etat += `<p><b>Mes notes</b> (privées) : ${esc(jp.notes).replace(/\n/g, "<br>")}</p>`;
-    if (env) etat += `<p><b>Dans mes envies</b>${env.note ? " · « " + esc(env.note) + " »" : ""}</p>`;
-    const prio = env ? `<div class="chips wrap-ok" role="group" aria-label="Envie"><button class="chip" type="button" data-adm="envie" data-id="${esc(e.id)}">Note privée</button></div>` : "";
+    if (env) etat += `<p><b>Coup de cœur</b>${env.note ? " · « " + esc(env.note) + " »" : ""}</p>`;
+    const prio = env ? `<div class="chips wrap-ok" role="group" aria-label="Coup de cœur"><button class="chip" type="button" data-adm="envie" data-id="${esc(e.id)}">Note privée</button></div>` : "";
     const acts = vu
       ? b("revu", "Ajouter une date vue", "ajouter", "pri", "Revu") + b("notes", "Dates, note, avis et notes", "carres") + b("editer", "Modifier la fiche", "modifier") + b("supprimer", "Supprimer", "supprimer", "danger")
       : (r ? b("reserver", "Modifier la réservation", "billet-ok", "pri", "Réservé") + b("annuler", "Annuler la réservation", "billet-barre", "danger") : b("reserver", "J’ai réservé", "billet-ok", "pri", "Réservé")) +
@@ -1361,10 +1361,10 @@
     const L = Object.entries(PRIVE.envies).map(([id, v]) => ({ id, v, e: BYID.get(id) })).filter((x) => x.e);
     const k = (x) => { const pv = prochaineVente(x.e); return [pv ? +venteDate(pv) : 9e15, sortKey(x.e)]; };
     L.sort((a, b) => { const [a1, a2] = k(a), [b1, b2] = k(b); return a1 - b1 || a2 - b2; });
-    if (!L.length) return '<p class="empty">Aucune envie.</p>';
+    if (!L.length) return '<p class="empty">Aucun coup de cœur.</p>';
     return `<div class="list">${L.map(({ id, v, e }) => { const pv = prochaineVente(e); return `<div class="ad"><h3><a href="#sortie-${esc(id)}">${esc(e.titre)}</a> ${stars(e.note, e.pronostic)}</h3>
       <p class="cr">${esc(court(e.lieuId))} · ${esc(range(e))}${pv ? ` · <b class="warn">Vente ${esc(venteTxt(pv))}</b> (${esc(pv.type)})` : ""}</p>${v.note ? `<p>« ${esc(v.note)} »</p>` : ""}
-      <div class="chips wrap-ok" role="group" aria-label="Envie"><button class="chip" type="button" data-adm="envie" data-id="${esc(id)}">Note</button><button class="chip i" type="button" data-envie="${esc(id)}" aria-pressed="true" aria-label="Retirer des envies">${COEUR_APP}</button><button class="chip" type="button" data-adm="reserver" data-id="${esc(id)}">Réserver</button></div></div>`; }).join("")}</div>`;
+      <div class="chips wrap-ok" role="group" aria-label="Coup de cœur"><button class="chip" type="button" data-adm="envie" data-id="${esc(id)}">Note</button><button class="chip i" type="button" data-envie="${esc(id)}" aria-pressed="true" aria-label="Retirer des coups de cœur">${COEUR_APP}</button><button class="chip" type="button" data-adm="reserver" data-id="${esc(id)}">Réserver</button></div></div>`; }).join("")}</div>`;
   }
 
   /* ---------- Formulaires de connexion ---------- */
@@ -1446,7 +1446,7 @@
   }
 
   /* ---------- Espace admin ---------- */
-  const ONGLETS = [["res", "Réservations"], ["ranger", "À ranger"], ["envies", "Mes envies"], ["rapide", "Saisie rapide"], ["soirs", "Soirs pris"], ["budget", "Budget"], ["acc", "Accompagnants"], ["lieux", "Lieux"], ["liens", "Liens"], ["abo", "Abonnements"]];
+  const ONGLETS = [["res", "Réservations"], ["ranger", "À ranger"], ["envies", "Coups de cœur"], ["rapide", "Saisie rapide"], ["soirs", "Soirs pris"], ["budget", "Budget"], ["acc", "Accompagnants"], ["lieux", "Lieux"], ["liens", "Liens"], ["abo", "Abonnements"]];
   let VUE = "res";
   function renderAdminVue(v) {
     if (v) VUE = v;
