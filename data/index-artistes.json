@@ -339,12 +339,6 @@
    "vu-les-fourberies-de-scapin"
   ]
  },
- "ballet-de-l-opera-de-paris": {
-  "nom": "Ballet de l’Opéra de Paris",
-  "sorties": [
-   "vu-jerome-robbins"
-  ]
- },
  "ballet-de-lorraine": {
   "nom": "Ballet de Lorraine",
   "sorties": [
@@ -1432,12 +1426,6 @@
   "sorties": [
    "vu-angels-in-america",
    "vu-la-puce-a-loreille"
-  ]
- },
- "jerome-robbins": {
-  "nom": "Jerome Robbins",
-  "sorties": [
-   "vu-jerome-robbins"
   ]
  },
  "jo-kanamori": {
