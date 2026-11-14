@@ -31,13 +31,22 @@
 
     const entete = `<header class="top"><div class="in"><a class="brand" href="#charte">${logo}</a><span class="saison">${S}</span>${themeBouton()}</div></header>
       <p class="meta muet" style="margin-top:var(--e3)">Barre compacte, au défilement sur mobile</p><div class="barre"><a href="#charte">${logo}</a></div>`;
-    const nav = `<nav class="tabs" aria-label="Exemple de navigation">${[["Affiche", "À\u00a0l’affiche"], ["Journal", "Journal"], ["Index", "Artistes et lieux"], ["Liens", "Liens utiles"], ["Admin", "Admin"]]
+    const nav = `<nav class="tabs" aria-label="Exemple de navigation">${[["Radar", "Radar"], ["Affiche", "À\u00a0l’affiche"], ["Journal", "Journal"], ["Index", "Artistes et lieux"], ["Admin", "Admin"]]
       .map(([c, l], i) => `<a class="tab${i === 4 ? " lock" : ""}" href="#charte"${i === 0 ? ' aria-current="page"' : ""}><span class="court">${c}</span><span class="long">${l}</span></a>`).join("")}</nav>`;
     const lignes = `<div class="list">${DEMO.map(ligne).join("")}</div>`;
+    // Radar : la colonne de date porte le jalon (compte à rebours de vente, ou fin) ; rouge quand il reste deux jours ou moins.
+    const ligneR = (d) => `<article class="row"><a class="rb" href="#charte"><span class="stub"><small class="fin${d.u ? " urg" : ""}">${d.k}</small><b>${d.j}</b><small>${d.m}</small></span>
+    <span class="mid"><span class="tt nom">${d.t}</span><span class="art">${d.i}</span><span class="ss">${d.l}</span></span>
+    <span class="end">${note(d.n)}${d.b.length ? `<span class="bds">${d.b.map(badge).join("")}</span>` : ""}</span></a></article>`;
+    const radar = `<a class="r-ligne" href="#charte"><b>Radar</b> <span>2 ventes cette semaine · 5 à réserver</span></a>
+      <h3 class="mh">À réserver <small>notées 4, pas encore réservées</small></h3><div class="list">
+      ${ligneR({ k: "auj.", u: true, j: "14", m: "nov.", t: "Werther", i: "Vente le sam. 14 nov. 12h <b class=\"warn\">(auj.)</b> · Avant-première jeunes, 10 € · 6 soirs libres", l: "Opéra Nord · Opéra", n: 4, b: ["Offre jeune"] })}
+      ${ligneR({ k: "fin", j: "29", m: "nov.", t: "Ruy Blas", i: "<b class=\"warn\">Dernières dates</b>, jusqu’au dim. 29 nov. · 3 soirs libres", l: "Théâtre du Quai · Théâtre", n: 4, b: ["Dernières places"] })}</div>
+      <h3 class="mh">Ouvertures suivantes</h3><ul class="vl"><li class="vm">Décembre 2026</li><li><a href="#charte"><span class="vd">~ dim. 6 déc. 10h</span><span class="vt"><b>Attila</b> <span>· Carte Jeunes</span></span>${note(4)}</a></li></ul>`;
     const bandeaux = `<div class="list"><h3 class="jour">Jeudi 15 octobre</h3>${ligne(DEMO[0])}${ligne({ ...DEMO[2], j: "15", m: "oct." })}
       <h3 class="jour">Vendredi 16 octobre</h3>${ligne({ ...DEMO[1], j: "16", m: "oct." })}</div>`;
     const notes = `<table class="t"><tbody>${[4, 3, 2, 1].map((n) => `<tr><td>${note(n)}</td><td>${n} – ${NOTES[n]}</td></tr>`).join("")}<tr><td>${note(3, true)}</td><td>Prévision : création pas encore critiquée</td></tr></tbody></table>`;
-    const badges = `<div class="bds">${["Léonard y va", "Public jeune", "Carte Jeunes", "Dernières places", "Offre jeune"].map(badge).join("")}</div>`;
+    const badges = `<div class="bds">${["Léonard y va", "Public jeune", "Carte Jeunes", "Dernières places", "Liste d’attente", "Complet", "Offre jeune"].map(badge).join("")}</div>`;
     const boutons = `<div class="acts"><a class="btn pri" href="#charte">${ico("billet")}Réserver</a><a class="btn" href="#charte">${ico("externe")}Site officiel</a><button class="btn ico" type="button" aria-label="Partager">${ico("partager")}</button><button class="btn danger" type="button">Annuler la réservation</button><button class="btn" type="button" disabled>Indisponible</button></div>`;
     const puces = `<div class="chips"><button class="chip g-theatre" type="button" aria-pressed="true">${ico("Théâtre")}Théâtre</button><button class="chip g-musique" type="button" aria-pressed="true">${ico("Opéra")}Opéra</button><button class="chip g-danse" type="button" aria-pressed="false">${ico("Danse")}Danse</button><button class="chip g-images" type="button" aria-pressed="false">${ico("Exposition")}Exposition</button><button class="chip" type="button" aria-pressed="true" aria-label="Note 3 et plus">${carres(3)}+</button><button class="chip i" type="button" aria-label="Plus de filtres">${ico("filtres")}</button><button class="chip" type="button" aria-pressed="false">Libre ce soir-là</button><button class="chip effacer" type="button">Tout effacer</button></div>
       <div class="active"><span class="n">12 sorties</span><span>2 filtres actifs</span></div><div class="seg" role="group" aria-label="Affichage"><button class="i" type="button" aria-pressed="true" aria-label="Liste">${ico("liste")}</button><button class="i" type="button" aria-pressed="false" aria-label="Mois">${ico("mois")}</button></div>`;
@@ -75,7 +84,7 @@
     const tailles = [["Titre du site", "logo", "Factotum"], ["Titre de section", "mh-demo", "Journal de la saison"], ["Titre de fiche", "tt", "La Folle Journée ou le Mariage de Figaro"], ["Corps", "corps", "Une brochure de saison transposée à l’écran : typographique, dense, franche et lisible."], ["Métadonnées", "ss", "Théâtre · Théâtre du Quai · 20h"], ["Dates", "jour-demo", "Jeudi 15 octobre"], ["Chiffres", "kpi-demo", "1 234"]];
 
     main.innerHTML = `<a class="skip" href="#ch-contenu">Aller au contenu</a>
-    <div class="ch-couv rouge"><span class="logo">${cleF()}Factotum</span><p class="meta">Charte graphique · ${S}</p><p>Largo al factotum della città. Le site de veille, d’agenda et de journal des sorties, comme une brochure de saison.</p><p><a class="theme" href="#affiche">Retour au site</a> ${themeBouton()}</p></div>
+    <div class="ch-couv rouge"><span class="logo">${cleF()}Factotum</span><p class="meta">Charte graphique · ${S}</p><p>Largo al factotum della città. Le site de veille, d’agenda et de journal des sorties, comme une brochure de saison.</p><p><a class="theme" href="#radar">Retour au site</a> ${themeBouton()}</p></div>
     <div id="ch-contenu" tabindex="-1">
     <section class="ch-section"><h2 class="mh">Nom</h2><p><b>Factotum</b>, d’après l’air de Figaro (<i>Largo al factotum della città</i>, Rossini). Jamais d’année dans le nom. Logotype : FACTOTUM en Schibsted Grotesk 800, capitales, approche −0,02em.</p>
       <p>La saison est un sous-titre calculé (septembre à août) : aujourd’hui <b>${S}</b>. Titre de page : « Factotum » ou « Titre de la page – Factotum ».</p></section>
@@ -111,6 +120,7 @@
     ${duo("12. Champs de saisie", champs, "16 px minimum (pas de zoom de Safari). Focus : contour rouge de 2 px.")}
     ${duo("13. Messages", messages)}
     ${duo("14. Mode admin", admin, "En-tête en encre (noir en clair, inversé en sombre) pour distinguer l’édition de la consultation. Confirmation intégrée à la page, jamais de fenêtre système.")}
+    ${duo("15. Radar", radar, "L’accueil du site. Ordre d’urgence : vente sous 7 jours, dernières dates sous 21 jours, en vente, ouverture plus lointaine, complet. Une sortie n’y paraît qu’une fois. Sur bureau, la même synthèse forme la colonne latérale de l’Affiche.")}
 
     <section class="ch-section"><h2 class="mh">Interdits</h2><ul class="ch-interdits">
       <li>Polices Inter, Roboto, Poppins, Montserrat, Space Grotesk ou police système par défaut</li><li>Dégradés (hachures fonctionnelles exceptées), glassmorphisme, ombres portées, flou d’arrière-plan</li>

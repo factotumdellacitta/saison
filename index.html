@@ -32,28 +32,28 @@
 <link rel="preload" href="assets/fonts/schibsted-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/schibsted-800.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="data/affiche.json" as="fetch" crossorigin>
-<link rel="stylesheet" href="assets/factotum.css?v=4.11">
+<link rel="stylesheet" href="assets/factotum.css?v=4.12">
 </head>
 <body>
 <a class="skip" href="#main">Aller au contenu</a>
 <header class="top" id="top"><div class="in">
-  <a class="brand" href="#affiche" aria-label="Factotum, accueil"><span class="logo"><svg class="cle" viewBox="0 0 48 48" fill="currentColor" aria-hidden="true" focusable="false"><g transform="translate(24 24) rotate(45) scale(.88) translate(-23.5 -25)"><rect x="18" y="5" width="5" height="25"/><rect x="18" y="5" width="17" height="5"/><rect x="18" y="14" width="12" height="5"/><circle cx="20.5" cy="36" r="6.5" fill="none" stroke="currentColor" stroke-width="5"/></g></svg>Factotum</span></a>
+  <a class="brand" href="#radar" aria-label="Factotum, accueil"><span class="logo"><svg class="cle" viewBox="0 0 48 48" fill="currentColor" aria-hidden="true" focusable="false"><g transform="translate(24 24) rotate(45) scale(.88) translate(-23.5 -25)"><rect x="18" y="5" width="5" height="25"/><rect x="18" y="5" width="17" height="5"/><rect x="18" y="14" width="12" height="5"/><circle cx="20.5" cy="36" r="6.5" fill="none" stroke="currentColor" stroke-width="5"/></g></svg>Factotum</span></a>
   <span class="saison" id="saison"></span>
   <div class="top-acts"><span class="tm"><button class="theme ic" type="button" data-theme-btn aria-haspopup="menu" aria-expanded="false" aria-label="Thème : auto"></button></span><button class="theme ic" type="button" id="cx" data-cx aria-haspopup="dialog" aria-label="Connexion"></button></div>
 </div></header>
-<div class="barre" aria-hidden="true"><a href="#affiche" tabindex="-1"><span class="logo"><svg class="cle" viewBox="0 0 48 48" fill="currentColor" focusable="false"><g transform="translate(24 24) rotate(45) scale(.88) translate(-23.5 -25)"><rect x="18" y="5" width="5" height="25"/><rect x="18" y="5" width="17" height="5"/><rect x="18" y="14" width="12" height="5"/><circle cx="20.5" cy="36" r="6.5" fill="none" stroke="currentColor" stroke-width="5"/></g></svg>Factotum</span></a></div>
+<div class="barre" aria-hidden="true"><a href="#radar" tabindex="-1"><span class="logo"><svg class="cle" viewBox="0 0 48 48" fill="currentColor" focusable="false"><g transform="translate(24 24) rotate(45) scale(.88) translate(-23.5 -25)"><rect x="18" y="5" width="5" height="25"/><rect x="18" y="5" width="17" height="5"/><rect x="18" y="14" width="12" height="5"/><circle cx="20.5" cy="36" r="6.5" fill="none" stroke="currentColor" stroke-width="5"/></g></svg>Factotum</span></a></div>
 <nav class="tabs" role="tablist" aria-label="Sections">
-  <button class="tab" role="tab" id="t-affiche" data-tab="affiche" aria-controls="main" aria-selected="true"><span class="court" aria-hidden="true">Affiche</span><span class="long">À&nbsp;l’affiche</span></button>
+  <button class="tab" role="tab" id="t-radar" data-tab="radar" aria-controls="main" aria-selected="true"><span class="court" aria-hidden="true">Radar</span><span class="long">Radar</span></button>
+  <button class="tab" role="tab" id="t-affiche" data-tab="affiche" aria-controls="main" aria-selected="false" tabindex="-1"><span class="court" aria-hidden="true">Affiche</span><span class="long">À&nbsp;l’affiche</span></button>
   <button class="tab coeur-tab" role="tab" id="t-coeur" data-tab="coeur" aria-controls="main" aria-selected="false" tabindex="-1"><svg class="coeur court" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20.5 3.6 12.1a4.8 4.8 0 0 1 6.8-6.8L12 6.9l1.6-1.6a4.8 4.8 0 0 1 6.8 6.8z"/></svg><span class="long">Envies</span></button>
   <button class="tab" role="tab" id="t-journal" data-tab="journal" aria-controls="main" aria-selected="false" tabindex="-1"><span class="court" aria-hidden="true">Journal</span><span class="long">Journal</span></button>
   <button class="tab" role="tab" id="t-artistes" data-tab="artistes" aria-controls="main" aria-selected="false" tabindex="-1"><span class="court" aria-hidden="true">Index</span><span class="long">Artistes et lieux</span></button>
-  <button class="tab" role="tab" id="t-liens" data-tab="liens" aria-controls="main" aria-selected="false" tabindex="-1"><span class="court" aria-hidden="true">Liens</span><span class="long">Liens utiles</span></button>
   <button class="tab lock" role="tab" id="t-admin" hidden data-tab="admin" aria-controls="main" aria-selected="false" tabindex="-1"><span class="court" aria-hidden="true">Admin</span><span class="long">Admin</span></button>
 </nav>
-<main class="wrap"><div id="main" role="tabpanel" aria-labelledby="t-affiche" tabindex="-1"><p class="load">Chargement de la saison…</p></div>
+<main class="wrap"><div id="main" role="tabpanel" aria-labelledby="t-radar" tabindex="-1"><p class="load">Chargement de la saison…</p></div>
 <footer class="pied"><p class="meta">Largo al factotum della città.</p><p class="meta muet" id="maj"></p></footer></main>
 <div class="sheet" id="sheet" hidden><div class="sheet-in" id="sheetIn" role="dialog" aria-modal="true" aria-labelledby="sheetT" tabindex="-1"></div></div>
 <div class="toast msg" id="toast" role="status" aria-live="polite"></div>
-<script src="assets/app.js?v=4.11" defer></script>
+<script src="assets/app.js?v=4.12" defer></script>
 </body>
 </html>

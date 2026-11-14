@@ -13,7 +13,6 @@
   const DUREE_MS = { jour: 864e5, semaine: 7 * 864e5, onglet: 864e5 };
   const FICHIERS = { affiche: "data/affiche.json", journal: "data/journal.json", lieux: "data/lieux.json", liens: "data/liens.json", dispo: "data/dispo.json", prive: "data/prive.enc" };
   const ZONES_L = ["Paris", "Petite couronne", "Île-de-France", "Avignon", "Autre"];
-  const PRI = { 1: "forte", 2: "normale", 3: "faible" };
   const TARIFS = ["Carte Jeune", "Moins de 28 ans", "Moins de 30 ans", "Avant-première jeunes", "Tarif réduit", "Plein tarif", "Invitation"];
   const TYPES_OFFRE = ["Avant-première jeunes", "Carte Jeunes", "Moins de 28 ans", "Moins de 30 ans", "Gratuit moins de 26 ans", "Dernière minute"];
   const enc = new TextEncoder(), dec = new TextDecoder();
@@ -163,6 +162,7 @@
   }
   function normPrive(p) {
     p.reservations ??= {}; p.envies ??= {}; p.journalPrive ??= {}; p.blocages ??= []; p.aCompleter ??= [];
+    for (const v of Object.values(p.envies)) delete v.priorite; // la priorité des envies n’existe plus
     return p;
   }
 
@@ -196,7 +196,9 @@
         if (!o.type) err.push(`${ou} : offre sans type.`);
         if (o.date && !ISO_RE.test(o.date)) err.push(`${ou} : date d’offre invalide.`);
         if (o.vente && !VENTE_RE.test(o.vente)) err.push(`${ou} : date de vente invalide.`);
+        if ("etat" in o && !ETATS[o.etat]) err.push(`${ou} : état de vente d’offre inconnu.`);
       }
+      if ("etat" in s && !ETATS[s.etat]) err.push(`${ou} : état des ventes inconnu.`);
     };
     for (const s of d.affiche.sorties) { sortie(s, "affiche"); if (!["a-voir", "ecarte"].includes(s.statut)) err.push(`« ${s.titre} » : statut ${s.statut} interdit à l’affiche.`); }
     for (const s of d.journal.sorties) {
@@ -386,7 +388,7 @@
     PRIVE = null; TOK = null; KEY = null; SALT = null; PUB = null; JAVEC = ""; SOIRS = null; LIENS_W = null; RAPIDE = null;
     BLOBS.clear(); fermerDlg(); bandeau(""); document.body.classList.remove("adm"); lockIcon();
     if ($("#sheet").hidden) $("#sheetIn").innerHTML = ""; // fiche fermée : aucun reste du bloc admin dans la page
-    if (/^#admin/.test(location.hash)) location.hash = "#affiche"; else rafraichir(true);
+    if (/^#admin/.test(location.hash)) location.hash = "#radar"; else rafraichir(true);
     if (msg) toast(msg);
   }
 
@@ -516,19 +518,20 @@
     const on = !!PRIVE.envies[id];
     return `<button class="envie" type="button" data-envie="${esc(id)}" aria-pressed="${on}" aria-label="Dans mes envies : ${esc(titreDe(id))}">${COEUR}</button>`;
   }
-  async function basculerEnvie(id, prio) {
-    const on = !!PRIVE.envies[id] && prio == null;
+  // Une envie est binaire : pas de hiérarchie (ni priorité, ni rang). La note de veille n’en dépend jamais.
+  async function basculerEnvie(id) {
+    const on = !!PRIVE.envies[id];
     await ecrire("Admin : envies mises à jour", (d) => {
       if (on) delete d.prive.envies[id];
-      else d.prive.envies[id] = { ajouteLe: d.prive.envies[id]?.ajouteLe || todayISO(), priorite: prio ?? d.prive.envies[id]?.priorite ?? 2, note: d.prive.envies[id]?.note || "" };
+      else d.prive.envies[id] = { ajouteLe: d.prive.envies[id]?.ajouteLe || todayISO(), note: d.prive.envies[id]?.note || "" };
     });
   }
 
   function formEnvie(id) {
     const v = PRIVE.envies[id] || {};
-    const form = dlg(`Envie : ${titreDe(id)}`, `${champ("Priorité", sel("priorite", [[1, "Forte"], [2, "Normale"], [3, "Faible"]], v.priorite || 2))}${champ("Note (privée)", `<textarea name="note" rows="3" placeholder="Avec qui, quel soir, quel tarif viser…">${esc(v.note || "")}</textarea>`)}`, async (f) => {
-      const priorite = +val(f, "priorite"), note = val(f, "note");
-      return ecrire("Admin : envies mises à jour", (d) => { const old = d.prive.envies[id] || {}; d.prive.envies[id] = { ajouteLe: old.ajouteLe || todayISO(), priorite, note }; });
+    const form = dlg(`Envie : ${titreDe(id)}`, `${champ("Note (privée)", `<textarea name="note" rows="3" placeholder="Avec qui, quel soir, quel tarif viser…">${esc(v.note || "")}</textarea>`)}`, async (f) => {
+      const note = val(f, "note");
+      return ecrire("Admin : envies mises à jour", (d) => { const old = d.prive.envies[id] || {}; d.prive.envies[id] = { ajouteLe: old.ajouteLe || todayISO(), note }; });
     }, { danger: PRIVE.envies[id] ? '<button class="btn" type="button" data-envdel>Retirer des envies</button>' : "" });
     const del = form.querySelector("[data-envdel]"); if (del) del.onclick = () => { fermerDlg(); act(() => basculerEnvie(id)); };
   }
@@ -542,8 +545,8 @@
     if (r) etat = `<p><b>Réservé</b> : ${r.date ? esc(fmtY(D(r.date), true)) : "date à préciser"}${r.heure ? " à " + esc(r.heure) : ""}${detRes(r)}</p>`;
     if (vu && jp) etat += `<p>${esc([jp.places || (jp.billets && jp.billets.length) ? plural(nbPlaces(jp), "place") : "", resumePrix(jp), (jp.accompagnants || []).length ? "avec " + jp.accompagnants.join(", ") : ""].filter(Boolean).join(" · "))}</p>`;
     if (vu && jp && jp.notes) etat += `<p><b>Mes notes</b> (privées) : ${esc(jp.notes).replace(/\n/g, "<br>")}</p>`;
-    if (env) etat += `<p><b>Dans mes envies</b> · priorité ${PRI[env.priorite || 2]}${env.note ? " · « " + esc(env.note) + " »" : ""}</p>`;
-    const prio = env ? `<div class="chips wrap-ok" role="group" aria-label="Priorité">${[1, 2, 3].map((p) => `<button class="chip" type="button" data-adm="prio" data-p="${p}" data-id="${esc(e.id)}" aria-pressed="${(env.priorite || 2) === p}">${PRI[p]}</button>`).join("")}<button class="chip" type="button" data-adm="envie" data-id="${esc(e.id)}">Note</button></div>` : "";
+    if (env) etat += `<p><b>Dans mes envies</b>${env.note ? " · « " + esc(env.note) + " »" : ""}</p>`;
+    const prio = env ? `<div class="chips wrap-ok" role="group" aria-label="Envie"><button class="chip" type="button" data-adm="envie" data-id="${esc(e.id)}">Note privée</button></div>` : "";
     const acts = vu
       ? b("revu", "Ajouter une date vue", "pri") + b("notes", "Dates, note, avis et notes") + b("editer", "Modifier la fiche") + b("supprimer", "Supprimer")
       : (r ? b("reserver", "Modifier la réservation", "pri") + b("annuler", "Annuler la réservation") : b("reserver", "J’ai réservé", "pri")) +
@@ -807,7 +810,7 @@
     return Object.keys(LIEUX).find((id) => norm(LIEUX[id].nom) === n || norm(court(id)) === n || id === n) || null;
   }
   const artRow = (a = {}) => `<div class="ar">${inp("a_nom", a.nom, 'list="dl-art" placeholder="Nom complet" aria-label="Nom de l’artiste"')}${sel("a_role", ROLES, a.role || "artiste")}<button type="button" class="btn ico" data-del aria-label="Retirer">${ico("fermer")}</button></div>`;
-  const offreRow = (o = {}) => { const [vd, vh] = (o.vente || "").split("T"); return `<fieldset class="fs of"><div class="grid2">${champ("Type", inp("o_type", o.type, 'list="dl-off"'))}${champ("Tarif", inp("o_tarif", o.tarif, 'placeholder="10 €"'))}</div><div class="grid2">${champ("Date du spectacle", inp("o_date", o.date, 'type="date"'))}${champ("Condition", inp("o_cond", o.condition, 'placeholder="Moins de 28 ans"'))}</div><div class="grid2">${champ("Ouverture de la vente", inp("o_vd", vd, 'type="date"'))}${champ("Heure", inp("o_vh", vh, 'type="time"'))}</div>${ck("o_approx", o.venteApprox, "Date de vente estimée")}<button type="button" class="linkbtn" data-del>Retirer cette offre</button></fieldset>`; };
+  const offreRow = (o = {}) => { const [vd, vh] = (o.vente || "").split("T"); return `<fieldset class="fs of"><div class="grid2">${champ("Type", inp("o_type", o.type, 'list="dl-off"'))}${champ("Tarif", inp("o_tarif", o.tarif, 'placeholder="10 €"'))}</div><div class="grid2">${champ("Date du spectacle", inp("o_date", o.date, 'type="date"'))}${champ("Condition", inp("o_cond", o.condition, 'placeholder="Moins de 28 ans"'))}</div><div class="grid2">${champ("Ouverture de la vente", inp("o_vd", vd, 'type="date"'))}${champ("Heure", inp("o_vh", vh, 'type="time"'))}</div>${ck("o_approx", o.venteApprox, "Date de vente estimée")}${champ("État des ventes de cette offre", sel("o_etat", [["", "Rien à signaler"], ...Object.entries(ETATS)], o.etat || ""))}<button type="button" class="linkbtn" data-del>Retirer cette offre</button></fieldset>`; };
   function formSortie(id) {
     const e0 = id ? BYID.get(id) : null, e = e0 || { categorie: "Théâtre", artistes: [], offres: [], note: 2, pronostic: false, publicJeune: false };
     const vu = e.statut === "vu";
@@ -830,6 +833,7 @@
       ${champ("Dates en clair (facultatif)", inp("datesTexte", e.datesTexte, 'placeholder="15 oct. 2026 – 27 janv. 2027"'))}
       ${champ("Horaires (facultatif)", inp("horaires", e.horaires, 'placeholder="20h, dim. 15h · 2h45"'))}
       <div class="grid2">${champ("Note (grille)", sel("note", [[4, "4 · incontournable"], [3, "3 · fortement recommandé"], [2, "2 · bon choix"], [1, "1 · curiosité"], ...(vu ? [[0, "0 · sans note"]] : [])], e.note))}<div>${ck("pronostic", e.pronostic, "Pronostic (pas encore critiqué)")}${ck("publicJeune", e.publicJeune, "Adapté à un public jeune")}</div></div>
+      ${champ("État des ventes", sel("etat", [["", "Rien à signaler"], ...Object.entries(ETATS)], e.etat || ""))}
       ${champ("Pourquoi (une phrase factuelle)", `<textarea name="pourquoi" rows="2">${esc(e.pourquoi || "")}</textarea>`)}
       ${champ("Billetterie directe (facultatif)", inp("billetterie", e.billetterie, 'type="url" placeholder="https://…"'))}
       <fieldset class="fs"><legend>Offres jeunes et ventes</legend><div data-offres>${(e.offres || []).map(offreRow).join("")}</div><button type="button" class="btn" data-addoff>${ico("ajouter")}Offre</button>${dl("dl-off", TYPES_OFFRE)}</fieldset></div>`, async (f) => {
@@ -847,12 +851,14 @@
         if (q("o_date").value) o.date = q("o_date").value; if (q("o_tarif").value.trim()) o.tarif = q("o_tarif").value.trim();
         if (q("o_vd").value) { o.vente = q("o_vd").value + (q("o_vh").value ? "T" + q("o_vh").value : ""); o.venteApprox = q("o_approx").checked; }
         if (q("o_cond").value.trim()) o.condition = q("o_cond").value.trim();
+        if (q("o_etat").value) o.etat = q("o_etat").value;
         return o;
       }).filter((o) => o.type);
       const champs = { titre, categorie: val(f, "categorie"), sousGenre: val(f, "sousGenre"), artistes, lieuId: lieuId || null, salle: val(f, "salle"), debut: val(f, "debut"), fin: val(f, "fin") || val(f, "debut"),
         datesTexte: val(f, "datesTexte"), horaires: val(f, "horaires"), note: +val(f, "note"), pronostic: f.elements.pronostic.checked, pourquoi: val(f, "pourquoi"), lien: val(f, "lien") || null, billetterie: val(f, "billetterie") || null, publicJeune: f.elements.publicJeune.checked, offres };
+      if (val(f, "etat")) champs.etat = val(f, "etat");
       for (const k of ["datesTexte", "horaires"]) if (!champs[k]) delete champs[k];
-      if (vu) for (const k of ["debut", "fin", "datesTexte", "horaires", "note", "pronostic", "pourquoi", "billetterie", "publicJeune", "offres"]) delete champs[k];
+      if (vu) for (const k of ["debut", "fin", "datesTexte", "horaires", "note", "pronostic", "pourquoi", "billetterie", "publicJeune", "offres", "etat"]) delete champs[k];
       if (!e0) {
         const memes = [...AFF, ...(JOURNAL || [])].filter((x) => norm(x.titre) === norm(titre));
         if (memes.length && !await demander(`« ${titre} » existe déjà (${memes.map((x) => [court(x.lieuId), range(x), x.statut === "vu" ? "vu" : ""].filter(Boolean).join(", ")).join(" ; ")}). Ajouter quand même ?`, { oui: "Ajouter quand même", non: "Revenir", danger: false })) return false;
@@ -864,7 +870,7 @@
           const s = d.affiche.sorties.find((x) => x.id === id) || d.journal.sorties.find((x) => x.id === id);
           if (!s) throw new Error("Cette sortie n’existe plus dans le dépôt.");
           await garde(snap, s, "La fiche");
-          if (!vu) for (const k of ["datesTexte", "horaires"]) if (!(k in champs)) delete s[k];
+          if (!vu) for (const k of ["datesTexte", "horaires", "etat"]) if (!(k in champs)) delete s[k];
           Object.assign(s, champs);
         } else {
           const tous = new Set([...d.affiche.sorties, ...d.journal.sorties].map((x) => x.id));
@@ -1340,7 +1346,7 @@
     if (!L.length) return '<p class="empty">Aucune envie.</p>';
     return `<div class="list">${L.map(({ id, v, e }) => { const pv = prochaineVente(e); return `<div class="ad"><h3><a href="#sortie-${esc(id)}">${esc(e.titre)}</a> ${stars(e.note, e.pronostic)}</h3>
       <p class="cr">${esc(court(e.lieuId))} · ${esc(range(e))}${pv ? ` · <b class="warn">Vente ${esc(venteTxt(pv))}</b> (${esc(pv.type)})` : ""}</p>${v.note ? `<p>« ${esc(v.note)} »</p>` : ""}
-      <div class="chips wrap-ok" role="group" aria-label="Priorité">${[1, 2, 3].map((p) => `<button class="chip" type="button" data-adm="prio" data-p="${p}" data-id="${esc(id)}" aria-pressed="${(v.priorite || 2) === p}">${PRI[p]}</button>`).join("")}<button class="chip" type="button" data-adm="envie" data-id="${esc(id)}">Note</button><button class="chip i" type="button" data-envie="${esc(id)}" aria-pressed="true" aria-label="Retirer des envies">${COEUR_APP}</button><button class="chip" type="button" data-adm="reserver" data-id="${esc(id)}">Réserver</button></div></div>`; }).join("")}</div>`;
+      <div class="chips wrap-ok" role="group" aria-label="Envie"><button class="chip" type="button" data-adm="envie" data-id="${esc(id)}">Note</button><button class="chip i" type="button" data-envie="${esc(id)}" aria-pressed="true" aria-label="Retirer des envies">${COEUR_APP}</button><button class="chip" type="button" data-adm="reserver" data-id="${esc(id)}">Réserver</button></div></div>`; }).join("")}</div>`;
   }
 
   /* ---------- Formulaires de connexion ---------- */
@@ -1466,7 +1472,6 @@
     else if (a === "ecarter") act(() => ecarter(id, "ecarte"));
     else if (a === "remettre") act(() => ecarter(id, "a-voir"));
     else if (a === "supprimer") act(() => supprimer(id));
-    else if (a === "prio") act(() => basculerEnvie(id, +b.dataset.p));
     else if (a === "envie") formEnvie(id);
     else if (a === "journal") act(formJournal);
   });

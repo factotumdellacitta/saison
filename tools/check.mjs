@@ -12,6 +12,7 @@ const CATEGORIES = ["Théâtre", "Opéra", "Danse", "Comédie musicale", "Récit
 const ROLES = ["auteur", "compositeur", "mise en scène", "chorégraphie", "direction musicale", "interprète", "commissaire", "réalisation", "compagnie", "artiste"];
 const ZONES = ["Paris", "Petite couronne", "Île-de-France", "Avignon", "Autre"];
 const STATUTS_LIEU = ["Public", "Privé"];
+const ETATS = ["dernieres-places", "attente", "complet"];
 // Clés interdites dans tout fichier public (données privées)
 const PRIVEES = new Set(["prix", "accompagnants", "places", "siege", "heure", "reserveLe", "icsToken",
   "tarifPlein", "prixPlace", "pleinPlace", "billets", "categoriePlace", "spectateur", "paiement", "envies", "journalPrive", "aCompleter", "priorite", "blocages", "jeton", "token"]);
@@ -141,7 +142,9 @@ const verifierSortie = (s, fichier) => {
     if (o.date && !ISO.test(o.date)) erreurs.push(`${ou} offre « ${o.type} » : date invalide.`);
     if (o.vente && !VENTE.test(o.vente)) erreurs.push(`${ou} offre « ${o.type} » : vente invalide (AAAA-MM-JJ ou AAAA-MM-JJTHH:MM).`);
     if ("venteApprox" in o && typeof o.venteApprox !== "boolean") erreurs.push(`${ou} offre « ${o.type} » : venteApprox doit être true ou false.`);
+    if ("etat" in o && !ETATS.includes(o.etat)) erreurs.push(`${ou} offre « ${o.type} » : etat inconnu (${ETATS.join(", ")}).`);
   }
+  if ("etat" in s && !ETATS.includes(s.etat)) erreurs.push(`${ou} etat inconnu : ${s.etat} (${ETATS.join(", ")}).`);
 };
 
 const affiche = lire("data/affiche.json");
