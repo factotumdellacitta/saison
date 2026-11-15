@@ -247,9 +247,10 @@
    "vuLe": [
     "2026-09-05"
    ],
-   "noteLeonard": null,
+   "noteLeonard": 3,
    "avis": "",
-   "offres": []
+   "offres": [],
+   "sousGenre": ""
   },
   {
    "id": "vu-art-majeur",
