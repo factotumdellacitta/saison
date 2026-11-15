@@ -514,6 +514,7 @@
   "nom": "Benjamin Lavernhe",
   "sorties": [
    "le-cid",
+   "vu-la-vie-parisienne",
    "vu-le-mariage-force"
   ]
  },
@@ -955,6 +956,7 @@
  "comedie-francaise": {
   "nom": "Comédie-Française",
   "sorties": [
+   "vu-la-vie-parisienne",
    "vu-le-soulier-de-satin",
    "vu-seisme"
   ]
