@@ -125,7 +125,7 @@
  "aliocha-schneider": {
   "nom": "Aliocha Schneider",
   "sorties": [
-   "vu-fete-de-l-humanite-2025"
+   "vu-fete-de-l-humanite-2025-samedi"
   ]
  },
  "alison-dechamps": {
@@ -185,7 +185,7 @@
  "anderson-paak": {
   "nom": "Anderson .Paak",
   "sorties": [
-   "vu-we-love-green-2023"
+   "vu-we-love-green-2023-vendredi"
   ]
  },
  "andre-marcon": {
@@ -215,7 +215,7 @@
  "angele": {
   "nom": "Angèle",
   "sorties": [
-   "vu-solidays-2023",
+   "vu-solidays-2023-dimanche",
    "vu-we-love-green-2022"
   ]
  },
@@ -362,8 +362,8 @@
  "ascendant-vierge": {
   "nom": "Ascendant Vierge",
   "sorties": [
-   "vu-fete-de-l-humanite-2025",
-   "vu-solidays-2023"
+   "vu-fete-de-l-humanite-2025-vendredi",
+   "vu-solidays-2023-vendredi"
   ]
  },
  "asmik-grigorian": {
@@ -533,7 +533,7 @@
  "bigflo-oli": {
   "nom": "Bigflo & Oli",
   "sorties": [
-   "vu-solidays-2023"
+   "vu-solidays-2023-samedi"
   ]
  },
  "billie-holiday": {
@@ -565,7 +565,7 @@
  "bon-iver": {
   "nom": "Bon Iver",
   "sorties": [
-   "vu-we-love-green-2023"
+   "vu-we-love-green-2023-dimanche"
   ]
  },
  "boris-charmatz": {
@@ -689,7 +689,7 @@
  "cerrone": {
   "nom": "Cerrone",
   "sorties": [
-   "vu-solidays-2023"
+   "vu-solidays-2023-dimanche"
   ]
  },
  "charles-ferdinand-ramuz": {
@@ -970,7 +970,7 @@
   "nom": "Damso",
   "sorties": [
    "vu-damso-la-defense-arena-2026",
-   "vu-solidays-2025"
+   "vu-solidays-2025-vendredi"
   ]
  },
  "daniel-jeanneteau": {
@@ -1296,7 +1296,7 @@
  "fave": {
   "nom": "Favé",
   "sorties": [
-   "vu-solidays-2023"
+   "vu-solidays-2023-dimanche"
   ]
  },
  "florence-viala": {
@@ -1422,7 +1422,7 @@
  "gazo": {
   "nom": "Gazo",
   "sorties": [
-   "vu-we-love-green-2023"
+   "vu-we-love-green-2023-samedi"
   ]
  },
  "georg-friedrich-haendel": {
@@ -1510,7 +1510,7 @@
  "gims": {
   "nom": "Gims",
   "sorties": [
-   "vu-solidays-2025"
+   "vu-solidays-2025-dimanche"
   ]
  },
  "gioachino-rossini": {
@@ -1593,7 +1593,7 @@
  "gwendoline": {
   "nom": "Gwendoline",
   "sorties": [
-   "vu-solidays-2023"
+   "vu-solidays-2023-dimanche"
   ]
  },
  "gwendoline-hamon": {
@@ -1611,7 +1611,7 @@
  "hamza": {
   "nom": "Hamza",
   "sorties": [
-   "vu-solidays-2023"
+   "vu-solidays-2023-dimanche"
   ]
  },
  "hanna-elisabeth-muller": {
@@ -1757,7 +1757,7 @@
  "j-balvin": {
   "nom": "J Balvin",
   "sorties": [
-   "vu-solidays-2023"
+   "vu-solidays-2023-samedi"
   ]
  },
  "jaap-van-zweden": {
@@ -1805,7 +1805,7 @@
  "jain": {
   "nom": "Jain",
   "sorties": [
-   "vu-solidays-2023"
+   "vu-solidays-2023-vendredi"
   ]
  },
  "jamie-barton": {
@@ -1943,7 +1943,7 @@
  "jok-air": {
   "nom": "Jok’Air",
   "sorties": [
-   "vu-solidays-2023"
+   "vu-solidays-2023-samedi"
   ]
  },
  "jolente-de-keersmaeker": {
@@ -1998,7 +1998,7 @@
  "josman": {
   "nom": "Josman",
   "sorties": [
-   "vu-solidays-2023"
+   "vu-solidays-2023-samedi"
   ]
  },
  "juan-diego-florez": {
@@ -2072,13 +2072,13 @@
  "julien-granel": {
   "nom": "Julien Granel",
   "sorties": [
-   "vu-solidays-2023"
+   "vu-solidays-2023-vendredi"
   ]
  },
  "juliette-armanet": {
   "nom": "Juliette Armanet",
   "sorties": [
-   "vu-solidays-2023",
+   "vu-solidays-2023-vendredi",
    "vu-theodora-zenith-2026",
    "vu-we-love-green-2022"
   ]
@@ -2104,8 +2104,8 @@
  "kalash": {
   "nom": "Kalash",
   "sorties": [
-   "vu-fete-de-l-humanite-2025",
-   "vu-solidays-2025"
+   "vu-fete-de-l-humanite-2025-vendredi",
+   "vu-solidays-2025-dimanche"
   ]
  },
  "kammerorchester-basel": {
@@ -2151,7 +2151,7 @@
  "knxwledge": {
   "nom": "Knxwledge",
   "sorties": [
-   "vu-we-love-green-2023"
+   "vu-we-love-green-2023-vendredi"
   ]
  },
  "krystian-lupa": {
@@ -2170,7 +2170,7 @@
   "nom": "Kungs",
   "sorties": [
    "vu-kungs-fete-de-la-musique-2024",
-   "vu-solidays-2023"
+   "vu-solidays-2023-samedi"
   ]
  },
  "kurt-weill": {
@@ -2182,7 +2182,7 @@
  "la-femme": {
   "nom": "La Femme",
   "sorties": [
-   "vu-solidays-2023"
+   "vu-solidays-2023-dimanche"
   ]
  },
  "la-horde": {
@@ -2194,7 +2194,7 @@
  "la-mano-1-9": {
   "nom": "La Mano 1.9",
   "sorties": [
-   "vu-solidays-2025"
+   "vu-solidays-2025-samedi"
   ]
  },
  "la-ribot": {
@@ -2430,7 +2430,7 @@
  "leto": {
   "nom": "Leto",
   "sorties": [
-   "vu-solidays-2025"
+   "vu-solidays-2025-vendredi"
   ]
  },
  "levy-sekgapane": {
@@ -2496,7 +2496,7 @@
  "lomepal": {
   "nom": "Lomepal",
   "sorties": [
-   "vu-we-love-green-2023"
+   "vu-we-love-green-2023-dimanche"
   ]
  },
  "london-symphony-orchestra": {
@@ -2509,7 +2509,7 @@
  "lorenzo": {
   "nom": "Lorenzo",
   "sorties": [
-   "vu-we-love-green-2023"
+   "vu-we-love-green-2023-samedi"
   ]
  },
  "lorenzo-passerini": {
@@ -2844,7 +2844,7 @@
  "meryl": {
   "nom": "Meryl",
   "sorties": [
-   "vu-solidays-2023"
+   "vu-solidays-2023-samedi"
   ]
  },
  "micha-lescot": {
@@ -2899,7 +2899,7 @@
  "miel-de-montagne": {
   "nom": "Miel de Montagne",
   "sorties": [
-   "vu-solidays-2023"
+   "vu-solidays-2023-samedi"
   ]
  },
  "mika": {
@@ -3088,7 +3088,7 @@
  "niska": {
   "nom": "Niska",
   "sorties": [
-   "vu-solidays-2025"
+   "vu-solidays-2025-samedi"
   ]
  },
  "noam-morgensztern": {
@@ -3120,7 +3120,7 @@
  "nxworries": {
   "nom": "NxWorries",
   "sorties": [
-   "vu-we-love-green-2023"
+   "vu-we-love-green-2023-vendredi"
   ]
  },
  "olga-kulchynska": {
@@ -3202,7 +3202,7 @@
  "orelsan": {
   "nom": "Orelsan",
   "sorties": [
-   "vu-we-love-green-2023"
+   "vu-we-love-green-2023-vendredi"
   ]
  },
  "pablo-gisbert": {
@@ -3305,7 +3305,7 @@
  "phoenix": {
   "nom": "Phoenix",
   "sorties": [
-   "vu-we-love-green-2023"
+   "vu-we-love-green-2023-samedi"
   ]
  },
  "pierre-andre-weitz": {
@@ -3355,7 +3355,7 @@
  "plk": {
   "nom": "PLK",
   "sorties": [
-   "vu-we-love-green-2023"
+   "vu-we-love-green-2023-vendredi"
   ]
  },
  "pnl": {
@@ -3369,7 +3369,7 @@
   "sorties": [
    "le-petit-cirque",
    "vu-solidays-2024",
-   "vu-we-love-green-2023"
+   "vu-we-love-green-2023-dimanche"
   ]
  },
  "pretty-yende": {
@@ -3465,7 +3465,7 @@
  "riles": {
   "nom": "Rilès",
   "sorties": [
-   "vu-solidays-2025"
+   "vu-solidays-2025-vendredi"
   ]
  },
  "robert-carsen": {
@@ -3537,7 +3537,7 @@
  "saint-levant": {
   "nom": "Saint Levant",
   "sorties": [
-   "vu-solidays-2023"
+   "vu-solidays-2023-samedi"
   ]
  },
  "saioa-hernandez": {
@@ -3579,8 +3579,8 @@
  "sch": {
   "nom": "SCH",
   "sorties": [
-   "vu-solidays-2023",
-   "vu-solidays-2025"
+   "vu-solidays-2023-vendredi",
+   "vu-solidays-2025-dimanche"
   ]
  },
  "scott-gibbons": {
@@ -3650,7 +3650,7 @@
  "shaka-ponk": {
   "nom": "Shaka Ponk",
   "sorties": [
-   "vu-solidays-2023"
+   "vu-solidays-2023-dimanche"
   ]
  },
  "sharon-eyal": {
@@ -3662,7 +3662,7 @@
  "shay": {
   "nom": "Shay",
   "sorties": [
-   "vu-solidays-2025"
+   "vu-solidays-2025-vendredi"
   ]
  },
  "simon-deletang": {
@@ -3700,7 +3700,7 @@
  "skrillex": {
   "nom": "Skrillex",
   "sorties": [
-   "vu-we-love-green-2023"
+   "vu-we-love-green-2023-dimanche"
   ]
  },
  "sofia-andrukhovych": {
@@ -3718,7 +3718,7 @@
  "sofiane-pamart": {
   "nom": "Sofiane Pamart",
   "sorties": [
-   "vu-solidays-2023"
+   "vu-solidays-2023-vendredi"
   ]
  },
  "sol-leon": {
@@ -3909,7 +3909,7 @@
  "the-blaze": {
   "nom": "The Blaze",
   "sorties": [
-   "vu-we-love-green-2023"
+   "vu-we-love-green-2023-vendredi"
   ]
  },
  "the-cure": {
@@ -3933,7 +3933,7 @@
  "theodora": {
   "nom": "Theodora",
   "sorties": [
-   "vu-fete-de-l-humanite-2025",
+   "vu-fete-de-l-humanite-2025-vendredi",
    "vu-theodora-zenith-2026"
   ]
  },
@@ -3989,7 +3989,7 @@
  "tiakola": {
   "nom": "Tiakola",
   "sorties": [
-   "vu-solidays-2023"
+   "vu-solidays-2023-vendredi"
   ]
  },
  "timur-zangiev": {
@@ -4097,7 +4097,7 @@
  "vladimir-cauchemar": {
   "nom": "Vladimir Cauchemar",
   "sorties": [
-   "vu-solidays-2023"
+   "vu-solidays-2023-samedi"
   ]
  },
  "wajdi-mouawad": {
@@ -4111,7 +4111,7 @@
  "werenoi": {
   "nom": "Werenoi",
   "sorties": [
-   "vu-solidays-2025"
+   "vu-solidays-2025-samedi"
   ]
  },
  "wiebke-lehmkuhl": {
@@ -4178,13 +4178,13 @@
  "zaho-de-sagazan": {
   "nom": "Zaho de Sagazan",
   "sorties": [
-   "vu-solidays-2023"
+   "vu-solidays-2023-samedi"
   ]
  },
  "ziak": {
   "nom": "Ziak",
   "sorties": [
-   "vu-solidays-2023"
+   "vu-solidays-2023-samedi"
   ]
  },
  "zola": {

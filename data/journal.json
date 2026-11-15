@@ -2922,9 +2922,9 @@
    ],
    "lieuId": "we-love-green",
    "salle": "",
-   "debut": "2022-06-02",
+   "debut": "2022-06-05",
    "fin": "2022-06-05",
-   "datesTexte": "2 au 5 juin 2022 ; vu le dimanche 5 juin",
+   "datesTexte": "journée du dimanche 5 juin 2022",
    "note": 0,
    "pronostic": false,
    "pourquoi": "Festival de musiques actuelles du bois de Vincennes, dixième édition ; journée du dimanche.",
@@ -2941,8 +2941,8 @@
    "offres": []
   },
   {
-   "id": "vu-we-love-green-2023",
-   "titre": "We Love Green 2023",
+   "id": "vu-we-love-green-2023-vendredi",
+   "titre": "We Love Green 2023 – vendredi",
    "categorie": "Festival",
    "sousGenre": "Musiques actuelles",
    "artistes": [
@@ -2969,7 +2969,34 @@
     {
      "nom": "PLK",
      "role": "interprète"
-    },
+    }
+   ],
+   "lieuId": "we-love-green",
+   "salle": "",
+   "debut": "2023-06-02",
+   "fin": "2023-06-02",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Festival de musiques actuelles du bois de Vincennes.",
+   "lien": "https://www.welovegreen.fr",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2023-06-02"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": [],
+   "datesTexte": "journée du vendredi 2 juin 2023 ; NxWorries : Anderson .Paak et Knxwledge"
+  },
+  {
+   "id": "vu-we-love-green-2023-samedi",
+   "titre": "We Love Green 2023 – samedi",
+   "categorie": "Festival",
+   "sousGenre": "Musiques actuelles",
+   "artistes": [
     {
      "nom": "Phoenix",
      "role": "interprète"
@@ -2981,7 +3008,34 @@
     {
      "nom": "Lorenzo",
      "role": "interprète"
-    },
+    }
+   ],
+   "lieuId": "we-love-green",
+   "salle": "",
+   "debut": "2023-06-03",
+   "fin": "2023-06-03",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Festival de musiques actuelles du bois de Vincennes.",
+   "lien": "https://www.welovegreen.fr",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2023-06-03"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": [],
+   "datesTexte": "journée du samedi 3 juin 2023"
+  },
+  {
+   "id": "vu-we-love-green-2023-dimanche",
+   "titre": "We Love Green 2023 – dimanche",
+   "categorie": "Festival",
+   "sousGenre": "Musiques actuelles",
+   "artistes": [
     {
      "nom": "Lomepal",
      "role": "interprète"
@@ -3001,25 +3055,23 @@
    ],
    "lieuId": "we-love-green",
    "salle": "",
-   "debut": "2023-06-02",
+   "debut": "2023-06-04",
    "fin": "2023-06-04",
-   "datesTexte": "vendredi 2 juin : Orelsan, The Blaze, NxWorries (Anderson .Paak et Knxwledge), PLK ; samedi 3 juin : Phoenix, Gazo, Lorenzo ; dimanche 4 juin : Lomepal, Skrillex, Bon Iver, Pomme",
    "note": 0,
    "pronostic": false,
-   "pourquoi": "Festival de musiques actuelles du bois de Vincennes, les trois jours.",
+   "pourquoi": "Festival de musiques actuelles du bois de Vincennes.",
    "lien": "https://www.welovegreen.fr",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "vu",
    "vuLe": [
-    "2023-06-02",
-    "2023-06-03",
     "2023-06-04"
    ],
    "noteLeonard": null,
    "avis": "",
-   "offres": []
+   "offres": [],
+   "datesTexte": "journée du dimanche 4 juin 2023"
   },
   {
    "id": "vu-rock-en-seine-2022",
@@ -3050,9 +3102,9 @@
    ],
    "lieuId": "rock-en-seine",
    "salle": "",
-   "debut": "2022-08-25",
+   "debut": "2022-08-28",
    "fin": "2022-08-28",
-   "datesTexte": "25 au 28 août 2022 ; vu le dimanche 28 août",
+   "datesTexte": "journée du dimanche 28 août 2022",
    "note": 0,
    "pronostic": false,
    "pourquoi": "Festival du domaine national de Saint-Cloud ; journée du dimanche, Stromae en tête d’affiche.",
@@ -3069,8 +3121,8 @@
    "offres": []
   },
   {
-   "id": "vu-solidays-2023",
-   "titre": "Solidays 2023",
+   "id": "vu-solidays-2023-vendredi",
+   "titre": "Solidays 2023 – vendredi",
    "categorie": "Festival",
    "sousGenre": "Musiques actuelles",
    "artistes": [
@@ -3101,7 +3153,34 @@
     {
      "nom": "Tiakola",
      "role": "interprète"
-    },
+    }
+   ],
+   "lieuId": "solidays",
+   "salle": "",
+   "debut": "2023-06-23",
+   "fin": "2023-06-23",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Festival de Solidarité Sida à l’hippodrome de Longchamp.",
+   "lien": "https://www.solidays.org",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2023-06-23"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": [],
+   "datesTexte": "journée du vendredi 23 juin 2023"
+  },
+  {
+   "id": "vu-solidays-2023-samedi",
+   "titre": "Solidays 2023 – samedi",
+   "categorie": "Festival",
+   "sousGenre": "Musiques actuelles",
+   "artistes": [
     {
      "nom": "Bigflo & Oli",
      "role": "interprète"
@@ -3145,7 +3224,34 @@
     {
      "nom": "Ziak",
      "role": "interprète"
-    },
+    }
+   ],
+   "lieuId": "solidays",
+   "salle": "",
+   "debut": "2023-06-24",
+   "fin": "2023-06-24",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Festival de Solidarité Sida à l’hippodrome de Longchamp.",
+   "lien": "https://www.solidays.org",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2023-06-24"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": [],
+   "datesTexte": "journée du samedi 24 juin 2023"
+  },
+  {
+   "id": "vu-solidays-2023-dimanche",
+   "titre": "Solidays 2023 – dimanche",
+   "categorie": "Festival",
+   "sousGenre": "Musiques actuelles",
+   "artistes": [
     {
      "nom": "Angèle",
      "role": "interprète"
@@ -3177,25 +3283,23 @@
    ],
    "lieuId": "solidays",
    "salle": "",
-   "debut": "2023-06-23",
+   "debut": "2023-06-25",
    "fin": "2023-06-25",
-   "datesTexte": "vendredi 23 juin : Jain, Julien Granel, Juliette Armanet, Ascendant Vierge, SCH, Sofiane Pamart, Tiakola ; samedi 24 juin : Bigflo & Oli, J Balvin, Jok’Air, Josman, Kungs, Meryl, Miel de Montagne, Saint Levant, Vladimir Cauchemar, Zaho de Sagazan, Ziak ; dimanche 25 juin : Angèle, Cerrone, Favé, Gwendoline, Hamza, La Femme, Shaka Ponk",
    "note": 0,
    "pronostic": false,
-   "pourquoi": "Festival de Solidarité Sida à l’hippodrome de Longchamp, les trois jours.",
+   "pourquoi": "Festival de Solidarité Sida à l’hippodrome de Longchamp.",
    "lien": "https://www.solidays.org",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "vu",
    "vuLe": [
-    "2023-06-23",
-    "2023-06-24",
     "2023-06-25"
    ],
    "noteLeonard": null,
    "avis": "",
-   "offres": []
+   "offres": [],
+   "datesTexte": "journée du dimanche 25 juin 2023"
   },
   {
    "id": "vu-the-weeknd-stade-de-france-2023",
@@ -3373,9 +3477,9 @@
    ],
    "lieuId": "solidays",
    "salle": "",
-   "debut": "2024-06-28",
+   "debut": "2024-06-30",
    "fin": "2024-06-30",
-   "datesTexte": "28 au 30 juin 2024 ; vu le dimanche 30 juin",
+   "datesTexte": "journée du dimanche 30 juin 2024",
    "note": 0,
    "pronostic": false,
    "pourquoi": "Festival de Solidarité Sida à l’hippodrome de Longchamp ; journée du dimanche.",
@@ -3512,8 +3616,8 @@
    "offres": []
   },
   {
-   "id": "vu-solidays-2025",
-   "titre": "Solidays 2025",
+   "id": "vu-solidays-2025-vendredi",
+   "titre": "Solidays 2025 – vendredi",
    "categorie": "Festival",
    "sousGenre": "Musiques actuelles",
    "artistes": [
@@ -3522,23 +3626,7 @@
      "role": "interprète"
     },
     {
-     "nom": "Gims",
-     "role": "interprète"
-    },
-    {
-     "nom": "SCH",
-     "role": "interprète"
-    },
-    {
-     "nom": "Kalash",
-     "role": "interprète"
-    },
-    {
      "nom": "Shay",
-     "role": "interprète"
-    },
-    {
-     "nom": "Werenoi",
      "role": "interprète"
     },
     {
@@ -3547,6 +3635,37 @@
     },
     {
      "nom": "Leto",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "solidays",
+   "salle": "",
+   "debut": "2025-06-27",
+   "fin": "2025-06-27",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Festival de Solidarité Sida à l’hippodrome de Longchamp.",
+   "lien": "https://www.solidays.org",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2025-06-27"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": [],
+   "datesTexte": "journée du vendredi 27 juin 2025"
+  },
+  {
+   "id": "vu-solidays-2025-samedi",
+   "titre": "Solidays 2025 – samedi",
+   "categorie": "Festival",
+   "sousGenre": "Musiques actuelles",
+   "artistes": [
+    {
+     "nom": "Werenoi",
      "role": "interprète"
     },
     {
@@ -3560,25 +3679,62 @@
    ],
    "lieuId": "solidays",
    "salle": "",
-   "debut": "2025-06-27",
-   "fin": "2025-06-29",
-   "datesTexte": "27 au 29 juin 2025 ; La Mano 1.9 avec Niska en invité",
+   "debut": "2025-06-28",
+   "fin": "2025-06-28",
    "note": 0,
    "pronostic": false,
-   "pourquoi": "Festival de Solidarité Sida à l’hippodrome de Longchamp, les trois jours.",
+   "pourquoi": "Festival de Solidarité Sida à l’hippodrome de Longchamp.",
    "lien": "https://www.solidays.org",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "vu",
    "vuLe": [
-    "2025-06-27",
-    "2025-06-28",
+    "2025-06-28"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": [],
+   "datesTexte": "journée du samedi 28 juin 2025 ; La Mano 1.9 avec Niska en invité"
+  },
+  {
+   "id": "vu-solidays-2025-dimanche",
+   "titre": "Solidays 2025 – dimanche",
+   "categorie": "Festival",
+   "sousGenre": "Musiques actuelles",
+   "artistes": [
+    {
+     "nom": "Gims",
+     "role": "interprète"
+    },
+    {
+     "nom": "Kalash",
+     "role": "interprète"
+    },
+    {
+     "nom": "SCH",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "solidays",
+   "salle": "",
+   "debut": "2025-06-29",
+   "fin": "2025-06-29",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Festival de Solidarité Sida à l’hippodrome de Longchamp.",
+   "lien": "https://www.solidays.org",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
     "2025-06-29"
    ],
    "noteLeonard": null,
    "avis": "",
-   "offres": []
+   "offres": [],
+   "datesTexte": "journée du dimanche 29 juin 2025"
   },
   {
    "id": "vu-rock-en-seine-2025",
@@ -3605,9 +3761,9 @@
    ],
    "lieuId": "rock-en-seine",
    "salle": "",
-   "debut": "2025-08-20",
+   "debut": "2025-08-24",
    "fin": "2025-08-24",
-   "datesTexte": "vu le dimanche 24 août 2025",
+   "datesTexte": "journée du dimanche 24 août 2025",
    "note": 0,
    "pronostic": false,
    "pourquoi": "Festival du domaine national de Saint-Cloud ; journée du dimanche.",
@@ -3624,8 +3780,8 @@
    "offres": []
   },
   {
-   "id": "vu-fete-de-l-humanite-2025",
-   "titre": "Fête de l’Humanité 2025",
+   "id": "vu-fete-de-l-humanite-2025-vendredi",
+   "titre": "Fête de l’Humanité 2025 – vendredi",
    "categorie": "Festival",
    "sousGenre": "Musiques actuelles",
    "artistes": [
@@ -3640,17 +3796,12 @@
     {
      "nom": "Theodora",
      "role": "interprète"
-    },
-    {
-     "nom": "Aliocha Schneider",
-     "role": "interprète"
     }
    ],
    "lieuId": "fete-de-l-humanite",
    "salle": "",
    "debut": "2025-09-12",
-   "fin": "2025-09-14",
-   "datesTexte": "vendredi 12 septembre : Ascendant Vierge, Kalash, Theodora ; samedi 13 septembre : discours de Jean-Luc Mélenchon, Aliocha Schneider",
+   "fin": "2025-09-12",
    "note": 0,
    "pronostic": false,
    "pourquoi": "Fête de l’Humanité à la Base 217 de Brétigny-sur-Orge, concerts et débats.",
@@ -3660,12 +3811,43 @@
    "leonardYVa": false,
    "statut": "vu",
    "vuLe": [
-    "2025-09-12",
+    "2025-09-12"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": [],
+   "datesTexte": "journée du vendredi 12 septembre 2025"
+  },
+  {
+   "id": "vu-fete-de-l-humanite-2025-samedi",
+   "titre": "Fête de l’Humanité 2025 – samedi",
+   "categorie": "Festival",
+   "sousGenre": "Musiques actuelles",
+   "artistes": [
+    {
+     "nom": "Aliocha Schneider",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "fete-de-l-humanite",
+   "salle": "",
+   "debut": "2025-09-13",
+   "fin": "2025-09-13",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Fête de l’Humanité à la Base 217 de Brétigny-sur-Orge, concerts et débats.",
+   "lien": "https://fete.humanite.fr",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
     "2025-09-13"
    ],
    "noteLeonard": null,
    "avis": "",
-   "offres": []
+   "offres": [],
+   "datesTexte": "journée du samedi 13 septembre 2025 ; discours de Jean-Luc Mélenchon"
   },
   {
    "id": "vu-avalon-bloom-point-ephemere-2025",
@@ -3965,7 +4147,7 @@
    "salle": "",
    "debut": "2026-08-30",
    "fin": "2026-08-30",
-   "datesTexte": "vu le dimanche 30 août 2026",
+   "datesTexte": "journée du dimanche 30 août 2026",
    "note": 0,
    "pronostic": false,
    "pourquoi": "Festival du domaine national de Saint-Cloud ; journée du dimanche, The Cure en tête d’affiche.",

@@ -8,6 +8,16 @@
   "billetterie": null,
   "tarifJeune": ""
  },
+ "adidas-arena": {
+  "nom": "Adidas Arena",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://www.adidasarena.com",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "Porte de la Chapelle, 75018 Paris"
+ },
  "arci-biko": {
   "nom": "Arci Biko",
   "ville": "Milan",
@@ -36,6 +46,26 @@
   "billetterie": null,
   "tarifJeune": "Carte Off : tarifs réduits dans la plupart des théâtres"
  },
+ "bal-blomet": {
+  "nom": "Bal Blomet",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.balblomet.fr",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "33 rue Blomet, 75015 Paris"
+ },
+ "bataclan": {
+  "nom": "Bataclan",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.bataclan.fr",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "50 boulevard Voltaire, 75011 Paris"
+ },
  "bouffes-du-nord": {
   "nom": "Théâtre des Bouffes du Nord",
   "ville": "Paris",
@@ -53,6 +83,16 @@
   "site": "https://www.bouffesparisiens.com",
   "billetterie": null,
   "tarifJeune": ""
+ },
+ "casino-de-paris": {
+  "nom": "Casino de Paris",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.casinodeparis.fr",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "16 rue de Clichy, 75009 Paris"
  },
  "chaillot": {
   "nom": "Chaillot – Théâtre national de la Danse",
@@ -89,6 +129,16 @@
   "site": "https://www.comedie-francaise.fr",
   "billetterie": null,
   "tarifJeune": "Moins de 28 ans : 27 / 18 / 12 € (Richelieu), 19 € (Vieux-Colombier), 18 € (Studio) ; places gratuites le lundi à Richelieu, 1h avant"
+ },
+ "duc-des-lombards": {
+  "nom": "Duc des Lombards",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.ducdeslombards.com",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "42 rue des Lombards, 75001 Paris"
  },
  "edouard-vii": {
   "nom": "Théâtre Édouard VII",
@@ -184,6 +234,16 @@
   "tarifJeune": "",
   "adresse": "Torre Branca, viale Luigi Camoens 2, 20121 Milan (parc Sempione)"
  },
+ "la-cigale": {
+  "nom": "La Cigale",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.lacigale.fr",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "120 boulevard de Rochechouart, 75018 Paris"
+ },
  "la-colline": {
   "nom": "La Colline – théâtre national",
   "ville": "Paris",
@@ -210,6 +270,16 @@
   "site": null,
   "billetterie": null,
   "tarifJeune": ""
+ },
+ "le-trianon": {
+  "nom": "Le Trianon",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.letrianon.fr",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "80 boulevard de Rochechouart, 75018 Paris"
  },
  "les-gemeaux": {
   "nom": "Les Gémeaux",
@@ -256,6 +326,16 @@
   "site": "https://nanterre-amandiers.com",
   "billetterie": null,
   "tarifJeune": ""
+ },
+ "new-morning": {
+  "nom": "New Morning",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.newmorning.com",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "7-9 rue des Petites-Écuries, 75010 Paris"
  },
  "odeon": {
   "nom": "Odéon – Théâtre de l’Europe",
@@ -396,6 +476,16 @@
   "tarifJeune": "",
   "adresse": "45 rue La Boétie, 75008 Paris"
  },
+ "salle-pleyel": {
+  "nom": "Salle Pleyel",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.sallepleyel.com",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "252 rue du Faubourg-Saint-Honoré, 75008 Paris"
+ },
  "sciences-po": {
   "nom": "Sciences Po",
   "ville": "Paris",
@@ -433,6 +523,16 @@
   "site": "https://www.stadefrance.com",
   "billetterie": null,
   "tarifJeune": ""
+ },
+ "sunset-sunside": {
+  "nom": "Sunset-Sunside",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.sunset-sunside.com",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "60 rue des Lombards, 75001 Paris"
  },
  "t2g": {
   "nom": "Théâtre de Gennevilliers (T2G)",
