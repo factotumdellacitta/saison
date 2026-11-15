@@ -4169,6 +4169,44 @@
    "noteLeonard": null,
    "avis": "",
    "offres": []
+  },
+  {
+   "id": "vu-le-dragon",
+   "titre": "Le Dragon",
+   "categorie": "Théâtre",
+   "sousGenre": "",
+   "artistes": [
+    {
+     "nom": "Evguéni Schwartz",
+     "role": "auteur"
+    },
+    {
+     "nom": "Clément Mirguet",
+     "role": "auteur"
+    },
+    {
+     "nom": "Thomas Jolly",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "grande-halle-villette",
+   "salle": "",
+   "debut": "2022-04-14",
+   "fin": "2022-04-17",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Thomas Jolly s’empare du récit écrit en 1943 par Evguéni Schwartz, auteur russe dont l’œuvre censurée par le régime soviétique dénonce les totalitarismes.",
+   "lien": "https://www.theatreonline.com/Spectacle/Le-Dragon/75719",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2022-04-14"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
   }
  ]
 }
