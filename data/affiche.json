@@ -240,9 +240,7 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-03-14",
      "tarif": "20 €",
-     "vente": "2026-11-15",
-     "venteApprox": false,
-     "condition": "Carte Jeunes TCE"
+     "condition": "Carte Jeunes TCE, réservation ouverte"
     }
    ]
   },
@@ -344,9 +342,7 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-05-29",
      "tarif": "15 €",
-     "vente": "2026-11-15",
-     "venteApprox": false,
-     "condition": "Carte Jeunes TCE"
+     "condition": "Carte Jeunes TCE, réservation ouverte"
     }
    ]
   },
@@ -400,9 +396,7 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-03-06",
      "tarif": "20 €",
-     "vente": "2026-11-15",
-     "venteApprox": false,
-     "condition": "Carte Jeunes TCE"
+     "condition": "Carte Jeunes TCE, réservation ouverte"
     }
    ],
    "relaches": [
@@ -1027,9 +1021,7 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-03-13",
      "tarif": "20 €",
-     "vente": "2026-11-15",
-     "venteApprox": false,
-     "condition": "Carte Jeunes TCE"
+     "condition": "Carte Jeunes TCE, réservation ouverte"
     }
    ]
   },
@@ -1149,9 +1141,7 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-05-24",
      "tarif": "20 €",
-     "vente": "2026-11-15",
-     "venteApprox": false,
-     "condition": "Carte Jeunes TCE"
+     "condition": "Carte Jeunes TCE, réservation ouverte"
     }
    ]
   },
@@ -1392,9 +1382,7 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-03-23",
      "tarif": "20 €",
-     "vente": "2026-11-15",
-     "venteApprox": false,
-     "condition": "Carte Jeunes TCE"
+     "condition": "Carte Jeunes TCE, réservation ouverte"
     }
    ]
   },
@@ -1682,9 +1670,7 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-05-28",
      "tarif": "20 €",
-     "vente": "2026-11-15",
-     "venteApprox": false,
-     "condition": "Carte Jeunes TCE"
+     "condition": "Carte Jeunes TCE, réservation ouverte"
     }
    ]
   },
@@ -3165,9 +3151,7 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-06-22",
      "tarif": "20 €",
-     "vente": "2026-11-15",
-     "venteApprox": false,
-     "condition": "Carte Jeunes TCE"
+     "condition": "Carte Jeunes TCE, réservation ouverte"
     }
    ]
   },
@@ -3640,9 +3624,7 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-06-02",
      "tarif": "10 €",
-     "vente": "2026-11-15",
-     "venteApprox": false,
-     "condition": "Carte Jeunes TCE"
+     "condition": "Carte Jeunes TCE, réservation ouverte"
     }
    ]
   },
@@ -3853,9 +3835,7 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-03-30",
      "tarif": "20 €",
-     "vente": "2026-11-15",
-     "venteApprox": false,
-     "condition": "Carte Jeunes TCE"
+     "condition": "Carte Jeunes TCE, réservation ouverte"
     }
    ]
   },
@@ -4129,9 +4109,7 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-04-01",
      "tarif": "20 €",
-     "vente": "2026-11-15",
-     "venteApprox": false,
-     "condition": "Carte Jeunes TCE"
+     "condition": "Carte Jeunes TCE, réservation ouverte"
     }
    ]
   },
@@ -4172,9 +4150,7 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-04-11",
      "tarif": "20 €",
-     "vente": "2026-11-15",
-     "venteApprox": false,
-     "condition": "Carte Jeunes TCE"
+     "condition": "Carte Jeunes TCE, réservation ouverte"
     }
    ]
   },
@@ -4331,9 +4307,7 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-04-26",
      "tarif": "20 €",
-     "vente": "2026-11-15",
-     "venteApprox": false,
-     "condition": "Carte Jeunes TCE"
+     "condition": "Carte Jeunes TCE, réservation ouverte"
     }
    ]
   },
@@ -4375,9 +4349,7 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-03-12",
      "tarif": "20 €",
-     "vente": "2026-11-15",
-     "venteApprox": false,
-     "condition": "Carte Jeunes TCE"
+     "condition": "Carte Jeunes TCE, réservation ouverte"
     }
    ]
   },
@@ -4669,9 +4641,7 @@
      "type": "Avant-première jeunes -30 ans",
      "date": "2027-04-18",
      "tarif": "20 €",
-     "vente": "2027-01-18T10:00",
-     "venteApprox": true,
-     "condition": "Moins de 30 ans, dim. 18 avril à 19h30"
+     "condition": "Moins de 30 ans, dim. 18 avril à 19h30, réservation ouverte"
     }
    ],
    "relaches": [
@@ -4780,9 +4750,7 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-06-24",
      "tarif": "20 €",
-     "vente": "2026-11-15",
-     "venteApprox": false,
-     "condition": "Carte Jeunes TCE"
+     "condition": "Carte Jeunes TCE, réservation ouverte"
     }
    ]
   },
@@ -5127,9 +5095,7 @@
      "type": "Avant-première jeunes -30 ans",
      "date": "2027-02-20",
      "tarif": "20 €",
-     "vente": "2026-11-20T10:00",
-     "venteApprox": true,
-     "condition": "Moins de 30 ans, sam. 20 févr. à 19h30"
+     "condition": "Moins de 30 ans, sam. 20 févr. à 19h30, réservation ouverte"
     }
    ],
    "relaches": [
@@ -5989,7 +5955,7 @@
      "tarif": "20 €",
      "vente": "2026-08-19T10:00",
      "venteApprox": true,
-     "condition": "Carte Jeunes TCE (16 – 29 ans), vente de 3 mois avant à la dernière minute"
+     "condition": "Carte Jeunes TCE (16 – 29 ans)"
     }
    ]
   },
@@ -6041,7 +6007,7 @@
      "tarif": "20 €",
      "vente": "2026-10-20T10:00",
      "venteApprox": true,
-     "condition": "Carte Jeunes TCE (16 – 29 ans), vente de 3 mois avant à la dernière minute"
+     "condition": "Carte Jeunes TCE (16 – 29 ans)"
     }
    ]
   },
@@ -6083,9 +6049,7 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-03-09",
      "tarif": "20 €",
-     "vente": "2026-11-15",
-     "venteApprox": false,
-     "condition": "Carte Jeunes TCE (16 – 29 ans), vente de 3 mois avant à la dernière minute"
+     "condition": "Carte Jeunes TCE (16 – 29 ans), réservation ouverte"
     }
    ]
   },
@@ -6139,9 +6103,7 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-05-12",
      "tarif": "20 €",
-     "vente": "2026-11-15",
-     "venteApprox": false,
-     "condition": "Carte Jeunes TCE (16 – 29 ans), vente de 3 mois avant à la dernière minute"
+     "condition": "Carte Jeunes TCE (16 – 29 ans), réservation ouverte"
     }
    ]
   },
@@ -6191,9 +6153,7 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-06-09",
      "tarif": "20 €",
-     "vente": "2026-11-15",
-     "venteApprox": false,
-     "condition": "Carte Jeunes TCE (16 – 29 ans), vente de 3 mois avant à la dernière minute"
+     "condition": "Carte Jeunes TCE (16 – 29 ans), réservation ouverte"
     }
    ]
   },
