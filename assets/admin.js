@@ -187,7 +187,7 @@
       if (s.lieuId == null) { if (f === "affiche") err.push(`${ou} : lieu manquant.`); }
       else if (!d.lieux[s.lieuId]) err.push(`${ou} : lieu inconnu (${s.lieuId}).`);
       if (!(Number.isInteger(s.note) && s.note >= 0 && s.note <= 4)) err.push(`${ou} : note hors de 0–4.`);
-      if ("calcul" in s) { const k = calculDe(s.calcul); if (!k) err.push(`${ou} : calcul du barème illisible (ex. « C2 A1 R1 G2 +Fidélité −Prix »).`); else if (s.pronostic && (k.socle.C > 1 || k.bonus.includes("Distinction"))) err.push(`${ou} : en prévision, critique 1 au plus et pas de Distinction.`); }
+      if ("calcul" in s) { const k = calculDe(s.calcul); if (!k) err.push(`${ou} : calcul du barème illisible (ex. « C1 N3 O2 H2 »).`); else if (s.pronostic && (k.socle.C > 1 || k.bonus.includes("Distinction"))) err.push(`${ou} : en prévision, critique 1 au plus et pas de Distinction.`); }
       for (const k of ["pronostic", "publicJeune", "leonardYVa"]) if (typeof s[k] !== "boolean") err.push(`${ou} : ${k} doit être vrai ou faux.`);
       for (const k of ["debut", "fin"]) if (s[k] && !ISO_RE.test(s[k])) err.push(`${ou} : ${k} invalide.`);
       if (s.debut && s.fin && s.fin < s.debut) err.push(`${ou} : fin avant le début.`);
@@ -875,7 +875,7 @@
       ${champ("Dates en clair (facultatif)", inp("datesTexte", e.datesTexte, 'placeholder="15 oct. 2026 – 27 janv. 2027"'))}
       ${champ("Horaires (facultatif)", inp("horaires", e.horaires, 'placeholder="20h, dim. 15h · 2h45"'))}
       <div class="grid2">${champ("Note (grille)", sel("note", [[4, "4 · incontournable"], [3, "3 · fortement recommandé"], [2, "2 · bon choix"], [1, "1 · curiosité"], ...(vu ? [[0, "0 · sans note"]] : [])], e.note))}<div>${ck("pronostic", e.pronostic, "Pronostic (pas encore critiqué)")}${ck("publicJeune", e.publicJeune, "Adapté à un public jeune")}</div></div>
-      ${champ("Calcul du barème (facultatif)", inp("calcul", e.calcul, 'placeholder="C2 A1 R1 G2 +Fidélité −Prix" autocapitalize="off" autocomplete="off"') + '<span class="cr" data-calc></span>')}
+      ${champ("Calcul du barème (facultatif)", inp("calcul", e.calcul, 'placeholder="C1 N3 O2 H2" autocapitalize="off" autocomplete="off"') + '<span class="cr" data-calc></span>')}
       ${champ("État des ventes", sel("etat", [["", "Rien à signaler"], ...Object.entries(ETATS)], e.etat || ""))}
       ${champ("Pourquoi (une phrase factuelle)", `<textarea name="pourquoi" rows="2">${esc(e.pourquoi || "")}</textarea>`)}
       ${champ("Billetterie directe (facultatif)", inp("billetterie", e.billetterie, 'type="url" placeholder="https://…"'))}
@@ -900,7 +900,7 @@
       const champs = { titre, categorie: val(f, "categorie"), sousGenre: val(f, "sousGenre"), artistes, lieuId: lieuId || null, salle: val(f, "salle"), debut: val(f, "debut"), fin: val(f, "fin") || val(f, "debut"),
         datesTexte: val(f, "datesTexte"), horaires: val(f, "horaires"), note: +val(f, "note"), pronostic: f.elements.pronostic.checked, pourquoi: val(f, "pourquoi"), lien: val(f, "lien") || null, billetterie: val(f, "billetterie") || null, publicJeune: f.elements.publicJeune.checked, offres };
       if (val(f, "etat")) champs.etat = val(f, "etat");
-      if (val(f, "calcul")) { if (!calculDe(val(f, "calcul"))) throw new Error("Calcul du barème illisible : « C2 A1 R1 G2 », puis bonus (+Distinction, +Fidélité, +Aubaine, +Découverte) et malus (−Accès, −Prix)."); champs.calcul = val(f, "calcul"); }
+      if (val(f, "calcul")) { if (!calculDe(val(f, "calcul"))) throw new Error("Calcul du barème illisible : « C1 N3 O2 H2 », éventuellement suivi de « +Distinction »."); champs.calcul = val(f, "calcul"); }
       for (const k of ["datesTexte", "horaires"]) if (!champs[k]) delete champs[k];
       if (vu) for (const k of ["debut", "fin", "datesTexte", "horaires", "note", "pronostic", "pourquoi", "billetterie", "publicJeune", "offres", "etat", "calcul"]) delete champs[k];
       if (!e0) {
@@ -929,7 +929,7 @@
     if (!e0) form.elements.titre.focus();
     // Barème : total et note correspondante sous le champ, la note se cale dessus.
     const cIn = form.elements.calcul, cOut = form.querySelector("[data-calc]");
-    if (cIn && cOut) { const maj = (cale) => { const k = calculDe(cIn.value); cOut.textContent = !cIn.value.trim() ? "" : k ? `Total ${k.total} : note ${k.note || "trop basse pour une fiche"}` : "Format : C2 A1 R1 G2 +Fidélité −Prix"; if (cale && k && k.note) form.elements.note.value = String(k.note); }; cIn.oninput = () => maj(true); maj(false); }
+    if (cIn && cOut) { const maj = (cale) => { const k = calculDe(cIn.value); cOut.textContent = !cIn.value.trim() ? "" : k ? `Total ${k.total} : note ${k.note || "trop basse pour une fiche"}` : "Format : C1 N3 O2 H2 +Distinction"; if (cale && k && k.note) form.elements.note.value = String(k.note); }; cIn.oninput = () => maj(true); maj(false); }
     const nl = form.querySelector("[data-nl]"), lieuIn = form.elements.lieu;
     const majLieu = () => { nl.hidden = !lieuIn.value.trim() || !!lieuDepuisNom(lieuIn.value); };
     lieuIn.addEventListener("input", majLieu); majLieu();
