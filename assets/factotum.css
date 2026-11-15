@@ -14,8 +14,8 @@
 :root,[data-theme="light"]{
   --fond:#FFFFFF;--surface:#FFFFFF;--encre:#111111;--encre-2:#5C5C5C;--filet:#111111;--filet-leger:#D9D9D9;
   --rouge:#E30613;--sur-rouge:#FFFFFF;--rouge-texte:#E30613;
-  --g-theatre:#B4233C;--g-musique:#1F5FA8;--g-danse:#946200;--g-images:#00695C;
-  --a-theatre:#B4233C;--a-musique:#1F5FA8;--a-danse:#946200;--a-images:#00695C;
+  --g-theatre:#B4233C;--g-lyrique:#1F5FA8;--g-danse:#946200;--g-concert:#00695C;
+  --a-theatre:#B4233C;--a-lyrique:#1F5FA8;--a-danse:#946200;--a-concert:#00695C;
   color-scheme:light;
 }
 :root{
@@ -34,13 +34,13 @@
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --fond:#0E0E0E;--surface:#161616;--encre:#F2F2F2;--encre-2:#A6A6A6;--filet:#F2F2F2;--filet-leger:#2E2E2E;
   --rouge:#E30613;--sur-rouge:#FFFFFF;--rouge-texte:#FF5A4F;
-  --g-theatre:#FF94A3;--g-musique:#8DB8F2;--g-danse:#E8B04A;--g-images:#4FC3A1;
-  --a-theatre:#B4233C;--a-musique:#1F5FA8;--a-danse:#946200;--a-images:#00695C;color-scheme:dark}}
+  --g-theatre:#FF94A3;--g-lyrique:#8DB8F2;--g-danse:#E8B04A;--g-concert:#4FC3A1;
+  --a-theatre:#B4233C;--a-lyrique:#1F5FA8;--a-danse:#946200;--a-concert:#00695C;color-scheme:dark}}
 :root[data-theme="dark"],[data-theme="dark"]{
   --fond:#0E0E0E;--surface:#161616;--encre:#F2F2F2;--encre-2:#A6A6A6;--filet:#F2F2F2;--filet-leger:#2E2E2E;
   --rouge:#E30613;--sur-rouge:#FFFFFF;--rouge-texte:#FF5A4F;
-  --g-theatre:#FF94A3;--g-musique:#8DB8F2;--g-danse:#E8B04A;--g-images:#4FC3A1;
-  --a-theatre:#B4233C;--a-musique:#1F5FA8;--a-danse:#946200;--a-images:#00695C;color-scheme:dark}
+  --g-theatre:#FF94A3;--g-lyrique:#8DB8F2;--g-danse:#E8B04A;--g-concert:#4FC3A1;
+  --a-theatre:#B4233C;--a-lyrique:#1F5FA8;--a-danse:#946200;--a-concert:#00695C;color-scheme:dark}
 @media print{html:not(.charte):root:root,html:not(.charte) [data-theme][data-theme]{
   --fond:#FFFFFF;--surface:#FFFFFF;--encre:#000000;--encre-2:#333333;--filet:#000000;--filet-leger:#999999;
   --rouge:#000000;--sur-rouge:#FFFFFF;--rouge-texte:#000000;color-scheme:light}}
@@ -581,8 +581,8 @@ body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
 .rech input[type=search]{width:100%;padding-left:40px}
 .ss .pi{width:14px;height:14px;margin:-2px var(--e1) 0 0}
 /* Familles de genre : une encre par famille (surtitre, tranche devant la date, icône des puces, barres) et un aplat (puce active, en-tête de fiche) */
-.g-theatre{--g:var(--g-theatre);--ga:var(--a-theatre)}.g-musique{--g:var(--g-musique);--ga:var(--a-musique)}
-.g-danse{--g:var(--g-danse);--ga:var(--a-danse)}.g-images{--g:var(--g-images);--ga:var(--a-images)}.g-neutre{--g:var(--encre);--ga:var(--rouge)}
+.g-theatre{--g:var(--g-theatre);--ga:var(--a-theatre)}.g-lyrique{--g:var(--g-lyrique);--ga:var(--a-lyrique)}
+.g-danse{--g:var(--g-danse);--ga:var(--a-danse)}.g-concert{--g:var(--g-concert);--ga:var(--a-concert)}.g-neutre{--g:var(--encre);--ga:var(--rouge)}
 .gk{display:flex;align-items:center;gap:6px;margin-bottom:2px;font-size:var(--t-meta);font-weight:700;text-transform:uppercase;letter-spacing:.06em;line-height:1.35;color:var(--g,var(--encre))}
 .gk .pi{width:16px;height:16px}
 /* Bande de genre à gauche de la ligne : aplat, icône et libellé en blanc, à la verticale (lu de bas en haut). */
@@ -595,7 +595,7 @@ body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
 .chip[class*=" g-"][aria-pressed="true"],.chip[class*=" g-"].on{background:var(--ga);border-color:var(--ga);color:var(--sur-rouge)}
 .chip[class*=" g-"][aria-pressed="true"] .pi,.chip[class*=" g-"].on .pi{color:inherit}
 @media (hover:hover){.chip[class*=" g-"]:hover .pi{color:inherit}.chip[class*=" g-"][aria-pressed="true"]:hover{background:var(--ga);color:var(--sur-rouge)}}
-.sheet-in.g-musique .shh,.sheet-in.g-danse .shh,.sheet-in.g-images .shh{background:var(--ga)}
+.sheet-in.g-lyrique .shh,.sheet-in.g-danse .shh,.sheet-in.g-concert .shh{background:var(--ga)}
 .bars .bg[class*=" g-"]{background:var(--g)}
 .bars .bg.g-neutre{background:var(--rouge)}
 .chip .pi{width:18px;height:18px}

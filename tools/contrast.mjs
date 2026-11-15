@@ -20,15 +20,15 @@ export const PAIRES = [
   ["g-theatre", "fond", 4.5, "surtitre de genre (theatre)"],
   ["g-theatre", "surface", 4.5, "surtitre de genre sur surface (theatre)"],
   ["sur-rouge", "a-theatre", 4.5, "texte blanc sur aplat de genre (theatre)"],
-  ["g-musique", "fond", 4.5, "surtitre de genre (musique)"],
-  ["g-musique", "surface", 4.5, "surtitre de genre sur surface (musique)"],
-  ["sur-rouge", "a-musique", 4.5, "texte blanc sur aplat de genre (musique)"],
+  ["g-lyrique", "fond", 4.5, "surtitre de genre (lyrique)"],
+  ["g-lyrique", "surface", 4.5, "surtitre de genre sur surface (lyrique)"],
+  ["sur-rouge", "a-lyrique", 4.5, "texte blanc sur aplat de genre (lyrique)"],
   ["g-danse", "fond", 4.5, "surtitre de genre (danse)"],
   ["g-danse", "surface", 4.5, "surtitre de genre sur surface (danse)"],
   ["sur-rouge", "a-danse", 4.5, "texte blanc sur aplat de genre (danse)"],
-  ["g-images", "fond", 4.5, "surtitre de genre (images)"],
-  ["g-images", "surface", 4.5, "surtitre de genre sur surface (images)"],
-  ["sur-rouge", "a-images", 4.5, "texte blanc sur aplat de genre (images)"],
+  ["g-concert", "fond", 4.5, "surtitre de genre (concert)"],
+  ["g-concert", "surface", 4.5, "surtitre de genre sur surface (concert)"],
+  ["sur-rouge", "a-concert", 4.5, "texte blanc sur aplat de genre (concert)"],
 ];
 
 const hex = (h) => { const m = /^#([0-9a-f]{6})$/i.exec(h.trim()); if (!m) throw new Error(`couleur illisible : ${h}`); return [0, 2, 4].map((i) => parseInt(m[1].slice(i, i + 2), 16) / 255); };

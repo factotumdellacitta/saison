@@ -1,7 +1,7 @@
 /* Factotum – interface publique (lots 2 et 3). Aucune dépendance. Le mode admin est dans assets/admin.js, chargé à la demande. */
 "use strict";
 const OWNER = "Léonard";
-const CATS = ["Théâtre", "Opéra", "Danse", "Comédie musicale", "Récital", "Concert", "Festival", "Exposition", "Cinéma", "Événement", "Sur scène", "Autre"];
+const CATS = ["Théâtre", "Opéra", "Concert", "Récital", "Danse", "Comédie musicale", "Festival", "Exposition", "Cinéma", "Événement", "Sur scène", "Autre"];
 const ROLES = ["auteur", "compositeur", "mise en scène", "chorégraphie", "direction musicale", "réalisation", "commissaire", "compagnie", "interprète", "artiste"];
 const CAT_LIENS = ["Billetteries", "Cartes et tarifs jeunes", "Calendriers de vente", "Outils"];
 const MOIS = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."];
@@ -89,7 +89,8 @@ const ICO = {
 };
 const ico = (n, cls) => ICO[n] ? `<svg class="pi${cls ? " " + cls : ""}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true" focusable="false">${ICO[n]}</svg>` : "";
 // Familles de genre (code couleur) : théâtre, musique, danse, images ; le reste est neutre.
-const FAMILLE = { "Théâtre": "theatre", "Opéra": "musique", "Récital": "musique", "Concert": "musique", "Comédie musicale": "musique", "Danse": "danse", "Exposition": "images", "Cinéma": "images" };
+// Familles de couleur : bleu pour la scène lyrique, vert pour la musique de concert ; Expo et Cinéma neutres.
+const FAMILLE = { "Théâtre": "theatre", "Opéra": "lyrique", "Comédie musicale": "lyrique", "Concert": "concert", "Récital": "concert", "Danse": "danse" };
 const famille = (c) => FAMILLE[c] || "neutre";
 const gk = (e) => `<span class="gk">${genreIco(e)}${esc(genre(e))}</span>`;
 const genreIco = (e, cls) => ico(CATS.includes(e.categorie) ? e.categorie : "Autre", cls);
@@ -951,7 +952,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.33"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.34"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -969,7 +970,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.33"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.34"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
