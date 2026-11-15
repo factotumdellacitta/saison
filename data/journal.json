@@ -2063,9 +2063,10 @@
    "vuLe": [
     "2026-10-15"
    ],
-   "noteLeonard": null,
+   "noteLeonard": 1,
    "avis": "",
-   "offres": []
+   "offres": [],
+   "sousGenre": ""
   },
   {
    "id": "vu-par-autan",
