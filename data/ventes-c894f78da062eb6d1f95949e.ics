@@ -185,6 +185,22 @@ TRIGGER:-PT15M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:vente-la-tour-de-nesle-0-ouverture-des-ventes@saison
+DTSTAMP:20261115T000000Z
+DTSTART;TZID=Europe/Paris:20270503T100000
+DTEND;TZID=Europe/Paris:20270503T101500
+SUMMARY:~ Vente : Ouverture des ventes – La Tour de Nesle
+DESCRIPTION:Condition : Sur le site du festival Paris l’été\nHeure d’
+ ouverture inconnue (10h par défaut)\nBilletterie : https://comedie-franca
+ ise.fr/2026-2027/la-tour-de-nesle
+URL:https://comedie-francaise.fr/2026-2027/la-tour-de-nesle
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vente : La Tour de Nesle
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:vente-le-cid-0-dates-a-partir-du-1er-mars@saison
 DTSTAMP:20261115T000000Z
 DTSTART;TZID=Europe/Paris:20270127T100000

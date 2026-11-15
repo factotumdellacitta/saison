@@ -15,6 +15,7 @@
  "adeline-d-hermy": {
   "nom": "Adeline d’Hermy",
   "sorties": [
+   "le-suicide",
    "vu-la-musica-deuxieme",
    "vu-le-suicide",
    "vu-une-mouette"
@@ -53,6 +54,8 @@
  "alain-lenglet": {
   "nom": "Alain Lenglet",
   "sorties": [
+   "l-avare",
+   "ruy-blas",
    "vu-lavare"
   ]
  },
@@ -93,6 +96,12 @@
    "c-est-beau",
    "vu-la-musica-deuxieme",
    "vu-la-puce-a-loreille"
+  ]
+ },
+ "alexis-joly": {
+  "nom": "Alexis Joly",
+  "sorties": [
+   "l-avare"
   ]
  },
  "alexis-michalik": {
@@ -152,6 +161,7 @@
  "ananda-devi": {
   "nom": "Ananda Devi",
   "sorties": [
+   "ecrire-et-mettre-en-scene-devi",
    "la-fournaise"
   ]
  },
@@ -195,6 +205,7 @@
   "nom": "Anna Cervinka",
   "sorties": [
    "deshonoree",
+   "l-avare",
    "vu-lavare",
    "vu-les-bonnes"
   ]
@@ -318,6 +329,12 @@
    "lady-macbeth-de-mzensk"
   ]
  },
+ "aymeline-alix": {
+  "nom": "Aymeline Alix",
+  "sorties": [
+   "l-avare"
+  ]
+ },
  "bachar-mar-khalife": {
   "nom": "Bachar Mar-Khalifé",
   "sorties": [
@@ -336,6 +353,8 @@
   "nom": "Bakary Sangaré",
   "sorties": [
    "le-cid",
+   "les-fourberies-de-scapin",
+   "ruy-blas",
    "vu-les-fourberies-de-scapin"
   ]
  },
@@ -390,6 +409,7 @@
  "benjamin-lavernhe": {
   "nom": "Benjamin Lavernhe",
   "sorties": [
+   "le-cid",
    "vu-le-mariage-force"
   ]
  },
@@ -428,6 +448,7 @@
   "nom": "Birane Ba",
   "sorties": [
    "la-fournaise",
+   "les-fourberies-de-scapin",
    "vu-une-mouette"
   ]
  },
@@ -540,6 +561,9 @@
  "charlie-fabert": {
   "nom": "Charlie Fabert",
   "sorties": [
+   "l-ecole-de-danse",
+   "le-suicide",
+   "ruy-blas",
    "vu-bestioles"
   ]
  },
@@ -599,6 +623,7 @@
  "christophe-montenez": {
   "nom": "Christophe Montenez",
   "sorties": [
+   "l-ecole-de-danse",
    "vu-le-soulier-de-satin"
   ]
  },
@@ -624,6 +649,12 @@
   "nom": "Christos Papadopoulos",
   "sorties": [
    "my-fierce-ignorant-step"
+  ]
+ },
+ "claire-de-la-rue-du-can": {
+  "nom": "Claire de La Rüe du Can",
+  "sorties": [
+   "l-ecole-de-danse"
   ]
  },
  "claude-debussy": {
@@ -654,6 +685,15 @@
   "nom": "Clémence Jeanguillaume",
   "sorties": [
    "olalaland"
+  ]
+ },
+ "clement-bresson": {
+  "nom": "Clément Bresson",
+  "sorties": [
+   "l-avare",
+   "l-ecole-de-danse",
+   "le-cid",
+   "le-suicide"
   ]
  },
  "clement-hervieu-leger": {
@@ -750,6 +790,7 @@
   "nom": "Danièle Lebrun",
   "sorties": [
    "l-envers-du-music-hall",
+   "le-cid",
    "ruy-blas",
    "vu-le-soulier-de-satin"
   ]
@@ -776,9 +817,11 @@
   "nom": "Denis Podalydès",
   "sorties": [
    "ce-que-j-appelle-oubli",
+   "hecube-pas-hecube",
    "l-ecole-de-danse",
    "l-evenement",
    "le-cid",
+   "les-fourberies-de-scapin",
    "vu-hecube-pas-hecube",
    "vu-les-fourberies-de-scapin"
   ]
@@ -786,6 +829,8 @@
  "didier-sandre": {
   "nom": "Didier Sandre",
   "sorties": [
+   "le-cid",
+   "une-heure-avec-didier-sandre",
    "vu-le-soulier-de-satin"
   ]
  },
@@ -822,6 +867,7 @@
  "edith-proust": {
   "nom": "Edith Proust",
   "sorties": [
+   "le-suicide",
    "vu-les-bonnes"
   ]
  },
@@ -840,6 +886,7 @@
  "elissa-alloula": {
   "nom": "Élissa Alloula",
   "sorties": [
+   "les-fourberies-de-scapin",
    "vu-les-bonnes",
    "vu-les-fourberies-de-scapin"
   ]
@@ -860,6 +907,7 @@
  "elsa-lepoivre": {
   "nom": "Elsa Lepoivre",
   "sorties": [
+   "hecube-pas-hecube",
    "vu-hecube-pas-hecube"
   ]
  },
@@ -942,6 +990,7 @@
  "eric-genovese": {
   "nom": "Éric Génovèse",
   "sorties": [
+   "hecube-pas-hecube",
    "l-ecole-de-danse",
    "vu-hecube-pas-hecube"
   ]
@@ -993,6 +1042,12 @@
   "nom": "Fabien Gabel",
   "sorties": [
    "romeo-et-juliette-jolly"
+  ]
+ },
+ "fatou-diome": {
+  "nom": "Fatou Diome",
+  "sorties": [
+   "une-heure-avec-jordan-rezgui"
   ]
  },
  "florence-viala": {
@@ -1058,6 +1113,7 @@
  "gael-kamilindi": {
   "nom": "Gaël Kamilindi",
   "sorties": [
+   "hecube-pas-hecube",
    "vu-angels-in-america",
    "vu-hecube-pas-hecube",
    "vu-le-mariage-force"
@@ -1131,6 +1187,8 @@
  "gilles-david": {
   "nom": "Gilles David",
   "sorties": [
+   "les-fourberies-de-scapin",
+   "ruy-blas",
    "vu-les-fourberies-de-scapin",
    "vu-une-mouette",
    "vu-willy-protagoras-enferme-dans-les-toilettes"
@@ -1253,6 +1311,13 @@
    "didon-et-enee"
   ]
  },
+ "hippolyte-orillard": {
+  "nom": "Hippolyte Orillard",
+  "sorties": [
+   "l-avare",
+   "l-ecole-de-danse"
+  ]
+ },
  "hiroshi-sugimoto": {
   "nom": "Hiroshi Sugimoto",
   "sorties": [
@@ -1296,6 +1361,12 @@
   "sorties": [
    "lady-macbeth-de-mzensk",
    "miroir-de-nos-peines"
+  ]
+ },
+ "irenee-rohrbach": {
+  "nom": "Irénée Rohrbach",
+  "sorties": [
+   "c-est-beau"
   ]
  },
  "isabelle-adjani": {
@@ -1371,6 +1442,13 @@
    "dipus-rex"
   ]
  },
+ "jean-chevalier": {
+  "nom": "Jean Chevalier",
+  "sorties": [
+   "l-avare",
+   "l-ecole-de-danse"
+  ]
+ },
  "jean-christophe-meurisse": {
   "nom": "Jean-Christophe Meurisse",
   "sorties": [
@@ -1417,6 +1495,7 @@
  "jennifer-decker": {
   "nom": "Jennifer Decker",
   "sorties": [
+   "le-cid",
    "vu-angels-in-america",
    "vu-une-mouette"
   ]
@@ -1424,6 +1503,7 @@
  "jeremy-lopez": {
   "nom": "Jérémy Lopez",
   "sorties": [
+   "le-suicide",
    "vu-angels-in-america",
    "vu-la-puce-a-loreille"
   ]
@@ -1446,6 +1526,12 @@
    "giselle"
   ]
  },
+ "johanna-nizard": {
+  "nom": "Johanna Nizard",
+  "sorties": [
+   "le-suicide"
+  ]
+ },
  "jon-fosse": {
   "nom": "Jon Fosse",
   "sorties": [
@@ -1456,6 +1542,14 @@
   "nom": "Jonas Kaufmann",
   "sorties": [
    "marina-rebeka-jonas-kaufmann"
+  ]
+ },
+ "jordan-rezgui": {
+  "nom": "Jordan Rezgui",
+  "sorties": [
+   "le-suicide",
+   "ruy-blas",
+   "une-heure-avec-jordan-rezgui"
   ]
  },
  "jose-montalvo": {
@@ -1527,6 +1621,7 @@
  "julie-sicard": {
   "nom": "Julie Sicard",
   "sorties": [
+   "le-suicide",
    "vu-le-mariage-force",
    "vu-le-suicide"
   ]
@@ -1685,6 +1780,7 @@
  "laurent-stocker": {
   "nom": "Laurent Stocker",
   "sorties": [
+   "l-avare",
    "ruy-blas",
    "vu-lavare",
    "vu-le-soulier-de-satin"
@@ -1744,6 +1840,7 @@
  "leila-slimani": {
   "nom": "Leïla Slimani",
   "sorties": [
+   "ecrire-et-mettre-en-scene-slimani",
    "resurrection-un-cas-de-conscience"
   ]
  },
@@ -1817,6 +1914,7 @@
  "lilo-baur": {
   "nom": "Lilo Baur",
   "sorties": [
+   "l-avare",
    "la-souriciere",
    "vu-la-puce-a-loreille",
    "vu-lavare"
@@ -1843,6 +1941,8 @@
  "loic-corbery": {
   "nom": "Loïc Corbery",
   "sorties": [
+   "hecube-pas-hecube",
+   "l-ecole-de-danse",
    "resurrection-un-cas-de-conscience",
    "vu-hecube-pas-hecube"
   ]
@@ -1856,6 +1956,7 @@
  "lolita-tergemina": {
   "nom": "Lolita Tergémina",
   "sorties": [
+   "ecrire-et-mettre-en-scene-devi",
    "la-fournaise"
   ]
  },
@@ -1982,10 +2083,17 @@
    "vu-la-musica-deuxieme"
   ]
  },
+ "marguerite-yourcenar": {
+  "nom": "Marguerite Yourcenar",
+  "sorties": [
+   "une-heure-avec-veronique-vella"
+  ]
+ },
  "mariame-clement": {
   "nom": "Mariame Clément",
   "sorties": [
    "berlin-mon-garcon",
+   "ecrire-et-mettre-en-scene-ndiaye",
    "miroir-de-nos-peines"
   ]
  },
@@ -2010,7 +2118,8 @@
  "marie-ndiaye": {
   "nom": "Marie NDiaye",
   "sorties": [
-   "berlin-mon-garcon"
+   "berlin-mon-garcon",
+   "ecrire-et-mettre-en-scene-ndiaye"
   ]
  },
  "marie-nicole-lemieux": {
@@ -2022,6 +2131,9 @@
  "marie-oppert": {
   "nom": "Marie Oppert",
   "sorties": [
+   "l-ecole-de-danse",
+   "le-cid",
+   "les-fourberies-de-scapin",
    "vu-bestioles",
    "vu-les-fourberies-de-scapin"
   ]
@@ -2105,6 +2217,7 @@
   "nom": "Mélissa Polonie",
   "sorties": [
    "berlin-mon-garcon",
+   "resurrection-un-cas-de-conscience",
    "vu-bestioles"
   ]
  },
@@ -2154,8 +2267,10 @@
  "moliere": {
   "nom": "Molière",
   "sorties": [
+   "l-avare",
    "le-bourgeois-gentilhomme",
    "les-femmes-savantes",
+   "les-fourberies-de-scapin",
    "tartuffe-van-hove",
    "vu-lavare",
    "vu-le-bourgeois-gentilhomme-porte-saint-martin",
@@ -2167,7 +2282,9 @@
  "morgane-real": {
   "nom": "Morgane Real",
   "sorties": [
+   "l-avare",
    "la-fournaise",
+   "les-fourberies-de-scapin",
    "ruy-blas"
   ]
  },
@@ -2181,6 +2298,13 @@
   "nom": "Myriam Gourfink",
   "sorties": [
    "fondre-gourfink"
+  ]
+ },
+ "myrthe-vermeulen": {
+  "nom": "Myrthe Vermeulen",
+  "sorties": [
+   "l-avare",
+   "ruy-blas"
   ]
  },
  "nacera-belaza": {
@@ -2237,6 +2361,13 @@
    "mitridate"
   ]
  },
+ "nicolas-chupin": {
+  "nom": "Nicolas Chupin",
+  "sorties": [
+   "l-avare",
+   "le-suicide"
+  ]
+ },
  "nicolas-devort": {
   "nom": "Nicolas Devort",
   "sorties": [
@@ -2247,6 +2378,8 @@
   "nom": "Nicolas Lormeau",
   "sorties": [
    "c-est-beau",
+   "l-avare",
+   "les-fourberies-de-scapin",
    "vu-lavare"
   ]
  },
@@ -2265,6 +2398,7 @@
  "nikolai-erdman": {
   "nom": "Nikolaï Erdman",
   "sorties": [
+   "le-suicide",
    "vu-le-suicide",
    "vu-le-suicide-double-jeu"
   ]
@@ -2278,7 +2412,9 @@
  "noam-morgensztern": {
   "nom": "Noam Morgensztern",
   "sorties": [
-   "la-fournaise"
+   "la-fournaise",
+   "les-fourberies-de-scapin",
+   "ruy-blas"
   ]
  },
  "noemie-gantier": {
@@ -2309,6 +2445,13 @@
   "nom": "Oliver Mears",
   "sorties": [
    "manon-lescaut"
+  ]
+ },
+ "olivia-lindon": {
+  "nom": "Olivia Lindon",
+  "sorties": [
+   "l-ecole-de-danse",
+   "le-suicide"
   ]
  },
  "olivier-saccomano": {
@@ -2358,6 +2501,12 @@
   "nom": "Paul Lightfoot",
   "sorties": [
    "pulsations-childs"
+  ]
+ },
+ "pauline-clement": {
+  "nom": "Pauline Clément",
+  "sorties": [
+   "l-ecole-de-danse"
   ]
  },
  "pavel-cernoch": {
@@ -2615,7 +2764,9 @@
  "sefa-yeboah": {
   "nom": "Sefa Yeboah",
   "sorties": [
-   "la-fournaise"
+   "la-fournaise",
+   "les-fourberies-de-scapin",
+   "ruy-blas"
   ]
  },
  "sephora-pondi": {
@@ -2627,7 +2778,10 @@
  "serge-bagdassarian": {
   "nom": "Serge Bagdassarian",
   "sorties": [
+   "l-avare",
    "l-envers-du-music-hall",
+   "le-suicide",
+   "ruy-blas",
    "vu-la-puce-a-loreille",
    "vu-lavare",
    "vu-le-soulier-de-satin",
@@ -2661,6 +2815,7 @@
  "simon-deletang": {
   "nom": "Simon Delétang",
   "sorties": [
+   "ecrire-et-mettre-en-scene-slimani",
    "resurrection-un-cas-de-conscience"
   ]
  },
@@ -2760,6 +2915,8 @@
  "stephane-varupenne": {
   "nom": "Stéphane Varupenne",
   "sorties": [
+   "l-ecole-de-danse",
+   "le-suicide",
    "ruy-blas",
    "vu-le-suicide"
   ]
@@ -2805,6 +2962,8 @@
  "sylvia-berge": {
   "nom": "Sylvia Bergé",
   "sorties": [
+   "le-suicide",
+   "ruy-blas",
    "vu-le-mariage-force",
    "vu-le-suicide"
   ]
@@ -2852,9 +3011,16 @@
    "vu-par-autan"
   ]
  },
+ "theophile-gautier": {
+  "nom": "Théophile Gautier",
+  "sorties": [
+   "une-heure-avec-didier-sandre"
+  ]
+ },
  "thierry-hancisse": {
   "nom": "Thierry Hancisse",
   "sorties": [
+   "les-fourberies-de-scapin",
    "ruy-blas",
    "vu-art-majeur",
    "vu-la-puce-a-loreille",
@@ -2889,6 +3055,7 @@
  "tiago-rodrigues": {
   "nom": "Tiago Rodrigues",
   "sorties": [
+   "hecube-pas-hecube",
    "vu-hecube-pas-hecube",
    "vu-la-distance"
   ]
@@ -2915,6 +3082,15 @@
   "nom": "Trisha Brown Dance Company",
   "sorties": [
    "dancing-with-bob"
+  ]
+ },
+ "troupe-de-la-comedie-francaise": {
+  "nom": "Troupe de la Comédie-Française",
+  "sorties": [
+   "grands-debats-parlementaires-1",
+   "grands-debats-parlementaires-2",
+   "grands-debats-parlementaires-3",
+   "week-end-ecritures-contemporaines-2"
   ]
  },
  "valentina-carrasco": {
@@ -2947,6 +3123,7 @@
   "sorties": [
    "berlin-mon-garcon",
    "c-est-beau",
+   "une-heure-avec-veronique-vella",
    "vu-art-majeur"
   ]
  },
@@ -3005,6 +3182,13 @@
   "nom": "Yoann Bourgeois",
   "sorties": [
    "le-petit-cirque"
+  ]
+ },
+ "yoann-gasiorowski": {
+  "nom": "Yoann Gasiorowski",
+  "sorties": [
+   "le-suicide",
+   "ruy-blas"
   ]
  },
  "yukio-mishima": {
