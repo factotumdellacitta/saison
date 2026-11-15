@@ -218,7 +218,9 @@ function stubHTML(e, mode) {
   const p = span(e);
   if (!p) return `<span class="stub"><b>–</b><small>à venir</small></span>`;
   if (running(e)) return `<span class="stub" title="jusqu’au ${fmtY(p[1])}"><small class="fin">fin<span class="vh"> le</span></small><b>${p[1].getDate()}</b><small>${MOIS[p[1].getMonth()]}</small></span>`;
-  return `<span class="stub"><b>${p[0].getDate()}</b><small>${MOIS[p[0].getMonth()]}${p[0].getFullYear() !== TODAY.getFullYear() && p[0].getFullYear() !== TODAY.getFullYear() + 1 ? " " + p[0].getFullYear() : ""}</small></span>`;
+  const loin = (d) => (d.getFullYear() !== TODAY.getFullYear() && d.getFullYear() !== TODAY.getFullYear() + 1 ? " " + d.getFullYear() : "");
+  const au = +p[0] !== +p[1] ? `<small class="au">au ${jj(p[1])} ${MOIS[p[1].getMonth()]}${loin(p[1])}</small>` : "";
+  return `<span class="stub"><b>${p[0].getDate()}</b><small>${MOIS[p[0].getMonth()]}${loin(p[0])}</small>${au}</span>`;
 }
 function badges(e) {
   const b = [];
@@ -419,7 +421,7 @@ function renderAffiche(q) {
   const chip = (g, v, t, extra = "") => `<button class="chip" type="button" data-g="${g}" data-v="${esc(v)}" aria-pressed="false"${extra}>${t}</button>`;
   const rd = radar();
   $("#main").innerHTML = `<div class="aff-g"><section id="aff"><h1 class="vh">À l’affiche</h1>
-  ${radarLigne(rd)}${coeurLigne()}
+  ${coeurLigne()}
   <div class="tools barre-f">${rech("aq", "Rechercher à l’affiche", F.q)}<div class="seg" role="group" aria-label="Affichage"><button class="i" type="button" data-vue="liste" aria-pressed="true" aria-label="Liste">${ico("liste")}</button><button class="i" type="button" data-vue="mois" aria-pressed="false" aria-label="Calendrier">${ico("mois")}</button></div>
     <button class="chip filtres" type="button" data-panel="pF" aria-expanded="false" aria-controls="pF">${ico("filtres")}<span class="lbf">Filtres</span><span class="nf" id="nF"></span></button></div>
   <div class="fbar"><div class="chips defile" role="group" aria-label="Genres">${cats.map((c) => chip("cat", slug(c), ico(c) + esc(c)).replace('class="chip"', `class="chip g-${famille(c)}"`)).join("")}</div>
@@ -526,16 +528,18 @@ function monthHTML(f) {
 
 /* ---------- Fiche ---------- */
 let SHEET_FROM = null, FROM_APP = false;
+// Barre Factotum en tête de la fiche (aussi quand on arrive par un lien partagé) : retour à l’accueil.
+const marqueFiche = () => `<a class="sh-marque" href="#affiche" aria-label="Factotum, accueil"><span class="logo">${cleF()}Factotum</span></a>`;
 async function openSheet(id) {
   let e = BYID.get(id);
   if (!e) { try { await loadJournal(); } catch (_) {} e = BYID.get(id); }
   const box = $("#sheetIn");
   box.className = "sheet-in" + (e ? " g-" + famille(e.categorie) : "");
   if (!e) {
-    box.innerHTML = `<div class="shtop"><button class="btn ico" type="button" data-close aria-label="Fermer">${ico("fermer")}</button><span class="k"></span></div><h2 id="sheetT" class="mh">Sortie introuvable</h2><p class="empty">Cette fiche n’existe plus ou a changé d’adresse.</p>`;
+    box.innerHTML = `${marqueFiche()}<div class="shtop"><button class="btn ico" type="button" data-close aria-label="Fermer">${ico("fermer")}</button><span class="k"></span></div><h2 id="sheetT" class="mh">Sortie introuvable</h2><p class="empty">Cette fiche n’existe plus ou a changé d’adresse.</p>`;
   } else {
     const vu = e.statut === "vu", L = lieu(e), c = creditsHTML(e);
-    box.innerHTML = `<div class="shtop"><button class="btn ico" type="button" data-close aria-label="Fermer">${ico("fermer")}</button><span class="k">${esc([e.categorie, e.sousGenre].filter(Boolean).join(" · "))}${L.nom ? " · " + esc(court(e.lieuId)) : ""}</span><button class="btn ico" type="button" data-share="${esc(e.id)}" aria-label="Partager">${ico("partager")}</button></div>
+    box.innerHTML = `${marqueFiche()}<div class="shtop"><button class="btn ico" type="button" data-close aria-label="Fermer">${ico("fermer")}</button><span class="k">${esc([e.categorie, e.sousGenre].filter(Boolean).join(" · "))}${L.nom ? " · " + esc(court(e.lieuId)) : ""}</span><button class="btn ico" type="button" data-share="${esc(e.id)}" aria-label="Partager">${ico("partager")}</button></div>
     <div class="shh"><span class="meta">${esc(vu ? "Vu le " + (e.vuLe || []).map((d) => fmtY(D(d), true)).join(", ") : range(e))}</span><div class="tit">${genreIco(e, "g")}<h2 id="sheetT" class="nom">${esc(e.titre)}</h2></div>
       <div class="ligne">${!vu && e.note ? stars(e.note, e.pronostic) : ""}${vu && e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : ""}${badges(e)}</div></div>
     ${vu ? `${c ? `<p class="cr">${c}</p>` : ""}<dl class="dl"><dt>Ma note</dt><dd>${e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : "pas de note"}</dd>${e.note ? `<dt>Grille</dt><dd>${stars(e.note, false, "Note de la grille")}</dd>` : ""}</dl>${e.avis ? `<blockquote>${esc(e.avis)}</blockquote>` : ""}${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${PRIVE && ADMIN ? ADMIN.ficheHTML(e) : ""}${actsHTML(e, false)}` : ficheCorps(e, true)}`;
@@ -680,10 +684,11 @@ function radarLigne(r) {
 }
 // Colonne de droite de l’Affiche : les envies (à la place de « À réserver »), avec un lien vers la page de toutes les envies.
 function envLat() {
-  const E = enviesIds(), L = LIVE.filter((e) => E.has(e.id)).sort((a, b) => sortKey(a) - sortKey(b) || a.titre.localeCompare(b.titre, "fr"));
+  // Les coups de cœur pas encore réservés (le texte d’introduction le dit).
+  const E = enviesIds(), L = LIVE.filter((e) => E.has(e.id) && !reservee(e)).sort((a, b) => sortKey(a) - sortKey(b) || a.titre.localeCompare(b.titre, "fr"));
   const li = L.slice(0, 6).map((e) => { const p = span(e), j = !p ? "à venir" : running(e) ? "fin " + fmt(p[1]) : fmt(p[0]);
     return `<li><a href="#sortie-${esc(e.id)}"><span class="vd">${esc(j)}</span><span class="vt"><b>${esc(e.titre)}</b> <span>· ${esc(court(e.lieuId))}</span></span></a></li>`; }).join("");
-  return `<h2 class="mh">Coups de cœur <small>${L.length}</small></h2>${li ? `<ul class="vl">${li}</ul>` : '<p class="cr">Aucun coup de cœur pour le moment.</p>'}
+  return `<h2 class="mh">Coups de cœur <small>${L.length}</small></h2><p class="cr lat-intro">Les pièces que j’aimerais aller voir et que je n’ai pas encore réservées.</p>${li ? `<ul class="vl">${li}</ul>` : '<p class="cr">Aucun coup de cœur pour le moment.</p>'}
   <div class="acts"><a class="btn pri" href="#coeur">${COEUR}Coups de cœur de ${OWNER}</a></div>`;
 }
 // Colonne de droite de l’Affiche (bureau) : les coups de cœur seulement (« Cette semaine » reste sur la page Radar).
@@ -693,7 +698,7 @@ function radarLateral() {
 // Bandeau mobile de l’Affiche vers les coups de cœur.
 function coeurLigne() {
   const E = enviesIds(), n = LIVE.filter((e) => E.has(e.id)).length;
-  return `<a class="r-ligne c-ligne" href="#coeur">${COEUR}<b>Coups de cœur de ${OWNER}</b> <span>${n ? plural(n, "sortie") : "aucun pour le moment"}</span></a>`;
+  return `<a class="r-ligne c-ligne" href="#coeur">${COEUR}<b>Coups de cœur de ${OWNER}</b> <span>${n ? plural(n, "sortie") : "aucun pour le moment"}</span><span class="cta" aria-hidden="true">Voir</span></a>`;
 }
 
 /* ---------- Journal ---------- */
@@ -867,7 +872,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.19"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.20"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -885,7 +890,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.19"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.20"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
@@ -915,8 +920,8 @@ async function renderView(h) {
   else if (view === "artiste") renderArtiste(decodeURIComponent(path.slice(8)));
   else if (view === "lieu") renderLieu(decodeURIComponent(path.slice(5)));
   else if (view === "coeur") renderCoeur();
-  const hc = $("#hcoeur"); if (hc) { if (view === "coeur") hc.setAttribute("aria-current", "page"); else hc.removeAttribute("aria-current"); }
   else if (view === "admin") await renderAdmin(q);
+  const hc = $("#hcoeur"); if (hc) { if (view === "coeur") hc.setAttribute("aria-current", "page"); else hc.removeAttribute("aria-current"); }
   RENDERED = h;
   if (path === "liens") { const l = $("#r-liens"); if (l) l.scrollIntoView({ block: "start" }); }
   else if (!samePath) window.scrollTo(0, 0);
@@ -969,7 +974,7 @@ document.addEventListener("click", async (ev) => {
   const sh = ev.target.closest("[data-share]");
   if (sh) {
     const e = BYID.get(sh.dataset.share), url = shareURL(sh.dataset.share);
-    try { if (navigator.share) { await navigator.share({ title: e ? e.titre : "Factotum", text: e ? `${e.titre}, ${court(e.lieuId)} : la fiche et les soirs où ${OWNER} est libre.` : "", url }); return; } } catch (err) { if (err && err.name === "AbortError") return; }
+    try { if (navigator.share) { await navigator.share({ url }); return; } } catch (err) { if (err && err.name === "AbortError") return; }
     try { await navigator.clipboard.writeText(url); toast("Lien copié"); } catch (_) { prompt("Copie ce lien :", url); }
     return;
   }
@@ -984,7 +989,7 @@ document.addEventListener("click", async (ev) => {
 });
 
 /* ---------- En-tête : saison calculée, thème, barre compacte au défilement ---------- */
-$("#saison").textContent = saisonTxt();
+$("#saison").textContent = "Saison " + saisonDe().debut + "–" + (saisonDe().debut + 1);
 themePose(themeLu()); lockIcon();
 document.addEventListener("keydown", (ev) => { const m = $(".tmenu"); if (ev.key === "Escape" && m) { const b = m.parentElement.querySelector("[data-theme-btn]"); themeFerme(); b.focus(); } });
 if ("IntersectionObserver" in window) new IntersectionObserver(([x]) => document.body.classList.toggle("compact", !x.isIntersecting)).observe($("#top"));
