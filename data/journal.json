@@ -2337,7 +2337,28 @@
    "id": "vu-seisme",
    "titre": "Séisme",
    "categorie": "Théâtre",
-   "artistes": [],
+   "artistes": [
+    {
+     "nom": "Duncan Macmillan",
+     "role": "auteur"
+    },
+    {
+     "nom": "Robin Ormond",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Jean Chevalier",
+     "role": "interprète"
+    },
+    {
+     "nom": "Claire de La Rüe du Can",
+     "role": "interprète"
+    },
+    {
+     "nom": "Comédie-Française",
+     "role": "compagnie"
+    }
+   ],
    "lieuId": "comedie-francaise",
    "salle": "Théâtre du Petit Saint-Martin",
    "debut": null,
