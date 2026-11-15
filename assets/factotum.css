@@ -719,3 +719,15 @@ body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
 .gtabs{gap:var(--e1)}
 .gtabs .chip{padding:0 var(--e2) 0 6px;gap:var(--e1);letter-spacing:.02em}
 @media (min-width:960px){.fbar>.chips.gtabs[class]{margin:0;padding:var(--e2) 0}}
+
+/* Journal : même barre que l’Affiche ; statistiques en colonne de droite sur bureau, en panneau sur mobile */
+.barre-f .chip.ajout,.barre-f .chip.j-st{min-width:var(--cible);justify-content:center;padding:0}
+.j-avec .f{margin:0;max-width:360px}
+@media (max-width:479.98px){.barre-f .chip.filtres .lbf{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.barre-f .chip.filtres{min-width:var(--cible);justify-content:center;padding:0 var(--e2)}.barre-f .chip.filtres .nf:empty{display:none}}
+.j-lat .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+.j-lat .stats>.kpis:first-child{margin-top:0}
+@media (min-width:960px){
+  .j-g>#jr{grid-column:1/span 8;min-width:0}
+  .barre-f .chip.j-st,.j-stm{display:none}
+  .j-stm[hidden]{display:none}
+}

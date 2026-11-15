@@ -783,7 +783,7 @@ function renderPlan() {
 
 /* ---------- Journal ---------- */
 const saisonCourt = (cle) => saisonDe(new Date(+cle, 9, 1)).court, saisonLib = (cle) => "Saison " + saisonCourt(cle);
-let JQ = ""; // recherche du journal (mémoire seulement)
+let JQ = "", JPANEL = ""; // recherche et panneau ouvert du journal (mémoire seulement)
 function renderJournal(q) {
   const p = new URLSearchParams(q || ""), L = (k) => new Set((p.get(k) || "").split(",").filter(Boolean));
   const f = { cat: L("cat"), sa: L("sa"), mn: L("mn"), tri: p.get("tri") === "note" ? "note" : "date" };
@@ -808,17 +808,35 @@ function renderJournal(q) {
     $("#jlist").innerHTML = list || `<p class="empty">Aucune sortie ne correspond${JQ.trim() ? " à « " + esc(JQ.trim()) + " »" : ""}.</p>`;
     $("#jn").textContent = plural(vis.length, "sortie");
   };
-  const nAct = f.cat.size + f.sa.size + f.mn.size;
-  const accSel = PRIVE && ADMIN ? ADMIN.accSelectHTML(JAVEC) : "";
-  const libS = f.sa.size === 1 ? saisonCourt([...f.sa][0]) : f.sa.size ? plural(f.sa.size, "saison") : "Toutes";
-  $("#main").innerHTML = `<div class="ph"><h1>Journal</h1></div>
-  ${PRIVE && ADMIN ? '<div class="acts acts-haut"><button class="btn pri" type="button" data-adm="journal">+ Entrée au journal</button></div>' : ""}
-  <div class="tools">${rech("jq", "Rechercher dans le journal", JQ)}</div>
-  <div class="chips" role="group" aria-label="Saison">${chip("sa", "*", "Toutes", !f.sa.size)}${saisons.map((y) => chip("sa", y, saisonCourt(y), f.sa.has(y), saisonLib(y))).join("")}</div>
-  <details class="box stats"><summary>${ico("stats")}Statistiques · ${esc(libS)}</summary>${statsHTML(parSaison, !f.sa.size)}</details>
-  <div class="fbar"><div class="chips defile" role="group" aria-label="Filtres du journal">${cats.map((c) => chip("cat", slug(c), ico(c) + esc(c)).replace('class="chip"', `class="chip g-${famille(c)}"`)).join("")}<span class="sep" aria-hidden="true"></span>${[4, 3, 2, 1].map((n) => chip("mn", String(n), carres(n), f.mn.has(String(n)), "Ma note " + n)).join("")}${chip("mn", "0", "Sans note")}</div>
-  <div class="active"><span class="n" id="jn" aria-live="polite"></span>${nAct ? `<a class="chip effacer" href="#journal${f.tri === "note" ? "?tri=note" : ""}">Tout effacer</a>` : ""}<a class="linkbtn ml tri" href="#journal?${esc(jq(f, "tri", f.tri === "note" ? "date" : "note"))}" aria-label="Tri par ${f.tri === "note" ? "ma note" : "date"}, changer">${ico("tri")}${f.tri === "note" ? "Ma note" : "Date"}</a></div>${accSel}</div>
-  <div class="list" id="jlist"></div>`;
+  // Barre comme l’Affiche : recherche, « + » (admin), Filtres (saison, ma note, avec) ; genres en puces ; statistiques en colonne sur bureau.
+  const nF = f.sa.size + f.mn.size + (JAVEC ? 1 : 0);
+  const accSel = PRIVE && ADMIN ? ADMIN.accSelectHTML(JAVEC).replace("<span>Avec (admin)</span>", '<span class="vh">Avec</span>').replace('class="tools"', 'class="j-avec"') : "";
+  const libS = f.sa.size === 1 ? saisonLib([...f.sa][0]) : f.sa.size ? plural(f.sa.size, "saison") : "Toutes les saisons";
+  const tok = (g, v, t) => `<a class="chip on" href="#journal?${esc(jq(f, g, v))}" aria-label="Retirer le filtre ${esc(t)}">${esc(t)}<span class="x" aria-hidden="true">×</span></a>`;
+  const jetons = [...[...f.sa].map((y) => tok("sa", y, saisonLib(y))), ...[...f.mn].map((n) => tok("mn", n, n === "0" ? "Sans note" : "Ma note " + n)), JAVEC ? `<button class="chip on" type="button" data-jclr aria-label="Retirer le filtre avec ${esc(JAVEC)}">Avec ${esc(JAVEC)}<span class="x" aria-hidden="true">×</span></button>` : ""].join("");
+  const stats = statsHTML(parSaison, !f.sa.size);
+  $("#main").innerHTML = `<div class="aff-g j-g"><section id="jr"><div class="ph"><h1>Journal</h1></div>
+  <div class="tools barre-f">${rech("jq", "Rechercher dans le journal", JQ)}
+    ${PRIVE && ADMIN ? `<button class="chip ajout" type="button" data-adm="journal" aria-label="Ajouter une entrée au journal" title="Ajouter une entrée au journal">${ico("ajouter")}</button>` : ""}
+    <button class="chip filtres" type="button" data-jpanel="pJF" aria-expanded="${JPANEL === "pJF"}" aria-controls="pJF" aria-label="Filtres${nF ? `, ${nF} actif${nF > 1 ? "s" : ""}` : ""}">${ico("filtres")}<span class="lbf">Filtres</span><span class="nf">${nF ? " " + nF : ""}</span></button>
+    <button class="chip j-st" type="button" data-jpanel="pJS" aria-expanded="${JPANEL === "pJS"}" aria-controls="pJS" aria-label="Statistiques">${ico("stats")}</button></div>
+  <div class="fbar"><div class="chips defile gtabs" role="group" aria-label="Genres">${cats.map((c) => chip("cat", slug(c), ico(c) + esc(GENRE_PUCE[c] || c), f.cat.has(slug(c)), GENRE_PUCE[c] ? c : "").replace('class="chip"', `class="chip g-${famille(c)}"`)).join("")}</div>
+    <div class="fpanel" id="pJF"${JPANEL === "pJF" ? "" : " hidden"}>
+      <div class="fgr" role="group" aria-labelledby="fjS"><span class="fl" id="fjS">Saison</span><div class="chips">${chip("sa", "*", "Toutes", !f.sa.size)}${saisons.map((y) => chip("sa", y, saisonCourt(y), f.sa.has(y), saisonLib(y))).join("")}</div></div>
+      <div class="fgr" role="group" aria-labelledby="fjN"><span class="fl" id="fjN">Ma note</span><div class="chips">${[4, 3, 2, 1].map((n) => chip("mn", String(n), carres(n), f.mn.has(String(n)), "Ma note " + n)).join("")}${chip("mn", "0", "Sans note")}</div></div>
+      ${accSel ? `<div class="fgr"><span class="fl">Avec</span><div>${accSel}</div></div>` : ""}
+    </div>
+    <div class="fpanel j-stm" id="pJS"${JPANEL === "pJS" ? "" : " hidden"}><h2 class="mh">Statistiques <small>${esc(libS)}</small></h2><div class="stats">${stats}</div></div>
+    <div class="resbar"><span class="n" id="jn" aria-live="polite"></span>
+      <a class="linkbtn tri" href="#journal?${esc(jq(f, "tri", f.tri === "note" ? "date" : "note"))}" aria-label="Tri par ${f.tri === "note" ? "ma note" : "date"}, changer">${ico("tri")}${f.tri === "note" ? "Ma note" : "Date"}</a>
+      <div class="active">${jetons}${jetons ? `<a class="chip effacer" href="#journal${f.cat.size ? "?cat=" + [...f.cat].map(encodeURIComponent).join(",") : ""}${f.tri === "note" ? (f.cat.size ? "&" : "?") + "tri=note" : ""}" data-jclr>Tout effacer</a>` : ""}</div></div></div>
+  <div class="list" id="jlist"></div></section>
+  <aside class="r-lat j-lat" aria-label="Statistiques du journal"><h2 class="mh">Statistiques <small>${esc(libS)}</small></h2><div class="stats">${stats}</div></aside></div>`;
+  $$("[data-jclr]").forEach((x) => x.addEventListener("click", () => { JAVEC = ""; if (x.tagName === "BUTTON") renderJournal(q); }));
+  $$("[data-jpanel]").forEach((bt) => bt.onclick = () => {
+    const id = bt.dataset.jpanel; JPANEL = JPANEL === id ? "" : id;
+    $$("[data-jpanel]").forEach((x) => { const on = x.dataset.jpanel === JPANEL; $("#" + x.dataset.jpanel).hidden = !on; x.setAttribute("aria-expanded", String(on)); });
+  });
   draw();
   $("#jq").oninput = (ev) => { JQ = ev.target.value; draw(); };
   const as = $("#jAvec"); if (as) as.onchange = () => { JAVEC = as.value; renderJournal(q); };
@@ -952,7 +970,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.34"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.35"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -970,7 +988,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.34"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.35"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
