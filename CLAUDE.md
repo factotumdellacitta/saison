@@ -49,10 +49,12 @@ Référence vivante : la page `#charte` (imprimable en PDF). Toute modification 
   | Famille | Genres | `--g` clair / sombre | `--a` |
   |---|---|---|---|
   | `theatre` | Théâtre | #B4233C / #FF94A3 (carmin) | #B4233C (puce) ; fiche en rouge |
-  | `musique` | Opéra, Récital, Concert, Comédie musicale | #1F5FA8 / #8DB8F2 (bleu de Prusse) | #1F5FA8 |
+  | `lyrique` | Opéra, Comédie musicale | #1F5FA8 / #8DB8F2 (bleu de Prusse) | #1F5FA8 |
+  | `concert` | Concert, Récital | #00695C / #4FC3A1 (vert sapin) | #00695C |
   | `danse` | Danse | #946200 / #E8B04A (ocre) | #946200 |
-  | `images` | Exposition, Cinéma | #00695C / #4FC3A1 (vert sapin) | #00695C |
-  | `neutre` | Festival, Événement, Sur scène, Autre | encre | rouge |
+  | `neutre` | Exposition, Cinéma, Festival, Événement, Sur scène, Autre | encre | rouge |
+
+  Ordre des genres (`CATS`) : Théâtre, Opéra, Concert, Récital, Danse, Comédie musicale, puis les autres (la veille de concerts arrive : Concert suit Opéra).
 
   Jamais d'aplat de genre ailleurs, jamais de couleur de genre sur le rouge ; le rouge reste aux actions, aux notes, à la sélection et aux bandeaux.
   Contrastes WCAG AA vérifiés par `tools/contrast.mjs` (appelé par `check.mjs`).
