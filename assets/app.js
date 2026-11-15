@@ -434,14 +434,14 @@ function setF(mut) {
 }
 function renderAffiche(q) {
   F = parseF(q); LAST_AFF = "affiche" + (q ? "?" + q : "");
-  const cats = CATS.filter((c) => LIVE.some((e) => e.categorie === c));
+  const cats = CATS.filter((c) => c !== "Exposition" && LIVE.some((e) => e.categorie === c)); // Expo : page dédiée à venir
   const lieux = [...new Set(LIVE.map((e) => e.lieuId).filter(Boolean))].sort((a, b) => norm(court(a)).localeCompare(norm(court(b))));
   const months = []; for (let i = 0; i < 10; i++) { const d = new Date(TODAY.getFullYear(), TODAY.getMonth() + i, 1); months.push([iso(d).slice(0, 7), cap(MOIS_L[d.getMonth()]) + " " + d.getFullYear()]); }
   const chip = (g, v, t, extra = "") => `<button class="chip" type="button" data-g="${g}" data-v="${esc(v)}" aria-pressed="false"${extra}>${t}</button>`;
   const rd = radar();
   $("#main").innerHTML = `<div class="aff-g"><section id="aff"><h1 class="vh">À l’affiche</h1>
   ${coeurLigne()}
-  <div class="tools barre-f">${rech("aq", "Rechercher à l’affiche", F.q)}<div class="seg" role="group" aria-label="Affichage"><button class="i" type="button" data-vue="liste" aria-pressed="true" aria-label="Liste">${ico("liste")}</button><button class="i" type="button" data-vue="mois" aria-pressed="false" aria-label="Calendrier">${ico("mois")}</button></div>
+  <div class="tools barre-f">${rech("aq", "Rechercher à l’affiche", F.q)}
     <button class="chip filtres" type="button" data-panel="pF" aria-expanded="false" aria-controls="pF">${ico("filtres")}<span class="lbf">Filtres</span><span class="nf" id="nF"></span></button></div>
   <div class="fbar"><div class="chips defile gtabs" role="group" aria-label="Genres">${cats.map((c) => chip("cat", slug(c), ico(c) + esc(c)).replace('class="chip"', `class="chip g-${famille(c)}"`)).join("")}</div>
     <div class="fpanel" id="pF" hidden>
@@ -452,7 +452,8 @@ function renderAffiche(q) {
         <div class="chips">${chip("libre", "1", "Soirs libres", ` aria-label="Seulement les soirs où ${OWNER} est libre"`)}</div></div></div>
       <div class="fgr" role="group" aria-labelledby="fgP"><span class="fl" id="fgP">Pour</span><div class="chips">${chip("jeune", "1", "Public jeune")}${chip("offre", "1", "Offre jeune")}${chip("yva", "1", OWNER + " y va")}</div></div>
     </div>
-    <div class="active" id="active" aria-live="polite"></div></div>
+    <div class="resbar"><span class="n" id="nres" aria-live="polite"></span>
+      <div class="vuectl"><button class="linkbtn tri" type="button" id="tri"></button><div class="seg seg-s" role="group" aria-label="Affichage"><button class="i" type="button" data-vue="liste" aria-pressed="true" aria-label="Liste">${ico("liste")}</button><button class="i" type="button" data-vue="mois" aria-pressed="false" aria-label="Calendrier">${ico("mois")}</button></div></div><div class="active" id="active"></div></div></div>
   <div id="monthBox"></div>
   <div id="alist" class="list"></div></section>${radarLateral()}</div>`;
   const m = $("#aff");
@@ -493,12 +494,14 @@ function updateAffiche() {
   let items = LIVE.filter((e) => matchA(e, f, f.vue === "mois" && !f.jour));
   if (f.vue === "mois" && !f.jour) { const c = monthCursor(f); items = items.filter((e) => overlaps(e, c, new Date(c.getFullYear(), c.getMonth() + 1, 0))); }
   const act = activeList(f);
-  $("#active").innerHTML = `<span class="n">${plural(items.length, "sortie")}</span>${act.map((a) => `<button class="chip on${a.k === "cat" ? " g-" + famille(a.t) : ""}" type="button" data-rm="${a.k}" data-v="${esc(a.v)}" aria-label="Retirer le filtre ${esc(a.t)}">${esc(a.t)}<span class="x" aria-hidden="true">×</span></button>`).join("")}${act.length ? `<button class="chip effacer" type="button" id="clear">Tout effacer</button>` : ""}<button class="linkbtn ml tri" type="button" id="tri" aria-label="Tri par ${f.tri === "note" ? "note" : "date"}, changer">${ico("tri")}${f.tri === "note" ? "Note" : "Date"}</button>`;
+  $("#nres").textContent = plural(items.length, "sortie");
+  $("#active").innerHTML = `${act.map((a) => `<button class="chip on${a.k === "cat" ? " g-" + famille(a.t) : ""}" type="button" data-rm="${a.k}" data-v="${esc(a.v)}" aria-label="Retirer le filtre ${esc(a.t)}">${esc(a.t)}<span class="x" aria-hidden="true">×</span></button>`).join("")}${act.length ? `<button class="chip effacer" type="button" id="clear">Tout effacer</button>` : ""}`;
+  const tri = $("#tri"); tri.innerHTML = ico("tri") + (f.tri === "note" ? "Note" : "Date"); tri.setAttribute("aria-label", `Tri par ${f.tri === "note" ? "note" : "date"}, changer`);
+  tri.onclick = () => setF((x) => { x.tri = x.tri === "note" ? "date" : "note"; });
   $("#active").onclick = (ev) => {
     const r = ev.target.closest("[data-rm]");
     if (r) return setF((x) => { const k = r.dataset.rm; if (x[k] instanceof Set) x[k].delete(r.dataset.v); else x[k] = typeof x[k] === "boolean" ? false : typeof x[k] === "number" ? 0 : ""; });
     if (ev.target.id === "clear") return setF((x) => { const keep = { vue: x.vue, mois: x.mois, tri: x.tri }; Object.assign(x, parseF(""), keep); });
-    if (ev.target.closest("#tri")) setF((x) => { x.tri = x.tri === "note" ? "date" : "note"; });
   };
   // Mois
   $("#monthBox").innerHTML = f.vue === "mois" ? monthHTML(f) : "";
@@ -946,7 +949,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.30"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.31"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -964,7 +967,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.30"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.31"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
