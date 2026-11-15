@@ -1,6 +1,6 @@
 // node tools/build.mjs
 // À lancer après toute modification. Il :
-//  1. génère data/index-artistes.json et data/index-lieux.json (toujours, même sans mot de passe) ;
+//  1. génère data/index-artistes.json, data/index-lieux.json et data/deja-vu.json (toujours, même sans mot de passe) ;
 //  2. lit la zone privée (déchiffrée avec SAISON_MDP, ou _prive.json si elle est ouverte) ;
 //  3. met à jour data/dispo.json (champ "reservations" : dates seules, sans motif) et data/envies.json (identifiants seuls) ;
 //  4. régénère data/agenda-<jeton>.ics (réservations) et data/ventes-<jeton>.ics (ouvertures de ventes).
@@ -44,6 +44,23 @@ const trie = (o) => Object.fromEntries(Object.keys(o).sort().map((k) => [k, { ..
 ecrire("data/index-artistes.json", json(trie(idxArt)));
 ecrire("data/index-lieux.json", json(trie(idxLieux)));
 console.log(`Index : ${Object.keys(idxArt).length} artistes, ${Object.keys(idxLieux).length} lieux.`);
+
+// ---------- 1b. Déjà vu ----------
+// Sorties à l'affiche dont l'œuvre figure au journal (même catégorie, même titre sans accents, ponctuation ni précision entre parenthèses) :
+// { idAffiche: [dates vues] }. Données publiques (le journal l'est déjà) ; la marque « Déjà vu » du site s'en sert.
+const cleTitre = (t) => slug(String(t).replace(/\s*\([^)]*\)\s*$/, ""));
+const vus = new Map();
+for (const s of journal.sorties) {
+  const k = s.categorie + "|" + cleTitre(s.titre);
+  vus.set(k, [...(vus.get(k) || []), ...(s.vuLe || [])]);
+}
+const dejaVu = {};
+for (const s of affiche.sorties) {
+  const d = vus.get(s.categorie + "|" + cleTitre(s.titre));
+  if (d) dejaVu[s.id] = [...new Set(d)].sort();
+}
+ecrire("data/deja-vu.json", json(Object.fromEntries(Object.keys(dejaVu).sort().map((k) => [k, dejaVu[k]]))));
+console.log(`Déjà vu : ${Object.keys(dejaVu).length} sorties à l'affiche.`);
 
 // ---------- 2. Zone privée ----------
 async function lirePrive() {

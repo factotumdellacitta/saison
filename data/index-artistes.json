@@ -161,7 +161,6 @@
  "ananda-devi": {
   "nom": "Ananda Devi",
   "sorties": [
-   "ecrire-et-mettre-en-scene-devi",
    "la-fournaise"
   ]
  },
@@ -830,7 +829,6 @@
   "nom": "Didier Sandre",
   "sorties": [
    "le-cid",
-   "une-heure-avec-didier-sandre",
    "vu-le-soulier-de-satin"
   ]
  },
@@ -1042,12 +1040,6 @@
   "nom": "Fabien Gabel",
   "sorties": [
    "romeo-et-juliette-jolly"
-  ]
- },
- "fatou-diome": {
-  "nom": "Fatou Diome",
-  "sorties": [
-   "une-heure-avec-jordan-rezgui"
   ]
  },
  "florence-viala": {
@@ -1548,8 +1540,7 @@
   "nom": "Jordan Rezgui",
   "sorties": [
    "le-suicide",
-   "ruy-blas",
-   "une-heure-avec-jordan-rezgui"
+   "ruy-blas"
   ]
  },
  "jose-montalvo": {
@@ -1840,7 +1831,6 @@
  "leila-slimani": {
   "nom": "Leïla Slimani",
   "sorties": [
-   "ecrire-et-mettre-en-scene-slimani",
    "resurrection-un-cas-de-conscience"
   ]
  },
@@ -1956,7 +1946,6 @@
  "lolita-tergemina": {
   "nom": "Lolita Tergémina",
   "sorties": [
-   "ecrire-et-mettre-en-scene-devi",
    "la-fournaise"
   ]
  },
@@ -2083,17 +2072,10 @@
    "vu-la-musica-deuxieme"
   ]
  },
- "marguerite-yourcenar": {
-  "nom": "Marguerite Yourcenar",
-  "sorties": [
-   "une-heure-avec-veronique-vella"
-  ]
- },
  "mariame-clement": {
   "nom": "Mariame Clément",
   "sorties": [
    "berlin-mon-garcon",
-   "ecrire-et-mettre-en-scene-ndiaye",
    "miroir-de-nos-peines"
   ]
  },
@@ -2118,8 +2100,7 @@
  "marie-ndiaye": {
   "nom": "Marie NDiaye",
   "sorties": [
-   "berlin-mon-garcon",
-   "ecrire-et-mettre-en-scene-ndiaye"
+   "berlin-mon-garcon"
   ]
  },
  "marie-nicole-lemieux": {
@@ -2815,7 +2796,6 @@
  "simon-deletang": {
   "nom": "Simon Delétang",
   "sorties": [
-   "ecrire-et-mettre-en-scene-slimani",
    "resurrection-un-cas-de-conscience"
   ]
  },
@@ -3011,12 +2991,6 @@
    "vu-par-autan"
   ]
  },
- "theophile-gautier": {
-  "nom": "Théophile Gautier",
-  "sorties": [
-   "une-heure-avec-didier-sandre"
-  ]
- },
  "thierry-hancisse": {
   "nom": "Thierry Hancisse",
   "sorties": [
@@ -3084,15 +3058,6 @@
    "dancing-with-bob"
   ]
  },
- "troupe-de-la-comedie-francaise": {
-  "nom": "Troupe de la Comédie-Française",
-  "sorties": [
-   "grands-debats-parlementaires-1",
-   "grands-debats-parlementaires-2",
-   "grands-debats-parlementaires-3",
-   "week-end-ecritures-contemporaines-2"
-  ]
- },
  "valentina-carrasco": {
   "nom": "Valentina Carrasco",
   "sorties": [
@@ -3123,7 +3088,6 @@
   "sorties": [
    "berlin-mon-garcon",
    "c-est-beau",
-   "une-heure-avec-veronique-vella",
    "vu-art-majeur"
   ]
  },
