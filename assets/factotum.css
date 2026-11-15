@@ -420,7 +420,7 @@ details.box[open]>summary::before{content:"–"}
 .l1 .tt{flex:1;min-width:0}
 .l1 .st{flex:none;margin-top:5px}
 .mid>.ss{display:flex;flex-wrap:wrap;align-items:center;gap:var(--e1) var(--e2)}
-.mid>.ss .bds{display:inline-flex}
+.mid>.ss .bds{display:inline-flex;margin-left:auto;justify-content:flex-end}
 @container liste (max-width:519.98px){.mid>.ss .hor{display:none}}
 /* Cœur des envies : toujours tout à droite de la première ligne. Public : cœur plein, non modifiable ; admin : bouton. */
 body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}

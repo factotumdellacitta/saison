@@ -223,15 +223,15 @@ function stubHTML(e, mode) {
   return `<span class="stub"><b>${p[0].getDate()}</b><small>${MOIS[p[0].getMonth()]}${loin(p[0])}</small>${au}</span>`;
 }
 function badges(e) {
+  // Alignés à droite de la ligne lieu ; les plus importants au bord droit (ordre de lecture : déjà vu … Léonard y va).
   const b = [];
-  if (e.leonardYVa) b.push(`<span class="b yva">${OWNER} y va</span>`);
-  // Déjà vu : l’œuvre figure au journal (data/deja-vu.json, généré par build.mjs).
-  const dv = e.statut !== "vu" && DEJA_VU[e.id];
+  const dv = e.statut !== "vu" && DEJA_VU[e.id]; // l’œuvre figure au journal (data/deja-vu.json, généré par build.mjs)
   if (dv && dv.length) { const t = "Vu le " + dv.map((x) => fmtY(D(x))).join(", "); b.push(`<span class="b vu" title="${esc(t)}" aria-label="Déjà vu (${esc(t.toLowerCase())})">Déjà vu</span>`); }
   if (e.publicJeune) b.push(`<span class="b">Public jeune</span>`);
+  if ((e.offres || []).length) b.push(`<span class="b">Offre jeune</span>`);
   if (ETATS[e.etat]) b.push(etatB(e.etat));
   else if (lastDays(e)) b.push(`<span class="b">Dernières dates</span>`);
-  if ((e.offres || []).length) b.push(`<span class="b">Offre jeune</span>`);
+  if (e.leonardYVa) b.push(`<span class="b yva">${OWNER} y va</span>`);
   return b.length ? `<span class="bds">${b.join("")}</span>` : "";
 }
 // Artistes en tête de ligne : auteur, compositeur, mise en scène, chorégraphie, puis les autres ; trois au plus.
@@ -253,7 +253,7 @@ const gb = (e) => `<span class="gb" aria-hidden="true"></span>`; // bande pleine
 // Première ligne : picto du genre (de sa couleur) et titre à gauche, note puis cœur à droite.
 const l1 = (e, note) => `<span class="l1"><span class="tt nom">${genreIco(e, "gt")}<span class="vh">${esc(genre(e))} : </span>${esc(e.titre)}</span>${note}${coeurPub(e)}</span>`;
 const sousG = (e) => (e.sousGenre ? cap(e.sousGenre.toLowerCase()) : "");
-const ligneMeta = (meta, b) => (meta || b ? `<span class="ss">${b}${meta ? `<span class="ssm">${meta}</span>` : ""}</span>` : ""); // labels en tête
+const ligneMeta = (meta, b) => (meta || b ? `<span class="ss">${meta ? `<span class="ssm">${meta}</span>` : ""}${b}</span>` : ""); // lieu à gauche, labels à droite
 function rowA(e) {
   const h = e.horaires && e.horaires.length <= 40 ? e.horaires : "", art = artLigne(e);
   const meta = esc([sousG(e), court(e.lieuId)].filter(Boolean).join(" · ")) + (h ? `<span class="hor"> · ${esc(h)}</span>` : ""); // horaires : bureau seulement (fiche dépliée sur mobile)
@@ -930,7 +930,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.25"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.26"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -948,7 +948,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.25"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.26"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
