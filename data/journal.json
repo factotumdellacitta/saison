@@ -1317,35 +1317,6 @@
    "sousGenre": ""
   },
   {
-   "id": "vu-le-cid",
-   "titre": "Le Cid",
-   "categorie": "Théâtre",
-   "artistes": [
-    {
-     "nom": "Pierre Corneille",
-     "role": "auteur"
-    }
-   ],
-   "lieuId": "porte-saint-martin",
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "billetterie": null,
-   "publicJeune": false,
-   "leonardYVa": false,
-   "statut": "vu",
-   "vuLe": [
-    "2026-04-22"
-   ],
-   "noteLeonard": null,
-   "avis": "",
-   "offres": []
-  },
-  {
    "id": "vu-le-malade-imaginaire",
    "titre": "Le Malade imaginaire",
    "categorie": "Théâtre",
