@@ -1334,6 +1334,22 @@
     {
      "nom": "Molière",
      "role": "auteur"
+    },
+    {
+     "nom": "Comédie-Française",
+     "role": "compagnie"
+    },
+    {
+     "nom": "Guillaume Gallienne",
+     "role": "artiste"
+    },
+    {
+     "nom": "Denis Podalydès",
+     "role": "artiste"
+    },
+    {
+     "nom": "Claude Stratz",
+     "role": "mise en scène"
     }
    ],
    "lieuId": "porte-saint-martin",
@@ -1343,7 +1359,7 @@
    "note": 0,
    "pronostic": false,
    "pourquoi": "",
-   "lien": null,
+   "lien": "https://www.comedie-francaise.fr/2025-2026/le-malade-imaginaire",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
@@ -1353,7 +1369,8 @@
    ],
    "noteLeonard": null,
    "avis": "",
-   "offres": []
+   "offres": [],
+   "sousGenre": ""
   },
   {
    "id": "vu-le-mariage-force",
