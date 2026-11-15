@@ -262,6 +262,8 @@ const gb = (e) => `<span class="gb" aria-hidden="true"></span>`; // bande pleine
 // Première ligne : titre à gauche, note puis cœur à droite.
 // Première ligne : picto du genre (de sa couleur) et titre à gauche, note puis cœur à droite.
 const l1 = (e, note) => `<span class="l1"><span class="tt nom">${genreIco(e, "gt")}<span class="vh">${esc(genre(e))} : </span>${esc(e.titre)}</span>${note}${coeurPub(e)}</span>`;
+// Libellés courts des puces de genre (pour tenir sur une ligne) ; le nom complet reste en aria-label.
+const GENRE_PUCE = { "Comédie musicale": "Musical" };
 const sousG = (e) => (e.sousGenre ? cap(e.sousGenre.toLowerCase()) : "");
 const ligneMeta = (meta, b) => (meta || b ? `<span class="ss">${meta ? `<span class="ssm">${meta}</span>` : ""}${b}</span>` : ""); // lieu à gauche, labels à droite
 function rowA(e) {
@@ -443,7 +445,7 @@ function renderAffiche(q) {
   ${coeurLigne()}
   <div class="tools barre-f">${rech("aq", "Rechercher à l’affiche", F.q)}
     <button class="chip filtres" type="button" data-panel="pF" aria-expanded="false" aria-controls="pF">${ico("filtres")}<span class="lbf">Filtres</span><span class="nf" id="nF"></span></button></div>
-  <div class="fbar"><div class="chips defile gtabs" role="group" aria-label="Genres">${cats.map((c) => chip("cat", slug(c), ico(c) + esc(c)).replace('class="chip"', `class="chip g-${famille(c)}"`)).join("")}</div>
+  <div class="fbar"><div class="chips defile gtabs" role="group" aria-label="Genres">${cats.map((c) => chip("cat", slug(c), ico(c) + esc(GENRE_PUCE[c] || c), GENRE_PUCE[c] ? ` aria-label="${esc(c)}"` : "").replace('class="chip"', `class="chip g-${famille(c)}"`)).join("")}</div>
     <div class="fpanel" id="pF" hidden>
       <div class="fgr" role="group" aria-labelledby="fgN"><span class="fl" id="fgN">Note</span><div class="chips">${chip("note", "2", carres(2, true), ' aria-label="Note 2 et plus"')}${chip("note", "3", carres(3, true), ' aria-label="Note 3 et plus"')}${chip("note", "4", carres(4), ' aria-label="Note 4"')}</div></div>
       <div class="fgr" role="group" aria-labelledby="fgO"><span class="fl" id="fgO">Où</span><div><div class="chips">${chip("zone", "paris", "Paris")}${chip("zone", "pc", "Petite couronne")}<span class="sep" aria-hidden="true"></span>${chip("statut", "public", "Lieu public")}${chip("statut", "prive", "Lieu privé")}</div>
@@ -949,7 +951,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.31"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.32"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -967,7 +969,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.31"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.32"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
