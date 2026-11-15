@@ -263,12 +263,14 @@
   }
   /* Confirmation intégrée à la page (jamais de fenêtre système) : un bandeau près de l’action, deux boutons.
      Résout vrai ou faux ; Échap ou « Garder » valent non. */
-  function demander(texte, { oui = "Confirmer", non = "Annuler", danger = true } = {}) {
+  function demander(texte, { oui = "Confirmer", non = "Annuler", danger = true, pres = null } = {}) {
     $$(".confirme").forEach((x) => x._fin && x._fin(false));
     const dl = $("#dlg"), sh = $("#sheet").hidden ? null : $("#sheetIn");
     const box = document.createElement("div"); box.className = "confirme"; box.setAttribute("role", "alertdialog"); box.setAttribute("aria-live", "assertive");
     box.innerHTML = `<p>${esc(texte).replace(/\n/g, "<br>")}</p><div class="acts"><button type="button" class="btn ${danger ? "danger" : "pri"}" data-oui>${esc(oui)}</button><button type="button" class="btn" data-non>${esc(non)}</button></div>`;
-    if (dl) { const a = dl.querySelector("form > .acts"); a.parentNode.insertBefore(box, a); }
+    const ancre = pres && document.contains(pres) ? pres.closest(".acts") : null;
+    if (ancre && (!dl || dl.contains(ancre))) ancre.parentNode.insertBefore(box, ancre);
+    else if (dl) { const a = dl.querySelector("form > .acts"); a.parentNode.insertBefore(box, a); }
     else if (sh) sh.querySelector(".shtop").after(box);
     else $("#main").prepend(box);
     const avant = document.activeElement;
@@ -950,9 +952,11 @@
       s.statut = statut;
     });
   }
-  async function supprimer(id) {
-    const t = titreDe(id), r = PRIVE.reservations[id];
-    if (!await demander(`Supprimer définitivement « ${t} » ?${r ? "\nSa réservation sera aussi supprimée." : ""}\nPour la masquer seulement, utilise plutôt « Écarter ».`, { oui: "Supprimer" })) return;
+  async function supprimer(id, pres) {
+    const t = titreDe(id), r = PRIVE.reservations[id], vu = (BYID.get(id) || {}).statut === "vu";
+    const q = vu ? `Supprimer « ${t} » du journal, avec ses dates, sa note, son avis, ses places et ses notes ?` : `Supprimer définitivement « ${t} » ?${r ? "\nSa réservation sera aussi supprimée." : ""}\nPour la masquer seulement, utilise plutôt « Écarter ».`;
+    if (!await demander(q, { oui: "Supprimer", pres })) return;
+    fermerDlg();
     await ecrire(`Admin : supprimé ${t}`, (d) => {
       d.affiche.sorties = d.affiche.sorties.filter((x) => x.id !== id);
       d.journal.sorties = d.journal.sorties.filter((x) => x.id !== id);
@@ -1519,7 +1523,7 @@
     else if (a === "ajouter") formSortie(null);
     else if (a === "ecarter") act(() => ecarter(id, "ecarte"));
     else if (a === "remettre") act(() => ecarter(id, "a-voir"));
-    else if (a === "supprimer") act(() => supprimer(id));
+    else if (a === "supprimer") act(() => supprimer(id, b));
     else if (a === "envie") formEnvie(id);
     else if (a === "journal") act(formJournal);
   });
