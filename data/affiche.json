@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-14",
+ "maj": "2026-11-15",
  "sorties": [
   {
    "id": "10-000-langages-pour-en-faire-un",
@@ -2316,12 +2316,13 @@
    "note": 4,
    "pronostic": true,
    "pourquoi": "Premier spectacle de Ruf depuis Le Soulier de satin, costumes Christian Lacroix. Prix : 28,50 – 93 €.",
-   "lien": "https://www.offi.fr/theatre/theatre-antoine-1408/la-cerisaie-108517.html",
+   "lien": "https://theatre-antoine.com/event-pro/la-cerisaie/",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "sousGenre": ""
   },
   {
    "id": "la-clemence-de-titus",
