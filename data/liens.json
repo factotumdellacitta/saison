@@ -84,6 +84,24 @@
   "note": ""
  },
  {
+  "categorie": "Calendriers de vente",
+  "titre": "Infoconcert – annonces de concerts et mises en vente",
+  "url": "https://www.infoconcert.com/actualites/",
+  "note": "Annonces de tournées et dates de vente, toutes salles."
+ },
+ {
+  "categorie": "Calendriers de vente",
+  "titre": "Live Nation France – concerts annoncés",
+  "url": "https://www.livenation.fr",
+  "note": "Préventes Live Nation avant la vente générale."
+ },
+ {
+  "categorie": "Calendriers de vente",
+  "titre": "Gérard Drouot Productions – concerts annoncés",
+  "url": "https://www.gdp.fr",
+  "note": ""
+ },
+ {
   "categorie": "Billetteries",
   "titre": "Théâtre de la Ville",
   "url": "https://www.theatredelaville-paris.com",
@@ -351,6 +369,66 @@
   "categorie": "Billetteries",
   "titre": "Zénith Paris – La Villette",
   "url": "https://www.zenith-paris.com",
+  "note": ""
+ },
+ {
+  "categorie": "Billetteries",
+  "titre": "Ticketmaster",
+  "url": "https://www.ticketmaster.fr",
+  "note": ""
+ },
+ {
+  "categorie": "Billetteries",
+  "titre": "Fnac Spectacles",
+  "url": "https://www.fnacspectacles.com",
+  "note": ""
+ },
+ {
+  "categorie": "Billetteries",
+  "titre": "Paris La Défense Arena",
+  "url": "https://www.parisladefense-arena.com",
+  "note": ""
+ },
+ {
+  "categorie": "Billetteries",
+  "titre": "Stade de France",
+  "url": "https://www.stadefrance.com",
+  "note": ""
+ },
+ {
+  "categorie": "Billetteries",
+  "titre": "Adidas Arena",
+  "url": "https://www.adidasarena.com",
+  "note": ""
+ },
+ {
+  "categorie": "Billetteries",
+  "titre": "Solidays",
+  "url": "https://www.solidays.org",
+  "note": ""
+ },
+ {
+  "categorie": "Billetteries",
+  "titre": "Rock en Seine",
+  "url": "https://www.rockenseine.com",
+  "note": ""
+ },
+ {
+  "categorie": "Billetteries",
+  "titre": "We Love Green",
+  "url": "https://www.welovegreen.fr",
+  "note": ""
+ },
+ {
+  "categorie": "Billetteries",
+  "titre": "Fête de l’Humanité",
+  "url": "https://fete.humanite.fr",
+  "note": ""
+ },
+ {
+  "categorie": "Billetteries",
+  "titre": "New Morning",
+  "url": "https://www.newmorning.com",
   "note": ""
  }
 ]

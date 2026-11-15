@@ -14,7 +14,7 @@ Léonard écrit en français, style direct. Réponds en français, brièvement, 
 | `data/liens.json` | `[{categorie, titre, url, note}]` | Oui |
 | `data/dispo.json` | `reservations` (généré), `manuel` (soirs pris déclarés), `calendrier` (généré par l'action depuis Apple Calendar) : dates seules | Oui |
 | `data/index-artistes.json`, `data/index-lieux.json` | Générés par `build.mjs`, ne pas modifier à la main | Oui |
-| `data/deja-vu.json` | `{idAffiche:[dates vues]}` : sorties à l’affiche dont l’œuvre est au journal (même catégorie, même titre), généré par `build.mjs`, sert la marque « Déjà vu » | Oui |
+| `data/deja-vu.json` | `{idAffiche:[dates vues]}` : sorties à l’affiche dont l’œuvre est au journal (même catégorie, même titre) ou, pour un concert de musiques actuelles, dont l’artiste en tête (premier interprète) a déjà été vu en concert, festival ou showcase, généré par `build.mjs`, sert la marque « Déjà vu » | Oui |
 | `data/envies.json` | `{ids:[…]}` : identifiants des sorties à l’affiche en envie, généré par `build.mjs` depuis la zone privée (ni note, ni date) | Oui |
 | `data/prive.enc` | Zone privée chiffrée (schéma ci-dessous) | Chiffré |
 | `data/agenda-<icsToken>.ics` | Flux « Factotum – réservations », généré | Adresse non devinable |
@@ -86,6 +86,7 @@ Référence vivante : la page `#charte` (imprimable en PDF). Toute modification 
 - Journal : `statut: "vu"`, `vuLe` (liste de dates ISO), `noteLeonard` (1–4 ou null), `avis` (ses mots, jamais les tiens).
 - Une œuvre déjà vue n’est jamais écartée pour cette raison : une nouvelle production ou reprise va à l’affiche, notée normalement, avec la marque « Déjà vu » (automatique).
 - Passage à vu : la fiche **sort** de `affiche.json` et **entre** dans `journal.json` (même id).
+- Journal : **une ligne par date**. Festival sur plusieurs jours : une fiche par journée (`<id>-vendredi`, titre « Solidays 2025 – vendredi », `debut` = `fin` = le jour), avec les seuls artistes vus ce jour-là ; invités et premières parties dans `artistes` et `datesTexte`.
 - « Public jeune » = adapté à un public jeune (jamais « avec ton frère »).
 
 ## Confidentialité (bloquant dans check.mjs)
@@ -105,7 +106,8 @@ La note est celle de la veille : elle mesure la valeur et le retentissement de l
 **Total sur 9 → note** : 7 et plus → **4** incontournable · 5–6 → **3** fortement recommandé · 2–4 → **2** bon choix · 1 → **1** curiosité · 0 → pas de fiche. 0 dans `note` reste réservé au journal (vu sans note de veille).
 - **`calcul`** (affiche.json, sur chaque sortie notée) : le détail, ex. `"C1 N3 H2 +Chef-d’œuvre"` ou `"C2 N1 H2 +Distinction"`. Le total n'est pas écrit, il se calcule. Affiché dans la fiche publique sous « Pourquoi ». `check.mjs` refuse un format invalide et signale un écart entre `note` et le total.
 - **Pronostic** (création pas encore critiquée) : C estimé d'après l'accueil des dernières productions de l'équipe, 1 au plus, et pas de Distinction ; `pronostic: true`. Dès que des critiques paraissent, recalcule C pour de bon et passe `pronostic` à false. Une création très attendue reste un incontournable par N, O et H (ex. La Cerisaie, Ruf, Adjani, Lacroix : C1 N3 H2 +Chef-d’œuvre = 7 → 4).
-- **Plafond** : une vingtaine de 4 par saison au plus. Au-delà, garde en 4 les plus hauts totaux (à égalité, la hype la plus forte) et passe les autres à 3 (seul écart toléré entre `note` et `calcul`).
+- **Plafond** : deux quotas par saison, une vingtaine de 4 pour la scène (théâtre, opéra, danse, comédie musicale et le reste) et une quinzaine de 4 à part pour la musique (Concert, Récital, Festival). Au-delà, garde en 4 les plus hauts totaux (à égalité, la hype la plus forte) et passe les autres à 3 (seul écart toléré entre `note` et `calcul`).
+- **Concerts de musiques actuelles et jazz** (même barème, repères) : C = accueil de l’album et de la tournée (Télérama, Libération, Le Monde, Les Inrocks, Pitchfork, Jazz Magazine, TSF Jazz…), pronostic tant que la tournée n’a pas commencé ; N1 artiste reconnu de salle moyenne ou de club de jazz, N2 tête d’affiche d’aréna ou de festival, N3 star internationale ou légende (Rosalía, The Cure, Stromae) ; H1 tournée attendue, H2 dates complètes en quelques minutes, retour, adieux, date unique en France ; +Chef-d’œuvre pour un album culte joué en entier ou le répertoire d’une légende ; +Distinction pour une Victoire, un Grammy ou un Mercury Prize de l’album tourné. Festival : une fiche par édition à l’affiche (dates complètes), notée sur l’ensemble de sa programmation.
 - **Révision** : quand un critère change (critiques parues, prix, distribution annoncée ou modifiée, engouement). Une sortie complète garde sa note (l'état de vente est dans `etat`).
 - **Trace** : `pourquoi` reste une phrase factuelle ; dans la réponse de `/veille`, `/note` ou `/ajoute`, donne le calcul et la note (« C1 N3 H2 +Chef-d’œuvre = 7 → 4 ») pour chaque note posée ou révisée.
 
@@ -139,7 +141,7 @@ Tableau de bord : **payé par moi** = places de Moi en `moi` + places de tiers e
 ## Fichiers générés (`node tools/build.mjs`)
 - `index-artistes.json` (`{slug: {nom, sorties}}`) et `index-lieux.json` (`{lieuId: {sorties}}`), même sans mot de passe.
 - `dispo.json.reservations`, `envies.json`, flux agenda, flux ventes : avec `SAISON_MDP` (ou `_prive.json` ouvert).
-- Flux ventes : un événement de 15 min à l'heure d'ouverture (10h si inconnue, « ~ » si approximative), alarme 15 min avant, pour toute offre dont la sortie est en envie, réservée, notée 4, ou de type avant-première.
+- Flux ventes : un événement de 15 min à l'heure d'ouverture (10h si inconnue, « ~ » si approximative), alarme 15 min avant, pour toute offre dont la sortie est en envie, réservée, notée 4, ou de type avant-première, et pour toutes les offres des concerts et festivals de musiques actuelles notés (Concert ou Festival sans compositeur ni direction musicale crédités : c’est ainsi que `build.mjs` distingue le classique).
 - L'action « Publier le site » relance `build.mjs` à chaque passage (avec le secret) et commite les fichiers générés. Sortie déterministe : pas de commit si rien n'a changé.
 
 ## Mode admin (site, onglet cadenas)

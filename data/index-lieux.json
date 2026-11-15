@@ -6,6 +6,9 @@
    "vu-rosalia-accor-arena-2026"
   ]
  },
+ "adidas-arena": {
+  "sorties": []
+ },
  "arci-biko": {
   "sorties": [
    "vu-zola-biko-2024"
@@ -53,6 +56,12 @@
    "vu-yongoyely"
   ]
  },
+ "bal-blomet": {
+  "sorties": []
+ },
+ "bataclan": {
+  "sorties": []
+ },
  "bouffes-du-nord": {
   "sorties": [
    "les-surs-hilton",
@@ -65,6 +74,9 @@
    "concert-tres-chic",
    "vu-un-tramway-nomme-desir"
   ]
+ },
+ "casino-de-paris": {
+  "sorties": []
  },
  "chaillot": {
   "sorties": [
@@ -133,6 +145,9 @@
    "vu-une-mouette"
   ]
  },
+ "duc-des-lombards": {
+  "sorties": []
+ },
  "edouard-vii": {
   "sorties": [
    "le-chameau",
@@ -159,7 +174,8 @@
  },
  "fete-de-l-humanite": {
   "sorties": [
-   "vu-fete-de-l-humanite-2025"
+   "vu-fete-de-l-humanite-2025-samedi",
+   "vu-fete-de-l-humanite-2025-vendredi"
   ]
  },
  "foire-de-chalons": {
@@ -191,6 +207,9 @@
    "vu-jason-derulo-just-me-2026"
   ]
  },
+ "la-cigale": {
+  "sorties": []
+ },
  "la-colline": {
   "sorties": [
    "amadoca",
@@ -215,6 +234,9 @@
   "sorties": [
    "vu-le-proces-dune-vie"
   ]
+ },
+ "le-trianon": {
+  "sorties": []
  },
  "les-gemeaux": {
   "sorties": [
@@ -256,6 +278,9 @@
    "piano-man",
    "une-odyssee"
   ]
+ },
+ "new-morning": {
+  "sorties": []
  },
  "odeon": {
   "sorties": [
@@ -398,6 +423,9 @@
    "vu-gala-talents-du-coeur-gaveau-2026"
   ]
  },
+ "salle-pleyel": {
+  "sorties": []
+ },
  "sciences-po": {
   "sorties": [
    "vu-black-m-sciences-po-2026"
@@ -410,15 +438,22 @@
  },
  "solidays": {
   "sorties": [
-   "vu-solidays-2023",
+   "vu-solidays-2023-dimanche",
+   "vu-solidays-2023-samedi",
+   "vu-solidays-2023-vendredi",
    "vu-solidays-2024",
-   "vu-solidays-2025"
+   "vu-solidays-2025-dimanche",
+   "vu-solidays-2025-samedi",
+   "vu-solidays-2025-vendredi"
   ]
  },
  "stade-de-france": {
   "sorties": [
    "vu-the-weeknd-stade-de-france-2023"
   ]
+ },
+ "sunset-sunside": {
+  "sorties": []
  },
  "t2g": {
   "sorties": [
@@ -580,7 +615,9 @@
  "we-love-green": {
   "sorties": [
    "vu-we-love-green-2022",
-   "vu-we-love-green-2023"
+   "vu-we-love-green-2023-dimanche",
+   "vu-we-love-green-2023-samedi",
+   "vu-we-love-green-2023-vendredi"
   ]
  },
  "yoyo-palais-de-tokyo": {

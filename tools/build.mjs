@@ -26,6 +26,8 @@ function ecrire(f, contenu) {
   return true;
 }
 const json = (o) => JSON.stringify(o, null, 1) + "\n";
+// Musiques actuelles et jazz : concerts et festivals sans compositeur ni chef crédités (le classique en a toujours).
+const actuelle = (s) => (s.categorie === "Concert" || s.categorie === "Festival") && !(s.artistes || []).some((a) => a.role === "compositeur" || a.role === "direction musicale");
 
 // ---------- 1. Index ----------
 const idxArt = {};
@@ -54,10 +56,15 @@ for (const s of journal.sorties) {
   const k = s.categorie + "|" + cleTitre(s.titre);
   vus.set(k, [...(vus.get(k) || []), ...(s.vuLe || [])]);
 }
+// Concerts de musiques actuelles : l'artiste en tête (premier interprète) déjà vu en concert, en festival ou en showcase.
+const vusArt = new Map();
+for (const s of journal.sorties) if (actuelle(s) || s.categorie === "Événement")
+  for (const a of s.artistes || []) if (a.role === "interprète") vusArt.set(slug(a.nom), [...(vusArt.get(slug(a.nom)) || []), ...(s.vuLe || [])]);
 const dejaVu = {};
 for (const s of affiche.sorties) {
-  const d = vus.get(s.categorie + "|" + cleTitre(s.titre));
-  if (d) dejaVu[s.id] = [...new Set(d)].sort();
+  const tete = s.categorie === "Concert" && actuelle(s) && (s.artistes || []).find((a) => a.role === "interprète");
+  const d = [...(vus.get(s.categorie + "|" + cleTitre(s.titre)) || []), ...(tete ? vusArt.get(slug(tete.nom)) || [] : [])];
+  if (d.length) dejaVu[s.id] = [...new Set(d)].sort();
 }
 ecrire("data/deja-vu.json", json(Object.fromEntries(Object.keys(dejaVu).sort().map((k) => [k, dejaVu[k]]))));
 console.log(`Déjà vu : ${Object.keys(dejaVu).length} sorties à l'affiche.`);
@@ -187,7 +194,8 @@ async function main() {
   const ve = entete("Factotum – ouvertures de ventes");
   let nVe = 0;
   for (const s of [...affiche.sorties].sort((a, b) => a.id.localeCompare(b.id))) {
-    const suivie = envies[s.id] || res[s.id] || s.note === 4;
+    // Suivies : envies, réservations, notes 4, et tous les concerts et festivals de musiques actuelles notés (annonce puis mise en vente).
+    const suivie = envies[s.id] || res[s.id] || s.note === 4 || (actuelle(s) && s.note >= 2);
     (s.offres || []).forEach((o, i) => {
       if (!o.vente) return;
       if (!(suivie || /avant[- ]premi/i.test(o.type || ""))) return;
