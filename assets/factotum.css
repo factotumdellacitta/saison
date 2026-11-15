@@ -714,3 +714,8 @@ body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
 .vuectl{display:flex;align-items:center;gap:var(--e3);flex:none}
 .seg-s button{min-height:30px;min-width:36px}
 .seg-s .pi{width:18px;height:18px}
+/* Genres : toujours sur une seule ligne (défilement horizontal si la place manque, sur mobile) */
+.fbar>.chips.gtabs[class]{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+.gtabs{gap:var(--e1)}
+.gtabs .chip{padding:0 var(--e2) 0 6px;gap:var(--e1);letter-spacing:.02em}
+@media (min-width:960px){.fbar>.chips.gtabs[class]{margin:0;padding:var(--e2) 0}}
