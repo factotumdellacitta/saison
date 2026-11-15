@@ -381,6 +381,12 @@
    "vu-les-fourberies-de-scapin"
   ]
  },
+ "ballet-de-l-opera-national-de-paris": {
+  "nom": "Ballet de l’Opéra national de Paris",
+  "sorties": [
+   "vu-sylvia-bal-de-l-x-2025"
+  ]
+ },
  "ballet-de-lorraine": {
   "nom": "Ballet de Lorraine",
   "sorties": [
@@ -2058,6 +2064,12 @@
    "histoire-du-soldat-tce"
   ]
  },
+ "leo-delibes": {
+  "nom": "Léo Delibes",
+  "sorties": [
+   "vu-sylvia-bal-de-l-x-2025"
+  ]
+ },
  "leo-vermot-desroches": {
   "nom": "Léo Vermot-Desroches",
   "sorties": [
@@ -2205,6 +2217,12 @@
    "vu-from-martin-to-eden"
   ]
  },
+ "louis-merante": {
+  "nom": "Louis Mérante",
+  "sorties": [
+   "vu-sylvia-bal-de-l-x-2025"
+  ]
+ },
  "louisa-proske": {
   "nom": "Louisa Proske",
   "sorties": [
@@ -2279,6 +2297,12 @@
   "nom": "Mané Galoyan",
   "sorties": [
    "la-rondine"
+  ]
+ },
+ "manuel-legris": {
+  "nom": "Manuel Legris",
+  "sorties": [
+   "vu-sylvia-bal-de-l-x-2025"
   ]
  },
  "marc-leroy-calatayud": {
