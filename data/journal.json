@@ -284,6 +284,22 @@
      "role": "mise en scène"
     },
     {
+     "nom": "Simon Johannin",
+     "role": "auteur"
+    },
+    {
+     "nom": "Gilles Leroy",
+     "role": "auteur"
+    },
+    {
+     "nom": "Pauline Delabroy-Allard",
+     "role": "auteur"
+    },
+    {
+     "nom": "Emmanuelle Fournier-Lorentz",
+     "role": "auteur"
+    },
+    {
      "nom": "Thierry Hancisse",
      "role": "interprète"
     },
@@ -294,16 +310,24 @@
     {
      "nom": "Léa Lopez",
      "role": "interprète"
+    },
+    {
+     "nom": "Axel Auriant",
+     "role": "interprète"
+    },
+    {
+     "nom": "Pierre-Marie Braye-Weppe",
+     "role": "interprète"
     }
    ],
    "lieuId": "comedie-francaise",
    "salle": "Studio-Théâtre",
-   "debut": null,
-   "fin": null,
+   "debut": "2026-03-19",
+   "fin": "2026-05-03",
    "note": 0,
    "pronostic": false,
-   "pourquoi": "",
-   "lien": "https://comedie-francaise.fr/2025-2026/art-majeur",
+   "pourquoi": "« Spectacle album » de la Troupe, théâtre musical où la chanson tient le premier rôle.",
+   "lien": "https://www.comedie-francaise.fr/2025-2026/art-majeur",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
@@ -313,7 +337,9 @@
    ],
    "noteLeonard": null,
    "avis": "",
-   "offres": []
+   "offres": [],
+   "sousGenre": "Spectacle musical",
+   "horaires": "1h30"
   },
   {
    "id": "vu-autopsie-dune-photo-de-famille",
@@ -2862,6 +2888,1128 @@
    "statut": "vu",
    "vuLe": [
     "2025-05-16"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-we-love-green-2022",
+   "titre": "We Love Green 2022",
+   "categorie": "Festival",
+   "sousGenre": "Musiques actuelles",
+   "artistes": [
+    {
+     "nom": "PNL",
+     "role": "interprète"
+    },
+    {
+     "nom": "Angèle",
+     "role": "interprète"
+    },
+    {
+     "nom": "Disclosure",
+     "role": "interprète"
+    },
+    {
+     "nom": "Juliette Armanet",
+     "role": "interprète"
+    },
+    {
+     "nom": "Central Cee",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "we-love-green",
+   "salle": "",
+   "debut": "2022-06-02",
+   "fin": "2022-06-05",
+   "datesTexte": "2 au 5 juin 2022 ; vu le dimanche 5 juin",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Festival de musiques actuelles du bois de Vincennes, dixième édition ; journée du dimanche.",
+   "lien": "https://www.welovegreen.fr",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2022-06-05"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-we-love-green-2023",
+   "titre": "We Love Green 2023",
+   "categorie": "Festival",
+   "sousGenre": "Musiques actuelles",
+   "artistes": [
+    {
+     "nom": "Orelsan",
+     "role": "interprète"
+    },
+    {
+     "nom": "The Blaze",
+     "role": "interprète"
+    },
+    {
+     "nom": "NxWorries",
+     "role": "interprète"
+    },
+    {
+     "nom": "Anderson .Paak",
+     "role": "interprète"
+    },
+    {
+     "nom": "Knxwledge",
+     "role": "interprète"
+    },
+    {
+     "nom": "PLK",
+     "role": "interprète"
+    },
+    {
+     "nom": "Phoenix",
+     "role": "interprète"
+    },
+    {
+     "nom": "Gazo",
+     "role": "interprète"
+    },
+    {
+     "nom": "Lorenzo",
+     "role": "interprète"
+    },
+    {
+     "nom": "Lomepal",
+     "role": "interprète"
+    },
+    {
+     "nom": "Skrillex",
+     "role": "interprète"
+    },
+    {
+     "nom": "Bon Iver",
+     "role": "interprète"
+    },
+    {
+     "nom": "Pomme",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "we-love-green",
+   "salle": "",
+   "debut": "2023-06-02",
+   "fin": "2023-06-04",
+   "datesTexte": "vendredi 2 juin : Orelsan, The Blaze, NxWorries (Anderson .Paak et Knxwledge), PLK ; samedi 3 juin : Phoenix, Gazo, Lorenzo ; dimanche 4 juin : Lomepal, Skrillex, Bon Iver, Pomme",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Festival de musiques actuelles du bois de Vincennes, les trois jours.",
+   "lien": "https://www.welovegreen.fr",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2023-06-02",
+    "2023-06-03",
+    "2023-06-04"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-rock-en-seine-2022",
+   "titre": "Rock en Seine 2022",
+   "categorie": "Festival",
+   "sousGenre": "Musiques actuelles",
+   "artistes": [
+    {
+     "nom": "Stromae",
+     "role": "interprète"
+    },
+    {
+     "nom": "Aurora",
+     "role": "interprète"
+    },
+    {
+     "nom": "Parcels",
+     "role": "interprète"
+    },
+    {
+     "nom": "Fred again..",
+     "role": "interprète"
+    },
+    {
+     "nom": "Vendredi sur Mer",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "rock-en-seine",
+   "salle": "",
+   "debut": "2022-08-25",
+   "fin": "2022-08-28",
+   "datesTexte": "25 au 28 août 2022 ; vu le dimanche 28 août",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Festival du domaine national de Saint-Cloud ; journée du dimanche, Stromae en tête d’affiche.",
+   "lien": "https://www.rockenseine.com",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2022-08-28"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-solidays-2023",
+   "titre": "Solidays 2023",
+   "categorie": "Festival",
+   "sousGenre": "Musiques actuelles",
+   "artistes": [
+    {
+     "nom": "Jain",
+     "role": "interprète"
+    },
+    {
+     "nom": "Julien Granel",
+     "role": "interprète"
+    },
+    {
+     "nom": "Juliette Armanet",
+     "role": "interprète"
+    },
+    {
+     "nom": "Ascendant Vierge",
+     "role": "interprète"
+    },
+    {
+     "nom": "SCH",
+     "role": "interprète"
+    },
+    {
+     "nom": "Sofiane Pamart",
+     "role": "interprète"
+    },
+    {
+     "nom": "Tiakola",
+     "role": "interprète"
+    },
+    {
+     "nom": "Bigflo & Oli",
+     "role": "interprète"
+    },
+    {
+     "nom": "J Balvin",
+     "role": "interprète"
+    },
+    {
+     "nom": "Jok’Air",
+     "role": "interprète"
+    },
+    {
+     "nom": "Josman",
+     "role": "interprète"
+    },
+    {
+     "nom": "Kungs",
+     "role": "interprète"
+    },
+    {
+     "nom": "Meryl",
+     "role": "interprète"
+    },
+    {
+     "nom": "Miel de Montagne",
+     "role": "interprète"
+    },
+    {
+     "nom": "Saint Levant",
+     "role": "interprète"
+    },
+    {
+     "nom": "Vladimir Cauchemar",
+     "role": "interprète"
+    },
+    {
+     "nom": "Zaho de Sagazan",
+     "role": "interprète"
+    },
+    {
+     "nom": "Ziak",
+     "role": "interprète"
+    },
+    {
+     "nom": "Angèle",
+     "role": "interprète"
+    },
+    {
+     "nom": "Cerrone",
+     "role": "interprète"
+    },
+    {
+     "nom": "Favé",
+     "role": "interprète"
+    },
+    {
+     "nom": "Gwendoline",
+     "role": "interprète"
+    },
+    {
+     "nom": "Hamza",
+     "role": "interprète"
+    },
+    {
+     "nom": "La Femme",
+     "role": "interprète"
+    },
+    {
+     "nom": "Shaka Ponk",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "solidays",
+   "salle": "",
+   "debut": "2023-06-23",
+   "fin": "2023-06-25",
+   "datesTexte": "vendredi 23 juin : Jain, Julien Granel, Juliette Armanet, Ascendant Vierge, SCH, Sofiane Pamart, Tiakola ; samedi 24 juin : Bigflo & Oli, J Balvin, Jok’Air, Josman, Kungs, Meryl, Miel de Montagne, Saint Levant, Vladimir Cauchemar, Zaho de Sagazan, Ziak ; dimanche 25 juin : Angèle, Cerrone, Favé, Gwendoline, Hamza, La Femme, Shaka Ponk",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Festival de Solidarité Sida à l’hippodrome de Longchamp, les trois jours.",
+   "lien": "https://www.solidays.org",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2023-06-23",
+    "2023-06-24",
+    "2023-06-25"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-the-weeknd-stade-de-france-2023",
+   "titre": "The Weeknd",
+   "categorie": "Concert",
+   "sousGenre": "R&B",
+   "artistes": [
+    {
+     "nom": "The Weeknd",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "stade-de-france",
+   "salle": "",
+   "debut": "2023-07-29",
+   "fin": "2023-07-29",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "The Weeknd au Stade de France, tournée After Hours til Dawn.",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2023-07-29"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-mika-chalons-2023",
+   "titre": "Mika",
+   "categorie": "Concert",
+   "sousGenre": "Pop",
+   "artistes": [
+    {
+     "nom": "Mika",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "foire-de-chalons",
+   "salle": "",
+   "debut": "2023-09-09",
+   "fin": "2023-09-09",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Mika en concert à la Foire de Châlons-en-Champagne.",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2023-09-09"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-etienne-daho-accor-arena-2023",
+   "titre": "Étienne Daho",
+   "categorie": "Concert",
+   "sousGenre": "Pop",
+   "artistes": [
+    {
+     "nom": "Étienne Daho",
+     "role": "interprète"
+    },
+    {
+     "nom": "Vanessa Paradis",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "salle": "",
+   "debut": "2023-12-29",
+   "fin": "2023-12-29",
+   "datesTexte": "29 décembre 2023, invitée : Vanessa Paradis",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Étienne Daho à l’Accor Arena, avec Vanessa Paradis en invitée.",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2023-12-29"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-black-eyed-peas-la-defense-arena-2024",
+   "titre": "Black Eyed Peas",
+   "categorie": "Concert",
+   "sousGenre": "Hip-hop",
+   "artistes": [
+    {
+     "nom": "Black Eyed Peas",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "paris-la-defense-arena",
+   "salle": "",
+   "debut": "2024-04-20",
+   "fin": "2024-04-20",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Les Black Eyed Peas à Paris La Défense Arena.",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2024-04-20"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-kungs-fete-de-la-musique-2024",
+   "titre": "Kungs à la Fête de la musique",
+   "categorie": "Concert",
+   "sousGenre": "Électro",
+   "artistes": [
+    {
+     "nom": "Kungs",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": null,
+   "salle": "",
+   "debut": "2024-06-21",
+   "fin": "2024-06-21",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Kungs en concert gratuit pour la Fête de la musique à Paris.",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2024-06-21"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-solidays-2024",
+   "titre": "Solidays 2024",
+   "categorie": "Festival",
+   "sousGenre": "Musiques actuelles",
+   "artistes": [
+    {
+     "nom": "Pomme",
+     "role": "interprète"
+    },
+    {
+     "nom": "Louise Attaque",
+     "role": "interprète"
+    },
+    {
+     "nom": "Martin Garrix",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "solidays",
+   "salle": "",
+   "debut": "2024-06-28",
+   "fin": "2024-06-30",
+   "datesTexte": "28 au 30 juin 2024 ; vu le dimanche 30 juin",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Festival de Solidarité Sida à l’hippodrome de Longchamp ; journée du dimanche.",
+   "lien": "https://www.solidays.org",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2024-06-30"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-toto-orange-2024",
+   "titre": "Toto",
+   "categorie": "Concert",
+   "sousGenre": "Rock",
+   "artistes": [
+    {
+     "nom": "Toto",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "theatre-antique-orange",
+   "salle": "",
+   "debut": "2024-08-02",
+   "fin": "2024-08-02",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Toto au Théâtre antique d’Orange.",
+   "lien": "https://theatre-antique.com/toto-2-aout-2024/",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2024-08-02"
+   ],
+   "noteLeonard": null,
+   "avis": "Fun fact : j’ai croisé Jamy Gourmaud.",
+   "offres": []
+  },
+  {
+   "id": "vu-diplo-magazzini-generali-2024",
+   "titre": "Diplo",
+   "categorie": "Concert",
+   "sousGenre": "Showcase",
+   "artistes": [
+    {
+     "nom": "Diplo",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "magazzini-generali",
+   "salle": "",
+   "debut": "2024-09-27",
+   "fin": "2024-09-27",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Showcase de Diplo aux Magazzini Generali, à Milan.",
+   "lien": "https://www.magazzinigenerali.org/event/diplo/",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2024-09-27"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-zola-biko-2024",
+   "titre": "Zola",
+   "categorie": "Concert",
+   "sousGenre": "Showcase",
+   "artistes": [
+    {
+     "nom": "Zola",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "arci-biko",
+   "salle": "",
+   "debut": "2024-10-09",
+   "fin": "2024-10-09",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Showcase de Zola à l’Arci Biko, à Milan.",
+   "lien": "https://zero.eu/en/eventi/320569-zola-biko,milano/",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2024-10-09"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-jason-derulo-just-me-2026",
+   "titre": "Jason Derulo",
+   "categorie": "Concert",
+   "sousGenre": "Showcase",
+   "artistes": [
+    {
+     "nom": "Jason Derulo",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "just-me-milano",
+   "salle": "",
+   "debut": "2026-03-06",
+   "fin": "2026-03-06",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Jason Derulo en invité spécial d’un aftershow au Just Me, à Milan.",
+   "lien": "https://www.eventbrite.it/e/jason-derulo-special-guest-just-me-milan-friday-march-6th-2026-tickets-1984218935249",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2026-03-06"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-solidays-2025",
+   "titre": "Solidays 2025",
+   "categorie": "Festival",
+   "sousGenre": "Musiques actuelles",
+   "artistes": [
+    {
+     "nom": "Damso",
+     "role": "interprète"
+    },
+    {
+     "nom": "Gims",
+     "role": "interprète"
+    },
+    {
+     "nom": "SCH",
+     "role": "interprète"
+    },
+    {
+     "nom": "Kalash",
+     "role": "interprète"
+    },
+    {
+     "nom": "Shay",
+     "role": "interprète"
+    },
+    {
+     "nom": "Werenoi",
+     "role": "interprète"
+    },
+    {
+     "nom": "Rilès",
+     "role": "interprète"
+    },
+    {
+     "nom": "Leto",
+     "role": "interprète"
+    },
+    {
+     "nom": "La Mano 1.9",
+     "role": "interprète"
+    },
+    {
+     "nom": "Niska",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "solidays",
+   "salle": "",
+   "debut": "2025-06-27",
+   "fin": "2025-06-29",
+   "datesTexte": "27 au 29 juin 2025 ; La Mano 1.9 avec Niska en invité",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Festival de Solidarité Sida à l’hippodrome de Longchamp, les trois jours.",
+   "lien": "https://www.solidays.org",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2025-06-27",
+    "2025-06-28",
+    "2025-06-29"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-rock-en-seine-2025",
+   "titre": "Rock en Seine 2025",
+   "categorie": "Festival",
+   "sousGenre": "Musiques actuelles",
+   "artistes": [
+    {
+     "nom": "Fontaines D.C.",
+     "role": "interprète"
+    },
+    {
+     "nom": "Queens of the Stone Age",
+     "role": "interprète"
+    },
+    {
+     "nom": "Stereophonics",
+     "role": "interprète"
+    },
+    {
+     "nom": "Kneecap",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "rock-en-seine",
+   "salle": "",
+   "debut": "2025-08-20",
+   "fin": "2025-08-24",
+   "datesTexte": "vu le dimanche 24 août 2025",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Festival du domaine national de Saint-Cloud ; journée du dimanche.",
+   "lien": "https://www.rockenseine.com",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2025-08-24"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-fete-de-l-humanite-2025",
+   "titre": "Fête de l’Humanité 2025",
+   "categorie": "Festival",
+   "sousGenre": "Musiques actuelles",
+   "artistes": [
+    {
+     "nom": "Ascendant Vierge",
+     "role": "interprète"
+    },
+    {
+     "nom": "Kalash",
+     "role": "interprète"
+    },
+    {
+     "nom": "Theodora",
+     "role": "interprète"
+    },
+    {
+     "nom": "Aliocha Schneider",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "fete-de-l-humanite",
+   "salle": "",
+   "debut": "2025-09-12",
+   "fin": "2025-09-14",
+   "datesTexte": "vendredi 12 septembre : Ascendant Vierge, Kalash, Theodora ; samedi 13 septembre : discours de Jean-Luc Mélenchon, Aliocha Schneider",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Fête de l’Humanité à la Base 217 de Brétigny-sur-Orge, concerts et débats.",
+   "lien": "https://fete.humanite.fr",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2025-09-12",
+    "2025-09-13"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-avalon-bloom-point-ephemere-2025",
+   "titre": "Avalon Bloom",
+   "categorie": "Concert",
+   "sousGenre": "Rock",
+   "artistes": [
+    {
+     "nom": "Avalon Bloom",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "point-ephemere",
+   "salle": "",
+   "debut": "2025-12-04",
+   "fin": "2025-12-04",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Avalon Bloom, groupe de rock alternatif, au Point Éphémère.",
+   "lien": "https://www.pointephemere.org/event/avalon-bloom-est-un-groupe-de-rock-alternatif.-ils",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2025-12-04"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-colonel-reyel-hec-2025",
+   "titre": "Colonel Reyel",
+   "categorie": "Concert",
+   "sousGenre": "Showcase",
+   "artistes": [
+    {
+     "nom": "Colonel Reyel",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "hec-paris",
+   "salle": "",
+   "debut": "2025-12-18",
+   "fin": "2025-12-18",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Showcase de Colonel Reyel sur le campus d’HEC Paris.",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2025-12-18"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-vegedream-yoyo-2025",
+   "titre": "Vegedream",
+   "categorie": "Concert",
+   "sousGenre": "Showcase",
+   "artistes": [
+    {
+     "nom": "Vegedream",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "yoyo-palais-de-tokyo",
+   "salle": "",
+   "debut": "2025-09-05",
+   "fin": "2025-09-05",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Showcase de Vegedream au Yoyo lors d’une soirée du BDE de Sciences Po.",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2025-09-05"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-miki-elysee-montmartre-2026",
+   "titre": "Miki",
+   "categorie": "Concert",
+   "sousGenre": "Pop",
+   "artistes": [
+    {
+     "nom": "Miki",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "elysee-montmartre",
+   "salle": "",
+   "debut": "2026-03-19",
+   "fin": "2026-03-19",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Miki à l’Élysée Montmartre.",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2026-03-19"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-rosalia-accor-arena-2026",
+   "titre": "Rosalía",
+   "categorie": "Concert",
+   "sousGenre": "Pop",
+   "artistes": [
+    {
+     "nom": "Rosalía",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "salle": "",
+   "debut": "2026-03-20",
+   "fin": "2026-03-20",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Rosalía à l’Accor Arena.",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2026-03-20"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-gala-talents-du-coeur-gaveau-2026",
+   "titre": "Les Talents du cœur",
+   "categorie": "Événement",
+   "sousGenre": "Gala",
+   "artistes": [
+    {
+     "nom": "Marco Poingt",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "salle-gaveau",
+   "salle": "",
+   "debut": "2026-03-30",
+   "fin": "2026-03-30",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Soirée de gala au profit de Mécénat Chirurgie Cardiaque, avec un concert de Marco Poingt.",
+   "lien": "https://mecenat-cardiaque.org",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2026-03-30"
+   ],
+   "noteLeonard": null,
+   "avis": "Fun fact : j’ai vu Amanda Lear, Nicoletta, Fabienne Carat, Ségolène Royal, Roselyne Bachelot, Danièle Gilbert, Massimo Gargia, le prince Michel et la princesse Barbara d’Orléans, Jeanne d’Hauteserre, Michèle Alliot-Marie et Patrick Ollier.",
+   "offres": []
+  },
+  {
+   "id": "vu-theodora-zenith-2026",
+   "titre": "Theodora",
+   "categorie": "Concert",
+   "sousGenre": "Pop",
+   "artistes": [
+    {
+     "nom": "Theodora",
+     "role": "interprète"
+    },
+    {
+     "nom": "Ino Casablanca",
+     "role": "interprète"
+    },
+    {
+     "nom": "Juliette Armanet",
+     "role": "interprète"
+    },
+    {
+     "nom": "Disiz",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "zenith-paris",
+   "salle": "",
+   "debut": "2026-04-01",
+   "fin": "2026-04-01",
+   "datesTexte": "1er avril 2026 ; première partie : Ino Casablanca ; invités : Juliette Armanet, Disiz",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Dernier des concerts de Theodora au Zénith de Paris, avec Juliette Armanet et Disiz en invités.",
+   "lien": "https://www.leparisien.fr/culture-loisirs/musique/theodora-invite-disiz-pour-son-dernier-concert-au-zenith-de-paris-dans-une-ambiance-de-pure-folie-01-04-2026-NNTR3S3NL5B73KPBL5F7OIK7S4.php",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2026-04-01"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-black-m-sciences-po-2026",
+   "titre": "Black M",
+   "categorie": "Concert",
+   "sousGenre": "Showcase",
+   "artistes": [
+    {
+     "nom": "Black M",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "sciences-po",
+   "salle": "",
+   "debut": "2026-05-13",
+   "fin": "2026-05-13",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Showcase de Black M à la garden party « One More Time » du BDE de Sciences Po.",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2026-05-13"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-damso-la-defense-arena-2026",
+   "titre": "Damso",
+   "categorie": "Concert",
+   "sousGenre": "Rap",
+   "artistes": [
+    {
+     "nom": "Damso",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "paris-la-defense-arena",
+   "salle": "",
+   "debut": "2026-05-29",
+   "fin": "2026-05-29",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Damso à Paris La Défense Arena.",
+   "lien": null,
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2026-05-29"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-rock-en-seine-2026",
+   "titre": "Rock en Seine 2026",
+   "categorie": "Festival",
+   "sousGenre": "Musiques actuelles",
+   "artistes": [
+    {
+     "nom": "The Cure",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "rock-en-seine",
+   "salle": "",
+   "debut": "2026-08-30",
+   "fin": "2026-08-30",
+   "datesTexte": "vu le dimanche 30 août 2026",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Festival du domaine national de Saint-Cloud ; journée du dimanche, The Cure en tête d’affiche.",
+   "lien": "https://www.rockenseine.com",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2026-08-30"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-central-cee-zenith-2022",
+   "titre": "Central Cee",
+   "categorie": "Concert",
+   "sousGenre": "Rap",
+   "artistes": [
+    {
+     "nom": "Central Cee",
+     "role": "interprète"
+    },
+    {
+     "nom": "Freeze Corleone",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "zenith-paris",
+   "salle": "",
+   "debut": "2022-11-07",
+   "fin": "2022-11-07",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Central Cee au Zénith de Paris, avec Freeze Corleone en invité.",
+   "lien": "https://www.offi.fr/concerts/le-zenith-3401/central-cee-2093519.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2022-11-07"
    ],
    "noteLeonard": null,
    "avis": "",

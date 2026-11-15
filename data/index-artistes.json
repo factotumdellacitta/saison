@@ -122,6 +122,12 @@
    "ubu-roi"
   ]
  },
+ "aliocha-schneider": {
+  "nom": "Aliocha Schneider",
+  "sorties": [
+   "vu-fete-de-l-humanite-2025"
+  ]
+ },
  "alison-dechamps": {
   "nom": "Alison Dechamps",
   "sorties": [
@@ -176,6 +182,12 @@
    "maria-stuarda"
   ]
  },
+ "anderson-paak": {
+  "nom": "Anderson .Paak",
+  "sorties": [
+   "vu-we-love-green-2023"
+  ]
+ },
  "andre-marcon": {
   "nom": "André Marcon",
   "sorties": [
@@ -198,6 +210,13 @@
   "nom": "Andris Nelsons",
   "sorties": [
    "boston-nelsons-lang-lang"
+  ]
+ },
+ "angele": {
+  "nom": "Angèle",
+  "sorties": [
+   "vu-solidays-2023",
+   "vu-we-love-green-2022"
   ]
  },
  "angelica-liddell": {
@@ -340,16 +359,41 @@
    "vu-la-musica-deuxieme"
   ]
  },
+ "ascendant-vierge": {
+  "nom": "Ascendant Vierge",
+  "sorties": [
+   "vu-fete-de-l-humanite-2025",
+   "vu-solidays-2023"
+  ]
+ },
  "asmik-grigorian": {
   "nom": "Asmik Grigorian",
   "sorties": [
    "asmik-grigorian-lukas-geniusas"
   ]
  },
+ "aurora": {
+  "nom": "Aurora",
+  "sorties": [
+   "vu-rock-en-seine-2022"
+  ]
+ },
  "ausrine-stundyte": {
   "nom": "Aušrinė Stundytė",
   "sorties": [
    "lady-macbeth-de-mzensk"
+  ]
+ },
+ "avalon-bloom": {
+  "nom": "Avalon Bloom",
+  "sorties": [
+   "vu-avalon-bloom-point-ephemere-2025"
+  ]
+ },
+ "axel-auriant": {
+  "nom": "Axel Auriant",
+  "sorties": [
+   "vu-art-majeur"
   ]
  },
  "aymeline-alix": {
@@ -486,6 +530,12 @@
    "vu-la-vestale"
   ]
  },
+ "bigflo-oli": {
+  "nom": "Bigflo & Oli",
+  "sorties": [
+   "vu-solidays-2023"
+  ]
+ },
  "billie-holiday": {
   "nom": "Billie Holiday",
   "sorties": [
@@ -498,6 +548,24 @@
    "la-fournaise",
    "les-fourberies-de-scapin",
    "vu-une-mouette"
+  ]
+ },
+ "black-eyed-peas": {
+  "nom": "Black Eyed Peas",
+  "sorties": [
+   "vu-black-eyed-peas-la-defense-arena-2024"
+  ]
+ },
+ "black-m": {
+  "nom": "Black M",
+  "sorties": [
+   "vu-black-m-sciences-po-2026"
+  ]
+ },
+ "bon-iver": {
+  "nom": "Bon Iver",
+  "sorties": [
+   "vu-we-love-green-2023"
   ]
  },
  "boris-charmatz": {
@@ -609,6 +677,19 @@
   "sorties": [
    "la-parabole-du-seum",
    "vu-la-parabole-du-seum-avignon"
+  ]
+ },
+ "central-cee": {
+  "nom": "Central Cee",
+  "sorties": [
+   "vu-central-cee-zenith-2022",
+   "vu-we-love-green-2022"
+  ]
+ },
+ "cerrone": {
+  "nom": "Cerrone",
+  "sorties": [
+   "vu-solidays-2023"
   ]
  },
  "charles-ferdinand-ramuz": {
@@ -816,6 +897,12 @@
    "l-envers-du-music-hall"
   ]
  },
+ "colonel-reyel": {
+  "nom": "Colonel Reyel",
+  "sorties": [
+   "vu-colonel-reyel-hec-2025"
+  ]
+ },
  "comedie-francaise": {
   "nom": "Comédie-Française",
   "sorties": [
@@ -877,6 +964,13 @@
   "nom": "Damien Jalet",
   "sorties": [
    "thrice"
+  ]
+ },
+ "damso": {
+  "nom": "Damso",
+  "sorties": [
+   "vu-damso-la-defense-arena-2026",
+   "vu-solidays-2025"
   ]
  },
  "daniel-jeanneteau": {
@@ -943,6 +1037,24 @@
   "sorties": [
    "le-cid",
    "vu-le-soulier-de-satin"
+  ]
+ },
+ "diplo": {
+  "nom": "Diplo",
+  "sorties": [
+   "vu-diplo-magazzini-generali-2024"
+  ]
+ },
+ "disclosure": {
+  "nom": "Disclosure",
+  "sorties": [
+   "vu-we-love-green-2022"
+  ]
+ },
+ "disiz": {
+  "nom": "Disiz",
+  "sorties": [
+   "vu-theodora-zenith-2026"
   ]
  },
  "dmitri-chostakovitch": {
@@ -1088,6 +1200,12 @@
    "le-serment-d-europe"
   ]
  },
+ "emmanuelle-fournier-lorentz": {
+  "nom": "Emmanuelle Fournier-Lorentz",
+  "sorties": [
+   "vu-art-majeur"
+  ]
+ },
  "emmanuelle-lafon": {
   "nom": "Emmanuelle Lafon",
   "sorties": [
@@ -1139,6 +1257,12 @@
    "esdeekid"
   ]
  },
+ "etienne-daho": {
+  "nom": "Étienne Daho",
+  "sorties": [
+   "vu-etienne-daho-accor-arena-2023"
+  ]
+ },
  "eugene-ionesco": {
   "nom": "Eugène Ionesco",
   "sorties": [
@@ -1169,6 +1293,12 @@
    "romeo-et-juliette-jolly"
   ]
  },
+ "fave": {
+  "nom": "Favé",
+  "sorties": [
+   "vu-solidays-2023"
+  ]
+ },
  "florence-viala": {
   "nom": "Florence Viala",
   "sorties": [
@@ -1188,6 +1318,12 @@
   "nom": "Florian Zeller",
   "sorties": [
    "le-pere"
+  ]
+ },
+ "fontaines-d-c": {
+  "nom": "Fontaines D.C.",
+  "sorties": [
+   "vu-rock-en-seine-2025"
   ]
  },
  "fouad-boussouf": {
@@ -1229,10 +1365,22 @@
    "vu-lavare"
   ]
  },
+ "fred-again": {
+  "nom": "Fred again..",
+  "sorties": [
+   "vu-rock-en-seine-2022"
+  ]
+ },
  "frederick-ashton": {
   "nom": "Frederick Ashton",
   "sorties": [
    "la-fille-mal-gardee"
+  ]
+ },
+ "freeze-corleone": {
+  "nom": "Freeze Corleone",
+  "sorties": [
+   "vu-central-cee-zenith-2022"
   ]
  },
  "freiburger-barockorchester": {
@@ -1269,6 +1417,12 @@
   "nom": "Gautier Capuçon",
   "sorties": [
    "makela-argerich-capucon-triple-concerto"
+  ]
+ },
+ "gazo": {
+  "nom": "Gazo",
+  "sorties": [
+   "vu-we-love-green-2023"
   ]
  },
  "georg-friedrich-haendel": {
@@ -1345,6 +1499,18 @@
    "vu-les-fourberies-de-scapin",
    "vu-une-mouette",
    "vu-willy-protagoras-enferme-dans-les-toilettes"
+  ]
+ },
+ "gilles-leroy": {
+  "nom": "Gilles Leroy",
+  "sorties": [
+   "vu-art-majeur"
+  ]
+ },
+ "gims": {
+  "nom": "Gims",
+  "sorties": [
+   "vu-solidays-2025"
   ]
  },
  "gioachino-rossini": {
@@ -1424,6 +1590,12 @@
    "thesee-sa-vie-nouvelle"
   ]
  },
+ "gwendoline": {
+  "nom": "Gwendoline",
+  "sorties": [
+   "vu-solidays-2023"
+  ]
+ },
  "gwendoline-hamon": {
   "nom": "Gwendoline Hamon",
   "sorties": [
@@ -1434,6 +1606,12 @@
   "nom": "H. K. Gruber",
   "sorties": [
    "les-sept-peches-capitaux"
+  ]
+ },
+ "hamza": {
+  "nom": "Hamza",
+  "sorties": [
+   "vu-solidays-2023"
   ]
  },
  "hanna-elisabeth-muller": {
@@ -1533,6 +1711,12 @@
    "miroir-de-nos-peines"
   ]
  },
+ "ino-casablanca": {
+  "nom": "Ino Casablanca",
+  "sorties": [
+   "vu-theodora-zenith-2026"
+  ]
+ },
  "irenee-rohrbach": {
   "nom": "Irénée Rohrbach",
   "sorties": [
@@ -1568,6 +1752,12 @@
   "nom": "Ivo van Hove",
   "sorties": [
    "tartuffe-van-hove"
+  ]
+ },
+ "j-balvin": {
+  "nom": "J Balvin",
+  "sorties": [
+   "vu-solidays-2023"
   ]
  },
  "jaap-van-zweden": {
@@ -1612,10 +1802,22 @@
    "la-cerisaie"
   ]
  },
+ "jain": {
+  "nom": "Jain",
+  "sorties": [
+   "vu-solidays-2023"
+  ]
+ },
  "jamie-barton": {
   "nom": "Jamie Barton",
   "sorties": [
    "dipus-rex"
+  ]
+ },
+ "jason-derulo": {
+  "nom": "Jason Derulo",
+  "sorties": [
+   "vu-jason-derulo-just-me-2026"
   ]
  },
  "jean-chevalier": {
@@ -1738,6 +1940,12 @@
    "lso-rattle-john-adams"
   ]
  },
+ "jok-air": {
+  "nom": "Jok’Air",
+  "sorties": [
+   "vu-solidays-2023"
+  ]
+ },
  "jolente-de-keersmaeker": {
   "nom": "Jolente De Keersmaeker",
   "sorties": [
@@ -1785,6 +1993,12 @@
   "nom": "Josette Baïz",
   "sorties": [
    "un-coin-de-paradis"
+  ]
+ },
+ "josman": {
+  "nom": "Josman",
+  "sorties": [
+   "vu-solidays-2023"
   ]
  },
  "juan-diego-florez": {
@@ -1855,6 +2069,20 @@
    "maldoror"
   ]
  },
+ "julien-granel": {
+  "nom": "Julien Granel",
+  "sorties": [
+   "vu-solidays-2023"
+  ]
+ },
+ "juliette-armanet": {
+  "nom": "Juliette Armanet",
+  "sorties": [
+   "vu-solidays-2023",
+   "vu-theodora-zenith-2026",
+   "vu-we-love-green-2022"
+  ]
+ },
  "juliette-binoche": {
   "nom": "Juliette Binoche",
   "sorties": [
@@ -1871,6 +2099,13 @@
   "nom": "Justine Heynemann",
   "sorties": [
    "vu-orso-et-moi"
+  ]
+ },
+ "kalash": {
+  "nom": "Kalash",
+  "sorties": [
+   "vu-fete-de-l-humanite-2025",
+   "vu-solidays-2025"
   ]
  },
  "kammerorchester-basel": {
@@ -1907,6 +2142,18 @@
    "missa-solemnis-makela"
   ]
  },
+ "kneecap": {
+  "nom": "Kneecap",
+  "sorties": [
+   "vu-rock-en-seine-2025"
+  ]
+ },
+ "knxwledge": {
+  "nom": "Knxwledge",
+  "sorties": [
+   "vu-we-love-green-2023"
+  ]
+ },
  "krystian-lupa": {
   "nom": "Krystian Lupa",
   "sorties": [
@@ -1919,16 +2166,35 @@
    "lady-macbeth-de-mzensk"
   ]
  },
+ "kungs": {
+  "nom": "Kungs",
+  "sorties": [
+   "vu-kungs-fete-de-la-musique-2024",
+   "vu-solidays-2023"
+  ]
+ },
  "kurt-weill": {
   "nom": "Kurt Weill",
   "sorties": [
    "les-sept-peches-capitaux"
   ]
  },
+ "la-femme": {
+  "nom": "La Femme",
+  "sorties": [
+   "vu-solidays-2023"
+  ]
+ },
  "la-horde": {
   "nom": "(LA)HORDE",
   "sorties": [
    "vu-apres-moi-le-deluge"
+  ]
+ },
+ "la-mano-1-9": {
+  "nom": "La Mano 1.9",
+  "sorties": [
+   "vu-solidays-2025"
   ]
  },
  "la-ribot": {
@@ -2161,6 +2427,12 @@
    "romeo-et-juliette-steibelt"
   ]
  },
+ "leto": {
+  "nom": "Leto",
+  "sorties": [
+   "vu-solidays-2025"
+  ]
+ },
  "levy-sekgapane": {
   "nom": "Levy Sekgapane",
   "sorties": [
@@ -2221,11 +2493,23 @@
    "la-fournaise"
   ]
  },
+ "lomepal": {
+  "nom": "Lomepal",
+  "sorties": [
+   "vu-we-love-green-2023"
+  ]
+ },
  "london-symphony-orchestra": {
   "nom": "London Symphony Orchestra",
   "sorties": [
    "lso-pappano-vengerov",
    "lso-rattle-john-adams"
+  ]
+ },
+ "lorenzo": {
+  "nom": "Lorenzo",
+  "sorties": [
+   "vu-we-love-green-2023"
   ]
  },
  "lorenzo-passerini": {
@@ -2263,6 +2547,12 @@
   "nom": "Louisa Proske",
   "sorties": [
    "don-giovanni"
+  ]
+ },
+ "louise-attaque": {
+  "nom": "Louise Attaque",
+  "sorties": [
+   "vu-solidays-2024"
   ]
  },
  "louise-hemon": {
@@ -2364,6 +2654,12 @@
   "nom": "Marco Armiliato",
   "sorties": [
    "anna-netrebko-brian-jagde-george-petean"
+  ]
+ },
+ "marco-poingt": {
+  "nom": "Marco Poingt",
+  "sorties": [
+   "vu-gala-talents-du-coeur-gaveau-2026"
   ]
  },
  "marcus-lindeen": {
@@ -2477,6 +2773,12 @@
    "pulsations-childs"
   ]
  },
+ "martin-garrix": {
+  "nom": "Martin Garrix",
+  "sorties": [
+   "vu-solidays-2024"
+  ]
+ },
  "mathieu-romano": {
   "nom": "Mathieu Romano",
   "sorties": [
@@ -2539,6 +2841,12 @@
    "vu-bestioles"
   ]
  },
+ "meryl": {
+  "nom": "Meryl",
+  "sorties": [
+   "vu-solidays-2023"
+  ]
+ },
  "micha-lescot": {
   "nom": "Micha Lescot",
   "sorties": [
@@ -2586,6 +2894,24 @@
   "nom": "Michel Vuillermoz",
   "sorties": [
    "vu-angels-in-america"
+  ]
+ },
+ "miel-de-montagne": {
+  "nom": "Miel de Montagne",
+  "sorties": [
+   "vu-solidays-2023"
+  ]
+ },
+ "mika": {
+  "nom": "Mika",
+  "sorties": [
+   "vu-mika-chalons-2023"
+  ]
+ },
+ "miki": {
+  "nom": "Miki",
+  "sorties": [
+   "vu-miki-elysee-montmartre-2026"
   ]
  },
  "milo-rau": {
@@ -2759,6 +3085,12 @@
    "les-sept-peches-capitaux"
   ]
  },
+ "niska": {
+  "nom": "Niska",
+  "sorties": [
+   "vu-solidays-2025"
+  ]
+ },
  "noam-morgensztern": {
   "nom": "Noam Morgensztern",
   "sorties": [
@@ -2783,6 +3115,12 @@
   "nom": "Nono la Grinta",
   "sorties": [
    "nono"
+  ]
+ },
+ "nxworries": {
+  "nom": "NxWorries",
+  "sorties": [
+   "vu-we-love-green-2023"
   ]
  },
  "olga-kulchynska": {
@@ -2861,10 +3199,22 @@
    "mahler-2-van-zweden"
   ]
  },
+ "orelsan": {
+  "nom": "Orelsan",
+  "sorties": [
+   "vu-we-love-green-2023"
+  ]
+ },
  "pablo-gisbert": {
   "nom": "Pablo Gisbert",
   "sorties": [
    "vu-lexikon"
+  ]
+ },
+ "parcels": {
+  "nom": "Parcels",
+  "sorties": [
+   "vu-rock-en-seine-2022"
   ]
  },
  "pascal-dusapin": {
@@ -2895,6 +3245,12 @@
   "nom": "Pauline Clément",
   "sorties": [
    "l-ecole-de-danse"
+  ]
+ },
+ "pauline-delabroy-allard": {
+  "nom": "Pauline Delabroy-Allard",
+  "sorties": [
+   "vu-art-majeur"
   ]
  },
  "pavel-cernoch": {
@@ -2946,6 +3302,12 @@
    "le-discours-d-un-roi"
   ]
  },
+ "phoenix": {
+  "nom": "Phoenix",
+  "sorties": [
+   "vu-we-love-green-2023"
+  ]
+ },
  "pierre-andre-weitz": {
   "nom": "Pierre-André Weitz",
   "sorties": [
@@ -2966,6 +3328,12 @@
    "vu-le-cid"
   ]
  },
+ "pierre-marie-braye-weppe": {
+  "nom": "Pierre-Marie Braye-Weppe",
+  "sorties": [
+   "vu-art-majeur"
+  ]
+ },
  "pietro-spagnoli": {
   "nom": "Pietro Spagnoli",
   "sorties": [
@@ -2984,10 +3352,24 @@
    "makela-argerich-capucon-triple-concerto"
   ]
  },
+ "plk": {
+  "nom": "PLK",
+  "sorties": [
+   "vu-we-love-green-2023"
+  ]
+ },
+ "pnl": {
+  "nom": "PNL",
+  "sorties": [
+   "vu-we-love-green-2022"
+  ]
+ },
  "pomme": {
   "nom": "Pomme",
   "sorties": [
-   "le-petit-cirque"
+   "le-petit-cirque",
+   "vu-solidays-2024",
+   "vu-we-love-green-2023"
   ]
  },
  "pretty-yende": {
@@ -2995,6 +3377,12 @@
   "sorties": [
    "l-elixir-d-amour",
    "les-pecheurs-de-perles"
+  ]
+ },
+ "queens-of-the-stone-age": {
+  "nom": "Queens of the Stone Age",
+  "sorties": [
+   "vu-rock-en-seine-2025"
   ]
  },
  "quinn-kelsey": {
@@ -3074,6 +3462,12 @@
    "missa-solemnis-makela"
   ]
  },
+ "riles": {
+  "nom": "Rilès",
+  "sorties": [
+   "vu-solidays-2025"
+  ]
+ },
  "robert-carsen": {
   "nom": "Robert Carsen",
   "sorties": [
@@ -3116,6 +3510,12 @@
    "faust-castellucci"
   ]
  },
+ "rosalia": {
+  "nom": "Rosalía",
+  "sorties": [
+   "vu-rosalia-accor-arena-2026"
+  ]
+ },
  "rudolf-noureev": {
   "nom": "Rudolf Noureev",
   "sorties": [
@@ -3132,6 +3532,12 @@
   "nom": "Sacha Guitry",
   "sorties": [
    "la-jalousie"
+  ]
+ },
+ "saint-levant": {
+  "nom": "Saint Levant",
+  "sorties": [
+   "vu-solidays-2023"
   ]
  },
  "saioa-hernandez": {
@@ -3168,6 +3574,13 @@
   "nom": "Scali Delpeyrat",
   "sorties": [
    "j-ai-une-theorie"
+  ]
+ },
+ "sch": {
+  "nom": "SCH",
+  "sorties": [
+   "vu-solidays-2023",
+   "vu-solidays-2025"
   ]
  },
  "scott-gibbons": {
@@ -3234,10 +3647,22 @@
    "rituels-lifar"
   ]
  },
+ "shaka-ponk": {
+  "nom": "Shaka Ponk",
+  "sorties": [
+   "vu-solidays-2023"
+  ]
+ },
  "sharon-eyal": {
   "nom": "Sharon Eyal",
   "sorties": [
    "delay-the-sadness"
+  ]
+ },
+ "shay": {
+  "nom": "Shay",
+  "sorties": [
+   "vu-solidays-2025"
   ]
  },
  "simon-deletang": {
@@ -3250,6 +3675,12 @@
   "nom": "Simon Falguières",
   "sorties": [
    "la-rose-la-bete-et-l-enfant"
+  ]
+ },
+ "simon-johannin": {
+  "nom": "Simon Johannin",
+  "sorties": [
+   "vu-art-majeur"
   ]
  },
  "simon-rattle": {
@@ -3266,6 +3697,12 @@
    "deux-trois-choses-qu-elle-nous-dit-d-elle"
   ]
  },
+ "skrillex": {
+  "nom": "Skrillex",
+  "sorties": [
+   "vu-we-love-green-2023"
+  ]
+ },
  "sofia-andrukhovych": {
   "nom": "Sofia Andrukhovych",
   "sorties": [
@@ -3276,6 +3713,12 @@
   "nom": "Sofia Goubaïdoulina",
   "sorties": [
    "makela-argerich-capucon-triple-concerto"
+  ]
+ },
+ "sofiane-pamart": {
+  "nom": "Sofiane Pamart",
+  "sorties": [
+   "vu-solidays-2023"
   ]
  },
  "sol-leon": {
@@ -3373,10 +3816,22 @@
    "don-giovanni"
   ]
  },
+ "stereophonics": {
+  "nom": "Stereophonics",
+  "sorties": [
+   "vu-rock-en-seine-2025"
+  ]
+ },
  "steven-cohen": {
   "nom": "Steven Cohen",
   "sorties": [
    "steven-cohen-people-will-people-you"
+  ]
+ },
+ "stromae": {
+  "nom": "Stromae",
+  "sorties": [
+   "vu-rock-en-seine-2022"
   ]
  },
  "suliane-brahim": {
@@ -3451,10 +3906,35 @@
    "vu-1-2-3-pocquelin"
   ]
  },
+ "the-blaze": {
+  "nom": "The Blaze",
+  "sorties": [
+   "vu-we-love-green-2023"
+  ]
+ },
+ "the-cure": {
+  "nom": "The Cure",
+  "sorties": [
+   "vu-rock-en-seine-2026"
+  ]
+ },
+ "the-weeknd": {
+  "nom": "The Weeknd",
+  "sorties": [
+   "vu-the-weeknd-stade-de-france-2023"
+  ]
+ },
  "theatre-du-radeau": {
   "nom": "Théâtre du Radeau",
   "sorties": [
    "vu-par-autan"
+  ]
+ },
+ "theodora": {
+  "nom": "Theodora",
+  "sorties": [
+   "vu-fete-de-l-humanite-2025",
+   "vu-theodora-zenith-2026"
   ]
  },
  "thierry-hancisse": {
@@ -3506,6 +3986,12 @@
    "vu-la-distance"
   ]
  },
+ "tiakola": {
+  "nom": "Tiakola",
+  "sorties": [
+   "vu-solidays-2023"
+  ]
+ },
  "timur-zangiev": {
   "nom": "Timur Zangiev",
   "sorties": [
@@ -3522,6 +4008,12 @@
   "nom": "Tony Kushner",
   "sorties": [
    "vu-angels-in-america"
+  ]
+ },
+ "toto": {
+  "nom": "Toto",
+  "sorties": [
+   "vu-toto-orange-2024"
   ]
  },
  "trisha-brown-dance-company": {
@@ -3549,10 +4041,28 @@
    "les-surs-hilton"
   ]
  },
+ "vanessa-paradis": {
+  "nom": "Vanessa Paradis",
+  "sorties": [
+   "vu-etienne-daho-accor-arena-2023"
+  ]
+ },
  "vannina-santoni": {
   "nom": "Vannina Santoni",
   "sorties": [
    "miroir-de-nos-peines"
+  ]
+ },
+ "vegedream": {
+  "nom": "Vegedream",
+  "sorties": [
+   "vu-vegedream-yoyo-2025"
+  ]
+ },
+ "vendredi-sur-mer": {
+  "nom": "Vendredi sur Mer",
+  "sorties": [
+   "vu-rock-en-seine-2022"
   ]
  },
  "veronique-vella": {
@@ -3584,12 +4094,24 @@
    "le-carnaval-baroque"
   ]
  },
+ "vladimir-cauchemar": {
+  "nom": "Vladimir Cauchemar",
+  "sorties": [
+   "vu-solidays-2023"
+  ]
+ },
  "wajdi-mouawad": {
   "nom": "Wajdi Mouawad",
   "sorties": [
    "idomeneo",
    "le-serment-d-europe",
    "vu-willy-protagoras-enferme-dans-les-toilettes"
+  ]
+ },
+ "werenoi": {
+  "nom": "Werenoi",
+  "sorties": [
+   "vu-solidays-2025"
   ]
  },
  "wiebke-lehmkuhl": {
@@ -3651,6 +4173,24 @@
   "sorties": [
    "le-trouvere",
    "turandot"
+  ]
+ },
+ "zaho-de-sagazan": {
+  "nom": "Zaho de Sagazan",
+  "sorties": [
+   "vu-solidays-2023"
+  ]
+ },
+ "ziak": {
+  "nom": "Ziak",
+  "sorties": [
+   "vu-solidays-2023"
+  ]
+ },
+ "zola": {
+  "nom": "Zola",
+  "sorties": [
+   "vu-zola-biko-2024"
   ]
  },
  "zurcher-sing-akademie": {
