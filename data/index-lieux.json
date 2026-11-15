@@ -13,7 +13,6 @@
  "avignon-off": {
   "sorties": [
    "toute-l-histoire-de-la-peinture-en-moins-de-2-heures-parcours-rembrandt",
-   "vu-1-2-3-pocquelin",
    "vu-alors-on-en-est-ou",
    "vu-antigone",
    "vu-autopsie-dune-photo-de-famille",
@@ -135,6 +134,7 @@
  },
  "festival-avignon": {
   "sorties": [
+   "vu-1-2-3-pocquelin",
    "vu-brel",
    "vu-la-distance",
    "vu-la-parabole-du-seum-avignon",

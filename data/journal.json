@@ -87,17 +87,34 @@
   },
   {
    "id": "vu-1-2-3-pocquelin",
-   "titre": "1, 2, 3… Pocquelin",
+   "titre": "1, 2, 3 Poquelin",
    "categorie": "Théâtre",
-   "artistes": [],
-   "lieuId": "avignon-off",
-   "salle": "",
-   "debut": null,
-   "fin": null,
+   "artistes": [
+    {
+     "nom": "Molière",
+     "role": "auteur"
+    },
+    {
+     "nom": "tg STAN",
+     "role": "compagnie"
+    },
+    {
+     "nom": "Jolente De Keersmaeker",
+     "role": "interprète"
+    },
+    {
+     "nom": "Damiaan De Schrijver",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "festival-avignon",
+   "salle": "Carrière de Boulbon",
+   "debut": "2026-07-13",
+   "fin": "2026-07-25",
    "note": 0,
    "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
+   "pourquoi": "Le collectif flamand tg STAN reprend ses Poquelin : huit acteurs pour une quarantaine de personnages de Molière.",
+   "lien": "https://festival-avignon.com/fr/edition-2026/programmation/1-2-3-poquelin-355193",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
@@ -107,7 +124,12 @@
    ],
    "noteLeonard": null,
    "avis": "",
-   "offres": []
+   "offres": [],
+   "horaires": "21h",
+   "relaches": [
+    "2026-07-15",
+    "2026-07-20"
+   ]
   },
   {
    "id": "vu-alors-on-en-est-ou",
