@@ -1920,7 +1920,20 @@
    "id": "vu-lexperience-theatrale",
    "titre": "L’Expérience théâtrale",
    "categorie": "Théâtre",
-   "artistes": [],
+   "artistes": [
+    {
+     "nom": "Laurent Ruquier",
+     "role": "auteur"
+    },
+    {
+     "nom": "François Berléand",
+     "role": "artiste"
+    },
+    {
+     "nom": "Max Boublil",
+     "role": "artiste"
+    }
+   ],
    "lieuId": "theatre-de-la-michodiere",
    "salle": "",
    "debut": null,
@@ -1938,7 +1951,8 @@
    ],
    "noteLeonard": null,
    "avis": "",
-   "offres": []
+   "offres": [],
+   "sousGenre": ""
   },
   {
    "id": "vu-lights-on-chaplin",
