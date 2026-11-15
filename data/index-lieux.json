@@ -2,12 +2,21 @@
  "accor-arena": {
   "sorties": [
    "tame-impala",
+   "vu-adele-bercy-2016",
+   "vu-celine-dion-bercy-2016",
    "vu-etienne-daho-accor-arena-2023",
+   "vu-mika-bercy-2019",
    "vu-rosalia-accor-arena-2026"
   ]
  },
  "adidas-arena": {
   "sorties": []
+ },
+ "alhambra": {
+  "sorties": [
+   "vu-anne-roumanoff-aimons-nous",
+   "vu-marc-antoine-le-bret-nouveau-spectacle"
+  ]
  },
  "arci-biko": {
   "sorties": [
@@ -72,6 +81,7 @@
  "bouffes-parisiens": {
   "sorties": [
    "concert-tres-chic",
+   "vu-le-fusible",
    "vu-un-tramway-nomme-desir"
   ]
  },
@@ -97,7 +107,8 @@
   "sorties": [
    "les-miserables",
    "vu-cosi-fan-tutte",
-   "vu-la-vie-parisienne"
+   "vu-la-vie-parisienne",
+   "vu-un-americain-a-paris"
   ]
  },
  "comedie-des-champs-elysees": {
@@ -143,6 +154,11 @@
    "vu-les-bonnes",
    "vu-les-fourberies-de-scapin",
    "vu-une-mouette"
+  ]
+ },
+ "docks-le-havre": {
+  "sorties": [
+   "vu-david-castello-lopes-le-havre"
   ]
  },
  "duc-des-lombards": {
@@ -209,7 +225,9 @@
   ]
  },
  "la-cigale": {
-  "sorties": []
+  "sorties": [
+   "vu-jean-luc-lemoine-si-vous-avez-manque-le-debut"
+  ]
  },
  "la-colline": {
   "sorties": [
@@ -229,6 +247,11 @@
  "la-fenice": {
   "sorties": [
    "vu-le-barbier-de-seville"
+  ]
+ },
+ "la-petite-loge": {
+  "sorties": [
+   "vu-un-stand-up-de-bonne-qualite"
   ]
  },
  "le-splendid": {
@@ -424,7 +447,9 @@
   ]
  },
  "salle-pleyel": {
-  "sorties": []
+  "sorties": [
+   "vu-patrick-timsit-on-ne-peut-pas-rire-de-tout"
+  ]
  },
  "sciences-po": {
   "sorties": [
@@ -433,7 +458,8 @@
  },
  "seine-musicale": {
   "sorties": [
-   "vu-bejart-et-nous-loiseau-de-feu-bolero"
+   "vu-bejart-et-nous-loiseau-de-feu-bolero",
+   "vu-west-side-story-seine-musicale"
   ]
  },
  "solidays": {
@@ -537,10 +563,21 @@
    "tout-doit-disparaitre"
   ]
  },
+ "theatre-de-la-madeleine": {
+  "sorties": [
+   "vu-l-invitation"
+  ]
+ },
  "theatre-de-la-michodiere": {
   "sorties": [
    "la-jalousie",
-   "vu-lexperience-theatrale"
+   "vu-lexperience-theatrale",
+   "vu-nuit-d-ivresse"
+  ]
+ },
+ "theatre-de-la-tour-eiffel": {
+  "sorties": [
+   "vu-christelle-chollet-n5-de-chollet"
   ]
  },
  "theatre-de-la-ville": {
@@ -591,7 +628,8 @@
  },
  "theatre-mogador": {
   "sorties": [
-   "le-roi-lion"
+   "le-roi-lion",
+   "vu-grease-mogador"
   ]
  },
  "theatre-montparnasse": {

@@ -52,9 +52,9 @@ Référence vivante : la page `#charte` (imprimable en PDF). Toute modification 
   | `lyrique` | Opéra, Comédie musicale | #1F5FA8 / #8DB8F2 (bleu de Prusse) | #1F5FA8 |
   | `concert` | Concert, Récital | #00695C / #4FC3A1 (vert sapin) | #00695C |
   | `danse` | Danse | #946200 / #E8B04A (ocre) | #946200 |
-  | `neutre` | Exposition, Cinéma, Festival, Événement, Sur scène, Autre | encre | rouge |
+  | `neutre` | Humour, Exposition, Cinéma, Festival, Événement, Sur scène, Autre | encre | rouge |
 
-  Ordre des genres (`CATS`) : Théâtre, Opéra, Concert, Récital, Danse, Comédie musicale, puis les autres (la veille de concerts arrive : Concert suit Opéra).
+  Ordre des genres (`CATS`) : Théâtre, Opéra, Concert, Récital, Danse, Comédie musicale, Humour, puis les autres (la veille de concerts arrive : Concert suit Opéra).
 
   Jamais d'aplat de genre ailleurs, jamais de couleur de genre sur le rouge ; le rouge reste aux actions, aux notes, à la sélection et aux bandeaux.
   Contrastes WCAG AA vérifiés par `tools/contrast.mjs` (appelé par `check.mjs`).
@@ -76,7 +76,7 @@ Référence vivante : la page `#charte` (imprimable en PDF). Toute modification 
  "offres":[{"type":"Avant-première jeunes","date":"2027-01-25","tarif":"10 €","vente":"2027-01-07T12:00","venteApprox":false,"condition":"Moins de 28 ans"}]}
 ```
 - `id` : minuscules, chiffres, tirets, unique entre affiche et journal. Les vus anciens sont préfixés `vu-`. Un id ne change jamais (réservations, envies et liens en dépendent).
-- `categorie` ∈ Théâtre, Opéra, Danse, Comédie musicale, Récital, Concert, Festival, Exposition, Cinéma, Événement, Sur scène (représentations de Léonard), Autre. `sousGenre` libre (Cirque, Version de concert, Salon, Visite…).
+- `categorie` ∈ Théâtre, Opéra, Danse, Comédie musicale, Humour (stand-up, one-man-show, imitations), Récital, Concert, Festival, Exposition, Cinéma, Événement, Sur scène (représentations de Léonard), Autre. `sousGenre` libre (Cirque, Version de concert, Salon, Visite…).
 - `artistes[].role` ∈ auteur, compositeur, mise en scène, chorégraphie, direction musicale, interprète, commissaire, réalisation, compagnie, artiste (en cas de doute). Une seule graphie par artiste : nom complet, accents, apostrophe ’ (vérifie `data/index-artistes.json` avant d'ajouter un nom).
 - `lieuId` doit exister dans `lieux.json` (sinon ajoute le lieu). `null` toléré seulement dans le journal.
 - `datesTexte` (facultatif) : dates en clair quand `debut`/`fin` ne suffisent pas. `horaires` (facultatif) : heures, durée, matinées.

@@ -1,7 +1,7 @@
 /* Factotum – interface publique (lots 2 et 3). Aucune dépendance. Le mode admin est dans assets/admin.js, chargé à la demande. */
 "use strict";
 const OWNER = "Léonard";
-const CATS = ["Théâtre", "Opéra", "Concert", "Récital", "Danse", "Comédie musicale", "Festival", "Exposition", "Cinéma", "Événement", "Sur scène", "Autre"];
+const CATS = ["Théâtre", "Opéra", "Concert", "Récital", "Danse", "Comédie musicale", "Humour", "Festival", "Exposition", "Cinéma", "Événement", "Sur scène", "Autre"];
 const ROLES = ["auteur", "compositeur", "mise en scène", "chorégraphie", "direction musicale", "réalisation", "commissaire", "compagnie", "interprète", "artiste"];
 const CAT_LIENS = ["Billetteries", "Cartes et tarifs jeunes", "Calendriers de vente", "Outils"];
 const MOIS = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."];
@@ -50,6 +50,7 @@ const ICO = {
   "Comédie musicale": "<path d=\"M1.5 7H12v4.5a5.25 5.25 0 0 1-10.5 0z\"/><path d=\"M3.9 9.4h2M7.6 9.4h2M4.75 12.2a3 3 0 0 0 4 0\" stroke-linecap=\"butt\"/><path d=\"M18 16.94V3.5M18 3.5c0 3 3.4 3.5 3.4 7.5\" stroke-linecap=\"butt\"/><ellipse cx=\"16.4\" cy=\"17.4\" rx=\"2.7\" ry=\"1.95\" transform=\"rotate(-22 16.4 17.4)\" fill=\"currentColor\" stroke=\"none\"/>",
   "Récital": "<path d=\"M4 3h5c0 7 11 6 11 13v5H4zM4 17h16M8 17v4M12 17v4M16 17v4\"/>",
   "Concert": "<path d=\"M8 17.74V6.4l10-2v11.34\" stroke-linecap=\"butt\"/><ellipse cx=\"6.4\" cy=\"18.2\" rx=\"2.7\" ry=\"1.95\" transform=\"rotate(-22 6.4 18.2)\" fill=\"currentColor\" stroke=\"none\"/><ellipse cx=\"16.4\" cy=\"16.2\" rx=\"2.7\" ry=\"1.95\" transform=\"rotate(-22 16.4 16.2)\" fill=\"currentColor\" stroke=\"none\"/>",
+  "Humour": "<path d=\"M9 2h6v9H9zM12 13v6M7 21h10\"/>",
   "Festival": "<path d=\"M3.6 20 12 6.6 20.4 20M10 20l2-4.5 2 4.5M12 6.6V3\" stroke-linecap=\"butt\"/><path d=\"M12 2h4.5v3H12z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M2 20h20\"/>",
   "Exposition": "<path d=\"M3 4h18v16H3zM7 8h10v8H7z\"/>",
   "Cinéma": "<path d=\"M3 10h18v10H3zM3 5h18v5H3z\"/><path d=\"M9.5 5 7 10M15.5 5 13 10\" stroke-linecap=\"butt\"/>",
@@ -970,7 +971,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.37"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.38"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -988,7 +989,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.37"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.38"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }

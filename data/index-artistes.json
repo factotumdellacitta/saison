@@ -6,6 +6,12 @@
    "vu-le-proces-pelicot"
   ]
  },
+ "adele": {
+  "nom": "Adele",
+  "sorties": [
+   "vu-adele-bercy-2016"
+  ]
+ },
  "adele-charvet": {
   "nom": "Adèle Charvet",
   "sorties": [
@@ -282,6 +288,12 @@
    "a-la-renverse"
   ]
  },
+ "anne-roumanoff": {
+  "nom": "Anne Roumanoff",
+  "sorties": [
+   "vu-anne-roumanoff-aimons-nous"
+  ]
+ },
  "anne-teresa-de-keersmaeker": {
   "nom": "Anne Teresa De Keersmaeker",
   "sorties": [
@@ -357,6 +369,18 @@
   "sorties": [
    "vu-angels-in-america",
    "vu-la-musica-deuxieme"
+  ]
+ },
+ "arnaud-gidoin": {
+  "nom": "Arnaud Gidoin",
+  "sorties": [
+   "vu-le-fusible"
+  ]
+ },
+ "arthur-jugnot": {
+  "nom": "Arthur Jugnot",
+  "sorties": [
+   "vu-le-fusible"
   ]
  },
  "ascendant-vierge": {
@@ -679,6 +703,12 @@
    "vu-la-parabole-du-seum-avignon"
   ]
  },
+ "celine-dion": {
+  "nom": "Céline Dion",
+  "sorties": [
+   "vu-celine-dion-bercy-2016"
+  ]
+ },
  "central-cee": {
   "nom": "Central Cee",
   "sorties": [
@@ -745,6 +775,12 @@
   "nom": "Chœur de Radio France",
   "sorties": [
    "mahler-2-van-zweden"
+  ]
+ },
+ "christelle-chollet": {
+  "nom": "Christelle Chollet",
+  "sorties": [
+   "vu-christelle-chollet-n5-de-chollet"
   ]
  },
  "christian-gonon": {
@@ -817,6 +853,12 @@
   "nom": "Christopher Maltman",
   "sorties": [
    "la-walkyrie"
+  ]
+ },
+ "christopher-wheeldon": {
+  "nom": "Christopher Wheeldon",
+  "sorties": [
+   "vu-un-americain-a-paris"
   ]
  },
  "christos-papadopoulos": {
@@ -1011,6 +1053,13 @@
   "nom": "David Bobée",
   "sorties": [
    "lorenzaccio"
+  ]
+ },
+ "david-castello-lopes": {
+  "nom": "David Castello-Lopes",
+  "sorties": [
+   "vu-david-castello-lopes-le-havre",
+   "vu-un-stand-up-de-bonne-qualite"
   ]
  },
  "davide-luciano": {
@@ -1263,6 +1312,12 @@
    "esdeekid"
   ]
  },
+ "estelle-lefebure": {
+  "nom": "Estelle Lefébure",
+  "sorties": [
+   "vu-l-invitation"
+  ]
+ },
  "etienne-daho": {
   "nom": "Étienne Daho",
   "sorties": [
@@ -1455,6 +1510,12 @@
    "histoire-du-soldat"
   ]
  },
+ "george-gershwin": {
+  "nom": "George Gershwin",
+  "sorties": [
+   "vu-un-americain-a-paris"
+  ]
+ },
  "george-petean": {
   "nom": "George Petean",
   "sorties": [
@@ -1570,6 +1631,12 @@
    "resurrection-un-cas-de-conscience"
   ]
  },
+ "guillaume-pouget-abadie": {
+  "nom": "Guillaume Pouget-Abadie",
+  "sorties": [
+   "vu-un-stand-up-de-bonne-qualite"
+  ]
+ },
  "guillaume-vincent": {
   "nom": "Guillaume Vincent",
   "sorties": [
@@ -1618,6 +1685,12 @@
   "nom": "H. K. Gruber",
   "sorties": [
    "les-sept-peches-capitaux"
+  ]
+ },
+ "hadrien-raccah": {
+  "nom": "Hadrien Raccah",
+  "sorties": [
+   "vu-l-invitation"
   ]
  },
  "hamza": {
@@ -1857,6 +1930,18 @@
    "vu-les-bonnes"
   ]
  },
+ "jean-luc-lemoine": {
+  "nom": "Jean-Luc Lemoine",
+  "sorties": [
+   "vu-jean-luc-lemoine-si-vous-avez-manque-le-debut"
+  ]
+ },
+ "jean-luc-reichmann": {
+  "nom": "Jean-Luc Reichmann",
+  "sorties": [
+   "vu-nuit-d-ivresse"
+  ]
+ },
  "jean-philippe-daguerre": {
   "nom": "Jean-Philippe Daguerre",
   "sorties": [
@@ -1916,6 +2001,18 @@
    "vu-la-puce-a-loreille"
   ]
  },
+ "jerome-robbins": {
+  "nom": "Jerome Robbins",
+  "sorties": [
+   "vu-west-side-story-seine-musicale"
+  ]
+ },
+ "jim-jacobs": {
+  "nom": "Jim Jacobs",
+  "sorties": [
+   "vu-grease-mogador"
+  ]
+ },
  "jo-kanamori": {
   "nom": "Jo Kanamori",
   "sorties": [
@@ -1932,6 +2029,12 @@
   "nom": "Joe Hisaishi",
   "sorties": [
    "joe-hisaishi-symphonique"
+  ]
+ },
+ "joey-mckneely": {
+  "nom": "Joey McKneely",
+  "sorties": [
+   "vu-west-side-story-seine-musicale"
   ]
  },
  "johan-inger": {
@@ -2005,6 +2108,12 @@
   "nom": "Josette Baïz",
   "sorties": [
    "un-coin-de-paradis"
+  ]
+ },
+ "josiane-balasko": {
+  "nom": "Josiane Balasko",
+  "sorties": [
+   "vu-nuit-d-ivresse"
   ]
  },
  "josman": {
@@ -2390,6 +2499,12 @@
    "resurrection-un-cas-de-conscience"
   ]
  },
+ "leonard-bernstein": {
+  "nom": "Leonard Bernstein",
+  "sorties": [
+   "vu-west-side-story-seine-musicale"
+  ]
+ },
  "leonard-matton": {
   "nom": "Léonard Matton",
   "sorties": [
@@ -2643,6 +2758,12 @@
    "vu-sylvia-bal-de-l-x-2025"
   ]
  },
+ "marc-antoine-le-bret": {
+  "nom": "Marc-Antoine Le Bret",
+  "sorties": [
+   "vu-marc-antoine-le-bret-nouveau-spectacle"
+  ]
+ },
  "marc-leroy-calatayud": {
   "nom": "Marc Leroy-Calatayud",
   "sorties": [
@@ -2791,6 +2912,12 @@
    "vu-solidays-2024"
   ]
  },
+ "martin-michel": {
+  "nom": "Martin Michel",
+  "sorties": [
+   "vu-grease-mogador"
+  ]
+ },
  "mathieu-romano": {
   "nom": "Mathieu Romano",
   "sorties": [
@@ -2917,6 +3044,7 @@
  "mika": {
   "nom": "Mika",
   "sorties": [
+   "vu-mika-bercy-2019",
    "vu-mika-chalons-2023"
   ]
  },
@@ -3129,6 +3257,12 @@
    "nono"
   ]
  },
+ "nora-hamzawi": {
+  "nom": "Nora Hamzawi",
+  "sorties": [
+   "vu-nora-hamzawi"
+  ]
+ },
  "nxworries": {
   "nom": "NxWorries",
   "sorties": [
@@ -3235,10 +3369,22 @@
    "heaven-hell"
   ]
  },
+ "patrick-chesnais": {
+  "nom": "Patrick Chesnais",
+  "sorties": [
+   "vu-l-invitation"
+  ]
+ },
  "patrick-pineau": {
   "nom": "Patrick Pineau",
   "sorties": [
    "ellen-babic"
+  ]
+ },
+ "patrick-timsit": {
+  "nom": "Patrick Timsit",
+  "sorties": [
+   "vu-patrick-timsit-on-ne-peut-pas-rire-de-tout"
   ]
  },
  "paul-claudel": {
@@ -3300,6 +3446,12 @@
   "nom": "Philippe Jaroussky",
   "sorties": [
    "rinaldo"
+  ]
+ },
+ "philippe-lellouche": {
+  "nom": "Philippe Lellouche",
+  "sorties": [
+   "vu-l-invitation"
   ]
  },
  "philippe-quesne": {
@@ -3806,6 +3958,12 @@
    "robert-badinter-l-enrage-de-justice"
   ]
  },
+ "stephane-plaza": {
+  "nom": "Stéphane Plaza",
+  "sorties": [
+   "vu-le-fusible"
+  ]
+ },
  "stephane-varupenne": {
   "nom": "Stéphane Varupenne",
   "sorties": [
@@ -3825,6 +3983,12 @@
   "nom": "Stephanie Childress",
   "sorties": [
    "don-giovanni"
+  ]
+ },
+ "stephen-sondheim": {
+  "nom": "Stephen Sondheim",
+  "sorties": [
+   "vu-west-side-story-seine-musicale"
   ]
  },
  "stereophonics": {
@@ -3863,6 +4027,12 @@
   "nom": "Sylvain Berdjane",
   "sorties": [
    "vu-dans-la-peau-de-cyrano"
+  ]
+ },
+ "sylvain-meyniac": {
+  "nom": "Sylvain Meyniac",
+  "sorties": [
+   "vu-le-fusible"
   ]
  },
  "sylvia-berge": {
@@ -3956,6 +4126,12 @@
    "vu-art-majeur",
    "vu-la-puce-a-loreille",
    "vu-les-fourberies-de-scapin"
+  ]
+ },
+ "thierry-lopez": {
+  "nom": "Thierry Lopez",
+  "sorties": [
+   "vu-nuit-d-ivresse"
   ]
  },
  "thierry-malandain": {
@@ -4118,6 +4294,12 @@
    "idomeneo",
    "le-serment-d-europe",
    "vu-willy-protagoras-enferme-dans-les-toilettes"
+  ]
+ },
+ "warren-casey": {
+  "nom": "Warren Casey",
+  "sorties": [
+   "vu-grease-mogador"
   ]
  },
  "werenoi": {
