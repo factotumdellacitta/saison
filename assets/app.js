@@ -813,7 +813,7 @@ function renderJournal(q) {
   const accSel = PRIVE && ADMIN ? ADMIN.accSelectHTML(JAVEC).replace("<span>Avec (admin)</span>", '<span class="vh">Avec</span>').replace('class="tools"', 'class="j-avec"') : "";
   const libS = f.sa.size === 1 ? saisonLib([...f.sa][0]) : f.sa.size ? plural(f.sa.size, "saison") : "Toutes les saisons";
   const tok = (g, v, t) => `<a class="chip on" href="#journal?${esc(jq(f, g, v))}" aria-label="Retirer le filtre ${esc(t)}">${esc(t)}<span class="x" aria-hidden="true">×</span></a>`;
-  const jetons = [...[...f.sa].map((y) => tok("sa", y, saisonLib(y))), ...[...f.mn].map((n) => tok("mn", n, n === "0" ? "Sans note" : "Ma note " + n)), JAVEC ? `<button class="chip on" type="button" data-jclr aria-label="Retirer le filtre avec ${esc(JAVEC)}">Avec ${esc(JAVEC)}<span class="x" aria-hidden="true">×</span></button>` : ""].join("");
+  const jetons = [...[...f.cat].map((c) => { const C = CATS.find((x) => slug(x) === c) || c; return tok("cat", c, C).replace('class="chip on"', `class="chip on g-${famille(C)}"`); }), ...[...f.sa].map((y) => tok("sa", y, saisonLib(y))), ...[...f.mn].map((n) => tok("mn", n, n === "0" ? "Sans note" : "Ma note " + n)), JAVEC ? `<button class="chip on" type="button" data-jclr aria-label="Retirer le filtre avec ${esc(JAVEC)}">Avec ${esc(JAVEC)}<span class="x" aria-hidden="true">×</span></button>` : ""].join("");
   const stats = statsHTML(parSaison, !f.sa.size);
   $("#main").innerHTML = `<div class="aff-g j-g"><section id="jr"><div class="ph"><h1>Journal</h1></div>
   <div class="tools barre-f">${rech("jq", "Rechercher dans le journal", JQ)}
@@ -829,7 +829,7 @@ function renderJournal(q) {
     <div class="fpanel j-stm" id="pJS"${JPANEL === "pJS" ? "" : " hidden"}><h2 class="mh">Statistiques <small>${esc(libS)}</small></h2><div class="stats">${stats}</div></div>
     <div class="resbar"><span class="n" id="jn" aria-live="polite"></span>
       <a class="linkbtn tri" href="#journal?${esc(jq(f, "tri", f.tri === "note" ? "date" : "note"))}" aria-label="Tri par ${f.tri === "note" ? "ma note" : "date"}, changer">${ico("tri")}${f.tri === "note" ? "Ma note" : "Date"}</a>
-      <div class="active">${jetons}${jetons ? `<a class="chip effacer" href="#journal${f.cat.size ? "?cat=" + [...f.cat].map(encodeURIComponent).join(",") : ""}${f.tri === "note" ? (f.cat.size ? "&" : "?") + "tri=note" : ""}" data-jclr>Tout effacer</a>` : ""}</div></div></div>
+      <div class="active">${jetons}${jetons ? `<a class="chip effacer" href="#journal${f.tri === "note" ? "?tri=note" : ""}" data-jclr>Tout effacer</a>` : ""}</div></div></div>
   <div class="list" id="jlist"></div></section>
   <aside class="r-lat j-lat" aria-label="Statistiques du journal"><h2 class="mh">Statistiques <small>${esc(libS)}</small></h2><div class="stats">${stats}</div></aside></div>`;
   $$("[data-jclr]").forEach((x) => x.addEventListener("click", () => { JAVEC = ""; if (x.tagName === "BUTTON") renderJournal(q); }));
@@ -970,7 +970,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.35"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.36"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -988,7 +988,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.35"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.36"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
