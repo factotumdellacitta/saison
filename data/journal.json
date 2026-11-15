@@ -2765,7 +2765,50 @@
    "horaires": "soirée",
    "note": 0,
    "pronostic": false,
-   "pourquoi": "Bal de bienfaisance de l’association des anciens élèves de l’École polytechnique, au Palais Garnier.",
+   "pourquoi": "Bal de bienfaisance des anciens élèves de Polytechnique au Palais Garnier, sous le haut patronage du président de la République, ouvert par le ballet Sylvia.",
+   "lien": "https://ax.polytechnique.org/fr/event/bal-de-l-x-2025-palais-garnier/2025/05/16/2262",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2025-05-16"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-sylvia-bal-de-l-x-2025",
+   "titre": "Sylvia",
+   "categorie": "Danse",
+   "sousGenre": "Ballet",
+   "artistes": [
+    {
+     "nom": "Léo Delibes",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Louis Mérante",
+     "role": "chorégraphie"
+    },
+    {
+     "nom": "Manuel Legris",
+     "role": "chorégraphie"
+    },
+    {
+     "nom": "Ballet de l’Opéra national de Paris",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "palais-garnier",
+   "salle": "",
+   "debut": "2025-05-16",
+   "fin": "2025-05-16",
+   "horaires": "en ouverture du Bal de l’X, portes à 18h30",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Production de Manuel Legris venue de la Scala, donnée en exclusivité par l’Opéra national de Paris en ouverture du Bal de l’X 2025.",
    "lien": "https://ax.polytechnique.org/fr/event/bal-de-l-x-2025-palais-garnier/2025/05/16/2262",
    "billetterie": null,
    "publicJeune": false,
