@@ -731,3 +731,15 @@ body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
   .barre-f .chip.j-st,.j-stm{display:none}
   .j-stm[hidden]{display:none}
 }
+
+/* Puces de filtre (Affiche, Journal) : un seul gabarit, celui des genres. Genres, panneau Filtres, jetons actifs :
+   32 px de dessin, texte 11 px, approche 0,02em, contour léger ; picto à 6 px du bord ; écart 4 px (8 px entre rangées). */
+.fbar .chips,.resbar .active{gap:var(--e2) var(--e1)}
+.fbar .chip{min-height:32px;padding:0 var(--e2);gap:var(--e1);letter-spacing:.02em;border-color:var(--filet-leger)}
+.fbar .chip:has(.pi){padding-left:6px}
+.fbar .chip[aria-pressed="true"]{border-color:var(--rouge)}
+.resbar .active .chip.on[class]{border-color:var(--filet-leger)}
+.resbar .active .chip.on[class] .x{margin-left:2px}
+@media (hover:hover){.fbar .chip:not([aria-pressed="true"]):not(.on):hover{border-color:var(--encre)}}
+@media (min-width:480px){.fgr .fl{padding-top:0;line-height:32px}}
+#alist>.row:first-child,#jlist>.row:first-child,#jlist>.empty:first-child{border-top:0}
