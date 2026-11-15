@@ -240,8 +240,8 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-03-14",
      "tarif": "20 €",
-     "vente": "2026-12-14T10:00",
-     "venteApprox": true,
+     "vente": "2026-11-15",
+     "venteApprox": false,
      "condition": "Carte Jeunes TCE"
     }
    ]
@@ -264,7 +264,7 @@
    "salle": "Vieux-Colombier",
    "debut": "2027-04-21",
    "fin": "2027-05-30",
-   "datesTexte": "21 avril – 30 mai 2027",
+   "datesTexte": "21 avril – 30 mai 2027 ; dates précises publiées en janvier 2027",
    "note": 2,
    "pronostic": true,
    "pourquoi": "Création. Beauvoir, Sartre, Camus, Koestler.",
@@ -273,7 +273,14 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [
+    {
+     "type": "Ouverture des ventes",
+     "vente": "2027-01-27",
+     "venteApprox": true,
+     "condition": "Détenteurs de cartes avant le grand public"
+    }
+   ]
   },
   {
    "id": "aria-da-capo",
@@ -337,15 +344,15 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-05-29",
      "tarif": "15 €",
-     "vente": "2027-02-28T10:00",
-     "venteApprox": true,
+     "vente": "2026-11-15",
+     "venteApprox": false,
      "condition": "Carte Jeunes TCE"
     }
    ]
   },
   {
    "id": "attila",
-   "titre": "Attila (version de concert)",
+   "titre": "Attila",
    "categorie": "Opéra",
    "sousGenre": "Version de concert",
    "artistes": [
@@ -393,8 +400,8 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-03-06",
      "tarif": "20 €",
-     "vente": "2026-12-06T10:00",
-     "venteApprox": true,
+     "vente": "2026-11-15",
+     "venteApprox": false,
      "condition": "Carte Jeunes TCE"
     }
    ],
@@ -598,7 +605,7 @@
    "salle": "Studio-Théâtre",
    "debut": "2027-06-02",
    "fin": "2027-07-04",
-   "datesTexte": "2 juin – 4 juill. 2027",
+   "datesTexte": "2 juin – 4 juill. 2027 ; dates précises publiées en janvier 2027",
    "horaires": "1h15",
    "note": 3,
    "pronostic": false,
@@ -608,7 +615,14 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [
+    {
+     "type": "Ouverture des ventes",
+     "vente": "2027-01-27",
+     "venteApprox": true,
+     "condition": "Détenteurs de cartes avant le grand public"
+    }
+   ]
   },
   {
    "id": "ceci-n-est-pas-nous",
@@ -973,7 +987,7 @@
   },
   {
    "id": "didon-et-enee",
-   "titre": "Didon et Énée (version de concert)",
+   "titre": "Didon et Énée",
    "categorie": "Opéra",
    "sousGenre": "Version de concert",
    "artistes": [
@@ -1013,8 +1027,8 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-03-13",
      "tarif": "20 €",
-     "vente": "2026-12-13T10:00",
-     "venteApprox": true,
+     "vente": "2026-11-15",
+     "venteApprox": false,
      "condition": "Carte Jeunes TCE"
     }
    ]
@@ -1087,7 +1101,7 @@
   },
   {
    "id": "dipus-rex",
-   "titre": "Œdipus Rex (version de concert)",
+   "titre": "Œdipus Rex",
    "categorie": "Opéra",
    "sousGenre": "Version de concert",
    "artistes": [
@@ -1135,8 +1149,8 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-05-24",
      "tarif": "20 €",
-     "vente": "2027-02-24T10:00",
-     "venteApprox": true,
+     "vente": "2026-11-15",
+     "venteApprox": false,
      "condition": "Carte Jeunes TCE"
     }
    ]
@@ -1334,7 +1348,7 @@
   },
   {
    "id": "faust",
-   "titre": "Faust (version de concert)",
+   "titre": "Faust",
    "categorie": "Opéra",
    "sousGenre": "Version de concert",
    "artistes": [
@@ -1378,8 +1392,8 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-03-23",
      "tarif": "20 €",
-     "vente": "2026-12-23T10:00",
-     "venteApprox": true,
+     "vente": "2026-11-15",
+     "venteApprox": false,
      "condition": "Carte Jeunes TCE"
     }
    ]
@@ -1628,7 +1642,7 @@
   },
   {
    "id": "hippolyte-et-aricie",
-   "titre": "Hippolyte et Aricie (version de concert)",
+   "titre": "Hippolyte et Aricie",
    "categorie": "Opéra",
    "sousGenre": "Version de concert",
    "artistes": [
@@ -1668,8 +1682,8 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-05-28",
      "tarif": "20 €",
-     "vente": "2027-02-28T10:00",
-     "venteApprox": true,
+     "vente": "2026-11-15",
+     "venteApprox": false,
      "condition": "Carte Jeunes TCE"
     }
    ]
@@ -2112,7 +2126,7 @@
    "salle": "Richelieu",
    "debut": "2026-12-18",
    "fin": "2027-03-22",
-   "datesTexte": "18 déc. 2026 – 22 mars 2027, en alternance",
+   "datesTexte": "18 déc. 2026 – 22 mars 2027, en alternance ; dates à partir du 1er mars publiées en janvier 2027",
    "horaires": "2h sans entracte",
    "note": 3,
    "pronostic": false,
@@ -2122,7 +2136,14 @@
    "publicJeune": false,
    "leonardYVa": true,
    "statut": "a-voir",
-   "offres": []
+   "offres": [
+    {
+     "type": "Dates à partir du 1er mars",
+     "vente": "2027-01-27",
+     "venteApprox": true,
+     "condition": "Détenteurs de cartes avant le grand public"
+    }
+   ]
   },
   {
    "id": "l-elixir-d-amour",
@@ -2192,7 +2213,7 @@
    "salle": "Studio-Théâtre",
    "debut": "2027-05-27",
    "fin": "2027-06-27",
-   "datesTexte": "27 mai – 27 juin 2027",
+   "datesTexte": "27 mai – 27 juin 2027 ; dates précises publiées en janvier 2027",
    "horaires": "1h20",
    "note": 2,
    "pronostic": false,
@@ -2202,7 +2223,14 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [
+    {
+     "type": "Ouverture des ventes",
+     "vente": "2027-01-27",
+     "venteApprox": true,
+     "condition": "Détenteurs de cartes avant le grand public"
+    }
+   ]
   },
   {
    "id": "l-evenement",
@@ -2240,7 +2268,7 @@
   },
   {
    "id": "l-orfeo",
-   "titre": "L’Orfeo (version de concert)",
+   "titre": "L’Orfeo",
    "categorie": "Opéra",
    "sousGenre": "Version de concert",
    "artistes": [
@@ -2660,7 +2688,7 @@
    "salle": "Vieux-Colombier",
    "debut": "2027-06-09",
    "fin": "2027-07-18",
-   "datesTexte": "9 juin – 18 juill. 2027",
+   "datesTexte": "9 juin – 18 juill. 2027 ; dates précises publiées en janvier 2027",
    "horaires": "1h40",
    "note": 2,
    "pronostic": false,
@@ -2670,7 +2698,14 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [
+    {
+     "type": "Ouverture des ventes",
+     "vente": "2027-01-27",
+     "venteApprox": true,
+     "condition": "Détenteurs de cartes avant le grand public"
+    }
+   ]
   },
   {
    "id": "la-tour-de-constance",
@@ -2746,7 +2781,7 @@
    "salle": "Richelieu",
    "debut": "2027-03-11",
    "fin": "2027-06-20",
-   "datesTexte": "11 mars – 20 juin 2027, en alternance",
+   "datesTexte": "11 mars – 20 juin 2027, en alternance ; dates précises publiées en janvier 2027",
    "horaires": "2h20 sans entracte",
    "note": 3,
    "pronostic": true,
@@ -2756,7 +2791,85 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [
+    {
+     "type": "Ouverture des ventes",
+     "vente": "2027-01-27",
+     "venteApprox": true,
+     "condition": "Détenteurs de cartes avant le grand public"
+    }
+   ]
+  },
+  {
+   "id": "la-rose-la-bete-et-l-enfant",
+   "titre": "La Rose, la Bête et l’Enfant",
+   "categorie": "Théâtre",
+   "sousGenre": "Jeune public",
+   "artistes": [
+    {
+     "nom": "Simon Falguières",
+     "role": "auteur"
+    },
+    {
+     "nom": "Simon Falguières",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "billetterie": null,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "salle": "Studio-Théâtre",
+   "debut": "2027-04-01",
+   "fin": "2027-05-23",
+   "datesTexte": "1er avril – 23 mai 2027 ; dates précises publiées en janvier 2027",
+   "note": 2,
+   "pronostic": true,
+   "pourquoi": "Création de Simon Falguières librement inspirée de La Belle et la Bête, dès 7 ans.",
+   "lien": "https://comedie-francaise.fr/2026-2027/la-rose-la-bete-et-lenfant",
+   "publicJeune": true,
+   "offres": [
+    {
+     "type": "Ouverture des ventes",
+     "vente": "2027-01-27",
+     "venteApprox": true,
+     "condition": "Détenteurs de cartes avant le grand public"
+    }
+   ]
+  },
+  {
+   "id": "polyeucte-soiree-repertoire",
+   "titre": "Polyeucte",
+   "categorie": "Théâtre",
+   "sousGenre": "Soirée Répertoire, lecture",
+   "artistes": [
+    {
+     "nom": "Pierre Corneille",
+     "role": "auteur"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "billetterie": null,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "salle": "Richelieu",
+   "debut": "2027-06-10",
+   "fin": "2027-06-10",
+   "datesTexte": "jeu. 10 juin 2027",
+   "horaires": "19h, présentation (salle Mounet-Sully) puis lecture",
+   "note": 3,
+   "pronostic": true,
+   "pourquoi": "Soirée unique : lecture de la tragédie de Corneille par la troupe, précédée d’une présentation.",
+   "lien": "https://comedie-francaise.fr/2026-2027/soiree-repertoire-0",
+   "publicJeune": false,
+   "offres": [
+    {
+     "type": "Ouverture des ventes",
+     "vente": "2027-01-27",
+     "venteApprox": true,
+     "condition": "Détenteurs de cartes avant le grand public"
+    }
+   ]
   },
   {
    "id": "la-walkyrie",
@@ -2894,7 +3007,7 @@
    "salle": "Richelieu",
    "debut": "2027-04-16",
    "fin": "2027-07-25",
-   "datesTexte": "16 avril – 25 juill. 2027, en alternance",
+   "datesTexte": "16 avril – 25 juill. 2027, en alternance ; dates précises publiées en janvier 2027",
    "horaires": "2h20 sans entracte",
    "note": 3,
    "pronostic": false,
@@ -2904,7 +3017,14 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [
+    {
+     "type": "Ouverture des ventes",
+     "vente": "2027-01-27",
+     "venteApprox": true,
+     "condition": "Détenteurs de cartes avant le grand public"
+    }
+   ]
   },
   {
    "id": "le-canard-sauvage",
@@ -3005,7 +3125,7 @@
   },
   {
    "id": "le-chateau-de-barbe-bleue",
-   "titre": "Le Château de Barbe-Bleue (version de concert)",
+   "titre": "Le Château de Barbe-Bleue",
    "categorie": "Opéra",
    "sousGenre": "Version de concert",
    "artistes": [
@@ -3045,8 +3165,8 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-06-22",
      "tarif": "20 €",
-     "vente": "2027-03-22T10:00",
-     "venteApprox": true,
+     "vente": "2026-11-15",
+     "venteApprox": false,
      "condition": "Carte Jeunes TCE"
     }
    ]
@@ -3111,7 +3231,7 @@
    "salle": "Richelieu",
    "debut": "2027-01-15",
    "fin": "2027-06-01",
-   "datesTexte": "15 janv. – 1er juin 2027, en alternance",
+   "datesTexte": "15 janv. – 1er juin 2027, en alternance ; dates à partir du 1er mars publiées en janvier 2027",
    "horaires": "2h30 sans entracte",
    "note": 3,
    "pronostic": false,
@@ -3121,7 +3241,14 @@
    "publicJeune": true,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [
+    {
+     "type": "Dates à partir du 1er mars",
+     "vente": "2027-01-27",
+     "venteApprox": true,
+     "condition": "Détenteurs de cartes avant le grand public"
+    }
+   ]
   },
   {
    "id": "le-discours-d-un-roi",
@@ -3513,8 +3640,8 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-06-02",
      "tarif": "10 €",
-     "vente": "2027-03-02T10:00",
-     "venteApprox": true,
+     "vente": "2026-11-15",
+     "venteApprox": false,
      "condition": "Carte Jeunes TCE"
     }
    ]
@@ -3537,7 +3664,7 @@
    "salle": "Richelieu",
    "debut": "2027-06-03",
    "fin": "2027-07-25",
-   "datesTexte": "3 juin – 25 juill. 2027, en alternance",
+   "datesTexte": "3 juin – 25 juill. 2027, en alternance ; dates précises publiées en janvier 2027",
    "note": 3,
    "pronostic": true,
    "pourquoi": "Création.",
@@ -3546,7 +3673,14 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [
+    {
+     "type": "Ouverture des ventes",
+     "vente": "2027-01-27",
+     "venteApprox": true,
+     "condition": "Détenteurs de cartes avant le grand public"
+    }
+   ]
   },
   {
    "id": "les-femmes-savantes",
@@ -3565,8 +3699,8 @@
    "lieuId": "comedie-francaise",
    "salle": "Richelieu",
    "debut": "2027-04-02",
-   "fin": "2027-07-15",
-   "datesTexte": "2 avril – 15 juill. 2027, en alternance",
+   "fin": "2027-07-24",
+   "datesTexte": "2 avril – 24 juill. 2027, en alternance ; dates précises publiées en janvier 2027",
    "horaires": "2h10 sans entracte",
    "note": 3,
    "pronostic": false,
@@ -3576,7 +3710,14 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [
+    {
+     "type": "Ouverture des ventes",
+     "vente": "2027-01-27",
+     "venteApprox": true,
+     "condition": "Détenteurs de cartes avant le grand public"
+    }
+   ]
   },
   {
    "id": "les-miserables",
@@ -3672,7 +3813,7 @@
   },
   {
    "id": "les-sept-peches-capitaux",
-   "titre": "Les Sept Péchés capitaux (version de concert)",
+   "titre": "Les Sept Péchés capitaux",
    "categorie": "Opéra",
    "sousGenre": "Version de concert",
    "artistes": [
@@ -3712,8 +3853,8 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-03-30",
      "tarif": "20 €",
-     "vente": "2026-12-28T10:00",
-     "venteApprox": true,
+     "vente": "2026-11-15",
+     "venteApprox": false,
      "condition": "Carte Jeunes TCE"
     }
    ]
@@ -3948,7 +4089,7 @@
   },
   {
    "id": "maria-stuarda",
-   "titre": "Maria Stuarda (version de concert)",
+   "titre": "Maria Stuarda",
    "categorie": "Opéra",
    "sousGenre": "Version de concert",
    "artistes": [
@@ -3988,8 +4129,8 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-04-01",
      "tarif": "20 €",
-     "vente": "2027-01-01T10:00",
-     "venteApprox": true,
+     "vente": "2026-11-15",
+     "venteApprox": false,
      "condition": "Carte Jeunes TCE"
     }
    ]
@@ -4031,8 +4172,8 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-04-11",
      "tarif": "20 €",
-     "vente": "2027-01-11T10:00",
-     "venteApprox": true,
+     "vente": "2026-11-15",
+     "venteApprox": false,
      "condition": "Carte Jeunes TCE"
     }
    ]
@@ -4150,7 +4291,7 @@
   },
   {
    "id": "mitridate",
-   "titre": "Mitridate (version de concert)",
+   "titre": "Mitridate",
    "categorie": "Opéra",
    "sousGenre": "Version de concert",
    "artistes": [
@@ -4190,15 +4331,15 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-04-26",
      "tarif": "20 €",
-     "vente": "2027-01-26T10:00",
-     "venteApprox": true,
+     "vente": "2026-11-15",
+     "venteApprox": false,
      "condition": "Carte Jeunes TCE"
     }
    ]
   },
   {
    "id": "mitridate-re-di-ponto",
-   "titre": "Mitridate, re di Ponto (version de concert)",
+   "titre": "Mitridate, re di Ponto",
    "categorie": "Opéra",
    "sousGenre": "Version de concert",
    "artistes": [
@@ -4234,8 +4375,8 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-03-12",
      "tarif": "20 €",
-     "vente": "2026-12-12T10:00",
-     "venteApprox": true,
+     "vente": "2026-11-15",
+     "venteApprox": false,
      "condition": "Carte Jeunes TCE"
     }
    ]
@@ -4599,7 +4740,7 @@
   },
   {
    "id": "platee",
-   "titre": "Platée (version de concert)",
+   "titre": "Platée",
    "categorie": "Opéra",
    "sousGenre": "Version de concert",
    "artistes": [
@@ -4639,8 +4780,8 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-06-24",
      "tarif": "20 €",
-     "vente": "2027-03-24T10:00",
-     "venteApprox": true,
+     "vente": "2026-11-15",
+     "venteApprox": false,
      "condition": "Carte Jeunes TCE"
     }
    ]
@@ -5802,7 +5943,7 @@
   },
   {
    "id": "la-rondine",
-   "titre": "La Rondine (version de concert)",
+   "titre": "La Rondine",
    "categorie": "Opéra",
    "sousGenre": "Version de concert",
    "artistes": [
@@ -5854,7 +5995,7 @@
   },
   {
    "id": "le-barbier-de-seville",
-   "titre": "Le Barbier de Séville (version de concert)",
+   "titre": "Le Barbier de Séville",
    "categorie": "Opéra",
    "sousGenre": "Version de concert",
    "artistes": [
@@ -5942,15 +6083,15 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-03-09",
      "tarif": "20 €",
-     "vente": "2026-12-09T10:00",
-     "venteApprox": true,
+     "vente": "2026-11-15",
+     "venteApprox": false,
      "condition": "Carte Jeunes TCE (16 – 29 ans), vente de 3 mois avant à la dernière minute"
     }
    ]
   },
   {
    "id": "la-griselda",
-   "titre": "La Griselda (version de concert)",
+   "titre": "La Griselda",
    "categorie": "Opéra",
    "sousGenre": "Version de concert",
    "artistes": [
@@ -5998,15 +6139,15 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-05-12",
      "tarif": "20 €",
-     "vente": "2027-02-12T10:00",
-     "venteApprox": true,
+     "vente": "2026-11-15",
+     "venteApprox": false,
      "condition": "Carte Jeunes TCE (16 – 29 ans), vente de 3 mois avant à la dernière minute"
     }
    ]
   },
   {
    "id": "romeo-et-juliette-steibelt",
-   "titre": "Roméo et Juliette (version de concert)",
+   "titre": "Roméo et Juliette",
    "categorie": "Opéra",
    "sousGenre": "Version de concert",
    "artistes": [
@@ -6050,8 +6191,8 @@
      "type": "Carte Jeunes TCE",
      "date": "2027-06-09",
      "tarif": "20 €",
-     "vente": "2027-03-09T10:00",
-     "venteApprox": true,
+     "vente": "2026-11-15",
+     "venteApprox": false,
      "condition": "Carte Jeunes TCE (16 – 29 ans), vente de 3 mois avant à la dernière minute"
     }
    ]

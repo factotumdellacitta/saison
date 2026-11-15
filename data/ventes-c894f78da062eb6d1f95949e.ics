@@ -23,14 +23,31 @@ RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
 END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
+UID:vente-apres-guerre-0-ouverture-des-ventes@saison
+DTSTAMP:20261115T000000Z
+DTSTART;TZID=Europe/Paris:20270127T100000
+DTEND;TZID=Europe/Paris:20270127T101500
+SUMMARY:~ Vente : Ouverture des ventes – Après-guerre
+DESCRIPTION:Condition : Détenteurs de cartes avant le grand public\nHeure 
+ d’ouverture inconnue (10h par défaut)\nBilletterie : https://comedie-fr
+ ancaise.fr/2026-2027/apres-guerre
+URL:https://comedie-francaise.fr/2026-2027/apres-guerre
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vente : Après-guerre
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:vente-asmik-grigorian-lukas-geniusas-0-carte-jeunes-tce@saison
 DTSTAMP:20261115T000000Z
-DTSTART;TZID=Europe/Paris:20270228T100000
-DTEND;TZID=Europe/Paris:20270228T101500
+DTSTART;TZID=Europe/Paris:20261115T100000
+DTEND;TZID=Europe/Paris:20261115T101500
 SUMMARY:~ Vente : Carte Jeunes TCE – Asmik Grigorian\, Lukas Geniušas
 DESCRIPTION:Tarif : 15 €\nReprésentation : 2027-05-29\nCondition : Carte
-  Jeunes TCE\nBilletterie : https://www.theatrechampselysees.fr/saison-2026
- -27/recital-chant/asmik-grigorian-lukas-geniusas
+  Jeunes TCE\nHeure d’ouverture inconnue (10h par défaut)\nBilletterie :
+  https://www.theatrechampselysees.fr/saison-2026-27/recital-chant/asmik-gr
+ igorian-lukas-geniusas
 URL:https://www.theatrechampselysees.fr/saison-2026-27/recital-chant/asmik-
  grigorian-lukas-geniusas
 BEGIN:VALARM
@@ -42,17 +59,18 @@ END:VEVENT
 BEGIN:VEVENT
 UID:vente-attila-0-carte-jeunes-tce@saison
 DTSTAMP:20261115T000000Z
-DTSTART;TZID=Europe/Paris:20261206T100000
-DTEND;TZID=Europe/Paris:20261206T101500
-SUMMARY:~ Vente : Carte Jeunes TCE – Attila (version de concert)
+DTSTART;TZID=Europe/Paris:20261115T100000
+DTEND;TZID=Europe/Paris:20261115T101500
+SUMMARY:~ Vente : Carte Jeunes TCE – Attila
 DESCRIPTION:Tarif : 20 €\nReprésentation : 2027-03-06\nCondition : Carte
-  Jeunes TCE\nBilletterie : https://www.theatrechampselysees.fr/saison-2026
- -27/opera-en-concert/attila
+  Jeunes TCE\nHeure d’ouverture inconnue (10h par défaut)\nBilletterie :
+  https://www.theatrechampselysees.fr/saison-2026-27/opera-en-concert/attil
+ a
 URL:https://www.theatrechampselysees.fr/saison-2026-27/opera-en-concert/att
  ila
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Vente : Attila (version de concert)
+DESCRIPTION:Vente : Attila
 TRIGGER:-PT15M
 END:VALARM
 END:VEVENT
@@ -138,11 +156,27 @@ TRIGGER:-PT15M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:vente-l-ecole-de-danse-0-dates-a-partir-du-1er-mars@saison
+DTSTAMP:20261115T000000Z
+DTSTART;TZID=Europe/Paris:20270127T100000
+DTEND;TZID=Europe/Paris:20270127T101500
+SUMMARY:~ Vente : Dates à partir du 1er mars – L’École de danse
+DESCRIPTION:Condition : Détenteurs de cartes avant le grand public\nHeure 
+ d’ouverture inconnue (10h par défaut)\nBilletterie : https://comedie-fr
+ ancaise.fr/2026-2027/lecole-de-danse
+URL:https://comedie-francaise.fr/2026-2027/lecole-de-danse
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vente : L’École de danse
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:vente-l-orfeo-0-carte-jeunes-tce@saison
 DTSTAMP:20261115T000000Z
 DTSTART;TZID=Europe/Paris:20261018T100000
 DTEND;TZID=Europe/Paris:20261018T101500
-SUMMARY:~ Vente : Carte Jeunes TCE – L’Orfeo (version de concert)
+SUMMARY:~ Vente : Carte Jeunes TCE – L’Orfeo
 DESCRIPTION:Tarif : 20 €\nReprésentation : 2027-01-18\nCondition : Carte
   Jeunes TCE\nBilletterie : https://www.theatrechampselysees.fr/saison-2026
  -27/opera-en-concert/l-orfeo
@@ -150,7 +184,7 @@ URL:https://www.theatrechampselysees.fr/saison-2026-27/opera-en-concert/l-o
  rfeo
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Vente : L’Orfeo (version de concert)
+DESCRIPTION:Vente : L’Orfeo
 TRIGGER:-PT15M
 END:VALARM
 END:VEVENT
@@ -167,6 +201,70 @@ URL:https://www.operadeparis.fr/saison-26-27/ballet/la-fille-mal-gardee
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Vente : La Fille mal gardée
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:vente-la-souriciere-0-ouverture-des-ventes@saison
+DTSTAMP:20261115T000000Z
+DTSTART;TZID=Europe/Paris:20270127T100000
+DTEND;TZID=Europe/Paris:20270127T101500
+SUMMARY:~ Vente : Ouverture des ventes – La Souricière
+DESCRIPTION:Condition : Détenteurs de cartes avant le grand public\nHeure 
+ d’ouverture inconnue (10h par défaut)\nBilletterie : https://comedie-fr
+ ancaise.fr/2026-2027/la-souriciere
+URL:https://comedie-francaise.fr/2026-2027/la-souriciere
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vente : La Souricière
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:vente-le-cid-0-dates-a-partir-du-1er-mars@saison
+DTSTAMP:20261115T000000Z
+DTSTART;TZID=Europe/Paris:20270127T100000
+DTEND;TZID=Europe/Paris:20270127T101500
+SUMMARY:~ Vente : Dates à partir du 1er mars – Le Cid
+DESCRIPTION:Condition : Détenteurs de cartes avant le grand public\nHeure 
+ d’ouverture inconnue (10h par défaut)\nBilletterie : https://comedie-fr
+ ancaise.fr/2026-2027/le-cid
+URL:https://comedie-francaise.fr/2026-2027/le-cid
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vente : Le Cid
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:vente-les-fausses-confidences-0-ouverture-des-ventes@saison
+DTSTAMP:20261115T000000Z
+DTSTART;TZID=Europe/Paris:20270127T100000
+DTEND;TZID=Europe/Paris:20270127T101500
+SUMMARY:~ Vente : Ouverture des ventes – Les Fausses Confidences
+DESCRIPTION:Condition : Détenteurs de cartes avant le grand public\nHeure 
+ d’ouverture inconnue (10h par défaut)\nBilletterie : https://comedie-fr
+ ancaise.fr/2026-2027/les-fausses-confidences
+URL:https://comedie-francaise.fr/2026-2027/les-fausses-confidences
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vente : Les Fausses Confidences
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:vente-les-femmes-savantes-0-ouverture-des-ventes@saison
+DTSTAMP:20261115T000000Z
+DTSTART;TZID=Europe/Paris:20270127T100000
+DTEND;TZID=Europe/Paris:20270127T101500
+SUMMARY:~ Vente : Ouverture des ventes – Les Femmes savantes
+DESCRIPTION:Condition : Détenteurs de cartes avant le grand public\nHeure 
+ d’ouverture inconnue (10h par défaut)\nBilletterie : https://comedie-fr
+ ancaise.fr/2026-2027/les-femmes-savantes
+URL:https://comedie-francaise.fr/2026-2027/les-femmes-savantes
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vente : Les Femmes savantes
 TRIGGER:-PT15M
 END:VALARM
 END:VEVENT
@@ -191,12 +289,13 @@ END:VEVENT
 BEGIN:VEVENT
 UID:vente-marina-rebeka-jonas-kaufmann-0-carte-jeunes-tce@saison
 DTSTAMP:20261115T000000Z
-DTSTART;TZID=Europe/Paris:20270111T100000
-DTEND;TZID=Europe/Paris:20270111T101500
+DTSTART;TZID=Europe/Paris:20261115T100000
+DTEND;TZID=Europe/Paris:20261115T101500
 SUMMARY:~ Vente : Carte Jeunes TCE – Marina Rebeka\, Jonas Kaufmann
 DESCRIPTION:Tarif : 20 €\nReprésentation : 2027-04-11\nCondition : Carte
-  Jeunes TCE\nBilletterie : https://www.theatrechampselysees.fr/saison-2026
- -27/recital-chant/marina-rebeka-jonas-kaufmann
+  Jeunes TCE\nHeure d’ouverture inconnue (10h par défaut)\nBilletterie :
+  https://www.theatrechampselysees.fr/saison-2026-27/recital-chant/marina-r
+ ebeka-jonas-kaufmann
 URL:https://www.theatrechampselysees.fr/saison-2026-27/recital-chant/marina
  -rebeka-jonas-kaufmann
 BEGIN:VALARM
