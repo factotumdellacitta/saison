@@ -1148,15 +1148,24 @@
    "id": "vu-le-bain",
    "titre": "Le Bain",
    "categorie": "Théâtre",
-   "artistes": [],
+   "artistes": [
+    {
+     "nom": "Léonore Vanier",
+     "role": "auteur"
+    },
+    {
+     "nom": "Cie Sensible Indocile",
+     "role": "compagnie"
+    }
+   ],
    "lieuId": "avignon-off",
-   "salle": "",
+   "salle": "Chapelle des Antonins//LA FACTORY",
    "debut": null,
    "fin": null,
    "note": 0,
    "pronostic": false,
    "pourquoi": "",
-   "lien": null,
+   "lien": "https://www.festivaloffavignon.com/spectacles/8152-le-bain",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
@@ -1166,7 +1175,8 @@
    ],
    "noteLeonard": null,
    "avis": "",
-   "offres": []
+   "offres": [],
+   "sousGenre": ""
   },
   {
    "id": "vu-le-barbier-de-seville",
