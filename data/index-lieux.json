@@ -1,7 +1,14 @@
 {
  "accor-arena": {
   "sorties": [
-   "tame-impala"
+   "tame-impala",
+   "vu-etienne-daho-accor-arena-2023",
+   "vu-rosalia-accor-arena-2026"
+  ]
+ },
+ "arci-biko": {
+  "sorties": [
+   "vu-zola-biko-2024"
   ]
  },
  "athenee": {
@@ -132,6 +139,11 @@
    "le-pere"
   ]
  },
+ "elysee-montmartre": {
+  "sorties": [
+   "vu-miki-elysee-montmartre-2026"
+  ]
+ },
  "festival-avignon": {
   "sorties": [
    "vu-1-2-3-pocquelin",
@@ -143,6 +155,16 @@
    "vu-nous-ou-le-paradoxe-du-herisson",
    "vu-par-autan",
    "vu-taire"
+  ]
+ },
+ "fete-de-l-humanite": {
+  "sorties": [
+   "vu-fete-de-l-humanite-2025"
+  ]
+ },
+ "foire-de-chalons": {
+  "sorties": [
+   "vu-mika-chalons-2023"
   ]
  },
  "folies-bergere": {
@@ -157,11 +179,17 @@
  },
  "hec-paris": {
   "sorties": [
+   "vu-colonel-reyel-hec-2025",
    "vu-le-suicide-double-jeu"
   ]
  },
  "jardin-des-tuileries": {
   "sorties": []
+ },
+ "just-me-milano": {
+  "sorties": [
+   "vu-jason-derulo-just-me-2026"
+  ]
  },
  "la-colline": {
   "sorties": [
@@ -203,6 +231,11 @@
  "lido": {
   "sorties": [
    "singin-in-the-rain"
+  ]
+ },
+ "magazzini-generali": {
+  "sorties": [
+   "vu-diplo-magazzini-generali-2024"
   ]
  },
  "mc93": {
@@ -287,6 +320,12 @@
    "vu-sylvia-bal-de-l-x-2025"
   ]
  },
+ "paris-la-defense-arena": {
+  "sorties": [
+   "vu-black-eyed-peas-la-defense-arena-2024",
+   "vu-damso-la-defense-arena-2026"
+  ]
+ },
  "petit-saint-martin": {
   "sorties": [
    "vu-seisme"
@@ -324,12 +363,24 @@
    "vu-leducation-sentimentale"
   ]
  },
+ "point-ephemere": {
+  "sorties": [
+   "vu-avalon-bloom-point-ephemere-2025"
+  ]
+ },
  "porte-saint-martin": {
   "sorties": [
    "le-mariage-de-figaro",
    "vu-le-bourgeois-gentilhomme-porte-saint-martin",
    "vu-le-cid",
    "vu-le-malade-imaginaire"
+  ]
+ },
+ "rock-en-seine": {
+  "sorties": [
+   "vu-rock-en-seine-2022",
+   "vu-rock-en-seine-2025",
+   "vu-rock-en-seine-2026"
   ]
  },
  "rond-point": {
@@ -342,9 +393,31 @@
    "oum"
   ]
  },
+ "salle-gaveau": {
+  "sorties": [
+   "vu-gala-talents-du-coeur-gaveau-2026"
+  ]
+ },
+ "sciences-po": {
+  "sorties": [
+   "vu-black-m-sciences-po-2026"
+  ]
+ },
  "seine-musicale": {
   "sorties": [
    "vu-bejart-et-nous-loiseau-de-feu-bolero"
+  ]
+ },
+ "solidays": {
+  "sorties": [
+   "vu-solidays-2023",
+   "vu-solidays-2024",
+   "vu-solidays-2025"
+  ]
+ },
+ "stade-de-france": {
+  "sorties": [
+   "vu-the-weeknd-stade-de-france-2023"
   ]
  },
  "t2g": {
@@ -398,6 +471,11 @@
  },
  "theatre-14": {
   "sorties": []
+ },
+ "theatre-antique-orange": {
+  "sorties": [
+   "vu-toto-orange-2024"
+  ]
  },
  "theatre-antoine": {
   "sorties": [
@@ -499,9 +577,22 @@
    "du-charbon-dans-les-veines"
   ]
  },
+ "we-love-green": {
+  "sorties": [
+   "vu-we-love-green-2022",
+   "vu-we-love-green-2023"
+  ]
+ },
+ "yoyo-palais-de-tokyo": {
+  "sorties": [
+   "vu-vegedream-yoyo-2025"
+  ]
+ },
  "zenith-paris": {
   "sorties": [
-   "nono"
+   "nono",
+   "vu-central-cee-zenith-2022",
+   "vu-theodora-zenith-2026"
   ]
  }
 }

@@ -8,6 +8,16 @@
   "billetterie": null,
   "tarifJeune": ""
  },
+ "arci-biko": {
+  "nom": "Arci Biko",
+  "ville": "Milan",
+  "zone": "Autre",
+  "statut": "Privé",
+  "site": null,
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "Via Ettore Ponti 40, 20143 Milan"
+ },
  "athenee": {
   "nom": "Athénée Théâtre Louis-Jouvet",
   "ville": "Paris",
@@ -89,6 +99,16 @@
   "billetterie": null,
   "tarifJeune": ""
  },
+ "elysee-montmartre": {
+  "nom": "Élysée Montmartre",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.elyseemontmartre.com",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "72 boulevard de Rochechouart, 75018 Paris"
+ },
  "festival-avignon": {
   "nom": "Festival d’Avignon",
   "ville": "Avignon",
@@ -97,6 +117,26 @@
   "site": "https://festival-avignon.com",
   "billetterie": null,
   "tarifJeune": ""
+ },
+ "fete-de-l-humanite": {
+  "nom": "Fête de l’Humanité (Base 217)",
+  "ville": "Brétigny-sur-Orge",
+  "zone": "Île-de-France",
+  "statut": "Privé",
+  "site": "https://fete.humanite.fr",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "Base aérienne 217, Brétigny-sur-Orge"
+ },
+ "foire-de-chalons": {
+  "nom": "Espace Foire de Châlons-en-Champagne",
+  "ville": "Châlons-en-Champagne",
+  "zone": "Autre",
+  "statut": "Public",
+  "site": null,
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "Parc des expositions, Châlons-en-Champagne"
  },
  "folies-bergere": {
   "nom": "Folies Bergère",
@@ -133,6 +173,16 @@
   "site": null,
   "billetterie": null,
   "tarifJeune": ""
+ },
+ "just-me-milano": {
+  "nom": "Just Me (Torre Branca)",
+  "ville": "Milan",
+  "zone": "Autre",
+  "statut": "Privé",
+  "site": null,
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "Torre Branca, viale Luigi Camoens 2, 20121 Milan (parc Sempione)"
  },
  "la-colline": {
   "nom": "La Colline – théâtre national",
@@ -178,6 +228,16 @@
   "site": "https://www.lido2paris.com",
   "billetterie": null,
   "tarifJeune": ""
+ },
+ "magazzini-generali": {
+  "nom": "Magazzini Generali",
+  "ville": "Milan",
+  "zone": "Autre",
+  "statut": "Privé",
+  "site": "https://www.magazzinigenerali.org",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "Via Pietrasanta 16, Milan"
  },
  "mc93": {
   "nom": "MC93",
@@ -251,6 +311,15 @@
   "billetterie": null,
   "tarifJeune": "Avant-premières jeunes 10 €, dernière minute -28 ans"
  },
+ "paris-la-defense-arena": {
+  "nom": "Paris La Défense Arena",
+  "ville": "Nanterre",
+  "zone": "Petite couronne",
+  "statut": "Privé",
+  "site": "https://www.parisladefense-arena.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
  "petit-saint-martin": {
   "nom": "Théâtre du Petit Saint-Martin",
   "ville": "Paris",
@@ -279,6 +348,16 @@
   "billetterie": null,
   "tarifJeune": ""
  },
+ "point-ephemere": {
+  "nom": "Point Éphémère",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.pointephemere.org",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "200 quai de Valmy, 75010 Paris"
+ },
  "porte-saint-martin": {
   "nom": "Théâtre de la Porte Saint-Martin",
   "ville": "Paris",
@@ -287,6 +366,16 @@
   "site": "https://www.portestmartin.com",
   "billetterie": null,
   "tarifJeune": ""
+ },
+ "rock-en-seine": {
+  "nom": "Rock en Seine (domaine de Saint-Cloud)",
+  "ville": "Saint-Cloud",
+  "zone": "Petite couronne",
+  "statut": "Privé",
+  "site": "https://www.rockenseine.com",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "Domaine national de Saint-Cloud"
  },
  "rond-point": {
   "nom": "Théâtre du Rond-Point",
@@ -297,12 +386,51 @@
   "billetterie": null,
   "tarifJeune": "12 € étudiant (salle Tardieu)"
  },
+ "salle-gaveau": {
+  "nom": "Salle Gaveau",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.sallegaveau.com",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "45 rue La Boétie, 75008 Paris"
+ },
+ "sciences-po": {
+  "nom": "Sciences Po",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://www.sciencespo.fr",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "27 rue Saint-Guillaume, 75007 Paris"
+ },
  "seine-musicale": {
   "nom": "La Seine Musicale",
   "ville": "Boulogne-Billancourt",
   "zone": "Petite couronne",
   "statut": "Privé",
   "site": "https://www.laseinemusicale.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "solidays": {
+  "nom": "Solidays (hippodrome de Longchamp)",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.solidays.org",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "Hippodrome ParisLongchamp, route des Tribunes"
+ },
+ "stade-de-france": {
+  "nom": "Stade de France",
+  "ville": "Saint-Denis",
+  "zone": "Petite couronne",
+  "statut": "Privé",
+  "site": "https://www.stadefrance.com",
   "billetterie": null,
   "tarifJeune": ""
  },
@@ -339,6 +467,15 @@
   "zone": "Paris",
   "statut": "Public",
   "site": "https://www.theatre14.fr",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "theatre-antique-orange": {
+  "nom": "Théâtre antique d’Orange",
+  "ville": "Orange",
+  "zone": "Autre",
+  "statut": "Public",
+  "site": "https://theatre-antique.com",
   "billetterie": null,
   "tarifJeune": ""
  },
@@ -485,6 +622,26 @@
   "site": "https://www.theatresaintgeorges.com",
   "billetterie": null,
   "tarifJeune": ""
+ },
+ "we-love-green": {
+  "nom": "We Love Green (bois de Vincennes)",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.welovegreen.fr",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "Plaine de la Belle Étoile, bois de Vincennes"
+ },
+ "yoyo-palais-de-tokyo": {
+  "nom": "Yoyo – Palais de Tokyo",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": null,
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "13 avenue du Président-Wilson, 75116 Paris"
  },
  "zenith-paris": {
   "nom": "Zénith Paris – La Villette",
