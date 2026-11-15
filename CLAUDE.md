@@ -69,7 +69,7 @@ Référence vivante : la page `#charte` (imprimable en PDF). Toute modification 
 {"id":"ruy-blas","titre":"Ruy Blas","categorie":"Théâtre","sousGenre":"",
  "artistes":[{"nom":"Victor Hugo","role":"auteur"},{"nom":"Julie Duclos","role":"mise en scène"}],
  "lieuId":"comedie-francaise","salle":"Richelieu","debut":"2026-10-15","fin":"2027-01-27","datesTexte":"15 oct. 2026 – 27 janv. 2027","horaires":"2h45",
- "note":3,"calcul":"C1 A2 R1 G2","pronostic":true,"pourquoi":"Une phrase factuelle.","lien":"https://…","billetterie":null,
+ "note":3,"calcul":"C1 N2 O2 H1","pronostic":true,"pourquoi":"Une phrase factuelle.","lien":"https://…","billetterie":null,
  "publicJeune":false,"leonardYVa":false,"statut":"a-voir",
  "offres":[{"type":"Avant-première jeunes","date":"2027-01-25","tarif":"10 €","vente":"2027-01-07T12:00","venteApprox":false,"condition":"Moins de 28 ans"}]}
 ```
@@ -90,33 +90,23 @@ Référence vivante : la page `#charte` (imprimable en PDF). Toute modification 
 **Jamais** dans un fichier public : `prix`, `accompagnants`, `places`, `siege`, `heure` (de réservation), date de réservation. Public = drapeau `leonardYVa` et la liste des envies (`data/envies.json`, identifiants seuls, page publique « Envies » sous le cœur de la navigation) ; note et date d’ajout d’une envie restent privées. Tout le reste va dans la zone privée. Les flux `.ics` (adresse secrète) contiennent prix et accompagnants : c'est voulu.
 
 ## Barème de notation (note 0–4)
-La note est celle de la veille : elle mesure la valeur de la sortie pour Léonard, jamais son état ni l'urgence. **Envie, réservation et « Léonard y va » n'entrent jamais dans le calcul**, pas plus que les dernières dates (l'urgence est l'affaire du Radar). Même barème pour toutes les catégories (théâtre, opéra, expos, concerts, cinéma, événements).
+La note est celle de la veille : elle mesure la valeur et le retentissement de la sortie, **jamais les goûts ni la situation de Léonard** (pas de critère de genre, de fidélité, de tarif jeune ou de distance : pas de bulle). Envie, réservation, « Léonard y va » et dernières dates n'entrent jamais dans le calcul (l'urgence est l'affaire du Radar). Même barème pour toutes les catégories (théâtre, opéra, danse, concerts, expos, cinéma, événements).
 
-**Socle** : quatre critères sans recoupement, chacun de 0 à 2.
+| Critère | 0 | 1 | 2 | 3 |
+|---|---|---|---|---|
+| **C – Critique** | mitigée, mauvaise ou inexistante | bonne presse nationale (Le Monde, Libération, Télérama, Figaro, France Inter, Diapason, Forum Opéra…) | accueil unanime, triomphe | |
+| **N – Notoriété** (équipe, troupe, interprètes, maison) | peu connus | reconnus dans leur domaine | de premier plan (grande maison, metteur en scène ou chorégraphe majeur, troupe de référence) | stars ou légendes (Adjani, Mnouchkine, Ostermeier, Kaufmann, Netrebko, Binoche…) |
+| **O – Œuvre** | inconnue ou mineure | connue | chef-d'œuvre du répertoire ou œuvre culte | |
+| **H – Hype** | rien de particulier | attendu : forte couverture, festival, création d'une équipe en vue, tournée d'un grand orchestre | événement de la saison : retour très attendu, distribution exceptionnelle, ventes prises d'assaut, rareté absolue (une date, adieux, Ring complet), Lion d'or | |
 
-| Critère | 0 | 1 | 2 |
-|---|---|---|---|
-| **C – Critique** | mitigée, mauvaise ou inexistante | bonne presse nationale (Le Monde, Libération, Télérama, Figaro, France Inter, Diapason, Forum Opéra…) | accueil unanime |
-| **A – Œuvre et équipe** | œuvre et équipe peu connues | œuvre ou artiste reconnu | œuvre majeure **et** équipe ou maison de premier plan, ou artiste majeur sur une œuvre forte |
-| **R – Rareté** | longue série, reprise fréquente | rare à Paris | événement unique : création mondiale, une ou deux dates, retour après 10 ans ou plus, adieux |
-| **G – Genre** | genre que Léonard fréquente peu | genre qu'il aime | genre favori : opéra, classiques revisités, scène européenne (Odéon, Festival d'Automne) |
+**Bonus** : **+Distinction** (+1) pour un prix majeur (Molière, Grand Prix de la critique, Victoire, Diapason d'or, ffff Télérama, Lion d'or).
 
-**Bonus** (+1 chacun, +3 au plus) :
-- **Distinction** : prix majeur (Molière, Grand Prix de la critique, Victoire, Diapason d'or, ffff Télérama).
-- **Fidélité** : artiste, auteur ou metteur en scène que Léonard a vu et noté 3 ou 4 dans le journal (`noteLeonard`) ; Mouawad d'office.
-- **Aubaine** : place à 10 € ou moins, ou avant-première jeunes.
-- **Découverte** : première venue en France d'un artiste ou d'une compagnie européenne majeure.
-
-**Malus** (−1 chacun) :
-- **Accès** : hors Paris et petite couronne, ou seulement en semaine à une heure difficile.
-- **Prix** : aucun tarif jeune et place la moins chère au-delà de 40 €.
-
-**Total → note** : 8 et plus → **4** incontournable · 6–7 → **3** fortement recommandé · 4–5 → **2** bon choix si disponible · 2–3 → **1** curiosité · moins de 2 → pas de fiche. 0 dans `note` reste réservé au journal (vu sans note de veille).
-- **`calcul`** (affiche.json, sur chaque sortie notée) : le détail, ex. `"C2 A1 R1 G2 +Fidélité −Prix"`. Le total n'est pas écrit, il se calcule. Affiché dans la fiche publique sous « Pourquoi ». `check.mjs` refuse un format invalide et signale un écart entre `note` et le total.
-- **Pronostic** (création pas encore critiquée) : C estimé d'après l'accueil des deux dernières productions de l'équipe, 1 au plus, et pas de bonus Distinction ; `pronostic: true`. Dès que des critiques paraissent, recalcule C pour de bon et passe `pronostic` à false.
-- **Plafond** : une quinzaine de 4 par saison au plus. Au-delà, garde en 4 les plus hauts totaux (à égalité, la rareté la plus forte) et passe les autres à 3 (seul écart toléré entre `note` et `calcul`).
-- **Révision** : seulement quand un critère change (critiques parues, prix, offre jeune ouverte, tarif connu). Une sortie complète garde sa note (l'état de vente est dans `etat`).
-- **Trace** : `pourquoi` reste une phrase factuelle ; dans la réponse de `/veille`, `/note` ou `/ajoute`, donne le calcul et la note (« C2 A1 R1 G2 +Fidélité = 7 → 3 ») pour chaque note posée ou révisée.
+**Total sur 10 → note** : 8 et plus → **4** incontournable · 6–7 → **3** fortement recommandé · 3–5 → **2** bon choix · 1–2 → **1** curiosité · 0 → pas de fiche. 0 dans `note` reste réservé au journal (vu sans note de veille).
+- **`calcul`** (affiche.json, sur chaque sortie notée) : le détail, ex. `"C1 N3 O2 H2"` ou `"C2 N1 O0 H2 +Distinction"`. Le total n'est pas écrit, il se calcule. Affiché dans la fiche publique sous « Pourquoi ». `check.mjs` refuse un format invalide et signale un écart entre `note` et le total.
+- **Pronostic** (création pas encore critiquée) : C estimé d'après l'accueil des dernières productions de l'équipe, 1 au plus, et pas de Distinction ; `pronostic: true`. Dès que des critiques paraissent, recalcule C pour de bon et passe `pronostic` à false. Une création très attendue reste un incontournable par N, O et H (ex. La Cerisaie, Ruf, Adjani, Lacroix : C1 N3 O2 H2 = 8 → 4).
+- **Plafond** : une vingtaine de 4 par saison au plus. Au-delà, garde en 4 les plus hauts totaux (à égalité, la hype la plus forte) et passe les autres à 3 (seul écart toléré entre `note` et `calcul`).
+- **Révision** : quand un critère change (critiques parues, prix, distribution annoncée ou modifiée, engouement). Une sortie complète garde sa note (l'état de vente est dans `etat`).
+- **Trace** : `pourquoi` reste une phrase factuelle ; dans la réponse de `/veille`, `/note` ou `/ajoute`, donne le calcul et la note (« C1 N3 O2 H2 = 8 → 4 ») pour chaque note posée ou révisée.
 
 ## Liens
 `lien` : toujours la page officielle de la sortie sur le site du lieu. À défaut, page officielle du festival, puis page de saison du lieu. L'Officiel des spectacles seulement en dernier recours. Pour un vu : page archivée officielle si elle existe. `billetterie` : URL d'achat directe si différente.
