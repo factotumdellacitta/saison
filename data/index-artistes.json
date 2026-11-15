@@ -887,6 +887,12 @@
    "kaguyahime"
   ]
  },
+ "claude-stratz": {
+  "nom": "Claude Stratz",
+  "sorties": [
+   "vu-le-malade-imaginaire"
+  ]
+ },
  "claudine-galea": {
   "nom": "Claudine Galea",
   "sorties": [
@@ -957,6 +963,7 @@
   "nom": "Comédie-Française",
   "sorties": [
    "vu-la-vie-parisienne",
+   "vu-le-malade-imaginaire",
    "vu-le-soulier-de-satin",
    "vu-seisme"
   ]
@@ -1088,6 +1095,7 @@
    "le-cid",
    "les-fourberies-de-scapin",
    "vu-hecube-pas-hecube",
+   "vu-le-malade-imaginaire",
    "vu-les-fourberies-de-scapin"
   ]
  },
@@ -1638,7 +1646,8 @@
  "guillaume-gallienne": {
   "nom": "Guillaume Gallienne",
   "sorties": [
-   "resurrection-un-cas-de-conscience"
+   "resurrection-un-cas-de-conscience",
+   "vu-le-malade-imaginaire"
   ]
  },
  "guillaume-pouget-abadie": {
