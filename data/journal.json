@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-15",
+ "maj": "2026-11-16",
  "sorties": [
   {
    "id": "faust-castellucci",
@@ -2338,14 +2338,14 @@
    "titre": "Séisme",
    "categorie": "Théâtre",
    "artistes": [],
-   "lieuId": "petit-saint-martin",
-   "salle": "",
+   "lieuId": "comedie-francaise",
+   "salle": "Théâtre du Petit Saint-Martin",
    "debut": null,
    "fin": null,
    "note": 0,
    "pronostic": false,
    "pourquoi": "",
-   "lien": null,
+   "lien": "https://www.comedie-francaise.fr/2025-2026/seisme",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
@@ -2355,7 +2355,8 @@
    ],
    "noteLeonard": null,
    "avis": "",
-   "offres": []
+   "offres": [],
+   "sousGenre": ""
   },
   {
    "id": "vu-taire",
