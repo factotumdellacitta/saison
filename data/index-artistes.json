@@ -876,7 +876,8 @@
  "claire-de-la-rue-du-can": {
   "nom": "Claire de La Rüe du Can",
   "sorties": [
-   "l-ecole-de-danse"
+   "l-ecole-de-danse",
+   "vu-seisme"
   ]
  },
  "claude-debussy": {
@@ -954,7 +955,8 @@
  "comedie-francaise": {
   "nom": "Comédie-Française",
   "sorties": [
-   "vu-le-soulier-de-satin"
+   "vu-le-soulier-de-satin",
+   "vu-seisme"
   ]
  },
  "compagnie-paizo": {
@@ -1136,6 +1138,12 @@
   "nom": "Double Jeu",
   "sorties": [
    "vu-le-suicide-double-jeu"
+  ]
+ },
+ "duncan-macmillan": {
+  "nom": "Duncan Macmillan",
+  "sorties": [
+   "vu-seisme"
   ]
  },
  "eddy-d-aranjo": {
@@ -1909,7 +1917,8 @@
   "nom": "Jean Chevalier",
   "sorties": [
    "l-avare",
-   "l-ecole-de-danse"
+   "l-ecole-de-danse",
+   "vu-seisme"
   ]
  },
  "jean-christophe-meurisse": {
@@ -3659,6 +3668,12 @@
   "nom": "Roberto Kalb",
   "sorties": [
    "la-rondine"
+  ]
+ },
+ "robin-ormond": {
+  "nom": "Robin Ormond",
+  "sorties": [
+   "vu-seisme"
   ]
  },
  "roderick-williams": {
