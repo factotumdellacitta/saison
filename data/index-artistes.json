@@ -1208,6 +1208,12 @@
    "le-discours-d-un-roi"
   ]
  },
+ "francois-berleand": {
+  "nom": "François Berléand",
+  "sorties": [
+   "vu-lexperience-theatrale"
+  ]
+ },
  "francois-tanguy": {
   "nom": "François Tanguy",
   "sorties": [
@@ -2004,6 +2010,12 @@
    "rituel-4-le-grand-debat"
   ]
  },
+ "laurent-ruquier": {
+  "nom": "Laurent Ruquier",
+  "sorties": [
+   "vu-lexperience-theatrale"
+  ]
+ },
  "laurent-stocker": {
   "nom": "Laurent Stocker",
   "sorties": [
@@ -2493,6 +2505,12 @@
   "nom": "Maud Saint-Jean",
   "sorties": [
    "vu-post"
+  ]
+ },
+ "max-boublil": {
+  "nom": "Max Boublil",
+  "sorties": [
+   "vu-lexperience-theatrale"
   ]
  },
  "maxim-vengerov": {
