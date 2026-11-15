@@ -4210,6 +4210,576 @@
    "noteLeonard": null,
    "avis": "",
    "offres": []
+  },
+  {
+   "id": "vu-patrick-timsit-on-ne-peut-pas-rire-de-tout",
+   "titre": "Patrick Timsit – On ne peut pas rire de tout",
+   "categorie": "Humour",
+   "sousGenre": "One-man-show",
+   "artistes": [
+    {
+     "nom": "Patrick Timsit",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "salle-pleyel",
+   "salle": "",
+   "debut": "2016-11-26",
+   "fin": "2016-11-26",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "One-man-show de Patrick Timsit.",
+   "lien": "https://www.offi.fr/theatre/salle-pleyel-3159/patrick-timsit-on-ne-peut-pas-rire-de-tout-54592.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2016-11-26"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-david-castello-lopes-le-havre",
+   "titre": "David Castello-Lopes – Authentique",
+   "categorie": "Humour",
+   "sousGenre": "Stand-up",
+   "artistes": [
+    {
+     "nom": "David Castello-Lopes",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "docks-le-havre",
+   "salle": "",
+   "debut": "2024-03-16",
+   "fin": "2024-03-16",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Stand-up de David Castello-Lopes, en tournée avec Authentique.",
+   "lien": "https://www.dockslehavre.com/evenement/david-castello-lopes/",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2024-03-16"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-l-invitation",
+   "titre": "L’Invitation",
+   "categorie": "Théâtre",
+   "sousGenre": "Comédie",
+   "artistes": [
+    {
+     "nom": "Hadrien Raccah",
+     "role": "auteur"
+    },
+    {
+     "nom": "Philippe Lellouche",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Patrick Chesnais",
+     "role": "interprète"
+    },
+    {
+     "nom": "Estelle Lefébure",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "theatre-de-la-madeleine",
+   "salle": "",
+   "debut": "2020-10-25",
+   "fin": "2020-10-25",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Comédie de Hadrien Raccah mise en scène et jouée par Philippe Lellouche, avec Patrick Chesnais et Estelle Lefébure.",
+   "lien": "https://tpa.fr/pieces-theatre-paris/l-invitation-4741.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2020-10-25"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-un-americain-a-paris",
+   "titre": "Un Américain à Paris",
+   "categorie": "Comédie musicale",
+   "sousGenre": "",
+   "artistes": [
+    {
+     "nom": "George Gershwin",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Christopher Wheeldon",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "chatelet",
+   "salle": "",
+   "debut": "2019-11-28",
+   "fin": "2020-01-01",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Reprise au Châtelet de la comédie musicale de Christopher Wheeldon sur la musique de Gershwin, créée sur cette scène en 2014.",
+   "lien": "https://www.chatelet.com/programmation/saison-19-20/un-americain-a-paris/",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2019-11-30"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-grease-mogador",
+   "titre": "Grease",
+   "categorie": "Comédie musicale",
+   "sousGenre": "",
+   "artistes": [
+    {
+     "nom": "Jim Jacobs",
+     "role": "auteur"
+    },
+    {
+     "nom": "Warren Casey",
+     "role": "auteur"
+    },
+    {
+     "nom": "Martin Michel",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "theatre-mogador",
+   "salle": "",
+   "debut": "2017-10-15",
+   "fin": "2017-10-15",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Production Stage Entertainment qui a rouvert le Théâtre Mogador après l’incendie de 2016.",
+   "lien": "https://tpa.fr/pieces-theatre-paris/grease-2804.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2017-10-15"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-le-fusible",
+   "titre": "Le Fusible",
+   "categorie": "Théâtre",
+   "sousGenre": "Comédie",
+   "artistes": [
+    {
+     "nom": "Sylvain Meyniac",
+     "role": "auteur"
+    },
+    {
+     "nom": "Arthur Jugnot",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Stéphane Plaza",
+     "role": "interprète"
+    },
+    {
+     "nom": "Arnaud Gidoin",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "bouffes-parisiens",
+   "salle": "",
+   "debut": "2016-03-03",
+   "fin": "2016-03-03",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Comédie de Sylvain Meyniac mise en scène par Arthur Jugnot, avec Stéphane Plaza.",
+   "lien": "https://www.offi.fr/theatre/theatre-des-bouffes-parisiens-1563/le-fusible-59048.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2016-03-03"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-un-stand-up-de-bonne-qualite",
+   "titre": "Un stand-up de bonne qualité",
+   "categorie": "Humour",
+   "sousGenre": "Stand-up",
+   "artistes": [
+    {
+     "nom": "David Castello-Lopes",
+     "role": "interprète"
+    },
+    {
+     "nom": "Guillaume Pouget-Abadie",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "la-petite-loge",
+   "salle": "",
+   "debut": "2021-12-18",
+   "fin": "2021-12-18",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Plateau partagé de David Castello-Lopes et Guillaume Pouget-Abadie.",
+   "lien": "https://www.offi.fr/theatre/la-petite-loge-theatre-2608/guillaume-pouget-abadie-david-castello-lopes-standup-de-bonne-qualite-81585.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2021-12-18"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-marc-antoine-le-bret-nouveau-spectacle",
+   "titre": "Marc-Antoine Le Bret – Nouveau spectacle",
+   "categorie": "Humour",
+   "sousGenre": "Imitations",
+   "artistes": [
+    {
+     "nom": "Marc-Antoine Le Bret",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "alhambra",
+   "salle": "",
+   "debut": "2019-06-01",
+   "fin": "2019-06-01",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Spectacle d’imitations de Marc-Antoine Le Bret.",
+   "lien": "https://www.theatreonline.com/Spectacle/Marc-Antoine-Le-Bret-Nouveau-spectacle/67584",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2019-06-01"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-nuit-d-ivresse",
+   "titre": "Nuit d’ivresse",
+   "categorie": "Théâtre",
+   "sousGenre": "Comédie",
+   "artistes": [
+    {
+     "nom": "Josiane Balasko",
+     "role": "auteur"
+    },
+    {
+     "nom": "Jean-Luc Reichmann",
+     "role": "interprète"
+    },
+    {
+     "nom": "Thierry Lopez",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "theatre-de-la-michodiere",
+   "salle": "",
+   "debut": "2018-04-21",
+   "fin": "2018-04-21",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Reprise de la comédie de Josiane Balasko avec Jean-Luc Reichmann.",
+   "lien": "https://www.offi.fr/theatre/theatre-de-la-michodiere-2784/nuit-divresse-66641.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2018-04-21"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-christelle-chollet-n5-de-chollet",
+   "titre": "Christelle Chollet – N°5 de Chollet",
+   "categorie": "Humour",
+   "sousGenre": "One-woman-show",
+   "artistes": [
+    {
+     "nom": "Christelle Chollet",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "theatre-de-la-tour-eiffel",
+   "salle": "",
+   "debut": "2019-12-21",
+   "fin": "2019-12-21",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "One-woman-show chanté de Christelle Chollet.",
+   "lien": "https://www.offi.fr/theatre/theatre-de-la-tour-eiffel-1363/no-5-de-chollet-by-christelle-69066.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2019-12-21"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-west-side-story-seine-musicale",
+   "titre": "West Side Story",
+   "categorie": "Comédie musicale",
+   "sousGenre": "",
+   "artistes": [
+    {
+     "nom": "Leonard Bernstein",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Stephen Sondheim",
+     "role": "auteur"
+    },
+    {
+     "nom": "Jerome Robbins",
+     "role": "chorégraphie"
+    },
+    {
+     "nom": "Joey McKneely",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "seine-musicale",
+   "salle": "",
+   "debut": "2017-10-12",
+   "fin": "2017-11-12",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Production internationale reprenant la chorégraphie originale de Jerome Robbins, dans la grande salle de La Seine Musicale.",
+   "lien": "https://www.theatreonline.com/Spectacle/West-Side-Story/59534",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2017-11-04"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-nora-hamzawi",
+   "titre": "Nora Hamzawi",
+   "categorie": "Humour",
+   "sousGenre": "One-woman-show",
+   "artistes": [
+    {
+     "nom": "Nora Hamzawi",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": null,
+   "salle": "",
+   "debut": "2017-07-22",
+   "fin": "2017-07-22",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Premier spectacle de Nora Hamzawi.",
+   "lien": "https://www.theatreonline.com/Spectacle/Nora-Hamzawi/59507",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2017-07-22"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-jean-luc-lemoine-si-vous-avez-manque-le-debut",
+   "titre": "Jean-Luc Lemoine – Si vous avez manqué le début",
+   "categorie": "Humour",
+   "sousGenre": "One-man-show",
+   "artistes": [
+    {
+     "nom": "Jean-Luc Lemoine",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "la-cigale",
+   "salle": "",
+   "debut": "2016-11-05",
+   "fin": "2016-11-05",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "One-man-show de Jean-Luc Lemoine, de retour à La Cigale pour deux dates.",
+   "lien": "https://www.theatreonline.com/Spectacle/Jean-Luc-Lemoine-Si-vous-avez-manque-le-debut/54532",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2016-11-05"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-mika-bercy-2019",
+   "titre": "Mika",
+   "categorie": "Concert",
+   "sousGenre": "Pop",
+   "artistes": [
+    {
+     "nom": "Mika",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "salle": "",
+   "debut": "2019-12-22",
+   "fin": "2019-12-22",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Tournée Revelation de Mika à Bercy.",
+   "lien": "https://www.offi.fr/concerts/palais-omnisports-de-paris-bercy-2913/mika-1554776.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2019-12-22"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-anne-roumanoff-aimons-nous",
+   "titre": "Anne Roumanoff – Aimons-nous les uns les autres et plus encore",
+   "categorie": "Humour",
+   "sousGenre": "One-woman-show",
+   "artistes": [
+    {
+     "nom": "Anne Roumanoff",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "alhambra",
+   "salle": "",
+   "debut": "2016-10-26",
+   "fin": "2016-10-26",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "One-woman-show d’Anne Roumanoff.",
+   "lien": "https://www.offi.fr/theatre/alhambra-3584/anne-roumanoff-aimons-nous-les-uns-les-autres-et-plus-encore-61684.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2016-10-26"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-celine-dion-bercy-2016",
+   "titre": "Céline Dion",
+   "categorie": "Concert",
+   "sousGenre": "Pop",
+   "artistes": [
+    {
+     "nom": "Céline Dion",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "salle": "",
+   "debut": "2016-06-29",
+   "fin": "2016-06-29",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Tournée estivale de Céline Dion à Bercy.",
+   "lien": "https://www.offi.fr/concerts/palais-omnisports-de-paris-bercy-2913/celine-dion-944610.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2016-06-29"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-adele-bercy-2016",
+   "titre": "Adele",
+   "categorie": "Concert",
+   "sousGenre": "Pop",
+   "artistes": [
+    {
+     "nom": "Adele",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "salle": "",
+   "debut": "2016-06-09",
+   "fin": "2016-06-09",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Adele Live 2016, tournée de l’album 25, à Bercy.",
+   "lien": "https://www.offi.fr/concerts/palais-omnisports-de-paris-bercy-2913/adele-944671.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2016-06-09"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
   }
  ]
 }

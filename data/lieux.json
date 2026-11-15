@@ -18,6 +18,16 @@
   "tarifJeune": "",
   "adresse": "Porte de la Chapelle, 75018 Paris"
  },
+ "alhambra": {
+  "nom": "Alhambra",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.alhambra-paris.com",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "21 rue Yves-Toudic, 75010 Paris"
+ },
  "arci-biko": {
   "nom": "Arci Biko",
   "ville": "Milan",
@@ -129,6 +139,15 @@
   "site": "https://www.comedie-francaise.fr",
   "billetterie": null,
   "tarifJeune": "Moins de 28 ans : 27 / 18 / 12 € (Richelieu), 19 € (Vieux-Colombier), 18 € (Studio) ; places gratuites le lundi à Richelieu, 1h avant"
+ },
+ "docks-le-havre": {
+  "nom": "Docks du Havre",
+  "ville": "Le Havre",
+  "zone": "Autre",
+  "statut": "Privé",
+  "site": "https://www.dockslehavre.com",
+  "billetterie": null,
+  "tarifJeune": ""
  },
  "duc-des-lombards": {
   "nom": "Duc des Lombards",
@@ -261,6 +280,16 @@
   "site": "https://www.teatrolafenice.it",
   "billetterie": null,
   "tarifJeune": ""
+ },
+ "la-petite-loge": {
+  "nom": "La Petite Loge Théâtre",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.lapetiteloge.fr",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "2 rue de la Bruyère, 75009 Paris"
  },
  "le-splendid": {
   "nom": "Le Splendid",
@@ -615,12 +644,30 @@
   "billetterie": null,
   "tarifJeune": ""
  },
+ "theatre-de-la-madeleine": {
+  "nom": "Théâtre de la Madeleine",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.theatremadeleine.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
  "theatre-de-la-michodiere": {
   "nom": "Théâtre de la Michodière",
   "ville": "Paris",
   "zone": "Paris",
   "statut": "Privé",
   "site": "https://www.michodiere.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "theatre-de-la-tour-eiffel": {
+  "nom": "Théâtre de la Tour Eiffel",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.theatredelatoureiffel.fr",
   "billetterie": null,
   "tarifJeune": ""
  },
