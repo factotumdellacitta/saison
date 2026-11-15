@@ -158,6 +158,12 @@
    "les-pecheurs-de-perles"
   ]
  },
+ "ana-maria-patino-osorio": {
+  "nom": "Ana María Patiño-Osorio",
+  "sorties": [
+   "lucia-di-lammermoor-sierra"
+  ]
+ },
  "ananda-devi": {
   "nom": "Ananda Devi",
   "sorties": [
@@ -180,6 +186,18 @@
   "nom": "Andrea Buccarella",
   "sorties": [
    "mitridate"
+  ]
+ },
+ "andrew-staples": {
+  "nom": "Andrew Staples",
+  "sorties": [
+   "missa-solemnis-makela"
+  ]
+ },
+ "andris-nelsons": {
+  "nom": "Andris Nelsons",
+  "sorties": [
+   "boston-nelsons-lang-lang"
   ]
  },
  "angelica-liddell": {
@@ -283,6 +301,12 @@
   "nom": "Antonello Manacorda",
   "sorties": [
    "idomeneo"
+  ]
+ },
+ "antonio-pappano": {
+  "nom": "Antonio Pappano",
+  "sorties": [
+   "lso-pappano-vengerov"
   ]
  },
  "antonio-vivaldi": {
@@ -402,7 +426,14 @@
  "benjamin-bernheim": {
   "nom": "Benjamin Bernheim",
   "sorties": [
+   "bernheim-recital-philharmonie",
    "werther"
+  ]
+ },
+ "benjamin-britten": {
+  "nom": "Benjamin Britten",
+  "sorties": [
+   "war-requiem-alsop"
   ]
  },
  "benjamin-lavernhe": {
@@ -424,6 +455,12 @@
    "le-fantome-de-l-opera"
   ]
  },
+ "berliner-barock-solisten": {
+  "nom": "Berliner Barock Solisten",
+  "sorties": [
+   "trifonov-berliner-barock-solisten"
+  ]
+ },
  "bernard-marie-koltes": {
   "nom": "Bernard-Marie Koltès",
   "sorties": [
@@ -443,6 +480,12 @@
    "vu-la-vestale"
   ]
  },
+ "billie-holiday": {
+  "nom": "Billie Holiday",
+  "sorties": [
+   "billie-holiday-legende-noire"
+  ]
+ },
  "birane-ba": {
   "nom": "Birane Ba",
   "sorties": [
@@ -456,6 +499,12 @@
   "sorties": [
    "10000-gestes",
    "muette"
+  ]
+ },
+ "boston-symphony-orchestra": {
+  "nom": "Boston Symphony Orchestra",
+  "sorties": [
+   "boston-nelsons-lang-lang"
   ]
  },
  "brian-jagde": {
@@ -488,6 +537,12 @@
    "la-walkyrie"
   ]
  },
+ "camilla-nylund": {
+  "nom": "Camilla Nylund",
+  "sorties": [
+   "la-walkyrie-zurich"
+  ]
+ },
  "camille-de-toledo": {
   "nom": "Camille de Toledo",
   "sorties": [
@@ -517,6 +572,12 @@
   "nom": "Carme Portaceli",
   "sorties": [
    "vu-les-bonnes"
+  ]
+ },
+ "carrie-ann-matheson": {
+  "nom": "Carrie-Ann Matheson",
+  "sorties": [
+   "bernheim-recital-philharmonie"
   ]
  },
  "catherine-hiegel": {
@@ -570,6 +631,33 @@
   "nom": "Charly Paillet",
   "sorties": [
    "vu-from-martin-to-eden"
+  ]
+ },
+ "chen-reiss": {
+  "nom": "Chen Reiss",
+  "sorties": [
+   "missa-solemnis-makela"
+  ]
+ },
+ "chicago-symphony-orchestra": {
+  "nom": "Chicago Symphony Orchestra",
+  "sorties": [
+   "chicago-makela-mahler-9",
+   "chicago-makela-sibelius-chostakovitch"
+  ]
+ },
+ "choeur-de-l-orchestre-de-paris": {
+  "nom": "Chœur de l’Orchestre de Paris",
+  "sorties": [
+   "mahler-symphonie-des-mille-makela",
+   "missa-solemnis-makela",
+   "war-requiem-alsop"
+  ]
+ },
+ "choeur-de-radio-france": {
+  "nom": "Chœur de Radio France",
+  "sorties": [
+   "mahler-2-van-zweden"
   ]
  },
  "christian-gonon": {
@@ -794,6 +882,13 @@
    "vu-le-soulier-de-satin"
   ]
  },
+ "daniil-trifonov": {
+  "nom": "Daniil Trifonov",
+  "sorties": [
+   "trifonov-berliner-barock-solisten",
+   "trifonov-recital-2027"
+  ]
+ },
  "david-bobee": {
   "nom": "David Bobée",
   "sorties": [
@@ -835,7 +930,9 @@
  "dmitri-chostakovitch": {
   "nom": "Dmitri Chostakovitch",
   "sorties": [
-   "lady-macbeth-de-mzensk"
+   "chicago-makela-sibelius-chostakovitch",
+   "lady-macbeth-de-mzensk",
+   "lso-pappano-vengerov"
   ]
  },
  "dominique-blanc": {
@@ -985,6 +1082,12 @@
    "rinaldo"
   ]
  },
+ "ensemble-pygmalion": {
+  "nom": "Ensemble Pygmalion",
+  "sorties": [
+   "ode-a-la-joie-pichon"
+  ]
+ },
  "eric-genovese": {
   "nom": "Éric Génovèse",
   "sorties": [
@@ -1004,6 +1107,12 @@
   "nom": "Ermonela Jaho",
   "sorties": [
    "maria-stuarda"
+  ]
+ },
+ "ernesto-petti": {
+  "nom": "Ernesto Petti",
+  "sorties": [
+   "le-trouvere-rhorer"
   ]
  },
  "esdeekid": {
@@ -1102,6 +1211,12 @@
    "la-fille-mal-gardee"
   ]
  },
+ "freiburger-barockorchester": {
+  "nom": "Freiburger Barockorchester",
+  "sorties": [
+   "passion-selon-saint-matthieu-rattle"
+  ]
+ },
  "gael-kamilindi": {
   "nom": "Gaël Kamilindi",
   "sorties": [
@@ -1116,6 +1231,7 @@
   "sorties": [
    "don-pasquale",
    "l-elixir-d-amour",
+   "lucia-di-lammermoor-sierra",
    "maria-stuarda"
   ]
  },
@@ -1123,6 +1239,12 @@
   "nom": "Gaspare Spontini",
   "sorties": [
    "vu-la-vestale"
+  ]
+ },
+ "gautier-capucon": {
+  "nom": "Gautier Capuçon",
+  "sorties": [
+   "makela-argerich-capucon-triple-concerto"
   ]
  },
  "georg-friedrich-haendel": {
@@ -1161,6 +1283,12 @@
    "vu-la-puce-a-loreille"
   ]
  },
+ "gerald-finley": {
+  "nom": "Gerald Finley",
+  "sorties": [
+   "missa-solemnis-makela"
+  ]
+ },
  "geraldine-martineau": {
   "nom": "Géraldine Martineau",
   "sorties": [
@@ -1174,6 +1302,15 @@
    "manon-lescaut",
    "turandot",
    "vu-puccini"
+  ]
+ },
+ "gianandrea-noseda": {
+  "nom": "Gianandrea Noseda",
+  "sorties": [
+   "l-or-du-rhin-zurich",
+   "la-walkyrie-zurich",
+   "le-crepuscule-des-dieux-zurich",
+   "siegfried-zurich"
   ]
  },
  "gilles-david": {
@@ -1197,7 +1334,14 @@
   "nom": "Giuseppe Verdi",
   "sorties": [
    "attila",
-   "le-trouvere"
+   "le-trouvere",
+   "le-trouvere-rhorer"
+  ]
+ },
+ "gottfried-von-der-goltz": {
+  "nom": "Gottfried von der Goltz",
+  "sorties": [
+   "trifonov-berliner-barock-solisten"
   ]
  },
  "groupe-grenade": {
@@ -1236,6 +1380,14 @@
    "cabaret-teheran"
   ]
  },
+ "gustav-mahler": {
+  "nom": "Gustav Mahler",
+  "sorties": [
+   "chicago-makela-mahler-9",
+   "mahler-2-van-zweden",
+   "mahler-symphonie-des-mille-makela"
+  ]
+ },
  "gustave-flaubert": {
   "nom": "Gustave Flaubert",
   "sorties": [
@@ -1263,7 +1415,8 @@
  "hanna-elisabeth-muller": {
   "nom": "Hanna-Elisabeth Müller",
   "sorties": [
-   "la-clemence-de-titus"
+   "la-clemence-de-titus",
+   "mahler-2-van-zweden"
   ]
  },
  "harry-bicket": {
@@ -1331,6 +1484,7 @@
  "igor-stravinsky": {
   "nom": "Igor Stravinsky",
   "sorties": [
+   "boston-nelsons-lang-lang",
    "dipus-rex",
    "histoire-du-soldat",
    "histoire-du-soldat-tce"
@@ -1390,6 +1544,12 @@
   "nom": "Ivo van Hove",
   "sorties": [
    "tartuffe-van-hove"
+  ]
+ },
+ "jaap-van-zweden": {
+  "nom": "Jaap van Zweden",
+  "sorties": [
+   "mahler-2-van-zweden"
   ]
  },
  "jack-london": {
@@ -1478,6 +1638,18 @@
    "le-chameau"
   ]
  },
+ "jean-sebastien-bach": {
+  "nom": "Jean-Sébastien Bach",
+  "sorties": [
+   "passion-selon-saint-matthieu-rattle"
+  ]
+ },
+ "jean-sibelius": {
+  "nom": "Jean Sibelius",
+  "sorties": [
+   "chicago-makela-sibelius-chostakovitch"
+  ]
+ },
  "jeanne-candel": {
   "nom": "Jeanne Candel",
   "sorties": [
@@ -1490,6 +1662,12 @@
    "le-cid",
    "vu-angels-in-america",
    "vu-une-mouette"
+  ]
+ },
+ "jeremie-rhorer": {
+  "nom": "Jérémie Rhorer",
+  "sorties": [
+   "le-trouvere-rhorer"
   ]
  },
  "jeremy-lopez": {
@@ -1512,6 +1690,12 @@
    "marina-rebeka-jonas-kaufmann"
   ]
  },
+ "joe-hisaishi": {
+  "nom": "Joe Hisaishi",
+  "sorties": [
+   "joe-hisaishi-symphonique"
+  ]
+ },
  "johan-inger": {
   "nom": "Johan Inger",
   "sorties": [
@@ -1522,6 +1706,12 @@
   "nom": "Johanna Nizard",
   "sorties": [
    "le-suicide"
+  ]
+ },
+ "john-adams": {
+  "nom": "John Adams",
+  "sorties": [
+   "lso-rattle-john-adams"
   ]
  },
  "jon-fosse": {
@@ -1671,6 +1861,22 @@
    "rave-l-age-d-or"
   ]
  },
+ "klaus-florian-vogt": {
+  "nom": "Klaus Florian Vogt",
+  "sorties": [
+   "la-walkyrie-zurich"
+  ]
+ },
+ "klaus-makela": {
+  "nom": "Klaus Mäkelä",
+  "sorties": [
+   "chicago-makela-mahler-9",
+   "chicago-makela-sibelius-chostakovitch",
+   "mahler-symphonie-des-mille-makela",
+   "makela-argerich-capucon-triple-concerto",
+   "missa-solemnis-makela"
+  ]
+ },
  "krystian-lupa": {
   "nom": "Krystian Lupa",
   "sorties": [
@@ -1717,6 +1923,12 @@
   "nom": "Lambert Wilson",
   "sorties": [
    "histoire-du-soldat-tce"
+  ]
+ },
+ "lang-lang": {
+  "nom": "Lang Lang",
+  "sorties": [
+   "boston-nelsons-lang-lang"
   ]
  },
  "laura-vazquez": {
@@ -1793,6 +2005,12 @@
   "nom": "Le Birgit Ensemble",
   "sorties": [
    "le-birgit-kabarett-7"
+  ]
+ },
+ "le-cercle-de-l-harmonie": {
+  "nom": "Le Cercle de l’Harmonie",
+  "sorties": [
+   "le-trouvere-rhorer"
   ]
  },
  "le-concert-de-la-loge": {
@@ -1895,6 +2113,12 @@
    "romeo-et-juliette-steibelt"
   ]
  },
+ "levy-sekgapane": {
+  "nom": "Levy Sekgapane",
+  "sorties": [
+   "lucia-di-lammermoor-sierra"
+  ]
+ },
  "lidia-fridman": {
   "nom": "Lidia Fridman",
   "sorties": [
@@ -1949,6 +2173,13 @@
    "la-fournaise"
   ]
  },
+ "london-symphony-orchestra": {
+  "nom": "London Symphony Orchestra",
+  "sorties": [
+   "lso-pappano-vengerov",
+   "lso-rattle-john-adams"
+  ]
+ },
  "lorenzo-passerini": {
   "nom": "Lorenzo Passerini",
   "sorties": [
@@ -1998,6 +2229,16 @@
    "pulsations-childs"
   ]
  },
+ "ludwig-van-beethoven": {
+  "nom": "Ludwig van Beethoven",
+  "sorties": [
+   "boston-nelsons-lang-lang",
+   "lso-pappano-vengerov",
+   "makela-argerich-capucon-triple-concerto",
+   "missa-solemnis-makela",
+   "ode-a-la-joie-pichon"
+  ]
+ },
  "lukas-geniusas": {
   "nom": "Lukas Geniušas",
   "sorties": [
@@ -2014,6 +2255,12 @@
   "nom": "Maëlle Poésy",
   "sorties": [
    "7-minutes"
+  ]
+ },
+ "magdalena-kozena": {
+  "nom": "Magdalena Kožená",
+  "sorties": [
+   "passion-selon-saint-matthieu-rattle"
   ]
  },
  "maguy-marin": {
@@ -2119,6 +2366,12 @@
    "vu-les-fourberies-de-scapin"
   ]
  },
+ "marin-alsop": {
+  "nom": "Marin Alsop",
+  "sorties": [
+   "war-requiem-alsop"
+  ]
+ },
  "marina-hands": {
   "nom": "Marina Hands",
   "sorties": [
@@ -2144,6 +2397,18 @@
   "nom": "Marivaux",
   "sorties": [
    "les-fausses-confidences"
+  ]
+ },
+ "markus-werba": {
+  "nom": "Markus Werba",
+  "sorties": [
+   "war-requiem-alsop"
+  ]
+ },
+ "martha-argerich": {
+  "nom": "Martha Argerich",
+  "sorties": [
+   "makela-argerich-capucon-triple-concerto"
   ]
  },
  "martha-graham": {
@@ -2180,6 +2445,12 @@
   "nom": "Maud Saint-Jean",
   "sorties": [
    "vu-post"
+  ]
+ },
+ "maxim-vengerov": {
+  "nom": "Maxim Vengerov",
+  "sorties": [
+   "lso-pappano-vengerov"
   ]
  },
  "melanie-thierry": {
@@ -2221,6 +2492,18 @@
    "vu-la-vestale"
   ]
  },
+ "michael-volle": {
+  "nom": "Michael Volle",
+  "sorties": [
+   "la-walkyrie-zurich"
+  ]
+ },
+ "michaela-schuster": {
+  "nom": "Michaela Schuster",
+  "sorties": [
+   "mahler-2-van-zweden"
+  ]
+ },
  "michel-fau": {
   "nom": "Michel Fau",
   "sorties": [
@@ -2245,6 +2528,12 @@
    "vu-le-proces-pelicot"
   ]
  },
+ "miriam-feuersinger": {
+  "nom": "Miriam Feuersinger",
+  "sorties": [
+   "passion-selon-saint-matthieu-rattle"
+  ]
+ },
  "moliere": {
   "nom": "Molière",
   "sorties": [
@@ -2267,6 +2556,12 @@
    "la-fournaise",
    "les-fourberies-de-scapin",
    "ruy-blas"
+  ]
+ },
+ "murat-karahan": {
+  "nom": "Murat Karahan",
+  "sorties": [
+   "le-trouvere-rhorer"
   ]
  },
  "muriel-imbach": {
@@ -2297,6 +2592,7 @@
  "nadine-sierra": {
   "nom": "Nadine Sierra",
   "sorties": [
+   "lucia-di-lammermoor-sierra",
    "romeo-et-juliette-jolly"
   ]
  },
@@ -2304,6 +2600,12 @@
   "nom": "Natalia Bacalov",
   "sorties": [
    "vu-roberto-zucco"
+  ]
+ },
+ "natalya-romaniw": {
+  "nom": "Natalya Romaniw",
+  "sorties": [
+   "war-requiem-alsop"
   ]
  },
  "nathalie-garraud": {
@@ -2422,6 +2724,12 @@
    "don-pasquale"
   ]
  },
+ "olga-peretyatko": {
+  "nom": "Olga Peretyatko",
+  "sorties": [
+   "le-trouvere-rhorer"
+  ]
+ },
  "oliver-mears": {
   "nom": "Oliver Mears",
   "sorties": [
@@ -2441,10 +2749,36 @@
    "un-hamlet-de-moins"
   ]
  },
+ "orchestre-de-l-opera-de-zurich": {
+  "nom": "Orchestre de l’Opéra de Zurich",
+  "sorties": [
+   "l-or-du-rhin-zurich",
+   "la-walkyrie-zurich",
+   "le-crepuscule-des-dieux-zurich",
+   "siegfried-zurich"
+  ]
+ },
+ "orchestre-de-paris": {
+  "nom": "Orchestre de Paris",
+  "sorties": [
+   "joe-hisaishi-symphonique",
+   "mahler-symphonie-des-mille-makela",
+   "makela-argerich-capucon-triple-concerto",
+   "missa-solemnis-makela",
+   "war-requiem-alsop"
+  ]
+ },
+ "orchestre-du-conservatoire-de-paris": {
+  "nom": "Orchestre du Conservatoire de Paris",
+  "sorties": [
+   "ode-a-la-joie-pichon"
+  ]
+ },
  "orchestre-national-bordeaux-aquitaine": {
   "nom": "Orchestre national Bordeaux Aquitaine",
   "sorties": [
-   "la-rondine"
+   "la-rondine",
+   "lucia-di-lammermoor-sierra"
   ]
  },
  "orchestre-national-de-france": {
@@ -2452,6 +2786,12 @@
   "sorties": [
    "attila",
    "manon-lescaut"
+  ]
+ },
+ "orchestre-philharmonique-de-radio-france": {
+  "nom": "Orchestre philharmonique de Radio France",
+  "sorties": [
+   "mahler-2-van-zweden"
   ]
  },
  "pablo-gisbert": {
@@ -2571,6 +2911,12 @@
    "rituels-lifar"
   ]
  },
+ "piotr-ilitch-tchaikovski": {
+  "nom": "Piotr Ilitch Tchaïkovski",
+  "sorties": [
+   "makela-argerich-capucon-triple-concerto"
+  ]
+ },
  "pomme": {
   "nom": "Pomme",
   "sorties": [
@@ -2590,6 +2936,12 @@
    "le-trouvere"
   ]
  },
+ "raphael-pichon": {
+  "nom": "Raphaël Pichon",
+  "sorties": [
+   "ode-a-la-joie-pichon"
+  ]
+ },
  "rebecca-chaillon": {
   "nom": "Rébecca Chaillon",
   "sorties": [
@@ -2607,6 +2959,12 @@
   "nom": "Renato Ribeiro",
   "sorties": [
    "vu-hubris"
+  ]
+ },
+ "renaud-capucon": {
+  "nom": "Renaud Capuçon",
+  "sorties": [
+   "makela-argerich-capucon-triple-concerto"
   ]
  },
  "rene-barbera": {
@@ -2636,7 +2994,17 @@
  "richard-wagner": {
   "nom": "Richard Wagner",
   "sorties": [
-   "la-walkyrie"
+   "l-or-du-rhin-zurich",
+   "la-walkyrie",
+   "la-walkyrie-zurich",
+   "le-crepuscule-des-dieux-zurich",
+   "siegfried-zurich"
+  ]
+ },
+ "richard-wilberforce": {
+  "nom": "Richard Wilberforce",
+  "sorties": [
+   "missa-solemnis-makela"
   ]
  },
  "robert-carsen": {
@@ -2669,6 +3037,12 @@
    "la-rondine"
   ]
  },
+ "roderick-williams": {
+  "nom": "Roderick Williams",
+  "sorties": [
+   "passion-selon-saint-matthieu-rattle"
+  ]
+ },
  "romeo-castellucci": {
   "nom": "Romeo Castellucci",
   "sorties": [
@@ -2679,6 +3053,12 @@
   "nom": "Rudolf Noureev",
   "sorties": [
    "raymonda"
+  ]
+ },
+ "russell-thomas": {
+  "nom": "Russell Thomas",
+  "sorties": [
+   "lso-rattle-john-adams"
   ]
  },
  "sacha-guitry": {
@@ -2805,6 +3185,13 @@
    "la-rose-la-bete-et-l-enfant"
   ]
  },
+ "simon-rattle": {
+  "nom": "Simon Rattle",
+  "sorties": [
+   "lso-rattle-john-adams",
+   "passion-selon-saint-matthieu-rattle"
+  ]
+ },
  "simone-de-beauvoir": {
   "nom": "Simone de Beauvoir",
   "sorties": [
@@ -2816,6 +3203,12 @@
   "nom": "Sofia Andrukhovych",
   "sorties": [
    "amadoca"
+  ]
+ },
+ "sofia-goubaidoulina": {
+  "nom": "Sofia Goubaïdoulina",
+  "sorties": [
+   "makela-argerich-capucon-triple-concerto"
   ]
  },
  "sol-leon": {
@@ -3007,6 +3400,12 @@
    "correspondances-nocturnes"
   ]
  },
+ "thomas-atkins": {
+  "nom": "Thomas Atkins",
+  "sorties": [
+   "war-requiem-alsop"
+  ]
+ },
  "thomas-dunford": {
   "nom": "Thomas Dunford",
   "sorties": [
@@ -3120,6 +3519,12 @@
    "vu-willy-protagoras-enferme-dans-les-toilettes"
   ]
  },
+ "wiebke-lehmkuhl": {
+  "nom": "Wiebke Lehmkuhl",
+  "sorties": [
+   "missa-solemnis-makela"
+  ]
+ },
  "william-blake": {
   "nom": "William Blake",
   "sorties": [
@@ -3173,6 +3578,12 @@
   "sorties": [
    "le-trouvere",
    "turandot"
+  ]
+ },
+ "zurcher-sing-akademie": {
+  "nom": "Zürcher Sing-Akademie",
+  "sorties": [
+   "passion-selon-saint-matthieu-rattle"
   ]
  }
 }

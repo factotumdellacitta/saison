@@ -2687,6 +2687,70 @@
    "noteLeonard": null,
    "avis": "",
    "offres": []
+  },
+  {
+   "id": "missa-solemnis-makela",
+   "titre": "Missa solemnis",
+   "categorie": "Concert",
+   "sousGenre": "Musique sacrée",
+   "artistes": [
+    {
+     "nom": "Ludwig van Beethoven",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Klaus Mäkelä",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Orchestre de Paris",
+     "role": "interprète"
+    },
+    {
+     "nom": "Chœur de l’Orchestre de Paris",
+     "role": "interprète"
+    },
+    {
+     "nom": "Richard Wilberforce",
+     "role": "interprète"
+    },
+    {
+     "nom": "Chen Reiss",
+     "role": "interprète"
+    },
+    {
+     "nom": "Wiebke Lehmkuhl",
+     "role": "interprète"
+    },
+    {
+     "nom": "Andrew Staples",
+     "role": "interprète"
+    },
+    {
+     "nom": "Gerald Finley",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "philharmonie",
+   "salle": "Grande salle Pierre Boulez",
+   "debut": "2026-01-27",
+   "fin": "2026-01-29",
+   "datesTexte": "répétition générale publique le 27 janvier, concerts les 28 et 29 janvier 2026",
+   "horaires": "20h, 1h35",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Klaus Mäkelä, l’Orchestre et le Chœur de l’Orchestre de Paris dans la Missa solemnis de Beethoven.",
+   "lien": "https://philharmoniedeparis.fr/fr/activite/concert-vocal/28473-ludwig-van-beethoven-missa-solemnis",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2026-01-27"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
   }
  ]
 }

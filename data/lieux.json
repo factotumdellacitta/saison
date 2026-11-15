@@ -260,6 +260,16 @@
   "billetterie": null,
   "tarifJeune": ""
  },
+ "philharmonie": {
+  "nom": "Philharmonie de Paris",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://philharmoniedeparis.fr",
+  "billetterie": null,
+  "tarifJeune": "Places dès 13 € (dernière catégorie)",
+  "adresse": "221 avenue Jean-Jaurès, 75019 Paris"
+ },
  "poche-montparnasse": {
   "nom": "Théâtre de Poche-Montparnasse",
   "ville": "Paris",
