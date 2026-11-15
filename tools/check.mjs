@@ -13,13 +13,14 @@ const ROLES = ["auteur", "compositeur", "mise en scène", "chorégraphie", "dire
 const ZONES = ["Paris", "Petite couronne", "Île-de-France", "Avignon", "Autre"];
 const STATUTS_LIEU = ["Public", "Privé"];
 const ETATS = ["dernieres-places", "attente", "complet"];
-// Barème (CLAUDE.md) : "C1 N3 O2 H2 +Distinction" ; même lecture que calculDe() dans assets/app.js.
+// Barème (CLAUDE.md) : "C1 N3 H2 +Chef-d’œuvre" ; même lecture que calculDe() dans assets/app.js.
 function calculDe(t) {
-  const m = /^C([0-2]) N([0-3]) O([0-2]) H([0-2])( \+Distinction)?$/.exec(String(t || "").trim());
+  const m = /^C([0-2]) N([0-3]) H([0-2])((?: \+(?:Chef-d’œuvre|Distinction))*)$/.exec(String(t || "").trim());
   if (!m) return null;
-  const socle = { C: +m[1], N: +m[2], O: +m[3], H: +m[4] }, bonus = m[5] ? ["Distinction"] : [];
-  const total = socle.C + socle.N + socle.O + socle.H + bonus.length;
-  return { socle, bonus, total, note: total >= 8 ? 4 : total >= 6 ? 3 : total >= 3 ? 2 : total >= 1 ? 1 : 0 };
+  const socle = { C: +m[1], N: +m[2], H: +m[3] }, bonus = m[4].trim().split(" ").filter(Boolean).map((x) => x.slice(1));
+  if (new Set(bonus).size !== bonus.length) return null;
+  const total = socle.C + socle.N + socle.H + bonus.length;
+  return { socle, bonus, total, note: total >= 7 ? 4 : total >= 5 ? 3 : total >= 2 ? 2 : total >= 1 ? 1 : 0 };
 }
 // Clés interdites dans tout fichier public (données privées)
 const PRIVEES = new Set(["prix", "accompagnants", "places", "siege", "heure", "reserveLe", "icsToken",
@@ -141,7 +142,7 @@ const verifierSortie = (s, fichier) => {
   if (typeof s.pronostic !== "boolean") erreurs.push(`${ou} pronostic doit être true ou false.`);
   if ("calcul" in s) {
     const k = calculDe(s.calcul);
-    if (!k) erreurs.push(`${ou} calcul illisible : « ${s.calcul} » (ex. C1 N3 O2 H2 +Distinction).`);
+    if (!k) erreurs.push(`${ou} calcul illisible : « ${s.calcul} » (ex. C1 N3 H2 +Chef-d’œuvre).`);
     else {
       if (s.pronostic && (k.socle.C > 1 || k.bonus.includes("Distinction"))) erreurs.push(`${ou} pronostic : critique 1 au plus et pas de Distinction.`);
       if (fichier === "affiche" && k.note !== s.note && !(s.note === 3 && k.note === 4)) warn.push(`${ou} note ${s.note} mais calcul ${s.calcul} = ${k.total} (note ${k.note}).`);

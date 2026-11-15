@@ -182,14 +182,15 @@ function range(e) {
   if (+a === +b) return fmtY(a, true);
   return a.getFullYear() === b.getFullYear() ? fmt(a) + " – " + fmtY(b) : fmtY(a) + " – " + fmtY(b);
 }
-// Barème de la veille (CLAUDE.md) : critique, notoriété, œuvre, hype, +Distinction. « calcul » = "C1 N3 O2 H2" ; total sur 10.
-const CRIT = { C: "Critique", N: "Notoriété", O: "Œuvre", H: "Hype" };
+// Barème de la veille (CLAUDE.md) : critique, notoriété, hype, bonus +Chef-d’œuvre et +Distinction. « calcul » = "C1 N3 H2 +Chef-d’œuvre" ; total sur 9.
+const CRIT = { C: "Critique", N: "Notoriété", H: "Hype" };
 function calculDe(t) {
-  const m = /^C([0-2]) N([0-3]) O([0-2]) H([0-2])( \+Distinction)?$/.exec(String(t || "").trim());
+  const m = /^C([0-2]) N([0-3]) H([0-2])((?: \+(?:Chef-d’œuvre|Distinction))*)$/.exec(String(t || "").trim());
   if (!m) return null;
-  const socle = { C: +m[1], N: +m[2], O: +m[3], H: +m[4] }, bonus = m[5] ? ["Distinction"] : [];
-  const total = socle.C + socle.N + socle.O + socle.H + bonus.length;
-  return { socle, bonus, total, note: total >= 8 ? 4 : total >= 6 ? 3 : total >= 3 ? 2 : total >= 1 ? 1 : 0 };
+  const socle = { C: +m[1], N: +m[2], H: +m[3] }, bonus = m[4].trim().split(" ").filter(Boolean).map((x) => x.slice(1));
+  if (new Set(bonus).size !== bonus.length) return null;
+  const total = socle.C + socle.N + socle.H + bonus.length;
+  return { socle, bonus, total, note: total >= 7 ? 4 : total >= 5 ? 3 : total >= 2 ? 2 : total >= 1 ? 1 : 0 };
 }
 const NOTES_TXT = { 4: "incontournable", 3: "fortement recommandé", 2: "bon choix si disponible", 1: "curiosité" };
 // Note : quatre carrés (pleins jusqu’à la note), « P » en exposant pour une prévision.
@@ -312,7 +313,7 @@ function detHTML(e) {
   }
   return ficheCorps(e);
 }
-// Détail du barème sous « Pourquoi » : « Critique 1 · Notoriété 3 · Œuvre 2 · Hype 2 = 8 ».
+// Détail du barème sous « Pourquoi » : « Critique 1 · Notoriété 3 · Hype 2 · Chef-d’œuvre +1 = 7 ».
 function calculHTML(e) {
   const k = calculDe(e.calcul); if (!k) return "";
   const t = [...Object.entries(CRIT).map(([c, l]) => l + " " + k.socle[c]), ...k.bonus.map((b) => b + " +1")].join(" · ");
@@ -945,7 +946,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.29"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.30"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -963,7 +964,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.29"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.30"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
