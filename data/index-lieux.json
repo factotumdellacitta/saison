@@ -153,6 +153,7 @@
    "vu-le-suicide",
    "vu-les-bonnes",
    "vu-les-fourberies-de-scapin",
+   "vu-seisme",
    "vu-une-mouette"
   ]
  },
@@ -376,9 +377,7 @@
   ]
  },
  "petit-saint-martin": {
-  "sorties": [
-   "vu-seisme"
-  ]
+  "sorties": []
  },
  "philharmonie": {
   "sorties": [
