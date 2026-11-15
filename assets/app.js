@@ -665,7 +665,8 @@ function renderRadar() {
     <section class="r-b r-semaine" id="r-semaine"><h2 class="mh">Cette semaine</h2>${blocSemaine(r)}</section>
     <section class="r-b r-suite" id="r-suite"><h2 class="mh">Ouvertures suivantes</h2>
       <div class="seg" role="group" aria-label="Ouvertures affichées"><button type="button" data-rf="suivies" aria-pressed="${RF === "suivies"}" title="Notées 4 ou coups de cœur">Suivies (${nSuivies})</button><button type="button" data-rf="tout" aria-pressed="${RF === "tout"}">Toutes (${r.suite.length})</button></div>
-      <div id="rSuite">${blocSuite(r)}</div></section>
+      <div id="rSuite">${blocSuite(r)}</div>
+      <div class="acts"><a class="btn pri" href="#ventes">${ico("ventes")}Toutes les ouvertures de vente</a></div></section>
   </div></div>
   <section class="r-b" id="r-liens"><h2 class="mh">Billetteries et calendriers de vente</h2>${LIENS ? liensHTML() : '<p class="empty">Liens indisponibles hors connexion.</p>'}</section>
   ${PRIVE ? `<h2 class="mh">Abonnements (admin)</h2>${subsHTML()}` : ""}</section>`;
@@ -699,6 +700,59 @@ function radarLateral() {
 function coeurLigne() {
   const E = enviesIds(), n = LIVE.filter((e) => E.has(e.id)).length;
   return `<a class="r-ligne c-ligne" href="#coeur">${COEUR}<b>Coups de cœur de ${OWNER}</b> <span>${n ? plural(n, "sortie") : "aucun pour le moment"}</span><span class="cta" aria-hidden="true">Voir</span></a>`;
+}
+
+/* ---------- Ouvertures de vente : toutes les ouvertures à venir (#ventes, depuis le Radar) ---------- */
+// Une ligne par ouverture (une sortie peut revenir pour plusieurs offres), bandeau par jour, filtres en mémoire.
+const VF = { q: "", cat: new Set() };
+function ventesToutes() {
+  const L = [];
+  LIVE.forEach((e) => ouvertures(e).forEach((o) => L.push({ e, o, v: venteDate(o) })));
+  return L.sort((a, b) => a.v - b.v || b.e.note - a.e.note || a.e.titre.localeCompare(b.e.titre, "fr"));
+}
+function listeVentes(T) {
+  const q = norm(VF.q).trim();
+  const L = T.filter(({ e }) => (RF === "tout" || suivie(e)) && (!VF.cat.size || VF.cat.has(slug(e.categorie)))
+    && (!q || norm([e.titre, court(e.lieuId), e.categorie, e.sousGenre || "", ...(e.artistes || []).map((a) => a.nom)].join(" ")).includes(q)));
+  let h = "", last = "", lastM = "";
+  for (const { e, o, v } of L) {
+    const k = iso(v), n = dansJ(v), m = k.slice(0, 7);
+    if (m !== lastM && n > R_SEMAINE) { h += `<h2 class="mh v-mois">${cap(MOIS_L[v.getMonth()])} ${v.getFullYear()}</h2>`; lastM = m; }
+    if (k !== last) { h += `<h3 class="jour">${n === 0 ? "Aujourd’hui" : n === 1 ? "Demain" : cap(fmt(v, true))}</h3>`; last = k; }
+    const hv = heureV(o), info = [`${hv ? "Vente à " + hv : "Vente"}${o.venteApprox ? (hv ? " (estimée)" : " (date estimée)") : hv ? "" : ", heure inconnue"}`, offreTxt(o), o.condition && o.condition !== o.type ? esc(o.condition) : ""].filter(Boolean).join(" · ");
+    h += rowR(e, "v" + k, stubR(n <= R_SEMAINE ? jTxt(n) : "vente", v, n <= 2), info);
+  }
+  return h ? `<div class="list">${h}</div>` : `<p class="empty">${RF === "tout" ? "Aucune ouverture ne correspond." : "Aucune ouverture suivie ne correspond : essaie « Toutes »."}</p>`;
+}
+function renderVentes() {
+  const T = ventesToutes(), cats = CATS.filter((c) => T.some((x) => x.e.categorie === c));
+  const nS = T.filter((x) => suivie(x.e)).length;
+  $("#main").innerHTML = `<section id="pv"><div class="ph"><h1>Ouvertures de vente</h1></div>
+  <div class="tools barre-f">${rech("vq", "Rechercher une ouverture", VF.q)}<div class="seg" role="group" aria-label="Ouvertures affichées"><button type="button" data-rf="suivies" aria-pressed="${RF === "suivies"}" title="Notées 4 ou coups de cœur">Suivies (${nS})</button><button type="button" data-rf="tout" aria-pressed="${RF === "tout"}">Toutes (${T.length})</button></div></div>
+  <div class="fbar"><div class="chips defile" role="group" aria-label="Genres">${cats.map((c) => `<button class="chip g-${famille(c)}" type="button" data-vc="${slug(c)}" aria-pressed="${VF.cat.has(slug(c))}">${ico(c)}${esc(c)}</button>`).join("")}</div></div>
+  <div id="vListe">${listeVentes(T)}</div>
+  ${PRIVE ? `<h2 class="mh">Abonnement aux ouvertures (admin)</h2>${subsHTML()}` : ""}</section>`;
+  const m = $("#pv"), maj = () => { $("#vListe").innerHTML = listeVentes(T); };
+  m.querySelector(".seg").onclick = (ev) => {
+    const b = ev.target.closest("[data-rf]"); if (!b) return;
+    RF = b.dataset.rf; m.querySelectorAll("[data-rf]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.rf === RF))); maj();
+  };
+  m.querySelector(".fbar").onclick = (ev) => {
+    const b = ev.target.closest("[data-vc]"); if (!b) return;
+    const v = b.dataset.vc; VF.cat.has(v) ? VF.cat.delete(v) : VF.cat.add(v); b.setAttribute("aria-pressed", String(VF.cat.has(v))); maj();
+  };
+  $("#vq").oninput = (ev) => { VF.q = ev.target.value; maj(); };
+}
+
+/* ---------- Plan du site (#plan, lien en pied de page) ---------- */
+function renderPlan() {
+  const it = (h, t, d) => `<li><a href="#${h}"><span class="lt"><b>${t}</b>${d ? `<small>${d}</small>` : ""}</span></a></li>`;
+  const sec = (t, l) => `<section class="lks"><h2 class="mh">${t}</h2><ul class="lk">${l.join("")}</ul></section>`;
+  $("#main").innerHTML = `<div class="ph"><h1>Plan du site</h1></div>
+  ${sec("Saison", [it("affiche", "À l’affiche", "Liste et calendrier, filtres"), it("coeur", `Coups de cœur de ${esc(OWNER)}`, ""),
+    it("radar", "Radar", "Cette semaine, à réserver, dernières chances"), it("ventes", "Ouvertures de vente", "Toutes les ouvertures à venir"), it("liens", "Billetteries", "Cartes jeunes, calendriers de vente")])}
+  ${sec("Archive", [it("journal", "Journal", "Sorties vues, par saison"), it("artistes", "Artistes", ""), it("lieux", "Lieux", "")])}
+  ${sec("À propos", [it("charte", "Charte graphique", "Nom, symbole, couleurs, typographie, icônes"), ...(PRIVE ? [it("admin", "Admin", "")] : [])])}`;
 }
 
 /* ---------- Journal ---------- */
@@ -872,7 +926,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.21"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.22"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -881,7 +935,7 @@ async function renderAdmin(q) {
 }
 
 /* ---------- Routeur ---------- */
-const TABS = { radar: "radar", affiche: "affiche", coeur: "coeur", journal: "journal", artistes: "artistes", lieux: "artistes", artiste: "artistes", lieu: "artistes", liens: "radar", admin: "admin" };
+const TABS = { radar: "radar", affiche: "affiche", coeur: "coeur", journal: "journal", artistes: "artistes", lieux: "artistes", artiste: "artistes", lieu: "artistes", liens: "radar", ventes: "radar", plan: null, admin: "admin" };
 let BASE = null, RENDERED = null;
 function setTab(t) {
   $$(".tab").forEach((b, i) => { const on = b.dataset.tab === t; b.setAttribute("aria-selected", String(on)); b.tabIndex = on || (!t && i === 0) ? 0 : -1; });
@@ -890,11 +944,11 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.21"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.22"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
-const TITRES = { radar: "Radar", affiche: "", coeur: "Coups de cœur", journal: "Journal", artistes: "Artistes et lieux", lieux: "Artistes et lieux", admin: "Admin" };
+const TITRES = { radar: "Radar", ventes: "Ouvertures de vente", plan: "Plan du site", affiche: "", coeur: "Coups de cœur", journal: "Journal", artistes: "Artistes et lieux", lieux: "Artistes et lieux", admin: "Admin" };
 let TITRE_VUE = "Factotum";
 async function renderView(h) {
   const [path, q = ""] = h.split("?");
@@ -905,7 +959,7 @@ async function renderView(h) {
     document.title = TITRE_VUE = "Charte – Factotum"; RENDERED = h; window.scrollTo(0, 0); return;
   }
   modeCharte(false);
-  const view = path.startsWith("artiste-") ? "artiste" : path.startsWith("lieu-") ? "lieu" : path === "liens" ? "radar" : TABS[path] ? path : "affiche";
+  const view = path.startsWith("artiste-") ? "artiste" : path.startsWith("lieu-") ? "lieu" : path === "liens" ? "radar" : Object.hasOwn(TABS, path) ? path : "affiche";
   const samePath = RENDERED && RENDERED.split("?")[0] === path;
   const focusK = samePath && document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.k : null;
   setTab(TABS[view]);
@@ -920,6 +974,8 @@ async function renderView(h) {
   else if (view === "artiste") renderArtiste(decodeURIComponent(path.slice(8)));
   else if (view === "lieu") renderLieu(decodeURIComponent(path.slice(5)));
   else if (view === "coeur") renderCoeur();
+  else if (view === "ventes") renderVentes();
+  else if (view === "plan") renderPlan();
   else if (view === "admin") await renderAdmin(q);
   const hc = $("#hcoeur"); if (hc) { if (view === "coeur") hc.setAttribute("aria-current", "page"); else hc.removeAttribute("aria-current"); }
   RENDERED = h;
@@ -927,7 +983,7 @@ async function renderView(h) {
   else if (!samePath) window.scrollTo(0, 0);
   else if (focusK) { const el = $(`[data-k="${focusK}"]`); if (el) el.focus({ preventScroll: true }); }
 }
-const LEGACY = { calendrier: "affiche?vue=mois", vus: "journal", prive: "admin", ventes: "radar", catalogue: "affiche" };
+const LEGACY = { calendrier: "affiche?vue=mois", vus: "journal", prive: "admin", ventes: "ventes", catalogue: "affiche" };
 async function route() {
   let h = location.hash.slice(1);
   if (h.startsWith("fiche-")) { history.replaceState(null, "", "#sortie-" + h.slice(6)); h = "sortie-" + h.slice(6); }
