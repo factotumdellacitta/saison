@@ -707,3 +707,4 @@ body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
 .nc-c.on{background:var(--rouge-texte)}
 .nc-t{margin-left:var(--e2);font-size:var(--t-meta);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--encre-2)}
 @media (forced-colors:active){.nc-c{border-color:CanvasText}.nc-c.on{forced-color-adjust:none;background:CanvasText}}
+.calc{margin:0 0 var(--e3);color:var(--encre-2);font-size:var(--t-meta);font-weight:500;text-transform:uppercase;letter-spacing:.06em;line-height:1.35}

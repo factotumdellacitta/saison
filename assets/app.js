@@ -182,6 +182,23 @@ function range(e) {
   if (+a === +b) return fmtY(a, true);
   return a.getFullYear() === b.getFullYear() ? fmt(a) + " – " + fmtY(b) : fmtY(a) + " – " + fmtY(b);
 }
+// Barème de la veille (CLAUDE.md) : socle C, A, R, G de 0 à 2, bonus +1 (3 au plus), malus −1. « calcul » = "C2 A1 R1 G2 +Fidélité −Prix".
+const BONUS = ["Distinction", "Fidélité", "Aubaine", "Découverte"], MALUS = ["Accès", "Prix"];
+const CRIT = { C: "Critique", A: "Œuvre", R: "Rareté", G: "Genre" };
+function calculDe(t) {
+  const m = /^C([0-2]) A([0-2]) R([0-2]) G([0-2])((?: [+−-][A-Za-zÀ-ÿ]+)*)$/.exec(String(t || "").trim());
+  if (!m) return null;
+  const socle = { C: +m[1], A: +m[2], R: +m[3], G: +m[4] }, bonus = [], malus = [];
+  for (const x of m[5].trim().split(" ").filter(Boolean)) {
+    const n = x.slice(1);
+    if (x[0] === "+" && BONUS.includes(n) && !bonus.includes(n)) bonus.push(n);
+    else if (x[0] !== "+" && MALUS.includes(n) && !malus.includes(n)) malus.push(n);
+    else return null;
+  }
+  if (bonus.length > 3) return null;
+  const total = socle.C + socle.A + socle.R + socle.G + bonus.length - malus.length;
+  return { socle, bonus, malus, total, note: total >= 8 ? 4 : total >= 6 ? 3 : total >= 4 ? 2 : total >= 2 ? 1 : 0 };
+}
 const NOTES_TXT = { 4: "incontournable", 3: "fortement recommandé", 2: "bon choix si disponible", 1: "curiosité" };
 // Note : quatre carrés (pleins jusqu’à la note), « P » en exposant pour une prévision.
 function stars(n, pro, label) {
@@ -303,13 +320,19 @@ function detHTML(e) {
   }
   return ficheCorps(e);
 }
+// Détail du barème sous « Pourquoi » : « Critique 2 · Œuvre 1 · Rareté 1 · Genre 2 · Fidélité +1 = 7 ».
+function calculHTML(e) {
+  const k = calculDe(e.calcul); if (!k) return "";
+  const t = [...Object.entries(CRIT).map(([c, l]) => l + " " + k.socle[c]), ...k.bonus.map((b) => b + " +1"), ...k.malus.map((b) => b + " −1")].join(" · ");
+  return `<p class="calc"><span class="vh">Barème : </span>${esc(t)} = ${k.total}${e.pronostic ? " (prévision)" : ""}</p>`;
+}
 // Corps de la fiche : utilisé par la fiche plein écran et par le déroulé d’une ligne (toute la fiche, sans détour).
 function ficheCorps(e, plein) {
   const L = lieu(e), c = creditsHTML(e);
   return `${c ? `<p class="cr">${c}</p>` : ""}
     <dl class="dl"><dt>${ico("lieu")}<span class="vh">Lieu</span></dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}${L.ville && L.ville !== "Paris" ? " (" + esc(L.ville) + ")" : ""}</dd>
     <dt>${ico("mois")}<span class="vh">Dates</span></dt><dd>${esc(range(e))}</dd>${e.horaires ? `<dt>${ico("horaires")}<span class="vh">Horaires</span></dt><dd>${esc(e.horaires)}</dd>` : ""}</dl>
-    ${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}
+    ${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${calculHTML(e)}
     ${PRIVE && ADMIN ? ADMIN.ficheHTML(e) : ""}
     ${(e.offres || []).length || L.tarifJeune ? `<h3 class="sec">Offres</h3>${offresHTML(e)}` : ""}${actsHTML(e, !plein)}<h3 class="sec">Dates</h3>${ficheCal(e)}`;
 }
@@ -930,7 +953,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.27"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.28"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -948,7 +971,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.27"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.28"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
