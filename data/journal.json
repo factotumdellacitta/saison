@@ -2751,6 +2751,32 @@
    "noteLeonard": null,
    "avis": "",
    "offres": []
+  },
+  {
+   "id": "vu-bal-de-l-x-2025",
+   "titre": "Bal de l’X 2025",
+   "categorie": "Événement",
+   "sousGenre": "Bal",
+   "artistes": [],
+   "lieuId": "palais-garnier",
+   "salle": "",
+   "debut": "2025-05-16",
+   "fin": "2025-05-16",
+   "horaires": "soirée",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Bal de bienfaisance de l’association des anciens élèves de l’École polytechnique, au Palais Garnier.",
+   "lien": "https://ax.polytechnique.org/fr/event/bal-de-l-x-2025-palais-garnier/2025/05/16/2262",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2025-05-16"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
   }
  ]
 }
