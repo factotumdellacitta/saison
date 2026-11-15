@@ -351,16 +351,14 @@ details.box[open]>summary::before{content:"–"}
 .barre-f .seg button{min-height:38px}
 .barre-f .chip{min-height:40px}
 /* Genres en onglets texte (Affiche, Radar) : soulignés en rouge quand actifs, sans cadre */
-.gtabs{gap:var(--e4);padding-top:0;padding-bottom:0;border-bottom:1px solid var(--filet-leger)}
-.gtabs .chip{min-height:36px;padding:0;border:0;background:none;color:var(--encre-2);font-size:var(--t-meta)}
+.gtabs{gap:var(--e2)}
+.gtabs .chip{padding:0 var(--e3) 0 var(--e2);gap:6px;border:1px solid var(--filet-leger);background:var(--fond);color:var(--encre)}
 .gtabs .chip .pi{width:14px;height:14px;color:var(--g,var(--encre-2))}
-.gtabs .chip::before{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:transparent}
-.gtabs .chip[aria-pressed="true"][class]{background:none;border-color:transparent;color:var(--encre)}
-.gtabs .chip[aria-pressed="true"]::before{background:var(--rouge)}
-@media (hover:hover){.gtabs .chip[class]:hover{background:none;color:var(--encre)}}
+.gtabs .chip[aria-pressed="true"][class]{background:var(--ga,var(--rouge));border-color:var(--ga,var(--rouge));color:var(--sur-rouge)}
+@media (hover:hover){.gtabs .chip[class]:hover{background:var(--fond);border-color:var(--g,var(--encre));color:var(--encre)}.gtabs .chip[aria-pressed="true"][class]:hover{background:var(--ga,var(--rouge));color:var(--sur-rouge)}}
 .barre-f .rech{flex:1;min-width:0}
 .chip.filtres .nf{margin-left:var(--e1);font-weight:800}
-@container page (max-width:479.98px){.chip.filtres .lbf{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.chip.filtres{min-width:var(--cible);justify-content:center}}
+@container page (max-width:0px){.chip.filtres .lbf{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.chip.filtres{min-width:var(--cible);justify-content:center}}
 .fgr{display:grid;grid-template-columns:72px minmax(0,1fr);gap:var(--e2);align-items:start;padding:var(--e2) 0;border-bottom:1px solid var(--filet-leger)}
 .fgr:last-child{border-bottom:0}
 @container page (max-width:479.98px){.fgr{grid-template-columns:minmax(0,1fr);gap:var(--e1)}.fl{padding-top:0}}
@@ -691,9 +689,9 @@ body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
 /* Colonne de date : intervalle des représentations sous le jour de début */
 .stub small.au{margin-top:var(--e1);font-size:var(--t-meta);font-weight:500;color:var(--encre-2);text-transform:uppercase;letter-spacing:.02em;line-height:1.2}
 .lat-intro{margin:0 0 var(--e3)}
-@media (forced-colors:active){.gtabs .chip[aria-pressed="true"]::before{background:CanvasText}}
 .r-lat .acts .btn{width:100%}
-.gtabs .chip[class] .pi,.gtabs .chip[class]:hover .pi{color:var(--g,var(--encre-2))}
+.gtabs .chip[class] .pi{color:var(--g,var(--encre-2))}
+.gtabs .chip[aria-pressed="true"][class] .pi{color:var(--sur-rouge)}
 /* Filtres actifs : jetons légers (contour fin), « Tout effacer » en lien */
 .active .chip.on[class]{background:none;border-color:var(--encre);color:var(--encre)}
 .active .chip.on[class] .x{color:var(--rouge-texte);font-weight:700}
@@ -708,3 +706,11 @@ body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
 .nc-t{margin-left:var(--e2);font-size:var(--t-meta);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--encre-2)}
 @media (forced-colors:active){.nc-c{border-color:CanvasText}.nc-c.on{forced-color-adjust:none;background:CanvasText}}
 .calc{margin:0 0 var(--e3);color:var(--encre-2);font-size:var(--t-meta);font-weight:500;text-transform:uppercase;letter-spacing:.06em;line-height:1.35}
+/* Ligne des résultats : nombre et filtres actifs à gauche ; tri et vue (liste ou calendrier) à droite */
+.resbar{display:flex;align-items:center;gap:var(--e2) var(--e4);flex-wrap:wrap;justify-content:space-between;border-bottom:1px solid var(--filet-leger)}
+.resbar>.n{font-size:var(--t-meta);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.resbar .active{flex:1 1 100%;order:3;min-width:0;min-height:0;padding-bottom:var(--e2)}
+.resbar .active:empty{display:none}
+.vuectl{display:flex;align-items:center;gap:var(--e3);flex:none}
+.seg-s button{min-height:30px;min-width:36px}
+.seg-s .pi{width:18px;height:18px}
