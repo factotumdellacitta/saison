@@ -1092,6 +1092,14 @@
     {
      "nom": "Jacques Offenbach",
      "role": "compositeur"
+    },
+    {
+     "nom": "Comédie-Française",
+     "role": "compagnie"
+    },
+    {
+     "nom": "Benjamin Lavernhe",
+     "role": "interprète"
     }
    ],
    "lieuId": "chatelet",
@@ -1111,7 +1119,8 @@
    ],
    "noteLeonard": null,
    "avis": "",
-   "offres": []
+   "offres": [],
+   "sousGenre": ""
   },
   {
    "id": "vu-lavare",
