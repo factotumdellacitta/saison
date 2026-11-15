@@ -24,7 +24,7 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:vente-asmik-grigorian-lukas-geniusas-0-carte-jeunes-tce@saison
-DTSTAMP:20261114T000000Z
+DTSTAMP:20261115T000000Z
 DTSTART;TZID=Europe/Paris:20270228T100000
 DTEND;TZID=Europe/Paris:20270228T101500
 SUMMARY:~ Vente : Carte Jeunes TCE – Asmik Grigorian\, Lukas Geniušas
@@ -41,7 +41,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:vente-attila-0-carte-jeunes-tce@saison
-DTSTAMP:20261114T000000Z
+DTSTAMP:20261115T000000Z
 DTSTART;TZID=Europe/Paris:20261206T100000
 DTEND;TZID=Europe/Paris:20261206T101500
 SUMMARY:~ Vente : Carte Jeunes TCE – Attila (version de concert)
@@ -58,7 +58,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:vente-correspondances-nocturnes-0-avant-premiere-jeunes@saison
-DTSTAMP:20261114T000000Z
+DTSTAMP:20261115T000000Z
 DTSTART;TZID=Europe/Paris:20270121T120000
 DTEND;TZID=Europe/Paris:20270121T121500
 SUMMARY:Vente : Avant-première jeunes – Correspondances nocturnes
@@ -75,7 +75,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:vente-don-giovanni-0-avant-premiere-jeunes@saison
-DTSTAMP:20261114T000000Z
+DTSTAMP:20261115T000000Z
 DTSTART;TZID=Europe/Paris:20270107T120000
 DTEND;TZID=Europe/Paris:20270107T121500
 SUMMARY:Vente : Avant-première jeunes – Don Giovanni
@@ -91,7 +91,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:vente-giselle-0-avant-premiere-jeunes@saison
-DTSTAMP:20261114T000000Z
+DTSTAMP:20261115T000000Z
 DTSTART;TZID=Europe/Paris:20270603T120000
 DTEND;TZID=Europe/Paris:20270603T121500
 SUMMARY:Vente : Avant-première jeunes – Giselle
@@ -107,7 +107,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:vente-idomeneo-0-avant-premiere-jeunes@saison
-DTSTAMP:20261114T000000Z
+DTSTAMP:20261115T000000Z
 DTSTART;TZID=Europe/Paris:20270408T120000
 DTEND;TZID=Europe/Paris:20270408T121500
 SUMMARY:Vente : Avant-première jeunes – Idomeneo
@@ -123,7 +123,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:vente-joyaux-0-avant-premiere-jeunes@saison
-DTSTAMP:20261114T000000Z
+DTSTAMP:20261115T000000Z
 DTSTART;TZID=Europe/Paris:20270318T120000
 DTEND;TZID=Europe/Paris:20270318T121500
 SUMMARY:Vente : Avant-première jeunes – Joyaux
@@ -139,7 +139,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:vente-l-orfeo-0-carte-jeunes-tce@saison
-DTSTAMP:20261114T000000Z
+DTSTAMP:20261115T000000Z
 DTSTART;TZID=Europe/Paris:20261018T100000
 DTEND;TZID=Europe/Paris:20261018T101500
 SUMMARY:~ Vente : Carte Jeunes TCE – L’Orfeo (version de concert)
@@ -156,7 +156,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:vente-la-fille-mal-gardee-0-avant-premiere-jeunes@saison
-DTSTAMP:20261114T000000Z
+DTSTAMP:20261115T000000Z
 DTSTART;TZID=Europe/Paris:20270415T120000
 DTEND;TZID=Europe/Paris:20270415T121500
 SUMMARY:Vente : Avant-première jeunes – La Fille mal gardée
@@ -172,7 +172,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:vente-les-pecheurs-de-perles-0-avant-premiere-jeunes-30-ans@saison
-DTSTAMP:20261114T000000Z
+DTSTAMP:20261115T000000Z
 DTSTART;TZID=Europe/Paris:20260903T100000
 DTEND;TZID=Europe/Paris:20260903T101500
 SUMMARY:~ Vente : Avant-première jeunes -30 ans – Les Pêcheurs de perle
@@ -190,7 +190,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:vente-marina-rebeka-jonas-kaufmann-0-carte-jeunes-tce@saison
-DTSTAMP:20261114T000000Z
+DTSTAMP:20261115T000000Z
 DTSTART;TZID=Europe/Paris:20270111T100000
 DTEND;TZID=Europe/Paris:20270111T101500
 SUMMARY:~ Vente : Carte Jeunes TCE – Marina Rebeka\, Jonas Kaufmann
@@ -207,7 +207,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:vente-miroir-de-nos-peines-0-avant-premiere-jeunes@saison
-DTSTAMP:20261114T000000Z
+DTSTAMP:20261115T000000Z
 DTSTART;TZID=Europe/Paris:20270401T120000
 DTEND;TZID=Europe/Paris:20270401T121500
 SUMMARY:Vente : Avant-première jeunes – Miroir de nos peines
@@ -223,7 +223,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:vente-orphee-0-avant-premiere-jeunes-30-ans@saison
-DTSTAMP:20261114T000000Z
+DTSTAMP:20261115T000000Z
 DTSTART;TZID=Europe/Paris:20270118T100000
 DTEND;TZID=Europe/Paris:20270118T101500
 SUMMARY:~ Vente : Avant-première jeunes -30 ans – Orphée
@@ -240,7 +240,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:vente-raymonda-0-avant-premiere-jeunes@saison
-DTSTAMP:20261114T000000Z
+DTSTAMP:20261115T000000Z
 DTSTART;TZID=Europe/Paris:20270527T120000
 DTEND;TZID=Europe/Paris:20270527T121500
 SUMMARY:Vente : Avant-première jeunes – Raymonda
@@ -256,7 +256,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:vente-rinaldo-0-avant-premiere-jeunes-30-ans@saison
-DTSTAMP:20261114T000000Z
+DTSTAMP:20261115T000000Z
 DTSTART;TZID=Europe/Paris:20261120T100000
 DTEND;TZID=Europe/Paris:20261120T101500
 SUMMARY:~ Vente : Avant-première jeunes -30 ans – Rinaldo
@@ -273,7 +273,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:vente-werther-0-avant-premiere-jeunes@saison
-DTSTAMP:20261114T000000Z
+DTSTAMP:20261115T000000Z
 DTSTART;TZID=Europe/Paris:20270114T120000
 DTEND;TZID=Europe/Paris:20270114T121500
 SUMMARY:Vente : Avant-première jeunes – Werther
