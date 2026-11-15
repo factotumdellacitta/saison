@@ -69,7 +69,7 @@ Référence vivante : la page `#charte` (imprimable en PDF). Toute modification 
 {"id":"ruy-blas","titre":"Ruy Blas","categorie":"Théâtre","sousGenre":"",
  "artistes":[{"nom":"Victor Hugo","role":"auteur"},{"nom":"Julie Duclos","role":"mise en scène"}],
  "lieuId":"comedie-francaise","salle":"Richelieu","debut":"2026-10-15","fin":"2027-01-27","datesTexte":"15 oct. 2026 – 27 janv. 2027","horaires":"2h45",
- "note":3,"calcul":"C1 N2 O2 H1","pronostic":true,"pourquoi":"Une phrase factuelle.","lien":"https://…","billetterie":null,
+ "note":3,"calcul":"C1 N2 H1 +Chef-d’œuvre","pronostic":true,"pourquoi":"Une phrase factuelle.","lien":"https://…","billetterie":null,
  "publicJeune":false,"leonardYVa":false,"statut":"a-voir",
  "offres":[{"type":"Avant-première jeunes","date":"2027-01-25","tarif":"10 €","vente":"2027-01-07T12:00","venteApprox":false,"condition":"Moins de 28 ans"}]}
 ```
@@ -96,17 +96,16 @@ La note est celle de la veille : elle mesure la valeur et le retentissement de l
 |---|---|---|---|---|
 | **C – Critique** | mitigée, mauvaise ou inexistante | bonne presse nationale (Le Monde, Libération, Télérama, Figaro, France Inter, Diapason, Forum Opéra…) | accueil unanime, triomphe | |
 | **N – Notoriété** (équipe, troupe, interprètes, maison) | peu connus | reconnus dans leur domaine | de premier plan (grande maison, metteur en scène ou chorégraphe majeur, troupe de référence) | stars ou légendes (Adjani, Mnouchkine, Ostermeier, Kaufmann, Netrebko, Binoche…) |
-| **O – Œuvre** | inconnue ou mineure | connue | chef-d'œuvre du répertoire ou œuvre culte | |
 | **H – Hype** | rien de particulier | attendu : forte couverture, festival, création d'une équipe en vue, tournée d'un grand orchestre | événement de la saison : retour très attendu, distribution exceptionnelle, ventes prises d'assaut, rareté absolue (une date, adieux, Ring complet), Lion d'or | |
 
-**Bonus** : **+Distinction** (+1) pour un prix majeur (Molière, Grand Prix de la critique, Victoire, Diapason d'or, ffff Télérama, Lion d'or).
+**Bonus** (+1 chacun) : **+Chef-d’œuvre** pour un chef-d'œuvre du répertoire ou une œuvre culte (une œuvre nouvelle ou peu connue n'est jamais pénalisée : elle n'a simplement pas ce bonus) ; **+Distinction** pour un prix majeur (Molière, Grand Prix de la critique, Victoire, Diapason d'or, ffff Télérama, Lion d'or).
 
-**Total sur 10 → note** : 8 et plus → **4** incontournable · 6–7 → **3** fortement recommandé · 3–5 → **2** bon choix · 1–2 → **1** curiosité · 0 → pas de fiche. 0 dans `note` reste réservé au journal (vu sans note de veille).
-- **`calcul`** (affiche.json, sur chaque sortie notée) : le détail, ex. `"C1 N3 O2 H2"` ou `"C2 N1 O0 H2 +Distinction"`. Le total n'est pas écrit, il se calcule. Affiché dans la fiche publique sous « Pourquoi ». `check.mjs` refuse un format invalide et signale un écart entre `note` et le total.
-- **Pronostic** (création pas encore critiquée) : C estimé d'après l'accueil des dernières productions de l'équipe, 1 au plus, et pas de Distinction ; `pronostic: true`. Dès que des critiques paraissent, recalcule C pour de bon et passe `pronostic` à false. Une création très attendue reste un incontournable par N, O et H (ex. La Cerisaie, Ruf, Adjani, Lacroix : C1 N3 O2 H2 = 8 → 4).
+**Total sur 9 → note** : 7 et plus → **4** incontournable · 5–6 → **3** fortement recommandé · 2–4 → **2** bon choix · 1 → **1** curiosité · 0 → pas de fiche. 0 dans `note` reste réservé au journal (vu sans note de veille).
+- **`calcul`** (affiche.json, sur chaque sortie notée) : le détail, ex. `"C1 N3 H2 +Chef-d’œuvre"` ou `"C2 N1 H2 +Distinction"`. Le total n'est pas écrit, il se calcule. Affiché dans la fiche publique sous « Pourquoi ». `check.mjs` refuse un format invalide et signale un écart entre `note` et le total.
+- **Pronostic** (création pas encore critiquée) : C estimé d'après l'accueil des dernières productions de l'équipe, 1 au plus, et pas de Distinction ; `pronostic: true`. Dès que des critiques paraissent, recalcule C pour de bon et passe `pronostic` à false. Une création très attendue reste un incontournable par N, O et H (ex. La Cerisaie, Ruf, Adjani, Lacroix : C1 N3 H2 +Chef-d’œuvre = 7 → 4).
 - **Plafond** : une vingtaine de 4 par saison au plus. Au-delà, garde en 4 les plus hauts totaux (à égalité, la hype la plus forte) et passe les autres à 3 (seul écart toléré entre `note` et `calcul`).
 - **Révision** : quand un critère change (critiques parues, prix, distribution annoncée ou modifiée, engouement). Une sortie complète garde sa note (l'état de vente est dans `etat`).
-- **Trace** : `pourquoi` reste une phrase factuelle ; dans la réponse de `/veille`, `/note` ou `/ajoute`, donne le calcul et la note (« C1 N3 O2 H2 = 8 → 4 ») pour chaque note posée ou révisée.
+- **Trace** : `pourquoi` reste une phrase factuelle ; dans la réponse de `/veille`, `/note` ou `/ajoute`, donne le calcul et la note (« C1 N3 H2 +Chef-d’œuvre = 7 → 4 ») pour chaque note posée ou révisée.
 
 ## Liens
 `lien` : toujours la page officielle de la sortie sur le site du lieu. À défaut, page officielle du festival, puis page de saison du lieu. L'Officiel des spectacles seulement en dernier recours. Pour un vu : page archivée officielle si elle existe. `billetterie` : URL d'achat directe si différente.
