@@ -121,7 +121,7 @@ function toast(t) { const el = $("#toast"); el.textContent = t; el.classList.add
 const getJSON = (u, o) => fetch(u, o).then((r) => { if (!r.ok) throw new Error(u); return r.json(); });
 
 /* ---------- Données ---------- */
-let ENVIES_PUB = [], AFF = [], LIVE = [], LIEUX = {}, BUSY = new Set(), BUSY_SRC = {}, MAJ = "", JOURNAL = null, JMAJ = "", LIENS = null, PRIVE = null;
+let DEJA_VU = {}, ENVIES_PUB = [], AFF = [], LIVE = [], LIEUX = {}, BUSY = new Set(), BUSY_SRC = {}, MAJ = "", JOURNAL = null, JMAJ = "", LIENS = null, PRIVE = null;
 let ADMIN = null, JAVEC = ""; // ADMIN : module admin (assets/admin.js) ; JAVEC : filtre du journal par accompagnant (mémoire seulement)
 const BYID = new Map();
 let jP = null, lP = null;
@@ -225,6 +225,9 @@ function stubHTML(e, mode) {
 function badges(e) {
   const b = [];
   if (e.leonardYVa) b.push(`<span class="b yva">${OWNER} y va</span>`);
+  // Déjà vu : l’œuvre figure au journal (data/deja-vu.json, généré par build.mjs).
+  const dv = e.statut !== "vu" && DEJA_VU[e.id];
+  if (dv && dv.length) { const t = "Vu le " + dv.map((x) => fmtY(D(x))).join(", "); b.push(`<span class="b vu" title="${esc(t)}" aria-label="Déjà vu (${esc(t.toLowerCase())})">Déjà vu</span>`); }
   if (e.publicJeune) b.push(`<span class="b">Public jeune</span>`);
   if (ETATS[e.etat]) b.push(etatB(e.etat));
   else if (lastDays(e)) b.push(`<span class="b">Dernières dates</span>`);
@@ -927,7 +930,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.24"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.25"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -945,7 +948,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.24"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.25"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
@@ -1054,8 +1057,9 @@ if ("IntersectionObserver" in window) new IntersectionObserver(([x]) => document
 /* ---------- Démarrage ---------- */
 (async () => {
   try {
-    const [a, l, d, ev] = await Promise.all([getJSON("data/affiche.json"), getJSON("data/lieux.json"), getJSON("data/dispo.json").catch(() => ({})), getJSON("data/envies.json").catch(() => ({}))]);
+    const [a, l, d, ev, dv] = await Promise.all([getJSON("data/affiche.json"), getJSON("data/lieux.json"), getJSON("data/dispo.json").catch(() => ({})), getJSON("data/envies.json").catch(() => ({})), getJSON("data/deja-vu.json").catch(() => ({}))]);
     ENVIES_PUB = Array.isArray(ev.ids) ? ev.ids : [];
+    DEJA_VU = dv && typeof dv === "object" ? dv : {};
     applyData({ affiche: a, lieux: l, dispo: d });
     await route();
     if (sessionVive()) loadAdmin().then(() => ADMIN.restaurer()).catch(() => {});
