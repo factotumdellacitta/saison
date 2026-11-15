@@ -13,6 +13,22 @@ const ROLES = ["auteur", "compositeur", "mise en scène", "chorégraphie", "dire
 const ZONES = ["Paris", "Petite couronne", "Île-de-France", "Avignon", "Autre"];
 const STATUTS_LIEU = ["Public", "Privé"];
 const ETATS = ["dernieres-places", "attente", "complet"];
+// Barème (CLAUDE.md) : "C2 A1 R1 G2 +Fidélité −Prix" ; même lecture que calculDe() dans assets/app.js.
+const BONUS = ["Distinction", "Fidélité", "Aubaine", "Découverte"], MALUS = ["Accès", "Prix"];
+function calculDe(t) {
+  const m = /^C([0-2]) A([0-2]) R([0-2]) G([0-2])((?: [+−-][A-Za-zÀ-ÿ]+)*)$/.exec(String(t || "").trim());
+  if (!m) return null;
+  const socle = { C: +m[1], A: +m[2], R: +m[3], G: +m[4] }, bonus = [], malus = [];
+  for (const x of m[5].trim().split(" ").filter(Boolean)) {
+    const n = x.slice(1);
+    if (x[0] === "+" && BONUS.includes(n) && !bonus.includes(n)) bonus.push(n);
+    else if (x[0] !== "+" && MALUS.includes(n) && !malus.includes(n)) malus.push(n);
+    else return null;
+  }
+  if (bonus.length > 3) return null;
+  const total = socle.C + socle.A + socle.R + socle.G + bonus.length - malus.length;
+  return { socle, bonus, total, note: total >= 8 ? 4 : total >= 6 ? 3 : total >= 4 ? 2 : total >= 2 ? 1 : 0 };
+}
 // Clés interdites dans tout fichier public (données privées)
 const PRIVEES = new Set(["prix", "accompagnants", "places", "siege", "heure", "reserveLe", "icsToken",
   "tarifPlein", "prixPlace", "pleinPlace", "billets", "categoriePlace", "spectateur", "paiement", "envies", "journalPrive", "aCompleter", "priorite", "blocages", "jeton", "token"]);
@@ -111,6 +127,7 @@ for (const [id, l] of Object.entries(lieux)) {
 
 // ---------- Sorties ----------
 const ids = new Map();
+let sansCalcul = 0;
 const verifierSortie = (s, fichier) => {
   const ou = `[${s.id}]`;
   if (!s.id || !ID.test(s.id)) erreurs.push(`${ou} id invalide (minuscules, chiffres, tirets).`);
@@ -130,6 +147,14 @@ const verifierSortie = (s, fichier) => {
   } else if (!lieux[s.lieuId]) erreurs.push(`${ou} lieuId absent de lieux.json : ${s.lieuId}.`);
   if (!(Number.isInteger(s.note) && s.note >= 0 && s.note <= 4)) erreurs.push(`${ou} note hors de 0–4.`);
   if (typeof s.pronostic !== "boolean") erreurs.push(`${ou} pronostic doit être true ou false.`);
+  if ("calcul" in s) {
+    const k = calculDe(s.calcul);
+    if (!k) erreurs.push(`${ou} calcul illisible : « ${s.calcul} » (ex. C2 A1 R1 G2 +Fidélité −Prix).`);
+    else {
+      if (s.pronostic && (k.socle.C > 1 || k.bonus.includes("Distinction"))) erreurs.push(`${ou} pronostic : critique 1 au plus et pas de Distinction.`);
+      if (fichier === "affiche" && k.note !== s.note && !(s.note === 3 && k.note === 4)) warn.push(`${ou} note ${s.note} mais calcul ${s.calcul} = ${k.total} (note ${k.note}).`);
+    }
+  } else if (fichier === "affiche" && s.statut === "a-voir") sansCalcul++;
   if (typeof s.publicJeune !== "boolean") erreurs.push(`${ou} publicJeune doit être true ou false.`);
   if (typeof s.leonardYVa !== "boolean") erreurs.push(`${ou} leonardYVa doit être true ou false.`);
   for (const k of ["debut", "fin"]) if (s[k] && !ISO.test(s[k])) erreurs.push(`${ou} ${k} n'est pas au format AAAA-MM-JJ.`);
@@ -185,6 +210,7 @@ for (const k of ["reservations", "manuel", "calendrier"]) {
   else for (const d of dispo[k]) if (!ISO.test(d)) erreurs.push(`dispo.json : ${k} contient une date invalide (${d}).`);
 }
 
+if (sansCalcul) warn.push(`${sansCalcul} sortie(s) à l'affiche sans calcul du barème.`);
 if (warn.length) console.log(`${warn.length} avertissement(s) :\n- ` + warn.slice(0, 30).join("\n- ") + (warn.length > 30 ? "\n- …" : ""));
 if (erreurs.length) {
   console.error(`\n${erreurs.length} erreur(s) bloquante(s) :\n- ` + erreurs.join("\n- "));
