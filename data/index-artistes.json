@@ -2425,6 +2425,7 @@
   "nom": "Pierre Corneille",
   "sorties": [
    "le-cid",
+   "polyeucte-soiree-repertoire",
    "vu-le-cid"
   ]
  },
@@ -2661,6 +2662,12 @@
   "nom": "Simon Delétang",
   "sorties": [
    "resurrection-un-cas-de-conscience"
+  ]
+ },
+ "simon-falguieres": {
+  "nom": "Simon Falguières",
+  "sorties": [
+   "la-rose-la-bete-et-l-enfant"
   ]
  },
  "simone-de-beauvoir": {
