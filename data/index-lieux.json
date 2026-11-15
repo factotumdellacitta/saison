@@ -290,6 +290,33 @@
    "vu-seisme"
   ]
  },
+ "philharmonie": {
+  "sorties": [
+   "bernheim-recital-philharmonie",
+   "billie-holiday-legende-noire",
+   "boston-nelsons-lang-lang",
+   "chicago-makela-mahler-9",
+   "chicago-makela-sibelius-chostakovitch",
+   "joe-hisaishi-symphonique",
+   "l-or-du-rhin-zurich",
+   "la-walkyrie-zurich",
+   "le-crepuscule-des-dieux-zurich",
+   "le-trouvere-rhorer",
+   "lso-pappano-vengerov",
+   "lso-rattle-john-adams",
+   "lucia-di-lammermoor-sierra",
+   "mahler-2-van-zweden",
+   "mahler-symphonie-des-mille-makela",
+   "makela-argerich-capucon-triple-concerto",
+   "missa-solemnis-makela",
+   "ode-a-la-joie-pichon",
+   "passion-selon-saint-matthieu-rattle",
+   "siegfried-zurich",
+   "trifonov-berliner-barock-solisten",
+   "trifonov-recital-2027",
+   "war-requiem-alsop"
+  ]
+ },
  "poche-montparnasse": {
   "sorties": [
    "vu-leducation-sentimentale"

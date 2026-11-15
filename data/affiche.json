@@ -7073,6 +7073,861 @@
     "2027-02-24"
    ],
    "etat": "dernieres-places"
+  },
+  {
+   "id": "war-requiem-alsop",
+   "titre": "War Requiem",
+   "categorie": "Concert",
+   "sousGenre": "Musique sacrée",
+   "artistes": [
+    {
+     "nom": "Benjamin Britten",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Marin Alsop",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Orchestre de Paris",
+     "role": "interprète"
+    },
+    {
+     "nom": "Chœur de l’Orchestre de Paris",
+     "role": "interprète"
+    },
+    {
+     "nom": "Natalya Romaniw",
+     "role": "interprète"
+    },
+    {
+     "nom": "Thomas Atkins",
+     "role": "interprète"
+    },
+    {
+     "nom": "Markus Werba",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "philharmonie",
+   "salle": "Grande salle Pierre Boulez",
+   "debut": "2026-11-26",
+   "fin": "2026-11-27",
+   "horaires": "20h",
+   "note": 2,
+   "pronostic": true,
+   "pourquoi": "Le requiem pacifiste de Britten, rarement donné, par Marin Alsop et l’Orchestre de Paris.",
+   "lien": "https://philharmoniedeparis.fr/fr/node/7098",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": []
+  },
+  {
+   "id": "lso-rattle-john-adams",
+   "titre": "London Symphony Orchestra, Simon Rattle : John Adams",
+   "categorie": "Concert",
+   "sousGenre": "Symphonique",
+   "artistes": [
+    {
+     "nom": "John Adams",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Simon Rattle",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "London Symphony Orchestra",
+     "role": "interprète"
+    },
+    {
+     "nom": "Russell Thomas",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "philharmonie",
+   "salle": "Grande salle Pierre Boulez",
+   "debut": "2027-01-15",
+   "fin": "2027-01-15",
+   "horaires": "20h",
+   "note": 2,
+   "pronostic": true,
+   "pourquoi": "Les 80 ans de John Adams : Harmonielehre, Frenzy et un extrait de The Gospel According to the Other Mary.",
+   "lien": "https://philharmoniedeparis.fr/fr/node/7098",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": []
+  },
+  {
+   "id": "chicago-makela-sibelius-chostakovitch",
+   "titre": "Chicago Symphony Orchestra, Klaus Mäkelä : Sibelius et Chostakovitch",
+   "categorie": "Concert",
+   "sousGenre": "Symphonique",
+   "artistes": [
+    {
+     "nom": "Jean Sibelius",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Dmitri Chostakovitch",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Klaus Mäkelä",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Chicago Symphony Orchestra",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "philharmonie",
+   "salle": "Grande salle Pierre Boulez",
+   "debut": "2027-01-21",
+   "fin": "2027-01-21",
+   "horaires": "20h, 1h50 avec entracte",
+   "note": 3,
+   "pronostic": true,
+   "pourquoi": "Première tournée européenne de Mäkelä avec Chicago, dont il devient directeur musical en 2027 : Sibelius 7 et Chostakovitch 4.",
+   "lien": "https://philharmoniedeparis.fr/fr/node/7098",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": []
+  },
+  {
+   "id": "chicago-makela-mahler-9",
+   "titre": "Chicago Symphony Orchestra, Klaus Mäkelä : Mahler, Symphonie n° 9",
+   "categorie": "Concert",
+   "sousGenre": "Symphonique",
+   "artistes": [
+    {
+     "nom": "Gustav Mahler",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Klaus Mäkelä",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Chicago Symphony Orchestra",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "philharmonie",
+   "salle": "Grande salle Pierre Boulez",
+   "debut": "2027-01-22",
+   "fin": "2027-01-22",
+   "horaires": "20h",
+   "note": 3,
+   "pronostic": true,
+   "pourquoi": "La Neuvième de Mahler par Chicago et Mäkelä, seconde et dernière soirée parisienne de leur tournée.",
+   "lien": "https://philharmoniedeparis.fr/fr/node/7098",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": []
+  },
+  {
+   "id": "billie-holiday-legende-noire",
+   "titre": "Billie Holiday. Légende noire",
+   "categorie": "Exposition",
+   "sousGenre": "",
+   "artistes": [
+    {
+     "nom": "Billie Holiday",
+     "role": "artiste"
+    }
+   ],
+   "lieuId": "philharmonie",
+   "salle": "Musée de la musique",
+   "debut": "2027-01-22",
+   "fin": "2027-07-11",
+   "note": 1,
+   "pronostic": true,
+   "pourquoi": "Exposition consacrée à Billie Holiday au Musée de la musique, avec concerts associés.",
+   "lien": "https://philharmoniedeparis.fr/fr/node/7098",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "relaches": [
+    "lun"
+   ]
+  },
+  {
+   "id": "trifonov-berliner-barock-solisten",
+   "titre": "Daniil Trifonov et les Berliner Barock Solisten",
+   "categorie": "Concert",
+   "sousGenre": "Musique de chambre",
+   "artistes": [
+    {
+     "nom": "Daniil Trifonov",
+     "role": "interprète"
+    },
+    {
+     "nom": "Berliner Barock Solisten",
+     "role": "interprète"
+    },
+    {
+     "nom": "Gottfried von der Goltz",
+     "role": "direction musicale"
+    }
+   ],
+   "lieuId": "philharmonie",
+   "salle": "Grande salle Pierre Boulez",
+   "debut": "2027-02-20",
+   "fin": "2027-02-20",
+   "horaires": "20h",
+   "note": 2,
+   "pronostic": true,
+   "pourquoi": "Trifonov avec l’ensemble baroque berlinois, programme classique et préclassique.",
+   "lien": "https://philharmoniedeparis.fr/fr/node/7098",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": []
+  },
+  {
+   "id": "lucia-di-lammermoor-sierra",
+   "titre": "Lucia di Lammermoor",
+   "categorie": "Opéra",
+   "sousGenre": "Version de concert",
+   "artistes": [
+    {
+     "nom": "Gaetano Donizetti",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Ana María Patiño-Osorio",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Nadine Sierra",
+     "role": "interprète"
+    },
+    {
+     "nom": "Levy Sekgapane",
+     "role": "interprète"
+    },
+    {
+     "nom": "Orchestre national Bordeaux Aquitaine",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "philharmonie",
+   "salle": "Grande salle Pierre Boulez",
+   "debut": "2027-02-21",
+   "fin": "2027-02-21",
+   "horaires": "16h",
+   "note": 3,
+   "pronostic": true,
+   "pourquoi": "Nadine Sierra, Lucia de référence, avec l’Orchestre et le Chœur de l’Opéra de Bordeaux, une seule date.",
+   "lien": "https://philharmoniedeparis.fr/fr/node/7098",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": []
+  },
+  {
+   "id": "bernheim-recital-philharmonie",
+   "titre": "Benjamin Bernheim, récital",
+   "categorie": "Récital",
+   "sousGenre": "Voix et piano",
+   "artistes": [
+    {
+     "nom": "Benjamin Bernheim",
+     "role": "interprète"
+    },
+    {
+     "nom": "Carrie-Ann Matheson",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "philharmonie",
+   "salle": "Grande salle Pierre Boulez",
+   "debut": "2027-03-03",
+   "fin": "2027-03-03",
+   "horaires": "20h",
+   "note": 2,
+   "pronostic": true,
+   "pourquoi": "Récital de Bernheim, de Massenet à Bizet, Tchaïkovski et Puccini.",
+   "lien": "https://philharmoniedeparis.fr/fr/node/7098",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": []
+  },
+  {
+   "id": "l-or-du-rhin-zurich",
+   "titre": "L’Or du Rhin (Ring de Zurich)",
+   "categorie": "Opéra",
+   "sousGenre": "Version de concert",
+   "artistes": [
+    {
+     "nom": "Richard Wagner",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Gianandrea Noseda",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Orchestre de l’Opéra de Zurich",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "philharmonie",
+   "salle": "Grande salle Pierre Boulez",
+   "debut": "2027-03-09",
+   "fin": "2027-03-09",
+   "horaires": "20h",
+   "note": 3,
+   "pronostic": true,
+   "pourquoi": "Premier Ring complet de la Philharmonie, par l’Opéra de Zurich et Noseda, en quatre soirées.",
+   "lien": "https://philharmoniedeparis.fr/fr/node/7098",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": []
+  },
+  {
+   "id": "la-walkyrie-zurich",
+   "titre": "La Walkyrie (Ring de Zurich)",
+   "categorie": "Opéra",
+   "sousGenre": "Version de concert",
+   "artistes": [
+    {
+     "nom": "Richard Wagner",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Gianandrea Noseda",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Orchestre de l’Opéra de Zurich",
+     "role": "interprète"
+    },
+    {
+     "nom": "Klaus Florian Vogt",
+     "role": "interprète"
+    },
+    {
+     "nom": "Camilla Nylund",
+     "role": "interprète"
+    },
+    {
+     "nom": "Michael Volle",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "philharmonie",
+   "salle": "Grande salle Pierre Boulez",
+   "debut": "2027-03-10",
+   "fin": "2027-03-10",
+   "horaires": "18h30, 4h45 avec entractes",
+   "note": 3,
+   "pronostic": true,
+   "pourquoi": "Deuxième soirée du Ring de Zurich avec Vogt, Nylund et Volle, une seule date.",
+   "lien": "https://philharmoniedeparis.fr/fr/activite/29199",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": []
+  },
+  {
+   "id": "siegfried-zurich",
+   "titre": "Siegfried (Ring de Zurich)",
+   "categorie": "Opéra",
+   "sousGenre": "Version de concert",
+   "artistes": [
+    {
+     "nom": "Richard Wagner",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Gianandrea Noseda",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Orchestre de l’Opéra de Zurich",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "philharmonie",
+   "salle": "Grande salle Pierre Boulez",
+   "debut": "2027-03-12",
+   "fin": "2027-03-12",
+   "horaires": "18h30",
+   "note": 3,
+   "pronostic": true,
+   "pourquoi": "Troisième soirée du Ring complet de l’Opéra de Zurich sous la direction de Noseda.",
+   "lien": "https://philharmoniedeparis.fr/fr/node/7098",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": []
+  },
+  {
+   "id": "le-crepuscule-des-dieux-zurich",
+   "titre": "Le Crépuscule des dieux (Ring de Zurich)",
+   "categorie": "Opéra",
+   "sousGenre": "Version de concert",
+   "artistes": [
+    {
+     "nom": "Richard Wagner",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Gianandrea Noseda",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Orchestre de l’Opéra de Zurich",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "philharmonie",
+   "salle": "Grande salle Pierre Boulez",
+   "debut": "2027-03-14",
+   "fin": "2027-03-14",
+   "horaires": "16h",
+   "note": 3,
+   "pronostic": true,
+   "pourquoi": "Conclusion du premier Ring complet donné à la Philharmonie, par l’Opéra de Zurich et Noseda.",
+   "lien": "https://philharmoniedeparis.fr/fr/node/7098",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": []
+  },
+  {
+   "id": "passion-selon-saint-matthieu-rattle",
+   "titre": "Passion selon saint Matthieu",
+   "categorie": "Concert",
+   "sousGenre": "Musique sacrée",
+   "artistes": [
+    {
+     "nom": "Jean-Sébastien Bach",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Simon Rattle",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Freiburger Barockorchester",
+     "role": "interprète"
+    },
+    {
+     "nom": "Zürcher Sing-Akademie",
+     "role": "interprète"
+    },
+    {
+     "nom": "Magdalena Kožená",
+     "role": "interprète"
+    },
+    {
+     "nom": "Roderick Williams",
+     "role": "interprète"
+    },
+    {
+     "nom": "Miriam Feuersinger",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "philharmonie",
+   "salle": "Grande salle Pierre Boulez",
+   "debut": "2027-03-13",
+   "fin": "2027-03-13",
+   "horaires": "20h",
+   "note": 2,
+   "pronostic": true,
+   "pourquoi": "Rattle dirige la Saint Matthieu avec le Freiburger Barockorchester et Kožená, une seule date.",
+   "lien": "https://philharmoniedeparis.fr/fr/node/7098",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": []
+  },
+  {
+   "id": "le-trouvere-rhorer",
+   "titre": "Le Trouvère",
+   "categorie": "Opéra",
+   "sousGenre": "Version de concert",
+   "artistes": [
+    {
+     "nom": "Giuseppe Verdi",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Jérémie Rhorer",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Le Cercle de l’Harmonie",
+     "role": "interprète"
+    },
+    {
+     "nom": "Olga Peretyatko",
+     "role": "interprète"
+    },
+    {
+     "nom": "Murat Karahan",
+     "role": "interprète"
+    },
+    {
+     "nom": "Ernesto Petti",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "philharmonie",
+   "salle": "Grande salle Pierre Boulez",
+   "debut": "2027-03-16",
+   "fin": "2027-03-16",
+   "horaires": "20h, 3h avec entracte",
+   "note": 2,
+   "pronostic": true,
+   "pourquoi": "Version de concert sur instruments d’époque par Rhorer, avec Olga Peretyatko en Leonora.",
+   "lien": "https://philharmoniedeparis.fr/fr/node/7098",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": []
+  },
+  {
+   "id": "boston-nelsons-lang-lang",
+   "titre": "Boston Symphony Orchestra, Andris Nelsons et Lang Lang",
+   "categorie": "Concert",
+   "sousGenre": "Symphonique",
+   "artistes": [
+    {
+     "nom": "Ludwig van Beethoven",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Igor Stravinsky",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Andris Nelsons",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Boston Symphony Orchestra",
+     "role": "interprète"
+    },
+    {
+     "nom": "Lang Lang",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "philharmonie",
+   "salle": "Grande salle Pierre Boulez",
+   "debut": "2027-03-19",
+   "fin": "2027-03-20",
+   "datesTexte": "19 mars (concerto n° 1, L’Oiseau de feu) et 20 mars 2027 (concerto n° 2, Petrouchka, Le Sacre du printemps)",
+   "horaires": "20h",
+   "note": 2,
+   "pronostic": true,
+   "pourquoi": "Fin de la tournée européenne de Boston : concertos n° 1 et 2 de Beethoven avec Lang Lang, puis Stravinsky (L’Oiseau de feu, Petrouchka, Le Sacre).",
+   "lien": "https://philharmoniedeparis.fr/fr/node/7098",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": []
+  },
+  {
+   "id": "lso-pappano-vengerov",
+   "titre": "London Symphony Orchestra, Antonio Pappano et Maxim Vengerov",
+   "categorie": "Concert",
+   "sousGenre": "Symphonique",
+   "artistes": [
+    {
+     "nom": "Ludwig van Beethoven",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Dmitri Chostakovitch",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Antonio Pappano",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "London Symphony Orchestra",
+     "role": "interprète"
+    },
+    {
+     "nom": "Maxim Vengerov",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "philharmonie",
+   "salle": "Grande salle Pierre Boulez",
+   "debut": "2027-03-21",
+   "fin": "2027-03-21",
+   "horaires": "19h, 2h20 avec entracte",
+   "note": 2,
+   "pronostic": true,
+   "pourquoi": "Concerto pour violon de Beethoven avec Vengerov, puis la Huitième de Chostakovitch.",
+   "lien": "https://philharmoniedeparis.fr/fr/node/7098",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": []
+  },
+  {
+   "id": "ode-a-la-joie-pichon",
+   "titre": "Ode à la joie",
+   "categorie": "Concert",
+   "sousGenre": "Symphonique",
+   "artistes": [
+    {
+     "nom": "Ludwig van Beethoven",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Raphaël Pichon",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Ensemble Pygmalion",
+     "role": "interprète"
+    },
+    {
+     "nom": "Orchestre du Conservatoire de Paris",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "philharmonie",
+   "salle": "Grande salle Pierre Boulez",
+   "debut": "2027-03-25",
+   "fin": "2027-03-26",
+   "horaires": "20h, 1h40",
+   "note": 2,
+   "pronostic": true,
+   "pourquoi": "La Neuvième de Beethoven par Pichon, mise en regard d’Ives, Schönberg, Stravinsky et Honegger.",
+   "lien": "https://philharmoniedeparis.fr/fr/node/7098",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": []
+  },
+  {
+   "id": "makela-argerich-capucon-triple-concerto",
+   "titre": "Orchestre de Paris, Klaus Mäkelä : Triple Concerto avec Argerich et les Capuçon",
+   "categorie": "Concert",
+   "sousGenre": "Symphonique",
+   "artistes": [
+    {
+     "nom": "Ludwig van Beethoven",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Sofia Goubaïdoulina",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Piotr Ilitch Tchaïkovski",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Klaus Mäkelä",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Orchestre de Paris",
+     "role": "interprète"
+    },
+    {
+     "nom": "Martha Argerich",
+     "role": "interprète"
+    },
+    {
+     "nom": "Renaud Capuçon",
+     "role": "interprète"
+    },
+    {
+     "nom": "Gautier Capuçon",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "philharmonie",
+   "salle": "Grande salle Pierre Boulez",
+   "debut": "2027-03-31",
+   "fin": "2027-04-01",
+   "horaires": "20h",
+   "note": 2,
+   "pronostic": true,
+   "pourquoi": "Triple Concerto de Beethoven avec Argerich et les frères Capuçon, puis la Deuxième de Tchaïkovski, dans la dernière saison de Mäkelä.",
+   "lien": "https://philharmoniedeparis.fr/fr/node/7098",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": []
+  },
+  {
+   "id": "mahler-2-van-zweden",
+   "titre": "Mahler, Symphonie n° 2 « Résurrection »",
+   "categorie": "Concert",
+   "sousGenre": "Symphonique",
+   "artistes": [
+    {
+     "nom": "Gustav Mahler",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Jaap van Zweden",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Orchestre philharmonique de Radio France",
+     "role": "interprète"
+    },
+    {
+     "nom": "Chœur de Radio France",
+     "role": "interprète"
+    },
+    {
+     "nom": "Hanna-Elisabeth Müller",
+     "role": "interprète"
+    },
+    {
+     "nom": "Michaela Schuster",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "philharmonie",
+   "salle": "Grande salle Pierre Boulez",
+   "debut": "2027-04-02",
+   "fin": "2027-04-02",
+   "horaires": "20h",
+   "note": 2,
+   "pronostic": true,
+   "pourquoi": "La « Résurrection » par le Philhar et son directeur musical Jaap van Zweden.",
+   "lien": "https://philharmoniedeparis.fr/fr/node/7098",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": []
+  },
+  {
+   "id": "trifonov-recital-2027",
+   "titre": "Daniil Trifonov, récital",
+   "categorie": "Récital",
+   "sousGenre": "Piano",
+   "artistes": [
+    {
+     "nom": "Daniil Trifonov",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "philharmonie",
+   "salle": "Grande salle Pierre Boulez",
+   "debut": "2027-04-09",
+   "fin": "2027-04-09",
+   "horaires": "20h, 1h50 avec entracte",
+   "note": 2,
+   "pronostic": true,
+   "pourquoi": "Récital de Trifonov, de Haendel et Schubert à Stravinsky, Villa-Lobos, Ginastera et une page de sa main.",
+   "lien": "https://philharmoniedeparis.fr/fr/node/7098",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": []
+  },
+  {
+   "id": "mahler-symphonie-des-mille-makela",
+   "titre": "Mahler, Symphonie n° 8 « des Mille »",
+   "categorie": "Concert",
+   "sousGenre": "Symphonique",
+   "artistes": [
+    {
+     "nom": "Gustav Mahler",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Klaus Mäkelä",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Orchestre de Paris",
+     "role": "interprète"
+    },
+    {
+     "nom": "Chœur de l’Orchestre de Paris",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "philharmonie",
+   "salle": "Grande salle Pierre Boulez",
+   "debut": "2027-06-03",
+   "fin": "2027-06-04",
+   "horaires": "20h",
+   "note": 3,
+   "pronostic": true,
+   "pourquoi": "Concerts d’adieu de Klaus Mäkelä à l’Orchestre de Paris avec la Huitième de Mahler, rarement montée.",
+   "lien": "https://philharmoniedeparis.fr/fr/node/7098",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": []
+  },
+  {
+   "id": "joe-hisaishi-symphonique",
+   "titre": "Joe Hisaishi symphonique",
+   "categorie": "Concert",
+   "sousGenre": "Musique de film",
+   "artistes": [
+    {
+     "nom": "Joe Hisaishi",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Orchestre de Paris",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "philharmonie",
+   "salle": "Grande salle Pierre Boulez",
+   "debut": "2027-06-09",
+   "fin": "2027-06-10",
+   "horaires": "20h",
+   "note": 2,
+   "pronostic": true,
+   "pourquoi": "Hisaishi dirige l’Orchestre de Paris, avec la création française de son Concerto pour orchestre.",
+   "lien": "https://philharmoniedeparis.fr/fr/node/7098",
+   "billetterie": null,
+   "publicJeune": true,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": []
   }
  ]
 }
