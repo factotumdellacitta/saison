@@ -699,3 +699,11 @@ body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
 .active .chip.on[class] .x{color:var(--rouge-texte);font-weight:700}
 @media (hover:hover){.active .chip.on[class]:hover{background:var(--encre);color:var(--fond)}}
 .active .chip.effacer[class]{min-height:32px;padding:0;border:0;background:none;color:var(--rouge-texte);text-decoration:underline;text-underline-offset:3px}
+
+/* Ma note : quatre carrés à toucher (formulaires du journal) */
+.nc-l{display:flex;align-items:center;gap:var(--e2);min-height:var(--cible)}
+.nc-c{position:relative;width:28px;height:28px;padding:0;border:2px solid var(--rouge-texte);border-radius:0;background:none;cursor:pointer}
+.nc-c::after{content:"";position:absolute;inset:-8px -4px}
+.nc-c.on{background:var(--rouge-texte)}
+.nc-t{margin-left:var(--e2);font-size:var(--t-meta);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--encre-2)}
+@media (forced-colors:active){.nc-c{border-color:CanvasText}.nc-c.on{forced-color-adjust:none;background:CanvasText}}

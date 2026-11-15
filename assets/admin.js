@@ -614,6 +614,29 @@
   }
 
   /* ---------- Vu ---------- */
+  // Ma note : quatre carrés à toucher (la 3e case = 3/4) ; toucher la case choisie efface la note. Champ caché « noteLeonard ».
+  const NOTE_LIB = { 1: "curiosité", 2: "bon choix", 3: "fortement recommandé", 4: "incontournable" };
+  const noteCarres = (v) => { const n = +v || 0, id = "nc" + Math.random().toString(36).slice(2, 7);
+    return `<div class="f nc" role="group" aria-labelledby="${id}"><span id="${id}">Ma note</span><input type="hidden" name="noteLeonard" value="${n || ""}">
+      <div class="nc-l" role="radiogroup" aria-labelledby="${id}">${[1, 2, 3, 4].map((i) => `<button type="button" class="nc-c${i <= n ? " on" : ""}" role="radio" aria-checked="${i === n}" tabindex="${i === (n || 1) ? 0 : -1}" data-nc="${i}" aria-label="${i} sur 4, ${NOTE_LIB[i]}"></button>`).join("")}
+      <span class="nc-t" aria-hidden="true">${n ? n + " · " + NOTE_LIB[n] : "sans note"}</span></div></div>`; };
+  function poseNote(grp, n) {
+    grp.closest(".nc").querySelector('input[name="noteLeonard"]').value = n || "";
+    grp.querySelectorAll(".nc-c").forEach((b) => { const i = +b.dataset.nc; b.classList.toggle("on", i <= n); b.setAttribute("aria-checked", String(i === n)); b.tabIndex = i === (n || 1) ? 0 : -1; });
+    grp.querySelector(".nc-t").textContent = n ? n + " · " + NOTE_LIB[n] : "sans note";
+  }
+  document.addEventListener("click", (ev) => {
+    const b = ev.target.closest(".nc-c"); if (!b) return;
+    const grp = b.closest(".nc-l"), cur = +grp.closest(".nc").querySelector('input[name="noteLeonard"]').value || 0, n = +b.dataset.nc;
+    poseNote(grp, n === cur ? 0 : n);
+  });
+  document.addEventListener("keydown", (ev) => {
+    const b = ev.target.closest && ev.target.closest(".nc-c"); if (!b || !["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"].includes(ev.key)) return;
+    ev.preventDefault();
+    const grp = b.closest(".nc-l"), cur = +grp.closest(".nc").querySelector('input[name="noteLeonard"]').value || 0;
+    const n = ev.key === "Home" ? 1 : ev.key === "End" ? 4 : Math.min(4, Math.max(1, (cur || 0) + (ev.key === "ArrowLeft" || ev.key === "ArrowDown" ? -1 : 1)));
+    poseNote(grp, n); grp.querySelector(`[data-nc="${n}"]`).focus();
+  });
   const NOTES_L = [["", "Pas de note"], [4, "4 · incontournable"], [3, "3 · fortement recommandé"], [2, "2 · bon choix"], [1, "1 · curiosité"]];
   const dateRow = (v = "") => `<div class="ar">${inp("vu_d", v, 'type="date" aria-label="Date vue"')}<button type="button" class="btn ico" data-del aria-label="Retirer cette date">${ico("fermer")}</button></div>`;
   const notesHTML = (v) => champ("Mes notes (privées)", `<textarea name="notes" rows="3" placeholder="Souvenirs, contexte, distribution du soir…">${esc(v || "")}</textarea>`);
@@ -629,10 +652,10 @@
     const form = dlg(edit ? `Journal : ${e.titre}` : revu ? `Nouvelle date vue : ${e.titre}` : `Vu : ${e.titre}`, `
       ${edit ? `<fieldset class="fs"><legend>Dates vues</legend><div data-dates>${(e.vuLe || []).map(dateRow).join("")}</div><button type="button" class="btn" data-adddate>${ico("ajouter")}Date</button></fieldset>` : champ("Vu le", inp("date", dDef, 'type="date"'))}
       ${revu && (e.vuLe || []).length ? `<p class="cr">Déjà vu le ${esc(e.vuLe.map((x) => fmtY(D(x))).join(", "))}.</p>` : ""}
-      ${champ("Ma note", sel("noteLeonard", NOTES_L, e.noteLeonard ?? ""))}
+      ${noteCarres(e.noteLeonard)}
       ${champ("Mon avis (public)", `<textarea name="avis" rows="3">${esc(e.avis || "")}</textarea>`)}
       ${notesHTML(jp.notes)}
-      ${revu ? '<p class="cr">Places de cette nouvelle fois.</p>' : ""}${prixReplie(revu ? { billets: [{ spectateur: "Moi" }] } : src, !revu && aDesPrix(src))}`, async (f) => {
+      ${revu ? '<p class="cr">Places de cette nouvelle fois.</p>' : ""}${prixReplie(revu ? { billets: [{ spectateur: "Moi" }] } : src, false)}`, async (f) => {
       const note = val(f, "noteLeonard") ? +val(f, "noteLeonard") : null, avis = val(f, "avis"), notes = val(f, "notes");
       let priv = lirePrix(f);
       let dates;
@@ -668,10 +691,10 @@
     const jp = PRIVE.journalPrive[e.id], k = esc(e.id), pr = jp && places(jp).length ? jp : { billets: [{ spectateur: "Moi" }] };
     return `<form class="frm jin" data-jid="${k}" novalidate autocomplete="off">
       <div class="jgrid"><fieldset class="fs"><legend>Dates vues</legend><div data-dates>${(e.vuLe || []).map(dateRow).join("")}</div><button type="button" class="btn ai" data-adddate>${ico("ajouter")}<span>Date</span></button></fieldset>
-      ${champ("Ma note", sel("noteLeonard", NOTES_L, e.noteLeonard ?? ""))}</div>
+      ${noteCarres(e.noteLeonard)}</div>
       <div class="jgrid jtxt">${champ("Mon avis (public)", `<textarea name="avis" rows="3">${esc(e.avis || "")}</textarea>`)}
       ${notesHTML(jp && jp.notes)}</div>
-      ${prixReplie(pr, aDesPrix(jp))}
+      ${prixReplie(pr, false)}
       <details class="box"><summary>Fiche</summary>${champ("Titre", inp("titre", e.titre, "required"))}
       <div class="grid2">${champ("Catégorie", sel("categorie", CATS, e.categorie))}${champ("Sous-genre", inp("sousGenre", e.sousGenre))}</div>
       <div class="grid2">${champ("Lieu", inp("lieu", nomLieu(e.lieuId), 'list="dl-lieux" placeholder="Commence à taper…"'))}${champ("Salle", inp("salle", e.salle))}</div>
@@ -774,7 +797,7 @@
       <fieldset class="fs" data-nl hidden><legend>Nouveau lieu</legend><div class="grid2">${champ("Ville", inp("nl_ville", "Paris"))}${champ("Zone", sel("nl_zone", ZONES_L, "Paris"))}</div></fieldset>
       ${champ("Salle (facultatif)", inp("salle", ""))}
       ${champ("Vu le", inp("date", "", 'type="date" required'))}
-      ${champ("Ma note", sel("noteLeonard", NOTES_L, ""))}
+      ${noteCarres(0)}
       ${champ("Mon avis (public)", '<textarea name="avis" rows="3"></textarea>')}
       ${notesHTML("")}
       ${champ("Lien officiel (facultatif)", inp("lien", "", 'type="url" placeholder="https://…"'))}
