@@ -446,11 +446,19 @@
    "publicJeune": false,
    "leonardYVa": true,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "horaires": "20h30, 19h (mar.), matinées 15h (dim.)",
+   "relaches": [
+    "2027-03-01",
+    "2027-03-08",
+    "2027-03-15",
+    "2027-03-22"
+   ],
+   "etat": "dernieres-places"
   },
   {
    "id": "c-est-beau",
-   "titre": "C'est beau",
+   "titre": "C’est beau",
    "categorie": "Théâtre",
    "artistes": [
     {
@@ -476,6 +484,10 @@
     {
      "nom": "Nicolas Lormeau",
      "role": "interprète"
+    },
+    {
+     "nom": "Irénée Rohrbach",
+     "role": "interprète"
     }
    ],
    "lieuId": "comedie-francaise",
@@ -491,7 +503,28 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "horaires": "18h30",
+   "relaches": [
+    "2026-11-30",
+    "2026-12-01",
+    "2026-12-07",
+    "2026-12-08",
+    "2026-12-14",
+    "2026-12-15",
+    "2026-12-21",
+    "2026-12-22",
+    "2026-12-25",
+    "2026-12-28",
+    "2026-12-29",
+    "2027-01-01",
+    "2027-01-04",
+    "2027-01-05",
+    "2027-01-11",
+    "2027-01-12",
+    "2027-01-13"
+   ],
+   "etat": "complet"
   },
   {
    "id": "cabaret-teheran",
@@ -583,7 +616,7 @@
   },
   {
    "id": "ce-que-j-appelle-oubli",
-   "titre": "Ce que j'appelle oubli",
+   "titre": "Ce que j’appelle oubli",
    "categorie": "Théâtre",
    "artistes": [
     {
@@ -2106,6 +2139,50 @@
     {
      "nom": "Clotilde de Bayser",
      "role": "interprète"
+    },
+    {
+     "nom": "Loïc Corbery",
+     "role": "interprète"
+    },
+    {
+     "nom": "Stéphane Varupenne",
+     "role": "interprète"
+    },
+    {
+     "nom": "Christophe Montenez",
+     "role": "interprète"
+    },
+    {
+     "nom": "Claire de La Rüe du Can",
+     "role": "interprète"
+    },
+    {
+     "nom": "Pauline Clément",
+     "role": "interprète"
+    },
+    {
+     "nom": "Jean Chevalier",
+     "role": "interprète"
+    },
+    {
+     "nom": "Clément Bresson",
+     "role": "interprète"
+    },
+    {
+     "nom": "Marie Oppert",
+     "role": "interprète"
+    },
+    {
+     "nom": "Charlie Fabert",
+     "role": "interprète"
+    },
+    {
+     "nom": "Olivia Lindon",
+     "role": "interprète"
+    },
+    {
+     "nom": "Hippolyte Orillard",
+     "role": "interprète"
     }
    ],
    "lieuId": "comedie-francaise",
@@ -2113,7 +2190,7 @@
    "debut": "2026-12-18",
    "fin": "2027-03-22",
    "datesTexte": "18 déc. 2026 – 22 mars 2027, en alternance ; dates à partir du 1er mars publiées en janvier 2027",
-   "horaires": "2h sans entracte",
+   "horaires": "20h30, matinées 14h (mer., ven., sam., dim.) ; 2h sans entracte",
    "note": 3,
    "pronostic": false,
    "pourquoi": "Goldoni par Clément Hervieu-Léger : un cours de danse, son maître cupide et ses élèves rebelles. Décor d’Éric Ruf.",
@@ -2129,6 +2206,55 @@
      "venteApprox": true,
      "condition": "Détenteurs de cartes avant le grand public"
     }
+   ],
+   "relaches": [
+    "2026-12-20",
+    "2026-12-22",
+    "2026-12-24",
+    "2026-12-26",
+    "2026-12-28",
+    "2026-12-29",
+    "2026-12-31",
+    "2027-01-03",
+    "2027-01-04",
+    "2027-01-06",
+    "2027-01-07",
+    "2027-01-08",
+    "2027-01-10",
+    "2027-01-11",
+    "2027-01-13",
+    "2027-01-15",
+    "2027-01-17",
+    "2027-01-18",
+    "2027-01-19",
+    "2027-01-20",
+    "2027-01-21",
+    "2027-01-23",
+    "2027-01-25",
+    "2027-01-26",
+    "2027-01-27",
+    "2027-01-28",
+    "2027-01-29",
+    "2027-01-31",
+    "2027-02-01",
+    "2027-02-02",
+    "2027-02-04",
+    "2027-02-05",
+    "2027-02-07",
+    "2027-02-09",
+    "2027-02-10",
+    "2027-02-11",
+    "2027-02-12",
+    "2027-02-13",
+    "2027-02-15",
+    "2027-02-16",
+    "2027-02-17",
+    "2027-02-18",
+    "2027-02-20",
+    "2027-02-22",
+    "2027-02-24",
+    "2027-02-25",
+    "2027-02-26"
    ]
   },
   {
@@ -2179,7 +2305,7 @@
   },
   {
    "id": "l-envers-du-music-hall",
-   "titre": "L'Envers du music-hall",
+   "titre": "L’Envers du music-hall",
    "categorie": "Théâtre",
    "artistes": [
     {
@@ -2241,7 +2367,7 @@
    "debut": "2027-01-12",
    "fin": "2027-01-31",
    "datesTexte": "12 – 31 janv. 2027",
-   "horaires": "1h05",
+   "horaires": "20h30, 19h (mar.), matinées 15h (dim.) ; 1h05",
    "note": 3,
    "pronostic": false,
    "pourquoi": "Seule en scène, Françoise Gillard dit le récit d’Annie Ernaux sur son avortement clandestin (collaboration artistique Denis Podalydès).",
@@ -2250,7 +2376,12 @@
    "publicJeune": false,
    "leonardYVa": true,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "2027-01-18",
+    "2027-01-25"
+   ],
+   "etat": "dernieres-places"
   },
   {
    "id": "l-orfeo",
@@ -2488,7 +2619,21 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "horaires": "18h30",
+   "relaches": [
+    "2027-02-08",
+    "2027-02-09",
+    "2027-02-15",
+    "2027-02-16",
+    "2027-02-22",
+    "2027-02-23",
+    "2027-03-01",
+    "2027-03-02",
+    "2027-03-08",
+    "2027-03-09"
+   ],
+   "etat": "dernieres-places"
   },
   {
    "id": "la-guerre-n-a-pas-un-visage-de-femme",
@@ -2737,8 +2882,7 @@
    "salle": "Jardin des Tuileries",
    "debut": "2027-07-06",
    "fin": "2027-07-31",
-   "datesTexte": "6 – 31 juill. 2027",
-   "horaires": "Billetterie ouverte en mai 2027 sur le site du festival Paris l’été",
+   "datesTexte": "6 – 31 juill. 2027, Jardin des Tuileries (festival Paris l’été)",
    "note": 3,
    "pronostic": true,
    "pourquoi": "Plein air, entrée au Répertoire.",
@@ -2747,7 +2891,14 @@
    "publicJeune": true,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [
+    {
+     "type": "Ouverture des ventes",
+     "vente": "2027-05-03",
+     "venteApprox": true,
+     "condition": "Sur le site du festival Paris l’été"
+    }
+   ]
   },
   {
    "id": "la-vie-est-un-songe",
@@ -3209,6 +3360,30 @@
     {
      "nom": "Bakary Sangaré",
      "role": "interprète"
+    },
+    {
+     "nom": "Benjamin Lavernhe",
+     "role": "interprète"
+    },
+    {
+     "nom": "Didier Sandre",
+     "role": "interprète"
+    },
+    {
+     "nom": "Jennifer Decker",
+     "role": "interprète"
+    },
+    {
+     "nom": "Danièle Lebrun",
+     "role": "interprète"
+    },
+    {
+     "nom": "Clément Bresson",
+     "role": "interprète"
+    },
+    {
+     "nom": "Marie Oppert",
+     "role": "interprète"
     }
    ],
    "lieuId": "comedie-francaise",
@@ -3216,7 +3391,7 @@
    "debut": "2027-01-15",
    "fin": "2027-06-01",
    "datesTexte": "15 janv. – 1er juin 2027, en alternance ; dates à partir du 1er mars publiées en janvier 2027",
-   "horaires": "2h30 sans entracte",
+   "horaires": "20h30, matinées 14h (sam., dim.) ; 2h30 sans entracte",
    "note": 3,
    "pronostic": false,
    "pourquoi": "Première fois à Richelieu.",
@@ -3232,7 +3407,38 @@
      "venteApprox": true,
      "condition": "Détenteurs de cartes avant le grand public"
     }
-   ]
+   ],
+   "relaches": [
+    "2027-01-15",
+    "2027-01-17",
+    "2027-01-19",
+    "2027-01-21",
+    "2027-01-22",
+    "2027-01-23",
+    "2027-01-26",
+    "2027-01-27",
+    "2027-01-28",
+    "2027-01-30",
+    "2027-02-01",
+    "2027-02-02",
+    "2027-02-03",
+    "2027-02-04",
+    "2027-02-06",
+    "2027-02-08",
+    "2027-02-10",
+    "2027-02-11",
+    "2027-02-12",
+    "2027-02-15",
+    "2027-02-16",
+    "2027-02-17",
+    "2027-02-19",
+    "2027-02-21",
+    "2027-02-22",
+    "2027-02-23",
+    "2027-02-25",
+    "2027-02-27"
+   ],
+   "etat": "complet"
   },
   {
    "id": "le-discours-d-un-roi",
@@ -4990,6 +5196,10 @@
     {
      "nom": "Christian Gonon",
      "role": "interprète"
+    },
+    {
+     "nom": "Mélissa Polonie",
+     "role": "interprète"
     }
    ],
    "lieuId": "comedie-francaise",
@@ -5005,7 +5215,16 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "horaires": "20h30, 19h (mar., jeu.), matinées 15h (dim.)",
+   "relaches": [
+    "2026-11-30",
+    "2026-12-07",
+    "2026-12-14",
+    "2026-12-21",
+    "2026-12-28"
+   ],
+   "etat": "dernieres-places"
   },
   {
    "id": "rhinoceros",
@@ -5244,6 +5463,50 @@
     {
      "nom": "Danièle Lebrun",
      "role": "interprète"
+    },
+    {
+     "nom": "Sylvia Bergé",
+     "role": "interprète"
+    },
+    {
+     "nom": "Alain Lenglet",
+     "role": "interprète"
+    },
+    {
+     "nom": "Serge Bagdassarian",
+     "role": "interprète"
+    },
+    {
+     "nom": "Bakary Sangaré",
+     "role": "interprète"
+    },
+    {
+     "nom": "Gilles David",
+     "role": "interprète"
+    },
+    {
+     "nom": "Noam Morgensztern",
+     "role": "interprète"
+    },
+    {
+     "nom": "Yoann Gasiorowski",
+     "role": "interprète"
+    },
+    {
+     "nom": "Sefa Yeboah",
+     "role": "interprète"
+    },
+    {
+     "nom": "Jordan Rezgui",
+     "role": "interprète"
+    },
+    {
+     "nom": "Charlie Fabert",
+     "role": "interprète"
+    },
+    {
+     "nom": "Myrthe Vermeulen",
+     "role": "interprète"
     }
    ],
    "lieuId": "comedie-francaise",
@@ -5251,7 +5514,7 @@
    "debut": "2026-10-15",
    "fin": "2027-01-27",
    "datesTexte": "15 oct. 2026 – 27 janv. 2027, en alternance",
-   "horaires": "2h45 avec entracte ; au cinéma en direct le 3 déc.",
+   "horaires": "20h30, matinées 14h (lun., sam., dim.) ; 2h45 entracte compris ; au cinéma en direct le 3 déc.",
    "note": 3,
    "pronostic": false,
    "pourquoi": "Création, absent de la CF depuis 25 ans. 2h45.",
@@ -5260,7 +5523,64 @@
    "publicJeune": true,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "2026-11-16",
+    "2026-11-17",
+    "2026-11-18",
+    "2026-11-19",
+    "2026-11-20",
+    "2026-11-24",
+    "2026-11-25",
+    "2026-11-26",
+    "2026-11-27",
+    "2026-11-29",
+    "2026-11-30",
+    "2026-12-02",
+    "2026-12-04",
+    "2026-12-06",
+    "2026-12-07",
+    "2026-12-08",
+    "2026-12-09",
+    "2026-12-10",
+    "2026-12-11",
+    "2026-12-12",
+    "2026-12-14",
+    "2026-12-15",
+    "2026-12-16",
+    "2026-12-17",
+    "2026-12-18",
+    "2026-12-19",
+    "2026-12-20",
+    "2026-12-22",
+    "2026-12-23",
+    "2026-12-24",
+    "2026-12-25",
+    "2026-12-27",
+    "2026-12-29",
+    "2027-01-01",
+    "2027-01-02",
+    "2027-01-04",
+    "2027-01-05",
+    "2027-01-06",
+    "2027-01-07",
+    "2027-01-09",
+    "2027-01-10",
+    "2027-01-12",
+    "2027-01-13",
+    "2027-01-14",
+    "2027-01-15",
+    "2027-01-16",
+    "2027-01-18",
+    "2027-01-19",
+    "2027-01-20",
+    "2027-01-21",
+    "2027-01-22",
+    "2027-01-24",
+    "2027-01-25",
+    "2027-01-26"
+   ],
+   "etat": "complet"
   },
   {
    "id": "seppuku",
@@ -6289,6 +6609,795 @@
    "leonardYVa": false,
    "statut": "a-voir",
    "offres": []
+  },
+  {
+   "id": "l-avare",
+   "titre": "L’Avare",
+   "categorie": "Théâtre",
+   "sousGenre": "",
+   "artistes": [
+    {
+     "nom": "Molière",
+     "role": "auteur"
+    },
+    {
+     "nom": "Lilo Baur",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Alain Lenglet",
+     "role": "interprète"
+    },
+    {
+     "nom": "Laurent Stocker",
+     "role": "interprète"
+    },
+    {
+     "nom": "Serge Bagdassarian",
+     "role": "interprète"
+    },
+    {
+     "nom": "Nicolas Lormeau",
+     "role": "interprète"
+    },
+    {
+     "nom": "Anna Cervinka",
+     "role": "interprète"
+    },
+    {
+     "nom": "Jean Chevalier",
+     "role": "interprète"
+    },
+    {
+     "nom": "Clément Bresson",
+     "role": "interprète"
+    },
+    {
+     "nom": "Nicolas Chupin",
+     "role": "interprète"
+    },
+    {
+     "nom": "Morgane Real",
+     "role": "interprète"
+    },
+    {
+     "nom": "Aymeline Alix",
+     "role": "interprète"
+    },
+    {
+     "nom": "Alexis Joly",
+     "role": "interprète"
+    },
+    {
+     "nom": "Myrthe Vermeulen",
+     "role": "interprète"
+    },
+    {
+     "nom": "Hippolyte Orillard",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "billetterie": null,
+   "publicJeune": true,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "salle": "Richelieu",
+   "debut": "2026-11-30",
+   "fin": "2027-03-09",
+   "datesTexte": "30 nov. 2026 – 9 mars 2027, en alternance ; dates à partir du 1er mars publiées en janvier 2027",
+   "note": 2,
+   "pronostic": false,
+   "pourquoi": "Reprise de la mise en scène de Lilo Baur, Laurent Stocker en Harpagon.",
+   "lien": "https://comedie-francaise.fr/2026-2027/lavare",
+   "offres": [
+    {
+     "type": "Dates à partir du 1er mars",
+     "vente": "2027-01-27",
+     "venteApprox": true,
+     "condition": "Détenteurs de cartes avant le grand public"
+    }
+   ],
+   "horaires": "20h30, matinées 14h (mer., jeu., sam., dim.) ; 2h sans entracte",
+   "relaches": [
+    "2026-12-01",
+    "2026-12-03",
+    "2026-12-04",
+    "2026-12-05",
+    "2026-12-07",
+    "2026-12-08",
+    "2026-12-10",
+    "2026-12-11",
+    "2026-12-13",
+    "2026-12-15",
+    "2026-12-16",
+    "2026-12-18",
+    "2026-12-20",
+    "2026-12-21",
+    "2026-12-23",
+    "2026-12-25",
+    "2026-12-26",
+    "2026-12-27",
+    "2026-12-28",
+    "2026-12-30",
+    "2027-01-01",
+    "2027-01-03",
+    "2027-01-05",
+    "2027-01-06",
+    "2027-01-07",
+    "2027-01-08",
+    "2027-01-11",
+    "2027-01-12",
+    "2027-01-13",
+    "2027-01-14",
+    "2027-01-15",
+    "2027-01-16",
+    "2027-01-17",
+    "2027-01-18",
+    "2027-01-20",
+    "2027-01-22",
+    "2027-01-24",
+    "2027-01-25",
+    "2027-01-27",
+    "2027-01-28",
+    "2027-01-29",
+    "2027-01-30",
+    "2027-02-02",
+    "2027-02-03",
+    "2027-02-04",
+    "2027-02-05",
+    "2027-02-07",
+    "2027-02-08",
+    "2027-02-09",
+    "2027-02-10",
+    "2027-02-12",
+    "2027-02-14",
+    "2027-02-15",
+    "2027-02-16",
+    "2027-02-17",
+    "2027-02-18",
+    "2027-02-19",
+    "2027-02-21",
+    "2027-02-23",
+    "2027-02-24",
+    "2027-02-25",
+    "2027-02-26"
+   ],
+   "etat": "dernieres-places"
+  },
+  {
+   "id": "les-fourberies-de-scapin",
+   "titre": "Les Fourberies de Scapin",
+   "categorie": "Théâtre",
+   "sousGenre": "",
+   "artistes": [
+    {
+     "nom": "Molière",
+     "role": "auteur"
+    },
+    {
+     "nom": "Denis Podalydès",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Thierry Hancisse",
+     "role": "interprète"
+    },
+    {
+     "nom": "Bakary Sangaré",
+     "role": "interprète"
+    },
+    {
+     "nom": "Nicolas Lormeau",
+     "role": "interprète"
+    },
+    {
+     "nom": "Gilles David",
+     "role": "interprète"
+    },
+    {
+     "nom": "Noam Morgensztern",
+     "role": "interprète"
+    },
+    {
+     "nom": "Birane Ba",
+     "role": "interprète"
+    },
+    {
+     "nom": "Élissa Alloula",
+     "role": "interprète"
+    },
+    {
+     "nom": "Marie Oppert",
+     "role": "interprète"
+    },
+    {
+     "nom": "Sefa Yeboah",
+     "role": "interprète"
+    },
+    {
+     "nom": "Morgane Real",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "billetterie": null,
+   "publicJeune": true,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "salle": "Richelieu",
+   "debut": "2026-10-27",
+   "fin": "2027-01-17",
+   "datesTexte": "27 oct. 2026 – 17 janv. 2027, en alternance",
+   "note": 2,
+   "pronostic": false,
+   "pourquoi": "Reprise de la mise en scène de Denis Podalydès, Noam Morgensztern en Scapin.",
+   "lien": "https://comedie-francaise.fr/2026-2027/les-fourberies-de-scapin",
+   "offres": [],
+   "horaires": "20h30, matinées 14h (mer., jeu., ven., sam., dim.) ; 2h sans entracte",
+   "relaches": [
+    "2026-11-16",
+    "2026-11-17",
+    "2026-11-18",
+    "2026-11-20",
+    "2026-11-22",
+    "2026-11-23",
+    "2026-11-24",
+    "2026-11-26",
+    "2026-11-27",
+    "2026-11-28",
+    "2026-11-30",
+    "2026-12-01",
+    "2026-12-02",
+    "2026-12-03",
+    "2026-12-04",
+    "2026-12-05",
+    "2026-12-07",
+    "2026-12-08",
+    "2026-12-10",
+    "2026-12-11",
+    "2026-12-12",
+    "2026-12-13",
+    "2026-12-14",
+    "2026-12-15",
+    "2026-12-16",
+    "2026-12-17",
+    "2026-12-18",
+    "2026-12-19",
+    "2026-12-21",
+    "2026-12-22",
+    "2026-12-23",
+    "2026-12-26",
+    "2026-12-27",
+    "2026-12-28",
+    "2026-12-29",
+    "2026-12-30",
+    "2026-12-31",
+    "2027-01-02",
+    "2027-01-04",
+    "2027-01-05",
+    "2027-01-06",
+    "2027-01-08",
+    "2027-01-09",
+    "2027-01-11",
+    "2027-01-12",
+    "2027-01-14",
+    "2027-01-15",
+    "2027-01-16"
+   ],
+   "etat": "dernieres-places"
+  },
+  {
+   "id": "le-suicide",
+   "titre": "Le Suicidé",
+   "categorie": "Théâtre",
+   "sousGenre": "",
+   "artistes": [
+    {
+     "nom": "Nikolaï Erdman",
+     "role": "auteur"
+    },
+    {
+     "nom": "Stéphane Varupenne",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Sylvia Bergé",
+     "role": "interprète"
+    },
+    {
+     "nom": "Julie Sicard",
+     "role": "interprète"
+    },
+    {
+     "nom": "Serge Bagdassarian",
+     "role": "interprète"
+    },
+    {
+     "nom": "Adeline d’Hermy",
+     "role": "interprète"
+    },
+    {
+     "nom": "Jérémy Lopez",
+     "role": "interprète"
+    },
+    {
+     "nom": "Yoann Gasiorowski",
+     "role": "interprète"
+    },
+    {
+     "nom": "Clément Bresson",
+     "role": "interprète"
+    },
+    {
+     "nom": "Nicolas Chupin",
+     "role": "interprète"
+    },
+    {
+     "nom": "Jordan Rezgui",
+     "role": "interprète"
+    },
+    {
+     "nom": "Edith Proust",
+     "role": "interprète"
+    },
+    {
+     "nom": "Charlie Fabert",
+     "role": "interprète"
+    },
+    {
+     "nom": "Johanna Nizard",
+     "role": "interprète"
+    },
+    {
+     "nom": "Olivia Lindon",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "salle": "Richelieu",
+   "debut": "2026-11-13",
+   "fin": "2026-12-27",
+   "datesTexte": "13 nov. – 27 déc. 2026, en alternance",
+   "note": 2,
+   "pronostic": false,
+   "pourquoi": "Reprise de la comédie satirique d’Erdman mise en scène par Stéphane Varupenne.",
+   "lien": "https://comedie-francaise.fr/2026-2027/le-suicide",
+   "offres": [],
+   "horaires": "20h30, matinées 14h (mar., sam., dim.) ; 2h15 sans entracte",
+   "relaches": [
+    "2026-11-15",
+    "2026-11-17",
+    "2026-11-19",
+    "2026-11-21",
+    "2026-11-23",
+    "2026-11-25",
+    "2026-11-30",
+    "2026-12-01",
+    "2026-12-02",
+    "2026-12-03",
+    "2026-12-06",
+    "2026-12-07",
+    "2026-12-09",
+    "2026-12-10",
+    "2026-12-12",
+    "2026-12-14",
+    "2026-12-17",
+    "2026-12-18",
+    "2026-12-19",
+    "2026-12-21",
+    "2026-12-24",
+    "2026-12-25"
+   ],
+   "etat": "dernieres-places"
+  },
+  {
+   "id": "hecube-pas-hecube",
+   "titre": "Hécube, pas Hécube",
+   "categorie": "Théâtre",
+   "sousGenre": "",
+   "artistes": [
+    {
+     "nom": "Tiago Rodrigues",
+     "role": "auteur"
+    },
+    {
+     "nom": "Tiago Rodrigues",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Éric Génovèse",
+     "role": "interprète"
+    },
+    {
+     "nom": "Denis Podalydès",
+     "role": "interprète"
+    },
+    {
+     "nom": "Elsa Lepoivre",
+     "role": "interprète"
+    },
+    {
+     "nom": "Loïc Corbery",
+     "role": "interprète"
+    },
+    {
+     "nom": "Gaël Kamilindi",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "salle": "Richelieu",
+   "debut": "2027-01-28",
+   "fin": "2027-04-18",
+   "datesTexte": "28 janv. – 18 avril 2027, en alternance ; dates à partir du 1er mars publiées en janvier 2027",
+   "note": 3,
+   "pronostic": false,
+   "pourquoi": "Tiago Rodrigues, créé au Festival d’Avignon 2024 ; première série salle Richelieu.",
+   "lien": "https://comedie-francaise.fr/2026-2027/hecube-pas-hecube",
+   "offres": [
+    {
+     "type": "Dates à partir du 1er mars",
+     "vente": "2027-01-27",
+     "venteApprox": true,
+     "condition": "Détenteurs de cartes avant le grand public"
+    }
+   ],
+   "horaires": "20h30, matinées 14h (dim.) ; 2h05 sans entracte",
+   "relaches": [
+    "2027-01-29",
+    "2027-01-31",
+    "2027-02-01",
+    "2027-02-03",
+    "2027-02-05",
+    "2027-02-06",
+    "2027-02-08",
+    "2027-02-09",
+    "2027-02-11",
+    "2027-02-13",
+    "2027-02-14",
+    "2027-02-15",
+    "2027-02-16",
+    "2027-02-18",
+    "2027-02-19",
+    "2027-02-20",
+    "2027-02-22",
+    "2027-02-23",
+    "2027-02-24"
+   ],
+   "etat": "dernieres-places"
+  },
+  {
+   "id": "une-heure-avec-didier-sandre",
+   "titre": "Une heure avec Didier Sandre",
+   "categorie": "Théâtre",
+   "sousGenre": "Lecture",
+   "artistes": [
+    {
+     "nom": "Didier Sandre",
+     "role": "interprète"
+    },
+    {
+     "nom": "Théophile Gautier",
+     "role": "auteur"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "salle": "Studio-Théâtre",
+   "debut": "2026-12-05",
+   "fin": "2026-12-05",
+   "datesTexte": "sam. 5 déc. 2026",
+   "note": 2,
+   "pronostic": false,
+   "pourquoi": "Didier Sandre lit la préface de Mademoiselle de Maupin de Théophile Gautier.",
+   "lien": "https://comedie-francaise.fr/2026-2027/une-heure-avec",
+   "offres": [],
+   "horaires": "16h ; 1h",
+   "etat": "complet"
+  },
+  {
+   "id": "ecrire-et-mettre-en-scene-slimani",
+   "titre": "Écrire et mettre en scène : Leïla Slimani et Simon Delétang",
+   "categorie": "Événement",
+   "sousGenre": "Rencontre",
+   "artistes": [
+    {
+     "nom": "Leïla Slimani",
+     "role": "artiste"
+    },
+    {
+     "nom": "Simon Delétang",
+     "role": "artiste"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "salle": "Vieux-Colombier",
+   "debut": "2026-12-07",
+   "fin": "2026-12-07",
+   "datesTexte": "lun. 7 déc. 2026",
+   "note": 2,
+   "pronostic": false,
+   "pourquoi": "Rencontre autour de Résurrection. Un cas de conscience.",
+   "lien": "https://comedie-francaise.fr/2026-2027/ecrire-et-mettre-en-scene",
+   "offres": [],
+   "horaires": "19h",
+   "etat": "complet"
+  },
+  {
+   "id": "une-heure-avec-jordan-rezgui",
+   "titre": "Une heure avec Jordan Rezgui",
+   "categorie": "Théâtre",
+   "sousGenre": "Lecture",
+   "artistes": [
+    {
+     "nom": "Jordan Rezgui",
+     "role": "interprète"
+    },
+    {
+     "nom": "Fatou Diome",
+     "role": "auteur"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "salle": "Studio-Théâtre",
+   "debut": "2027-02-27",
+   "fin": "2027-02-27",
+   "datesTexte": "sam. 27 févr. 2027",
+   "note": 1,
+   "pronostic": false,
+   "pourquoi": "Jordan Rezgui lit Le Ventre de l’Atlantique de Fatou Diome.",
+   "lien": "https://comedie-francaise.fr/2026-2027/une-heure-avec-0",
+   "offres": [],
+   "horaires": "16h ; 1h",
+   "etat": "complet"
+  },
+  {
+   "id": "ecrire-et-mettre-en-scene-ndiaye",
+   "titre": "Écrire et mettre en scène : Marie NDiaye et Mariame Clément",
+   "categorie": "Événement",
+   "sousGenre": "Rencontre",
+   "artistes": [
+    {
+     "nom": "Marie NDiaye",
+     "role": "artiste"
+    },
+    {
+     "nom": "Mariame Clément",
+     "role": "artiste"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "salle": "Vieux-Colombier",
+   "debut": "2027-03-01",
+   "fin": "2027-03-01",
+   "datesTexte": "lun. 1er mars 2027",
+   "note": 2,
+   "pronostic": false,
+   "pourquoi": "Rencontre autour de Berlin mon garçon.",
+   "lien": "https://comedie-francaise.fr/2026-2027/ecrire-et-mettre-en-scene-0",
+   "offres": [],
+   "horaires": "19h"
+  },
+  {
+   "id": "ecrire-et-mettre-en-scene-devi",
+   "titre": "Écrire et mettre en scène : Ananda Devi et Lolita Tergémina",
+   "categorie": "Événement",
+   "sousGenre": "Rencontre",
+   "artistes": [
+    {
+     "nom": "Ananda Devi",
+     "role": "artiste"
+    },
+    {
+     "nom": "Lolita Tergémina",
+     "role": "artiste"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "salle": "Studio-Théâtre",
+   "debut": "2027-03-08",
+   "fin": "2027-03-08",
+   "datesTexte": "lun. 8 mars 2027",
+   "note": 1,
+   "pronostic": false,
+   "pourquoi": "Rencontre autour de La Fournaise.",
+   "lien": "https://comedie-francaise.fr/2026-2027/ecrire-et-mettre-en-scene-1",
+   "offres": [],
+   "horaires": "19h",
+   "etat": "complet"
+  },
+  {
+   "id": "grands-debats-parlementaires-1",
+   "titre": "Les grands débats parlementaires 1/3 : XVIIIe siècle",
+   "categorie": "Théâtre",
+   "sousGenre": "Lecture",
+   "artistes": [
+    {
+     "nom": "Troupe de la Comédie-Française",
+     "role": "compagnie"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "salle": "Vieux-Colombier",
+   "debut": "2027-03-15",
+   "fin": "2027-03-15",
+   "datesTexte": "lun. 15 mars 2027",
+   "note": 1,
+   "pronostic": false,
+   "pourquoi": "Lecture par la Troupe des grands débats du XVIIIe siècle, avec le Conseil d’État.",
+   "lien": "https://comedie-francaise.fr/2026-2027/les-grands-debats-parlementaires-13",
+   "offres": [],
+   "horaires": "19h",
+   "etat": "complet"
+  },
+  {
+   "id": "week-end-ecritures-contemporaines-2",
+   "titre": "Week-end des écritures contemporaines 2/3",
+   "categorie": "Théâtre",
+   "sousGenre": "Lecture",
+   "artistes": [
+    {
+     "nom": "Troupe de la Comédie-Française",
+     "role": "compagnie"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "salle": "Studio-Théâtre",
+   "debut": "2027-04-17",
+   "fin": "2027-04-18",
+   "datesTexte": "sam. 17 et dim. 18 avril 2027",
+   "note": 1,
+   "pronostic": false,
+   "pourquoi": "Quatre lectures de pièces contemporaines par la Troupe et le Jeune théâtre national.",
+   "lien": "https://comedie-francaise.fr/2026-2027/week-end-des-ecritures-contemporaines-23",
+   "offres": [
+    {
+     "type": "Ouverture des ventes",
+     "vente": "2027-01-27",
+     "venteApprox": true,
+     "condition": "Détenteurs de cartes avant le grand public"
+    }
+   ]
+  },
+  {
+   "id": "grands-debats-parlementaires-2",
+   "titre": "Les grands débats parlementaires 2/3 : XIXe siècle",
+   "categorie": "Théâtre",
+   "sousGenre": "Lecture",
+   "artistes": [
+    {
+     "nom": "Troupe de la Comédie-Française",
+     "role": "compagnie"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "salle": "Vieux-Colombier",
+   "debut": "2027-05-10",
+   "fin": "2027-05-10",
+   "datesTexte": "lun. 10 mai 2027",
+   "note": 1,
+   "pronostic": false,
+   "pourquoi": "Lecture par la Troupe des grands débats du XIXe siècle, avec le Conseil d’État.",
+   "lien": "https://comedie-francaise.fr/2026-2027/les-grands-debats-parlementaires-23",
+   "offres": [
+    {
+     "type": "Ouverture des ventes",
+     "vente": "2027-01-27",
+     "venteApprox": true,
+     "condition": "Détenteurs de cartes avant le grand public"
+    }
+   ]
+  },
+  {
+   "id": "une-heure-avec-veronique-vella",
+   "titre": "Une heure avec Véronique Vella",
+   "categorie": "Théâtre",
+   "sousGenre": "Lecture",
+   "artistes": [
+    {
+     "nom": "Véronique Vella",
+     "role": "interprète"
+    },
+    {
+     "nom": "Marguerite Yourcenar",
+     "role": "auteur"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "salle": "Studio-Théâtre",
+   "debut": "2027-05-22",
+   "fin": "2027-05-22",
+   "datesTexte": "sam. 22 mai 2027",
+   "note": 2,
+   "pronostic": false,
+   "pourquoi": "Véronique Vella lit Mémoires d’Hadrien de Marguerite Yourcenar.",
+   "lien": "https://comedie-francaise.fr/2026-2027/une-heure-avec-1",
+   "offres": [
+    {
+     "type": "Ouverture des ventes",
+     "vente": "2027-01-27",
+     "venteApprox": true,
+     "condition": "Détenteurs de cartes avant le grand public"
+    }
+   ],
+   "horaires": "1h"
+  },
+  {
+   "id": "grands-debats-parlementaires-3",
+   "titre": "Les grands débats parlementaires 3/3 : XXe siècle",
+   "categorie": "Théâtre",
+   "sousGenre": "Lecture",
+   "artistes": [
+    {
+     "nom": "Troupe de la Comédie-Française",
+     "role": "compagnie"
+    }
+   ],
+   "lieuId": "comedie-francaise",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "salle": "Vieux-Colombier",
+   "debut": "2027-06-14",
+   "fin": "2027-06-14",
+   "datesTexte": "lun. 14 juin 2027",
+   "note": 1,
+   "pronostic": false,
+   "pourquoi": "Lecture par la Troupe des grands débats du XXe siècle, avec le Conseil d’État.",
+   "lien": "https://comedie-francaise.fr/2026-2027/les-grands-debats-parlementaires-33",
+   "offres": [
+    {
+     "type": "Ouverture des ventes",
+     "vente": "2027-01-27",
+     "venteApprox": true,
+     "condition": "Détenteurs de cartes avant le grand public"
+    }
+   ]
   }
  ]
 }
