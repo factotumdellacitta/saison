@@ -689,7 +689,7 @@ function envLat() {
   const li = L.slice(0, 6).map((e) => { const p = span(e), j = !p ? "à venir" : running(e) ? "fin " + fmt(p[1]) : fmt(p[0]);
     return `<li><a href="#sortie-${esc(e.id)}"><span class="vd">${esc(j)}</span><span class="vt"><b>${esc(e.titre)}</b> <span>· ${esc(court(e.lieuId))}</span></span></a></li>`; }).join("");
   return `<h2 class="mh">Coups de cœur <small>${L.length}</small></h2><p class="cr lat-intro">Les pièces que j’aimerais aller voir et que je n’ai pas encore réservées.</p>${li ? `<ul class="vl">${li}</ul>` : '<p class="cr">Aucun coup de cœur pour le moment.</p>'}
-  <div class="acts"><a class="btn pri" href="#coeur">${COEUR}Coups de cœur de ${OWNER}</a></div>`;
+  <div class="acts"><a class="btn pri" href="#coeur">${COEUR}Découvre tous mes coups de cœur ici</a></div>`;
 }
 // Colonne de droite de l’Affiche (bureau) : les coups de cœur seulement (« Cette semaine » reste sur la page Radar).
 function radarLateral() {
@@ -872,7 +872,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.20"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.21"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -890,7 +890,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.20"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.21"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
