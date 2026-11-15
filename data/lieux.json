@@ -725,6 +725,16 @@
   "billetterie": null,
   "tarifJeune": ""
  },
+ "theatre-le-republique": {
+  "nom": "Théâtre Le République",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.lerepublique.fr",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "1 boulevard Saint-Martin, 75003 Paris"
+ },
  "theatre-libre": {
   "nom": "Théâtre Libre",
   "ville": "Paris",
