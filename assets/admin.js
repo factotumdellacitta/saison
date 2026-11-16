@@ -7,11 +7,14 @@
 "use strict";
 (() => {
   const REPO = "factotumdellacitta/saison", API = "https://api.github.com", BRANCHE = "main", WF = "publier.yml";
-  const ITER = 310000, LS_JETON = "saison.jeton", POLL = 6000;
+  const ITER = 600000, LS_JETON = "saison.jeton", POLL = 6000;
   const LS_SESSION = "factotum-session", LS_DUREE = "factotum-duree", SS_ONGLET = "factotum-onglet";
   const DUREES = [["jour", "1 jour"], ["semaine", "7 jours"], ["onglet", "Jusqu’à la fermeture de l’onglet"]];
   const DUREE_MS = { jour: 864e5, semaine: 7 * 864e5, onglet: 864e5 };
   const FICHIERS = { affiche: "data/affiche.json", journal: "data/journal.json", lieux: "data/lieux.json", liens: "data/liens.json", dispo: "data/dispo.json", prive: "data/prive.enc" };
+  const CAL = "data/calendrier.enc"; // agenda Apple (dates seules), chiffré avec la clé de la zone privée, écrit par l’action seule
+  // Auteur des commits : l’adresse « noreply » de GitHub, jamais l’adresse personnelle du compte (le dépôt est public).
+  const AUTEUR = { name: "factotumdellacitta", email: "356283316+factotumdellacitta@users.noreply.github.com" };
   const ZONES_L = ["Paris", "Petite couronne", "Île-de-France", "Avignon", "Autre"];
   const TARIFS = ["Carte Jeune", "Moins de 28 ans", "Moins de 30 ans", "Avant-première jeunes", "Tarif réduit", "Plein tarif", "Invitation"];
   const TYPES_OFFRE = ["Avant-première jeunes", "Carte Jeunes", "Moins de 28 ans", "Moins de 30 ans", "Gratuit moins de 26 ans", "Dernière minute"];
@@ -158,6 +161,8 @@
     try { d.prive = await ouvrirPaquet(KEY, paquet); }
     catch (_) { KEY = null; throw new Error("La zone privée du dépôt ne s’ouvre pas avec ce mot de passe."); }
     normPrive(d.prive);
+    d.cal = null;
+    if (shas[CAL]) { try { const b = await gh(`/repos/${REPO}/git/blobs/${shas[CAL]}`), pq = JSON.parse(deB64txt(b.content)); if (pq.salt === paquet.salt) d.cal = (await ouvrirPaquet(KEY, pq)).dates || []; } catch (_) {} }
     return { sha, tree: c.tree.sha, textes, d };
   }
   function normPrive(p) {
@@ -215,7 +220,7 @@
     }
     if (!Array.isArray(d.liens)) err.push("Liens : liste attendue.");
     else for (const l of d.liens) if (!CAT_LIENS.includes(l.categorie) || !l.titre || !URL_RE.test(l.url || "")) err.push(`Lien « ${l.titre || "?"} » : catégorie, titre ou adresse invalide.`);
-    for (const k of ["reservations", "manuel", "calendrier"]) if (!Array.isArray(d.dispo[k]) || d.dispo[k].some((x) => !ISO_RE.test(x))) err.push(`Soirs pris : liste ${k} invalide.`);
+    if (d.prive.soirs != null && (!Array.isArray(d.prive.soirs) || d.prive.soirs.some((x) => !ISO_RE.test(x)))) err.push("Soirs pris : liste invalide.");
     for (const [id, r] of Object.entries(d.prive.reservations)) if (r.date && !ISO_RE.test(r.date)) err.push(`Réservation ${titreDe(id)} : date invalide.`);
     for (const [id, r] of [...Object.entries(d.prive.reservations), ...Object.entries(d.prive.journalPrive)]) for (const b of r.billets || []) if (!["moi", "offert", "autrui", "spectateur", "gratuit"].includes(b.paiement || "moi") || (b.prix != null && (typeof b.prix !== "number" || b.prix < 0))) err.push(`${titreDe(id)} : place invalide (prix ou paiement).`);
     for (const b of d.prive.blocages) if (b && typeof b === "object" && (!ISO_RE.test(b.debut || "") || !ISO_RE.test(b.fin || "") || b.fin < b.debut)) err.push("Période bloquée : dates invalides.");
@@ -240,15 +245,16 @@
         for (const k of ["affiche", "journal", "lieux", "liens", "prive"]) d[k] = typo(d[k]);
         const erreurs = valider(d);
         if (erreurs.length) throw new Error("Données refusées : " + erreurs.slice(0, 4).join(" "));
-        const ser = (k) => (k === "dispo" ? JSON.stringify(d.dispo, null, 1) : JSON.stringify(d[k], null, 1) + "\n");
+        const ser = (k) => JSON.stringify(d[k], null, 1) + "\n";
         for (const k of ["affiche", "journal"]) if (ser(k) !== base.textes[FICHIERS[k]]) d[k].maj = todayISO();
         const changes = [];
-        for (const k of ["affiche", "journal", "lieux", "liens", "dispo"]) { const t = ser(k); if (t !== base.textes[FICHIERS[k]]) changes.push({ path: FICHIERS[k], content: t }); }
+        // dispo.json (soirs pris publics) n’est jamais écrit d’ici : l’action le régénère depuis la zone privée.
+        for (const k of ["affiche", "journal", "lieux", "liens"]) { const t = ser(k); if (t !== base.textes[FICHIERS[k]]) changes.push({ path: FICHIERS[k], content: t }); }
         if (JSON.stringify(d.prive) !== privAvant) changes.push({ path: FICHIERS.prive, content: JSON.stringify(await fermerPaquet(KEY, SALT, ITERP, d.prive)) });
         if (!changes.length) { bandeau(""); toast("Rien à enregistrer"); return true; }
         if (changes.some((c) => c.path !== FICHIERS.prive && TOK && c.content.includes(TOK))) throw new Error("Écriture bloquée : le jeton apparaîtrait dans un fichier public.");
         const tree = await gh(`/repos/${REPO}/git/trees`, { method: "POST", body: { base_tree: base.tree, tree: changes.map((c) => ({ path: c.path, mode: "100644", type: "blob", content: c.content })) } });
-        const commit = await gh(`/repos/${REPO}/git/commits`, { method: "POST", body: { message, tree: tree.sha, parents: [base.sha] } });
+        const commit = await gh(`/repos/${REPO}/git/commits`, { method: "POST", body: { message, tree: tree.sha, parents: [base.sha], author: AUTEUR, committer: AUTEUR } });
         try { await gh(`/repos/${REPO}/git/refs/heads/${BRANCHE}`, { method: "PATCH", body: { sha: commit.sha, force: false } }); }
         catch (e) { if (e.status === 422 || e.status === 409) { await pause(400 + essai * 600); continue; } throw e; }
         appliquer(d);
@@ -289,11 +295,21 @@
     if (avant === undefined) return;
     if (JSON.stringify(avant ?? null) !== JSON.stringify(maintenant ?? null) && !await demander(`${quoi} a été modifié ailleurs (Claude Code ou un autre appareil) depuis l’ouverture du formulaire. Remplacer par ta version ?`, { oui: "Remplacer", non: "Garder la leur", danger: false })) throw new Annule();
   }
+  // Soirs pris en mode admin : les trois sources privées, détaillées (le public ne voit qu’une liste fusionnée sur six mois).
+  // Avant la migration faite par l’action, les soirs déclarés et l’agenda sont encore dans l’ancien dispo.json.
+  const soirsDe = (d) => (Array.isArray(d.prive.soirs) ? d.prive.soirs : (d.dispo && d.dispo.manuel) || []);
+  const calDe = (d) => d.cal || (d.dispo && d.dispo.calendrier) || [];
+  const dispoPrive = (d) => ({ reservations: [...new Set(Object.values(d.prive.reservations).map((r) => r.date).filter(Boolean))].sort(), manuel: [...soirsDe(d)], calendrier: [...calDe(d)] });
+  // Sans jeton (lecture seule) ou hors ligne : mêmes sources, lues dans les fichiers du site.
+  async function soirsStatiques() {
+    let cal = null;
+    try { const pq = await getJSON(CAL + "?t=" + Date.now(), { cache: "no-store" }); if (pq.salt === SALT) cal = (await ouvrirPaquet(KEY, pq)).dates || []; } catch (_) {}
+    if (PRIVE) applyData({ dispo: dispoPrive({ prive: PRIVE, cal, dispo: DISPO_PUB || {} }) });
+  }
   // Applique des données fraîches à l’interface.
   function appliquer(d, force) {
     PRIVE = d.prive;
-    const dispo = { ...d.dispo, reservations: [...new Set(Object.values(d.prive.reservations).map((r) => r.date).filter(Boolean))].sort() };
-    applyData({ affiche: d.affiche, journal: d.journal, lieux: d.lieux, liens: d.liens, dispo });
+    applyData({ affiche: d.affiche, journal: d.journal, lieux: d.lieux, liens: d.liens, dispo: dispoPrive(d) });
     rafraichir(force);
   }
   // Une saisie est-elle en cours dans la page (hors dialogue) ? On ne redessine pas sous les doigts.
@@ -311,7 +327,7 @@
     let el = $("#pub");
     if (!el) { el = document.createElement("div"); el.id = "pub"; el.className = "pub"; el.setAttribute("role", "status"); el.setAttribute("aria-live", "polite"); document.body.appendChild(el); }
     el.hidden = !t; el.className = "pub " + cls;
-    el.innerHTML = t ? esc(t) + (lien ? ` <a href="${esc(lien)}" target="_blank" rel="noopener">Voir le détail</a>` : "") + (cls === "ko" || cls === "ok" ? ' <button type="button" aria-label="Fermer le bandeau">×</button>' : "") : "";
+    el.innerHTML = t ? esc(t) + (lien ? ` <a href="${esc(lien)}" target="_blank" rel="noopener noreferrer">Voir le détail</a>` : "") + (cls === "ko" || cls === "ok" ? ' <button type="button" aria-label="Fermer le bandeau">×</button>' : "") : "";
     const b = el.querySelector("button"); if (b) b.onclick = () => (el.hidden = true);
   }
   async function suivrePublication(sha) {
@@ -379,6 +395,7 @@
     } catch (_) { return effacerSession(); }
     document.body.classList.add("adm"); lockIcon();
     if (TOK) { try { await recharger(undefined, true); return; } catch (_) {} }
+    await soirsStatiques();
     await rafraichir(true);
   }
   const echeance = () => { const d = new Date(EXP); return fmt(d, true) + " à " + d.getHours() + " h " + String(d.getMinutes()).padStart(2, "0"); };
@@ -390,6 +407,7 @@
     effacerSession(); EXP = 0;
     PRIVE = null; TOK = null; KEY = null; SALT = null; PUB = null; JAVEC = ""; SOIRS = null; LIENS_W = null; RAPIDE = null;
     BLOBS.clear(); fermerDlg(); bandeau(""); document.body.classList.remove("adm"); lockIcon();
+    if (DISPO_PUB) applyData({ dispo: DISPO_PUB }); // retour aux soirs pris publics : plus aucun détail privé en mémoire
     if ($("#sheet").hidden) $("#sheetIn").innerHTML = ""; // fiche fermée : aucun reste du bloc admin dans la page
     if (/^#admin/.test(location.hash)) location.hash = "#affiche"; else rafraichir(true);
     if (msg) toast(msg);
@@ -497,8 +515,8 @@
   function conflits(d, date, sansId) {
     if (!date) return [];
     const out = [];
-    if ((d.dispo.manuel || []).includes(date)) out.push("soir déclaré pris");
-    if ((d.dispo.calendrier || []).includes(date)) out.push("événement dans Apple Calendar");
+    if (soirsDe(d).includes(date)) out.push("soir déclaré pris");
+    if (calDe(d).includes(date)) out.push("événement dans Apple Calendar");
     for (const [id, r] of Object.entries(d.prive.reservations)) if (id !== sansId && r.date === date) out.push("réservation : " + titreDe(id));
     for (const b of d.prive.blocages || []) {
       const deb = typeof b === "string" ? b : b.date || b.debut, fin = typeof b === "string" ? b : b.fin || b.date || b.debut;
@@ -506,7 +524,7 @@
     }
     return out;
   }
-  const etatLocal = () => ({ dispo: BUSY_SRC, prive: PRIVE });
+  const etatLocal = () => ({ dispo: BUSY_SRC, prive: PRIVE, cal: BUSY_SRC.calendrier });
   async function confirmeConflits(d, date, sansId, deja) {
     const c = conflits(d, date, sansId).filter((x) => !(deja || []).includes(x));
     if (c.length && !await demander(`Le ${fmtY(D(date), true)} est déjà pris :\n– ${c.join("\n– ")}\n\nConfirmer quand même ?`, { oui: "Confirmer quand même", non: "Revenir", danger: false })) throw new Annule();
@@ -565,7 +583,7 @@
   /* ---------- Réserver ---------- */
   function joursJoues(e) {
     const p = span(e); if (!p) return [];
-    const out = []; for (let d = new Date(Math.max(+p[0], +TODAY)); d <= p[1] && out.length < 400; d = add(d, 1)) out.push(iso(d));
+    const out = []; for (let d = new Date(Math.max(+p[0], +TODAY)), i = 0; d <= p[1] && i < 400; d = add(d, 1), i++) if (playsOn(e, d)) out.push(iso(d)); // jours de relâche retirés
     return out;
   }
   function formReserver(id) {
@@ -574,6 +592,7 @@
     const jours = joursJoues(e); if (r.date && !jours.includes(r.date)) jours.unshift(r.date);
     const loc = etatLocal();
     const opts = jours.map((k) => [k, `${fmtY(D(k), true)}${conflits(loc, k, id).length ? " · pris" : ""}`]);
+    if (!r.date && jours.length > 1) opts.unshift(["", "Choisir une date…"]); // plusieurs dates : aucune n’est présélectionnée
     const mh = /\b(\d{1,2})\s*h\s*(\d{2})?/i.exec(e.horaires || "");
     const hDef = r.heure || (mh && +mh[1] >= 10 ? String(mh[1]).padStart(2, "0") + ":" + (mh[2] || "00") : "");
     const form = dlg(r0 ? `Modifier la réservation : ${e.titre}` : `Réserver : ${e.titre}`, `
@@ -581,14 +600,14 @@
       <p class="warn" data-conf hidden></p>
       <div class="grid2">${champ("Heure", inp("heure", hDef, 'type="time"'))}${champ("Salle", inp("salle", r.salle ?? e.salle ?? ""))}</div>
       ${champ("Siège(s)", inp("siege", r.siege, 'placeholder="Rang D, 12-13"'))}
-      ${prixHTML(r)}
+      ${prixReplie(r, false)}
       ${champ("Billetterie (où acheté)", inp("billetterie", r.billetterie))}
       ${champ("Note", inp("note", r.note))}`, async (f) => {
       const date = val(f, "date") && val(f, "date") !== "autre" ? val(f, "date") : val(f, "date_autre");
       if (!date) throw new Error("Choisis une date.");
       const res = { date, heure: val(f, "heure"), salle: val(f, "salle"), siege: val(f, "siege"), ...lirePrix(f), billetterie: val(f, "billetterie"), note: val(f, "note") };
       const vus = await confirmeConflits(etatLocal(), date, id);
-      return ecrire(`Admin : ${r0 ? "réservation modifiée" : "réservé"} ${e.titre} le ${fmt(D(date))}`, async (d) => {
+      return ecrire("Admin : réservations mises à jour", async (d) => {
         await garde(r0, d.prive.reservations[id], "La réservation");
         await confirmeConflits(d, date, id, vus);
         d.prive.reservations[id] = res;
@@ -609,7 +628,7 @@
   async function annulerRes(id) {
     const r = PRIVE.reservations[id]; if (!r) return;
     if (!await demander(`Annuler la réservation de « ${titreDe(id)} » (${dCourt(r.date)}) ? Le soir sera libéré.`, { oui: "Oui, annuler", non: "Garder" })) return;
-    await ecrire(`Admin : annulé ${titreDe(id)} (${dCourt(r.date)})`, (d) => {
+    await ecrire("Admin : réservations mises à jour", (d) => {
       delete d.prive.reservations[id];
       const s = d.affiche.sorties.find((x) => x.id === id); if (s) s.leonardYVa = false;
     });
@@ -1066,7 +1085,7 @@
       const vus = {};
       try {
         for (const l of ok) vus[l.id] = await confirmeConflits(etatLocal(), l.date, l.id);
-        const msg = "Admin : saisie rapide" + (ok.length ? ", réservé " + ok.map((l) => `${titreDe(l.id)} le ${fmt(D(l.date))}`).join(", ") : "") + (reste.length ? ` ; ${reste.length} à compléter` : "");
+        const msg = "Admin : saisie rapide"; // jamais de titre ni de date de réservation dans un message de commit (dépôt public)
         await ecrire(msg, async (d) => {
           for (const l of ok) {
             await confirmeConflits(d, l.date, l.id, vus[l.id]);
@@ -1127,10 +1146,9 @@
       });
       if (ev.target.id === "sSave") act(async () => {
         const plus = [...SOIRS.set].filter((x) => !SOIRS.base.includes(x)).sort(), moins = SOIRS.base.filter((x) => !SOIRS.set.has(x)).sort();
-        const liste = (l) => (l.length > 4 ? `${l.length} soirs entre le ${fmt(D(l[0]))} et le ${fmt(D(l.at(-1)))}` : l.map((k) => fmt(D(k))).join(", "));
-        await ecrire(`Admin : soirs pris${plus.length ? ", bloqué " + liste(plus) : ""}${moins.length ? (plus.length ? " ;" : ",") + " libéré " + liste(moins) : ""}`, (d) => {
-          const s = new Set(d.dispo.manuel || []); plus.forEach((k) => s.add(k)); moins.forEach((k) => s.delete(k));
-          d.dispo.manuel = [...s].sort(); d.dispo.maj = todayISO();
+        await ecrire("Admin : soirs pris mis à jour", (d) => {
+          const s = new Set(soirsDe(d)); plus.forEach((k) => s.add(k)); moins.forEach((k) => s.delete(k));
+          d.prive.soirs = [...s].sort();
         });
         SOIRS = null; renderAdminVue("soirs"); toast("Soirs pris enregistrés");
       });
@@ -1169,7 +1187,7 @@
     const eco = P.filter((x) => x.plein != null).reduce((s, x) => s + (x.plein - x.c.engage), 0);
     const parMois = {}, parCat = {};
     P.forEach((x) => { const k = x.date.slice(0, 7); parMois[k] = (parMois[k] || 0) + x.c.paye; parCat[x.cat] = (parCat[x.cat] || 0) + x.c.paye; });
-    const barres = (rows) => { const mx = Math.max(1, ...rows.map((r) => r[1])); return `<div class="bars bars-e">${rows.map(([l, n]) => `<span class="bl">${esc(l)}</span><span class="bg" style="--v:${Math.round((n / mx) * 100)}" aria-hidden="true"></span><span class="bn">${esc(euros(n))}</span>`).join("")}</div>`; };
+    const barres = (rows) => { const mx = Math.max(1, ...rows.map((r) => r[1])); return `<div class="bars bars-e">${rows.map(([l, n]) => `<span class="bl">${esc(l)}</span><span class="bg" data-pc="${Math.round((n / mx) * 100)}" aria-hidden="true"></span><span class="bn">${esc(euros(n))}</span>`).join("")}</div>`; };
     const mois = Object.keys(parMois).sort().map((k) => [MOIS[+k.slice(5) - 1] + " " + k.slice(2, 4), parMois[k]]);
     const cats = Object.entries(parCat).sort((x, y) => y[1] - x[1]);
     const opts = [["saison", "Saison en cours"], ["prec", "Saison précédente"], ["annee", "Année civile"], ["12m", "12 derniers mois"], ["tout", "Tout"]];
@@ -1459,7 +1477,7 @@
       document.body.classList.add("adm"); lockIcon(); fermerDlg();
       let fait = false;
       if (TOK) { try { await recharger(pw, true); fait = true; } catch (e) { avert = "Lecture du dépôt impossible (" + msgGH(e) + ") : données du site affichées."; } }
-      if (!fait) await rafraichir(true);
+      if (!fait) { await soirsStatiques(); await rafraichir(true); }
       toast(avert || "Connecté " + jusqua());
     }, { valider: "Se connecter" });
     form.elements.password.focus();
@@ -1473,8 +1491,8 @@
       const d = val(f, "duree"); lsSet(LS_DUREE, d);
       try { await sauverSession(d); toast("Connecté " + jusqua()); } catch (_) { toast("Impossible de garder la session sur cet appareil."); }
       rafraichir();
-    }, { valider: "Prolonger", danger: '<button class="btn danger" type="button" data-deco>Se déconnecter</button>' });
-    form.querySelector("[data-deco]").onclick = () => verrouiller("Déconnecté");
+    }, { valider: "Prolonger", danger: '<button class="btn danger" type="button" data-deco>Verrouiller</button>' });
+    form.querySelector("[data-deco]").onclick = () => verrouiller("Verrouillé");
     form.querySelector("[data-oublier]").onclick = async () => { if (await demander("Effacer le jeton GitHub de cet appareil et se déconnecter ? Il faudra le ressaisir à la prochaine connexion.", { oui: "Effacer le jeton" })) { lsDel(LS_JETON); verrouiller("Appareil oublié : jeton effacé"); } };
   }
 
@@ -1486,12 +1504,19 @@
     if (!PRIVE) return vueConnexion();
     if (location.hash.slice(1).split("?")[0] !== "admin") return;
     const nE = Object.keys(PRIVE.envies).length, nC = (PRIVE.aCompleter || []).length, nR = nRanger();
-    const corps = { res: vueRes, ranger: vueRanger, envies: vueEnvies, rapide: vueRapide, soirs: vueSoirs, budget: vueBudget, acc: vueAcc, lieux: vueLieux, liens: vueLiens, abo: () => `${subsHTML()}<p class="cr">Adresses secrètes : ne les partage pas.</p>` }[VUE] || vueRes;
+    const corps = { res: vueRes, ranger: vueRanger, envies: vueEnvies, rapide: vueRapide, soirs: vueSoirs, budget: vueBudget, acc: vueAcc, lieux: vueLieux, liens: vueLiens, abo: () => `${subsHTML()}<p class="cr">Adresses secrètes : ne les partage pas. Elles ne sont écrites nulle part dans le dépôt.</p>
+      <div class="acts"><button class="btn" type="button" id="icsRegen">Régénérer les adresses des flux</button></div>` }[VUE] || vueRes;
     $("#main").innerHTML = `<div class="adm-tete"><h1>Admin</h1>${TOK ? "" : "<p>Lecture seule</p>"}
-    <nav class="chips" aria-label="Espace admin">${ONGLETS.map(([k, t]) => `<a class="chip" href="#admin?v=${k}"${k === VUE ? ' aria-current="page"' : ""}>${t}${k === "envies" && nE ? ` (${nE})` : ""}${k === "rapide" && nC ? ` (${nC})` : ""}${k === "ranger" && nR ? ` (${nR})` : ""}</a>`).join("")}</nav></div>
+    <nav class="chips defile" aria-label="Espace admin">${ONGLETS.map(([k, t]) => `<a class="chip" href="#admin?v=${k}"${k === VUE ? ' aria-current="page"' : ""}>${t}${k === "envies" && nE ? ` (${nE})` : ""}${k === "rapide" && nC ? ` (${nC})` : ""}${k === "ranger" && nR ? ` (${nR})` : ""}</a>`).join("")}</nav></div>
     <div class="acts"><button class="btn pri" type="button" data-adm="ajouter">${ico("ajouter")}Spectacle</button><button class="btn" type="button" data-adm="journal">${ico("ajouter")}Journal</button>${TOK ? "" : '<button class="btn" type="button" id="aTok">Saisir le jeton</button>'}</div>
     <div id="av">${corps()}</div>`;
     if ($("#aTok")) $("#aTok").onclick = () => formJeton();
+    const rg = $("#icsRegen"); if (rg) rg.onclick = () => act(async () => {
+      if (!TOK) { formJeton("Cet appareil est en lecture seule."); return; }
+      if (!await demander("Régénérer les adresses des deux flux ? Les anciennes cesseront de fonctionner à la prochaine publication : il faudra te réabonner dans Apple Calendar avec les nouvelles.", { oui: "Régénérer", pres: rg })) return;
+      await ecrire("Admin : adresses des flux régénérées", (d) => { d.prive.icsToken = [...crypto.getRandomValues(new Uint8Array(12))].map((x) => x.toString(16).padStart(2, "0")).join(""); });
+      toast("Nouvelles adresses : réabonne-toi après la publication");
+    });
     const bp = $("#bp"); if (bp) bp.onchange = () => { BUDGET_P = bp.value; renderAdminVue(); };
     if (VUE === "rapide") brancherRapide();
     if (VUE === "soirs") brancherSoirs();

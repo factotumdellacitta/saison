@@ -765,3 +765,23 @@ body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
 
 /* Colonne de droite : pas de défilement propre, elle suit la page (voir colLat() dans app.js). */
 @media (min-width:960px){.r-lat{max-height:none;overflow:visible}}
+
+/* ---------- Revue UX 4.41 ---------- */
+/* Recherche étendue : la même recherche ailleurs sur le site */
+.aussi{margin:var(--e4) 0 0;padding-top:var(--e3);border-top:1px solid var(--filet-leger);font-size:var(--t-meta);font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--encre-2)}
+.aussi a{display:inline-block;padding:var(--e3) 0;color:var(--encre);font-weight:700}
+/* Hors ligne : bandeau en tête de page */
+.msg.hl[hidden]{display:none}
+/* Radar sur mobile : sans vente dans la semaine, les ouvertures passent après « À réserver » */
+.r-lat2.calme>.mh,.r-lat2.calme>.r-semaine{order:3}
+/* Zones tactiles de 44 px : tri, liens des fiches, icônes admin (4 px de plus entre elles, « Supprimer » à l'écart) */
+.linkbtn{position:relative}
+.linkbtn::after{content:"";position:absolute;left:0;right:0;top:-6px;bottom:-6px}
+.dl dd a,.cr a{display:inline-block;padding:var(--e1) 0}
+.acts-adm{gap:var(--e2)}
+.acts-adm .btn.ai.danger:last-child{margin-left:auto}
+/* Menu admin : une seule ligne défilante */
+.adm-tete .chips.defile{margin-top:var(--e3)}
+/* Formulaires : barre d'enregistrement toujours visible ; rien n'est couvert par le bandeau de publication */
+#dlg form>.acts{position:sticky;bottom:0;z-index:2;margin:var(--e4) calc(-1 * var(--marge)) 0;padding:var(--e3) var(--marge) calc(var(--e3) + var(--sab));background:var(--fond);border-top:1px solid var(--filet)}
+body:has(#dlg) .pub,body:has(#dlg) .toast{bottom:auto;top:0}

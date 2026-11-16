@@ -15,7 +15,7 @@
 
   // Favicon : la clé (dont le dessin occupe 75 % × 60 % de sa boîte) laisse 18 % de marge et se centre optiquement
   let CLE = null, ICO = () => "", FAM = () => "neutre";
-  const carre = (n) => { const t = n * 0.85, d = (t * 1.5) / 48; return CLE("", Math.round(t)).replace("<svg ", `<svg style="transform:translate(${-d}px,${d}px)" `); };
+  const carre = (n) => { const t = n * 0.85, d = (t * 1.5) / 48; return CLE("", Math.round(t)).replace("<svg ", `<svg data-st="transform:translate(${-d}px,${d}px)" `); };
   function render(main, { cleF, saisonTxt, themeBouton, ico, ICONES, CATS, famille }) {
     CLE = cleF; ICO = ico; FAM = famille; const S = saisonTxt();
     const carres = (n) => `<span class="st" aria-hidden="true">${[1, 2, 3, 4].map((i) => `<i${i <= n ? ' class="on"' : ""}></i>`).join("")}</span>`;
@@ -29,7 +29,7 @@
       <div class="ch-duo"><div class="ch-planche" data-theme="light"><span class="meta">Clair</span>${html}</div><div class="ch-planche" data-theme="dark"><span class="meta">Sombre</span>${html}</div></div></section>`;
 
     const entete = `<header class="top"><div class="in"><a class="brand" href="#charte">${logo}</a><span class="saison">${S}</span>${themeBouton()}</div></header>
-      <p class="meta muet" style="margin-top:var(--e3)">Barre compacte, au défilement sur mobile</p><div class="barre"><a href="#charte">${logo}</a></div>`;
+      <p class="meta muet" data-st="margin-top:var(--e3)">Barre compacte, au défilement sur mobile</p><div class="barre"><a href="#charte">${logo}</a></div>`;
     const nav = `<nav class="tabs" aria-label="Exemple de navigation">${[["Radar", "Radar"], ["Affiche", "À\u00a0l’affiche"], ["Journal", "Journal"], ["Index", "Artistes et lieux"], ["Admin", "Admin"]]
       .map(([c, l], i) => `<a class="tab${i === 4 ? " lock" : ""}" href="#charte"${i === 0 ? ' aria-current="page"' : ""}><span class="court">${c}</span><span class="long">${l}</span></a>`).join("")}</nav>`;
     const lignes = `<div class="list">${DEMO.map(ligne).join("")}</div>`;
@@ -69,13 +69,13 @@
       <p class="why">Une phrase factuelle : la mise en scène a été saluée par la presse nationale à sa création.</p>
       <div class="acts"><a class="btn pri" href="#charte">${ico("billet")}Billetterie</a><a class="btn" href="#charte">${ico("externe")}Site officiel</a></div></div>`;
     const stats = `<div class="kpis"><div><b>48</b><span>sorties vues</span></div><div><b>17</b><span>lieux</span></div><div><b>3,1</b><span>note moyenne</span></div><div><b>12</b><span>cette saison</span></div></div>
-      <div class="stats"><h3>Par catégorie</h3><div class="bars">${[["Théâtre", 21], ["Opéra", 12], ["Danse", 7], ["Concert", 5], ["Exposition", 3]].map(([l, n]) => `<span class="bl">${l}</span><span class="bg" style="--v:${Math.round((n / 21) * 100)}" aria-hidden="true"></span><span class="bn">${n}</span>`).join("")}</div></div>`;
-    const champs = `<form class="frm" onsubmit="return false"><label class="f"><span>Titre</span><input type="text" value="Ruy Blas" autocomplete="off" enterkeyhint="next"></label>
+      <div class="stats"><h3>Par catégorie</h3><div class="bars">${[["Théâtre", 21], ["Opéra", 12], ["Danse", 7], ["Concert", 5], ["Exposition", 3]].map(([l, n]) => `<span class="bl">${l}</span><span class="bg" data-st="--v:${Math.round((n / 21) * 100)}" aria-hidden="true"></span><span class="bn">${n}</span>`).join("")}</div></div>`;
+    const champs = `<form class="frm"><label class="f"><span>Titre</span><input type="text" value="Ruy Blas" autocomplete="off" enterkeyhint="next"></label>
       <label class="f"><span>Date</span><input type="date" value="2026-10-15"></label><label class="f"><span>Prix de la place (€)</span><input type="text" inputmode="decimal" placeholder="18" enterkeyhint="next"></label>
       <label class="f"><span>Catégorie</span><select><option>Théâtre</option><option>Opéra</option></select></label><label class="f ck"><input type="checkbox" checked><span>Public jeune</span></label><p class="err">Message d’erreur de champ.</p></form>`;
     const messages = `<div class="msg">Publication en cours</div><p></p><div class="msg ok">En ligne <a href="#charte">Voir</a></div><p></p><div class="msg err">Erreur : la publication a échoué <button type="button">Réessayer</button></div><p></p><div class="msg">Hors ligne : données de la dernière visite</div>`;
     const admin = `<div class="adm-tete"><h3 class="h1-demo">Admin</h3><p>Édition · déverrouillé</p><nav class="chips" aria-label="Espace admin (exemple)"><a class="chip" href="#charte" aria-current="page">Réservations</a><a class="chip" href="#charte">Coups de cœur</a><a class="chip" href="#charte">Saisie rapide</a><a class="chip" href="#charte">Budget</a></nav></div>
-      <h3 class="sec">Réservation</h3><form class="frm" onsubmit="return false"><label class="f"><span>Sortie</span><input type="text" value="Werther" autocomplete="off"></label><label class="f"><span>Date</span><input type="date" value="2027-02-08"></label><label class="f"><span>Heure</span><input type="time" value="20:00"></label>
+      <h3 class="sec">Réservation</h3><form class="frm"><label class="f"><span>Sortie</span><input type="text" value="Werther" autocomplete="off"></label><label class="f"><span>Date</span><input type="date" value="2027-02-08"></label><label class="f"><span>Heure</span><input type="time" value="20:00"></label>
       <div class="acts"><button class="btn pri" type="button">Enregistrer</button><button class="btn danger" type="button">Annuler la réservation</button></div>
       <div class="confirme" role="alert"><p>Annuler la réservation de « Werther » (8 févr.) ? Le soir sera libéré.</p><div class="acts"><button class="btn danger" type="button">Oui, annuler</button><button class="btn" type="button">Garder</button></div></div></form>
       <h3 class="sec">Saisie rapide</h3><div class="saisie"><label class="f"><span>Colle la confirmation de billet</span><textarea placeholder="Votre commande n° 1234 – Werther – 8 février 2027 20:00…" enterkeyhint="done"></textarea></label></div>
@@ -93,7 +93,7 @@
       <p>La saison est un sous-titre calculé (septembre à août) : aujourd’hui <b>${S}</b>. Titre de page : « Factotum » ou « Titre de la page – Factotum ».</p></section>
 
     <section class="ch-section"><h2 class="mh">Symbole : la clé F</h2><p>Une clé passe-partout dont le panneton dessine un F, inclinée à 45° (anneau en bas à gauche, panneton en haut à droite). Géométrie stricte, extrémités carrées. Blanc sur aplat rouge, ou encre sur fond clair ou sombre. Jamais rouge sur rouge, ni contour, ombre, rotation ou animation. Taille minimale 16 px ; zone de protection : l’épaisseur de la tige. Usage réservé : en-tête, favicon, icônes, image de partage et cette page.</p>
-      <div class="ch-cles">${[180, 32, 16].map((n) => `<figure><span class="carre" style="width:${n}px;height:${n}px">${carre(n)}</span><figcaption class="meta muet">${n} px</figcaption></figure>`).join("")}
+      <div class="ch-cles">${[180, 32, 16].map((n) => `<figure><span class="carre" data-st="width:${n}px;height:${n}px">${carre(n)}</span><figcaption class="meta muet">${n} px</figcaption></figure>`).join("")}
       ${[64, 32, 16].map((n) => `<figure>${cleF("", n)}<figcaption class="meta muet">${n} px, encre</figcaption></figure>`).join("")}</div></section>
     ${icones}
 
@@ -131,13 +131,18 @@
       <li>Violet, indigo, bleu ardoise ou toute couleur hors palette</li><li>Héros centré avec accroche, grandes sections vides, texte d’accueil marketing</li>
       <li>Animations d’échelle, rebonds, révélations au défilement, squelettes de chargement : seules les transitions de couleur et d’opacité de 120 ms, aucune en mouvement réduit</li>
       <li>Texte noir sur aplat rouge ; clé F rouge sur rouge, redressée, ombrée ou animée</li></ul></section>
-    <p class="meta muet" style="margin:var(--e8) 0">Largo al factotum della città.</p></div>`;
+    <p class="meta muet" data-st="margin:var(--e8) 0">Largo al factotum della città.</p></div>`;
 
+    // Styles ponctuels de la planche : posés par script (la politique de sécurité du site interdit les attributs style).
+    const st = (root) => root.querySelectorAll("[data-st]").forEach((el) => { el.dataset.st.split(";").forEach((d) => { const i = d.indexOf(":"); if (i > 0) el.style.setProperty(d.slice(0, i).trim(), d.slice(i + 1).trim()); }); el.removeAttribute("data-st"); });
+    st(main);
+    main.querySelectorAll("form").forEach((f) => f.addEventListener("submit", (ev) => ev.preventDefault()));
     // Jetons et contrastes, lus dans la feuille (aucune valeur recopiée ici)
     const JET = ["fond", "surface", "encre", "encre-2", "filet", "filet-leger", "rouge", "sur-rouge", "rouge-texte", "g-theatre", "g-lyrique", "g-danse", "g-concert", "a-theatre", "a-lyrique", "a-danse", "a-concert"];
     main.querySelectorAll("[data-jetons]").forEach((box) => {
       const cs = getComputedStyle(box.parentElement);
-      box.innerHTML = JET.map((k) => `<div class="ch-jeton"><i style="--c:var(--${k})"></i><b>--${k}</b><span class="muet">${cs.getPropertyValue("--" + k).trim()}</span></div>`).join("");
+      box.innerHTML = JET.map((k) => `<div class="ch-jeton"><i data-st="--c:var(--${k})"></i><b>--${k}</b><span class="muet">${cs.getPropertyValue("--" + k).trim()}</span></div>`).join("");
+      st(box);
     });
     const hex = (h) => { h = h.trim().replace("#", ""); return [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16) / 255); };
     const lum = (h) => { const [r, g, b] = hex(h).map((c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4)); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
