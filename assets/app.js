@@ -827,10 +827,10 @@ function renderJournal(q) {
       <div class="fgr" role="group" aria-labelledby="fjN"><span class="fl" id="fjN">Ma note</span><div class="chips">${[4, 3, 2, 1].map((n) => chip("mn", String(n), carres(n), f.mn.has(String(n)), "Ma note " + n)).join("")}${chip("mn", "0", "Sans note")}</div></div>
       ${accSel ? `<div class="fgr"><span class="fl">Avec</span><div>${accSel}</div></div>` : ""}
     </div>
-    <div class="fpanel j-stm" id="pJS"${JPANEL === "pJS" ? "" : " hidden"}><h2 class="mh">Statistiques <small>${esc(libS)}</small></h2><div class="stats">${stats}</div></div>
     <div class="resbar"><span class="n" id="jn" aria-live="polite"></span>
       <a class="linkbtn tri" href="#journal?${esc(jq(f, "tri", f.tri === "note" ? "date" : "note"))}" aria-label="Tri par ${f.tri === "note" ? "ma note" : "date"}, changer">${ico("tri")}${f.tri === "note" ? "Ma note" : "Date"}</a>
       <div class="active">${jetons}${jetons ? `<a class="chip effacer" href="#journal${f.tri === "note" ? "?tri=note" : ""}" data-jclr>Tout effacer</a>` : ""}</div></div></div>
+  <div class="j-stm" id="pJS"${JPANEL === "pJS" ? "" : " hidden"}><h2 class="mh">Statistiques <small>${esc(libS)}</small></h2><div class="stats">${stats}</div></div>
   <div class="list" id="jlist"></div></section>
   <aside class="r-lat j-lat" aria-label="Statistiques du journal"><h2 class="mh">Statistiques <small>${esc(libS)}</small></h2><div class="stats">${stats}</div></aside></div>`;
   $$("[data-jclr]").forEach((x) => x.addEventListener("click", () => { JAVEC = ""; if (x.tagName === "BUTTON") renderJournal(q); }));
@@ -971,7 +971,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.38"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.39"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -989,7 +989,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.38"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.39"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }

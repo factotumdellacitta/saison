@@ -743,3 +743,22 @@ body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
 @media (hover:hover){.fbar .chip:not([aria-pressed="true"]):not(.on):hover{border-color:var(--encre)}}
 @media (min-width:480px){.fgr .fl{padding-top:0;line-height:32px}}
 #alist>.row:first-child,#jlist>.row:first-child,#jlist>.empty:first-child{border-top:0}
+
+/* Panneaux dans le bloc collant des filtres : jamais plus hauts que l'écran, ils défilent eux-mêmes. */
+.fbar .fpanel{max-height:calc(100dvh - var(--collant) - var(--nav) - 120px);overflow-y:auto;overscroll-behavior:contain}
+.j-stm{padding-bottom:var(--e4);border-bottom:1px solid var(--filet-leger)}
+
+/* Boutons compacts : 32 px de dessin comme les puces, zone tactile de 44 px par pseudo-élément, texte 11 px.
+   Grand format (44 px) réservé à l'action principale : validation des fenêtres et des confirmations, barre
+   d'enregistrement, appel rouge de la colonne de droite, barres de fiche et de fenêtre. */
+.btn{position:relative;min-height:32px;min-width:32px;padding:0 var(--e3);gap:var(--e1);font-size:var(--t-puce);letter-spacing:.04em}
+.btn::after{content:"";position:absolute;left:0;right:0;top:-6px;bottom:-6px}
+.btn .pi{width:16px;height:16px}
+.btn.ico .pi{width:18px;height:18px}
+.btn.ico,.btn.ai{min-width:36px;padding:0 var(--e1)}
+.acts{gap:var(--e3) var(--e1)}
+.linkbtn{min-height:32px}
+.btn.grand,#dlg form>.acts .btn,.confirme .acts .btn,.savebar .btn,.r-lat .acts .btn,.shtop .btn{min-height:var(--cible);min-width:var(--cible);padding:0 var(--e4);gap:var(--e2);font-size:var(--t-meta);letter-spacing:.06em}
+.btn.grand .pi,#dlg form>.acts .btn .pi,.confirme .acts .btn .pi,.r-lat .acts .btn .pi,.shtop .btn .pi{width:18px;height:18px}
+.shtop .btn.ico{padding:0}
+#dlg form>.acts,.confirme .acts{gap:var(--e2)}

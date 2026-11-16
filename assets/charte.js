@@ -115,7 +115,7 @@
     ${duo("4. Bandeaux de jour", bandeaux, "Collants en haut de la liste au défilement.")}
     ${duo("5. Note", notes)}
     ${duo("6. Badges", badges)}
-    ${duo("7. Boutons", boutons, "Survol : inversion des couleurs, sans animation de taille.")}
+    ${duo("7. Boutons", boutons, "Compacts : 32 px de dessin comme les puces (texte 11 px, 4 px entre boutons), zone tactile de 44 px. Grand format de 44 px pour l’action principale seulement : validation d’une fenêtre ou d’une confirmation, enregistrement, appel rouge de la colonne de droite, barres de fiche et de fenêtre. Survol : inversion des couleurs, sans animation de taille.")}
     ${duo("8. Barre de liste et puces de filtre", puces, "Commune à l’Affiche et au Journal. Barre de 40 px : recherche, « + » en mode admin, Filtres avec le nombre de filtres actifs (icône seule sur mobile). Genres en puces sur une ligne. Panneau replié par rubriques. Ligne des résultats : nombre à gauche, tri et affichage à droite, filtres actifs dessous en jetons, puis « Tout effacer ». Un seul gabarit pour toutes les puces de filtre (genres, panneau, jetons) : 32 px de dessin et 44 px de zone tactile, texte 11 px, approche 0,02em, contour léger, 8 px de marge (6 px côté picto), 4 px entre puces et 8 px entre rangées. Puce active en rouge, ou à l’aplat de son genre.")}
     ${duo("9. Bande des 14 jours et calendriers", frise + cal, "Hachures : soir pris. Cadre rouge : aujourd’hui. Carré rouge plein : un soir où Léonard va quelque part.")}
     ${duo("10. Fiche détaillée", fiche)}
