@@ -1,5 +1,6 @@
 // node tools/check.mjs  –  bloque la publication si les données sont incohérentes ou si une donnée privée fuit.
 import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
+import { execSync } from "node:child_process";
 import { verifierContrastes } from "./contrast.mjs";
 
 const erreurs = [];
@@ -24,7 +25,7 @@ function calculDe(t) {
 }
 // Clés interdites dans tout fichier public (données privées)
 const PRIVEES = new Set(["prix", "accompagnants", "places", "siege", "heure", "reserveLe", "icsToken",
-  "tarifPlein", "prixPlace", "pleinPlace", "billets", "categoriePlace", "spectateur", "paiement", "envies", "journalPrive", "aCompleter", "priorite", "blocages", "jeton", "token"]);
+  "tarifPlein", "prixPlace", "pleinPlace", "billets", "categoriePlace", "spectateur", "paiement", "envies", "journalPrive", "aCompleter", "priorite", "blocages", "soirs", "motif", "jeton", "token"]);
 
 const lire = (f) => {
   try { return JSON.parse(readFileSync(f, "utf8")); } catch (e) { erreurs.push(`${f} illisible : ${e.message}`); return null; }
@@ -40,10 +41,20 @@ else {
   if (p && !(p.ct && p.iv && p.salt && p.kdf)) erreurs.push("data/prive.enc n'a pas la forme d'un fichier chiffré.");
   if (p && Object.keys(p).some((k) => !["v", "kdf", "iter", "salt", "iv", "ct"].includes(k))) erreurs.push("data/prive.enc contient des champs en clair.");
 }
+// Fichiers chiffrés : rien d'autre que le paquet (aucun champ en clair).
+if (existsSync("data/calendrier.enc")) {
+  const p = lire("data/calendrier.enc");
+  if (p && (!(p.ct && p.iv && p.salt && p.kdf) || Object.keys(p).some((k) => !["v", "kdf", "iter", "salt", "iv", "ct"].includes(k)))) erreurs.push("data/calendrier.enc n'a pas la forme d'un fichier chiffré.");
+}
+// Le dépôt est public : les flux .ics (prix, accompagnants) ne sont jamais versionnés, ils sont générés à la publication.
+try {
+  const suivis = execSync("git ls-files", { encoding: "utf8" }).split("\n");
+  for (const f of suivis) if (/\.(ics|pdf|pkpass)$/i.test(f) || /(^|\/)_prive\.json$/.test(f)) erreurs.push(`${f} est suivi par git dans un dépôt public : « git rm --cached ${f} ».`);
+} catch (_) { /* hors d'un dépôt git : rien à vérifier */ }
 if (existsSync("data/spectacles.json")) erreurs.push("data/spectacles.json ne doit plus exister (remplacé par affiche.json et journal.json).");
 
 // ---------- Fichiers publics : aucune clé privée ----------
-const PUBLICS_ATTENDUS = new Set(["affiche.json", "journal.json", "lieux.json", "liens.json", "dispo.json", "index-artistes.json", "index-lieux.json", "envies.json", "deja-vu.json", "prive.enc"]);
+const PUBLICS_ATTENDUS = new Set(["affiche.json", "journal.json", "lieux.json", "liens.json", "dispo.json", "index-artistes.json", "index-lieux.json", "envies.json", "deja-vu.json", "prive.enc", "calendrier.enc"]);
 function fouille(o, chemin, f) {
   if (Array.isArray(o)) o.forEach((v, i) => fouille(v, `${chemin}[${i}]`, f));
   else if (o && typeof o === "object")
@@ -58,7 +69,7 @@ for (const f of readdirSync("data")) {
     continue;
   }
   if (!PUBLICS_ATTENDUS.has(f)) { erreurs.push(`data/${f} : fichier inattendu dans le dossier publié.`); continue; }
-  if (f === "prive.enc") continue;
+  if (f.endsWith(".enc")) continue;
   const o = lire(`data/${f}`);
   if (o) fouille(o, "", `data/${f}`);
 }
@@ -197,10 +208,36 @@ const idxL = lire("data/index-lieux.json") || {};
 for (const [k, v] of Object.entries(idxL)) for (const id of v.sorties || []) if (!ids.has(id)) erreurs.push(`index-lieux[${k}] : sortie inconnue ${id} (relance build).`);
 
 // ---------- Dispo ----------
+// Public : { maj, horizon, pris } : une seule liste de dates, sans raison. L'ancien format (trois listes) est toléré
+// jusqu'à la migration faite par l'action « Publier le site ».
 const dispo = lire("data/dispo.json") || {};
-for (const k of ["reservations", "manuel", "calendrier"]) {
-  if (!Array.isArray(dispo[k])) erreurs.push(`dispo.json : ${k} doit être une liste.`);
-  else for (const d of dispo[k]) if (!ISO.test(d)) erreurs.push(`dispo.json : ${k} contient une date invalide (${d}).`);
+if (Array.isArray(dispo.pris)) {
+  if (Object.keys(dispo).some((k) => !["maj", "horizon", "pris"].includes(k))) erreurs.push("dispo.json : seuls maj, horizon et pris sont permis.");
+  for (const d of dispo.pris) if (!ISO.test(d)) erreurs.push(`dispo.json : date invalide (${d}).`);
+  if (dispo.horizon && !ISO.test(dispo.horizon)) erreurs.push("dispo.json : horizon invalide.");
+} else {
+  warn.push("dispo.json à l'ancien format (trois listes) : la prochaine publication le fusionnera.");
+  for (const k of ["reservations", "manuel", "calendrier"]) {
+    if (!Array.isArray(dispo[k])) erreurs.push(`dispo.json : ${k} doit être une liste.`);
+    else for (const d of dispo[k]) if (!ISO.test(d)) erreurs.push(`dispo.json : ${k} contient une date invalide (${d}).`);
+  }
+}
+
+// ---------- Site : politique de sécurité ----------
+const html = readFileSync("index.html", "utf8");
+if (!/http-equiv="Content-Security-Policy"/.test(html)) erreurs.push("index.html : Content-Security-Policy manquante.");
+if (/'unsafe-inline'|'unsafe-eval'/.test(html)) erreurs.push("index.html : la politique de sécurité ne doit autoriser ni 'unsafe-inline' ni 'unsafe-eval'.");
+if (!/<meta name="referrer" content="no-referrer">/.test(html)) erreurs.push("index.html : <meta name=\"referrer\" content=\"no-referrer\"> manquant.");
+for (const f of ["assets/app.js", "assets/admin.js", "assets/charte.js"]) {
+  const t = readFileSync(f, "utf8");
+  if (/\sstyle="|\son[a-z]+="/.test(t)) erreurs.push(`${f} : attribut style ou gestionnaire d'événement en ligne (bloqué par la politique de sécurité).`);
+  if (/target="_blank"(?! rel="noopener noreferrer")/.test(t)) erreurs.push(`${f} : lien externe sans rel="noopener noreferrer".`);
+  if (/\beval\(|new Function\(|document\.write\(/.test(t)) erreurs.push(`${f} : eval, new Function ou document.write interdits.`);
+}
+for (const f of readdirSync(".github/workflows")) {
+  const t = readFileSync(`.github/workflows/${f}`, "utf8");
+  for (const m of t.matchAll(/uses:\s*(\S+)/g)) if (!/@[0-9a-f]{40}$/.test(m[1])) erreurs.push(`.github/workflows/${f} : action non épinglée par SHA (${m[1]}).`);
+  if (/pull_request_target/.test(t)) erreurs.push(`.github/workflows/${f} : pull_request_target interdit.`);
 }
 
 if (sansCalcul) warn.push(`${sansCalcul} sortie(s) à l'affiche sans calcul du barème.`);

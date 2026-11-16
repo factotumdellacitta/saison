@@ -1,0 +1,11 @@
+# Mises à jour de sécurité : actions épinglées par SHA et dépendance du job agenda.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+  - package-ecosystem: npm
+    directory: /tools/calendrier
+    schedule:
+      interval: weekly

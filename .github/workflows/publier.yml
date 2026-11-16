@@ -1,6 +1,10 @@
 # Publie le site sur GitHub Pages.
-# À chaque passage : génère les fichiers dérivés (index, soirs réservés, flux agenda et ventes) avec le secret SAISON_MDP,
-# et les commite s'ils ont changé. Toutes les heures, met aussi à jour les soirs pris depuis le calendrier Apple.
+# Trois jobs, chacun avec le strict nécessaire :
+#  1. calendrier : lit l'agenda Apple (seul job qui installe un paquet npm ; dépôt en lecture seule, aucun autre secret) ;
+#  2. construire : génère les fichiers dérivés avec le secret SAISON_MDP (aucun paquet npm), commite ce qui a changé,
+#     contrôle les données et prépare le site ;
+#  3. deployer : envoie le site sur Pages.
+# Le dépôt et les journaux de cette action sont publics : rien de privé n'y est écrit (ni adresse, ni date, ni nom de flux).
 # Pas de boucle : un push fait avec le GITHUB_TOKEN ne relance aucun workflow.
 name: Publier le site
 on:
@@ -9,68 +13,97 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "17 * * * *"
-permissions:
-  contents: write
-  pages: write
-  id-token: write
+permissions: {}
 concurrency:
   group: pages
   cancel-in-progress: false
 jobs:
-  publier:
+  calendrier:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deploiement.outputs.page_url }}
+    permissions:
+      contents: read
+    outputs:
+      dates: ${{ steps.agenda.outputs.dates }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           ref: main
-      - uses: actions/setup-node@v4
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 20
       - name: Soirs pris depuis Apple Calendar
-        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        id: agenda
+        working-directory: tools/calendrier
         env:
           ICLOUD_ICS_URL: ${{ secrets.ICLOUD_ICS_URL }}
         run: |
-          npm install --no-save node-ical@0.27.3
-          node tools/sync-dispo.mjs
-      - name: Fichiers générés (index, soirs réservés, flux)
+          npm ci --ignore-scripts --no-audit --no-fund
+          node sync.mjs
+  construire:
+    needs: calendrier
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      publier: ${{ steps.bilan.outputs.publier }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          ref: main
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 20
+      - name: Fichiers générés (index, soirs pris, flux)
         env:
           SAISON_MDP: ${{ secrets.SAISON_MDP }}
+          CAL_DATES: ${{ needs.calendrier.outputs.dates }}
         run: node tools/build.mjs
       - name: Enregistrer les changements
+        id: bilan
+        env:
+          EVENEMENT: ${{ github.event_name }}
         run: |
           git add -A data
           if git diff --cached --quiet; then
-            if [ "${{ github.event_name }}" = "schedule" ]; then echo "RIEN_A_PUBLIER=1" >> "$GITHUB_ENV"; fi
+            if [ "$EVENEMENT" = "schedule" ]; then echo "publier=non" >> "$GITHUB_OUTPUT"; else echo "publier=oui" >> "$GITHUB_OUTPUT"; fi
           else
             git config user.name "saison-bot"
             git config user.email "saison-bot@users.noreply.github.com"
             git commit -m "Mise à jour automatique : soirs pris et fichiers générés"
             git pull --rebase origin main
             git push origin HEAD:main
+            echo "publier=oui" >> "$GITHUB_OUTPUT"
           fi
       - name: Contrôle des données
-        if: env.RIEN_A_PUBLIER != '1'
+        if: steps.bilan.outputs.publier == 'oui'
         run: node tools/check.mjs
       - name: Préparer le site (index.html, sw.js, assets, data uniquement)
-        if: env.RIEN_A_PUBLIER != '1'
+        if: steps.bilan.outputs.publier == 'oui'
         run: |
           mkdir -p _site
           cp index.html sw.js _site/
-          if [ -d assets ]; then cp -r assets _site/assets; fi
+          cp -r assets _site/assets
           cp -r data _site/data
           rm -f _site/data/_prive.json
           touch _site/.nojekyll
-          find _site -type f | sort
-      - uses: actions/configure-pages@v5
-        if: env.RIEN_A_PUBLIER != '1'
-      - uses: actions/upload-pages-artifact@v3
-        if: env.RIEN_A_PUBLIER != '1'
+          echo "Site préparé : $(find _site -type f | wc -l) fichiers."
+      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
+        if: steps.bilan.outputs.publier == 'oui'
         with:
           path: _site
+  deployer:
+    needs: construire
+    if: ${{ !cancelled() && needs.construire.outputs.publier == 'oui' }}
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploiement.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
       - id: deploiement
-        if: env.RIEN_A_PUBLIER != '1'
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5

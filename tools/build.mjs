@@ -2,11 +2,13 @@
 // À lancer après toute modification. Il :
 //  1. génère data/index-artistes.json, data/index-lieux.json et data/deja-vu.json (toujours, même sans mot de passe) ;
 //  2. lit la zone privée (déchiffrée avec SAISON_MDP, ou _prive.json si elle est ouverte) ;
-//  3. met à jour data/dispo.json (champ "reservations" : dates seules, sans motif) et data/envies.json (identifiants seuls) ;
-//  4. régénère data/agenda-<jeton>.ics (réservations) et data/ventes-<jeton>.ics (ouvertures de ventes).
+//  3. met à jour data/dispo.json ({maj, horizon, pris} : une seule liste de soirs pris, sans raison, sur six mois glissants)
+//     et data/envies.json (identifiants seuls) ; l'agenda Apple (dates seules) est gardé chiffré dans data/calendrier.enc ;
+//  4. régénère data/agenda-<jeton>.ics (réservations) et data/ventes-<jeton>.ics (ouvertures de ventes) :
+//     fichiers ignorés par git (le dépôt est public), copiés dans le site seulement au moment de la publication.
 // Sortie déterministe : rien ne change si les données n'ont pas changé (pas de commit inutile dans l'action).
 import { readFileSync, writeFileSync, existsSync, readdirSync, rmSync } from "node:fs";
-import { dechiffrer } from "./crypto.mjs";
+import { chiffrer, dechiffrer, ITER } from "./crypto.mjs";
 
 const lire = (f) => JSON.parse(readFileSync(f, "utf8"));
 const affiche = lire("data/affiche.json");
@@ -70,14 +72,21 @@ ecrire("data/deja-vu.json", json(Object.fromEntries(Object.keys(dejaVu).sort().m
 console.log(`Déjà vu : ${Object.keys(dejaVu).length} sorties à l'affiche.`);
 
 // ---------- 2. Zone privée ----------
+const MDP = process.env.SAISON_MDP;
+const ISO = /^\d{4}-\d{2}-\d{2}$/;
 async function lirePrive() {
-  if (existsSync("_prive.json")) return lire("_prive.json");
-  if (!process.env.SAISON_MDP) {
+  if (existsSync("_prive.json")) return { prive: lire("_prive.json"), ouvert: true };
+  if (!MDP) {
     console.warn("SAISON_MDP absent : zone privée non lue, dispo.json et flux inchangés.");
     return null;
   }
-  return dechiffrer(lire("data/prive.enc"), process.env.SAISON_MDP);
+  const paquet = lire("data/prive.enc");
+  return { prive: await dechiffrer(paquet, MDP), paquet };
 }
+// Aujourd'hui à Paris (l'action tourne en UTC), et la même date n jours plus tard.
+const aujourdhui = () => new Intl.DateTimeFormat("fr-CA", { timeZone: "Europe/Paris", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+const plusJours = (d, n) => new Date(Date.parse(d + "T12:00:00Z") + n * 86400000).toISOString().slice(0, 10);
+const HORIZON_JOURS = 183;
 
 // ---------- outils iCalendar ----------
 const pad = (n) => String(n).padStart(2, "0");
@@ -139,20 +148,43 @@ const credits = (s) => (s.artistes || []).map((a) => a.nom).filter((n, i, t) => 
 const nomLieu = (s) => (s.lieuId && lieux[s.lieuId] ? lieux[s.lieuId].nom : "");
 
 async function main() {
-  const prive = await lirePrive();
-  if (!prive) return;
+  const lu = await lirePrive();
+  if (!lu) return;
+  const { prive, ouvert } = lu;
+  let paquet = lu.paquet;
   if (!prive.icsToken) throw new Error("icsToken absent de la zone privée.");
   const res = prive.reservations || {};
   const envies = prive.envies || {};
-
-  // 3. Soirs réservés (publics, sans motif)
   const dispo = lire("data/dispo.json");
-  const dates = [...new Set(Object.values(res).map((r) => r.date).filter(Boolean))].sort();
-  if (JSON.stringify(dates) !== JSON.stringify(dispo.reservations)) {
-    dispo.reservations = dates;
-    dispo.maj = new Date().toISOString().slice(0, 10);
-    ecrire("data/dispo.json", JSON.stringify(dispo, null, 1));
+
+  // 3. Soirs pris. Sources privées : réservations, soirs déclarés (prive.soirs) et agenda Apple (calendrier.enc).
+  // Public : une seule liste fusionnée, sans raison, d'aujourd'hui à six mois.
+  // Migration (une fois, avec le mot de passe) : les anciens soirs déclarés de dispo.json passent dans la zone privée,
+  // et un paquet à l'ancien nombre d'itérations est rechiffré avec un nouveau sel.
+  let rechiffrer = false;
+  if (!Array.isArray(prive.soirs)) { prive.soirs = (dispo.manuel || []).filter((d) => ISO.test(d)).sort(); rechiffrer = true; }
+  if (paquet && paquet.iter !== ITER) rechiffrer = true;
+  if (rechiffrer && !ouvert && MDP) {
+    paquet = await chiffrer(prive, MDP, paquet.iter === ITER ? paquet.salt : undefined);
+    writeFileSync("data/prive.enc", JSON.stringify(paquet));
+    console.log("Zone privée rechiffrée (migration).");
   }
+  // Agenda Apple : dates fraîches données par l'action (CAL_DATES, liste JSON), sinon dernière version chiffrée connue.
+  let cal = null, calPaquet = null;
+  if (existsSync("data/calendrier.enc") && MDP) { try { calPaquet = lire("data/calendrier.enc"); cal = (await dechiffrer(calPaquet, MDP)).dates; } catch (_) { cal = null; calPaquet = null; } }
+  const ancien = cal;
+  if (process.env.CAL_DATES) {
+    let d = null; try { d = JSON.parse(process.env.CAL_DATES); } catch (_) {}
+    if (Array.isArray(d) && d.every((x) => typeof x === "string" && ISO.test(x))) cal = [...new Set(d)].sort();
+    else console.warn("Agenda : liste de dates illisible, dernière version connue gardée.");
+  }
+  if (!cal) cal = (dispo.calendrier || []).filter((d) => ISO.test(d)).sort();
+  if (paquet && MDP && (JSON.stringify(cal) !== JSON.stringify(ancien) || !calPaquet || calPaquet.salt !== paquet.salt))
+    writeFileSync("data/calendrier.enc", JSON.stringify(await chiffrer({ dates: cal }, MDP, paquet.salt)));
+  const jour = aujourdhui(), horizon = plusJours(jour, HORIZON_JOURS);
+  const pris = [...new Set([...Object.values(res).map((r) => r.date), ...prive.soirs, ...cal])].filter((d) => d && ISO.test(d) && d >= jour && d <= horizon).sort();
+  if (JSON.stringify(pris) !== JSON.stringify(dispo.pris) || dispo.horizon !== horizon || "manuel" in dispo || "calendrier" in dispo || "reservations" in dispo)
+    ecrire("data/dispo.json", json({ maj: jour, horizon, pris }));
   // 3b. Envies publiques : identifiants des sorties à l'affiche seulement (ni priorité, ni note, ni date d'ajout)
   const aVoir = new Set(affiche.sorties.filter((s) => s.statut === "a-voir").map((s) => s.id));
   const pub = json({ ids: Object.keys(envies).filter((id) => aVoir.has(id)).sort() });
@@ -222,6 +254,7 @@ async function main() {
   }
   ve.push("END:VCALENDAR");
   ecrire(`data/ventes-${tok}.ics`, fichierIcs(ve));
-  console.log(`dispo.json, agenda (${nRes} réservations datées) et ventes (${nVe} ouvertures) à jour.`);
+  void nRes; void nVe;
+  console.log("Soirs pris et flux à jour.");
 }
 main().catch((e) => { console.error("Erreur :", e.message); process.exit(1); });

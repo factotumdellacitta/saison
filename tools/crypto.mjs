@@ -4,7 +4,8 @@
 // ainsi sa clé dérivée valable même quand Claude Code rechiffre la zone privée.
 import { webcrypto as crypto } from "node:crypto";
 
-const ITER = 310000;
+// 600 000 itérations (recommandation OWASP pour PBKDF2-SHA256). Les paquets plus anciens restent lisibles (leur « iter » est lu).
+export const ITER = 600000;
 const enc = new TextEncoder();
 const dec = new TextDecoder();
 const b64 = (buf) => Buffer.from(buf).toString("base64");
