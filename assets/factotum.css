@@ -785,3 +785,4 @@ body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
 /* Formulaires : barre d'enregistrement toujours visible ; rien n'est couvert par le bandeau de publication */
 #dlg form>.acts{position:sticky;bottom:0;z-index:2;margin:var(--e4) calc(-1 * var(--marge)) 0;padding:var(--e3) var(--marge) calc(var(--e3) + var(--sab));background:var(--fond);border-top:1px solid var(--filet)}
 body:has(#dlg) .pub,body:has(#dlg) .toast{bottom:auto;top:0}
+.aussi a{scroll-margin:calc(var(--collant) + var(--e4)) 0 calc(var(--nav) + var(--e6))}
