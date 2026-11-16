@@ -58,7 +58,7 @@ try {
 if (existsSync("data/spectacles.json")) erreurs.push("data/spectacles.json ne doit plus exister (remplacé par affiche.json et journal.json).");
 
 // ---------- Fichiers publics : aucune clé privée ----------
-const PUBLICS_ATTENDUS = new Set(["affiche.json", "journal.json", "lieux.json", "liens.json", "dispo.json", "index-artistes.json", "index-lieux.json", "envies.json", "deja-vu.json", "prive.enc", "calendrier.enc"]);
+const PUBLICS_ATTENDUS = new Set(["affiche.json", "journal.json", "lieux.json", "liens.json", "dispo.json", "index-artistes.json", "index-lieux.json", "envies.json", "deja-vu.json", "archive.json", "radar.json", "radar.atom", "prive.enc", "calendrier.enc"]);
 function fouille(o, chemin, f) {
   if (Array.isArray(o)) o.forEach((v, i) => fouille(v, `${chemin}[${i}]`, f));
   else if (o && typeof o === "object")
@@ -73,7 +73,7 @@ for (const f of readdirSync("data")) {
     continue;
   }
   if (!PUBLICS_ATTENDUS.has(f)) { erreurs.push(`data/${f} : fichier inattendu dans le dossier publié.`); continue; }
-  if (f.endsWith(".enc")) continue;
+  if (f.endsWith(".enc") || f.endsWith(".atom")) continue;
   const o = lire(`data/${f}`);
   if (o) fouille(o, "", `data/${f}`);
 }
@@ -88,14 +88,14 @@ if (existsSync("data/envies.json")) {
 const SECRET = /\b(gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})/;
 const publies = ["index.html", "sw.js", ...["assets", "data", "expo"].flatMap((d) => existsSync(d) ? readdirSync(d).map((f) => `${d}/${f}`) : [])].filter((f) => statSync(f).isFile());
 for (const f of publies) {
-  if (!/\.(html|js|json|enc|ics|webmanifest|svg|txt|md)$/.test(f)) continue;
+  if (!/\.(html|js|json|enc|ics|atom|webmanifest|svg|txt|md)$/.test(f)) continue;
   if (SECRET.test(readFileSync(f, "utf8"))) erreurs.push(`${f} contient ce qui ressemble à un jeton GitHub : retire-le et révoque le jeton.`);
 }
 
 // ---------- Charte Factotum : typographie et feuille de style ----------
 // Fichiers publiés, sous-dossiers compris (assets/fonts…)
 const arbo = (d) => readdirSync(d).flatMap((f) => statSync(`${d}/${f}`).isDirectory() ? arbo(`${d}/${f}`) : [`${d}/${f}`]);
-const textes = ["index.html", "sw.js", ...["assets", "data", "expo"].flatMap((d) => existsSync(d) ? arbo(d) : [])].filter((f) => /\.(html|js|css|json|ics|webmanifest|svg|txt|md)$/.test(f));
+const textes = ["index.html", "sw.js", ...["assets", "data", "expo"].flatMap((d) => existsSync(d) ? arbo(d) : [])].filter((f) => /\.(html|js|css|json|ics|atom|webmanifest|svg|txt|md)$/.test(f));
 for (const f of textes) {
   const t = readFileSync(f, "utf8");
   t.split("\n").forEach((l, i) => {
@@ -139,8 +139,12 @@ let sansCalcul = 0;
 const verifierSortie = (s, fichier) => {
   const ou = `[${s.id}]`;
   if (!s.id || !ID.test(s.id)) erreurs.push(`${ou} id invalide (minuscules, chiffres, tirets).`);
-  if (ids.has(s.id)) erreurs.push(`${ou} id en double (${ids.get(s.id)} et ${fichier}).`);
-  ids.set(s.id, fichier);
+  // Archive : un id y reste réservé, mais une collision n'est qu'un avertissement (le mode admin du site ne lit pas l'archive).
+  if (ids.has(s.id)) (fichier === "archive" || ids.get(s.id) === "archive" ? warn : erreurs).push(`${ou} id en double (${ids.get(s.id)} et ${fichier}).`);
+  if (!(fichier === "archive" && ids.has(s.id))) ids.set(s.id, fichier);
+  if ("nouveau" in s && typeof s.nouveau !== "boolean") erreurs.push(`${ou} nouveau doit être true ou false.`);
+  if ("nouveau" in s && fichier !== "affiche") erreurs.push(`${ou} nouveau n'a de sens qu'à l'affiche.`);
+  if ("source" in s && s.source !== "" && !URL_RE.test(s.source)) erreurs.push(`${ou} source n'est pas une URL.`);
   if (!s.titre) erreurs.push(`${ou} titre manquant.`);
   if (!CATEGORIES.includes(s.categorie)) erreurs.push(`${ou} catégorie inconnue : ${s.categorie}.`);
   if ("genre" in s || "credits" in s || "lieu" in s) erreurs.push(`${ou} ancien champ (genre, credits ou lieu) : utiliser categorie, artistes, lieuId.`);
@@ -214,6 +218,52 @@ for (const s of journal?.sorties || []) {
   if (!(Array.isArray(s.vuLe) && s.vuLe.length && s.vuLe.every((d) => ISO.test(d)))) erreurs.push(`[${s.id}] vu sans date valide dans vuLe.`);
   if (!(s.noteLeonard == null || (Number.isInteger(s.noteLeonard) && s.noteLeonard >= 1 && s.noteLeonard <= 4))) erreurs.push(`[${s.id}] noteLeonard hors de 1–4.`);
 }
+// Archive : sorties terminées ni vues ni réservées, déplacées par la veille (jamais supprimées).
+const archive = existsSync("data/archive.json") ? lire("data/archive.json") : { sorties: [] };
+for (const s of archive?.sorties || []) {
+  verifierSortie(s, "archive");
+  if (s.statut !== "passe") erreurs.push(`[${s.id}] statut « ${s.statut} » interdit dans archive.json (passe).`);
+  if (s.leonardYVa) erreurs.push(`[${s.id}] une sortie réservée ne va pas à l'archive.`);
+}
+if (archive && archive.maj && !ISO.test(archive.maj)) erreurs.push("maj invalide dans archive.json.");
+
+// ---------- Rapports de veille (Radar) ----------
+// Publics : structure stricte, aucune clé inconnue (donc aucune donnée privée), sorties citées connues.
+const DOMAINES = ["complete", "spectacles", "concerts", "expo", "ventes"];
+const radar = existsSync("data/radar.json") ? lire("data/radar.json") : null;
+if (radar) {
+  const cles = (o, permis, ou) => { for (const k of Object.keys(o || {})) if (!permis.includes(k)) erreurs.push(`radar.json ${ou} : champ inconnu « ${k} ».`); };
+  cles(radar, ["maj", "rapports"], "racine");
+  if (!Array.isArray(radar.rapports)) erreurs.push("radar.json : rapports doit être une liste.");
+  else {
+    const vusR = new Set();
+    radar.rapports.forEach((r, i) => {
+      const ou = `[${r.id || i}]`;
+      cles(r, ["id", "date", "domaine", "titre", "chapo", "sections", "bilan"], ou);
+      if (!/^\d{4}-\d{2}-\d{2}(-\d+)?$/.test(r.id || "") || vusR.has(r.id)) erreurs.push(`radar.json ${ou} : id invalide ou en double (AAAA-MM-JJ, suffixe -2 pour un second rapport du jour).`);
+      vusR.add(r.id);
+      if (!ISO.test(r.date || "") || !String(r.id).startsWith(r.date)) erreurs.push(`radar.json ${ou} : date invalide ou différente de l'id.`);
+      if (i && radar.rapports[i - 1].id < r.id) erreurs.push(`radar.json ${ou} : rapports à ranger du plus récent au plus ancien.`);
+      if (!DOMAINES.includes(r.domaine)) erreurs.push(`radar.json ${ou} : domaine inconnu (${DOMAINES.join(", ")}).`);
+      if (!r.titre || typeof r.titre !== "string") erreurs.push(`radar.json ${ou} : titre manquant.`);
+      if ("chapo" in r && typeof r.chapo !== "string") erreurs.push(`radar.json ${ou} : chapo doit être un texte.`);
+      if ("bilan" in r) { cles(r.bilan, ["ajoutees", "archivees", "revisees", "ventes"], ou + " bilan"); for (const v of Object.values(r.bilan || {})) if (!Number.isInteger(v) || v < 0) erreurs.push(`radar.json ${ou} : bilan en nombres entiers.`); }
+      if (!Array.isArray(r.sections) || !r.sections.length) erreurs.push(`radar.json ${ou} : sections manquantes.`);
+      else for (const s of r.sections) {
+        cles(s, ["titre", "texte", "lignes"], ou + " section");
+        if (!s.titre) erreurs.push(`radar.json ${ou} : section sans titre.`);
+        if ("texte" in s && (!Array.isArray(s.texte) || s.texte.some((p) => typeof p !== "string"))) erreurs.push(`radar.json ${ou} : texte = liste de paragraphes.`);
+        for (const l of s.lignes || []) {
+          cles(l, ["id", "titre", "texte"], ou + " ligne");
+          if (!l.titre) erreurs.push(`radar.json ${ou} : ligne sans titre.`);
+          if (l.id && !ids.has(l.id)) warn.push(`radar.json ${ou} : sortie inconnue ${l.id}.`);
+        }
+      }
+    });
+    if (radar.rapports.length && !existsSync("data/radar.atom")) erreurs.push("data/radar.atom manquant : relance build.");
+  }
+}
+
 for (const f of [affiche, journal]) if (f && f.maj && !ISO.test(f.maj)) erreurs.push("maj invalide dans affiche.json ou journal.json.");
 
 // ---------- Liens ----------

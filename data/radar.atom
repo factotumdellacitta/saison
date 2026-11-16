@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="fr">
+<title>Factotum – Radar</title>
+<subtitle>Rapports de veille : spectacles, concerts, expositions à Paris</subtitle>
+<id>https://factotumdellacitta.github.io/saison/data/radar.atom</id>
+<link rel="self" type="application/atom+xml" href="https://factotumdellacitta.github.io/saison/data/radar.atom"/>
+<link rel="alternate" type="text/html" href="https://factotumdellacitta.github.io/saison/#rapports"/>
+<updated>2026-11-16T12:00:00Z</updated>
+<author><name>Factotum</name></author>
+</feed>

@@ -137,6 +137,9 @@ let ADMIN = null, JAVEC = ""; // ADMIN : module admin (assets/admin.js) ; JAVEC 
 const BYID = new Map();
 let jP = null, lP = null;
 const loadJournal = () => jP || (jP = getJSON(RACINE + "data/journal.json").then((j) => { JOURNAL = j.sorties; JMAJ = j.maj; JOURNAL.forEach((e) => BYID.set(e.id, e)); ART = null; return JOURNAL; }).catch((e) => { jP = null; throw e; }));
+// Rapports de veille (data/radar.json) : chroniques datées publiées dans le Radar, la plus récente en tête.
+let RAPPORTS = null, rpP = null;
+const loadRadar = () => rpP || (rpP = getJSON(RACINE + "data/radar.json").then((r) => (RAPPORTS = Array.isArray(r.rapports) ? r.rapports : [])).catch(() => { rpP = null; return (RAPPORTS = RAPPORTS || []); }));
 const loadLiens = () => lP || (lP = getJSON(RACINE + "data/liens.json").then((l) => (LIENS = l)).catch((e) => { lP = null; throw e; }));
 
 // Remplace les données en mémoire (démarrage, ou données fraîches lues par l’admin via l’API).
@@ -243,7 +246,7 @@ const X_FIN = 14, X_NEUF = 14; // « Derniers jours » : fermeture sous 14 jours
 const xp = (e) => e.expo || {};
 // « bientot » (pas encore ouverte), « derniers » (ferme sous 14 jours) ou « cours ».
 const expoEtat = (e) => { const p = span(e); if (!p || p[0] > TODAY) return "bientot"; return dansJ(p[1]) <= X_FIN ? "derniers" : "cours"; };
-const expoNeuve = (e) => { const d = D(xp(e).ajouteLe); return !!d && dansJ(d) <= 0 && dansJ(d) >= -X_NEUF; };
+const expoNeuve = (e) => { if (e.nouveau === true) return true; const d = D(xp(e).ajouteLe); return !!d && dansJ(d) <= 0 && dansJ(d) >= -X_NEUF; };
 // Arrondissement de Paris, lu dans le code postal de l’adresse du lieu (75116 = 16e) ; 0 hors Paris ou adresse inconnue.
 const arrdt = (e) => { const m = /\b75(\d{3})\b/.exec(lieu(e).adresse || ""); return m ? (+m[1] > 100 ? +m[1] - 100 : +m[1]) : 0; };
 const arrdtTxt = (n) => (n ? n + (n === 1 ? "er" : "e") : "");
@@ -281,6 +284,7 @@ function badges(e) {
     if (e.leonardYVa) b.push(`<span class="b yva">${OWNER} y va</span>`);
     return b.length ? `<span class="bds">${b.join("")}</span>` : "";
   }
+  if (e.nouveau === true && e.statut !== "vu") b.push(`<span class="b">Nouveau</span>`); // ajoutée par la dernière veille (CLAUDE.md, « Veille »)
   if (e.publicJeune) b.push(`<span class="b">Public jeune</span>`);
   if ((e.offres || []).length) b.push(`<span class="b">Offre jeune</span>`);
   if (ETATS[e.etat]) b.push(etatB(e.etat));
@@ -759,6 +763,7 @@ function renderRadar() {
   $("#main").innerHTML = `<section id="radar"><div class="ph"><h1>Radar</h1></div>
   <nav class="chips wrap-ok r-res" aria-label="Résumé du radar">${go("r-semaine", r.semaine.length, r.semaine.length > 1 ? "ventes cette semaine" : "vente cette semaine")}${go("r-reserver", r.aReserver.length, "à réserver")}${go("r-chances", r.chances.length, r.chances.length > 1 ? "dernières chances" : "dernière chance")}${go("r-liens", "", "Billetteries")}</nav>
   ${nC ? `<div class="msg">${plural(nC, "billet")} à compléter <a href="#admin?v=rapide">Traiter</a></div>` : ""}
+  ${rapportEnTete()}
   <div class="r-g"><div class="r-col">
     <section class="r-b r-reserver" id="r-reserver"><h2 class="mh">À réserver <small>notées 4</small></h2>
       ${r.aReserver.length ? `<div class="list">${r.aReserver.map((x) => rowR(x.e, "r", stubReserver(x), infoReserver(x))).join("")}</div>` : `<p class="empty">Tous les incontournables sont réservés.</p>`}</section>
@@ -805,6 +810,36 @@ function radarLateral() {
 function coeurLigne() {
   const E = enviesIds(), n = LIVE.filter((e) => E.has(e.id)).length;
   return `<a class="r-ligne c-ligne" href="#coeur">${COEUR}<b>Coups de cœur de ${OWNER}</b> <span>${n ? plural(n, "sortie") : "aucun pour le moment"}</span><span class="cta" aria-hidden="true">Voir</span></a>`;
+}
+
+/* ---------- Rapports de veille (#rapports, #rapport-<id>, en tête du Radar) ---------- */
+// Chaque veille publie un rapport daté dans data/radar.json : { id, date, domaine, titre, chapo, sections:[{ titre, texte:[…], lignes:[{ id, titre, texte }] }], bilan }.
+// Public : aucune donnée privée. Flux Atom généré par build.mjs (data/radar.atom).
+const DOMAINES = { complete: "Veille complète", spectacles: "Spectacles", concerts: "Concerts", expo: "Expositions", ventes: "Ventes" };
+const rapportMeta = (r) => [cap(fmtY(D(r.date), true)), DOMAINES[r.domaine] || "", r.bilan && r.bilan.ajoutees ? plural(r.bilan.ajoutees, "fiche ajoutée", "fiches ajoutées") : ""].filter(Boolean).map(esc).join(" · ");
+const rapportLiens = () => `<div class="acts"><a class="btn" href="#rapports">Tous les rapports</a><a class="btn" href="${RACINE}data/radar.atom" type="application/atom+xml">Flux Atom</a></div>`;
+function rapportEnTete() {
+  const r = (RAPPORTS || [])[0]; if (!r) return "";
+  return `<section class="r-b rp" id="r-rapport"><h2 class="mh">Dernière veille <small>${esc(fmt(D(r.date)))}</small></h2>
+  <p class="rp-chapo"><a href="#rapport-${esc(r.id)}">${esc(r.titre)}</a></p>${r.chapo ? `<p>${esc(r.chapo)}</p>` : ""}
+  <div class="acts"><a class="btn pri" href="#rapport-${esc(r.id)}">Lire le rapport</a><a class="btn" href="#rapports">Tous les rapports</a></div></section>`;
+}
+function rapportHTML(r) {
+  const ligne = (l) => { const c = `<span class="lt"><b>${esc(l.titre || "")}</b>${l.texte ? `<small>${esc(l.texte)}</small>` : ""}</span>`; return `<li>${l.id && BYID.has(l.id) ? `<a href="#sortie-${esc(l.id)}">${c}</a>` : `<div class="rp-l">${c}</div>`}</li>`; };
+  return (r.sections || []).map((s) => `<section><h2 class="mh">${esc(s.titre || "")}</h2>${(s.texte || []).map((p) => `<p>${esc(p)}</p>`).join("")}${(s.lignes || []).length ? `<ul class="lk">${s.lignes.map(ligne).join("")}</ul>` : ""}</section>`).join("");
+}
+function renderRapport(id) {
+  const r = (RAPPORTS || []).find((x) => x.id === id);
+  if (!r) { $("#main").innerHTML = `<div class="ph"><h1>Rapport introuvable</h1></div><p class="empty">Ce rapport n’existe pas ou n’est pas disponible hors connexion.</p>${rapportLiens()}`; return; }
+  document.title = TITRE_VUE = r.titre + " – " + NOM;
+  $("#main").innerHTML = `<article class="rp"><div class="ph"><h1>${esc(r.titre)}</h1><p>${rapportMeta(r)}</p></div>
+  ${r.chapo ? `<p class="rp-chapo">${esc(r.chapo)}</p>` : ""}${rapportHTML(r)}${rapportLiens()}</article>`;
+}
+function renderRapports() {
+  const L = RAPPORTS || [];
+  $("#main").innerHTML = `<div class="ph"><h1>Rapports de veille</h1></div>
+  ${L.length ? `<ul class="lk">${L.map((r) => `<li><a href="#rapport-${esc(r.id)}"><span class="lt"><b>${esc(r.titre)}</b><small>${rapportMeta(r)}</small></span></a></li>`).join("")}</ul>` : `<p class="empty">Aucun rapport pour l’instant.</p>`}
+  <div class="acts"><a class="btn" href="#radar">Radar</a><a class="btn" href="${RACINE}data/radar.atom" type="application/atom+xml">Flux Atom</a></div>`;
 }
 
 /* ---------- Ouvertures de vente : toutes les ouvertures à venir (#ventes, depuis le Radar) ---------- */
@@ -862,7 +897,7 @@ function renderPlan() {
   ${sec("À propos", [`<li><a href="../"><span class="lt"><b>Factotum</b><small>Les spectacles</small></span></a></li>`, it("charte", "Charte graphique", "Nom, symbole, couleurs, typographie, icônes"), ...(PRIVE ? [it("admin", "Admin", "")] : [])])}`; return; }
   $("#main").innerHTML = `<div class="ph"><h1>Plan du site</h1></div>
   ${sec("Saison", [it("affiche", "À l’affiche", "Liste et calendrier, filtres"), it("coeur", `Coups de cœur de ${esc(OWNER)}`, ""),
-    it("radar", "Radar", "Cette semaine, à réserver, dernières chances"), it("ventes", "Ouvertures de vente", "Toutes les ouvertures à venir"), it("liens", "Billetteries", "Cartes jeunes, calendriers de vente")])}
+    it("radar", "Radar", "Cette semaine, à réserver, dernières chances"), it("rapports", "Rapports de veille", "Chroniques datées, flux Atom"), it("ventes", "Ouvertures de vente", "Toutes les ouvertures à venir"), it("liens", "Billetteries", "Cartes jeunes, calendriers de vente")])}
   ${sec("Archive", [it("journal", "Journal", "Sorties vues, par saison"), it("artistes", "Artistes", ""), it("lieux", "Lieux", "")])}
   ${sec("À propos", [`<li><a href="expo/"><span class="lt"><b>Factotum Expo</b><small>Les expositions</small></span></a></li>`, it("charte", "Charte graphique", "Nom, symbole, couleurs, typographie, icônes"), ...(PRIVE ? [it("admin", "Admin", "")] : [])])}`;
 }
@@ -1065,7 +1100,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.42"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.43"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1076,7 +1111,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.42"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.43"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1085,7 +1120,7 @@ async function renderExpo(vue, q) {
 }
 
 /* ---------- Routeur ---------- */
-const TABS = EXPO ? { "a-voir": "a-voir", bientot: "bientot", coeur: "coeur", journal: "journal", artistes: "artistes", lieux: "artistes", artiste: "artistes", lieu: "artistes", plan: null, admin: "admin" } : { radar: "radar", affiche: "affiche", coeur: "coeur", journal: "journal", artistes: "artistes", lieux: "artistes", artiste: "artistes", lieu: "artistes", liens: "radar", ventes: "radar", plan: null, admin: "admin" };
+const TABS = EXPO ? { "a-voir": "a-voir", bientot: "bientot", coeur: "coeur", journal: "journal", artistes: "artistes", lieux: "artistes", artiste: "artistes", lieu: "artistes", plan: null, admin: "admin" } : { radar: "radar", affiche: "affiche", coeur: "coeur", journal: "journal", artistes: "artistes", lieux: "artistes", artiste: "artistes", lieu: "artistes", liens: "radar", ventes: "radar", rapports: "radar", rapport: "radar", plan: null, admin: "admin" };
 let BASE = null, RENDERED = null;
 function setTab(t) {
   $$(".tab").forEach((b, i) => { const on = b.dataset.tab === t; b.setAttribute("aria-selected", String(on)); b.tabIndex = on || (!t && i === 0) ? 0 : -1; });
@@ -1094,11 +1129,11 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.42"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.43"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
-const TITRES = { "a-voir": "", bientot: "Bientôt", radar: "Radar", ventes: "Ouvertures de vente", plan: "Plan du site", affiche: "", coeur: "Coups de cœur", journal: "Journal", artistes: "Artistes et lieux", lieux: "Artistes et lieux", admin: "Admin" };
+const TITRES = { "a-voir": "", bientot: "Bientôt", radar: "Radar", ventes: "Ouvertures de vente", rapports: "Rapports de veille", rapport: "Rapport de veille", plan: "Plan du site", affiche: "", coeur: "Coups de cœur", journal: "Journal", artistes: "Artistes et lieux", lieux: "Artistes et lieux", admin: "Admin" };
 let TITRE_VUE = NOM;
 async function renderView(h) {
   const [path, q = ""] = h.split("?");
@@ -1109,7 +1144,7 @@ async function renderView(h) {
     document.title = TITRE_VUE = "Charte – " + NOM; RENDERED = h; window.scrollTo(0, 0); return;
   }
   modeCharte(false);
-  const view = path.startsWith("artiste-") ? "artiste" : path.startsWith("lieu-") ? "lieu" : path === "liens" ? "radar" : Object.hasOwn(TABS, path) ? path : ACCUEIL;
+  const view = path.startsWith("artiste-") ? "artiste" : path.startsWith("lieu-") ? "lieu" : path.startsWith("rapport-") && !EXPO ? "rapport" : path === "liens" ? "radar" : Object.hasOwn(TABS, path) ? path : ACCUEIL;
   const samePath = RENDERED && RENDERED.split("?")[0] === path;
   const focusK = samePath && document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.k : null;
   setTab(TABS[view]);
@@ -1117,7 +1152,8 @@ async function renderView(h) {
   try {
     if (["journal", "artistes", "lieux", "artiste", "lieu"].includes(view) && !JOURNAL) { if (!samePath) $("#main").innerHTML = '<p class="load">Chargement…</p>'; await loadJournal(); }
   } catch (_) { $("#main").innerHTML = '<p class="empty">Impossible de charger ces données. Vérifie la connexion puis recharge.</p>'; return; }
-  if (view === "radar") { if (!LIENS) { if (!samePath) $("#main").innerHTML = '<p class="load">Chargement…</p>'; await loadLiens().catch(() => {}); } renderRadar(); }
+  if (view === "radar") { if (!LIENS) { if (!samePath) $("#main").innerHTML = '<p class="load">Chargement…</p>'; await loadLiens().catch(() => {}); } if (!RAPPORTS) await loadRadar(); renderRadar(); }
+  else if (view === "rapport" || view === "rapports") { if (!RAPPORTS) { if (!samePath) $("#main").innerHTML = '<p class="load">Chargement…</p>'; await loadRadar(); } if (view === "rapport" && path.length > 8) renderRapport(decodeURIComponent(path.slice(8))); else renderRapports(); }
   else if (view === "a-voir" || view === "bientot") await renderExpo(view, q);
   else if (view === "affiche") renderAffiche(q);
   else if (view === "journal") renderJournal(q);
@@ -1148,7 +1184,7 @@ async function route() {
     return openSheet(decodeURIComponent(h.slice(7)));
   }
   const chemin = h.split("?")[0];
-  if (!(Object.hasOwn(TABS, chemin) || chemin === "charte" || /^(artiste|lieu)-./.test(chemin))) { h = ACCUEIL; history.replaceState(null, "", "#" + ACCUEIL); }
+  if (!(Object.hasOwn(TABS, chemin) || chemin === "charte" || /^(artiste|lieu)-./.test(chemin) || (!EXPO && /^rapport-./.test(chemin)))) { h = ACCUEIL; history.replaceState(null, "", "#" + ACCUEIL); }
   const wasOpen = !$("#sheet").hidden;
   closeSheet();
   BASE = h;

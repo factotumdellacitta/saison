@@ -13,6 +13,8 @@ Léonard écrit en français, style direct. Réponds en français, brièvement, 
 | `data/journal.json` | `{maj, sorties:[…]}` : déjà vues (`statut` `vu`) | Oui |
 | `data/archive.json` | `{maj, sorties:[…]}` : sorties terminées ni vues ni réservées (`statut` `passe`), déplacées par la veille, jamais supprimées | Oui |
 | `data/lieux.json` | `{ lieuId: {nom, ville, zone, statut, site, billetterie, tarifJeune, adresse?} }` | Oui |
+| `data/radar.json` | `{maj, rapports:[…]}` : rapports de veille datés, le plus récent en tête (voir « Rapport Radar ») | Oui |
+| `data/radar.atom` | Flux Atom des rapports, généré par `build.mjs`, ne pas modifier à la main | Oui |
 | `data/liens.json` | `[{categorie, titre, url, note}]` | Oui |
 | `data/dispo.json` | `{maj, horizon, pris:[…]}` : une seule liste de soirs pris, sans raison, d'aujourd'hui à six mois (`horizon`), générée par `build.mjs`. Ne pas modifier à la main | Oui |
 | `data/calendrier.enc` | Soirs occupés de l'agenda Apple (dates seules), chiffrés avec la clé de la zone privée, écrits par l'action seule | Chiffré |
@@ -27,7 +29,7 @@ Léonard écrit en français, style direct. Réponds en français, brièvement, 
 
 Le site publié ne contient que `index.html`, `sw.js`, `assets/`, `data/` et `expo/`. Jamais `tools/`, `_setup/` ni fichier en clair.
 Après toute modification de `assets/app.js`, `assets/admin.js`, `assets/charte.js`, `assets/expo.js` ou `assets/factotum.css` : incrémente `?v=` partout où il apparaît (`index.html`, `expo/index.html`, `loadAdmin`, `loadCharte` et `loadExpo` d'`app.js`, `SHELL` de `sw.js` ; `check.mjs` bloque des versions différentes) ainsi que `V` dans `sw.js` (sinon les téléphones gardent l'ancienne version en cache). Icônes, image de partage et visuels GitHub : `node tools/icones.mjs` (à relancer seulement si le symbole change).
-Routes du site : `#radar` (accueil : ventes sous 7 jours, notées 4 à réserver, dernières chances sous 21 jours, ouvertures suivantes, billetteries ; colonne latérale de l'Affiche sur bureau), `#affiche?filtres`, `#journal`, `#artistes`, `#lieux`, `#artiste-<slug>`, `#lieu-<id>`, `#liens` (section Billetteries du Radar), `#ventes` (toutes les ouvertures de vente à venir, bouton dans la colonne de droite du Radar), `#plan` (plan du site, lien en pied de page), `#coeur` (envies, publique), `#sortie-<id>`, `#admin?v=res|ranger|envies|rapide|soirs|budget|acc|lieux|liens|abo`, `#journal?sa=<année de début>` (filtre de saison), `#charte` (charte graphique, liée seulement depuis le plan du site) (les anciens `#fiche-<id>` redirigent). Routes de Factotum Expo (`expo/`) : `#a-voir?filtres` (accueil), `#bientot`, `#journal`, `#artistes`, `#lieux`, `#artiste-<slug>`, `#lieu-<id>`, `#coeur`, `#sortie-<id>`, `#plan`, `#admin`, `#charte`.
+Routes du site : `#radar` (accueil : ventes sous 7 jours, notées 4 à réserver, dernières chances sous 21 jours, ouvertures suivantes, billetteries ; colonne latérale de l'Affiche sur bureau), `#affiche?filtres`, `#journal`, `#artistes`, `#lieux`, `#artiste-<slug>`, `#lieu-<id>`, `#liens` (section Billetteries du Radar), `#ventes` (toutes les ouvertures de vente à venir, bouton dans la colonne de droite du Radar), `#rapports` (archive des rapports de veille) et `#rapport-<id>` (lien permanent d’un rapport ; le dernier est annoncé en tête du Radar), `#plan` (plan du site, lien en pied de page), `#coeur` (envies, publique), `#sortie-<id>`, `#admin?v=res|ranger|envies|rapide|soirs|budget|acc|lieux|liens|abo`, `#journal?sa=<année de début>` (filtre de saison), `#charte` (charte graphique, liée seulement depuis le plan du site) (les anciens `#fiche-<id>` redirigent). Routes de Factotum Expo (`expo/`) : `#a-voir?filtres` (accueil), `#bientot`, `#journal`, `#artistes`, `#lieux`, `#artiste-<slug>`, `#lieu-<id>`, `#coeur`, `#sortie-<id>`, `#plan`, `#admin`, `#charte`.
 
 ## Factotum Expo (`expo/`)
 - **Architecture** : `expo/index.html` est une seconde coque qui charge les mêmes `assets/app.js` et `assets/factotum.css`. `app.js` lit `<html data-site>` : `EXPO`, `RACINE` (`"../"` sous `expo/`, préfixe de tous les chemins `data/`, `assets/`, `sw.js`), `NOM`, `ACCUEIL`, `duSite(e)`. Jamais de copie de code : ce qui est propre aux expos tient dans `assets/expo.js` (vues) et dans les fonctions `expo…` d'`app.js` (marques, infos pratiques, Radar).
@@ -111,6 +113,7 @@ Référence vivante : la page `#charte` (imprimable en PDF). Toute modification 
 - `datesTexte` (facultatif) : dates en clair quand `debut`/`fin` ne suffisent pas. `horaires` (facultatif) : heures, durée, matinées.
 - `relaches` (facultatif) : jours sans représentation entre `debut` et `fin`, jours de semaine (`"lun"` … `"dim"`) ou dates ISO (`["lun", "2027-01-17"]`). Le calendrier de la fiche les retire. À renseigner dès que le calendrier du lieu est connu (y compris dates isolées : liste des jours sans spectacle).
 - `offres[].vente` : `AAAA-MM-JJ` ou `AAAA-MM-JJTHH:MM` ; `venteApprox: true` si la date est estimée.
+- `source` (facultatif, obligatoire sur tout ajout de la veille) : adresse d’où vient l’information. `nouveau` (facultatif, affiche seulement) : `true` sur les fiches ajoutées par la dernière veille, marque « Nouveau » ; retiré à la veille suivante.
 - `etat` (facultatif, sur la sortie ou sur une offre) : état des ventes, `dernieres-places`, `attente` (liste d'attente) ou `complet`. Absent = rien à signaler (en vente si l'ouverture est passée). Tenu à jour par `/veille` et le mode admin ; n'influe jamais sur la note.
 - Journal : `statut: "vu"`, `vuLe` (liste de dates ISO), `noteLeonard` (1–4 ou null), `avis` (ses mots, jamais les tiens).
 - Une œuvre déjà vue n’est jamais écartée pour cette raison : une nouvelle production ou reprise va à l’affiche, notée normalement, avec la marque « Déjà vu » (automatique).
@@ -155,6 +158,7 @@ La veille se lance **à la main** (`/veille` et ses variantes), jamais par une r
 - **Artistes suivis** (`suivis` dans la zone privée, voir le schéma) : déduits du profil, puis tenus par `/suivre` et `/nesuisplus`. Ils sont vérifiés **en premier** à chaque veille (nouvelles dates à Paris et en petite couronne, annonces, mises en vente). Un artiste suivi n’a aucun passe-droit : sa sortie entre à l’affiche si elle obtient au moins 2, comme les autres. La liste est privée ; le rapport public parle d’« annonces à suivre », sans dire qui est suivi ni pourquoi.
 - **Profil de goûts** (`profil` dans la zone privée) : genres, artistes, lieux, fréquences et fourchette de prix tirés du journal depuis 2022, des envies et des réservations. Recalculé à la demande de Léonard ou quand le journal a nettement changé ; jamais en clair dans le dépôt, jamais cité dans un fichier public ni dans un message de commit.
 - **Sorties caduques** : rien n’est supprimé. Une sortie `a-voir` ou `ecarte` terminée depuis plus de 7 jours, ni vue ni réservée, **passe de `affiche.json` à `data/archive.json`** (même id, `statut: "passe"`, fiche intacte). Un id d’archive reste réservé : une reprise ultérieure prend un nouvel id.
+- **Hiérarchiser plutôt que recenser** : Factotum n’est pas un agenda exhaustif (la saison complète d’une maison se lit sur son site). La pertinence passe avant le nombre, dans tous les domaines, et se juge sur des **critères objectifs** : ceux du barème (critique, notoriété, hype, distinctions, statut de l’œuvre) et la rareté. À note égale, on garde ce qui est le plus rare ou le plus attendu, pas ce qui remplit.
 - **Seuil d’entrée** : note 2 au moins. Périmètre : Paris et petite couronne (festivals d’Île-de-France compris), jamais au-delà.
 
 ### Spectacles (théâtre, opéra, danse, comédie musicale, humour)
@@ -169,7 +173,7 @@ La veille se lance **à la main** (`/veille` et ses variantes), jamais par une r
 - **Billetteries et annonces** : Fnac Spectacles, Ticketmaster, Live Nation, Dice, Shotgun, See Tickets, Infoconcert, Gérard Drouot, AEG, Décibels, et les liens « Calendriers de vente » de `liens.json`.
 - **Presse** : Télérama, Les Inrocks, Libération, Le Monde, FIP, Nova, Tsugi, Mouv’, Booska-P, Pitchfork, Jazz Magazine, TSF Jazz, Diapason, Forum Opéra.
 - **Showcases** : `categorie: "Concert"`, `sousGenre: "Showcase"`. Seuls entrent ceux qui sont publics et annoncés par une source officielle (salle, marque, radio, billetterie) ; les soirées privées ou étudiantes restent l’affaire de `/ajoute`.
-- **Classique et lyrique au TCE et à la Philharmonie : quota strict.** Ne retenir que les orchestres et solistes de premier plan, les œuvres majeures ou rares, et ce qui recoupe le profil ; écarter récitals et concerts secondaires. **Au plus 4 nouvelles propositions par mois de représentation pour ces deux maisons réunies** ; toute exception est justifiée dans `pourquoi` et signalée dans le rapport. Les fiches déjà à l’affiche ne sont pas purgées : la première veille liste les mois au-dessus du quota et Léonard tranche.
+- **Classique et lyrique au TCE et à la Philharmonie** : la hiérarchie s’y applique avec le plus de rigueur, car Léonard y va plus rarement et trouve la saison complète sur le site de ces maisons. Ne retenir que les orchestres et solistes de premier plan et les œuvres majeures ou rares ; écarter récitals et concerts secondaires. Repère : **environ 4 nouvelles propositions par mois de représentation pour ces deux maisons réunies**, un ordre de grandeur et non un objectif (moins si le mois est faible, davantage si chaque ajout se justifie par le barème). Les fiches déjà à l’affiche ne sont pas purgées : la première veille liste les mois nettement au-dessus du repère et Léonard tranche.
 - **Cycle de vie d’un concert** (jamais écrit tel quel, toujours déduit) :
 
   | Étape | Dans les données |
@@ -188,7 +192,18 @@ La veille se lance **à la main** (`/veille` et ses variantes), jamais par une r
 - Le rapport signale les **ouvertures à venir** (30 jours) et les **derniers jours** (fermeture sous 14 jours).
 
 ### Rapport Radar
-Chaque veille publie un **rapport daté** : ce qu’il faut retenir, nouveautés par domaine, annonces à suivre, mises en vente à venir avec dates et heures, derniers jours d’expos, incontournables notés 4. Ton d’une chronique courte, factuelle, à la première personne du site (jamais celle de Léonard). **Public : aucune donnée privée** (ni prix payés, ni accompagnants, ni envies, ni réservations au-delà de `leonardYVa`, ni liste des suivis, ni profil).
+Chaque veille ajoute un **rapport daté** en tête de `data/radar.json` ; `build.mjs` en tire le flux `data/radar.atom`. Le site l’annonce en tête du Radar, le garde dans l’archive `#rapports` et lui donne un lien permanent `#rapport-<id>`.
+```json
+{"id":"2026-11-16","date":"2026-11-16","domaine":"complete","titre":"…","chapo":"Deux ou trois phrases : ce qu’il faut retenir.",
+ "sections":[{"titre":"Concerts","texte":["Un paragraphe de chronique."],"lignes":[{"id":"<id de sortie>","titre":"Titre affiché","texte":"Note 3 · vente générale le 20 nov. à 10 h"}]}],
+ "bilan":{"ajoutees":12,"archivees":3,"revisees":2,"ventes":5}}
+```
+- `id` = date du rapport (`-2` pour un second rapport le même jour) ; `domaine` ∈ `complete`, `spectacles`, `concerts`, `expo`, `ventes`. Un rapport publié ne se réécrit pas (sauf erreur factuelle) : son lien est permanent.
+- **Sections, dans cet ordre, seulement si elles ont du contenu** : À retenir ; Spectacles ; Concerts et showcases ; Expositions ; Annonces à suivre ; Mises en vente à venir (date et heure, prévente ou vente générale) ; Derniers jours ; Incontournables (notes 4). Une ligne par sortie citée : `id` (lien vers la fiche), `titre` écrit en clair (le rapport reste lisible quand la fiche part à l’archive), `texte` court. Une rumeur est une ligne sans `id`, source nommée.
+- `bilan` : nombres de fiches ajoutées, archivées, de notes révisées et de ventes datées ; aucun autre champ (`check.mjs` refuse toute clé inconnue dans un rapport).
+- **Ton** : chronique courte et factuelle, au nom du site (jamais « je » pour Léonard), sans superlatifs gratuits ; chaque affirmation tient à une fiche ou à une source. Texte brut seulement (pas de HTML ni de Markdown), typographie de la charte.
+- **Public : aucune donnée privée** : ni prix payés, ni accompagnants, ni envies, ni réservations au-delà de `leonardYVa`, ni liste des suivis, ni profil. Les « annonces à suivre » ne disent pas qui est suivi ni pourquoi.
+- Composant : titres de section à filet de 3 px, paragraphes en colonne de lecture (68 caractères), lignes de sorties comme le plan du site ; aucun visuel.
 
 ## Zone privée et mot de passe
 Le mot de passe est dans la variable d'environnement `SAISON_MDP` (et dans le secret GitHub du même nom). Ne l'affiche jamais, ne l'écris dans aucun fichier.
@@ -219,7 +234,7 @@ Tableau de bord : **payé par moi** = places de Moi en `moi` + places de tiers e
 `aCompleter` : billets collés dans la saisie rapide du site et non reconnus. `/veille` les traite (voir plus bas).
 
 ## Fichiers générés (`node tools/build.mjs`)
-- `index-artistes.json` (`{slug: {nom, sorties}}`) et `index-lieux.json` (`{lieuId: {sorties}}`), même sans mot de passe.
+- `index-artistes.json` (`{slug: {nom, sorties}}`), `index-lieux.json` (`{lieuId: {sorties}}`) et `radar.atom` (flux des rapports), même sans mot de passe. L’archive n’entre pas dans les index.
 - `dispo.json` (réservations, `soirs` et agenda Apple fondus en une liste `pris`), `envies.json`, flux agenda, flux ventes : avec `SAISON_MDP` (ou `_prive.json` ouvert). Les flux `.ics` restent hors du dépôt.
 - Flux ventes : un événement de 15 min à l'heure d'ouverture (10h si inconnue, « ~ » si approximative), alarme 15 min avant, pour toute offre dont la sortie est en envie, réservée, notée 4, ou de type avant-première, et pour toutes les offres des concerts et festivals de musiques actuelles notés (Concert ou Festival sans compositeur ni direction musicale crédités : c’est ainsi que `build.mjs` distingue le classique).
 - L'action « Publier le site » relance `build.mjs` à chaque passage (avec le secret) et commite les fichiers générés. Sortie déterministe : pas de commit si rien n'a changé.
@@ -244,7 +259,7 @@ Léonard gère aussi tout depuis le site (iPhone) : envies (cœur, note privée)
 
 ## Contrôles automatiques à faire de toi-même
 - Conflit : avant toute réservation, vérifie dans la zone privée les réservations, `soirs` et `blocages`, et `dispo.json` (`pris`, qui contient aussi l'agenda Apple) ; signale tout soir déjà pris.
-- Avant d'ajouter une sortie : vérifie qu'elle n'est pas déjà dans l'affiche ou le journal (même œuvre, même production).
+- Avant d'ajouter une sortie : vérifie qu'elle n'est pas déjà dans l'affiche, le journal ou l'archive (même œuvre, même production).
 - Une réservation passée (date < aujourd'hui) : demande à Léonard s'il l'a vue, puis propose `/vu`.
 - File `aCompleter` non vide (zone privée) : traite chaque billet (retrouve ou ajoute la sortie, enregistre la réservation, vérifie les conflits), retire-le de la file, et signale ce qui reste ambigu.
 
@@ -264,4 +279,4 @@ Léonard gère aussi tout depuis le site (iPhone) : envies (cœur, note privée)
 - Filtres et recherches restent dans l'adresse (Affiche, Journal, Index, Ventes) ; hors ligne, le site reste lisible et l'indique.
 
 ## Commandes
-`/ajoute`, `/reserve`, `/vu`, `/pris`, `/note`, `/veille`, `/envie`, `/modifie`, `/annule`, `/import` (voir `.claude/commands/`).
+`/ajoute`, `/reserve`, `/vu`, `/pris`, `/note`, `/veille` (aussi `/veille spectacles`, `concerts`, `expo`, `ventes`), `/suivre`, `/nesuisplus`, `/envie`, `/modifie`, `/annule`, `/import` (voir `.claude/commands/`).

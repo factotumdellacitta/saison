@@ -421,6 +421,14 @@ details.box[open]>summary::before{content:"–"}
 .lt b{font-weight:700;overflow-wrap:anywhere}
 .lt small{font-size:var(--t-meta);font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--encre-2);overflow-wrap:anywhere}
 @media (hover:hover){.lk a:hover b{color:var(--accent-texte)}}
+/* Rapports de veille (Radar) : chronique en colonne de lecture, lignes de sorties comme le plan du site */
+.rp p{max-width:68ch;margin:var(--e3) 0 0}
+.rp .ph p{max-width:none;margin:var(--e1) 0 0}
+.rp-chapo{font-size:var(--t-fiche);font-weight:700}
+.rp-chapo a{text-decoration:none}
+.rp .lk{margin-top:var(--e3)}
+.rp-l{display:flex;align-items:center;min-height:52px;padding:var(--e2) 0}
+@media (hover:hover){.rp-chapo a:hover{color:var(--accent-texte)}}
 .vl{list-style:none;margin:0;padding:0;border-top:1px solid var(--filet)}
 .vl li{border-bottom:1px solid var(--filet-leger)}
 .vl a{display:flex;gap:var(--e3);align-items:baseline;min-height:var(--cible);padding:var(--e2) 0;text-decoration:none}

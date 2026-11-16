@@ -49,6 +49,27 @@ ecrire("data/index-artistes.json", json(trie(idxArt)));
 ecrire("data/index-lieux.json", json(trie(idxLieux)));
 console.log(`Index : ${Object.keys(idxArt).length} artistes, ${Object.keys(idxLieux).length} lieux.`);
 
+// ---------- 1a. Flux Atom des rapports de veille ----------
+// data/radar.json (écrit par /veille) -> data/radar.atom. Public et déterministe : la date d'un rapport fait foi (midi UTC).
+if (existsSync("data/radar.json")) {
+  const SITE = "https://factotumdellacitta.github.io/saison/";
+  const x = (t) => String(t ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  const rapports = JSON.parse(readFileSync("data/radar.json", "utf8")).rapports || [];
+  const connues = new Set(toutes.map((s) => s.id));
+  const corps = (r) => (r.chapo ? `<p><strong>${x(r.chapo)}</strong></p>` : "") + (r.sections || []).map((s) => `<h2>${x(s.titre)}</h2>` + (s.texte || []).map((p) => `<p>${x(p)}</p>`).join("")
+    + ((s.lignes || []).length ? `<ul>${s.lignes.map((l) => `<li>${l.id && connues.has(l.id) ? `<a href="${SITE}#sortie-${x(l.id)}">${x(l.titre)}</a>` : x(l.titre)}${l.texte ? ` : ${x(l.texte)}` : ""}</li>`).join("")}</ul>` : "")).join("");
+  const quand = (r) => `${r.date}T12:00:00Z`;
+  const atom = [`<?xml version="1.0" encoding="utf-8"?>`, `<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="fr">`,
+    `<title>Factotum – Radar</title>`, `<subtitle>Rapports de veille : spectacles, concerts, expositions à Paris</subtitle>`,
+    `<id>${SITE}data/radar.atom</id>`, `<link rel="self" type="application/atom+xml" href="${SITE}data/radar.atom"/>`, `<link rel="alternate" type="text/html" href="${SITE}#rapports"/>`,
+    `<updated>${rapports.length ? quand(rapports[0]) : "2026-11-16T12:00:00Z"}</updated>`, `<author><name>Factotum</name></author>`,
+    ...rapports.map((r) => [`<entry>`, `<title>${x(r.titre)}</title>`, `<id>tag:factotumdellacitta.github.io,2026:saison/rapport-${x(r.id)}</id>`,
+      `<link rel="alternate" type="text/html" href="${SITE}#rapport-${x(r.id)}"/>`, `<updated>${quand(r)}</updated>`, `<published>${quand(r)}</published>`,
+      r.chapo ? `<summary>${x(r.chapo)}</summary>` : "", `<content type="html">${x(corps(r))}</content>`, `</entry>`].filter(Boolean).join("\n")),
+    `</feed>`, ""].join("\n");
+  ecrire("data/radar.atom", atom);
+}
+
 // ---------- 1b. Déjà vu ----------
 // Sorties à l'affiche dont l'œuvre figure au journal (même catégorie, même titre sans accents, ponctuation ni précision entre parenthèses) :
 // { idAffiche: [dates vues] }. Données publiques (le journal l'est déjà) ; la marque « Déjà vu » du site s'en sert.
