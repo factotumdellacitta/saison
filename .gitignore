@@ -1,2 +1,4 @@
 _prive.json
 node_modules/
+# Flux privés (prix, accompagnants) : générés à la publication, jamais versionnés (dépôt public)
+data/*.ics
