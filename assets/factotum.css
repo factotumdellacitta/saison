@@ -762,3 +762,6 @@ body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
 .btn.grand .pi,#dlg form>.acts .btn .pi,.confirme .acts .btn .pi,.r-lat .acts .btn .pi,.shtop .btn .pi{width:18px;height:18px}
 .shtop .btn.ico{padding:0}
 #dlg form>.acts,.confirme .acts{gap:var(--e2)}
+
+/* Colonne de droite : pas de défilement propre, elle suit la page (voir colLat() dans app.js). */
+@media (min-width:960px){.r-lat{max-height:none;overflow:visible}}

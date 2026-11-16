@@ -971,7 +971,7 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.39"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.40"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -989,7 +989,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.39"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.40"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
@@ -1024,6 +1024,7 @@ async function renderView(h) {
   else if (view === "admin") await renderAdmin(q);
   const hc = $("#hcoeur"); if (hc) { if (view === "coeur") hc.setAttribute("aria-current", "page"); else hc.removeAttribute("aria-current"); }
   RENDERED = h;
+  colLat();
   if (path === "liens") { const l = $("#r-liens"); if (l) l.scrollIntoView({ block: "start" }); }
   else if (!samePath) window.scrollTo(0, 0);
   else if (focusK) { const el = $(`[data-k="${focusK}"]`); if (el) el.focus({ preventScroll: true }); }
@@ -1047,6 +1048,18 @@ async function route() {
   await renderView(h);
 }
 window.addEventListener("hashchange", route);
+/* Colonne de droite (bureau) : collante, mais sans défilement propre. Plus haute que l'écran, elle défile avec la
+   page jusqu'à montrer sa fin, puis reste en place (top négatif). */
+function colLat() {
+  $$(".r-lat").forEach((a) => {
+    a.style.top = "";
+    const cs = getComputedStyle(a); if (cs.position !== "sticky") return;
+    const base = parseFloat(cs.top) || 0, h = a.offsetHeight;
+    if (base + h > innerHeight) a.style.top = Math.round(innerHeight - h - 16) + "px";
+  });
+}
+window.addEventListener("resize", colLat);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(colLat);
 
 /* ---------- Événements globaux ---------- */
 $$(".tab").forEach((b) => {
