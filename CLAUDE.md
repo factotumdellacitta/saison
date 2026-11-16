@@ -12,13 +12,14 @@ Léonard écrit en français, style direct. Réponds en français, brièvement, 
 | `data/journal.json` | `{maj, sorties:[…]}` : déjà vues (`statut` `vu`) | Oui |
 | `data/lieux.json` | `{ lieuId: {nom, ville, zone, statut, site, billetterie, tarifJeune, adresse?} }` | Oui |
 | `data/liens.json` | `[{categorie, titre, url, note}]` | Oui |
-| `data/dispo.json` | `reservations` (généré), `manuel` (soirs pris déclarés), `calendrier` (généré par l'action depuis Apple Calendar) : dates seules | Oui |
+| `data/dispo.json` | `{maj, horizon, pris:[…]}` : une seule liste de soirs pris, sans raison, d'aujourd'hui à six mois (`horizon`), générée par `build.mjs`. Ne pas modifier à la main | Oui |
+| `data/calendrier.enc` | Soirs occupés de l'agenda Apple (dates seules), chiffrés avec la clé de la zone privée, écrits par l'action seule | Chiffré |
 | `data/index-artistes.json`, `data/index-lieux.json` | Générés par `build.mjs`, ne pas modifier à la main | Oui |
 | `data/deja-vu.json` | `{idAffiche:[dates vues]}` : sorties à l’affiche dont l’œuvre est au journal (même catégorie, même titre) ou, pour un concert de musiques actuelles, dont l’artiste en tête (premier interprète) a déjà été vu en concert, festival ou showcase, généré par `build.mjs`, sert la marque « Déjà vu » | Oui |
 | `data/envies.json` | `{ids:[…]}` : identifiants des sorties à l’affiche en envie, généré par `build.mjs` depuis la zone privée (ni note, ni date) | Oui |
 | `data/prive.enc` | Zone privée chiffrée (schéma ci-dessous) | Chiffré |
-| `data/agenda-<icsToken>.ics` | Flux « Factotum – réservations », généré | Adresse non devinable |
-| `data/ventes-<icsToken>.ics` | Flux « Factotum – ouvertures de ventes », généré | Adresse non devinable |
+| `data/agenda-<icsToken>.ics` | Flux « Factotum – réservations », généré à la publication, **jamais versionné** (ignoré par git) | Adresse non devinable |
+| `data/ventes-<icsToken>.ics` | Flux « Factotum – ouvertures de ventes », généré à la publication, **jamais versionné** | Adresse non devinable |
 | `index.html`, `assets/factotum.css`, `assets/app.js`, `assets/admin.js`, `assets/charte.js`, `sw.js` | Le site (coque, feuille unique, logique publique, mode admin et page `#charte` chargés à la demande, service worker). Ne les modifie que si Léonard demande un changement d'interface. | |
 
 Le site publié ne contient que `index.html`, `sw.js`, `assets/` et `data/`. Jamais `tools/`, `_setup/` ni fichier en clair.
@@ -125,22 +126,24 @@ Schéma (version 2) :
 {"version":2,"icsToken":"…",
  "reservations":{"<id>":{"date":"2027-02-08","heure":"20:00","salle":"","siege":"","places":2,
    "billets":[{"spectateur":"Moi","prix":18,"paiement":"moi","tarif":"Abonné jeune moins de 28 ans","categoriePlace":"cat. 1"},
-              {"spectateur":"Alexandre","prix":18,"paiement":"spectateur"}],
-   "pleinPlace":40,"accompagnants":["Alexandre"],"billetterie":"","note":""}},
+              {"spectateur":"Camille","prix":18,"paiement":"spectateur"}],
+   "pleinPlace":40,"accompagnants":["Camille"],"billetterie":"","note":""}},
  "envies":{"<id>":{"ajouteLe":"2026-11-13","note":""}},
- "journalPrive":{"<id>":{"places":2,"billets":[{"spectateur":"Moi","prix":20,"paiement":"moi"},{"spectateur":"Papa","prix":75,"paiement":"offert","categoriePlace":"cat. 4"}],"accompagnants":["Papa"],"notes":"…"}},
+ "journalPrive":{"<id>":{"places":2,"billets":[{"spectateur":"Moi","prix":20,"paiement":"moi"},{"spectateur":"Dominique","prix":75,"paiement":"offert","categoriePlace":"cat. 4"}],"accompagnants":["Dominique"],"notes":"…"}},
+ "soirs":["2026-12-24","2026-12-31"],
  "blocages":[{"debut":"2027-04-10","fin":"2027-04-20","motif":"…"}],
  "aCompleter":[{"ajouteLe":"2026-11-14","texte":"…confirmation collée…","extrait":{"sortieId":null,"date":"2027-02-03","heure":"19:30","salle":"","places":1,"siege":"","prixPlace":12,"tarif":""}}]}
 ```
 Une envie est binaire (pas de priorité ni de rang) ; `note` = note privée. Une seule réservation par sortie (clé = id).
 **Places et prix** (réservations et journalPrive) : `billets`, **une ligne par spectateur** : `spectateur` (« Moi » ou un prénom déjà utilisé, voir l'onglet Accompagnants ; vide si inconnu), `prix` (de cette place, en euros, `null` si inconnu), `paiement`, `tarif` et `categoriePlace` facultatifs. `paiement` : `moi` (payée par Léonard ; défaut ; pour un tiers, place qu'il lui offre), `autrui` (place de Léonard offerte par quelqu'un : `prix` = valeur commerciale, hors dépenses), `spectateur` (le tiers paie sa part, ex. Alexandre), `gratuit` (gratuité, mécénat, cadeau reçu : prix 0). `places` = nombre de lignes ; `accompagnants` = spectateurs autres que « Moi » (toujours tenu à jour). `pleinPlace` (facultatif) = plein tarif par place, pour les économies. `notes` (journalPrive, facultatif) = notes privées de Léonard sur la sortie vue.
 Tableau de bord : **payé par moi** = places de Moi en `moi` + places de tiers en `moi` (ancien `offert` lu comme `moi`), détaillé en « pour moi » et « offerts aux autres » ; **valeur de mes places** = toutes les places de Moi ; **offerts à moi** = places de Moi en `autrui` ; **valeur de toutes les places** et **réglé par les accompagnants** (`spectateur`). Les anciens champs (`prix` total, `prixPlace`, `pour`) sont encore lus mais ne s’écrivent plus.
+`soirs` : soirs pris déclarés (dates seules), publiés seulement fondus dans la liste `pris` de `dispo.json`.
 `blocages` : périodes privées (`debut`, `fin` inclus, `motif`) comptées dans les conflits mais jamais publiées dans `dispo.json`.
 `aCompleter` : billets collés dans la saisie rapide du site et non reconnus. `/veille` les traite (voir plus bas).
 
 ## Fichiers générés (`node tools/build.mjs`)
 - `index-artistes.json` (`{slug: {nom, sorties}}`) et `index-lieux.json` (`{lieuId: {sorties}}`), même sans mot de passe.
-- `dispo.json.reservations`, `envies.json`, flux agenda, flux ventes : avec `SAISON_MDP` (ou `_prive.json` ouvert).
+- `dispo.json` (réservations, `soirs` et agenda Apple fondus en une liste `pris`), `envies.json`, flux agenda, flux ventes : avec `SAISON_MDP` (ou `_prive.json` ouvert). Les flux `.ics` restent hors du dépôt.
 - Flux ventes : un événement de 15 min à l'heure d'ouverture (10h si inconnue, « ~ » si approximative), alarme 15 min avant, pour toute offre dont la sortie est en envie, réservée, notée 4, ou de type avant-première, et pour toutes les offres des concerts et festivals de musiques actuelles notés (Concert ou Festival sans compositeur ni direction musicale crédités : c’est ainsi que `build.mjs` distingue le classique).
 - L'action « Publier le site » relance `build.mjs` à chaque passage (avec le secret) et commite les fichiers générés. Sortie déterministe : pas de commit si rien n'a changé.
 
@@ -148,7 +151,7 @@ Tableau de bord : **payé par moi** = places de Moi en `moi` + places de tiers e
 Léonard gère aussi tout depuis le site (iPhone) : envies (cœur, note privée), réservations, vu, ajout et modification de sorties, lieux (ajout, modification, suppression d'un lieu inutilisé), saisie rapide de billets, soirs pris et périodes bloquées privées, liens, tableau de bord (engagé, payé par moi, pour mon bénéfice), accompagnants, abonnements.
 - Connexion : mot de passe (déchiffre `prive.enc` dans le navigateur). Première fois sur un appareil : jeton GitHub « fine-grained » limité au dépôt (Contents : lecture et écriture ; Actions : lecture), testé puis rangé dans `localStorage` chiffré avec une clé dérivée du mot de passe. Cadenas de l'en-tête (fenêtre en surimpression ; l'onglet Admin n'apparaît qu'une fois connecté). Session gardée 1 jour (défaut), 7 jours ou jusqu'à la fermeture de l'onglet : clé AES non extractible dans IndexedDB, effacée à l'échéance ou par « Se déconnecter » (cadenas ouvert de l'en-tête), « Oublier cet appareil » efface aussi le jeton.
 - Écriture : `assets/admin.js` relit `main` via l'API GitHub, applique l'action, valide (mêmes règles que `check.mjs`), rechiffre la zone privée et crée **un commit directement sur `main`** (« Admin : réservé Werther le 8 févr. »). Si `main` a bougé entre-temps, l'action est rejouée sur la version fraîche ; si l'objet visé a changé, Léonard est consulté.
-- Le navigateur n'écrit que les sources : `affiche.json`, `journal.json`, `lieux.json`, `liens.json`, `dispo.json` (`manuel` seulement), `prive.enc`. Le push déclenche « Publier le site », qui régénère index, `dispo.reservations` et flux ; le site suit l'exécution (bandeau « Publication en cours », puis « En ligne »).
+- Le navigateur n'écrit que les sources : `affiche.json`, `journal.json`, `lieux.json`, `liens.json`, `prive.enc` (jamais `dispo.json`, que l'action régénère). Le push déclenche « Publier le site », qui régénère index, `dispo.reservations` et flux ; le site suit l'exécution (bandeau « Publication en cours », puis « En ligne »).
 - Conséquence pour toi : **Léonard commite aussi sur `main`.** Pars toujours de `origin/main` à jour et rebase avant de pousser (voir la procédure). `prive.enc` tient sur une ligne : en cas de conflit, ne fusionne jamais à la main, rouvre la version de `main` et refais ta modification.
 - Le dépôt est **public**, messages de commit compris : ils ne citent jamais un prix, un accompagnant, une envie ni une période bloquée (le site écrit « Admin : envies mises à jour », « Admin : périodes bloquées mises à jour »). Fais de même dans tes commits.
 - Messages de commit commençant par « Admin : » = modifications faites depuis le site. Lis-les (`git log origin/main`) pour savoir ce qui a changé.
@@ -159,14 +162,29 @@ Léonard gère aussi tout depuis le site (iPhone) : envies (cœur, note privée)
 2. `node tools/build.mjs`.
 3. `node tools/check.mjs` : corrige jusqu'à « OK ».
 4. Mets `maj` de affiche.json (et journal.json s'il a changé) à la date du jour.
-5. Commit en français, une ligne par changement (« Réservé : Werther le 8 févr. »), `git fetch origin main && git rebase origin/main` (en cas de conflit sur `prive.enc` : reprends la version de main, rouvre, refais, ferme), puis push. La branche `claude/…` est fusionnée et publiée automatiquement par GitHub Actions : ne crée pas de pull request.
+5. Commit en français, une ligne par changement (« Réservé : Werther », sans date ni prix : voir Sécurité), `git fetch origin main && git rebase origin/main` (en cas de conflit sur `prive.enc` : reprends la version de main, rouvre, refais, ferme), puis push. La branche `claude/…` est fusionnée et publiée automatiquement par GitHub Actions : ne crée pas de pull request.
 6. Réponds à Léonard en 2–4 lignes : ce qui a changé, conflits éventuels, prochaines ventes utiles.
 
 ## Contrôles automatiques à faire de toi-même
-- Conflit : avant toute réservation, vérifie `dispo.json` (toutes listes), les réservations privées et `blocages` ; signale tout soir déjà pris.
+- Conflit : avant toute réservation, vérifie dans la zone privée les réservations, `soirs` et `blocages`, et `dispo.json` (`pris`, qui contient aussi l'agenda Apple) ; signale tout soir déjà pris.
 - Avant d'ajouter une sortie : vérifie qu'elle n'est pas déjà dans l'affiche ou le journal (même œuvre, même production).
 - Une réservation passée (date < aujourd'hui) : demande à Léonard s'il l'a vue, puis propose `/vu`.
 - File `aCompleter` non vide (zone privée) : traite chaque billet (retrouve ou ajoute la sortie, enregistre la réservation, vérifie les conflits), retire-le de la file, et signale ce qui reste ambigu.
+
+## Sécurité (dépôt public)
+- **Rien de privé en clair, nulle part** : fichiers, historique, messages de commit, journaux d'Actions. Messages de commit : jamais de prix, d'accompagnant, d'envie, de période bloquée ni de **date de réservation** (« Admin : réservations mises à jour », « Réservé : Werther » sans date).
+- **Jamais versionnés** : flux `.ics`, `_prive.json`, billets (PDF, pkpass), jeton, mot de passe, adresse iCloud. `check.mjs` bloque un `.ics` suivi par git.
+- **Chiffrement** : PBKDF2-SHA256 à 600 000 itérations et AES-256-GCM, IV aléatoire à chaque écriture, format versionné (`v`, `kdf`, `iter`). Le sel est gardé d'une écriture à l'autre ; il change avec le mot de passe ou le nombre d'itérations. Paramètres identiques dans `tools/crypto.mjs` et `assets/admin.js`.
+- **Mot de passe et clé** : le mot de passe n'est jamais stocké ; la clé est non extractible (mémoire, et IndexedDB le temps de la session). Jamais dans `localStorage`, `sessionStorage`, une adresse ou la console. Le cadenas de l'en-tête donne « Verrouiller ».
+- **Jeton GitHub** : « fine-grained », dépôt saison seul (Contents : lecture et écriture ; Actions : lecture), avec une date d'expiration ; chiffré au repos, jamais journalisé. Révocation : GitHub › Settings › Developer settings › Fine-grained tokens › Revoke, puis « Oublier cet appareil » sur le site et saisie du nouveau jeton à la connexion.
+- **Site** : toute donnée insérée passe par `esc()` ou `textContent` ; adresses externes limitées à http(s) (`web()`) ; liens externes en `rel="noopener noreferrer"`. Politique de sécurité par balise meta (`default-src 'self'`, seul le script du thème est autorisé par son hash : le recalculer s'il change) ; ni attribut `style`, ni gestionnaire `on…=` en ligne, ni `eval` ; aucune ressource tierce ; `<meta name="referrer" content="no-referrer">`. `check.mjs` le vérifie.
+- **Actions** : `permissions` minimales par job, actions épinglées par SHA (Dependabot les met à jour), jamais `pull_request_target`, aucun secret ni donnée privée dans les journaux (publics). Le paquet npm de l'agenda s'installe dans un job à part (`npm ci --ignore-scripts`, lockfile), sans accès à `SAISON_MDP`. `integrer.yml` ne fusionne que les branches `claude/**` poussées par le propriétaire.
+
+## Parcours de référence (à rejouer après tout changement d'interface)
+À 375 px et 1280 px, en clair et en sombre, sans erreur en console (une violation de la politique de sécurité en est une).
+- **Visiteur** : comprendre l'accueil ; « Cette semaine » en 2 gestes (Filtres › Cette semaine) ; ouvrir une fiche (dates, site officiel, soirs libres de Léonard) ; partager ; arriver par `#sortie-<id>`, `#radar`, `#artiste-<slug>` et revenir ; une recherche propose aussi journal, artistes et lieux.
+- **Admin sur iPhone**, 3 gestes au plus par action courante : déverrouiller ; cœur ; réserver (aucune date présélectionnée s'il y en a plusieurs) ; modifier ; annuler ; marquer vu avec une note ; saisie rapide ; budget ; accompagnants ; verrouiller.
+- Filtres et recherches restent dans l'adresse (Affiche, Journal, Index, Ventes) ; hors ligne, le site reste lisible et l'indique.
 
 ## Commandes
 `/ajoute`, `/reserve`, `/vu`, `/pris`, `/note`, `/veille`, `/envie`, `/modifie`, `/annule`, `/import` (voir `.claude/commands/`).
