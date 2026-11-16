@@ -124,6 +124,8 @@ const getJSON = (u, o) => fetch(u, o).then((r) => { if (!r.ok) throw new Error(u
 
 /* ---------- Données ---------- */
 let DEJA_VU = {}, ENVIES_PUB = [], AFF = [], LIVE = [], LIEUX = {}, BUSY = new Set(), BUSY_SRC = {}, MAJ = "", JOURNAL = null, JMAJ = "", LIENS = null, PRIVE = null;
+let DISPO_PUB = null; // soirs pris publics tels que servis (rétablis au verrouillage du mode admin)
+let HORIZON = ""; // dernier jour couvert par les soirs pris publics (au-delà : inconnu) ; vide en mode admin
 let ADMIN = null, JAVEC = ""; // ADMIN : module admin (assets/admin.js) ; JAVEC : filtre du journal par accompagnant (mémoire seulement)
 const BYID = new Map();
 let jP = null, lP = null;
@@ -140,7 +142,8 @@ function applyData({ affiche, lieux, dispo, journal, liens }) {
   if (lieux) LIEUX = lieux;
   if (journal) { JOURNAL = journal.sorties; JMAJ = journal.maj; jP = Promise.resolve(JOURNAL); }
   if (liens) { LIENS = liens; lP = Promise.resolve(LIENS); }
-  if (dispo) { BUSY_SRC = dispo; BUSY = new Set([...(dispo.reservations || []), ...(dispo.manuel || []), ...(dispo.calendrier || [])]); }
+  // Public : { pris, horizon } (une seule liste, sans raison). Admin : sources privées détaillées (réservations, soirs, agenda).
+  if (dispo) { BUSY_SRC = dispo; BUSY = new Set([...(dispo.pris || []), ...(dispo.reservations || []), ...(dispo.manuel || []), ...(dispo.calendrier || [])]); HORIZON = dispo.horizon || ""; }
   BYID.clear(); AFF.forEach((e) => BYID.set(e.id, e)); (JOURNAL || []).forEach((e) => BYID.set(e.id, e));
   LIVE = AFF.filter((e) => e.statut === "a-voir" && !ended(e));
   ART = null;
@@ -201,8 +204,10 @@ function stars(n, pro, label) {
   const lib = `${label ? label + " : " : ""}${n} sur 4${label ? "" : ", " + NOTES_TXT[n]}${pro ? ", prévision" : ""}`;
   return `<span class="st" role="img" aria-label="${lib}">${[1, 2, 3, 4].map((i) => `<i${i <= n ? ' class="on"' : ""}></i>`).join("")}${pro ? '<sup aria-hidden="true">P</sup>' : ""}</span>`;
 }
-const booking = (e) => e.billetterie || lieu(e).billetterie || ""; // adresse d’achat seulement (sinon : page officielle)
-const official = (e) => e.lien || lieu(e).site || "";
+// Adresses externes : http(s) seulement (jamais javascript:, data:…), même si une donnée était mal formée.
+const web = (u) => (/^https?:\/\//i.test(String(u || "")) ? String(u) : "");
+const booking = (e) => web(e.billetterie) || web(lieu(e).billetterie); // adresse d’achat seulement (sinon : page officielle)
+const official = (e) => web(e.lien) || web(lieu(e).site);
 const shareURL = (id) => location.origin + location.pathname + "#sortie-" + id;
 
 /* ---------- Index artistes ---------- */
@@ -302,7 +307,7 @@ function offresHTML(e) {
 }
 function actsHTML(e, details) {
   const o = official(e), b0 = booking(e), b = b0 && b0 !== o ? b0 : "", vu = e.statut === "vu";
-  return `<div class="acts">${b && !vu ? `<a class="btn pri" href="${esc(b)}" target="_blank" rel="noopener">${ico("billet")}Billetterie</a>` : ""}${o ? `<a class="btn${!b && !vu ? " pri" : ""}" href="${esc(o)}" target="_blank" rel="noopener">${ico("externe")}${vu ? "Page archivée" : "Site officiel"}</a>` : ""}${details ? `<button class="btn ico" type="button" data-share="${esc(e.id)}" aria-label="Partager" title="Partager">${ico("partager")}</button>` : ""}</div>`;
+  return `<div class="acts">${b && !vu ? `<a class="btn pri" href="${esc(b)}" target="_blank" rel="noopener noreferrer">${ico("billet")}Billetterie</a>` : ""}${o ? `<a class="btn${!b && !vu ? " pri" : ""}" href="${esc(o)}" target="_blank" rel="noopener noreferrer">${ico("externe")}${vu ? "Page archivée" : "Site officiel"}</a>` : ""}${details ? `<button class="btn ico" type="button" data-share="${esc(e.id)}" aria-label="Partager" title="Partager">${ico("partager")}</button>` : ""}</div>`;
 }
 function detHTML(e) {
   const c = creditsHTML(e);
@@ -351,12 +356,13 @@ function ficheCal(e) {
     h += `<div class="cal mini"><div class="calh"><h3>${MOIS_L[c.getMonth()]} ${c.getFullYear()}</h3></div>` + monthGrid(c.getFullYear(), c.getMonth(), (d) => {
       const k = iso(d), on = playsOn(e, d) && d >= TODAY, busy = BUSY.has(k);
       const cls = ["cell", on ? (busy ? "busy" : "play") : "", d < TODAY ? "past" : "", +d === +TODAY ? "today" : "", offers.has(k) ? "of" : ""].filter(Boolean).join(" ");
-      const lab = `${fmt(d, true)}${on ? (busy ? `, se joue, ${OWNER} pris` : `, se joue, ${OWNER} libre`) : ""}${offers.has(k) ? ", offre jeune" : ""}`;
+      const lab = `${fmt(d, true)}${on ? (busy ? `, se joue, ${OWNER} pris` : HORIZON && k > HORIZON ? ", se joue" : `, se joue, ${OWNER} libre`) : ""}${offers.has(k) ? ", offre jeune" : ""}`;
       return `<div class="${cls}" role="img" aria-label="${lab}"><span class="n" aria-hidden="true">${d.getDate()}</span></div>`;
     }) + "</div>";
   }
-  return `<div class="mini-wrap">${h}</div><div class="legend"><span class="l-joue">Libre</span><span class="l-pris">Pris</span><span class="l-offre">Offre jeune</span></div>
-  ${e.relaches ? "" : '<p class="aide">Relâches non renseignées.</p>'}`;
+  const loin = HORIZON && iso(p[1]) > HORIZON ? `<p class="aide">Soirs pris connus jusqu’au ${fmt(D(HORIZON))}.</p>` : "";
+  return `<div class="mini-wrap">${h}</div><div class="legend"><span class="l-joue">${OWNER} libre</span><span class="l-pris">${OWNER} pris</span><span class="l-offre">Offre jeune</span></div>
+  ${e.relaches ? "" : '<p class="aide">Relâches non renseignées.</p>'}${loin}`;
 }
 
 /* ---------- Filtres de l’affiche (état dans l’URL) ---------- */
@@ -452,14 +458,14 @@ function renderAffiche(q) {
       <div class="fgr" role="group" aria-labelledby="fgN"><span class="fl" id="fgN">Note</span><div class="chips">${chip("note", "2", carres(2, true), ' aria-label="Note 2 et plus"')}${chip("note", "3", carres(3, true), ' aria-label="Note 3 et plus"')}${chip("note", "4", carres(4), ' aria-label="Note 4"')}</div></div>
       <div class="fgr" role="group" aria-labelledby="fgO"><span class="fl" id="fgO">Où</span><div><div class="chips">${chip("zone", "paris", "Paris")}${chip("zone", "pc", "Petite couronne")}<span class="sep" aria-hidden="true"></span>${chip("statut", "public", "Lieu public")}${chip("statut", "prive", "Lieu privé")}</div>
         <label class="f"><span>Lieu</span><select id="fLieu"><option value="">Tous les lieux</option>${lieux.map((l) => `<option value="${esc(l)}">${esc(court(l))}</option>`).join("")}</select></label></div></div>
-      <div class="fgr" role="group" aria-labelledby="fgQ"><span class="fl" id="fgQ">Quand</span><div><label class="f"><span>Période</span><select id="fPer"><option value="">Toute la saison</option><option value="30">30 prochains jours</option>${months.map(([v, t]) => `<option value="${v}">${t}</option>`).join("")}</select></label>
+      <div class="fgr" role="group" aria-labelledby="fgQ"><span class="fl" id="fgQ">Quand</span><div><div class="chips">${Object.entries(RAC).map(([k, t]) => chip("rac", k, t)).join("")}${chip("per", "30", "30 jours")}</div><label class="f"><span>Période</span><select id="fPer"><option value="">Toute la saison</option><option value="30">30 prochains jours</option>${months.map(([v, t]) => `<option value="${v}">${t}</option>`).join("")}</select></label>
         <div class="chips">${chip("libre", "1", "Soirs libres", ` aria-label="Seulement les soirs où ${OWNER} est libre"`)}</div></div></div>
       <div class="fgr" role="group" aria-labelledby="fgP"><span class="fl" id="fgP">Pour</span><div class="chips">${chip("jeune", "1", "Public jeune")}${chip("offre", "1", "Offre jeune")}${chip("yva", "1", OWNER + " y va")}</div></div>
     </div>
     <div class="resbar"><span class="n" id="nres" aria-live="polite"></span>
       <div class="vuectl"><button class="linkbtn tri" type="button" id="tri"></button><div class="seg seg-s" role="group" aria-label="Affichage"><button class="i" type="button" data-vue="liste" aria-pressed="true" aria-label="Liste">${ico("liste")}</button><button class="i" type="button" data-vue="mois" aria-pressed="false" aria-label="Calendrier">${ico("mois")}</button></div></div><div class="active" id="active"></div></div></div>
   <div id="monthBox"></div>
-  <div id="alist" class="list"></div></section>${radarLateral()}</div>`;
+  <div id="alist" class="list"></div><p class="aussi" id="aussi" hidden></p></section>${radarLateral()}</div>`;
   const m = $("#aff");
   m.querySelector(".seg").onclick = (ev) => { const b = ev.target.closest("[data-vue]"); if (b) setF((f) => { f.vue = b.dataset.vue; }); };
   m.querySelectorAll("[data-panel]").forEach((b) => b.onclick = () => {
@@ -473,6 +479,7 @@ function renderAffiche(q) {
     setF((f) => {
       if (g === "rac") { f.rac = f.rac === v ? "" : v; f.jour = ""; }
       else if (g === "note") f.note = f.note === +v ? 0 : +v;
+      else if (g === "per") f.per = f.per === v ? "" : v;
       else if (["libre", "jeune", "offre", "yva"].includes(g)) f[g] = !f[g];
       else if (f[g] instanceof Set) f[g].has(v) ? f[g].delete(v) : f[g].add(v);
     });
@@ -486,10 +493,10 @@ function updateAffiche() {
   const m = $("#aff"), f = F;
   m.querySelectorAll("[data-g]").forEach((b) => {
     const g = b.dataset.g, v = b.dataset.v;
-    const on = g === "rac" ? f.rac === v : g === "note" ? f.note === +v : typeof f[g] === "boolean" ? f[g] : f[g] instanceof Set ? f[g].has(v) : false;
+    const on = g === "rac" ? f.rac === v : g === "per" ? f.per === v : g === "note" ? f.note === +v : typeof f[g] === "boolean" ? f[g] : f[g] instanceof Set ? f[g].has(v) : false;
     b.setAttribute("aria-pressed", String(!!on));
   });
-  const nF = (f.note ? 1 : 0) + f.zone.size + f.statut.size + (f.lieu ? 1 : 0) + (f.per ? 1 : 0) + [f.libre, f.jeune, f.offre, f.yva].filter(Boolean).length;
+  const nF = (f.note ? 1 : 0) + f.zone.size + f.statut.size + (f.lieu ? 1 : 0) + (f.per ? 1 : 0) + (f.rac ? 1 : 0) + [f.libre, f.jeune, f.offre, f.yva].filter(Boolean).length;
   $("#nF").textContent = nF ? " " + nF : ""; m.querySelector("[data-panel=pF]").setAttribute("aria-label", "Filtres" + (nF ? `, ${nF} actif${nF > 1 ? "s" : ""}` : ""));
   m.querySelectorAll("[data-vue]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.vue === f.vue)));
   $("#fLieu").value = f.lieu; $("#fPer").value = f.per;
@@ -532,6 +539,21 @@ function updateAffiche() {
     }
   }
   L.innerHTML = html;
+  aussi(f.q);
+}
+// Recherche étendue : la même recherche au journal, parmi les artistes et les lieux (liens sous les résultats).
+function aussi(q0) {
+  const el = $("#aussi"), q = (q0 || "").trim(); if (!el) return;
+  if (q.length < 2) { el.hidden = true; el.textContent = ""; return; }
+  if (!JOURNAL) { loadJournal().then(() => { if (F.q.trim() === q) aussi(q); }).catch(() => {}); }
+  const nq = norm(q), enc = encodeURIComponent(q), L = [];
+  const nj = (JOURNAL || []).filter((e) => cherche(e, q)).length;
+  const na = Object.values(artistes()).filter((a) => norm(a.nom).includes(nq)).length;
+  const nl = Object.keys(LIEUX).filter((id) => norm(LIEUX[id].nom + " " + court(id) + " " + (LIEUX[id].ville || "")).includes(nq)).length;
+  if (nj) L.push(`<a href="#journal?q=${enc}">${nj} au journal</a>`);
+  if (na) L.push(`<a href="#artistes?q=${enc}">${plural(na, "artiste")}</a>`);
+  if (nl) L.push(`<a href="#lieux?q=${enc}">${plural(nl, "lieu", "lieux")}</a>`);
+  el.hidden = !L.length; el.innerHTML = L.length ? "Aussi : " + L.join(" · ") : "";
 }
 const sortKey = (e) => { const p = span(e); return p ? (running(e) ? +p[1] - 1e13 : +p[0]) : 9e15; };
 function groupOf(e) {
@@ -687,7 +709,7 @@ function renderRadar() {
       ${r.aReserver.length ? `<div class="list">${r.aReserver.map((x) => rowR(x.e, "r", stubReserver(x), infoReserver(x))).join("")}</div>` : `<p class="empty">Tous les incontournables sont réservés.</p>`}</section>
     <section class="r-b r-chances" id="r-chances"><h2 class="mh">Dernières chances <small>notées 3 et +</small></h2>
       ${r.chances.length ? `<div class="list">${r.chances.map((e) => rowR(e, "c", stubR("fin", finDe(e), dansJ(finDe(e)) <= 7), [`Jusqu’au ${fmt(finDe(e), true)}`, libresTxt(e)].filter(Boolean).join(" · "))).join("")}</div>` : `<p class="empty">Rien de noté 3 ou plus ne s’arrête dans les ${R_FIN} jours.</p>`}</section>
-  </div><div class="r-col r-lat2">
+  </div><div class="r-col r-lat2${r.semaine.length ? "" : " calme"}">
     <h2 class="mh">Prochaines ouvertures de vente</h2>
     <section class="r-b r-semaine" id="r-semaine"><h3 class="sec">Cette semaine</h3>${blocSemaine(r)}</section>
     <section class="r-b r-suite" id="r-suite"><h3 class="sec">Plus tard</h3>
@@ -751,7 +773,10 @@ function listeVentes(T) {
   }
   return h ? `<div class="list">${h}</div>` : `<p class="empty">${RF === "tout" ? "Aucune ouverture ne correspond." : "Aucune ouverture suivie ne correspond : essaie « Toutes »."}</p>`;
 }
-function renderVentes() {
+const serV = () => [VF.q.trim() ? "q=" + encodeURIComponent(VF.q.trim()) : "", VF.cat.size ? "cat=" + [...VF.cat].join(",") : "", RF === "tout" ? "rf=tout" : ""].filter(Boolean).join("&");
+function renderVentes(q0) {
+  const p0 = new URLSearchParams(q0 || "");
+  if ([...p0.keys()].length) { VF.q = p0.get("q") || ""; VF.cat = new Set((p0.get("cat") || "").split(",").filter(Boolean)); RF = p0.get("rf") === "tout" ? "tout" : "suivies"; }
   const T = ventesToutes(), cats = CATS.filter((c) => T.some((x) => x.e.categorie === c));
   const nS = T.filter((x) => suivie(x.e)).length;
   $("#main").innerHTML = `<section id="pv"><div class="ph"><h1>Ouvertures de vente</h1></div>
@@ -759,7 +784,7 @@ function renderVentes() {
   <div class="fbar"><div class="chips defile gtabs" role="group" aria-label="Genres">${cats.map((c) => `<button class="chip g-${famille(c)}" type="button" data-vc="${slug(c)}" aria-pressed="${VF.cat.has(slug(c))}">${ico(c)}${esc(c)}</button>`).join("")}</div></div>
   <div id="vListe">${listeVentes(T)}</div>
   ${PRIVE ? `<h2 class="mh">Abonnement aux ouvertures (admin)</h2>${subsHTML()}` : ""}</section>`;
-  const m = $("#pv"), maj = () => { $("#vListe").innerHTML = listeVentes(T); };
+  const m = $("#pv"), maj = () => { $("#vListe").innerHTML = listeVentes(T); const s = serV(); history.replaceState(null, "", "#ventes" + (s ? "?" + s : "")); BASE = RENDERED = location.hash.slice(1); };
   m.querySelector(".seg").onclick = (ev) => {
     const b = ev.target.closest("[data-rf]"); if (!b) return;
     RF = b.dataset.rf; m.querySelectorAll("[data-rf]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.rf === RF))); maj();
@@ -788,6 +813,7 @@ let JQ = "", JPANEL = ""; // recherche et panneau ouvert du journal (mémoire se
 function renderJournal(q) {
   const p = new URLSearchParams(q || ""), L = (k) => new Set((p.get(k) || "").split(",").filter(Boolean));
   const f = { cat: L("cat"), sa: L("sa"), mn: L("mn"), tri: p.get("tri") === "note" ? "note" : "date" };
+  if (p.has("q")) JQ = p.get("q"); else if (RENDERED === null || !RENDERED.startsWith("journal")) JQ = "";
   const all = JOURNAL.filter((e) => (e.vuLe || []).length);
   const last = (e) => e.vuLe.at(-1), sOf = (e) => saisonDe(D(last(e))).cle;
   const saisons = [...new Set(all.map(sOf))].sort().reverse();
@@ -829,7 +855,7 @@ function renderJournal(q) {
     </div>
     <div class="resbar"><span class="n" id="jn" aria-live="polite"></span>
       <a class="linkbtn tri" href="#journal?${esc(jq(f, "tri", f.tri === "note" ? "date" : "note"))}" aria-label="Tri par ${f.tri === "note" ? "ma note" : "date"}, changer">${ico("tri")}${f.tri === "note" ? "Ma note" : "Date"}</a>
-      <div class="active">${jetons}${jetons ? `<a class="chip effacer" href="#journal${f.tri === "note" ? "?tri=note" : ""}" data-jclr>Tout effacer</a>` : ""}</div></div></div>
+      <div class="active">${jetons}${jetons ? `<a class="chip effacer" href="#journal?${esc([f.tri === "note" ? "tri=note" : "", JQ.trim() ? "q=" + encodeURIComponent(JQ.trim()) : ""].filter(Boolean).join("&"))}" data-jclr>Tout effacer</a>` : ""}</div></div></div>
   <div class="j-stm" id="pJS"${JPANEL === "pJS" ? "" : " hidden"}><h2 class="mh">Statistiques <small>${esc(libS)}</small></h2><div class="stats">${stats}</div></div>
   <div class="list" id="jlist"></div></section>
   <aside class="r-lat j-lat" aria-label="Statistiques du journal"><h2 class="mh">Statistiques <small>${esc(libS)}</small></h2><div class="stats">${stats}</div></aside></div>`;
@@ -839,19 +865,25 @@ function renderJournal(q) {
     $$("[data-jpanel]").forEach((x) => { const on = x.dataset.jpanel === JPANEL; $("#" + x.dataset.jpanel).hidden = !on; x.setAttribute("aria-expanded", String(on)); });
   });
   draw();
-  $("#jq").oninput = (ev) => { JQ = ev.target.value; draw(); };
+  // La recherche reste dans l’adresse (partageable), sans redessiner la page sous les doigts.
+  $("#jq").oninput = (ev) => {
+    JQ = ev.target.value; draw();
+    const s = jq(f, "", ""); history.replaceState(null, "", "#journal" + (s ? "?" + s : "")); BASE = RENDERED = location.hash.slice(1);
+    $$("#jr a.chip, #jr a.linkbtn").forEach((a) => { const u = new URLSearchParams(a.getAttribute("href").split("?")[1] || ""); if (JQ.trim()) u.set("q", JQ.trim()); else u.delete("q"); const t = u.toString(); a.setAttribute("href", "#journal" + (t ? "?" + t : "")); });
+  };
   const as = $("#jAvec"); if (as) as.onchange = () => { JAVEC = as.value; renderJournal(q); };
 }
 function jq(f, g, v) {
   const n = { cat: new Set(f.cat), sa: new Set(f.sa), mn: new Set(f.mn), tri: f.tri };
-  if (g === "tri") n.tri = v; else if (v === "*") n[g].clear(); else n[g].has(v) ? n[g].delete(v) : n[g].add(v);
+  if (g === "tri") n.tri = v; else if (!g) { /* état courant, tel quel */ } else if (v === "*") n[g].clear(); else n[g].has(v) ? n[g].delete(v) : n[g].add(v);
   const p = []; for (const k of ["sa", "cat", "mn"]) if (n[k].size) p.push(k + "=" + [...n[k]].map(encodeURIComponent).join(","));
   if (n.tri === "note") p.push("tri=note");
+  if (JQ.trim()) p.push("q=" + encodeURIComponent(JQ.trim()));
   return p.join("&");
 }
 function bars(rows) {
   const max = Math.max(1, ...rows.map((r) => r[1]));
-  return `<div class="bars">${rows.map(([l, n, href, cls]) => `<span class="bl">${href ? `<a href="${href}">${esc(l)}</a>` : esc(l)}</span><span class="bg${cls ? " " + cls : ""}" style="--v:${Math.round((n / max) * 100)}" aria-hidden="true"></span><span class="bn">${n}</span>`).join("")}</div>`;
+  return `<div class="bars">${rows.map(([l, n, href, cls]) => `<span class="bl">${href ? `<a href="${href}">${esc(l)}</a>` : esc(l)}</span><span class="bg${cls ? " " + cls : ""}" data-pc="${Math.round((n / max) * 100)}" aria-hidden="true"></span><span class="bn">${n}</span>`).join("")}</div>`;
 }
 function statsHTML(all, toutes) {
   const count = (fn) => { const o = new Map(); all.forEach((e) => [].concat(fn(e)).forEach((k) => k != null && k !== "" && o.set(k, (o.get(k) || 0) + 1))); return [...o]; };
@@ -871,7 +903,8 @@ function statsHTML(all, toutes) {
 
 /* ---------- Artistes & lieux ---------- */
 let ALQ = "";
-function renderAL(which) {
+function renderAL(which, q0) {
+  const p0 = new URLSearchParams(q0 || ""); if (p0.has("q")) ALQ = p0.get("q");
   $("#main").innerHTML = `<div class="ph"><h1>Artistes et lieux</h1></div>
   <div class="tools"><nav class="seg" aria-label="Index"><a href="#artistes"${which === "artistes" ? ' aria-current="page"' : ""}>Artistes</a><a href="#lieux"${which === "lieux" ? ' aria-current="page"' : ""}>Lieux</a></nav>
   ${rech("alq", "Rechercher un " + (which === "lieux" ? "lieu" : "artiste"), ALQ)}</div><div id="alist"></div>`;
@@ -893,7 +926,7 @@ function renderAL(which) {
     }
     $("#alist").innerHTML = h;
   };
-  $("#alq").oninput = (ev) => { ALQ = ev.target.value; draw(); };
+  $("#alq").oninput = (ev) => { ALQ = ev.target.value; draw(); history.replaceState(null, "", "#" + which + (ALQ.trim() ? "?q=" + encodeURIComponent(ALQ.trim()) : "")); BASE = RENDERED = location.hash.slice(1); };
   draw();
 }
 const byStart = (a, b) => sortKey(a) - sortKey(b);
@@ -912,7 +945,7 @@ function renderLieu(id) {
   if (!L) { $("#main").innerHTML = `<a class="back" href="#lieux">Artistes et lieux</a><p class="empty">Lieu inconnu.</p>`; return; }
   const aff = AFF.filter((e) => e.lieuId === id && e.statut === "a-voir" && !ended(e)).sort(byStart);
   const vus = (JOURNAL || []).filter((e) => e.lieuId === id).sort(byVu);
-  const ext = (u, t) => u ? `<a href="${esc(u)}" target="_blank" rel="noopener">${t}</a>` : "";
+  const ext = (u, t) => web(u) ? `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${t}</a>` : "";
   $("#main").innerHTML = `<a class="back" href="#lieux">Artistes et lieux</a><div class="ph"><h1>${esc(L.nom)}</h1><p>${esc([L.ville, L.zone !== L.ville ? L.zone : ""].filter(Boolean).join(", "))} · lieu ${L.statut === "Public" ? "public" : "privé"}</p></div>
   <dl class="dl inl">${L.tarifJeune ? `<dt>Tarif jeune</dt><dd>${esc(L.tarifJeune)}</dd>` : ""}${L.adresse ? `<dt>Adresse</dt><dd>${esc(L.adresse)}</dd>` : ""}${L.site ? `<dt>Site</dt><dd>${ext(L.site, esc(L.site.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")))}</dd>` : ""}${L.billetterie ? `<dt>Billetterie</dt><dd>${ext(L.billetterie, "Acheter des places")}</dd>` : ""}</dl>
   <h2 class="mh">À l’affiche <small>${aff.length}</small></h2><div class="list">${aff.map(rowA).join("") || '<p class="empty">Rien à l’affiche.</p>'}</div>
@@ -937,8 +970,8 @@ function renderCoeur() {
 }
 // Billetteries, cartes jeunes et calendriers de vente : section du Radar (l’ancienne page Liens, #liens y mène).
 function liensHTML() {
-  const groups = liensParRubrique(LIENS).filter(([, l]) => l.length);
-  const item = (x) => `<li data-q="${esc(norm(x.titre + " " + hote(x.url) + " " + (x.note || "")))}"><a href="${esc(x.url)}" target="_blank" rel="noopener"><span class="lt"><b>${esc(x.titre)}</b><small>${esc(hote(x.url))}${x.note ? " · " + esc(x.note) : ""}</small></span><span class="vh"> (nouvel onglet)</span></a></li>`;
+  const groups = liensParRubrique(LIENS.filter((x) => web(x.url))).filter(([, l]) => l.length);
+  const item = (x) => `<li data-q="${esc(norm(x.titre + " " + hote(x.url) + " " + (x.note || "")))}"><a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer"><span class="lt"><b>${esc(x.titre)}</b><small>${esc(hote(x.url))}${x.note ? " · " + esc(x.note) : ""}</small></span><span class="vh"> (nouvel onglet)</span></a></li>`;
   const section = ([c, l]) => `<section class="lks" id="lk-${slug(c)}"><h3 class="sec">${esc(c)} <small>${l.length}</small></h3><ul class="lk${l.length > 6 ? " lk2" : ""}">${l.map(item).join("")}</ul></section>`;
   return `<div class="tools">${rech("lkq", "Rechercher un lien")}</div>
   <nav class="chips" aria-label="Rubriques" id="lkNav">${groups.map(([c]) => `<button class="chip" type="button" data-lkgo="lk-${slug(c)}">${esc(c)}</button>`).join("")}</nav>
@@ -971,7 +1004,8 @@ function lockIcon() {
 const sessionVive = () => { try { return +localStorage.getItem("factotum-session") > Date.now(); } catch (_) { return false; } };
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.40"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
+  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.41"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -989,7 +1023,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.40"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.41"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
@@ -1015,11 +1049,11 @@ async function renderView(h) {
   if (view === "radar") { if (!LIENS) { if (!samePath) $("#main").innerHTML = '<p class="load">Chargement…</p>'; await loadLiens().catch(() => {}); } renderRadar(); }
   else if (view === "affiche") renderAffiche(q);
   else if (view === "journal") renderJournal(q);
-  else if (view === "artistes" || view === "lieux") renderAL(view);
+  else if (view === "artistes" || view === "lieux") renderAL(view, q);
   else if (view === "artiste") renderArtiste(decodeURIComponent(path.slice(8)));
   else if (view === "lieu") renderLieu(decodeURIComponent(path.slice(5)));
   else if (view === "coeur") renderCoeur();
-  else if (view === "ventes") renderVentes();
+  else if (view === "ventes") renderVentes(q);
   else if (view === "plan") renderPlan();
   else if (view === "admin") await renderAdmin(q);
   const hc = $("#hcoeur"); if (hc) { if (view === "coeur") hc.setAttribute("aria-current", "page"); else hc.removeAttribute("aria-current"); }
@@ -1041,6 +1075,8 @@ async function route() {
     if (RENDERED === null) await renderView(BASE);
     return openSheet(decodeURIComponent(h.slice(7)));
   }
+  const chemin = h.split("?")[0];
+  if (!(Object.hasOwn(TABS, chemin) || chemin === "charte" || /^(artiste|lieu)-./.test(chemin))) { h = "affiche"; history.replaceState(null, "", "#affiche"); }
   const wasOpen = !$("#sheet").hidden;
   closeSheet();
   BASE = h;
@@ -1108,17 +1144,30 @@ themePose(themeLu()); lockIcon();
 document.addEventListener("keydown", (ev) => { const m = $(".tmenu"); if (ev.key === "Escape" && m) { const b = m.parentElement.querySelector("[data-theme-btn]"); themeFerme(); b.focus(); } });
 if ("IntersectionObserver" in window) new IntersectionObserver(([x]) => document.body.classList.toggle("compact", !x.isIntersecting)).observe($("#top"));
 
+/* ---------- Barres des statistiques : largeur posée par script (la politique de sécurité interdit les attributs style) ---------- */
+const poseBarres = (root) => { if (root.querySelectorAll) root.querySelectorAll("[data-pc]").forEach((el) => el.style.setProperty("--v", String(Math.max(0, Math.min(100, +el.dataset.pc || 0))))); };
+new MutationObserver((ms) => ms.forEach((m) => m.addedNodes.forEach((n) => { if (n.nodeType === 1) { if (n.dataset && n.dataset.pc) poseBarres(n.parentNode); else poseBarres(n); } }))).observe(document.body, { childList: true, subtree: true });
+
+/* ---------- Hors ligne : le site reste lisible (cache), le bandeau dit de quand datent les données ---------- */
+function horsLigne() {
+  const el = $("#hl"); if (!el) return;
+  el.hidden = navigator.onLine !== false;
+  if (!el.hidden) el.textContent = "Hors ligne" + (MAJ ? " – données du " + fmt(D(MAJ)) : "");
+}
+window.addEventListener("online", horsLigne); window.addEventListener("offline", horsLigne);
+
 /* ---------- Démarrage ---------- */
 (async () => {
   try {
     const [a, l, d, ev, dv] = await Promise.all([getJSON("data/affiche.json"), getJSON("data/lieux.json"), getJSON("data/dispo.json").catch(() => ({})), getJSON("data/envies.json").catch(() => ({})), getJSON("data/deja-vu.json").catch(() => ({}))]);
     ENVIES_PUB = Array.isArray(ev.ids) ? ev.ids : [];
     DEJA_VU = dv && typeof dv === "object" ? dv : {};
+    DISPO_PUB = d;
     applyData({ affiche: a, lieux: l, dispo: d });
+    horsLigne();
     await route();
     if (sessionVive()) loadAdmin().then(() => ADMIN.restaurer()).catch(() => {});
   } catch (err) {
-    console.error(err);
     $("#main").innerHTML = '<p class="empty">Impossible de charger la saison. Vérifie la connexion puis recharge la page.</p>';
   }
 })();
