@@ -1,0 +1,9 @@
+{
+  "name": "factotum-calendrier",
+  "private": true,
+  "description": "Lecture de l'agenda Apple pour les soirs pris (job isolé de l'action « Publier le site »).",
+  "type": "module",
+  "dependencies": {
+    "node-ical": "0.27.3"
+  }
+}
