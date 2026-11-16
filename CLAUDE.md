@@ -11,6 +11,7 @@ Léonard écrit en français, style direct. Réponds en français, brièvement, 
 | --- | --- | --- |
 | `data/affiche.json` | `{maj, sorties:[…]}` : à venir ou en cours (`statut` `a-voir` ou `ecarte`) | Oui |
 | `data/journal.json` | `{maj, sorties:[…]}` : déjà vues (`statut` `vu`) | Oui |
+| `data/archive.json` | `{maj, sorties:[…]}` : sorties terminées ni vues ni réservées (`statut` `passe`), déplacées par la veille, jamais supprimées | Oui |
 | `data/lieux.json` | `{ lieuId: {nom, ville, zone, statut, site, billetterie, tarifJeune, adresse?} }` | Oui |
 | `data/liens.json` | `[{categorie, titre, url, note}]` | Oui |
 | `data/dispo.json` | `{maj, horizon, pris:[…]}` : une seule liste de soirs pris, sans raison, d'aujourd'hui à six mois (`horizon`), générée par `build.mjs`. Ne pas modifier à la main | Oui |
@@ -143,6 +144,52 @@ La note est celle de la veille : elle mesure la valeur et le retentissement de l
 `lien` : toujours la page officielle de la sortie sur le site du lieu. À défaut, page officielle du festival, puis page de saison du lieu. L'Officiel des spectacles seulement en dernier recours. Pour un vu : page archivée officielle si elle existe. `billetterie` : URL d'achat directe si différente.
 `liens.json` : catégories Billetteries, Cartes et tarifs jeunes, Calendriers de vente, Outils.
 
+## Veille
+La veille se lance **à la main** (`/veille` et ses variantes), jamais par une routine planifiée. Elle couvre trois domaines : spectacles, concerts et showcases, expositions.
+
+### Principes communs
+- **Une fiche par production ou par exposition**, dédoublonnée contre l’affiche, le journal et l’archive (même œuvre, même production, même lieu). Une tournée dans la même salle : une seule fiche.
+- **`lien` officiel et `source` obligatoires** sur toute fiche ajoutée par la veille : `source` = adresse d’où vient l’information (programmation du lieu, billetterie, presse) ; pour une exposition, c’est `expo.source`. **Aucun champ inventé** : un champ inconnu reste vide (ni date, ni heure, ni tarif, ni distribution supposés) ; une date de vente estimée porte `venteApprox: true`.
+- **Note** : le barème commun, et lui seul (critique, notoriété, hype, bonus ; « P » tant que la note est un pronostic). **Le profil de goûts n’entre jamais dans la note.** Il sert à choisir où chercher en premier, à trancher les quotas et à ordonner le rapport.
+- **`nouveau: true`** sur toute fiche ajoutée par une veille ; la veille suivante (complète ou du même domaine) retire le drapeau avant de poser les siens. La marque « Nouveau » le suit, sur les deux sites.
+- **Artistes suivis** (`suivis` dans la zone privée, voir le schéma) : déduits du profil, puis tenus par `/suivre` et `/nesuisplus`. Ils sont vérifiés **en premier** à chaque veille (nouvelles dates à Paris et en petite couronne, annonces, mises en vente). Un artiste suivi n’a aucun passe-droit : sa sortie entre à l’affiche si elle obtient au moins 2, comme les autres. La liste est privée ; le rapport public parle d’« annonces à suivre », sans dire qui est suivi ni pourquoi.
+- **Profil de goûts** (`profil` dans la zone privée) : genres, artistes, lieux, fréquences et fourchette de prix tirés du journal depuis 2022, des envies et des réservations. Recalculé à la demande de Léonard ou quand le journal a nettement changé ; jamais en clair dans le dépôt, jamais cité dans un fichier public ni dans un message de commit.
+- **Sorties caduques** : rien n’est supprimé. Une sortie `a-voir` ou `ecarte` terminée depuis plus de 7 jours, ni vue ni réservée, **passe de `affiche.json` à `data/archive.json`** (même id, `statut: "passe"`, fiche intacte). Un id d’archive reste réservé : une reprise ultérieure prend un nouvel id.
+- **Seuil d’entrée** : note 2 au moins. Périmètre : Paris et petite couronne (festivals d’Île-de-France compris), jamais au-delà.
+
+### Spectacles (théâtre, opéra, danse, comédie musicale, humour)
+- **Lieux** : tous ceux de `lieux.json` (zones Paris et Petite couronne) et les sources de `liens.json`, La Villette comprise. À couvrir en plus, au vu du journal et des envies : Théâtre du Soleil et Cartoucherie (Tempête, Aquarium), Théâtre Gérard-Philipe, MC93, Théâtre de la Ville (Sarah-Bernhardt, Abbesses), Théâtre de la Bastille, Monfort, Théâtre 13, Théâtre Ouvert, Paris-Villette, Le Centquatre, Théâtre du Rond-Point, Studio-Théâtre et Vieux-Colombier, Festival d’Automne, Paris l’été, et de mai à juillet les programmes du Festival d’Avignon (In, puis Off). Un lieu n’entre dans `lieux.json` que le jour où une fiche en a besoin.
+- **Distribution** : auteur ou compositeur, mise en scène, chorégraphie, direction musicale, puis les **interprètes principaux** (rôles-titres et têtes de distribution, 6 au plus ; la troupe ou la compagnie en `compagnie`). Chaque nom suit la graphie de `data/index-artistes.json` et renvoie ainsi à sa page artiste. Source : la page officielle de la production ; à défaut, le dossier de presse. Distribution non annoncée : on n’écrit rien.
+- **Presse** : Le Monde, Libération, Télérama, Le Figaro, Les Échos, La Terrasse, Sceneweb, France Inter, Forum Opéra, Diapason, Danser Canal Historique.
+
+### Concerts et showcases (pop, rap, chanson, rock, jazz, électro, classique et lyrique)
+- **Sélection** : notoriété et **dynamique** de l’artiste (progression de taille de salle, presse spécialisée, présence en festival, dates précédentes complètes), **rareté** (showcase, date unique en France, petite salle pour un artiste en vue, retour, adieux). Ces éléments se traduisent en N et H du barème. La proximité avec le profil décide seulement de l’ordre de recherche et des cas limites à 2.
+- **Salles** : petites (La Maroquinerie, La Boule Noire, Point Éphémère, Badaboum, Le Trabendo, La Bellevilloise, Le Pop-Up du Label, Les Trois Baudets, FGO-Barbara, La Machine du Moulin Rouge, Yoyo) ; moyennes et grandes (Olympia, La Cigale, Le Trianon, Élysée Montmartre, Bataclan, Casino de Paris, Alhambra, Salle Pleyel, Zénith, Adidas Arena, Accor Arena, Paris La Défense Arena, Stade de France) ; jazz (New Morning, Sunset-Sunside, Duc des Lombards, Bal Blomet) ; électro (Rex Club, La Station – Gare des Mines, Kilomètre 25, Dehors Brut) ; classique (Philharmonie, TCE, Salle Pleyel, Seine Musicale, Opéra de Paris, Radio France).
+- **Festivals** : Solidays, We Love Green, Rock en Seine, Fête de l’Humanité, Lollapalooza Paris, Pitchfork Paris, Les Inrocks Festival, MaMA, Peacock Society, Jazz à la Villette, Banlieues Bleues, Days Off, Festival de Saint-Denis. Une fiche par édition, complétée à chaque vague d’annonces.
+- **Billetteries et annonces** : Fnac Spectacles, Ticketmaster, Live Nation, Dice, Shotgun, See Tickets, Infoconcert, Gérard Drouot, AEG, Décibels, et les liens « Calendriers de vente » de `liens.json`.
+- **Presse** : Télérama, Les Inrocks, Libération, Le Monde, FIP, Nova, Tsugi, Mouv’, Booska-P, Pitchfork, Jazz Magazine, TSF Jazz, Diapason, Forum Opéra.
+- **Showcases** : `categorie: "Concert"`, `sousGenre: "Showcase"`. Seuls entrent ceux qui sont publics et annoncés par une source officielle (salle, marque, radio, billetterie) ; les soirées privées ou étudiantes restent l’affaire de `/ajoute`.
+- **Classique et lyrique au TCE et à la Philharmonie : quota strict.** Ne retenir que les orchestres et solistes de premier plan, les œuvres majeures ou rares, et ce qui recoupe le profil ; écarter récitals et concerts secondaires. **Au plus 4 nouvelles propositions par mois de représentation pour ces deux maisons réunies** ; toute exception est justifiée dans `pourquoi` et signalée dans le rapport. Les fiches déjà à l’affiche ne sont pas purgées : la première veille liste les mois au-dessus du quota et Léonard tranche.
+- **Cycle de vie d’un concert** (jamais écrit tel quel, toujours déduit) :
+
+  | Étape | Dans les données |
+  |---|---|
+  | Rumeur | pas de fiche (pas de lien officiel) : une ligne dans le rapport, source citée |
+  | Annoncé | fiche à l’affiche dès l’annonce officielle, `pronostic: true`, offres avec `venteApprox: true` si la date de vente n’est pas publiée |
+  | Prévente | offre « Prévente » : `vente` (date et heure), `condition` (qui y a droit : fan club, Live Nation, Fnac, banque, code), lien d’achat dans `billetterie` de la fiche |
+  | Vente générale | offre « Vente générale » : `vente` (date et heure) |
+  | Dernières places, complet | `etat` sur la fiche ou sur l’offre ; retiré quand des places reviennent |
+
+  Le cœur de la veille concerts : **détecter l’annonce**, puis **guetter la mise en vente**. Chaque prévente et chaque vente générale datée entre dans le flux `ventes-<icsToken>.ics` avec son alerte ; une date estimée y figure avec « ~ » et se corrige dès qu’elle est publiée.
+
+### Expositions (Factotum Expo)
+- **Lieux** : musées et fondations de Paris et d’Île-de-France (Louvre, Orsay, Orangerie, Centre Pompidou (hors les murs pendant ses travaux), Grand Palais, Petit Palais, Musée d’Art moderne de Paris, Carnavalet, Cernuschi, Galliera, Jacquemart-André, Marmottan Monet, Luxembourg, Picasso, Rodin, quai Branly, Guimet, Arts décoratifs, BnF, Jeu de Paume, MEP, Palais de Tokyo, Fondation Louis Vuitton, Bourse de Commerce, Fondation Cartier, Fondation Henri Cartier-Bresson, Le Bal, Institut du monde arabe, Musée de la musique ; en Île-de-France : Versailles, MAC VAL, Fontainebleau ; pas d’expositions immersives sans œuvres) et galeries parisiennes notables (Perrotin, Gagosian, Thaddaeus Ropac, Templon, Kamel Mennour, David Zwirner, Marian Goodman, Hauser & Wirth, Almine Rech, Chantal Crousel).
+- **Sources** : programmations officielles, Paris Musées, GrandPalaisRmn, sites des fondations et des galeries ; presse : Télérama Sortir, Le Quotidien de l’Art, Connaissance des arts, The Art Newspaper, Beaux Arts, Le Monde, Libération.
+- Le rapport signale les **ouvertures à venir** (30 jours) et les **derniers jours** (fermeture sous 14 jours).
+
+### Rapport Radar
+Chaque veille publie un **rapport daté** : ce qu’il faut retenir, nouveautés par domaine, annonces à suivre, mises en vente à venir avec dates et heures, derniers jours d’expos, incontournables notés 4. Ton d’une chronique courte, factuelle, à la première personne du site (jamais celle de Léonard). **Public : aucune donnée privée** (ni prix payés, ni accompagnants, ni envies, ni réservations au-delà de `leonardYVa`, ni liste des suivis, ni profil).
+
 ## Zone privée et mot de passe
 Le mot de passe est dans la variable d'environnement `SAISON_MDP` (et dans le secret GitHub du même nom). Ne l'affiche jamais, ne l'écris dans aucun fichier.
 - `node tools/prive.mjs ouvrir` → `_prive.json` en clair (ignoré par git). Modifie-le.
@@ -159,13 +206,16 @@ Schéma (version 2) :
  "journalPrive":{"<id>":{"places":2,"billets":[{"spectateur":"Moi","prix":20,"paiement":"moi"},{"spectateur":"Dominique","prix":75,"paiement":"offert","categoriePlace":"cat. 4"}],"accompagnants":["Dominique"],"notes":"…"}},
  "soirs":["2026-12-24","2026-12-31"],
  "blocages":[{"debut":"2027-04-10","fin":"2027-04-20","motif":"…"}],
- "aCompleter":[{"ajouteLe":"2026-11-14","texte":"…confirmation collée…","extrait":{"sortieId":null,"date":"2027-02-03","heure":"19:30","salle":"","places":1,"siege":"","prixPlace":12,"tarif":""}}]}
+ "aCompleter":[{"ajouteLe":"2026-11-14","texte":"…confirmation collée…","extrait":{"sortieId":null,"date":"2027-02-03","heure":"19:30","salle":"","places":1,"siege":"","prixPlace":12,"tarif":""}}],
+ "suivis":[{"nom":"Tiago Rodrigues","domaine":"Théâtre","depuis":"2026-11-16","origine":"profil"}],
+ "profil":{"maj":"2026-11-16","depuis":"2022-01-01","sorties":120,"genres":{},"parAnnee":{},"sousGenres":{},"artistes":{},"lieux":{},"prix":{},"synthese":["…"]}}
 ```
 Une envie est binaire (pas de priorité ni de rang) ; `note` = note privée. Une seule réservation par sortie (clé = id).
 **Places et prix** (réservations et journalPrive) : `billets`, **une ligne par spectateur** : `spectateur` (« Moi » ou un prénom déjà utilisé, voir l'onglet Accompagnants ; vide si inconnu), `prix` (de cette place, en euros, `null` si inconnu), `paiement`, `tarif` et `categoriePlace` facultatifs. `paiement` : `moi` (payée par Léonard ; défaut ; pour un tiers, place qu'il lui offre), `autrui` (place de Léonard offerte par quelqu'un : `prix` = valeur commerciale, hors dépenses), `spectateur` (le tiers paie sa part, ex. Alexandre), `gratuit` (gratuité, mécénat, cadeau reçu : prix 0). `places` = nombre de lignes ; `accompagnants` = spectateurs autres que « Moi » (toujours tenu à jour). `pleinPlace` (facultatif) = plein tarif par place, pour les économies. `notes` (journalPrive, facultatif) = notes privées de Léonard sur la sortie vue.
 Tableau de bord : **payé par moi** = places de Moi en `moi` + places de tiers en `moi` (ancien `offert` lu comme `moi`), détaillé en « pour moi » et « offerts aux autres » ; **valeur de mes places** = toutes les places de Moi ; **offerts à moi** = places de Moi en `autrui` ; **valeur de toutes les places** et **réglé par les accompagnants** (`spectateur`). Les anciens champs (`prix` total, `prixPlace`, `pour`) sont encore lus mais ne s’écrivent plus.
 `soirs` : soirs pris déclarés (dates seules), publiés seulement fondus dans la liste `pris` de `dispo.json`.
 `blocages` : périodes privées (`debut`, `fin` inclus, `motif`) comptées dans les conflits mais jamais publiées dans `dispo.json`.
+`suivis` : artistes suivis par la veille (`nom` dans la graphie de l’index, `domaine` ∈ Théâtre, Danse, Musique, Classique et lyrique, `depuis`, `origine` `profil` ou `manuel`), tenus par `/suivre` et `/nesuisplus`. `profil` : profil de goûts calculé (voir « Veille »). Le mode admin conserve ces deux clés sans les modifier.
 `aCompleter` : billets collés dans la saisie rapide du site et non reconnus. `/veille` les traite (voir plus bas).
 
 ## Fichiers générés (`node tools/build.mjs`)
