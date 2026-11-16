@@ -8189,54 +8189,6 @@
    }
   },
   {
-   "id": "gustave-fayet-collectionneur-createur",
-   "titre": "Gustave Fayet, Collectionneur – Créateur. Icônes de l’art moderne",
-   "salle": "",
-   "publicJeune": false,
-   "leonardYVa": false,
-   "statut": "a-voir",
-   "offres": [],
-   "billetterie": "https://billetterie.fondationlouisvuitton.fr",
-   "categorie": "Exposition",
-   "sousGenre": "",
-   "artistes": [
-    {
-     "nom": "Gustave Fayet",
-     "role": "artiste"
-    },
-    {
-     "nom": "Sylvie Patry",
-     "role": "commissaire"
-    },
-    {
-     "nom": "Angeline Scherf",
-     "role": "commissaire"
-    }
-   ],
-   "lieuId": "fondation-louis-vuitton",
-   "debut": "2026-10-09",
-   "fin": "2027-03-08",
-   "relaches": [
-    "mar"
-   ],
-   "note": 3,
-   "calcul": "C1 N2 H2",
-   "pronostic": true,
-   "pourquoi": "La Fondation Louis Vuitton consacre tous ses espaces à Gustave Fayet, collectionneur de Gauguin, Van Gogh et Redon, et à son œuvre de créateur.",
-   "lien": "https://www.fondationlouisvuitton.fr/en/events/gustave-fayet-collector-designer-icons-of-modern-art",
-   "expo": {
-    "type": "fondation",
-    "nocturnes": [],
-    "tarif": "18 €",
-    "gratuit": false,
-    "jeunes": "reduit",
-    "jeunesTexte": "Étudiants 10 €, moins de 18 ans 5 €",
-    "creneau": true,
-    "source": "https://presse.fondationlouisvuitton.fr/?p=32390",
-    "ajouteLe": "2026-11-16"
-   }
-  },
-  {
    "id": "miguel-rothschild-chroniques-de-la-mer",
    "titre": "Miguel Rothschild. Chroniques de la mer et d’une tempête",
    "salle": "",
