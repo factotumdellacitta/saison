@@ -14,6 +14,10 @@ const ROLES = ["auteur", "compositeur", "mise en scène", "chorégraphie", "dire
 const ZONES = ["Paris", "Petite couronne", "Île-de-France", "Avignon", "Autre"];
 const STATUTS_LIEU = ["Public", "Privé"];
 const ETATS = ["dernieres-places", "attente", "complet"];
+// Expositions (bloc « expo » d'une sortie de catégorie Exposition) : mêmes listes que dans assets/app.js.
+const EXPO_TYPES = ["musee", "fondation", "galerie"];
+const EXPO_JEUNES = ["gratuit-ue-18-25", "gratuit", "reduit"];
+const JOURS = ["lun", "mar", "mer", "jeu", "ven", "sam", "dim"];
 // Barème (CLAUDE.md) : "C1 N3 H2 +Chef-d’œuvre" ; même lecture que calculDe() dans assets/app.js.
 function calculDe(t) {
   const m = /^C([0-2]) N([0-3]) H([0-2])((?: \+(?:Chef-d’œuvre|Distinction))*)$/.exec(String(t || "").trim());
@@ -82,7 +86,7 @@ if (existsSync("data/envies.json")) {
 
 // ---------- Jetons et secrets : jamais dans un fichier publié ----------
 const SECRET = /\b(gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})/;
-const publies = ["index.html", "sw.js", ...["assets", "data"].flatMap((d) => existsSync(d) ? readdirSync(d).map((f) => `${d}/${f}`) : [])];
+const publies = ["index.html", "sw.js", ...["assets", "data", "expo"].flatMap((d) => existsSync(d) ? readdirSync(d).map((f) => `${d}/${f}`) : [])].filter((f) => statSync(f).isFile());
 for (const f of publies) {
   if (!/\.(html|js|json|enc|ics|webmanifest|svg|txt|md)$/.test(f)) continue;
   if (SECRET.test(readFileSync(f, "utf8"))) erreurs.push(`${f} contient ce qui ressemble à un jeton GitHub : retire-le et révoque le jeton.`);
@@ -91,7 +95,7 @@ for (const f of publies) {
 // ---------- Charte Factotum : typographie et feuille de style ----------
 // Fichiers publiés, sous-dossiers compris (assets/fonts…)
 const arbo = (d) => readdirSync(d).flatMap((f) => statSync(`${d}/${f}`).isDirectory() ? arbo(`${d}/${f}`) : [`${d}/${f}`]);
-const textes = ["index.html", "sw.js", ...["assets", "data"].flatMap((d) => existsSync(d) ? arbo(d) : [])].filter((f) => /\.(html|js|css|json|ics|webmanifest|svg|txt|md)$/.test(f));
+const textes = ["index.html", "sw.js", ...["assets", "data", "expo"].flatMap((d) => existsSync(d) ? arbo(d) : [])].filter((f) => /\.(html|js|css|json|ics|webmanifest|svg|txt|md)$/.test(f));
 for (const f of textes) {
   const t = readFileSync(f, "utf8");
   t.split("\n").forEach((l, i) => {
@@ -174,6 +178,27 @@ const verifierSortie = (s, fichier) => {
     if ("etat" in o && !ETATS.includes(o.etat)) erreurs.push(`${ou} offre « ${o.type} » : etat inconnu (${ETATS.join(", ")}).`);
   }
   if ("etat" in s && !ETATS.includes(s.etat)) erreurs.push(`${ou} etat inconnu : ${s.etat} (${ETATS.join(", ")}).`);
+  // Expositions : bloc « expo » obligatoire à l'affiche (type, source), lien officiel obligatoire.
+  if ("expo" in s && s.categorie !== "Exposition") erreurs.push(`${ou} bloc expo réservé à la catégorie Exposition.`);
+  if (s.categorie === "Exposition" && (fichier === "affiche" || "expo" in s)) {
+    const x = s.expo;
+    if (!x || typeof x !== "object" || Array.isArray(x)) erreurs.push(`${ou} exposition sans bloc expo (type, tarif, source… voir CLAUDE.md).`);
+    else {
+      const connues = ["type", "nocturnes", "tarif", "gratuit", "jeunes", "jeunesTexte", "creneau", "source", "ajouteLe"];
+      for (const k of Object.keys(x)) if (!connues.includes(k)) erreurs.push(`${ou} expo.${k} : champ inconnu.`);
+      if (!EXPO_TYPES.includes(x.type)) erreurs.push(`${ou} expo.type inconnu : ${x.type} (${EXPO_TYPES.join(", ")}).`);
+      if (x.jeunes != null && !EXPO_JEUNES.includes(x.jeunes)) erreurs.push(`${ou} expo.jeunes inconnu : ${x.jeunes} (${EXPO_JEUNES.join(", ")} ou null).`);
+      for (const k of ["gratuit", "creneau"]) if (k in x && typeof x[k] !== "boolean") erreurs.push(`${ou} expo.${k} doit être true ou false.`);
+      if ("nocturnes" in x && (!Array.isArray(x.nocturnes) || x.nocturnes.some((j) => !JOURS.includes(j)))) erreurs.push(`${ou} expo.nocturnes : liste de jours (lun … dim).`);
+      if (fichier === "affiche" && !URL_RE.test(x.source || "")) erreurs.push(`${ou} expo.source manquante (URL de la source de l'information).`);
+      if (x.source && !URL_RE.test(x.source)) erreurs.push(`${ou} expo.source n'est pas une URL.`);
+      if (x.ajouteLe && !ISO.test(x.ajouteLe)) erreurs.push(`${ou} expo.ajouteLe n'est pas au format AAAA-MM-JJ.`);
+      if (fichier === "affiche" && !x.gratuit && !x.tarif) warn.push(`${ou} exposition sans tarif.`);
+    }
+    if (fichier === "affiche" && s.statut === "a-voir" && !URL_RE.test(s.lien || "")) erreurs.push(`${ou} lien officiel obligatoire pour une exposition.`);
+    const L = lieux[s.lieuId];
+    if (fichier === "affiche" && L && L.zone === "Paris" && !/\b75\d{3}\b/.test(L.adresse || "")) warn.push(`${ou} lieu d'exposition sans adresse (code postal) : arrondissement inconnu.`);
+  }
 };
 
 const affiche = lire("data/affiche.json");
@@ -224,11 +249,21 @@ if (Array.isArray(dispo.pris)) {
 }
 
 // ---------- Site : politique de sécurité ----------
-const html = readFileSync("index.html", "utf8");
-if (!/http-equiv="Content-Security-Policy"/.test(html)) erreurs.push("index.html : Content-Security-Policy manquante.");
-if (/'unsafe-inline'|'unsafe-eval'/.test(html)) erreurs.push("index.html : la politique de sécurité ne doit autoriser ni 'unsafe-inline' ni 'unsafe-eval'.");
-if (!/<meta name="referrer" content="no-referrer">/.test(html)) erreurs.push("index.html : <meta name=\"referrer\" content=\"no-referrer\"> manquant.");
-for (const f of ["assets/app.js", "assets/admin.js", "assets/charte.js"]) {
+// Deux coques (Factotum et Factotum Expo) : même politique, même script de thème, même version des fichiers partagés.
+const csp = (h) => (/http-equiv="Content-Security-Policy" content="([^"]*)"/.exec(h) || [])[1];
+const versions = (t) => [...new Set([...t.matchAll(/\?v=([0-9.]+)/g)].map((m) => m[1]))];
+const coques = ["index.html", "expo/index.html"].filter((f) => existsSync(f));
+for (const f of coques) {
+  const html = readFileSync(f, "utf8");
+  if (!csp(html)) erreurs.push(`${f} : Content-Security-Policy manquante.`);
+  if (/'unsafe-inline'|'unsafe-eval'/.test(html)) erreurs.push(`${f} : la politique de sécurité ne doit autoriser ni 'unsafe-inline' ni 'unsafe-eval'.`);
+  if (!/<meta name="referrer" content="no-referrer">/.test(html)) erreurs.push(`${f} : <meta name="referrer" content="no-referrer"> manquant.`);
+  if (/\sstyle="|\son[a-z]+="/.test(html)) erreurs.push(`${f} : attribut style ou gestionnaire d'événement en ligne.`);
+  if (csp(html) !== csp(readFileSync("index.html", "utf8"))) erreurs.push(`${f} : politique de sécurité différente de celle d'index.html.`);
+}
+const vs = versions(["index.html", "expo/index.html", "sw.js", "assets/app.js"].filter((f) => existsSync(f)).map((f) => readFileSync(f, "utf8")).join("\n"));
+if (vs.length > 1) erreurs.push(`Versions « ?v= » différentes entre les coques, sw.js et app.js : ${vs.join(", ")}.`);
+for (const f of ["assets/app.js", "assets/admin.js", "assets/charte.js", "assets/expo.js"]) {
   const t = readFileSync(f, "utf8");
   if (/\sstyle="|\son[a-z]+="/.test(t)) erreurs.push(`${f} : attribut style ou gestionnaire d'événement en ligne (bloqué par la politique de sécurité).`);
   if (/target="_blank"(?! rel="noopener noreferrer")/.test(t)) erreurs.push(`${f} : lien externe sans rel="noopener noreferrer".`);

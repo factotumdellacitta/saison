@@ -237,6 +237,12 @@
    "impressions"
   ]
  },
+ "angeline-scherf": {
+  "nom": "Angeline Scherf",
+  "sorties": [
+   "gustave-fayet-collectionneur-createur"
+  ]
+ },
  "angelique-boudeville": {
   "nom": "Angélique Boudeville",
   "sorties": [
@@ -1676,10 +1682,22 @@
    "mahler-symphonie-des-mille-makela"
   ]
  },
+ "gustave-fayet": {
+  "nom": "Gustave Fayet",
+  "sorties": [
+   "gustave-fayet-collectionneur-createur"
+  ]
+ },
  "gustave-flaubert": {
   "nom": "Gustave Flaubert",
   "sorties": [
    "vu-leducation-sentimentale"
+  ]
+ },
+ "gustave-le-gray": {
+  "nom": "Gustave Le Gray",
+  "sorties": [
+   "gustave-le-gray-peintre-photographe"
   ]
  },
  "guy-cassiers": {
@@ -3061,6 +3079,12 @@
    "vu-solidays-2023-samedi"
   ]
  },
+ "miguel-rothschild": {
+  "nom": "Miguel Rothschild",
+  "sorties": [
+   "miguel-rothschild-chroniques-de-la-mer"
+  ]
+ },
  "mika": {
   "nom": "Mika",
   "sorties": [
@@ -4070,6 +4094,12 @@
    "vu-le-suicide"
   ]
  },
+ "sylvie-patry": {
+  "nom": "Sylvie Patry",
+  "sorties": [
+   "gustave-fayet-collectionneur-createur"
+  ]
+ },
  "tamara-al-saadi": {
   "nom": "Tamara Al Saadi",
   "sorties": [
@@ -4176,6 +4206,12 @@
   "nom": "Thomas Dunford",
   "sorties": [
    "lea-desandre"
+  ]
+ },
+ "thomas-galifot": {
+  "nom": "Thomas Galifot",
+  "sorties": [
+   "gustave-le-gray-peintre-photographe"
   ]
  },
  "thomas-jolly": {

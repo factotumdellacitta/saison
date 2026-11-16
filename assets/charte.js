@@ -102,6 +102,9 @@
       <div class="ch-duo"><div class="ch-planche" data-theme="light"><span class="meta">Clair</span><div class="ch-jetons" data-jetons></div></div><div class="ch-planche" data-theme="dark"><span class="meta">Sombre</span><div class="ch-jetons" data-jetons></div></div></div>
       <h3 class="sec">Contrastes (WCAG AA)</h3><div class="defile-x"><table class="t" id="ch-contrastes"></table></div></section>
 
+    <section class="ch-section"><h2 class="mh">Déclinaison : Factotum Expo</h2><p>Le site des expositions (sous <code>expo/</code>) reprend toute la charte ; seul l’accent change : <b>vert Véronèse #00715D</b> en aplats francs, texte blanc dessus. Employé comme couleur de texte, il passe à #3DBFA2 sur fond sombre. Tout passe par les jetons <code>--accent</code>, <code>--sur-accent</code> et <code>--accent-texte</code>, jamais par une couleur en dur. Logotype FACTOTUM suivi de la mention « EXPO » (métadonnée, 800) ; même clé F, blanche sur vert. Dans l’en-tête des deux sites, le sélecteur « Spectacles | Expos » reste toujours visible et garde le thème.</p>
+      <div class="ch-site" data-site="expo"><span class="logo">${cleF()}Factotum</span><span class="mention">Expo</span><span class="sites"><a href="./">Spectacles</a><a href="expo/" aria-current="page">Expos</a></span></div></section>
+
     <section class="ch-section"><h2 class="mh">Typographie</h2><p>Police unique : Schibsted Grotesk (OFL), auto-hébergée, graisses 400, 500, 700 et 800. Chiffres tabulaires partout. Guillemets « » avec espaces insécables, apostrophe ’, tiret demi-cadratin – pour les intervalles et les incises. Ni tiret cadratin ni espace fine.</p>
       <div class="ch-duo"><div class="ch-planche ch-type" data-theme="light">${tailles.map(([l, c, t]) => `<div><span class="meta muet" data-taille="${c}">${l}</span><div class="${c}">${t}</div></div>`).join("")}</div>
       <div class="ch-planche ch-type" data-theme="dark">${tailles.map(([l, c, t]) => `<div><span class="meta muet">${l}</span><div class="${c}">${t}</div></div>`).join("")}</div></div></section>
@@ -138,7 +141,7 @@
     st(main);
     main.querySelectorAll("form").forEach((f) => f.addEventListener("submit", (ev) => ev.preventDefault()));
     // Jetons et contrastes, lus dans la feuille (aucune valeur recopiée ici)
-    const JET = ["fond", "surface", "encre", "encre-2", "filet", "filet-leger", "rouge", "sur-rouge", "rouge-texte", "g-theatre", "g-lyrique", "g-danse", "g-concert", "a-theatre", "a-lyrique", "a-danse", "a-concert"];
+    const JET = ["fond", "surface", "encre", "encre-2", "filet", "filet-leger", "accent", "sur-accent", "accent-texte", "g-theatre", "g-lyrique", "g-danse", "g-concert", "a-theatre", "a-lyrique", "a-danse", "a-concert"];
     main.querySelectorAll("[data-jetons]").forEach((box) => {
       const cs = getComputedStyle(box.parentElement);
       box.innerHTML = JET.map((k) => `<div class="ch-jeton"><i data-st="--c:var(--${k})"></i><b>--${k}</b><span class="muet">${cs.getPropertyValue("--" + k).trim()}</span></div>`).join("");
@@ -147,7 +150,7 @@
     const hex = (h) => { h = h.trim().replace("#", ""); return [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16) / 255); };
     const lum = (h) => { const [r, g, b] = hex(h).map((c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4)); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
     const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };
-    const PAIRES = [["encre", "fond", 4.5], ["encre", "surface", 4.5], ["encre-2", "fond", 4.5], ["encre-2", "surface", 4.5], ["rouge-texte", "fond", 4.5], ["rouge-texte", "surface", 4.5], ["sur-rouge", "rouge", 4.5], ["fond", "encre", 4.5], ["filet", "fond", 3], ["rouge", "fond", 3], ...["theatre", "musique", "danse", "images"].flatMap((f) => [["g-" + f, "fond", 4.5], ["sur-rouge", "a-" + f, 4.5]])];
+    const PAIRES = [["encre", "fond", 4.5], ["encre", "surface", 4.5], ["encre-2", "fond", 4.5], ["encre-2", "surface", 4.5], ["accent-texte", "fond", 4.5], ["accent-texte", "surface", 4.5], ["sur-accent", "accent", 4.5], ["fond", "encre", 4.5], ["filet", "fond", 3], ["accent", "fond", 3], ...["theatre", "lyrique", "danse", "concert"].flatMap((f) => [["g-" + f, "fond", 4.5], ["sur-accent", "a-" + f, 4.5]])];
     const [cl, so] = [...main.querySelectorAll("[data-jetons]")].map((b) => getComputedStyle(b.parentElement));
     const v = (cs, k) => cs.getPropertyValue("--" + k);
     $("#ch-contrastes", main).innerHTML = `<thead><tr><th>Texte</th><th>Fond</th><th class="num">Clair</th><th class="num">Sombre</th><th class="num">Seuil</th></tr></thead><tbody>${PAIRES.map(([t, f, s]) => {

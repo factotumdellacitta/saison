@@ -1,0 +1,18 @@
+{
+ "id": "expo",
+ "name": "Factotum Expo",
+ "short_name": "Expo",
+ "description": "Expositions à Paris : veille, agenda et journal des visites de Léonard.",
+ "lang": "fr",
+ "start_url": "./#a-voir",
+ "scope": "../",
+ "display": "standalone",
+ "background_color": "#00715D",
+ "theme_color": "#00715D",
+ "icons": [
+  {"src": "../assets/expo/icon.svg", "sizes": "any", "type": "image/svg+xml"},
+  {"src": "../assets/expo/icon-192.png", "sizes": "192x192", "type": "image/png"},
+  {"src": "../assets/expo/icon-512.png", "sizes": "512x512", "type": "image/png"},
+  {"src": "../assets/expo/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+ ]
+}

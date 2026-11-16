@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr" data-site="expo">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-tAZPaSxIVz/tOO0If1MrTFX/6rY7B0zZPsPWJW8w3DU='; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.github.com; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Factotum Expo</title>
+<script>try{var t=localStorage.getItem("factotum-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<meta name="description" content="Expositions à Paris, dans les musées, les fondations et les galeries : à voir, bientôt, derniers jours, notées et commentées par Léonard.">
+<meta name="theme-color" content="#00715D">
+<meta name="color-scheme" content="light dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Factotum Expo">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Factotum Expo">
+<meta property="og:title" content="Factotum Expo">
+<meta property="og:description" content="Expositions à Paris : musées, fondations et galeries, à voir, bientôt et derniers jours, notées et commentées.">
+<meta property="og:url" content="https://factotumdellacitta.github.io/saison/expo/">
+<meta property="og:image" content="https://factotumdellacitta.github.io/saison/assets/expo/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Factotum Expo : la clé F et le nom en blanc sur un aplat vert">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Factotum Expo">
+<meta name="twitter:description" content="Expositions, saison après saison.">
+<meta name="twitter:image" content="https://factotumdellacitta.github.io/saison/assets/expo/og.png">
+<link rel="icon" href="../assets/expo/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/expo/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preload" href="../assets/fonts/schibsted-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/schibsted-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../data/affiche.json" as="fetch" crossorigin>
+<link rel="stylesheet" href="../assets/factotum.css?v=4.42">
+</head>
+<body>
+<a class="skip" href="#main">Aller au contenu</a>
+<header class="top" id="top"><div class="in">
+  <a class="brand cartouche" href="#a-voir" aria-label="Factotum Expo, accueil"><span class="logo"><svg class="cle" viewBox="0 0 48 48" fill="currentColor" aria-hidden="true" focusable="false"><g transform="translate(24 24) rotate(45) scale(.88) translate(-23.5 -25)"><rect x="18" y="5" width="5" height="25"/><rect x="18" y="5" width="17" height="5"/><rect x="18" y="14" width="12" height="5"/><circle cx="20.5" cy="36" r="6.5" fill="none" stroke="currentColor" stroke-width="5"/></g></svg>Factotum</span><span class="saison duo"><span class="mention">Expo</span><span id="saison"></span></span></a>
+  <nav class="sites" aria-label="Sites Factotum"><a href="../">Spectacles</a><a href="./" aria-current="page">Expos</a></nav>
+  <div class="top-acts"><a class="theme ic" id="hcoeur" href="#coeur" aria-label="Coups de cœur de Léonard" title="Coups de cœur de Léonard"><svg class="coeur" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20.5 3.6 12.1a4.8 4.8 0 0 1 6.8-6.8L12 6.9l1.6-1.6a4.8 4.8 0 0 1 6.8 6.8z"/></svg></a><span class="tm"><button class="theme ic" type="button" data-theme-btn aria-haspopup="menu" aria-expanded="false" aria-label="Thème : auto"></button></span><button class="theme ic" type="button" id="cx" data-cx aria-haspopup="dialog" aria-label="Connexion"></button></div>
+</div></header>
+<div class="barre" aria-hidden="true"><a href="#a-voir" tabindex="-1"><span class="logo"><svg class="cle" viewBox="0 0 48 48" fill="currentColor" focusable="false"><g transform="translate(24 24) rotate(45) scale(.88) translate(-23.5 -25)"><rect x="18" y="5" width="5" height="25"/><rect x="18" y="5" width="17" height="5"/><rect x="18" y="14" width="12" height="5"/><circle cx="20.5" cy="36" r="6.5" fill="none" stroke="currentColor" stroke-width="5"/></g></svg>Factotum</span><span class="mention">Expo</span></a><span class="sites"><a href="../" tabindex="-1">Spectacles</a><a href="./" tabindex="-1">Expos</a></span></div>
+<nav class="tabs" role="tablist" aria-label="Sections">
+  <button class="tab" role="tab" id="t-a-voir" data-tab="a-voir" aria-controls="main" aria-selected="true"><span class="court" aria-hidden="true">À voir</span><span class="long">À&nbsp;voir</span></button>
+  <button class="tab" role="tab" id="t-bientot" data-tab="bientot" aria-controls="main" aria-selected="false" tabindex="-1"><span class="court" aria-hidden="true">Bientôt</span><span class="long">Bientôt</span></button>
+  <button class="tab" role="tab" id="t-journal" data-tab="journal" aria-controls="main" aria-selected="false" tabindex="-1"><span class="court" aria-hidden="true">Journal</span><span class="long">Journal</span></button>
+  <button class="tab" role="tab" id="t-artistes" data-tab="artistes" aria-controls="main" aria-selected="false" tabindex="-1"><span class="court" aria-hidden="true">Index</span><span class="long">Artistes et lieux</span></button>
+  <button class="tab lock" role="tab" id="t-admin" hidden data-tab="admin" aria-controls="main" aria-selected="false" tabindex="-1"><span class="court" aria-hidden="true">Admin</span><span class="long">Admin</span></button>
+</nav>
+<div class="msg hl" id="hl" role="status" hidden></div>
+<main class="wrap"><div id="main" role="tabpanel" aria-labelledby="t-a-voir" tabindex="-1"><p class="load">Chargement des expositions…</p></div>
+<footer class="pied"><p class="meta">Largo al factotum della città.</p><p class="meta"><a href="#plan">Plan du site</a></p><p class="meta muet" id="maj"></p></footer></main>
+<div class="sheet" id="sheet" hidden><div class="sheet-in" id="sheetIn" role="dialog" aria-modal="true" aria-labelledby="sheetT" tabindex="-1"></div></div>
+<div class="toast msg" id="toast" role="status" aria-live="polite"></div>
+<script src="../assets/app.js?v=4.42" defer></script>
+</body>
+</html>

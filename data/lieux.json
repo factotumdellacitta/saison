@@ -76,6 +76,16 @@
   "tarifJeune": "",
   "adresse": "50 boulevard Voltaire, 75011 Paris"
  },
+ "bendana-pinel": {
+  "nom": "Bendana | Pinel Art Contemporain",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.bendana-pinel.com",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "4 rue du Perche, 75003 Paris"
+ },
  "bouffes-du-nord": {
   "nom": "Théâtre des Bouffes du Nord",
   "ville": "Paris",
@@ -216,6 +226,16 @@
   "billetterie": null,
   "tarifJeune": ""
  },
+ "fondation-louis-vuitton": {
+  "nom": "Fondation Louis Vuitton",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.fondationlouisvuitton.fr",
+  "billetterie": "https://billetterie.fondationlouisvuitton.fr",
+  "tarifJeune": "",
+  "adresse": "8 avenue du Mahatma-Gandhi, 75116 Paris"
+ },
  "grande-halle-villette": {
   "nom": "Grande Halle de la Villette",
   "ville": "Paris",
@@ -346,6 +366,16 @@
   "site": "https://www.mc93.com",
   "billetterie": null,
   "tarifJeune": ""
+ },
+ "musee-orsay": {
+  "nom": "Musée d’Orsay",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://www.musee-orsay.fr",
+  "billetterie": "https://billetterie.musee-orsay.fr",
+  "tarifJeune": "Gratuit pour les moins de 26 ans résidents de l’Espace économique européen",
+  "adresse": "Esplanade Valéry-Giscard-d’Estaing, 75007 Paris"
  },
  "nanterre-amandiers": {
   "nom": "Nanterre-Amandiers",

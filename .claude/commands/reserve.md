@@ -1,5 +1,5 @@
 ---
-description: Enregistrer une réservation (ex. /reserve Werther 8 février 20h, 2 places, 24 € Carte Jeune, avec Paul)
+description: Enregistrer une réservation ou une visite d’exposition (ex. /reserve Werther 8 février 20h, 2 places, 24 € Carte Jeune, avec Paul ; /reserve expo Le Gray samedi 14h)
 ---
 Réservation : $ARGUMENTS
 
@@ -7,4 +7,5 @@ Réservation : $ARGUMENTS
 2. Vérifie les conflits (`dispo.json` toutes listes, réservations privées, `blocages`). S'il y en a un, signale-le mais enregistre quand même.
 3. `node tools/prive.mjs ouvrir`, ajoute ou mets à jour `reservations[id]` : `date`, `heure` (20:00 si inconnue, et note « heure à préciser »), `salle`, `siege`, `billets` (une ligne par spectateur : `spectateur` « Moi » ou prénom, `prix` de la place, `paiement` moi / offert / spectateur / gratuit, `tarif` et `categoriePlace` facultatifs ; voir CLAUDE.md), `places` (= nombre de lignes), `pleinPlace` (facultatif), `accompagnants` (spectateurs autres que Moi), `billetterie`, `note`. Retire l'id de `envies` s'il y est. Puis `node tools/prive.mjs fermer`.
 4. Passe `leonardYVa` à true dans la fiche publique. Rien d'autre de la réservation ne va dans un fichier public.
-5. Procédure CLAUDE.md (build, check, commit, push) et réponds en 2 lignes.
+5. **Exposition** : la réservation est une visite planifiée, même schéma (`heure` = créneau, vide si la visite est libre ; ni `salle` ni `siege`). Créneau à partir de 17 h : soir pris ; avant : demi-journée, hors `dispo.json`. Vérifie que le jour n'est pas un jour de fermeture (`relaches`) et signale si `expo.creneau` impose de réserver.
+6. Procédure CLAUDE.md (build, check, commit, push) et réponds en 2 lignes.

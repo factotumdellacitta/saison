@@ -7,4 +7,5 @@ Sortie vue : $ARGUMENTS
 2. Déplace la fiche de `affiche.json` vers `journal.json` (même id) : `statut: "vu"`, ajoute la date à `vuLe`, `noteLeonard` (nombre d'étoiles donné, sinon null), `avis` (ses mots exacts, sinon vide), `leonardYVa: false`.
 3. Cherche la page officielle archivée et mets-la dans `lien` si la fiche n'en a pas.
 4. Zone privée (ouvrir / fermer) : si une réservation existe, copie `billets`, `places`, `pleinPlace` et `accompagnants` dans `journalPrive[id]`, puis retire la réservation ; retire aussi l'id de `envies`.
-5. Procédure CLAUDE.md (mets aussi à jour `maj` de journal.json), réponse en 1–2 lignes.
+5. Exposition : même procédure (la fiche garde son bloc `expo` et paraît au journal de Factotum Expo) ; la date est celle de la visite planifiée si elle existe.
+6. Procédure CLAUDE.md (mets aussi à jour `maj` de journal.json), réponse en 1–2 lignes.

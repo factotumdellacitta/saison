@@ -2,6 +2,7 @@
 
 Site public de Léonard, **Factotum** : https://factotumdellacitta.github.io/saison/ (le dépôt garde le nom `saison` : ne le renomme pas, l’adresse, les flux abonnés et les liens partagés en dépendent).
 Outil unique de **veille** (affiche notée), d'**agenda** (réservations, soirs pris, flux Apple Calendar) et d'**archive** (journal des sorties vues) pour toutes les sorties culturelles.
+**Deux sites, un seul code** : Factotum (spectacles, à la racine) et **Factotum Expo** (expositions, https://factotumdellacitta.github.io/saison/expo/). Mêmes données, même zone privée, même mode admin, mêmes outils ; voir « Factotum Expo ».
 Léonard écrit en français, style direct. Réponds en français, brièvement, sans préambule. Pas de tiret cadratin ni d'espace fine : utilise « – » ou la virgule.
 
 ## Fichiers
@@ -21,10 +22,36 @@ Léonard écrit en français, style direct. Réponds en français, brièvement, 
 | `data/agenda-<icsToken>.ics` | Flux « Factotum – réservations », généré à la publication, **jamais versionné** (ignoré par git) | Adresse non devinable |
 | `data/ventes-<icsToken>.ics` | Flux « Factotum – ouvertures de ventes », généré à la publication, **jamais versionné** | Adresse non devinable |
 | `index.html`, `assets/factotum.css`, `assets/app.js`, `assets/admin.js`, `assets/charte.js`, `sw.js` | Le site (coque, feuille unique, logique publique, mode admin et page `#charte` chargés à la demande, service worker). Ne les modifie que si Léonard demande un changement d'interface. | |
+| `expo/index.html`, `expo/manifest.webmanifest`, `assets/expo.js`, `assets/expo/` | Factotum Expo : coque (`<html data-site="expo">`), manifeste, vues « À voir » et « Bientôt » chargées à la demande, icônes et image de partage vertes (générées par `tools/icones.mjs`). Tout le reste est partagé. | |
 
-Le site publié ne contient que `index.html`, `sw.js`, `assets/` et `data/`. Jamais `tools/`, `_setup/` ni fichier en clair.
-Après toute modification de `assets/app.js`, `assets/admin.js`, `assets/charte.js` ou `assets/factotum.css` : incrémente `?v=` partout où il apparaît (`index.html`, `loadAdmin` et `loadCharte` d'`app.js`, `SHELL` de `sw.js`) ainsi que `V` dans `sw.js` (sinon les téléphones gardent l'ancienne version en cache). Icônes, image de partage et visuels GitHub : `node tools/icones.mjs` (à relancer seulement si le symbole change).
-Routes du site : `#radar` (accueil : ventes sous 7 jours, notées 4 à réserver, dernières chances sous 21 jours, ouvertures suivantes, billetteries ; colonne latérale de l'Affiche sur bureau), `#affiche?filtres`, `#journal`, `#artistes`, `#lieux`, `#artiste-<slug>`, `#lieu-<id>`, `#liens` (section Billetteries du Radar), `#ventes` (toutes les ouvertures de vente à venir, bouton dans la colonne de droite du Radar), `#plan` (plan du site, lien en pied de page), `#coeur` (envies, publique), `#sortie-<id>`, `#admin?v=res|ranger|envies|rapide|soirs|budget|acc|lieux|liens|abo`, `#journal?sa=<année de début>` (filtre de saison), `#charte` (charte graphique, liée seulement depuis le plan du site) (les anciens `#fiche-<id>` redirigent).
+Le site publié ne contient que `index.html`, `sw.js`, `assets/`, `data/` et `expo/`. Jamais `tools/`, `_setup/` ni fichier en clair.
+Après toute modification de `assets/app.js`, `assets/admin.js`, `assets/charte.js`, `assets/expo.js` ou `assets/factotum.css` : incrémente `?v=` partout où il apparaît (`index.html`, `expo/index.html`, `loadAdmin`, `loadCharte` et `loadExpo` d'`app.js`, `SHELL` de `sw.js` ; `check.mjs` bloque des versions différentes) ainsi que `V` dans `sw.js` (sinon les téléphones gardent l'ancienne version en cache). Icônes, image de partage et visuels GitHub : `node tools/icones.mjs` (à relancer seulement si le symbole change).
+Routes du site : `#radar` (accueil : ventes sous 7 jours, notées 4 à réserver, dernières chances sous 21 jours, ouvertures suivantes, billetteries ; colonne latérale de l'Affiche sur bureau), `#affiche?filtres`, `#journal`, `#artistes`, `#lieux`, `#artiste-<slug>`, `#lieu-<id>`, `#liens` (section Billetteries du Radar), `#ventes` (toutes les ouvertures de vente à venir, bouton dans la colonne de droite du Radar), `#plan` (plan du site, lien en pied de page), `#coeur` (envies, publique), `#sortie-<id>`, `#admin?v=res|ranger|envies|rapide|soirs|budget|acc|lieux|liens|abo`, `#journal?sa=<année de début>` (filtre de saison), `#charte` (charte graphique, liée seulement depuis le plan du site) (les anciens `#fiche-<id>` redirigent). Routes de Factotum Expo (`expo/`) : `#a-voir?filtres` (accueil), `#bientot`, `#journal`, `#artistes`, `#lieux`, `#artiste-<slug>`, `#lieu-<id>`, `#coeur`, `#sortie-<id>`, `#plan`, `#admin`, `#charte`.
+
+## Factotum Expo (`expo/`)
+- **Architecture** : `expo/index.html` est une seconde coque qui charge les mêmes `assets/app.js` et `assets/factotum.css`. `app.js` lit `<html data-site>` : `EXPO`, `RACINE` (`"../"` sous `expo/`, préfixe de tous les chemins `data/`, `assets/`, `sw.js`), `NOM`, `ACCUEIL`, `duSite(e)`. Jamais de copie de code : ce qui est propre aux expos tient dans `assets/expo.js` (vues) et dans les fonctions `expo…` d'`app.js` (marques, infos pratiques, Radar).
+- **Partage** : une expo est une sortie `categorie: "Exposition"` dans `affiche.json` puis `journal.json` (identifiants uniques, mêmes index, mêmes envies et réservations dans `prive.enc`). Chaque site ne liste que les siennes (Affiche, Journal, Coups de cœur) ; les pages artiste et lieu montrent tout ; `#sortie-<id>` ouvert sur le mauvais site redirige vers le bon.
+- **Sélecteur « Spectacles | Expos »** (`.sites`) : deux liens statiques dans l'en-tête et la barre compacte des deux coques, toujours visibles ; le thème suit (même `localStorage`).
+- **PWA** : un seul service worker (`sw.js`, portée racine) ; deux applications installables, Factotum (`assets/manifest.webmanifest`) et Factotum Expo (`expo/manifest.webmanifest`, `id` propre, icônes vertes), toutes deux de portée racine : le sélecteur ne fait jamais sortir de l'application.
+- **Identité** : même charte, accent **vert Véronèse #00715D** en aplats francs. Les jetons d'accent s'appellent `--accent`, `--sur-accent`, `--accent-texte` (rouges par défaut) ; les blocs `[data-site="expo"]` de la feuille les remplacent : `--accent` #00715D, `--accent-texte` #00715D en clair et **#3DBFA2** en sombre. Jamais de couleur en dur. Logotype FACTOTUM + mention « EXPO » (`.mention`) ; clé F blanche sur vert. `tools/contrast.mjs` vérifie toutes les paires pour les deux sites.
+- **Pages** : À voir (expos en cours, derniers jours d'abord puis note ; filtres type, arrondissement, gratuité, nocturne, note), Bientôt (par date d'ouverture), Journal, Index, Admin. Le Radar de Factotum porte les rubriques « Nouvelles expos » et « Derniers jours » (affichées seulement si elles ne sont pas vides).
+- **Admin** (libellés selon la catégorie) : « Ça m’intéresse » = envie ; « Planifier une visite » = réservation (`reservations[id]` : `date`, `heure` = créneau, `billets`, `accompagnants`) ; « Vu » avec note. La visite entre dans le flux agenda (« Expo : titre », 1 h 30). **Créneau à partir de 17 h : soir pris** (publié dans `dispo.pris`) ; **avant 17 h : demi-journée**, signalée dans les conflits du mode admin mais jamais publiée.
+
+### Exposition (bloc `expo` d'une sortie)
+```json
+{"id":"gustave-le-gray-peintre-photographe","titre":"…","categorie":"Exposition","sousGenre":"Photographie",
+ "artistes":[{"nom":"Gustave Le Gray","role":"artiste"},{"nom":"Thomas Galifot","role":"commissaire"}],
+ "lieuId":"musee-orsay","debut":"2026-11-10","fin":"2027-02-07","horaires":"9h30–18h, jeudi jusqu’à 21h45","relaches":["lun"],
+ "note":2,"calcul":"C1 N2 H1","pronostic":true,"pourquoi":"…","lien":"https://…","billetterie":null,
+ "expo":{"type":"musee","nocturnes":["jeu"],"tarif":"16 €","gratuit":false,"jeunes":"gratuit-ue-18-25","jeunesTexte":"","creneau":false,"source":"https://…","ajouteLe":"2026-11-16"}}
+```
+- `expo.type` ∈ `musee`, `fondation`, `galerie` (obligatoire). `lien` officiel et `expo.source` (adresse d'où vient l'information) **obligatoires** à l'affiche.
+- `relaches` = jours de fermeture ; `expo.nocturnes` = jours de nocturne (`lun` … `dim`) ; `horaires` en clair.
+- `expo.tarif` = plein tarif en clair (jamais `tarifPlein`, `prix` ni `heure`, clés privées) ; `expo.gratuit` = entrée libre pour tous ; `expo.creneau` = réservation d'un créneau obligatoire.
+- `expo.jeunes` ∈ `gratuit-ue-18-25` (gratuité des musées nationaux pour les 18–25 ans résidents de l'UE : à poser dès qu'elle s'applique à l'exposition, pas seulement aux collections), `gratuit`, `reduit` ou `null` ; précision libre dans `jeunesTexte`.
+- `expo.ajouteLe` : date d'ajout de la fiche ; la marque « Nouveau » est calculée pendant 14 jours.
+- Calculés, jamais écrits : « Derniers jours » (fermeture sous 14 jours), « Bientôt » (pas encore ouverte), « En cours », arrondissement (code postal de `lieux[].adresse` : renseigne l'adresse de tout lieu d'exposition).
+- Artistes exposés : rôle `artiste` ; commissaires : rôle `commissaire`. Note : barème commun.
 
 ## Charte graphique (Factotum)
 Référence vivante : la page `#charte` (imprimable en PDF). Toute modification d'interface la respecte ; `tools/check.mjs` bloque les écarts mesurables.
@@ -41,9 +68,9 @@ Référence vivante : la page `#charte` (imprimable en PDF). Toute modification 
   | `--encre-2` | #5C5C5C | #A6A6A6 |
   | `--filet` | #111111 | #F2F2F2 |
   | `--filet-leger` | #D9D9D9 | #2E2E2E |
-  | `--rouge` | #E30613 | #E30613 |
-  | `--sur-rouge` | #FFFFFF | #FFFFFF |
-  | `--rouge-texte` | #E30613 | #FF5A4F |
+  | `--accent` (rouge ; Expo : #00715D) | #E30613 | #E30613 |
+  | `--sur-accent` | #FFFFFF | #FFFFFF |
+  | `--accent-texte` (Expo : #00715D / #3DBFA2) | #E30613 | #FF5A4F |
 
   **Code des genres** : une encre par famille (`--g-…`, texte AA) et un aplat sous texte blanc (`--a-…`, identique dans les deux thèmes), réservés au genre : surtitre et tranche de 3 px devant la date des lignes, icône des puces de genre, puce de genre active (aplat), barres « Par catégorie », en-tête de fiche (aplat ; Théâtre et genres neutres gardent le rouge franc). Familles (`famille()` dans `app.js`) :
 

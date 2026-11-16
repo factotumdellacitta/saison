@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-15",
+ "maj": "2026-11-16",
  "sorties": [
   {
    "id": "10-000-langages-pour-en-faire-un",
@@ -7447,7 +7447,15 @@
    "offres": [],
    "relaches": [
     "lun"
-   ]
+   ],
+   "expo": {
+    "type": "musee",
+    "nocturnes": [],
+    "gratuit": false,
+    "jeunes": null,
+    "creneau": false,
+    "source": "https://philharmoniedeparis.fr/fr/node/7098"
+   }
   },
   {
    "id": "trifonov-berliner-barock-solisten",
@@ -8132,6 +8140,136 @@
    "leonardYVa": false,
    "statut": "a-voir",
    "offres": []
+  },
+  {
+   "id": "gustave-le-gray-peintre-photographe",
+   "titre": "Gustave Le Gray, peintre photographe",
+   "salle": "Niveau 0, salle 8c",
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "billetterie": "https://billetterie.musee-orsay.fr",
+   "categorie": "Exposition",
+   "sousGenre": "Photographie",
+   "artistes": [
+    {
+     "nom": "Gustave Le Gray",
+     "role": "artiste"
+    },
+    {
+     "nom": "Thomas Galifot",
+     "role": "commissaire"
+    }
+   ],
+   "lieuId": "musee-orsay",
+   "debut": "2026-11-10",
+   "fin": "2027-02-07",
+   "horaires": "9h30–18h, jeudi jusqu’à 21h45",
+   "relaches": [
+    "lun"
+   ],
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Le musée d’Orsay revient sur Gustave Le Gray, peintre devenu l’un des grands photographes du XIXe siècle, à partir de ses collections.",
+   "lien": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions/gustave-le-gray-painter-and-photographer",
+   "expo": {
+    "type": "musee",
+    "nocturnes": [
+     "jeu"
+    ],
+    "tarif": "16 € (12 € en nocturne)",
+    "gratuit": false,
+    "jeunes": "gratuit-ue-18-25",
+    "jeunesTexte": "Gratuit aussi pour les moins de 18 ans",
+    "creneau": false,
+    "source": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions/gustave-le-gray-painter-and-photographer",
+    "ajouteLe": "2026-11-16"
+   }
+  },
+  {
+   "id": "gustave-fayet-collectionneur-createur",
+   "titre": "Gustave Fayet, Collectionneur – Créateur. Icônes de l’art moderne",
+   "salle": "",
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "billetterie": "https://billetterie.fondationlouisvuitton.fr",
+   "categorie": "Exposition",
+   "sousGenre": "",
+   "artistes": [
+    {
+     "nom": "Gustave Fayet",
+     "role": "artiste"
+    },
+    {
+     "nom": "Sylvie Patry",
+     "role": "commissaire"
+    },
+    {
+     "nom": "Angeline Scherf",
+     "role": "commissaire"
+    }
+   ],
+   "lieuId": "fondation-louis-vuitton",
+   "debut": "2026-10-09",
+   "fin": "2027-03-08",
+   "relaches": [
+    "mar"
+   ],
+   "note": 3,
+   "calcul": "C1 N2 H2",
+   "pronostic": true,
+   "pourquoi": "La Fondation Louis Vuitton consacre tous ses espaces à Gustave Fayet, collectionneur de Gauguin, Van Gogh et Redon, et à son œuvre de créateur.",
+   "lien": "https://www.fondationlouisvuitton.fr/en/events/gustave-fayet-collector-designer-icons-of-modern-art",
+   "expo": {
+    "type": "fondation",
+    "nocturnes": [],
+    "tarif": "18 €",
+    "gratuit": false,
+    "jeunes": "reduit",
+    "jeunesTexte": "Étudiants 10 €, moins de 18 ans 5 €",
+    "creneau": true,
+    "source": "https://presse.fondationlouisvuitton.fr/?p=32390",
+    "ajouteLe": "2026-11-16"
+   }
+  },
+  {
+   "id": "miguel-rothschild-chroniques-de-la-mer",
+   "titre": "Miguel Rothschild. Chroniques de la mer et d’une tempête",
+   "salle": "",
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "billetterie": null,
+   "categorie": "Exposition",
+   "sousGenre": "Photographie",
+   "artistes": [
+    {
+     "nom": "Miguel Rothschild",
+     "role": "artiste"
+    }
+   ],
+   "lieuId": "bendana-pinel",
+   "debut": "2026-11-07",
+   "fin": "2026-12-19",
+   "note": 1,
+   "calcul": "C0 N1 H0",
+   "pronostic": true,
+   "pourquoi": "Cinquième exposition personnelle de Miguel Rothschild à la galerie, autour de la photographie, du paysage marin et du temps.",
+   "lien": "https://www.bendana-pinel.com/fr/galerie",
+   "expo": {
+    "type": "galerie",
+    "nocturnes": [],
+    "gratuit": true,
+    "jeunes": null,
+    "creneau": false,
+    "source": "https://www.artrabbit.com/events/chroniques-de-la-mer-et-dune-temp%C3%AAte",
+    "ajouteLe": "2026-11-16"
+   }
   }
  ]
 }

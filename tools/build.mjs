@@ -145,6 +145,8 @@ function prixTexte(r) {
   return `Prix : ${t}${L.length > 1 ? " = " + eur(L.reduce((s, b) => s + (b.prix || 0), 0)) : ""}`;
 }
 const credits = (s) => (s.artistes || []).map((a) => a.nom).filter((n, i, t) => t.indexOf(n) === i).join(", ");
+// Visite d'exposition en journée (créneau avant 17 h) : une demi-journée, pas un soir pris (elle reste dans le flux agenda).
+const enJournee = (id, r) => parId[id]?.categorie === "Exposition" && !!r.heure && r.heure < "17:00";
 const nomLieu = (s) => (s.lieuId && lieux[s.lieuId] ? lieux[s.lieuId].nom : "");
 
 async function main() {
@@ -182,7 +184,7 @@ async function main() {
   if (paquet && MDP && (JSON.stringify(cal) !== JSON.stringify(ancien) || !calPaquet || calPaquet.salt !== paquet.salt))
     writeFileSync("data/calendrier.enc", JSON.stringify(await chiffrer({ dates: cal }, MDP, paquet.salt)));
   const jour = aujourdhui(), horizon = plusJours(jour, HORIZON_JOURS);
-  const pris = [...new Set([...Object.values(res).map((r) => r.date), ...prive.soirs, ...cal])].filter((d) => d && ISO.test(d) && d >= jour && d <= horizon).sort();
+  const pris = [...new Set([...Object.entries(res).filter(([id, r]) => !enJournee(id, r)).map(([, r]) => r.date), ...prive.soirs, ...cal])].filter((d) => d && ISO.test(d) && d >= jour && d <= horizon).sort();
   if (JSON.stringify(pris) !== JSON.stringify(dispo.pris) || dispo.horizon !== horizon || "manuel" in dispo || "calendrier" in dispo || "reservations" in dispo)
     ecrire("data/dispo.json", json({ maj: jour, horizon, pris }));
   // 3b. Envies publiques : identifiants des sorties à l'affiche seulement (ni priorité, ni note, ni date d'ajout)
@@ -200,6 +202,7 @@ async function main() {
     if (!r.date) continue;
     nRes++;
     const s = parId[id] || { titre: id };
+    const expo = s.categorie === "Exposition"; // visite : 1 h 30, titre préfixé
     const lieu = [r.salle || s.salle, nomLieu(s)].filter(Boolean).join(", ");
     const desc = [
       credits(s),
@@ -214,8 +217,8 @@ async function main() {
     ].filter(Boolean).join("\n");
     ag.push(
       "BEGIN:VEVENT", `UID:${id}-${r.date}@saison`, `DTSTAMP:${DTSTAMP}`,
-      `DTSTART;TZID=Europe/Paris:${stamp(r.date, r.heure)}`, `DTEND;TZID=Europe/Paris:${plus(r.date, r.heure, 150)}`,
-      `SUMMARY:${esc(s.titre)}`, `LOCATION:${esc(lieu)}`, `DESCRIPTION:${esc(desc)}`,
+      `DTSTART;TZID=Europe/Paris:${stamp(r.date, r.heure)}`, `DTEND;TZID=Europe/Paris:${plus(r.date, r.heure, expo ? 90 : 150)}`,
+      `SUMMARY:${esc((expo ? "Expo : " : "") + s.titre)}`, `LOCATION:${esc(lieu)}`, `DESCRIPTION:${esc(desc)}`,
       ...(s.lien ? [`URL:${s.lien}`] : []), "END:VEVENT"
     );
   }

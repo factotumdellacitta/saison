@@ -205,6 +205,20 @@
         if ("etat" in o && !ETATS[o.etat]) err.push(`${ou} : état de vente d’offre inconnu.`);
       }
       if ("etat" in s && !ETATS[s.etat]) err.push(`${ou} : état des ventes inconnu.`);
+      if ("expo" in s && s.categorie !== "Exposition") err.push(`${ou} : bloc expo réservé aux expositions.`);
+      if (s.categorie === "Exposition" && (f === "affiche" || "expo" in s)) {
+        const x = s.expo;
+        if (!x || typeof x !== "object") err.push(`${ou} : informations d’exposition manquantes.`);
+        else {
+          if (!EXPO_TYPES[x.type]) err.push(`${ou} : type d’exposition inconnu (musée, fondation, galerie).`);
+          if (x.jeunes != null && !EXPO_JEUNES[x.jeunes]) err.push(`${ou} : gratuité ou réduction jeunes inconnue.`);
+          for (const k of ["gratuit", "creneau"]) if (k in x && typeof x[k] !== "boolean") err.push(`${ou} : ${k} doit être vrai ou faux.`);
+          if ("nocturnes" in x && (!Array.isArray(x.nocturnes) || x.nocturnes.some((j) => !JOURS_L[j]))) err.push(`${ou} : nocturnes, jours de lun à dim.`);
+          if (f === "affiche" && !URL_RE.test(x.source || "")) err.push(`${ou} : source manquante (adresse web).`);
+          if (x.ajouteLe && !ISO_RE.test(x.ajouteLe)) err.push(`${ou} : date d’ajout invalide.`);
+        }
+        if (f === "affiche" && s.statut === "a-voir" && !URL_RE.test(s.lien || "")) err.push(`${ou} : lien officiel obligatoire pour une exposition.`);
+      }
     };
     for (const s of d.affiche.sorties) { sortie(s, "affiche"); if (!["a-voir", "ecarte"].includes(s.statut)) err.push(`« ${s.titre} » : statut ${s.statut} interdit à l’affiche.`); }
     for (const s of d.journal.sorties) {
@@ -299,11 +313,12 @@
   // Avant la migration faite par l’action, les soirs déclarés et l’agenda sont encore dans l’ancien dispo.json.
   const soirsDe = (d) => (Array.isArray(d.prive.soirs) ? d.prive.soirs : (d.dispo && d.dispo.manuel) || []);
   const calDe = (d) => d.cal || (d.dispo && d.dispo.calendrier) || [];
-  const dispoPrive = (d) => ({ reservations: [...new Set(Object.values(d.prive.reservations).map((r) => r.date).filter(Boolean))].sort(), manuel: [...soirsDe(d)], calendrier: [...calDe(d)] });
+  const enJournee = (id, r, d) => { const s = (d && d.affiche && d.affiche.sorties.find((x) => x.id === id)) || BYID.get(id); return estExpo(s) && !!r.heure && r.heure < "17:00"; };
+  const dispoPrive = (d) => ({ reservations: [...new Set(Object.entries(d.prive.reservations).filter(([id, r]) => !enJournee(id, r, d)).map(([, r]) => r.date).filter(Boolean))].sort(), manuel: [...soirsDe(d)], calendrier: [...calDe(d)] });
   // Sans jeton (lecture seule) ou hors ligne : mêmes sources, lues dans les fichiers du site.
   async function soirsStatiques() {
     let cal = null;
-    try { const pq = await getJSON(CAL + "?t=" + Date.now(), { cache: "no-store" }); if (pq.salt === SALT) cal = (await ouvrirPaquet(KEY, pq)).dates || []; } catch (_) {}
+    try { const pq = await getJSON(RACINE + CAL + "?t=" + Date.now(), { cache: "no-store" }); if (pq.salt === SALT) cal = (await ouvrirPaquet(KEY, pq)).dates || []; } catch (_) {}
     if (PRIVE) applyData({ dispo: dispoPrive({ prive: PRIVE, cal, dispo: DISPO_PUB || {} }) });
   }
   // Applique des données fraîches à l’interface.
@@ -315,9 +330,9 @@
   // Une saisie est-elle en cours dans la page (hors dialogue) ? On ne redessine pas sous les doigts.
   const saisieEnCours = () => $$("#main input:not([type=search]), #main textarea").some((x) => (x.type === "checkbox" ? x.checked !== x.defaultChecked : x.value !== x.defaultValue)) || (document.activeElement && $("#main").contains(document.activeElement) && /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName) && document.activeElement.type !== "search");
   async function rafraichir(force) {
-    const h = location.hash.slice(1) || "affiche";
+    const h = location.hash.slice(1) || ACCUEIL;
     if (!force && !h.startsWith("sortie-") && saisieEnCours()) return;
-    if (h.startsWith("sortie-")) { await renderView(BASE || "affiche"); openSheet(decodeURIComponent(h.slice(7))); }
+    if (h.startsWith("sortie-")) { await renderView(BASE || ACCUEIL); openSheet(decodeURIComponent(h.slice(7))); }
     else await renderView(h);
   }
   async function recharger(pw, force) { const b = await lireDistant(pw); appliquer(b.d, force); }
@@ -386,7 +401,7 @@
     if (PRIVE) return;
     let rec = null; try { rec = await idb("readonly", (st) => st.get("s")); } catch (_) { return; }
     if (!rec || !rec.key || !(rec.exp > Date.now()) || (rec.mode === "onglet" && ssGet(SS_ONGLET) !== "1")) return effacerSession();
-    let p; try { p = await getJSON("data/prive.enc?t=" + Date.now(), { cache: "no-store" }); } catch (_) { return; } // hors ligne : on réessaiera au prochain chargement
+    let p; try { p = await getJSON(RACINE + "data/prive.enc?t=" + Date.now(), { cache: "no-store" }); } catch (_) { return; } // hors ligne : on réessaiera au prochain chargement
     if (PRIVE) return;
     if (p.salt !== rec.salt) return effacerSession(); // mot de passe changé
     try {
@@ -409,7 +424,7 @@
     BLOBS.clear(); fermerDlg(); bandeau(""); document.body.classList.remove("adm"); lockIcon();
     if (DISPO_PUB) applyData({ dispo: DISPO_PUB }); // retour aux soirs pris publics : plus aucun détail privé en mémoire
     if ($("#sheet").hidden) $("#sheetIn").innerHTML = ""; // fiche fermée : aucun reste du bloc admin dans la page
-    if (/^#admin/.test(location.hash)) location.hash = "#affiche"; else rafraichir(true);
+    if (/^#admin/.test(location.hash)) location.hash = "#" + ACCUEIL; else rafraichir(true);
     if (msg) toast(msg);
   }
 
@@ -517,7 +532,7 @@
     const out = [];
     if (soirsDe(d).includes(date)) out.push("soir déclaré pris");
     if (calDe(d).includes(date)) out.push("événement dans Apple Calendar");
-    for (const [id, r] of Object.entries(d.prive.reservations)) if (id !== sansId && r.date === date) out.push("réservation : " + titreDe(id));
+    for (const [id, r] of Object.entries(d.prive.reservations)) if (id !== sansId && r.date === date) out.push((enJournee(id, r, d) ? "visite en journée : " : estExpo(BYID.get(id)) ? "visite : " : "réservation : ") + titreDe(id));
     for (const b of d.prive.blocages || []) {
       const deb = typeof b === "string" ? b : b.date || b.debut, fin = typeof b === "string" ? b : b.fin || b.date || b.debut;
       if (deb && date >= deb && date <= fin) out.push("blocage" + (b.motif ? " : " + b.motif : ""));
@@ -537,7 +552,7 @@
   function heart(id) {
     if (!PRIVE) return "";
     const on = !!PRIVE.envies[id];
-    return `<button class="envie" type="button" data-envie="${esc(id)}" aria-pressed="${on}" aria-label="Coup de cœur : ${esc(titreDe(id))}">${COEUR}</button>`;
+    return `<button class="envie" type="button" data-envie="${esc(id)}" aria-pressed="${on}" aria-label="${estExpo(BYID.get(id)) ? "Ça m’intéresse" : "Coup de cœur"} : ${esc(titreDe(id))}">${COEUR}</button>`;
   }
   // Une envie est binaire : pas de hiérarchie (ni priorité, ni rang). La note de veille n’en dépend jamais.
   async function basculerEnvie(id) {
@@ -563,15 +578,16 @@
     const vu = e.statut === "vu", r = PRIVE.reservations[e.id], env = PRIVE.envies[e.id], jp = PRIVE.journalPrive[e.id];
     // Actions en petits boutons à icône (libellé pour les lecteurs d’écran et en infobulle) ; seule l’action principale garde un mot.
     const b = (act, t, icone, cls = "", mot = "") => `<button class="btn ai ${cls}" type="button" data-adm="${act}" data-id="${esc(e.id)}" aria-label="${t}" title="${t}">${ico(icone)}${mot ? `<span>${mot}</span>` : ""}</button>`;
+    const x = estExpo(e);
     let etat = "";
-    if (r) etat = `<p><b>Réservé</b> : ${r.date ? esc(fmtY(D(r.date), true)) : "date à préciser"}${r.heure ? " à " + esc(r.heure) : ""}${detRes(r)}</p>`;
+    if (r) etat = `<p><b>${x ? "Visite prévue" : "Réservé"}</b> : ${r.date ? esc(fmtY(D(r.date), true)) : "date à préciser"}${r.heure ? " à " + esc(r.heure) : ""}${detRes(r)}</p>`;
     if (vu && jp) etat += `<p>${esc([jp.places || (jp.billets && jp.billets.length) ? plural(nbPlaces(jp), "place") : "", resumePrix(jp), (jp.accompagnants || []).length ? "avec " + jp.accompagnants.join(", ") : ""].filter(Boolean).join(" · "))}</p>`;
     if (vu && jp && jp.notes) etat += `<p><b>Mes notes</b> (privées) : ${esc(jp.notes).replace(/\n/g, "<br>")}</p>`;
-    if (env) etat += `<p><b>Coup de cœur</b>${env.note ? " · « " + esc(env.note) + " »" : ""}</p>`;
+    if (env) etat += `<p><b>${x ? "Ça m’intéresse" : "Coup de cœur"}</b>${env.note ? " · « " + esc(env.note) + " »" : ""}</p>`;
     const prio = env ? `<div class="chips wrap-ok" role="group" aria-label="Coup de cœur"><button class="chip" type="button" data-adm="envie" data-id="${esc(e.id)}">Note privée</button></div>` : "";
     const acts = vu
       ? b("revu", "Ajouter une date vue", "ajouter", "pri", "Revu") + b("notes", "Dates, note, avis et notes", "carres") + b("editer", "Modifier la fiche", "modifier") + b("supprimer", "Supprimer", "supprimer", "danger")
-      : (r ? b("reserver", "Modifier la réservation", "billet-ok", "pri", "Réservé") + b("annuler", "Annuler la réservation", "billet-barre", "danger") : b("reserver", "J’ai réservé", "billet-ok", "pri", "Réservé")) +
+      : (r ? b("reserver", x ? "Modifier la visite" : "Modifier la réservation", "billet-ok", "pri", x ? "Visite" : "Réservé") + b("annuler", x ? "Annuler la visite" : "Annuler la réservation", "billet-barre", "danger") : b("reserver", x ? "Planifier une visite" : "J’ai réservé", "billet-ok", "pri", x ? "Visite" : "Réservé")) +
         b("vu", "Marquer vu", "coche") + b("editer", "Modifier la fiche", "modifier") + (e.statut === "ecarte" ? b("remettre", "Remettre à l’affiche", "oeil") : b("ecarter", "Écarter (masquer du public)", "oeil-barre")) + b("supprimer", "Supprimer", "supprimer", "danger");
     return `<section class="admbox" aria-label="Admin"><h3 class="adm-titre">Admin${e.statut === "ecarte" ? " · écartée (masquée du public)" : ""}</h3>${etat}${prio}<div class="acts acts-adm">${acts}</div></section>`;
   }
@@ -595,11 +611,12 @@
     if (!r.date && jours.length > 1) opts.unshift(["", "Choisir une date…"]); // plusieurs dates : aucune n’est présélectionnée
     const mh = /\b(\d{1,2})\s*h\s*(\d{2})?/i.exec(e.horaires || "");
     const hDef = r.heure || (mh && +mh[1] >= 10 ? String(mh[1]).padStart(2, "0") + ":" + (mh[2] || "00") : "");
-    const form = dlg(r0 ? `Modifier la réservation : ${e.titre}` : `Réserver : ${e.titre}`, `
+    const x = estExpo(e);
+    const form = dlg(x ? (r0 ? `Modifier la visite : ${e.titre}` : `Planifier une visite : ${e.titre}`) : r0 ? `Modifier la réservation : ${e.titre}` : `Réserver : ${e.titre}`, `
       ${jours.length ? champ("Date", sel("date", [...opts, ["autre", "Autre date…"]], r.date || "")) + `<div data-autre hidden>${champ("Autre date", inp("date_autre", r.date || "", 'type="date"'))}</div>` : champ("Date", inp("date_autre", r.date || "", 'type="date"'))}
       <p class="warn" data-conf hidden></p>
-      <div class="grid2">${champ("Heure", inp("heure", hDef, 'type="time"'))}${champ("Salle", inp("salle", r.salle ?? e.salle ?? ""))}</div>
-      ${champ("Siège(s)", inp("siege", r.siege, 'placeholder="Rang D, 12-13"'))}
+      ${x ? champ("Créneau (avant 17 h : demi-journée, le soir reste libre)", inp("heure", r.heure || "", 'type="time"')) : `<div class="grid2">${champ("Heure", inp("heure", hDef, 'type="time"'))}${champ("Salle", inp("salle", r.salle ?? e.salle ?? ""))}</div>
+      ${champ("Siège(s)", inp("siege", r.siege, 'placeholder="Rang D, 12-13"'))}`}
       ${prixReplie(r, false)}
       ${champ("Billetterie (où acheté)", inp("billetterie", r.billetterie))}
       ${champ("Note", inp("note", r.note))}`, async (f) => {
@@ -614,12 +631,12 @@
         delete d.prive.envies[id];
         const s = d.affiche.sorties.find((x) => x.id === id); if (s) s.leonardYVa = true;
       });
-    }, { valider: r0 ? "Enregistrer" : "Réserver" });
+    }, { valider: r0 ? "Enregistrer" : x ? "Planifier" : "Réserver" });
     const s = f_sel(form, "date"), autre = form.querySelector("[data-autre]"), conf = form.querySelector("[data-conf]");
     const maj = () => {
       if (autre) autre.hidden = s.value !== "autre";
       const k = s && s.value !== "autre" ? s.value : val(form, "date_autre");
-      const c = conflits(etatLocal(), k, id); conf.hidden = !c.length; conf.textContent = c.length ? "Déjà pris ce soir-là : " + c.join(", ") + "." : "";
+      const c = conflits(etatLocal(), k, id); conf.hidden = !c.length; conf.textContent = c.length ? (x ? "Déjà pris ce jour-là : " : "Déjà pris ce soir-là : ") + c.join(", ") + "." : "";
     };
     if (s) s.onchange = maj; if (form.elements.date_autre) form.elements.date_autre.onchange = maj; maj();
   }
@@ -875,11 +892,12 @@
   const artRow = (a = {}) => `<div class="ar">${inp("a_nom", a.nom, 'list="dl-art" placeholder="Nom complet" aria-label="Nom de l’artiste"')}${sel("a_role", ROLES, a.role || "artiste")}<button type="button" class="btn ico" data-del aria-label="Retirer">${ico("fermer")}</button></div>`;
   const offreRow = (o = {}) => { const [vd, vh] = (o.vente || "").split("T"); return `<fieldset class="fs of"><div class="grid2">${champ("Type", inp("o_type", o.type, 'list="dl-off"'))}${champ("Tarif", inp("o_tarif", o.tarif, 'placeholder="10 €"'))}</div><div class="grid2">${champ("Date du spectacle", inp("o_date", o.date, 'type="date"'))}${champ("Condition", inp("o_cond", o.condition, 'placeholder="Moins de 28 ans"'))}</div><div class="grid2">${champ("Ouverture de la vente", inp("o_vd", vd, 'type="date"'))}${champ("Heure", inp("o_vh", vh, 'type="time"'))}</div>${ck("o_approx", o.venteApprox, "Date de vente estimée")}${champ("État des ventes de cette offre", sel("o_etat", [["", "Rien à signaler"], ...Object.entries(ETATS)], o.etat || ""))}<button type="button" class="linkbtn" data-del>Retirer cette offre</button></fieldset>`; };
   function formSortie(id) {
-    const e0 = id ? BYID.get(id) : null, e = e0 || { categorie: "Théâtre", artistes: [], offres: [], note: 2, pronostic: false, publicJeune: false };
+    const e0 = id ? BYID.get(id) : null, e = e0 || { categorie: EXPO ? "Exposition" : "Théâtre", artistes: [], offres: [], note: 2, pronostic: false, publicJeune: false };
     const vu = e.statut === "vu";
     const arts = [...new Set([...AFF, ...(JOURNAL || [])].flatMap((x) => (x.artistes || []).map((a) => a.nom)))].sort((a, b) => a.localeCompare(b, "fr"));
     const lieuxNoms = Object.keys(LIEUX).map((k) => LIEUX[k].nom).sort((a, b) => a.localeCompare(b, "fr"));
-    const form = dlg(e0 ? `Modifier : ${e0.titre}` : "Ajouter un spectacle", `
+    const x0 = e.expo || {};
+    const form = dlg(e0 ? `Modifier : ${e0.titre}` : EXPO ? "Ajouter une exposition" : "Ajouter un spectacle", `
       <div class="grid2">${champ("Catégorie", sel("categorie", CATS, e.categorie))}${champ("Sous-genre", inp("sousGenre", e.sousGenre, 'placeholder="Cirque, Version de concert…"'))}</div>
       ${champ("Titre", inp("titre", e.titre, "required"))}
       <fieldset class="fs"><legend>Artistes</legend><div data-arts>${(e.artistes.length ? e.artistes : [{}]).map(artRow).join("")}</div><button type="button" class="btn" data-addart>${ico("ajouter")}Artiste</button>${dl("dl-art", arts)}</fieldset>
@@ -890,6 +908,13 @@
         ${champ("Adresse", inp("nl_adr", ""))}${champ("Site", inp("nl_site", "", 'type="url" placeholder="https://…"'))}${champ("Billetterie", inp("nl_bil", "", 'type="url" placeholder="https://…"'))}</fieldset>
       ${champ("Salle", inp("salle", e.salle))}
       ${champ("Lien officiel", inp("lien", e.lien, 'type="url" placeholder="https://…"'))}
+      <fieldset class="fs" data-expo hidden><legend>Exposition</legend>
+        <div class="grid2">${champ("Type", sel("x_type", Object.entries(EXPO_TYPES), x0.type || "musee"))}${champ("Tarif plein", inp("x_tarif", x0.tarif, 'placeholder="17 €"'))}</div>
+        ${champ("Jeunes", sel("x_jeunes", [["", "Rien de particulier"], ["gratuit-ue-18-25", "Gratuit 18–25 ans résidents de l’UE (musée national)"], ["gratuit", "Gratuit pour les jeunes"], ["reduit", "Tarif réduit"]], x0.jeunes || ""))}
+        ${champ("Précision jeunes (facultatif)", inp("x_jeunesTexte", x0.jeunesTexte, 'placeholder="Moins de 26 ans, sur justificatif"'))}
+        <div>${ck("x_gratuit", !!x0.gratuit, "Entrée libre pour tous")}${ck("x_creneau", !!x0.creneau, "Réservation d’un créneau obligatoire")}</div>
+        ${champ("Nocturnes (jours : jeu, ven…)", inp("x_nocturnes", (x0.nocturnes || []).join(", "), 'autocapitalize="off"'))}
+        ${champ("Source de l’information", inp("x_source", x0.source, 'type="url" placeholder="https://…"'))}</fieldset>
       ${vu ? '<p class="cr">Dates vues, note et avis : « Dates, note, avis et notes ».</p>' : ""}
       <div data-aff${vu ? " hidden" : ""}>
       <div class="grid2">${champ("Début", inp("debut", e.debut, 'type="date"'))}${champ("Fin", inp("fin", e.fin, 'type="date"'))}</div>
@@ -920,6 +945,11 @@
       }).filter((o) => o.type);
       const champs = { titre, categorie: val(f, "categorie"), sousGenre: val(f, "sousGenre"), artistes, lieuId: lieuId || null, salle: val(f, "salle"), debut: val(f, "debut"), fin: val(f, "fin") || val(f, "debut"),
         datesTexte: val(f, "datesTexte"), horaires: val(f, "horaires"), note: +val(f, "note"), pronostic: f.elements.pronostic.checked, pourquoi: val(f, "pourquoi"), lien: val(f, "lien") || null, billetterie: val(f, "billetterie") || null, publicJeune: f.elements.publicJeune.checked, offres };
+      if (champs.categorie === "Exposition") {
+        const noct = val(f, "x_nocturnes").toLowerCase().split(/[\s,;]+/).map((j) => j.slice(0, 3)).filter((j) => JOURS_L[j]);
+        champs.expo = { ...x0, type: val(f, "x_type"), tarif: val(f, "x_tarif"), gratuit: f.elements.x_gratuit.checked, jeunes: val(f, "x_jeunes") || null, jeunesTexte: val(f, "x_jeunesTexte"), creneau: f.elements.x_creneau.checked, nocturnes: [...new Set(noct)], source: val(f, "x_source") || val(f, "lien") || "", ajouteLe: x0.ajouteLe || todayISO() };
+        if (!vu && !champs.lien) throw new Error("Le lien officiel est obligatoire pour une exposition.");
+      }
       if (val(f, "etat")) champs.etat = val(f, "etat");
       if (val(f, "calcul")) { if (!calculDe(val(f, "calcul"))) throw new Error("Calcul du barème illisible : « C1 N3 H2 », éventuellement suivi de « +Chef-d’œuvre » et « +Distinction »."); champs.calcul = val(f, "calcul"); }
       for (const k of ["datesTexte", "horaires"]) if (!champs[k]) delete champs[k];
@@ -936,6 +966,7 @@
           if (!s) throw new Error("Cette sortie n’existe plus dans le dépôt.");
           await garde(snap, s, "La fiche");
           if (!vu) for (const k of ["datesTexte", "horaires", "etat", "calcul"]) if (!(k in champs)) delete s[k];
+          if (!("expo" in champs)) delete s.expo;
           Object.assign(s, champs);
         } else {
           const tous = new Set([...d.affiche.sorties, ...d.journal.sorties].map((x) => x.id));
@@ -953,6 +984,8 @@
     if (cIn && cOut) { const maj = (cale) => { const k = calculDe(cIn.value); cOut.textContent = !cIn.value.trim() ? "" : k ? `Total ${k.total} : note ${k.note || "trop basse pour une fiche"}` : "Format : C1 N3 H2 +Chef-d’œuvre +Distinction"; if (cale && k && k.note) form.elements.note.value = String(k.note); }; cIn.oninput = () => maj(true); maj(false); }
     const nl = form.querySelector("[data-nl]"), lieuIn = form.elements.lieu;
     const majLieu = () => { nl.hidden = !lieuIn.value.trim() || !!lieuDepuisNom(lieuIn.value); };
+    const bx = form.querySelector("[data-expo]"), majExpo = () => { bx.hidden = form.elements.categorie.value !== "Exposition"; };
+    form.elements.categorie.addEventListener("change", majExpo); majExpo();
     lieuIn.addEventListener("input", majLieu); majLieu();
     form.addEventListener("click", (ev) => {
       if (ev.target.closest("[data-addart]")) form.querySelector("[data-arts]").insertAdjacentHTML("beforeend", artRow());
@@ -1427,7 +1460,7 @@
         const pw = f.elements.password.value, tok = f.elements.tok.value.trim();
         f.elements.password.value = ""; f.elements.tok.value = "";
         if (!tok) throw new Error("Colle le jeton.");
-        const p = await getJSON("data/prive.enc?t=" + Date.now(), { cache: "no-store" });
+        const p = await getJSON(RACINE + "data/prive.enc?t=" + Date.now(), { cache: "no-store" });
         try { await ouvrirPaquet(await derive(pw, unb64(p.salt), p.iter), p); } catch (_) { throw new Error("Mot de passe incorrect."); }
         const avert = await testerJeton(tok);
         TOK = tok; await ranger(pw, tok);
@@ -1458,7 +1491,7 @@
       ${champ("Rester connecté", sel("duree", DUREES, dDef))}`, async (f) => {
       const pw = f.elements.password.value, tok = f.elements.tok ? f.elements.tok.value.trim() : "", duree = val(f, "duree");
       f.elements.password.value = "";
-      let p; try { p = await getJSON("data/prive.enc?t=" + Date.now(), { cache: "no-store" }); } catch (_) { throw new Error("Impossible de lire la zone privée : vérifie la connexion."); }
+      let p; try { p = await getJSON(RACINE + "data/prive.enc?t=" + Date.now(), { cache: "no-store" }); } catch (_) { throw new Error("Impossible de lire la zone privée : vérifie la connexion."); }
       let key, prive;
       try { key = await derive(pw, unb64(p.salt), p.iter); prive = await ouvrirPaquet(key, p); } catch (_) { throw new Error("Mot de passe incorrect."); }
       let tk = null, avert = "";

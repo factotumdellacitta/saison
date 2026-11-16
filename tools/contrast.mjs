@@ -10,25 +10,26 @@ export const PAIRES = [
   ["encre", "surface", 4.5, "texte sur surface, champs"],
   ["encre-2", "fond", 4.5, "métadonnées"],
   ["encre-2", "surface", 4.5, "métadonnées sur surface, textes indicatifs"],
-  ["rouge-texte", "fond", 4.5, "note, liens d’erreur, boutons destructifs"],
-  ["rouge-texte", "surface", 4.5, "rouge sur surface"],
-  ["sur-rouge", "rouge", 4.5, "texte blanc sur aplat rouge (en-tête, bandeaux, badges)"],
+  ["accent-texte", "fond", 4.5, "note, liens d’erreur, boutons destructifs"],
+  ["accent-texte", "surface", 4.5, "rouge sur surface"],
+  ["sur-accent", "accent", 4.5, "texte blanc sur aplat d’accent (en-tête, bandeaux, badges)"],
+  ["accent", "sur-accent", 4.5, "accent sur blanc (sélecteur de site, survol des boutons de l’en-tête)"],
   ["fond", "encre", 4.5, "texte inversé (messages, en-tête admin, puce ouverte)"],
-  ["fond", "rouge", 3, "grand texte : survol du bouton principal"],
+  ["fond", "accent", 3, "grand texte : survol du bouton principal"],
   ["filet", "fond", 3, "filets de section"],
-  ["rouge", "fond", 3, "aplats rouges et anneaux de focus sur fond"],
+  ["accent", "fond", 3, "aplats rouges et anneaux de focus sur fond"],
   ["g-theatre", "fond", 4.5, "surtitre de genre (theatre)"],
   ["g-theatre", "surface", 4.5, "surtitre de genre sur surface (theatre)"],
-  ["sur-rouge", "a-theatre", 4.5, "texte blanc sur aplat de genre (theatre)"],
+  ["sur-accent", "a-theatre", 4.5, "texte blanc sur aplat de genre (theatre)"],
   ["g-lyrique", "fond", 4.5, "surtitre de genre (lyrique)"],
   ["g-lyrique", "surface", 4.5, "surtitre de genre sur surface (lyrique)"],
-  ["sur-rouge", "a-lyrique", 4.5, "texte blanc sur aplat de genre (lyrique)"],
+  ["sur-accent", "a-lyrique", 4.5, "texte blanc sur aplat de genre (lyrique)"],
   ["g-danse", "fond", 4.5, "surtitre de genre (danse)"],
   ["g-danse", "surface", 4.5, "surtitre de genre sur surface (danse)"],
-  ["sur-rouge", "a-danse", 4.5, "texte blanc sur aplat de genre (danse)"],
+  ["sur-accent", "a-danse", 4.5, "texte blanc sur aplat de genre (danse)"],
   ["g-concert", "fond", 4.5, "surtitre de genre (concert)"],
   ["g-concert", "surface", 4.5, "surtitre de genre sur surface (concert)"],
-  ["sur-rouge", "a-concert", 4.5, "texte blanc sur aplat de genre (concert)"],
+  ["sur-accent", "a-concert", 4.5, "texte blanc sur aplat de genre (concert)"],
 ];
 
 const hex = (h) => { const m = /^#([0-9a-f]{6})$/i.exec(h.trim()); if (!m) throw new Error(`couleur illisible : ${h}`); return [0, 2, 4].map((i) => parseInt(m[1].slice(i, i + 2), 16) / 255); };
@@ -48,12 +49,23 @@ export function verifierContrastes(fichier = "assets/factotum.css") {
     sombre: bloc(css, ':root[data-theme="dark"],[data-theme="dark"]{'),
     "sombre (système)": bloc(css, ':root:not([data-theme="light"]){'),
   };
+  // Factotum Expo : mêmes jetons, accent remplacé (blocs [data-site="expo"]) ; toutes les paires sont revérifiées.
+  const expo = {
+    clair: bloc(css, ':root[data-site="expo"],[data-site="expo"],[data-site="expo"] [data-theme="light"]{'),
+    sombre: bloc(css, ':root[data-site="expo"][data-theme="dark"],[data-site="expo"] [data-theme="dark"]{'),
+    "sombre (système)": bloc(css, ':root[data-site="expo"]:not([data-theme="light"]){'),
+  };
+  for (const [nom, t] of Object.entries(expo)) {
+    if (!t || !t.accent || !t["accent-texte"]) { erreurs.push(`${fichier} : jetons d'accent Expo du thème ${nom} introuvables.`); continue; }
+    if (themes[nom]) themes[`expo, ${nom}`] = { ...themes[nom], ...t };
+  }
+  if (JSON.stringify(expo.sombre) !== JSON.stringify(expo["sombre (système)"])) erreurs.push(`${fichier} : les jetons sombres d'Expo diffèrent entre [data-theme="dark"] et prefers-color-scheme.`);
   for (const [nom, t] of Object.entries(themes)) {
     if (!t) { erreurs.push(`${fichier} : jetons du thème ${nom} introuvables.`); continue; }
     for (const [a, b, seuil, usage] of PAIRES) {
       if (!t[a] || !t[b]) { erreurs.push(`${fichier} : jeton --${t[a] ? b : a} absent du thème ${nom}.`); continue; }
       const r = ratio(t[a], t[b]);
-      lignes.push(`${nom.padEnd(17)} --${a} sur --${b} : ${r.toFixed(2)} (seuil ${seuil})`);
+      lignes.push(`${nom.padEnd(23)} --${a} sur --${b} : ${r.toFixed(2)} (seuil ${seuil})`);
       if (r < seuil) erreurs.push(`Contraste insuffisant (${nom}) : --${a} ${t[a]} sur --${b} ${t[b]} = ${r.toFixed(2)}:1, il faut ${seuil}:1 (${usage}).`);
     }
   }

@@ -1,6 +1,13 @@
 /* Factotum – interface publique (lots 2 et 3). Aucune dépendance. Le mode admin est dans assets/admin.js, chargé à la demande. */
 "use strict";
 const OWNER = "Léonard";
+// Deux sites, un seul code : Factotum (spectacles, à la racine) et Factotum Expo (expositions, sous expo/).
+// La coque dit lequel par <html data-site> ; RACINE ramène les chemins (data/, assets/, sw.js) à la racine du site.
+const EXPO = document.documentElement.dataset.site === "expo", RACINE = EXPO ? "../" : "";
+const NOM = EXPO ? "Factotum Expo" : "Factotum", ACCUEIL = EXPO ? "a-voir" : "affiche";
+const URL_RACINE = new URL(RACINE || "./", location.href).href.split(/[?#]/)[0];
+const estExpo = (e) => !!e && e.categorie === "Exposition", duSite = (e) => estExpo(e) === EXPO;
+const urlSortie = (id) => URL_RACINE + (estExpo(BYID.get(id)) ? "expo/" : "") + "#sortie-" + id;
 const CATS = ["Théâtre", "Opéra", "Concert", "Récital", "Danse", "Comédie musicale", "Humour", "Festival", "Exposition", "Cinéma", "Événement", "Sur scène", "Autre"];
 const ROLES = ["auteur", "compositeur", "mise en scène", "chorégraphie", "direction musicale", "réalisation", "commissaire", "compagnie", "interprète", "artiste"];
 const CAT_LIENS = ["Billetteries", "Cartes et tarifs jeunes", "Calendriers de vente", "Outils"];
@@ -129,8 +136,8 @@ let HORIZON = ""; // dernier jour couvert par les soirs pris publics (au-delà :
 let ADMIN = null, JAVEC = ""; // ADMIN : module admin (assets/admin.js) ; JAVEC : filtre du journal par accompagnant (mémoire seulement)
 const BYID = new Map();
 let jP = null, lP = null;
-const loadJournal = () => jP || (jP = getJSON("data/journal.json").then((j) => { JOURNAL = j.sorties; JMAJ = j.maj; JOURNAL.forEach((e) => BYID.set(e.id, e)); ART = null; return JOURNAL; }).catch((e) => { jP = null; throw e; }));
-const loadLiens = () => lP || (lP = getJSON("data/liens.json").then((l) => (LIENS = l)).catch((e) => { lP = null; throw e; }));
+const loadJournal = () => jP || (jP = getJSON(RACINE + "data/journal.json").then((j) => { JOURNAL = j.sorties; JMAJ = j.maj; JOURNAL.forEach((e) => BYID.set(e.id, e)); ART = null; return JOURNAL; }).catch((e) => { jP = null; throw e; }));
+const loadLiens = () => lP || (lP = getJSON(RACINE + "data/liens.json").then((l) => (LIENS = l)).catch((e) => { lP = null; throw e; }));
 
 // Remplace les données en mémoire (démarrage, ou données fraîches lues par l’admin via l’API).
 // Envies : liste publique (data/envies.json, générée) ou, en mode admin, la zone privée à jour.
@@ -145,7 +152,7 @@ function applyData({ affiche, lieux, dispo, journal, liens }) {
   // Public : { pris, horizon } (une seule liste, sans raison). Admin : sources privées détaillées (réservations, soirs, agenda).
   if (dispo) { BUSY_SRC = dispo; BUSY = new Set([...(dispo.pris || []), ...(dispo.reservations || []), ...(dispo.manuel || []), ...(dispo.calendrier || [])]); HORIZON = dispo.horizon || ""; }
   BYID.clear(); AFF.forEach((e) => BYID.set(e.id, e)); (JOURNAL || []).forEach((e) => BYID.set(e.id, e));
-  LIVE = AFF.filter((e) => e.statut === "a-voir" && !ended(e));
+  LIVE = AFF.filter((e) => e.statut === "a-voir" && !ended(e) && duSite(e)); // chaque site montre les siennes
   ART = null;
   if (MAJ) $("#maj").textContent = "À jour au " + fmt(D(MAJ));
 }
@@ -208,7 +215,7 @@ function stars(n, pro, label) {
 const web = (u) => (/^https?:\/\//i.test(String(u || "")) ? String(u) : "");
 const booking = (e) => web(e.billetterie) || web(lieu(e).billetterie); // adresse d’achat seulement (sinon : page officielle)
 const official = (e) => web(e.lien) || web(lieu(e).site);
-const shareURL = (id) => location.origin + location.pathname + "#sortie-" + id;
+const shareURL = urlSortie;
 
 /* ---------- Index artistes ---------- */
 let ART = null;
@@ -224,6 +231,28 @@ function artistes() {
   AFF.filter((e) => e.statut === "a-voir").forEach((e) => put(e, false));
   (JOURNAL || []).forEach((e) => put(e, true));
   return ART;
+}
+
+/* ---------- Expositions : état calculé, marques et infos pratiques (communs aux deux sites) ---------- */
+// Bloc « expo » d’une sortie de catégorie Exposition (CLAUDE.md) : type, nocturnes, tarif, gratuit, jeunes, creneau, source, ajouteLe.
+const EXPO_TYPES = { musee: "Musée", fondation: "Fondation", galerie: "Galerie" };
+const EXPO_JEUNES = { "gratuit-ue-18-25": "Gratuit 18–25 ans", gratuit: "Gratuit jeunes", reduit: "Tarif jeune" };
+const EXPO_JEUNES_L = { "gratuit-ue-18-25": "Gratuit pour les 18–25 ans résidents de l’Union européenne (musée national)", gratuit: "Gratuit pour les jeunes", reduit: "Tarif réduit pour les jeunes" };
+const JOURS_L = { lun: "lundi", mar: "mardi", mer: "mercredi", jeu: "jeudi", ven: "vendredi", sam: "samedi", dim: "dimanche" };
+const X_FIN = 14, X_NEUF = 14; // « Derniers jours » : fermeture sous 14 jours ; « Nouveau » : fiche ajoutée depuis 14 jours au plus
+const xp = (e) => e.expo || {};
+// « bientot » (pas encore ouverte), « derniers » (ferme sous 14 jours) ou « cours ».
+const expoEtat = (e) => { const p = span(e); if (!p || p[0] > TODAY) return "bientot"; return dansJ(p[1]) <= X_FIN ? "derniers" : "cours"; };
+const expoNeuve = (e) => { const d = D(xp(e).ajouteLe); return !!d && dansJ(d) <= 0 && dansJ(d) >= -X_NEUF; };
+// Arrondissement de Paris, lu dans le code postal de l’adresse du lieu (75116 = 16e) ; 0 hors Paris ou adresse inconnue.
+const arrdt = (e) => { const m = /\b75(\d{3})\b/.exec(lieu(e).adresse || ""); return m ? (+m[1] > 100 ? +m[1] - 100 : +m[1]) : 0; };
+const arrdtTxt = (n) => (n ? n + (n === 1 ? "er" : "e") : "");
+const joursTxt = (l) => (l || []).filter((j) => JOURS_L[j]).map((j) => "le " + JOURS_L[j]).join(", ");
+function expoInfos(e) {
+  const x = xp(e), nuit = joursTxt(x.nocturnes), ferme = joursTxt(e.relaches), src = web(x.source);
+  const tarif = x.gratuit ? "Entrée libre" : x.tarif || "";
+  const jeunes = x.gratuit ? "" : [EXPO_JEUNES_L[x.jeunes], x.jeunesTexte].filter(Boolean).join(". ");
+  return `${EXPO_TYPES[x.type] ? `<dt>Type</dt><dd>${EXPO_TYPES[x.type]}${arrdt(e) ? ", Paris " + arrdtTxt(arrdt(e)) : ""}</dd>` : ""}${tarif ? `<dt>Tarif</dt><dd>${esc(tarif)}</dd>` : ""}${jeunes ? `<dt>Jeunes</dt><dd>${esc(jeunes)}</dd>` : ""}${typeof x.creneau === "boolean" ? `<dt>Créneau</dt><dd>${x.creneau ? "Réservation d’un créneau obligatoire" : "Sans réservation"}</dd>` : ""}${nuit ? `<dt>Nocturne</dt><dd>${cap(nuit)}</dd>` : ""}${ferme ? `<dt>Fermé</dt><dd>${cap(ferme)}</dd>` : ""}${src ? `<dt>Source</dt><dd><a href="${esc(src)}" target="_blank" rel="noopener noreferrer">${esc(hote(src))}</a></dd>` : ""}`;
 }
 
 /* ---------- Fragments ---------- */
@@ -244,6 +273,14 @@ function badges(e) {
   const b = [];
   const dv = e.statut !== "vu" && DEJA_VU[e.id]; // l’œuvre figure au journal (data/deja-vu.json, généré par build.mjs)
   if (dv && dv.length) { const t = "Vu le " + dv.map((x) => fmtY(D(x))).join(", "); b.push(`<span class="b vu" title="${esc(t)}" aria-label="Déjà vu (${esc(t.toLowerCase())})">Déjà vu</span>`); }
+  if (estExpo(e) && e.statut !== "vu") {
+    const x = xp(e), et = expoEtat(e);
+    if (x.gratuit) b.push(`<span class="b">Gratuit</span>`); else if (EXPO_JEUNES[x.jeunes]) b.push(`<span class="b" title="${esc(EXPO_JEUNES_L[x.jeunes])}">${EXPO_JEUNES[x.jeunes]}</span>`);
+    if (expoNeuve(e)) b.push(`<span class="b">Nouveau</span>`);
+    if (et === "derniers") b.push(`<span class="b">Derniers jours</span>`); else if (et === "bientot") b.push(`<span class="b">Bientôt</span>`);
+    if (e.leonardYVa) b.push(`<span class="b yva">${OWNER} y va</span>`);
+    return b.length ? `<span class="bds">${b.join("")}</span>` : "";
+  }
   if (e.publicJeune) b.push(`<span class="b">Public jeune</span>`);
   if ((e.offres || []).length) b.push(`<span class="b">Offre jeune</span>`);
   if (ETATS[e.etat]) b.push(etatB(e.etat));
@@ -253,7 +290,8 @@ function badges(e) {
 }
 // Artistes en tête de ligne : auteur, compositeur, mise en scène, chorégraphie, puis les autres ; trois au plus.
 const ORDRE_ART = ["auteur", "compositeur", "mise en scène", "chorégraphie", "direction musicale", "commissaire", "réalisation", "compagnie", "interprète", "artiste"];
-const artLigne = (e) => [...(e.artistes || [])].sort((a, b) => ORDRE_ART.indexOf(a.role) - ORDRE_ART.indexOf(b.role)).slice(0, 3).map((a) => a.nom).join(", ");
+const rangArt = (e, a) => (estExpo(e) && a.role === "artiste" ? -1 : ORDRE_ART.indexOf(a.role)); // exposition : les artistes exposés avant les commissaires
+const artLigne = (e) => [...(e.artistes || [])].sort((a, b) => rangArt(e, a) - rangArt(e, b)).slice(0, 3).map((a) => a.nom).join(", ");
 // Recherche plein texte (titre, artistes, lieu, salle, avis, années vues ; notes privées si connecté), sans accents, tous les mots.
 const normQ = (s) => norm(s).replace(/[’‘`]/g, "'");
 function texteDe(e) {
@@ -275,7 +313,7 @@ const sousG = (e) => (e.sousGenre ? cap(e.sousGenre.toLowerCase()) : "");
 const ligneMeta = (meta, b) => (meta || b ? `<span class="ss">${meta ? `<span class="ssm">${meta}</span>` : ""}${b}</span>` : ""); // lieu à gauche, labels à droite
 function rowA(e) {
   const h = e.horaires && e.horaires.length <= 40 ? e.horaires : "", art = artLigne(e);
-  const meta = esc([sousG(e), court(e.lieuId)].filter(Boolean).join(" · ")) + (h ? `<span class="hor"> · ${esc(h)}</span>` : ""); // horaires : bureau seulement (fiche dépliée sur mobile)
+  const meta = esc([sousG(e), estExpo(e) ? EXPO_TYPES[xp(e).type] : "", court(e.lieuId), estExpo(e) ? arrdtTxt(arrdt(e)) : ""].filter(Boolean).join(" · ")) + (h ? `<span class="hor"> · ${esc(h)}</span>` : ""); // horaires : bureau seulement (fiche dépliée sur mobile)
   return `<article class="row g-${famille(e.categorie)}" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${esc(e.id)}">${gb(e)}${stubHTML(e)}
   <span class="mid">${l1(e, stars(e.note, e.pronostic))}${art ? `<span class="art nom">${esc(art)}</span>` : ""}${ligneMeta(meta, badges(e))}</span></button>${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}<div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
 }
@@ -290,7 +328,8 @@ function rowJ(e) {
 function creditsHTML(e) {
   const by = {};
   (e.artistes || []).forEach((a) => (by[a.role] ??= []).push(a));
-  return ROLES.filter((r) => by[r]).map((r) => `<span class="ro">${esc(r)}</span> ${by[r].map((a) => `<a href="#artiste-${slug(a.nom)}">${esc(a.nom)}</a>`).join(", ")}`).join(" · ");
+  const ordre = estExpo(e) ? ["artiste", ...ROLES.filter((r) => r !== "artiste")] : ROLES; // exposition : artistes exposés d’abord
+  return ordre.filter((r) => by[r]).map((r) => `<span class="ro">${esc(r)}</span> ${by[r].map((a) => `<a href="#artiste-${slug(a.nom)}">${esc(a.nom)}</a>`).join(", ")}`).join(" · ");
 }
 function offresHTML(e) {
   const L = lieu(e);
@@ -333,7 +372,7 @@ function ficheCorps(e, plein) {
   const L = lieu(e), c = creditsHTML(e);
   return `${c ? `<p class="cr">${c}</p>` : ""}
     <dl class="dl"><dt>${ico("lieu")}<span class="vh">Lieu</span></dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}${L.ville && L.ville !== "Paris" ? " (" + esc(L.ville) + ")" : ""}</dd>
-    <dt>${ico("mois")}<span class="vh">Dates</span></dt><dd>${esc(range(e))}</dd>${e.horaires ? `<dt>${ico("horaires")}<span class="vh">Horaires</span></dt><dd>${esc(e.horaires)}</dd>` : ""}</dl>
+    <dt>${ico("mois")}<span class="vh">Dates</span></dt><dd>${esc(range(e))}</dd>${e.horaires ? `<dt>${ico("horaires")}<span class="vh">Horaires</span></dt><dd>${esc(e.horaires)}</dd>` : ""}${estExpo(e) ? expoInfos(e) : ""}</dl>
     ${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${calculHTML(e)}
     ${PRIVE && ADMIN ? ADMIN.ficheHTML(e) : ""}
     ${(e.offres || []).length || L.tarifJeune ? `<h3 class="sec">Offres</h3>${offresHTML(e)}` : ""}${actsHTML(e, !plein)}<h3 class="sec">Dates</h3>${ficheCal(e)}`;
@@ -356,13 +395,14 @@ function ficheCal(e) {
     h += `<div class="cal mini"><div class="calh"><h3>${MOIS_L[c.getMonth()]} ${c.getFullYear()}</h3></div>` + monthGrid(c.getFullYear(), c.getMonth(), (d) => {
       const k = iso(d), on = playsOn(e, d) && d >= TODAY, busy = BUSY.has(k);
       const cls = ["cell", on ? (busy ? "busy" : "play") : "", d < TODAY ? "past" : "", +d === +TODAY ? "today" : "", offers.has(k) ? "of" : ""].filter(Boolean).join(" ");
-      const lab = `${fmt(d, true)}${on ? (busy ? `, se joue, ${OWNER} pris` : HORIZON && k > HORIZON ? ", se joue" : `, se joue, ${OWNER} libre`) : ""}${offers.has(k) ? ", offre jeune" : ""}`;
+      const joue = estExpo(e) ? ", ouverte" : ", se joue";
+      const lab = `${fmt(d, true)}${on ? (busy ? `${joue}, ${OWNER} pris` : HORIZON && k > HORIZON ? joue : `${joue}, ${OWNER} libre`) : ""}${offers.has(k) ? ", offre jeune" : ""}`;
       return `<div class="${cls}" role="img" aria-label="${lab}"><span class="n" aria-hidden="true">${d.getDate()}</span></div>`;
     }) + "</div>";
   }
   const loin = HORIZON && iso(p[1]) > HORIZON ? `<p class="aide">Soirs pris connus jusqu’au ${fmt(D(HORIZON))}.</p>` : "";
-  return `<div class="mini-wrap">${h}</div><div class="legend"><span class="l-joue">${OWNER} libre</span><span class="l-pris">${OWNER} pris</span><span class="l-offre">Offre jeune</span></div>
-  ${e.relaches ? "" : '<p class="aide">Relâches non renseignées.</p>'}${loin}`;
+  return `<div class="mini-wrap">${h}</div><div class="legend"><span class="l-joue">${OWNER} libre</span><span class="l-pris">${OWNER} pris</span>${estExpo(e) ? "" : '<span class="l-offre">Offre jeune</span>'}</div>
+  ${e.relaches ? "" : `<p class="aide">${estExpo(e) ? "Jours de fermeture non renseignés." : "Relâches non renseignées."}</p>`}${loin}`;
 }
 
 /* ---------- Filtres de l’affiche (état dans l’URL) ---------- */
@@ -435,7 +475,7 @@ function activeList(f) {
 }
 
 /* ---------- Vue « À l’affiche » ---------- */
-let F = parseF(""), LAST_AFF = "affiche";
+let F = parseF(""), LAST_AFF = ACCUEIL;
 function setF(mut) {
   mut(F);
   history.replaceState(null, "", "#affiche" + (serF(F) ? "?" + serF(F) : ""));
@@ -577,10 +617,12 @@ function monthHTML(f) {
 /* ---------- Fiche ---------- */
 let SHEET_FROM = null, FROM_APP = false;
 // Barre Factotum en tête de la fiche (aussi quand on arrive par un lien partagé) : retour à l’accueil.
-const marqueFiche = () => `<a class="sh-marque" href="#affiche" aria-label="Factotum, accueil"><span class="logo">${cleF()}Factotum</span></a>`;
+const marqueFiche = () => `<a class="sh-marque" href="#${ACCUEIL}" aria-label="${NOM}, accueil"><span class="logo">${cleF()}Factotum</span>${EXPO ? '<span class="mention">Expo</span>' : ""}</a>`;
 async function openSheet(id) {
   let e = BYID.get(id);
   if (!e) { try { await loadJournal(); } catch (_) {} e = BYID.get(id); }
+  // Une sortie de l’autre site s’ouvre chez lui (les liens partagés tiennent, l’en-tête dit où l’on est).
+  if (e && !duSite(e)) { location.replace(urlSortie(id)); return; }
   const box = $("#sheetIn");
   box.className = "sheet-in" + (e ? " g-" + famille(e.categorie) : "");
   if (!e) {
@@ -595,16 +637,16 @@ async function openSheet(id) {
   const s = $("#sheet");
   if (s.hidden) { SHEET_FROM = document.activeElement; s.hidden = false; document.documentElement.style.overflow = "hidden"; }
   box.scrollTop = 0; box.focus();
-  document.title = (e ? e.titre + " – " : "") + "Factotum";
+  document.title = (e ? e.titre + " – " : "") + NOM;
 }
 function closeSheet() {
   const s = $("#sheet"); if (s.hidden) return;
-  s.hidden = true; document.documentElement.style.overflow = ""; document.title = TITRE_VUE || "Factotum";
+  s.hidden = true; document.documentElement.style.overflow = ""; document.title = TITRE_VUE || NOM;
   if (SHEET_FROM && document.contains(SHEET_FROM)) SHEET_FROM.focus({ preventScroll: true });
 }
 function requestClose() {
   if (FROM_APP) history.back();
-  else { history.replaceState(null, "", "#" + (BASE || "affiche")); route(); }
+  else { history.replaceState(null, "", "#" + (BASE || ACCUEIL)); route(); }
 }
 $("#sheet").addEventListener("click", (ev) => { if (ev.target.id === "sheet" || ev.target.closest("[data-close]")) requestClose(); });
 document.addEventListener("keydown", (ev) => {
@@ -650,6 +692,19 @@ function radar() {
   const deja = new Set(aReserver.map((x) => x.e.id));
   const chances = vivantes.filter((e) => e.note >= 3 && !deja.has(e.id) && finDe(e) && finDe(e) < finLim).sort((a, b) => finDe(a) - finDe(b) || b.note - a.note || a.titre.localeCompare(b.titre, "fr"));
   return { semaine, suite, aReserver, chances };
+}
+// Rubriques expo du Radar : « Nouvelles expos » (fiches ajoutées depuis 14 jours) et « Derniers jours » (fermeture sous 14 jours).
+function radarExpos() {
+  const X = AFF.filter((e) => estExpo(e) && e.statut === "a-voir" && !ended(e));
+  const parNote = (a, b) => b.note - a.note || a.titre.localeCompare(b.titre, "fr");
+  return { nouvelles: X.filter(expoNeuve).sort(parNote), derniers: X.filter((e) => expoEtat(e) === "derniers").sort((a, b) => finDe(a) - finDe(b) || parNote(a, b)) };
+}
+function radarExposHTML() {
+  const x = radarExpos(); if (!x.nouvelles.length && !x.derniers.length) return "";
+  const stubX = (e) => (expoEtat(e) === "bientot" ? stubHTML(e) : stubR("fin", finDe(e), dansJ(finDe(e)) <= 7));
+  const bloc = (id, t, L, info) => (L.length ? `<section class="r-b" id="${id}"><h3 class="sec">${t}</h3><div class="list">${L.map((e) => rowR(e, id, stubX(e), info(e))).join("")}</div></section>` : "");
+  return `<section class="r-b" id="r-expos"><h2 class="mh">Expositions <small><a href="expo/">Factotum Expo</a></small></h2>
+  ${bloc("r-xn", "Nouvelles expos", x.nouvelles, (e) => esc(range(e)))}${bloc("r-xd", "Derniers jours", x.derniers, (e) => `Jusqu’au ${fmt(finDe(e), true)}`)}</section>`;
 }
 const heureV = (o) => { const h = /T(\d\d):(\d\d)/.exec(o.vente); return h ? (+h[1]) + "h" + (h[2] !== "00" ? h[2] : "") : ""; };
 const offreTxt = (o) => esc(o.type) + (o.tarif ? ", " + esc(o.tarif) : "");
@@ -717,6 +772,7 @@ function renderRadar() {
       <div id="rSuite">${blocSuite(r)}</div>
       <div class="acts"><a class="btn pri" href="#ventes">${ico("ventes")}Toutes les ouvertures de vente</a></div></section>
   </div></div>
+  ${radarExposHTML()}
   <section class="r-b" id="r-liens"><h2 class="mh">Billetteries et calendriers de vente</h2>${LIENS ? liensHTML() : '<p class="empty">Liens indisponibles hors connexion.</p>'}</section>
   ${PRIVE ? `<h2 class="mh">Abonnements (admin)</h2>${subsHTML()}` : ""}</section>`;
   const m = $("#radar");
@@ -800,11 +856,15 @@ function renderVentes(q0) {
 function renderPlan() {
   const it = (h, t, d) => `<li><a href="#${h}"><span class="lt"><b>${t}</b>${d ? `<small>${d}</small>` : ""}</span></a></li>`;
   const sec = (t, l) => `<section class="lks"><h2 class="mh">${t}</h2><ul class="lk">${l.join("")}</ul></section>`;
+  if (EXPO) { $("#main").innerHTML = `<div class="ph"><h1>Plan du site</h1></div>
+  ${sec("Expositions", [it("a-voir", "À voir", "Expositions en cours, derniers jours d’abord"), it("bientot", "Bientôt", "Expositions annoncées"), it("coeur", `Coups de cœur de ${esc(OWNER)}`, "")])}
+  ${sec("Archive", [it("journal", "Journal", "Expositions vues, par saison"), it("artistes", "Artistes", "Spectacles et expositions"), it("lieux", "Lieux", "")])}
+  ${sec("À propos", [`<li><a href="../"><span class="lt"><b>Factotum</b><small>Les spectacles</small></span></a></li>`, it("charte", "Charte graphique", "Nom, symbole, couleurs, typographie, icônes"), ...(PRIVE ? [it("admin", "Admin", "")] : [])])}`; return; }
   $("#main").innerHTML = `<div class="ph"><h1>Plan du site</h1></div>
   ${sec("Saison", [it("affiche", "À l’affiche", "Liste et calendrier, filtres"), it("coeur", `Coups de cœur de ${esc(OWNER)}`, ""),
     it("radar", "Radar", "Cette semaine, à réserver, dernières chances"), it("ventes", "Ouvertures de vente", "Toutes les ouvertures à venir"), it("liens", "Billetteries", "Cartes jeunes, calendriers de vente")])}
   ${sec("Archive", [it("journal", "Journal", "Sorties vues, par saison"), it("artistes", "Artistes", ""), it("lieux", "Lieux", "")])}
-  ${sec("À propos", [it("charte", "Charte graphique", "Nom, symbole, couleurs, typographie, icônes"), ...(PRIVE ? [it("admin", "Admin", "")] : [])])}`;
+  ${sec("À propos", [`<li><a href="expo/"><span class="lt"><b>Factotum Expo</b><small>Les expositions</small></span></a></li>`, it("charte", "Charte graphique", "Nom, symbole, couleurs, typographie, icônes"), ...(PRIVE ? [it("admin", "Admin", "")] : [])])}`;
 }
 
 /* ---------- Journal ---------- */
@@ -814,7 +874,7 @@ function renderJournal(q) {
   const p = new URLSearchParams(q || ""), L = (k) => new Set((p.get(k) || "").split(",").filter(Boolean));
   const f = { cat: L("cat"), sa: L("sa"), mn: L("mn"), tri: p.get("tri") === "note" ? "note" : "date" };
   if (p.has("q")) JQ = p.get("q"); else if (RENDERED === null || !RENDERED.startsWith("journal")) JQ = "";
-  const all = JOURNAL.filter((e) => (e.vuLe || []).length);
+  const all = JOURNAL.filter((e) => (e.vuLe || []).length && duSite(e));
   const last = (e) => e.vuLe.at(-1), sOf = (e) => saisonDe(D(last(e))).cle;
   const saisons = [...new Set(all.map(sOf))].sort().reverse();
   const parSaison = all.filter((e) => !f.sa.size || f.sa.has(sOf(e)));
@@ -938,7 +998,7 @@ function renderArtiste(k) {
   $("#main").innerHTML = `<a class="back" href="#artistes">Artistes et lieux</a><div class="ph"><h1>${esc(a.nom)}</h1><p>${esc(cap(ROLES.filter((r) => a.roles.has(r)).join(", ")))} · ${plural(aff.length, "sortie")} à l’affiche, ${plural(vus.length, "vue", "vues")}</p></div>
   <h2 class="mh">À l’affiche</h2><div class="list">${aff.map(rowA).join("") || '<p class="empty">Rien à l’affiche.</p>'}</div>
   <h2 class="mh">Vu</h2><div class="list">${vus.map(rowJ).join("") || '<p class="empty">Pas encore vu.</p>'}</div>`;
-  document.title = a.nom + " – Factotum";
+  document.title = a.nom + " – " + NOM;
 }
 function renderLieu(id) {
   const L = LIEUX[id];
@@ -950,11 +1010,11 @@ function renderLieu(id) {
   <dl class="dl inl">${L.tarifJeune ? `<dt>Tarif jeune</dt><dd>${esc(L.tarifJeune)}</dd>` : ""}${L.adresse ? `<dt>Adresse</dt><dd>${esc(L.adresse)}</dd>` : ""}${L.site ? `<dt>Site</dt><dd>${ext(L.site, esc(L.site.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")))}</dd>` : ""}${L.billetterie ? `<dt>Billetterie</dt><dd>${ext(L.billetterie, "Acheter des places")}</dd>` : ""}</dl>
   <h2 class="mh">À l’affiche <small>${aff.length}</small></h2><div class="list">${aff.map(rowA).join("") || '<p class="empty">Rien à l’affiche.</p>'}</div>
   <h2 class="mh">Vu ici <small>${vus.length}</small></h2><div class="list">${vus.map(rowJ).join("") || '<p class="empty">Aucune.</p>'}</div>`;
-  document.title = L.nom + " – Factotum";
+  document.title = L.nom + " – " + NOM;
 }
 
 /* ---------- Liens utiles ---------- */
-const icsURL = (k) => `webcal://${location.host}${location.pathname.replace(/[^/]*$/, "")}data/${k}-${PRIVE.icsToken}.ics`;
+const icsURL = (k) => `webcal://${location.host}${new URL(URL_RACINE).pathname}data/${k}-${PRIVE.icsToken}.ics`;
 const ORDRE_LIENS = ["Cartes et tarifs jeunes", "Calendriers de vente", "Billetteries", "Outils"];
 const hote = (u) => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch (_) { return ""; } };
 // Liens rangés par rubrique, dans l’ordre du fichier à l’intérieur de chaque rubrique.
@@ -962,10 +1022,10 @@ const liensParRubrique = (L) => ORDRE_LIENS.map((c) => [c, L.filter((l) => l.cat
 /* ---------- Coups de cœur (envies, publiques) ---------- */
 function renderCoeur() {
   const E = enviesIds();
-  const items = AFF.filter((e) => e.statut === "a-voir" && !ended(e) && E.has(e.id)).sort((a, b) => sortKey(a) - sortKey(b) || a.titre.localeCompare(b.titre, "fr"));
+  const items = LIVE.filter((e) => E.has(e.id)).sort((a, b) => sortKey(a) - sortKey(b) || a.titre.localeCompare(b.titre, "fr"));
   let html = "", last = null;
   for (const e of items) { const g = groupOf(e); if (g !== last) { html += `<h2 class="jour">${g}</h2>`; last = g; } html += rowA(e); }
-  $("#main").innerHTML = `<div class="ph"><h1>Coups de cœur de ${OWNER}</h1><p>${plural(items.length, "sortie")} à l’affiche</p></div>
+  $("#main").innerHTML = `<div class="ph"><h1>Coups de cœur de ${OWNER}</h1><p>${EXPO ? plural(items.length, "exposition") : plural(items.length, "sortie") + " à l’affiche"}</p></div>
   <div class="list">${html || `<p class="empty">Aucun coup de cœur pour le moment.</p>`}</div>`;
 }
 // Billetteries, cartes jeunes et calendriers de vente : section du Radar (l’ancienne page Liens, #liens y mène).
@@ -1005,7 +1065,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = "assets/admin.js?v=4.41"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.42"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1013,8 +1073,19 @@ async function renderAdmin(q) {
   return ADMIN.render(q);
 }
 
+/* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
+let exP = null;
+const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.42"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  document.head.appendChild(s);
+}));
+async function renderExpo(vue, q) {
+  if (!window.EXPOS) { try { await loadExpo(); } catch (_) { $("#main").innerHTML = '<p class="empty">Impossible de charger les expositions. Vérifie la connexion puis recharge.</p>'; return; } }
+  window.EXPOS.render(vue, q);
+}
+
 /* ---------- Routeur ---------- */
-const TABS = { radar: "radar", affiche: "affiche", coeur: "coeur", journal: "journal", artistes: "artistes", lieux: "artistes", artiste: "artistes", lieu: "artistes", liens: "radar", ventes: "radar", plan: null, admin: "admin" };
+const TABS = EXPO ? { "a-voir": "a-voir", bientot: "bientot", coeur: "coeur", journal: "journal", artistes: "artistes", lieux: "artistes", artiste: "artistes", lieu: "artistes", plan: null, admin: "admin" } : { radar: "radar", affiche: "affiche", coeur: "coeur", journal: "journal", artistes: "artistes", lieux: "artistes", artiste: "artistes", lieu: "artistes", liens: "radar", ventes: "radar", plan: null, admin: "admin" };
 let BASE = null, RENDERED = null;
 function setTab(t) {
   $$(".tab").forEach((b, i) => { const on = b.dataset.tab === t; b.setAttribute("aria-selected", String(on)); b.tabIndex = on || (!t && i === 0) ? 0 : -1; });
@@ -1023,30 +1094,31 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = "assets/charte.js?v=4.41"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.42"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
-const TITRES = { radar: "Radar", ventes: "Ouvertures de vente", plan: "Plan du site", affiche: "", coeur: "Coups de cœur", journal: "Journal", artistes: "Artistes et lieux", lieux: "Artistes et lieux", admin: "Admin" };
-let TITRE_VUE = "Factotum";
+const TITRES = { "a-voir": "", bientot: "Bientôt", radar: "Radar", ventes: "Ouvertures de vente", plan: "Plan du site", affiche: "", coeur: "Coups de cœur", journal: "Journal", artistes: "Artistes et lieux", lieux: "Artistes et lieux", admin: "Admin" };
+let TITRE_VUE = NOM;
 async function renderView(h) {
   const [path, q = ""] = h.split("?");
   if (path === "charte") {
     modeCharte(true); setTab(null);
     try { await loadCharte(); } catch (_) { $("#main").innerHTML = '<p class="empty">Impossible de charger la charte. Vérifie la connexion puis recharge.</p>'; return; }
-    window.CHARTE.render($("#main"), { esc, cleF, saisonTxt, saisonDe, themeBouton, ico, ICONES: ICO, CATS, famille });
-    document.title = TITRE_VUE = "Charte – Factotum"; RENDERED = h; window.scrollTo(0, 0); return;
+    window.CHARTE.render($("#main"), { EXPO, esc, cleF, saisonTxt, saisonDe, themeBouton, ico, ICONES: ICO, CATS, famille });
+    document.title = TITRE_VUE = "Charte – " + NOM; RENDERED = h; window.scrollTo(0, 0); return;
   }
   modeCharte(false);
-  const view = path.startsWith("artiste-") ? "artiste" : path.startsWith("lieu-") ? "lieu" : path === "liens" ? "radar" : Object.hasOwn(TABS, path) ? path : "affiche";
+  const view = path.startsWith("artiste-") ? "artiste" : path.startsWith("lieu-") ? "lieu" : path === "liens" ? "radar" : Object.hasOwn(TABS, path) ? path : ACCUEIL;
   const samePath = RENDERED && RENDERED.split("?")[0] === path;
   const focusK = samePath && document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.k : null;
   setTab(TABS[view]);
-  document.title = TITRE_VUE = TITRES[view] ? TITRES[view] + " – Factotum" : "Factotum";
+  document.title = TITRE_VUE = TITRES[view] ? TITRES[view] + " – " + NOM : NOM;
   try {
     if (["journal", "artistes", "lieux", "artiste", "lieu"].includes(view) && !JOURNAL) { if (!samePath) $("#main").innerHTML = '<p class="load">Chargement…</p>'; await loadJournal(); }
   } catch (_) { $("#main").innerHTML = '<p class="empty">Impossible de charger ces données. Vérifie la connexion puis recharge.</p>'; return; }
   if (view === "radar") { if (!LIENS) { if (!samePath) $("#main").innerHTML = '<p class="load">Chargement…</p>'; await loadLiens().catch(() => {}); } renderRadar(); }
+  else if (view === "a-voir" || view === "bientot") await renderExpo(view, q);
   else if (view === "affiche") renderAffiche(q);
   else if (view === "journal") renderJournal(q);
   else if (view === "artistes" || view === "lieux") renderAL(view, q);
@@ -1067,16 +1139,16 @@ const LEGACY = { calendrier: "affiche?vue=mois", vus: "journal", prive: "admin",
 async function route() {
   let h = location.hash.slice(1);
   if (h.startsWith("fiche-")) { history.replaceState(null, "", "#sortie-" + h.slice(6)); h = "sortie-" + h.slice(6); }
-  else if (h.startsWith("vue-")) { h = LEGACY[h.slice(4)] || "affiche"; history.replaceState(null, "", "#" + h); }
-  if (!h) h = "affiche";
+  else if (h.startsWith("vue-")) { h = (!EXPO && LEGACY[h.slice(4)]) || ACCUEIL; history.replaceState(null, "", "#" + h); }
+  if (!h) h = ACCUEIL;
   if (h.startsWith("sortie-")) {
     FROM_APP = BASE !== null;
-    if (BASE === null) BASE = "affiche";
+    if (BASE === null) BASE = ACCUEIL;
     if (RENDERED === null) await renderView(BASE);
     return openSheet(decodeURIComponent(h.slice(7)));
   }
   const chemin = h.split("?")[0];
-  if (!(Object.hasOwn(TABS, chemin) || chemin === "charte" || /^(artiste|lieu)-./.test(chemin))) { h = "affiche"; history.replaceState(null, "", "#affiche"); }
+  if (!(Object.hasOwn(TABS, chemin) || chemin === "charte" || /^(artiste|lieu)-./.test(chemin))) { h = ACCUEIL; history.replaceState(null, "", "#" + ACCUEIL); }
   const wasOpen = !$("#sheet").hidden;
   closeSheet();
   BASE = h;
@@ -1101,7 +1173,7 @@ if (document.fonts && document.fonts.ready) document.fonts.ready.then(colLat);
 $$(".tab").forEach((b) => {
   b.onclick = () => {
     const t = b.dataset.tab;
-    const target = t === "affiche" ? LAST_AFF : t;
+    const target = t === ACCUEIL ? LAST_AFF : t;
     if (location.hash.slice(1) === target) { window.scrollTo({ top: 0 }); return; }
     location.hash = target;
   };
@@ -1139,7 +1211,7 @@ document.addEventListener("click", async (ev) => {
 });
 
 /* ---------- En-tête : saison calculée, thème, barre compacte au défilement ---------- */
-$("#saison").textContent = "Saison " + saisonDe().debut + "–" + (saisonDe().debut + 1);
+$("#saison").innerHTML = '<span class="sl">Saison </span>' + saisonDe().debut + "–" + (saisonDe().debut + 1); // « Saison » replié sur mobile quand la mention du site partage la ligne
 themePose(themeLu()); lockIcon();
 document.addEventListener("keydown", (ev) => { const m = $(".tmenu"); if (ev.key === "Escape" && m) { const b = m.parentElement.querySelector("[data-theme-btn]"); themeFerme(); b.focus(); } });
 if ("IntersectionObserver" in window) new IntersectionObserver(([x]) => document.body.classList.toggle("compact", !x.isIntersecting)).observe($("#top"));
@@ -1159,7 +1231,7 @@ window.addEventListener("online", horsLigne); window.addEventListener("offline",
 /* ---------- Démarrage ---------- */
 (async () => {
   try {
-    const [a, l, d, ev, dv] = await Promise.all([getJSON("data/affiche.json"), getJSON("data/lieux.json"), getJSON("data/dispo.json").catch(() => ({})), getJSON("data/envies.json").catch(() => ({})), getJSON("data/deja-vu.json").catch(() => ({}))]);
+    const [a, l, d, ev, dv] = await Promise.all([getJSON(RACINE + "data/affiche.json"), getJSON(RACINE + "data/lieux.json"), getJSON(RACINE + "data/dispo.json").catch(() => ({})), getJSON(RACINE + "data/envies.json").catch(() => ({})), getJSON(RACINE + "data/deja-vu.json").catch(() => ({}))]);
     ENVIES_PUB = Array.isArray(ev.ids) ? ev.ids : [];
     DEJA_VU = dv && typeof dv === "object" ? dv : {};
     DISPO_PUB = d;
@@ -1172,4 +1244,4 @@ window.addEventListener("online", horsLigne); window.addEventListener("offline",
   }
 })();
 if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost"))
-  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+  window.addEventListener("load", () => navigator.serviceWorker.register(RACINE + "sw.js").catch(() => {}));

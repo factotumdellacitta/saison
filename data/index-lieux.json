@@ -71,6 +71,11 @@
  "bataclan": {
   "sorties": []
  },
+ "bendana-pinel": {
+  "sorties": [
+   "miguel-rothschild-chroniques-de-la-mer"
+  ]
+ },
  "bouffes-du-nord": {
   "sorties": [
    "les-surs-hilton",
@@ -205,6 +210,11 @@
    "shrek-le-musical"
   ]
  },
+ "fondation-louis-vuitton": {
+  "sorties": [
+   "gustave-fayet-collectionneur-createur"
+  ]
+ },
  "grande-halle-villette": {
   "sorties": [
    "tartuffe-van-hove",
@@ -290,6 +300,11 @@
    "chiens-de-navarre-i-will-survive",
    "josef-nadj-dialogues-dans-le-reve",
    "steven-cohen-people-will-people-you"
+  ]
+ },
+ "musee-orsay": {
+  "sorties": [
+   "gustave-le-gray-peintre-photographe"
   ]
  },
  "nanterre-amandiers": {
