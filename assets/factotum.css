@@ -828,7 +828,7 @@ body:has(#dlg) .pub,body:has(#dlg) .toast{bottom:auto;top:0}
 .cr .plus{position:relative;padding:0 var(--e1);border:0;background:none;color:var(--encre);font:inherit;font-size:var(--t-meta);font-weight:700;letter-spacing:.06em;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .cr .plus::after{content:"";position:absolute;left:-8px;right:-8px;top:-12px;bottom:-12px}
 /* Infos : lignes plus basses. */
-:is(.det,#sheet) .dl dt,:is(.det,#sheet) .dl dd{padding:6px 0}
+:is(.det,#sheet) .dl dt,:is(.det,#sheet) .dl dd{padding-top:6px;padding-bottom:6px}
 :is(.det,#sheet) .dl{margin-bottom:var(--e3)}
 :is(.det,#sheet) .why{margin-bottom:var(--e1)}
 :is(.det,#sheet) .acts{margin:var(--e3) 0 0}
@@ -1006,8 +1006,8 @@ body:has(#dlg) .pub,body:has(#dlg) .toast{bottom:auto;top:0}
 /* ---------- Fiche en surimpression : deux colonnes sur bureau, « Dates » (calendrier) à gauche ---------- */
 @media (min-width:960px){
   .fi-g{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--e8);align-items:start;margin-top:var(--e4)}
-  .fi-g>.fi-p{grid-column:6/span 7;grid-row:1}
-  .fi-g>.fi-d{grid-column:1/span 5;grid-row:1}
+  .fi-g>.fi-p{grid-column:1/span 7;grid-row:1}
+  .fi-g>.fi-d{grid-column:8/span 5;grid-row:1}
   .fi-g>.fi-d>.sec:first-child{margin-top:0}
   .fi-g.fi-vu>.fi-p{grid-column:1/span 8}
   .fi-d .mini-wrap{grid-template-columns:minmax(0,1fr)}
@@ -1025,3 +1025,11 @@ body:has(#dlg) .pub,body:has(#dlg) .toast{bottom:auto;top:0}
 .pub-expo.pe-tete{margin:0}
 .pe-tete h2.pe-l{margin:0;font-size:inherit}
 .rp-x .rp-a .vl{border-top:0}
+/* Fiche : boutons dans l’en-tête de couleur (blanc sur l’aplat ; action principale en blanc plein). */
+.sh-acts{margin-top:var(--e4)}
+.shh .sh-acts .btn{border-color:var(--sur-accent);background:transparent;color:var(--sur-accent)}
+.shh .sh-acts .btn.pri{background:var(--sur-accent);color:var(--ga,var(--accent))}
+.shh .sh-acts>.acts-adm{border-left-color:var(--sur-accent)}
+.shh .sh-acts .btn.ai,.shh .sh-acts .btn.ai.danger{border-color:transparent;color:var(--sur-accent)}
+.shh .sh-acts .btn.ai.pri{border-color:var(--sur-accent);background:transparent;color:var(--sur-accent)}
+@media (hover:hover){.shh .sh-acts .btn:hover{background:var(--sur-accent);color:var(--ga,var(--accent))}.shh .sh-acts .btn.pri:hover{background:transparent;color:var(--sur-accent)}}
