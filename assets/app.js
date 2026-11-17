@@ -295,7 +295,7 @@ function badges(e) {
 // Artistes en tête de ligne : auteur, compositeur, mise en scène, chorégraphie, puis les autres ; trois au plus.
 const ORDRE_ART = ["auteur", "compositeur", "mise en scène", "chorégraphie", "direction musicale", "commissaire", "réalisation", "compagnie", "interprète", "artiste"];
 const rangArt = (e, a) => (estExpo(e) && a.role === "artiste" ? -1 : ORDRE_ART.indexOf(a.role)); // exposition : les artistes exposés avant les commissaires
-const artLigne = (e) => [...(e.artistes || [])].sort((a, b) => rangArt(e, a) - rangArt(e, b)).slice(0, 3).map((a) => a.nom).join(", ");
+const artLigne = (e) => [...new Set([...(e.artistes || [])].sort((a, b) => rangArt(e, a) - rangArt(e, b)).map((a) => a.nom))].slice(0, 3).join(", "); // sans répéter un nom
 // Recherche plein texte (titre, artistes, lieu, salle, avis, années vues ; notes privées si connecté), sans accents, tous les mots.
 const normQ = (s) => norm(s).replace(/[’‘`]/g, "'");
 function texteDe(e) {
@@ -330,13 +330,17 @@ function rowJ(e) {
   <span class="mid">${l1(e, e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : "")}${e.avis ? `<span class="art avis">« ${esc(e.avis)} »</span>` : artLigne(e) ? `<span class="art nom">${esc(artLigne(e))}</span>` : ""}${ligneMeta(esc(meta), acc.length ? `<span class="bds"><span class="b">avec ${esc(acc.join(", "))}</span></span>` : "")}</span></button><div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
 }
 function creditsHTML(e) {
-  const by = {};
-  (e.artistes || []).forEach((a) => (by[a.role] ??= []).push(a));
   const ordre = estExpo(e) ? ["artiste", ...ROLES.filter((r) => r !== "artiste")] : ROLES; // exposition : artistes exposés d’abord
+  const rg = (r) => (ordre.includes(r) ? ordre.indexOf(r) : ordre.length);
+  // Une personne à plusieurs rôles n’est citée qu’une fois : « auteur, mise en scène Laura Vazquez ».
+  const pers = new Map();
+  (e.artistes || []).forEach((a) => { const p = pers.get(a.nom) || pers.set(a.nom, { nom: a.nom, roles: [] }).get(a.nom); if (!p.roles.includes(a.role)) p.roles.push(a.role); });
+  const grp = new Map();
+  for (const p of pers.values()) { p.roles.sort((x, y) => rg(x) - rg(y)); const k = p.roles.join(", "); (grp.get(k) || grp.set(k, []).get(k)).push(p); }
   const lien = (a) => `<a href="#artiste-${slug(a.nom)}">${esc(a.nom)}</a>`, MAXN = 6;
-  return ordre.filter((r) => by[r]).map((r) => {
-    const n = by[r], vis = n.length > MAXN + 1 ? n.slice(0, MAXN) : n, reste = n.slice(vis.length);
-    return `<span class="ro">${esc(r)}</span> ${vis.map(lien).join(", ")}${reste.length ? `<button class="plus" type="button" data-plus aria-expanded="false" aria-label="Voir ${reste.length} autres noms">+ ${reste.length}</button><span hidden>, ${reste.map(lien).join(", ")}</span>` : ""}`;
+  return [...grp].sort((a, b) => rg(a[1][0].roles[0]) - rg(b[1][0].roles[0]) || a[1][0].roles.length - b[1][0].roles.length).map(([k, n]) => {
+    const vis = n.length > MAXN + 1 ? n.slice(0, MAXN) : n, reste = n.slice(vis.length);
+    return `<span class="ro">${esc(k)}</span> ${vis.map(lien).join(", ")}${reste.length ? `<button class="plus" type="button" data-plus aria-expanded="false" aria-label="Voir ${reste.length} autres noms">+ ${reste.length}</button><span hidden>, ${reste.map(lien).join(", ")}</span>` : ""}`;
   }).join(" · ");
 }
 function offresHTML(e) {
@@ -1108,7 +1112,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.44"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.45"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1119,7 +1123,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.44"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.45"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1137,7 +1141,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.44"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.45"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }

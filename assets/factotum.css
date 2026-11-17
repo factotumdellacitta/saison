@@ -810,7 +810,6 @@ body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
 /* Zones tactiles de 44 px : tri, liens des fiches, icônes admin (4 px de plus entre elles, « Supprimer » à l'écart) */
 .linkbtn{position:relative}
 .linkbtn::after{content:"";position:absolute;left:0;right:0;top:-6px;bottom:-6px}
-.dl dd a{display:inline-block;padding:var(--e1) 0}
 .acts-adm{gap:var(--e2)}
 .acts-adm .btn.ai.danger:last-child{margin-left:auto}
 /* Menu admin : une seule ligne défilante */
@@ -821,12 +820,11 @@ body:has(#dlg) .pub,body:has(#dlg) .toast{bottom:auto;top:0}
 .aussi a{scroll-margin:calc(var(--collant) + var(--e4)) 0 calc(var(--nav) + var(--e6))}
 
 /* ---------- Revue ergonomie : fiche déroulée plus courte ---------- */
-/* Ouverte, la ligne ne répète pas les artistes (crédits complets dessous) ; l’avis du journal s’y lit en entier, replié à 3 lignes sinon. */
-.row.open .rb .art.nom{display:none}
+/* La ligne ne bouge pas à l’ouverture ; l’avis du journal s’y lit en entier, replié à 3 lignes sinon. */
 .rb .art.avis{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
 .row.open .rb .art.avis{display:block;-webkit-line-clamp:none;overflow:visible}
 /* Crédits : interligne serré, rôles en petites capitales, au-delà de 6 noms la suite se déplie. */
-:is(.det,#sheet) .cr{margin:var(--e2) 0 var(--e3);line-height:1.6}
+:is(.det,#sheet) .cr{margin:0 0 var(--e3);padding-top:var(--e2);line-height:1.5}
 .cr .plus{position:relative;padding:0 var(--e1);border:0;background:none;color:var(--encre);font:inherit;font-size:var(--t-meta);font-weight:700;letter-spacing:.06em;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .cr .plus::after{content:"";position:absolute;left:-8px;right:-8px;top:-12px;bottom:-12px}
 /* Infos : lignes plus basses. */
@@ -846,3 +844,11 @@ body:has(#dlg) .pub,body:has(#dlg) .toast{bottom:auto;top:0}
 :is(.det,#sheet) .mini .dow{padding:2px var(--e1)}
 :is(.det,#sheet) .mini-wrap{gap:var(--e3) var(--e4)}
 .det .mini.cal,:is(.det,#sheet) .mini-wrap>.cal{margin-top:0}
+/* Déroulé : aucune marge ne sort du bloc, le pointillé de la colonne de date se prolonge sans coupure. */
+.det{display:flow-root}
+/* Liste plus dense : ligne d’artistes sur une ligne, marges verticales resserrées. */
+.mid{gap:1px;padding:6px 0 6px var(--e3)}
+.stub{padding-top:6px;padding-bottom:6px}
+.rb .art.nom{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.l1 .st{margin-top:4px}
+.row>.envie{top:7px}
