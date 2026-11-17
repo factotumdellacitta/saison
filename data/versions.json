@@ -1,6 +1,14 @@
 {
  "versions": [
   {
+   "version": "4.67",
+   "date": "2026-11-17",
+   "titre": "Fiche d’une sortie vue : infos privées sans doublon",
+   "points": [
+    "Mode admin : places, prix et accompagnants n’apparaissent plus qu’une fois dans la fiche d’une sortie vue"
+   ]
+  },
+  {
    "version": "4.66",
    "date": "2026-11-17",
    "titre": "Sélecteur de site sans couleur, bouton Filtres centré",

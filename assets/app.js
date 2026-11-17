@@ -727,7 +727,7 @@ async function openSheet(id) {
   } else {
     const vu = e.statut === "vu", L = lieu(e), c = creditsHTML(e), tete = enteteFiche(e);
     box.innerHTML = `${marqueFiche()}<div class="shtop"><button class="btn ico" type="button" data-close aria-label="Fermer">${ico("fermer")}</button><span class="k">${esc([e.categorie, e.sousGenre].filter(Boolean).join(" · "))}${L.nom ? " · " + esc(court(e.lieuId)) : ""}</span>${nav}<button class="btn ico" type="button" data-share="${esc(e.id)}" aria-label="Partager">${ico("partager")}</button></div>
-    ${vu ? `<div class="fi-g fi-vu"><div class="fi-p">${tete}${PRIVE && ADMIN ? ADMIN.ficheHTML(e) + ADMIN.journalResume(e) : ""}${e.avis ? `<blockquote>${esc(e.avis)}</blockquote>` : ""}${c ? `<p class="cr">${c}</p>` : ""}<dl class="dl"><dt>${ico("lieu")}<span class="vh">Lieu</span></dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}</dd></dl>${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${e.note ? `<p class="calc">Note de la grille ${stars(e.note, false, "Note de la grille")}</p>` : ""}</div></div>` : ficheCorps(e, tete)}`;
+    ${vu ? `<div class="fi-g fi-vu"><div class="fi-p">${tete}${PRIVE && ADMIN ? ADMIN.ficheHTML(e) : ""}${e.avis ? `<blockquote>${esc(e.avis)}</blockquote>` : ""}${c ? `<p class="cr">${c}</p>` : ""}<dl class="dl"><dt>${ico("lieu")}<span class="vh">Lieu</span></dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}</dd></dl>${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${e.note ? `<p class="calc">Note de la grille ${stars(e.note, false, "Note de la grille")}</p>` : ""}</div></div>` : ficheCorps(e, tete)}`;
   }
   clearTimeout(SHEET_T); s.classList.remove("sort"); box.style.transform = "";
   if (s.hidden) { SHEET_FROM = document.activeElement; s.hidden = false; document.documentElement.style.overflow = "hidden"; }
@@ -1286,7 +1286,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.66"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.67"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1297,7 +1297,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.66"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.67"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1315,7 +1315,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.66"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.67"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
