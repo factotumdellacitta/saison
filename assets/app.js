@@ -442,14 +442,13 @@ function dejaVuHTML(e) {
   return J.length ? `<p class="dv">Déjà vu : ${J.map((j) => `<a href="#sortie-${esc(j.id)}">${esc(j.titre)}, ${esc(fmtY(D(j.vuLe.at(-1)), true))}</a>`).join(" · ")}</p>` : "";
 }
 // « Autour de cette sortie » : d’autres sorties à l’affiche avec les mêmes artistes, puis dans la même salle (quatre au plus),
-// chacune avec la raison du lien. Après le calendrier sur mobile, sous les infos sur bureau.
+// le sous-titre dit le lien. Après le calendrier sur mobile, sous les infos sur bureau.
 function autourHTML(e) {
   const noms = new Set((e.artistes || []).map((a) => a.nom));
   const sc = (x) => ((x.artistes || []).some((a) => noms.has(a.nom)) ? 2 : 0) + (e.lieuId && x.lieuId === e.lieuId ? 1 : 0);
   const L = LIVE.filter((x) => x.id !== e.id && x.statut === "a-voir" && sc(x) > 0).sort((a, b) => sc(b) - sc(a) || sortKey(a) - sortKey(b)).slice(0, 4);
   if (!L.length) return "";
-  const lien = (x) => { const a = (x.artistes || []).find((y) => noms.has(y.nom)); return a ? `${a.nom}, ${a.role}` : `même salle : ${court(x.lieuId)}`; };
-  return `<section class="fi-a" aria-labelledby="fiA"><h3 class="sec" id="fiA">Autour de cette sortie <small>mêmes artistes ou même salle</small></h3><ul class="vl">${L.map((x) => apercu(x, dateAp(x), esc(lien(x)))).join("")}</ul></section>`;
+  return `<section class="fi-a" aria-labelledby="fiA"><h3 class="sec" id="fiA">Autour de cette sortie <small>mêmes artistes ou même salle</small></h3><ul class="vl">${L.map((x) => apercu(x, dateAp(x), esc(court(x.lieuId)))).join("")}</ul></section>`;
 }
 
 /* ---------- Calendriers ---------- */
@@ -1057,6 +1056,14 @@ function renderVentes(q0) {
   $("#vq").oninput = (ev) => { VF.q = ev.target.value; maj(); };
 }
 
+/* ---------- Versions du site (#versions, depuis le plan du site) : data/versions.json, la plus récente en tête ---------- */
+let VERSIONS = null;
+async function renderVersions() {
+  if (!VERSIONS) { $("#main").innerHTML = '<p class="load">Chargement…</p>'; try { VERSIONS = (await getJSON(RACINE + "data/versions.json")).versions || []; } catch (_) { $("#main").innerHTML = '<p class="empty">Liste des versions indisponible hors connexion.</p>'; return; } }
+  $("#main").innerHTML = `<div class="ph">${partagerBtn()}<h1>Versions du site</h1><p>${plural(VERSIONS.length, "version")} · ${NOM}</p></div>
+  <ol class="vers">${VERSIONS.map((v, i) => `<li${i === 0 ? ' class="cur"' : ""}><div class="vv"><b>${esc(v.version)}</b><small>${esc(fmtY(D(v.date), true))}</small>${i === 0 ? '<span class="b">En ligne</span>' : ""}</div><div class="vc"><p class="vt">${esc(v.titre)}</p>${(v.points || []).length ? `<ul>${v.points.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}</div></li>`).join("")}</ol>`;
+}
+
 /* ---------- Plan du site (#plan, lien en pied de page) ---------- */
 function renderPlan() {
   const it = (h, t, d) => `<li><a href="#${h}"><span class="lt"><b>${t}</b>${d ? `<small>${d}</small>` : ""}</span></a></li>`;
@@ -1064,12 +1071,12 @@ function renderPlan() {
   if (EXPO) { $("#main").innerHTML = `<div class="ph"><h1>Plan du site</h1></div>
   ${sec("Expositions", [it("a-voir", "À voir", "Expositions en cours, derniers jours d’abord"), it("bientot", "Bientôt", "Expositions annoncées"), it("coeur", `Coups de cœur de ${esc(OWNER)}`, "")])}
   ${sec("Archive", [it("journal", "Journal", "Expositions vues, par saison"), it("artistes", "Artistes", "Spectacles et expositions"), it("lieux", "Lieux", "")])}
-  ${sec("À propos", [`<li><a href="../"><span class="lt"><b>Factotum</b><small>Les spectacles</small></span></a></li>`, it("charte", "Charte graphique", "Nom, symbole, couleurs, typographie, icônes"), ...(PRIVE ? [it("admin", "Admin", "")] : [])])}`; return; }
+  ${sec("À propos", [`<li><a href="../"><span class="lt"><b>Factotum</b><small>Les spectacles</small></span></a></li>`, it("charte", "Charte graphique", "Nom, symbole, couleurs, typographie, icônes"), it("versions", "Versions du site", "Ce qui a changé, version par version"), ...(PRIVE ? [it("admin", "Admin", "")] : [])])}`; return; }
   $("#main").innerHTML = `<div class="ph"><h1>Plan du site</h1></div>
   ${sec("Saison", [it("affiche", "À l’affiche", "Liste et calendrier, filtres"), it("coeur", `Coups de cœur de ${esc(OWNER)}`, ""),
     it("radar", "Radar", "Cette semaine, à réserver, dernières chances"), it("rapports", "Rapports de veille", "Chroniques datées, flux Atom"), it("ventes", "Ouvertures de vente", "Toutes les ouvertures à venir"), it("liens", "Billetteries", "Cartes jeunes, calendriers de vente")])}
   ${sec("Archive", [it("journal", "Journal", "Sorties vues, par saison"), it("artistes", "Artistes", ""), it("lieux", "Lieux", "")])}
-  ${sec("À propos", [`<li><a href="expo/"><span class="lt"><b>Factotum Expo</b><small>Les expositions</small></span></a></li>`, it("charte", "Charte graphique", "Nom, symbole, couleurs, typographie, icônes"), ...(PRIVE ? [it("admin", "Admin", "")] : [])])}`;
+  ${sec("À propos", [`<li><a href="expo/"><span class="lt"><b>Factotum Expo</b><small>Les expositions</small></span></a></li>`, it("charte", "Charte graphique", "Nom, symbole, couleurs, typographie, icônes"), it("versions", "Versions du site", "Ce qui a changé, version par version"), ...(PRIVE ? [it("admin", "Admin", "")] : [])])}`;
 }
 
 /* ---------- Journal ---------- */
@@ -1272,7 +1279,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.62"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.63"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1283,7 +1290,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.62"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.63"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1292,7 +1299,7 @@ async function renderExpo(vue, q) {
 }
 
 /* ---------- Routeur ---------- */
-const TABS = EXPO ? { "a-voir": "a-voir", bientot: "bientot", coeur: "coeur", journal: "journal", artistes: "artistes", lieux: "artistes", artiste: "artistes", lieu: "artistes", plan: null, admin: "admin" } : { radar: "radar", affiche: "affiche", coeur: "coeur", journal: "journal", artistes: "artistes", lieux: "artistes", artiste: "artistes", lieu: "artistes", liens: "radar", ventes: "radar", rapports: "radar", rapport: "radar", plan: null, admin: "admin" };
+const TABS = EXPO ? { "a-voir": "a-voir", bientot: "bientot", coeur: "coeur", journal: "journal", artistes: "artistes", lieux: "artistes", artiste: "artistes", lieu: "artistes", plan: null, versions: null, admin: "admin" } : { radar: "radar", affiche: "affiche", coeur: "coeur", journal: "journal", artistes: "artistes", lieux: "artistes", artiste: "artistes", lieu: "artistes", liens: "radar", ventes: "radar", rapports: "radar", rapport: "radar", plan: null, versions: null, admin: "admin" };
 let BASE = null, RENDERED = null;
 function setTab(t) {
   $$(".tab").forEach((b, i) => { const on = b.dataset.tab === t; b.setAttribute("aria-selected", String(on)); b.tabIndex = on || (!t && i === 0) ? 0 : -1; });
@@ -1301,11 +1308,11 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.62"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.63"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
-const TITRES = { "a-voir": "", bientot: "Bientôt", radar: "Radar", ventes: "Ouvertures de vente", rapports: "Rapports de veille", rapport: "Rapport de veille", plan: "Plan du site", affiche: "", coeur: "Coups de cœur", journal: "Journal", artistes: "Artistes et lieux", lieux: "Artistes et lieux", admin: "Admin" };
+const TITRES = { "a-voir": "", bientot: "Bientôt", radar: "Radar", ventes: "Ouvertures de vente", rapports: "Rapports de veille", rapport: "Rapport de veille", plan: "Plan du site", versions: "Versions du site", affiche: "", coeur: "Coups de cœur", journal: "Journal", artistes: "Artistes et lieux", lieux: "Artistes et lieux", admin: "Admin" };
 let TITRE_VUE = NOM;
 async function renderView(h) {
   const [path, q = ""] = h.split("?");
@@ -1335,6 +1342,7 @@ async function renderView(h) {
   else if (view === "coeur") renderCoeur(q);
   else if (view === "ventes") renderVentes(q);
   else if (view === "plan") renderPlan();
+  else if (view === "versions") await renderVersions();
   else if (view === "admin") await renderAdmin(q);
   const hc = $("#hcoeur"); if (hc) { if (view === "coeur") hc.setAttribute("aria-current", "page"); else hc.removeAttribute("aria-current"); }
   RENDERED = h;

@@ -17,6 +17,7 @@
   --g-theatre:#B4233C;--g-lyrique:#1F5FA8;--g-danse:#946200;--g-concert:#B04A00;--g-xbeaux:#A3175E;--g-xphoto:#0F5F7A;--g-xcontemporain:#7A5230;
   --a-theatre:#B4233C;--a-lyrique:#1F5FA8;--a-danse:#946200;--a-concert:#B04A00;--a-neutre:#5C5C5C;--a-xbeaux:#A3175E;--a-xphoto:#0F5F7A;--a-xcontemporain:#7A5230;
   --voile:rgba(17,17,17,.45);
+  --id-spectacles:#E30613;--id-expo:#00715D;
   color-scheme:light;
 }
 :root{
@@ -1099,3 +1100,25 @@ button.cell.cal-res{cursor:pointer;font:inherit;font-weight:800}
   .fi-g>.fi-d{grid-row:1/span 2}
   .fi-g>.fi-a{grid-column:1/span 8;grid-row:2}
 }
+/* ---------- En-tête (v4.63) : sur mobile, « Spectacles | Expos » à la largeur du cartouche ;
+   le lien vers l’autre site garde la couleur de celui-ci (vert vers Expo, rouge vers Spectacles). */
+@media (max-width:959.98px){
+  .top .in{grid-template-columns:max-content minmax(0,1fr)}
+  .brand.cartouche{justify-self:stretch}
+  .top .sites{grid-column:1;justify-self:stretch;display:flex}
+  .top .sites a{flex:1 1 0;justify-content:center}
+}
+.sites a.vers-expo{background:var(--id-expo);color:var(--sur-accent)}
+.sites a.vers-spectacles{background:var(--id-spectacles);color:var(--sur-accent)}
+@media (hover:hover){.sites a.vers-expo:hover{background:var(--sur-accent);color:var(--id-expo)}.sites a.vers-spectacles:hover{background:var(--sur-accent);color:var(--id-spectacles)}}
+/* Page des versions */
+.vers{list-style:none;margin:var(--e4) 0 0;padding:0;border-top:1px solid var(--filet)}
+.vers>li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:var(--e4);padding:var(--e3) 0;border-bottom:1px solid var(--filet-leger)}
+.vers .vv{display:flex;flex-direction:column;gap:2px}
+.vers .vv b{font-size:var(--t-fiche);font-weight:800}
+.vers .vv small{font-size:var(--t-meta);font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--encre-2)}
+.vers .vv .b{align-self:flex-start;margin-top:var(--e1)}
+.vers .vt{margin:0;font-weight:700}
+.vers ul{margin:var(--e1) 0 0;padding-left:var(--e4)}
+.vers ul li{margin:2px 0;color:var(--encre-2)}
+.vers>li.cur .vv b{color:var(--accent-texte)}

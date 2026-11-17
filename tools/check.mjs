@@ -58,7 +58,7 @@ try {
 if (existsSync("data/spectacles.json")) erreurs.push("data/spectacles.json ne doit plus exister (remplacé par affiche.json et journal.json).");
 
 // ---------- Fichiers publics : aucune clé privée ----------
-const PUBLICS_ATTENDUS = new Set(["affiche.json", "journal.json", "lieux.json", "liens.json", "dispo.json", "index-artistes.json", "index-lieux.json", "envies.json", "deja-vu.json", "archive.json", "radar.json", "radar.atom", "prive.enc", "calendrier.enc"]);
+const PUBLICS_ATTENDUS = new Set(["affiche.json", "journal.json", "lieux.json", "liens.json", "dispo.json", "index-artistes.json", "index-lieux.json", "envies.json", "deja-vu.json", "archive.json", "radar.json", "radar.atom", "versions.json", "prive.enc", "calendrier.enc"]);
 function fouille(o, chemin, f) {
   if (Array.isArray(o)) o.forEach((v, i) => fouille(v, `${chemin}[${i}]`, f));
   else if (o && typeof o === "object")
@@ -332,3 +332,13 @@ if (erreurs.length) {
   process.exit(1);
 }
 console.log(`OK : ${affiche.sorties.length} sorties à l'affiche, ${journal.sorties.length} au journal, ${Object.keys(lieux).length} lieux, ${liens.length} liens.`);
+
+// Versions du site : data/versions.json porte en tête la version servie (V de sw.js), avec date, titre et points.
+{
+  const V = (/const V = "factotum-([\d.]+)"/.exec(readFileSync("sw.js", "utf8")) || [])[1];
+  let vs = null; try { vs = JSON.parse(readFileSync("data/versions.json", "utf8")).versions; } catch (_) { console.error("ERREUR : data/versions.json illisible."); process.exitCode = 1; }
+  if (vs) {
+    if (!vs.length || vs[0].version !== V) { console.error(`ERREUR : data/versions.json doit commencer par la version ${V} (sw.js).`); process.exitCode = 1; }
+    for (const v of vs) if (!/^\d+\.\d+$/.test(v.version || "") || !/^\d{4}-\d{2}-\d{2}$/.test(v.date || "") || !v.titre || !Array.isArray(v.points)) { console.error(`ERREUR : version mal formée dans data/versions.json (${v.version}).`); process.exitCode = 1; }
+  }
+}

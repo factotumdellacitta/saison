@@ -1,0 +1,278 @@
+{
+ "versions": [
+  {
+   "version": "4.63",
+   "date": "2026-11-17",
+   "titre": "Page des versions, sélecteur de site à la largeur du logo",
+   "points": [
+    "Page « Versions du site », accessible depuis le plan du site",
+    "Mobile : boutons « Spectacles | Expos » de la largeur du cartouche ; le lien vers l’autre site garde sa couleur (vert vers Expo, rouge vers Spectacles)",
+    "« Autour de cette sortie » : aperçus sans la raison du lien, le sous-titre suffit"
+   ]
+  },
+  {
+   "version": "4.62",
+   "date": "2026-11-17",
+   "titre": "Fiche : « Autour de cette sortie » expliqué et placé après le calendrier sur mobile",
+   "points": [
+    "Sous-titre « mêmes artistes ou même salle » ; chaque aperçu dit le lien (artiste et rôle, ou même salle)",
+    "Mobile : après le calendrier ; bureau : sous les infos"
+   ]
+  },
+  {
+   "version": "4.61",
+   "date": "2026-11-17",
+   "titre": "Avant-premières jeunes : dates à part entière des sorties",
+   "points": [
+    "Les offres datées étendent la période (colonne de date, filtres, Radar) et se jouent dans le calendrier"
+   ]
+  },
+  {
+   "version": "4.60",
+   "date": "2026-11-17",
+   "titre": "Fiche : panneau latéral sur bureau, geste retour du trackpad, calendrier plus étroit",
+   "points": [
+    "Bureau : la fiche s’ouvre en panneau à droite (920 px), la liste reste visible sous un voile ; clic sur le voile pour fermer",
+    "Le défilement horizontal revient au navigateur (geste « retour » de Chrome), plus de débordement en largeur",
+    "Calendrier sur 4 colonnes sur 12",
+    "Jeton --voile ; charte amendée"
+   ]
+  },
+  {
+   "version": "4.59",
+   "date": "2026-11-17",
+   "titre": "Fiches : cœur dans l’en-tête ; Factotum Expo : couleurs propres et repère vert",
+   "points": [
+    "Cœur à droite du titre de la fiche : bouton en mode admin, plein pour le public",
+    "Expo : domaines en magenta, bleu pétrole et terre d’ombre (plus aucune couleur de genre partagée, hors gris neutre) ; contrastes vérifiés",
+    "Une expo reprise sur Factotum porte la mention « Expo » en aplat vert"
+   ]
+  },
+  {
+   "version": "4.58",
+   "date": "2026-11-17",
+   "titre": "Fiches : calendrier en haut à droite, navigation et gestes, fermeture animée",
+   "points": [
+    "En-tête de couleur dans la colonne de gauche, calendrier monté en haut à droite (bureau)",
+    "En-tête : prochain soir libre et nombre de soirs libres, vente des 14 prochains jours",
+    "Fiche précédente / suivante (flèches, clavier, glissement) ; glisser vers le bas pour fermer",
+    "Admin : toucher un soir libre du calendrier ouvre la réservation à cette date",
+    "« Déjà vu » relié à l’entrée du journal ; « Autour de cette sortie »",
+    "Offres : dates de vente en gras, tarif jeune du lieu sans doublon",
+    "Calendrier : un mois sur mobile, trois sur bureau, la suite à la demande",
+    "Fermeture animée des fenêtres (fiche et admin)"
+   ]
+  },
+  {
+   "version": "4.57",
+   "date": "2026-11-17",
+   "titre": "Fiche : boutons dans l’en-tête de couleur, calendrier à droite",
+   "points": [
+    "Billetterie, Site officiel et actions admin dans l’en-tête, blancs sur l’aplat",
+    "Sur bureau, calendrier à droite, infos à gauche",
+    "Intitulés des infos de nouveau espacés (Source, Tarif…)"
+   ]
+  },
+  {
+   "version": "4.56",
+   "date": "2026-11-17",
+   "titre": "Fiches en surimpression, grilles alignées, encadré Expo en tête de section",
+   "points": [
+    "Toucher une ligne ouvre la fiche en surimpression (plus de déroulé) ; sur bureau, calendrier à gauche, infos et actions à droite",
+    "Fiche d’une sortie vue : avis, crédits, lieu ; actions admin du journal",
+    "Grilles de lignes et d’aperçus : même hauteur par rangée, trait du genre prolongé",
+    "Rapport : l’encadré Factotum Expo tient lieu de titre de la section Expositions"
+   ]
+  },
+  {
+   "version": "4.55",
+   "date": "2026-11-17",
+   "titre": "Couleurs unifiées sur les deux sites, partage des pages, rapports mieux agencés",
+   "points": [
+    "Code couleur unique : rouge et vert réservés à l’identité ; concerts en orange brûlé (plus de vert sapin) ; genres et domaines d’expo sur les mêmes familles ; neutre en gris",
+    "Bouton Partager : Coups de cœur, Ouvertures de vente, Rapports, Artiste, Lieu",
+    "Rapport : sections sans texte en fiches pleine largeur ; Expositions aux couleurs de Factotum Expo, fiches seules et encadré",
+    "Rapport du 17 nov. : fiches ajoutées à « À retenir »",
+    "Charte amendée"
+   ]
+  },
+  {
+   "version": "4.54",
+   "date": "2026-11-17",
+   "titre": "Factotum Expo : groupes en deux colonnes et code couleur par domaine ; légende des offres",
+   "points": [
+    "Expo : À voir et Bientôt en groupes (deux colonnes sur bureau) ; domaines en couleur (Peinture et dessin, Photographie, Art contemporain, Arts et civilisations), types de lieu dans le panneau",
+    "Jeton --a-neutre, vérifié par contrast.mjs",
+    "Calendrier de la fiche : point plein pour une offre datée, légende seulement si une offre tombe dans les mois montrés, au nom de l’offre",
+    "Colonne des coups de cœur : renvoi vers les autres"
+   ]
+  },
+  {
+   "version": "4.53",
+   "date": "2026-11-17",
+   "titre": "Interface : aperçus au trait du genre, rapports en deux colonnes, Radar et billetteries resserrés",
+   "points": [
+    "Aperçus courts (colonne de l’Affiche, Plus tard, rapports) : trait de la couleur du genre",
+    "Rapports : fiches citées à droite du texte ; en bas, « Toutes les nouveautés » (nouveau filtre de l’Affiche)",
+    "Radar : Plus tard limité aux deux mois suivants ; encadré Factotum Expo dans la colonne de droite",
+    "Billetteries : rubriques en filtres, liens compacts en colonnes",
+    "Mouvement : fermeture d’une fiche, trait de l’onglet actif ; charte amendée"
+   ]
+  },
+  {
+   "version": "4.52",
+   "date": "2026-11-17",
+   "titre": "Interface : admin dans la rangée de boutons, filtres de genre, Radar, mouvement",
+   "points": [
+    "Fiche (Affiche et Journal) : actions admin à côté de Site officiel / Page archivée et Partager",
+    "Coups de cœur, Artiste, Lieu : puces de genre (Coups de cœur : genres dans l’adresse)",
+    "Radar : quatre accès visibles d’un coup, « Incontournables à réserver », bouton « Tous les rapports de veille » sous la dernière veille",
+    "Mouvement : fondu court à l’entrée d’une page, au déroulé d’une fiche et à l’ouverture d’une fenêtre (charte amendée, coupé en mouvement réduit)",
+    "Comédie-Française : condition « détenteurs de cartes » retirée des ouvertures"
+   ]
+  },
+  {
+   "version": "4.50",
+   "date": "2026-11-17",
+   "titre": "Aperçus : groupes en deux colonnes, dates et offres simplifiées",
+   "points": [
+    "Coups de cœur, Artiste et Lieu : mise en page des ouvertures de vente (groupes en métadonnées, deux colonnes sur bureau)",
+    "Ouvertures de vente : dates de jeu en plus de la date d’ouverture",
+    "Offres abrégées dans les aperçus (« –28 ans », sans « sur justificatif » ni nombre de places)",
+    "Colonne de date à 64 px : « 16 / au 24 / avr. » ou « 24 / févr. au / 7 mars »"
+   ]
+  },
+  {
+   "version": "4.49",
+   "date": "2026-11-17",
+   "titre": "Radar et ouvertures de vente : place mieux employée",
+   "points": [
+    "Radar : « Coups de cœur » avant « N notées 4 » (ex-« à réserver »)",
+    "Ouvertures de vente : plus de bandeaux de jour ni de grands titres de mois ; groupes en métadonnées, heure en tête, deux colonnes sur bureau ; bascule Toutes/Suivies sur la ligne des genres"
+   ]
+  },
+  {
+   "version": "4.48",
+   "date": "2026-11-17",
+   "titre": "Radar : accès en tête, encadré Factotum Expo, ouvertures « Toutes » par défaut",
+   "points": [
+    "Rangée d’accès en tête : ouvertures de vente, à réserver, coups de cœur, rapports, billetteries",
+    "Expositions retirées du Radar, remplacées par un encadré vert vers Factotum Expo",
+    "Dernière veille : le titre seul mène au rapport (boutons retirés)",
+    "Ouvertures de vente : « Toutes » par défaut, puis « Suivies »",
+    "Colonne de date : « au 28/02 » tient dans la colonne"
+   ]
+  },
+  {
+   "version": "4.46",
+   "date": "2026-11-17",
+   "titre": "Interface : barre admin compacte, Radar réorganisé, colonne de date sur trois lignes",
+   "points": [
+    "Admin : une ligne d’état et une rangée d’icônes en tête du déroulé",
+    "Déroulé collé à sa ligne",
+    "Barème affiché sur 9",
+    "Radar : sorties sans soir libre retirées ; sans titre ; ouvertures de vente en haut à droite sur bureau ; dernière veille et expositions dans la colonne principale",
+    "Deux dates : « et » au lieu de « au »",
+    "Colonne de date : trois lignes au plus (« au 24 » ou « au 24/03 »)"
+   ]
+  },
+  {
+   "version": "4.45",
+   "date": "2026-11-17",
+   "titre": "Interface : liste resserrée, déroulé sans saut ni coupure",
+   "points": [
+    "La ligne ne masque plus ses artistes à l’ouverture (plus de vide)",
+    "Pointillé de la colonne de date continu dans le déroulé",
+    "Liste plus dense : artistes sur une ligne, sans nom répété ; marges verticales réduites",
+    "Crédits : une personne à plusieurs rôles citée une seule fois"
+   ]
+  },
+  {
+   "version": "4.44",
+   "date": "2026-11-17",
+   "titre": "Interface : fiche déroulée plus courte, typographie resserrée",
+   "points": [
+    "Crédits à interligne serré ; au-delà de 6 noms par rôle, « + N » déplie la suite",
+    "Fiche : boutons remontés sous le pourquoi, sous-titres Offres et Dates en métadonnées, calendrier limité à trois mois d’emblée et cases resserrées",
+    "Journal : l’avis n’apparaît plus qu’une fois (sur la ligne, entier une fois ouverte), date vue non répétée",
+    "Ligne ouverte : la ligne d’artistes s’efface au profit des crédits",
+    "Échelle typographique réduite d’un cran (corps 14/15, fiche 16/18, section 20/24, métadonnées 11/12)"
+   ]
+  },
+  {
+   "version": "4.43",
+   "date": "2026-11-16",
+   "titre": "Veille : rapports datés dans le Radar, flux Atom, commandes par domaine",
+   "points": [
+    "Interface : dernier rapport en tête du Radar, archive #rapports, lien permanent #rapport-<id>, marque « Nouveau » sur toute fiche ajoutée par la veille",
+    "Données : data/radar.json et data/radar.atom (généré), data/archive.json pour les sorties passées, champs source et nouveau",
+    "Outils : check contrôle rapports, archive et nouveaux champs ; build génère le flux Atom",
+    "Commandes : /veille (complète, spectacles, concerts, expo, ventes), /suivre, /nesuisplus ; plus de routine planifiée",
+    "Documentation : hiérarchiser plutôt que recenser, repère pour le TCE et la Philharmonie, schéma des rapports"
+   ]
+  },
+  {
+   "version": "4.42",
+   "date": "2026-11-16",
+   "titre": "Factotum Expo : déclinaison du site pour les expositions, sous expo/",
+   "points": [
+    "Architecture : seconde coque expo/index.html sur le même code (app.js lit data-site), vues À voir et Bientôt dans assets/expo.js, service worker unique, manifeste et icônes dédiés",
+    "Interface : sélecteur « Spectacles | Expos » dans l’en-tête des deux sites, jetons --accent (vert Véronèse #00715D pour Expo), rubriques expo du Radar",
+    "Données : bloc « expo » des sorties de catégorie Exposition (type, tarif, gratuité jeunes, créneau, nocturnes, source), trois expositions d’exemple et leurs lieux",
+    "Admin : « Ça m’intéresse », « Planifier une visite », champs expo ; visite en journée hors des soirs pris",
+    "Outils : check, contrast, build et icones étendus aux deux sites ; publication du dossier expo",
+    "Documentation : CLAUDE.md, README et commandes /ajoute, /vu, /reserve"
+   ]
+  },
+  {
+   "version": "4.41",
+   "date": "2026-11-16",
+   "titre": "Interface et sécurité : politique de sécurité du site, raccourcis Cette semaine, recherche étendue, réservation sans date par défaut, hors ligne",
+   "points": []
+  },
+  {
+   "version": "4.40",
+   "date": "2026-11-16",
+   "titre": "Interface : colonne de droite sans défilement propre, elle suit la page jusqu’à sa fin puis reste en place (statistiques du journal, coups de cœur)",
+   "points": []
+  },
+  {
+   "version": "4.39",
+   "date": "2026-11-16",
+   "titre": "Interface : boutons compacts de 32 px comme les puces (zone tactile de 44 px), grand format pour l’action principale seulement ; charte mise à jour",
+   "points": [
+    "Interface : statistiques du journal sur mobile hors du bloc collant (elles défilent), panneaux de filtres limités à la hauteur de l’écran"
+   ]
+  },
+  {
+   "version": "4.38",
+   "date": "2026-11-15",
+   "titre": "Nouvelle catégorie : Humour",
+   "points": [
+    "Icône micro pour le genre Humour"
+   ]
+  },
+  {
+   "version": "4.37",
+   "date": "2026-11-15",
+   "titre": "Charte : section 8 « Barre de liste et puces de filtre » (Affiche et Journal, gabarit unique des puces), statistiques en colonne de droite",
+   "points": []
+  },
+  {
+   "version": "4.36",
+   "date": "2026-11-15",
+   "titre": "Interface : puces de filtre au gabarit des genres partout (genres, panneau Filtres, jetons actifs), Affiche et Journal",
+   "points": [
+    "Interface : intitulés du panneau alignés, double filet retiré, genre du journal en jeton"
+   ]
+  },
+  {
+   "version": "4.35",
+   "date": "2026-11-15",
+   "titre": "Interface : Journal, barre comme l’Affiche (recherche, + en admin, Filtres saison, note et accompagnant), genres en puces, jetons de filtres",
+   "points": [
+    "Interface : statistiques du journal en colonne de droite sur bureau, en panneau sur mobile"
+   ]
+  }
+ ]
+}
