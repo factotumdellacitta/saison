@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-16",
+ "maj": "2026-11-17",
  "sorties": [
   {
    "id": "10-000-langages-pour-en-faire-un",
@@ -707,6 +707,14 @@
     {
      "nom": "Isabelle Lafon",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Isabelle Lafon",
+     "role": "auteur"
+    },
+    {
+     "nom": "Isabelle Lafon",
+     "role": "interprète"
     }
    ],
    "lieuId": "la-colline",
@@ -742,6 +750,18 @@
     {
      "nom": "Elsa Granat",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Ambre Febvre",
+     "role": "interprète"
+    },
+    {
+     "nom": "Benoît Seguin",
+     "role": "interprète"
+    },
+    {
+     "nom": "Annabelle Simon",
+     "role": "interprète"
     }
    ],
    "lieuId": "tgp",
@@ -1218,7 +1238,31 @@
    "artistes": [
     {
      "nom": "Nicole Genovese",
+     "role": "auteur"
+    },
+    {
+     "nom": "Claude Vanessa",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Minh-Tâm Nguyen",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Jeanne Alechinsky",
+     "role": "chorégraphie"
+    },
+    {
+     "nom": "Les Percussions de Strasbourg",
+     "role": "interprète"
+    },
+    {
+     "nom": "Sébastien Chassagne",
+     "role": "interprète"
+    },
+    {
+     "nom": "Marion Gomar",
+     "role": "interprète"
     }
    ],
    "lieuId": "rond-point",
@@ -1298,6 +1342,10 @@
     {
      "nom": "Jean-Philippe Daguerre",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Jean-Philippe Daguerre",
+     "role": "auteur"
     }
    ],
    "lieuId": "theatre-saint-georges",
@@ -1314,7 +1362,8 @@
    "publicJeune": true,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "source": "https://www.fnacspectacles.com/artist/d-ucharbon-dans-les-veines/du-charbon-dans-les-veines-theatre-saint-georges-paris-4114288/"
   },
   {
    "id": "ellen-babic",
@@ -1389,6 +1438,22 @@
     {
      "nom": "Daniel Jeanneteau",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Mammar Benranou",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Solène Arbel",
+     "role": "interprète"
+    },
+    {
+     "nom": "Yann Boudaud",
+     "role": "interprète"
+    },
+    {
+     "nom": "Dominique Reymond",
+     "role": "interprète"
     }
    ],
    "lieuId": "t2g",
@@ -1467,6 +1532,22 @@
     {
      "nom": "Ben Duke",
      "role": "chorégraphie"
+    },
+    {
+     "nom": "Miguel Altunaga",
+     "role": "interprète"
+    },
+    {
+     "nom": "Hannah Shepherd",
+     "role": "interprète"
+    },
+    {
+     "nom": "Emily Terndrup",
+     "role": "interprète"
+    },
+    {
+     "nom": "John Kendall",
+     "role": "interprète"
     }
    ],
    "lieuId": "theatre-de-la-ville",
@@ -1493,6 +1574,18 @@
     {
      "nom": "Myriam Gourfink",
      "role": "chorégraphie"
+    },
+    {
+     "nom": "Kasper T. Toeplitz",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Deborah Lary",
+     "role": "interprète"
+    },
+    {
+     "nom": "Véronique Weil",
+     "role": "interprète"
     }
    ],
    "lieuId": "odeon",
@@ -1510,7 +1603,11 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "dim",
+    "lun"
+   ]
   },
   {
    "id": "food-court",
@@ -1551,6 +1648,30 @@
     {
      "nom": "Back to Back Theatre",
      "role": "compagnie"
+    },
+    {
+     "nom": "Bruce Gladwin",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Simon Laherty",
+     "role": "interprète"
+    },
+    {
+     "nom": "Scott Price",
+     "role": "interprète"
+    },
+    {
+     "nom": "Tamika Simpson",
+     "role": "interprète"
+    },
+    {
+     "nom": "Brian Tilley",
+     "role": "interprète"
+    },
+    {
+     "nom": "David Woods",
+     "role": "interprète"
     }
    ],
    "lieuId": "theatre-cite-internationale",
@@ -1768,11 +1889,43 @@
     {
      "nom": "George Benjamin",
      "role": "compositeur"
+    },
+    {
+     "nom": "Charles-Ferdinand Ramuz",
+     "role": "auteur"
+    },
+    {
+     "nom": "Martin Crimp",
+     "role": "auteur"
+    },
+    {
+     "nom": "Marie-Christine Soma",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Daniel Jeanneteau",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Lucie Leguay",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Orchestre philharmonique de Radio France",
+     "role": "interprète"
+    },
+    {
+     "nom": "Jennifer France",
+     "role": "interprète"
+    },
+    {
+     "nom": "Joanne Evans",
+     "role": "interprète"
     }
    ],
    "lieuId": "t2g",
    "salle": "",
-   "debut": "2026-11-01",
+   "debut": "2026-11-08",
    "fin": "2026-11-16",
    "datesTexte": "jusqu'au 16 nov. 2026",
    "note": 4,
@@ -1834,6 +1987,14 @@
     {
      "nom": "Ariane Mnouchkine",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Hélène Cixous",
+     "role": "auteur"
+    },
+    {
+     "nom": "Théâtre du Soleil",
+     "role": "compagnie"
     }
    ],
    "lieuId": "theatre-du-soleil",
@@ -2591,6 +2752,38 @@
     {
      "nom": "Anne-Cécile Vandalem",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Anne-Cécile Vandalem",
+     "role": "auteur"
+    },
+    {
+     "nom": "Joëlle Sambi",
+     "role": "auteur"
+    },
+    {
+     "nom": "Anne-Cécile Vandalem",
+     "role": "interprète"
+    },
+    {
+     "nom": "Habib Ben Tanfous",
+     "role": "interprète"
+    },
+    {
+     "nom": "Anne-Pascale Clairembourg",
+     "role": "interprète"
+    },
+    {
+     "nom": "Arne De Tremerie",
+     "role": "interprète"
+    },
+    {
+     "nom": "François Ebouele",
+     "role": "interprète"
+    },
+    {
+     "nom": "Oscar Van Rompay",
+     "role": "interprète"
     }
    ],
    "lieuId": "nanterre-amandiers",
@@ -2787,6 +2980,34 @@
     {
      "nom": "Sébastien Kheroufi",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Sébastien Kheroufi",
+     "role": "auteur"
+    },
+    {
+     "nom": "Reda Kateb",
+     "role": "interprète"
+    },
+    {
+     "nom": "Élodie Bouchez",
+     "role": "interprète"
+    },
+    {
+     "nom": "Oulaya Amamra",
+     "role": "interprète"
+    },
+    {
+     "nom": "Casey",
+     "role": "interprète"
+    },
+    {
+     "nom": "Amine Adjina",
+     "role": "interprète"
+    },
+    {
+     "nom": "Benjamin Grangier",
+     "role": "interprète"
     }
    ],
    "lieuId": "la-colline",
@@ -2822,6 +3043,34 @@
     {
      "nom": "Céline Champinot",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Rébecca Chaillon",
+     "role": "auteur"
+    },
+    {
+     "nom": "Yanis Boulahia",
+     "role": "interprète"
+    },
+    {
+     "nom": "Hassan Gourniz",
+     "role": "interprète"
+    },
+    {
+     "nom": "Loulie Houmed",
+     "role": "interprète"
+    },
+    {
+     "nom": "Camille Léon-Fucien",
+     "role": "interprète"
+    },
+    {
+     "nom": "Living Smile Vidya",
+     "role": "interprète"
+    },
+    {
+     "nom": "Nabila Mekkid",
+     "role": "interprète"
     }
    ],
    "lieuId": "theatre-public-montreuil",
@@ -3331,6 +3580,14 @@
     {
      "nom": "Jean Reno",
      "role": "interprète"
+    },
+    {
+     "nom": "Ladislas Chollat",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Pablo Lanty",
+     "role": "interprète"
     }
    ],
    "lieuId": "edouard-vii",
@@ -3568,6 +3825,18 @@
     {
      "nom": "Benoît Solès",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Marc Demais",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Benoît Solès",
+     "role": "auteur"
+    },
+    {
+     "nom": "Pierre-Yves Lebert",
+     "role": "auteur"
     }
    ],
    "lieuId": "theatre-du-gymnase",
@@ -3584,7 +3853,8 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "source": "https://www.fnacspectacles.com/artist/le-fantome-de-lopera/le-fantome-de-lopera-theatre-du-gymnase-marie-bell-paris-4128847/"
   },
   {
    "id": "le-mariage-de-figaro",
@@ -3601,6 +3871,22 @@
     },
     {
      "nom": "Vincent Dedienne",
+     "role": "interprète"
+    },
+    {
+     "nom": "Micha Lescot",
+     "role": "interprète"
+    },
+    {
+     "nom": "Alix Poisson",
+     "role": "interprète"
+    },
+    {
+     "nom": "Noémie Lvovsky",
+     "role": "interprète"
+    },
+    {
+     "nom": "Ana Blagojević",
      "role": "interprète"
     }
    ],
@@ -4020,6 +4306,26 @@
     {
      "nom": "Ladislas Chollat",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Claude-Michel Schönberg",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Alain Boublil",
+     "role": "auteur"
+    },
+    {
+     "nom": "Victor Hugo",
+     "role": "auteur"
+    },
+    {
+     "nom": "Alexandra Cravero",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Romain Rachline Borgeaud",
+     "role": "chorégraphie"
     }
    ],
    "lieuId": "chatelet",
@@ -4268,11 +4574,27 @@
     {
      "nom": "Anne Brochet",
      "role": "interprète"
+    },
+    {
+     "nom": "Sophie Mihran",
+     "role": "interprète"
+    },
+    {
+     "nom": "Julie Pouillon",
+     "role": "interprète"
+    },
+    {
+     "nom": "Lamya Regragui",
+     "role": "interprète"
+    },
+    {
+     "nom": "Claire Toubin",
+     "role": "interprète"
     }
    ],
    "lieuId": "bouffes-du-nord",
    "salle": "",
-   "debut": null,
+   "debut": "2026-11-17",
    "fin": "2026-11-22",
    "datesTexte": "jusqu’au 22 nov. 2026, relâche le lundi",
    "horaires": "20h, dim. 16h",
@@ -4768,6 +5090,22 @@
     {
      "nom": "Back to Back Theatre",
      "role": "compagnie"
+    },
+    {
+     "nom": "Bruce Gladwin",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Simon Laherty",
+     "role": "interprète"
+    },
+    {
+     "nom": "Scott Price",
+     "role": "interprète"
+    },
+    {
+     "nom": "Sarah Mainwaring",
+     "role": "interprète"
     }
    ],
    "lieuId": "odeon",
@@ -4879,6 +5217,30 @@
     {
      "nom": "Eddy D’Aranjo",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Eddy D’Aranjo",
+     "role": "interprète"
+    },
+    {
+     "nom": "Edith Biscaro",
+     "role": "interprète"
+    },
+    {
+     "nom": "Clémence Delille",
+     "role": "interprète"
+    },
+    {
+     "nom": "Marie Depoorter",
+     "role": "interprète"
+    },
+    {
+     "nom": "Carine Goron",
+     "role": "interprète"
+    },
+    {
+     "nom": "Volodia Piotrovitch d’Orlik",
+     "role": "interprète"
     }
    ],
    "lieuId": "odeon",
@@ -4896,7 +5258,10 @@
    "publicJeune": false,
    "leonardYVa": true,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "lun"
+   ]
   },
   {
    "id": "olalaland",
@@ -5029,6 +5394,26 @@
     {
      "nom": "Marianne Ségol",
      "role": "artiste"
+    },
+    {
+     "nom": "Marcus Lindeen",
+     "role": "auteur"
+    },
+    {
+     "nom": "Nans Laborde-Jourdàa",
+     "role": "interprète"
+    },
+    {
+     "nom": "Niranjani Iyer",
+     "role": "interprète"
+    },
+    {
+     "nom": "Anthony Bambury",
+     "role": "interprète"
+    },
+    {
+     "nom": "Bridget O’Loughlin",
+     "role": "interprète"
     }
    ],
    "lieuId": "nanterre-amandiers",
@@ -5558,6 +5943,22 @@
     {
      "nom": "Stéphane Guillon",
      "role": "interprète"
+    },
+    {
+     "nom": "Nina Pynson",
+     "role": "auteur"
+    },
+    {
+     "nom": "Jérémie Lippmann",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Garance Bocobza",
+     "role": "interprète"
+    },
+    {
+     "nom": "Mathias Maréchal",
+     "role": "interprète"
     }
    ],
    "lieuId": "theatre-antoine",
@@ -5573,7 +5974,8 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "source": "https://75.agendaculturel.fr/theatre/robert-badinter-1.html"
   },
   {
    "id": "ruy-blas",
@@ -5797,7 +6199,12 @@
    "id": "shrek-le-musical",
    "titre": "Shrek le musical",
    "categorie": "Comédie musicale",
-   "artistes": [],
+   "artistes": [
+    {
+     "nom": "Philippe Hersen",
+     "role": "mise en scène"
+    }
+   ],
    "lieuId": "folies-bergere",
    "salle": "",
    "debut": "2026-10-02",
@@ -5842,7 +6249,11 @@
    "artistes": [
     {
      "nom": "Steven Cohen",
-     "role": "artiste"
+     "role": "chorégraphie"
+    },
+    {
+     "nom": "Steven Cohen",
+     "role": "interprète"
     }
    ],
    "lieuId": "mc93",
@@ -5860,7 +6271,8 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "etat": "dernieres-places"
   },
   {
    "id": "suzanne",
