@@ -869,10 +869,21 @@ body:has(#dlg) .pub,body:has(#dlg) .toast{bottom:auto;top:0}
 .stub small.au{white-space:nowrap}
 /* Radar : le rapport passe en tête de la colonne principale ; les ventes occupent la colonne de droite dès le haut. */
 #r-rapport{order:0}
-#r-expos{order:5}
 #r-rapport>.mh:first-child{margin-top:var(--e3)}
 @media (min-width:960px){
-  .r-res{display:none}
   #radar>.r-g{margin-top:var(--e4)}
   .r-col>.r-b:first-child>.mh,.r-col.r-lat2>.mh:first-child{margin-top:0}
 }
+/* Radar : encadré vers Factotum Expo, aplat vert de la déclinaison Expo (data-site="expo" sur l’encadré), texte blanc. */
+.pub-expo{order:5;display:flex;flex-direction:column;align-items:flex-start;gap:var(--e2);margin:var(--e8) 0 0;padding:var(--e4);background:var(--accent);color:var(--sur-accent);text-decoration:none;scroll-margin-top:calc(var(--collant) + var(--e4))}
+.pub-expo .pe-l{display:flex;align-items:center;gap:var(--e2)}
+.pub-expo .logo{font-size:var(--t-barre)}
+.pub-expo .pe-t{max-width:52ch}
+.pub-expo .pe-n{font-size:var(--t-meta);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.pub-expo .pe-c{display:inline-flex;align-items:center;min-height:32px;margin-top:var(--e1);padding:0 var(--e3);border:1px solid var(--sur-accent);font-size:var(--t-puce);font-weight:700;text-transform:uppercase;letter-spacing:.06em;transition:background-color var(--duree),color var(--duree)}
+@media (hover:hover){.pub-expo:hover .pe-c{background:var(--sur-accent);color:var(--accent)}}
+.pub-expo:focus-visible{outline:2px solid var(--encre);outline-offset:2px}
+/* Radar : accès en tête, sur toutes les tailles. */
+.r-res .chip .pi,.r-res .chip .coeur{width:16px;height:16px}
+.stub small.au{letter-spacing:0}
+@media (min-width:960px){.r-res.defile{flex-wrap:wrap;overflow:visible}}
