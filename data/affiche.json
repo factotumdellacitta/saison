@@ -6422,7 +6422,7 @@
    "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-mis-en-scene/rinaldo-2",
    "billetterie": null,
    "publicJeune": false,
-   "leonardYVa": false,
+   "leonardYVa": true,
    "statut": "a-voir",
    "offres": [
     {
