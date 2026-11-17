@@ -243,7 +243,14 @@ function stars(n, pro, label) {
 const web = (u) => (/^https?:\/\//i.test(String(u || "")) ? String(u) : "");
 const booking = (e) => web(e.billetterie) || web(lieu(e).billetterie); // adresse d’achat seulement (sinon : page officielle)
 const official = (e) => web(e.lien) || web(lieu(e).site);
-const shareURL = urlSortie;
+// Lien partagé : la page de partage p/<id>.html (titre, description et image propres à la fiche), qui renvoie vers la fiche.
+const shareURL = (id) => URL_RACINE + "p/" + encodeURIComponent(id) + ".html";
+// Page affichée → sa page de partage quand elle existe (rapport, artiste, lieu, coups de cœur, ouvertures), sinon l’adresse telle quelle.
+function partageURL() {
+  const h = location.hash.slice(1).split("?")[0];
+  const k = /^(rapport|artiste|lieu)-./.test(h) ? h : h === "coeur" ? (EXPO ? "coeur-expo" : "coeur") : h === "ventes" ? "ventes" : "";
+  return k ? URL_RACINE + "p/" + encodeURIComponent(k) + ".html" : location.origin + location.pathname + location.hash;
+}
 
 /* ---------- Index artistes ---------- */
 let ART = null;
@@ -1279,7 +1286,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.64"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.65"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1290,7 +1297,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.64"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.65"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1308,7 +1315,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.64"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.65"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
@@ -1413,7 +1420,7 @@ document.addEventListener("click", async (ev) => {
   if (cpl) { const w = cpl.previousElementSibling; if (w) w.classList.add("tout"); cpl.hidden = true; return; }
   const pg = ev.target.closest("[data-partage]");
   if (pg) {
-    const url = location.origin + location.pathname + location.hash;
+    const url = partageURL();
     try { if (navigator.share) { await navigator.share({ title: document.title, url }); return; } } catch (err) { if (err && err.name === "AbortError") return; }
     try { await navigator.clipboard.writeText(url); toast("Lien copié"); } catch (_) { prompt("Copie ce lien :", url); }
     return;

@@ -79,7 +79,7 @@ jobs:
       - name: Contrôle des données
         if: steps.bilan.outputs.publier == 'oui'
         run: node tools/check.mjs
-      - name: Préparer le site (index.html, sw.js, assets, data et expo uniquement)
+      - name: Préparer le site (index.html, sw.js, assets, data, expo et pages de partage p/)
         if: steps.bilan.outputs.publier == 'oui'
         run: |
           mkdir -p _site
@@ -88,6 +88,7 @@ jobs:
           cp -r data _site/data
           cp -r expo _site/expo
           rm -f _site/data/_prive.json
+          node tools/partage.mjs _site
           touch _site/.nojekyll
           echo "Site préparé : $(find _site -type f | wc -l) fichiers."
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1

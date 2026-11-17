@@ -1,6 +1,15 @@
 {
  "versions": [
   {
+   "version": "4.65",
+   "date": "2026-11-17",
+   "titre": "Aperçus de lien propres à chaque fiche",
+   "points": [
+    "Le bouton Partager donne une adresse p/<id>.html : titre, description et image du bon site s’affichent dans les messageries",
+    "Pages de partage pour les fiches, les rapports, les artistes, les lieux, les coups de cœur et les ouvertures de vente, générées à la publication"
+   ]
+  },
+  {
    "version": "4.64",
    "date": "2026-11-17",
    "titre": "Sélecteur de site en liens soulignés",
