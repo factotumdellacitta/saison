@@ -1003,3 +1003,25 @@ body:has(#dlg) .pub,body:has(#dlg) .toast{bottom:auto;top:0}
 .rp-x .rp-a{margin-top:var(--e2)}
 .rp-x .rp-a .vl{border-top:1px solid var(--accent)}
 .rp-x .pub-expo{margin-top:var(--e4)}
+/* ---------- Fiche en surimpression : deux colonnes sur bureau, « Dates » (calendrier) à gauche ---------- */
+@media (min-width:960px){
+  .fi-g{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--e8);align-items:start;margin-top:var(--e4)}
+  .fi-g>.fi-p{grid-column:6/span 7;grid-row:1}
+  .fi-g>.fi-d{grid-column:1/span 5;grid-row:1}
+  .fi-g>.fi-d>.sec:first-child{margin-top:0}
+  .fi-g.fi-vu>.fi-p{grid-column:1/span 8}
+  .fi-d .mini-wrap{grid-template-columns:minmax(0,1fr)}
+}
+.fi-p>.adm-c:first-child,.fi-p>.cr:first-child{margin-top:var(--e3)}
+#sheet .fi-p blockquote{margin-top:var(--e3)}
+/* Grilles de lignes et d’aperçus : même hauteur par rangée, le trait du genre va jusqu’en bas. */
+.v-l{align-items:stretch}
+.v-l>.row{display:flex;flex-direction:column}
+.v-l>.row>.rb{flex:1 1 auto;align-content:stretch}
+.vl li.ap>a,.vl li.ap>.ap-s{height:100%;box-sizing:border-box}
+@media (min-width:760px){.rp-s.sans-texte .vl,.rp-x .vl{align-items:stretch}}
+/* Rapport : l’encadré Factotum Expo tient lieu de titre de section. */
+.rp-x{margin-top:var(--e8)}
+.pub-expo.pe-tete{margin:0}
+.pe-tete h2.pe-l{margin:0;font-size:inherit}
+.rp-x .rp-a .vl{border-top:0}

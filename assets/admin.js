@@ -594,7 +594,7 @@
     const vu = e.statut === "vu", r = PRIVE.reservations[e.id], x = estExpo(e);
     const b = (act, t, icone, cls = "") => `<button class="btn ai ${cls}" type="button" data-adm="${act}" data-id="${esc(e.id)}" aria-label="${t}" title="${t}">${ico(icone)}</button>`;
     return vu
-      ? b("revu", "Ajouter une date vue", "ajouter", "pri") + b("notes", "Dates, note, avis et notes", "carres") + b("editer", "Modifier la fiche", "modifier") + b("supprimer", "Supprimer", "supprimer", "danger")
+      ? b("revu", "Ajouter une date vue", "ajouter", "pri") + b("jmodif", "Modifier les entrées et la fiche", "modifier") + b("supprimer", "Supprimer du journal", "supprimer", "danger")
       : b("reserver", r ? (x ? "Modifier la visite" : "Modifier la réservation") : (x ? "Planifier une visite" : "J’ai réservé"), "billet-ok", "pri") + (r ? b("annuler", x ? "Annuler la visite" : "Annuler la réservation", "billet-barre", "danger") : "") +
         b("vu", "Marquer vu", "coche") + b("editer", "Modifier la fiche", "modifier") + (e.statut === "ecarte" ? b("remettre", "Remettre à l’affiche", "oeil") : r ? "" : b("ecarter", "Écarter (masquer du public)", "oeil-barre")) + b("supprimer", "Supprimer", "supprimer", "danger");
   }

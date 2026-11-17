@@ -337,16 +337,16 @@ const ligneMeta = (meta, b) => (meta || b ? `<span class="ss">${meta ? `<span cl
 function rowA(e) {
   const h = e.horaires && e.horaires.length <= 40 ? e.horaires : "", art = artLigne(e);
   const meta = esc([sousG(e), estExpo(e) ? EXPO_TYPES[xp(e).type] : "", court(e.lieuId), estExpo(e) ? arrdtTxt(arrdt(e)) : ""].filter(Boolean).join(" · ")) + (h ? `<span class="hor"> · ${esc(h)}</span>` : ""); // horaires : bureau seulement (fiche dépliée sur mobile)
-  return `<article class="row g-${famE(e)}" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${esc(e.id)}">${gb(e)}${stubHTML(e)}
-  <span class="mid">${l1(e, stars(e.note, e.pronostic))}${art ? `<span class="art nom">${esc(art)}</span>` : ""}${ligneMeta(meta, badges(e))}</span></button>${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}<div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
+  return `<article class="row g-${famE(e)}" data-id="${esc(e.id)}"><button class="rb" type="button" aria-haspopup="dialog">${gb(e)}${stubHTML(e)}
+  <span class="mid">${l1(e, stars(e.note, e.pronostic))}${art ? `<span class="art nom">${esc(art)}</span>` : ""}${ligneMeta(meta, badges(e))}</span></button>${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}</article>`;
 }
 function rowJ(e) {
   const n = (e.vuLe || []).length;
   const meta = [sousG(e), court(e.lieuId), n > 1 ? `vu ${n} fois : ${e.vuLe.map((d) => fmtY(D(d))).join(", ")}` : ""].filter(Boolean).join(" · ");
   // Admin : les personnes venues avec moi, en label sur la ligne.
   const jp = PRIVE && ADMIN && PRIVE.journalPrive ? PRIVE.journalPrive[e.id] : null, acc = jp ? [...new Set(jp.accompagnants || [])] : [];
-  return `<article class="row g-${famE(e)}" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${esc(e.id)}">${gb(e)}${stubHTML(e, "vu")}
-  <span class="mid">${l1(e, e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : "")}${e.avis ? `<span class="art avis">« ${esc(e.avis)} »</span>` : artLigne(e) ? `<span class="art nom">${esc(artLigne(e))}</span>` : ""}${ligneMeta(esc(meta), acc.length ? `<span class="bds"><span class="b">avec ${esc(acc.join(", "))}</span></span>` : "")}</span></button><div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
+  return `<article class="row g-${famE(e)}" data-id="${esc(e.id)}"><button class="rb" type="button" aria-haspopup="dialog">${gb(e)}${stubHTML(e, "vu")}
+  <span class="mid">${l1(e, e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : "")}${e.avis ? `<span class="art avis">« ${esc(e.avis)} »</span>` : artLigne(e) ? `<span class="art nom">${esc(artLigne(e))}</span>` : ""}${ligneMeta(esc(meta), acc.length ? `<span class="bds"><span class="b">avec ${esc(acc.join(", "))}</span></span>` : "")}</span></button></article>`;
 }
 function creditsHTML(e) {
   const ordre = estExpo(e) ? ["artiste", ...ROLES.filter((r) => r !== "artiste")] : ROLES; // exposition : artistes exposés d’abord
@@ -380,20 +380,6 @@ function actsHTML(e, details, adm = "") {
   const lo = vu ? "Page archivée" : "Site officiel"; // libellés masqués sur mobile quand les icônes admin suivent (aria-label gardé)
   return `<div class="acts">${b && !vu ? `<a class="btn pri" href="${esc(b)}" target="_blank" rel="noopener noreferrer" aria-label="Billetterie">${ico("billet")}<span class="lbl">Billetterie</span></a>` : ""}${o ? `<a class="btn${!b && !vu ? " pri" : ""}" href="${esc(o)}" target="_blank" rel="noopener noreferrer" aria-label="${lo}">${ico("externe")}<span class="lbl">${lo}</span></a>` : ""}${details ? `<button class="btn ico" type="button" data-share="${esc(e.id)}" aria-label="Partager" title="Partager">${ico("partager")}</button>` : ""}${adm ? `<span class="acts-adm" role="group" aria-label="Admin">${adm}</span>` : ""}</div>`;
 }
-function detHTML(e) {
-  const c = creditsHTML(e);
-  // Journal : la fiche, comme en public ; en admin, mes infos privées et un bouton « Modifier » qui ouvre le formulaire complet.
-  if (e.statut === "vu") {
-    const L = lieu(e), adm = PRIVE && ADMIN;
-    const mod = adm ? `<button class="btn ai" type="button" data-adm="jmodif" data-id="${esc(e.id)}" aria-label="Modifier les entrées et la fiche" title="Modifier les entrées et la fiche">${ico("modifier")}</button><button class="btn ai danger" type="button" data-adm="supprimer" data-id="${esc(e.id)}" aria-label="Supprimer du journal" title="Supprimer du journal">${ico("supprimer")}</button>` : "";
-    const res = adm ? ADMIN.journalResume(e) : "";
-    return `${res ? `<section class="adm-c" aria-label="Admin">${res}</section>` : ""}${c ? `<p class="cr">${c}</p>` : ""}
-    <dl class="dl"><dt>${ico("lieu")}<span class="vh">Lieu</span></dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}</dd>
-    ${e.note ? `<dt>Grille</dt><dd>${stars(e.note, false, "Note de la grille")}</dd>` : ""}</dl>
-    ${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${actsHTML(e, true, mod)}`;
-  }
-  return ficheCorps(e);
-}
 // Détail du barème sous « Pourquoi » : « Critique 1 · Notoriété 3 · Hype 2 · Chef-d’œuvre +1 = 7 ».
 function calculHTML(e) {
   const k = calculDe(e.calcul); if (!k) return "";
@@ -403,11 +389,12 @@ function calculHTML(e) {
 // Corps de la fiche : utilisé par la fiche plein écran et par le déroulé d’une ligne (toute la fiche, sans détour).
 function ficheCorps(e, plein) {
   const L = lieu(e), c = creditsHTML(e);
-  return `${PRIVE && ADMIN ? ADMIN.ficheHTML(e) : ""}${c ? `<p class="cr">${c}</p>` : ""}
+  return `<div class="fi-g"><div class="fi-p">${PRIVE && ADMIN ? ADMIN.ficheHTML(e) : ""}${c ? `<p class="cr">${c}</p>` : ""}
     <dl class="dl"><dt>${ico("lieu")}<span class="vh">Lieu</span></dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}${L.ville && L.ville !== "Paris" ? " (" + esc(L.ville) + ")" : ""}</dd>
     <dt>${ico("mois")}<span class="vh">Dates</span></dt><dd>${esc(range(e))}</dd>${e.horaires ? `<dt>${ico("horaires")}<span class="vh">Horaires</span></dt><dd>${esc(e.horaires)}</dd>` : ""}${estExpo(e) ? expoInfos(e) : ""}</dl>
     ${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${calculHTML(e)}${actsHTML(e, !plein, PRIVE && ADMIN ? ADMIN.ficheActs(e) : "")}
-    ${(e.offres || []).length || L.tarifJeune ? `<h3 class="sec">Offres</h3>${offresHTML(e)}` : ""}<h3 class="sec">Dates</h3>${ficheCal(e)}`;
+    ${(e.offres || []).length || L.tarifJeune ? `<h3 class="sec">Offres</h3>${offresHTML(e)}` : ""}</div>
+    <div class="fi-d"><h3 class="sec">Dates</h3>${ficheCal(e)}</div></div>`;
 }
 
 /* ---------- Calendriers ---------- */
@@ -675,7 +662,7 @@ async function openSheet(id) {
     box.innerHTML = `${marqueFiche()}<div class="shtop"><button class="btn ico" type="button" data-close aria-label="Fermer">${ico("fermer")}</button><span class="k">${esc([e.categorie, e.sousGenre].filter(Boolean).join(" · "))}${L.nom ? " · " + esc(court(e.lieuId)) : ""}</span><button class="btn ico" type="button" data-share="${esc(e.id)}" aria-label="Partager">${ico("partager")}</button></div>
     <div class="shh"><span class="meta">${esc(vu ? "Vu le " + (e.vuLe || []).map((d) => fmtY(D(d), true)).join(", ") : range(e))}</span><div class="tit">${genreIco(e, "g")}<h2 id="sheetT" class="nom">${esc(e.titre)}</h2></div>
       <div class="ligne">${!vu && e.note ? stars(e.note, e.pronostic) : ""}${vu && e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : ""}${badges(e)}</div></div>
-    ${vu ? `${PRIVE && ADMIN ? ADMIN.ficheHTML(e) : ""}${c ? `<p class="cr">${c}</p>` : ""}<dl class="dl"><dt>Ma note</dt><dd>${e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : "pas de note"}</dd>${e.note ? `<dt>Grille</dt><dd>${stars(e.note, false, "Note de la grille")}</dd>` : ""}</dl>${e.avis ? `<blockquote>${esc(e.avis)}</blockquote>` : ""}${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${actsHTML(e, false, PRIVE && ADMIN ? ADMIN.ficheActs(e) : "")}` : ficheCorps(e, true)}`;
+    ${vu ? `<div class="fi-g fi-vu"><div class="fi-p">${PRIVE && ADMIN ? ADMIN.ficheHTML(e) + ADMIN.journalResume(e) : ""}${e.avis ? `<blockquote>${esc(e.avis)}</blockquote>` : ""}${c ? `<p class="cr">${c}</p>` : ""}<dl class="dl"><dt>${ico("lieu")}<span class="vh">Lieu</span></dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}</dd></dl>${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${e.note ? `<p class="calc">Note de la grille ${stars(e.note, false, "Note de la grille")}</p>` : ""}${actsHTML(e, false, PRIVE && ADMIN ? ADMIN.ficheActs(e) : "")}</div></div>` : ficheCorps(e, true)}`;
   }
   const s = $("#sheet");
   if (s.hidden) { SHEET_FROM = document.activeElement; s.hidden = false; document.documentElement.style.overflow = "hidden"; }
@@ -743,6 +730,10 @@ function radarExpos() {
   return { nouvelles: X.filter(expoNeuve).sort(parNote), derniers: X.filter((e) => expoEtat(e) === "derniers").sort((a, b) => finDe(a) - finDe(b) || parNote(a, b)) };
 }
 // Radar de Factotum : un encadré aux couleurs de Factotum Expo (les expositions n’y sont pas listées).
+// En-tête de la section Expositions d’un rapport : l’encadré Factotum Expo sert de titre.
+function encartExpo(idT) {
+  return `<div class="pub-expo pe-tete"><h2 class="pe-l" id="${idT}"><span class="logo">${cleF()}Factotum</span><span class="mention">Expo</span></h2><span class="pe-t">Les expositions ajoutées par cette veille. Toutes les expositions notées sont sur Factotum Expo.</span><a class="pe-c" href="${EXPO ? "#a-voir" : "expo/#a-voir"}">Voir les expos</a></div>`;
+}
 function pubExpo() {
   const x = radarExpos(), n = AFF.filter((e) => estExpo(e) && e.statut === "a-voir" && !ended(e) && running(e)).length;
   const t = [n ? plural(n, "exposition") + " en cours" : "", x.nouvelles.length ? plural(x.nouvelles.length, "nouvelle", "nouvelles") : "", x.derniers.length ? x.derniers.length + " en derniers jours" : ""].filter(Boolean).join(" · ");
@@ -774,8 +765,8 @@ const libresTxt = (e) => { const n = soirsLibres(e); return n == null ? "" : n ?
 const stubR = (lbl, d, urg) => `<span class="stub"><small class="fin${urg ? " urg" : ""}">${lbl}</small><b>${d.getDate()}</b><small>${MOIS[d.getMonth()]}</small></span>`;
 function rowR(e, pre, stub, info, jeu) {
   const k = esc(pre + "-" + e.id), meta = [sousG(e), court(e.lieuId), jeu ? joueCourt(e) : ""].filter(Boolean).join(" · ");
-  return `<article class="row g-${famE(e)}" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${k}">${gb(e)}${stub}
-  <span class="mid">${l1(e, stars(e.note, e.pronostic))}${info ? `<span class="art">${info}</span>` : ""}${ligneMeta(esc(meta), badges(e).replace('<span class="b">Dernières dates</span>', "").replace('<span class="bds"></span>', ""))}</span></button>${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}<div class="det" id="d-${k}" hidden></div></article>`;
+  return `<article class="row g-${famE(e)}" data-id="${esc(e.id)}"><button class="rb" type="button" aria-haspopup="dialog">${gb(e)}${stub}
+  <span class="mid">${l1(e, stars(e.note, e.pronostic))}${info ? `<span class="art">${info}</span>` : ""}${ligneMeta(esc(meta), badges(e).replace('<span class="b">Dernières dates</span>', "").replace('<span class="bds"></span>', ""))}</span></button>${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}</article>`;
 }
 function infoReserver({ e, o, rang }) {
   const f = finDe(e), li = libresTxt(e);
@@ -897,7 +888,7 @@ function rapportHTML(r) {
     const L = s.lignes || [], T = s.texte || [], expo = !EXPO && /^expo/i.test(s.titre || "") || (L.length && L.every((l) => { const e = BYID.get(l.id); return e && estExpo(e); }));
     const fiches = L.length ? `<aside class="rp-a" aria-label="Fiches citées"><ul class="vl">${L.map(ligne).join("")}</ul></aside>` : "";
     // Expositions : aux couleurs de Factotum Expo (data-site), les fiches seules, puis l’encadré vers le site Expo.
-    if (expo) return `<section class="rp-s rp-x" data-site="expo"><h2 class="mh">${esc(s.titre || "Expositions")}<span class="mention">Expo</span></h2>${fiches}${EXPO ? "" : pubExpo()}</section>`;
+    if (expo) return `<section class="rp-s rp-x" data-site="expo" aria-labelledby="rpx-t">${encartExpo("rpx-t")}${fiches}</section>`;
     const cls = !T.length ? " sans-texte" : L.length ? " a-lignes" : "";
     return `<section class="rp-s${cls}"><h2 class="mh">${esc(s.titre || "")}</h2>${T.length ? `<div class="rp-t">${T.map((p) => `<p>${esc(p)}</p>`).join("")}</div>` : ""}${fiches}</section>`;
   }).join("");
@@ -1204,7 +1195,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.55"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.56"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1215,7 +1206,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.55"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.56"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1233,7 +1224,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.55"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.56"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
@@ -1328,19 +1319,7 @@ $$(".tab").forEach((b) => {
 document.addEventListener("click", async (ev) => {
   if (!ev.target.closest(".tm")) themeFerme();
   const rb = ev.target.closest("button.rb");
-  if (rb) {
-    const row = rb.closest(".row"), det = row.querySelector(".det"), open = det.hidden;
-    if (open && !det.innerHTML) { det.innerHTML = detHTML(BYID.get(row.dataset.id)); }
-    rb.setAttribute("aria-expanded", String(open));
-    if (open) { det.classList.remove("ferme"); det.hidden = false; row.classList.add("open"); }
-    else if (matchMedia("(prefers-reduced-motion: reduce)").matches) { det.hidden = true; row.classList.remove("open"); }
-    else { // fermeture : fondu avant de masquer (animation CSS « m-replie »)
-      row.classList.remove("open"); det.classList.add("ferme");
-      const fin = () => { if (det.classList.contains("ferme")) { det.hidden = true; det.classList.remove("ferme"); } };
-      det.addEventListener("animationend", fin, { once: true }); setTimeout(fin, 260);
-    }
-    return;
-  }
+  if (rb) { const id = rb.closest(".row").dataset.id; if (id) location.hash = "#sortie-" + encodeURIComponent(id); return; } // fiche en surimpression
   const pl = ev.target.closest("[data-plus]");
   if (pl) { pl.nextElementSibling.hidden = false; pl.remove(); return; } // crédits : noms suivants
   const pg = ev.target.closest("[data-partage]");
