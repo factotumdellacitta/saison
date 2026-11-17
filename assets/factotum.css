@@ -15,7 +15,7 @@
   --fond:#FFFFFF;--surface:#FFFFFF;--encre:#111111;--encre-2:#5C5C5C;--filet:#111111;--filet-leger:#D9D9D9;
   --accent:#E30613;--sur-accent:#FFFFFF;--accent-texte:#E30613;
   --g-theatre:#B4233C;--g-lyrique:#1F5FA8;--g-danse:#946200;--g-concert:#00695C;
-  --a-theatre:#B4233C;--a-lyrique:#1F5FA8;--a-danse:#946200;--a-concert:#00695C;
+  --a-theatre:#B4233C;--a-lyrique:#1F5FA8;--a-danse:#946200;--a-concert:#00695C;--a-neutre:#5C5C5C;
   color-scheme:light;
 }
 :root{
@@ -35,12 +35,12 @@
   --fond:#0E0E0E;--surface:#161616;--encre:#F2F2F2;--encre-2:#A6A6A6;--filet:#F2F2F2;--filet-leger:#2E2E2E;
   --accent:#E30613;--sur-accent:#FFFFFF;--accent-texte:#FF5A4F;
   --g-theatre:#FF94A3;--g-lyrique:#8DB8F2;--g-danse:#E8B04A;--g-concert:#4FC3A1;
-  --a-theatre:#B4233C;--a-lyrique:#1F5FA8;--a-danse:#946200;--a-concert:#00695C;color-scheme:dark}}
+  --a-theatre:#B4233C;--a-lyrique:#1F5FA8;--a-danse:#946200;--a-concert:#00695C;--a-neutre:#5C5C5C;color-scheme:dark}}
 :root[data-theme="dark"],[data-theme="dark"]{
   --fond:#0E0E0E;--surface:#161616;--encre:#F2F2F2;--encre-2:#A6A6A6;--filet:#F2F2F2;--filet-leger:#2E2E2E;
   --accent:#E30613;--sur-accent:#FFFFFF;--accent-texte:#FF5A4F;
   --g-theatre:#FF94A3;--g-lyrique:#8DB8F2;--g-danse:#E8B04A;--g-concert:#4FC3A1;
-  --a-theatre:#B4233C;--a-lyrique:#1F5FA8;--a-danse:#946200;--a-concert:#00695C;color-scheme:dark}
+  --a-theatre:#B4233C;--a-lyrique:#1F5FA8;--a-danse:#946200;--a-concert:#00695C;--a-neutre:#5C5C5C;color-scheme:dark}
 /* Factotum Expo (expo/index.html, <html data-site="expo">) : même charte, accent vert Véronèse. Seul l'accent change ;
    la variante de texte du thème sombre est éclaircie pour passer AA (contrôlé par tools/contrast.mjs). */
 :root[data-site="expo"],[data-site="expo"],[data-site="expo"] [data-theme="light"]{
@@ -973,3 +973,13 @@ body:has(#dlg) .pub,body:has(#dlg) .toast{bottom:auto;top:0}
 }
 @keyframes m-replie{from{opacity:1;transform:none}to{opacity:0;transform:translateY(-6px)}}
 @keyframes m-trait{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+/* Factotum Expo : domaines sur les encres et aplats des genres (le vert reste à l’identité : en-tête, bandeaux, actions). */
+.g-xbeaux{--g:var(--g-theatre);--ga:var(--a-theatre)}.g-xphoto{--g:var(--g-lyrique);--ga:var(--a-lyrique)}.g-xcontemporain{--g:var(--g-danse);--ga:var(--a-danse)}.g-xobjets{--g:var(--encre);--ga:var(--a-neutre)}
+.sheet-in.g-xbeaux .shh,.sheet-in.g-xphoto .shh,.sheet-in.g-xcontemporain .shh,.sheet-in.g-xobjets .shh{background:var(--ga)}
+.bars .bg.g-xbeaux,.bars .bg.g-xphoto,.bars .bg.g-xcontemporain,.bars .bg.g-xobjets{background:var(--ga)}
+/* Calendrier de la fiche : l’offre est un point plein, distinct du cadre d’aujourd’hui. */
+.cell.of::after{width:6px;height:6px;border:0;border-radius:0;background:var(--accent-texte)}
+.legend .l-offre::before{width:6px;height:6px;border:0;background:var(--accent-texte);align-self:center}
+/* Colonne des coups de cœur : renvoi vers les autres */
+.lat-plus{margin:var(--e2) 0 0;font-size:var(--t-meta);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.lat-plus a{display:inline-flex;align-items:center;min-height:var(--cible);color:var(--encre-2);text-underline-offset:3px}

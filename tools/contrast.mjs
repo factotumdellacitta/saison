@@ -30,6 +30,7 @@ export const PAIRES = [
   ["g-concert", "fond", 4.5, "surtitre de genre (concert)"],
   ["g-concert", "surface", 4.5, "surtitre de genre sur surface (concert)"],
   ["sur-accent", "a-concert", 4.5, "texte blanc sur aplat de genre (concert)"],
+  ["sur-accent", "a-neutre", 4.5, "texte blanc sur aplat neutre (domaine Arts et civilisations de Factotum Expo)"],
 ];
 
 const hex = (h) => { const m = /^#([0-9a-f]{6})$/i.exec(h.trim()); if (!m) throw new Error(`couleur illisible : ${h}`); return [0, 2, 4].map((i) => parseInt(m[1].slice(i, i + 2), 16) / 255); };
