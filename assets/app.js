@@ -367,12 +367,13 @@ function offresHTML(e) {
   const li = (e.offres || []).map((o) => {
     const v = o.vente ? venteDate(o) : null;
     let t = `<b>${esc(o.type)}</b>${o.date ? " le " + fmt(D(o.date), true) : ""}${o.tarif ? ", " + esc(o.tarif) : ""}`;
-    if (v) t += v <= NOW ? (o.etat ? "" : ", en vente") : `, vente ${o.venteApprox ? "vers le " : "le "}${venteTxt(o).replace(/^~ /, "")}${dansJ(v) <= 14 ? ` <b class="warn">(${jTxt(dansJ(v))})</b>` : ""}`;
+    if (v) t += v <= NOW ? (o.etat ? "" : ", en vente") : `, <b>vente ${o.venteApprox ? "vers le " : "le "}${venteTxt(o).replace(/^~ /, "")}</b>${dansJ(v) <= 14 ? ` <b class="warn">(${jTxt(dansJ(v))})</b>` : ""}`;
     if (ETATS[o.etat]) t += ` <b class="warn">${ETATS[o.etat].toLowerCase()}</b>`;
     if (o.condition) t += ` <span class="cr">(${esc(o.condition)})</span>`;
     return `<li>${t}</li>`;
   });
-  if (L.tarifJeune) li.push(`<li class="soft">Tarif jeune du lieu : ${esc(L.tarifJeune)}</li>`);
+  // Le tarif jeune permanent du lieu seulement si aucune offre jeune datée ne le dit déjà.
+  if (L.tarifJeune && !(e.offres || []).some((o) => /jeune|moins de|–\d+ ans|-\d+ ans|n[ée]e?s? apr/i.test((o.type || "") + " " + (o.condition || "")))) li.push(`<li class="soft">Tarif jeune du lieu : ${esc(L.tarifJeune)}</li>`);
   return li.length ? `<ul class="off">${li.join("")}</ul>` : "";
 }
 function actsHTML(e, details, adm = "") {
@@ -387,14 +388,49 @@ function calculHTML(e) {
   return `<p class="calc"><span class="vh">Barème : </span>${esc(t)} = ${k.total} sur 9${e.pronostic ? " (prévision)" : ""}</p>`;
 }
 // Corps de la fiche : utilisé par la fiche plein écran et par le déroulé d’une ligne (toute la fiche, sans détour).
-function ficheCorps(e, plein) {
+function ficheCorps(e, tete = "") {
   const L = lieu(e), c = creditsHTML(e);
-  return `<div class="fi-g"><div class="fi-p">${PRIVE && ADMIN ? ADMIN.ficheHTML(e) : ""}${c ? `<p class="cr">${c}</p>` : ""}
+  return `<div class="fi-g"><div class="fi-p">${tete}${PRIVE && ADMIN ? ADMIN.ficheHTML(e) : ""}${dejaVuHTML(e)}${c ? `<p class="cr">${c}</p>` : ""}
     <dl class="dl"><dt>${ico("lieu")}<span class="vh">Lieu</span></dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}${L.ville && L.ville !== "Paris" ? " (" + esc(L.ville) + ")" : ""}</dd>
     <dt>${ico("mois")}<span class="vh">Dates</span></dt><dd>${esc(range(e))}</dd>${e.horaires ? `<dt>${ico("horaires")}<span class="vh">Horaires</span></dt><dd>${esc(e.horaires)}</dd>` : ""}${estExpo(e) ? expoInfos(e) : ""}</dl>
-    ${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${calculHTML(e)}${plein ? "" : actsHTML(e, true, PRIVE && ADMIN ? ADMIN.ficheActs(e) : "")}
-    ${(e.offres || []).length || L.tarifJeune ? `<h3 class="sec">Offres</h3>${offresHTML(e)}` : ""}</div>
+    ${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${calculHTML(e)}
+    ${(e.offres || []).length || L.tarifJeune ? `<h3 class="sec">Offres</h3>${offresHTML(e)}` : ""}${autourHTML(e)}</div>
     <div class="fi-d"><h3 class="sec">Dates</h3>${ficheCal(e)}</div></div>`;
+}
+// En-tête de couleur : dates, picto et titre, note et badges, prochain soir libre et vente proche, boutons.
+function enteteFiche(e) {
+  const vu = e.statut === "vu";
+  return `<div class="shh"><span class="meta">${esc(vu ? "Vu le " + (e.vuLe || []).map((d) => fmtY(D(d), true)).join(", ") : range(e))}</span><div class="tit">${genreIco(e, "g")}<h2 id="sheetT" class="nom">${esc(e.titre)}</h2></div>
+    <div class="ligne">${!vu && e.note ? stars(e.note, e.pronostic) : ""}${vu && e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : ""}${badges(e)}</div>${vu ? "" : enteteInfos(e)}${actsHTML(e, false, PRIVE && ADMIN ? ADMIN.ficheActs(e) : "").replace('class="acts"', 'class="acts sh-acts"')}</div>`;
+}
+// Prochain soir libre (spectacles) et nombre de soirs libres jusqu’à la fin.
+function prochainLibre(e) {
+  const p = span(e); if (!p) return null;
+  let n = 0, prem = null;
+  for (let d = new Date(Math.max(+p[0], +TODAY)), i = 0; d <= p[1] && i < 400; d = add(d, 1), i++) if (playsOn(e, d) && !BUSY.has(iso(d))) { n++; if (!prem) prem = new Date(d); }
+  return { n, prem };
+}
+function enteteInfos(e) {
+  const t = [];
+  if (!estExpo(e) && !reservee(e)) { const x = prochainLibre(e); if (x) t.push(x.n ? `Prochain soir libre ${fmt(x.prem, true)} · ${plural(x.n, "soir libre", "soirs libres")}` : "Aucun soir libre"); }
+  const o = ouvertures(e)[0];
+  if (o) { const v = venteDate(o), n = dansJ(v); if (n <= 14) t.push(`Vente ${n <= 0 ? "aujourd’hui" : jTxt(n)}${heureV(o) ? " à " + heureV(o) : ""} · ${typeCourt(o.type)}`); }
+  return t.length ? `<p class="sh-info">${t.map((x) => `<span>${esc(x)}</span>`).join("")}</p>` : "";
+}
+// « Déjà vu » : lien vers l’entrée du journal (même œuvre, ou même artiste en tête pour un concert).
+function dejaVuHTML(e) {
+  const dv = e.statut !== "vu" && DEJA_VU[e.id]; if (!dv || !dv.length || !JOURNAL) return "";
+  const a0 = (e.artistes || [])[0], J = JOURNAL.filter((j) => (j.vuLe || []).some((d) => dv.includes(d)) && (norm(j.titre) === norm(e.titre) || (a0 && (j.artistes || [])[0] && j.artistes[0].nom === a0.nom)));
+  return J.length ? `<p class="dv">Déjà vu : ${J.map((j) => `<a href="#sortie-${esc(j.id)}">${esc(j.titre)}, ${esc(fmtY(D(j.vuLe.at(-1)), true))}</a>`).join(" · ")}</p>` : "";
+}
+// « Autour de cette sortie » : mêmes artistes d’abord, puis même lieu ; quatre aperçus au plus.
+function autourHTML(e) {
+  const noms = new Set((e.artistes || []).map((a) => a.nom));
+  const sc = (x) => ((x.artistes || []).some((a) => noms.has(a.nom)) ? 2 : 0) + (e.lieuId && x.lieuId === e.lieuId ? 1 : 0);
+  const L = LIVE.filter((x) => x.id !== e.id && x.statut === "a-voir" && sc(x) > 0).sort((a, b) => sc(b) - sc(a) || sortKey(a) - sortKey(b)).slice(0, 4);
+  if (!L.length) return "";
+  const pourquoi = (x) => { const a = (x.artistes || []).find((y) => noms.has(y.nom)); return a ? a.nom : court(x.lieuId); };
+  return `<h3 class="sec">Autour de cette sortie</h3><ul class="vl">${L.map((x) => apercu(x, dateAp(x), esc(pourquoi(x)))).join("")}</ul>`;
 }
 
 /* ---------- Calendriers ---------- */
@@ -410,15 +446,16 @@ const moisN = (a, b) => (b.getFullYear() - a.getFullYear()) * 12 + b.getMonth() 
 function ficheCal(e) {
   const p = span(e); if (!p) return '<p class="empty">Dates inconnues.</p>';
   const offers = new Set((e.offres || []).map((o) => o.date).filter(Boolean));
-  const st = p[0] < TODAY ? TODAY : p[0];
-  let h = "", n = 0, plus = "";
+  const st = p[0] < TODAY ? TODAY : p[0], adm = !!(PRIVE && ADMIN);
+  let h = "", n = 0;
   for (let c = new Date(st.getFullYear(), st.getMonth(), 1); c <= p[1] && n < 6; c = new Date(c.getFullYear(), c.getMonth() + 1, 1), n++) {
-    if (n === 2 && moisN(st, p[1]) > 3) { plus = h; h = ""; }
     h += `<div class="cal mini"><div class="calh"><h3>${MOIS_L[c.getMonth()]} ${c.getFullYear()}</h3></div>` + monthGrid(c.getFullYear(), c.getMonth(), (d) => {
       const k = iso(d), on = playsOn(e, d) && d >= TODAY, busy = BUSY.has(k);
       const cls = ["cell", on ? (busy ? "busy" : "play") : "", d < TODAY ? "past" : "", +d === +TODAY ? "today" : "", offers.has(k) ? "of" : ""].filter(Boolean).join(" ");
       const joue = estExpo(e) ? ", ouverte" : ", se joue";
       const lab = `${fmt(d, true)}${on ? (busy ? `${joue}, ${OWNER} pris` : HORIZON && k > HORIZON ? joue : `${joue}, ${OWNER} libre`) : ""}${offers.has(k) ? ", " + esc((((e.offres || []).find((o) => o.date === k) || {}).type || "offre").toLowerCase()) : ""}`;
+      // Admin : un soir libre se touche pour réserver à cette date.
+      if (adm && on && !busy) return `<button class="${cls} cal-res" type="button" data-adm="reserver" data-id="${esc(e.id)}" data-date="${k}" aria-label="${lab}, réserver ce soir"><span class="n" aria-hidden="true">${d.getDate()}</span></button>`;
       return `<div class="${cls}" role="img" aria-label="${lab}"><span class="n" aria-hidden="true">${d.getDate()}</span></div>`;
     }) + "</div>";
   }
@@ -426,9 +463,10 @@ function ficheCal(e) {
   const ofs = (e.offres || []).filter((o) => o.date && vus.has(o.date.slice(0, 7)) && D(o.date) >= TODAY), tys = [...new Set(ofs.map((o) => typeCourt(o.type)))];
   const libOf = tys.length === 1 ? tys[0] : "Offre";
   const loin = HORIZON && iso(p[1]) > HORIZON ? `<p class="aide">Soirs pris connus jusqu’au ${fmt(D(HORIZON))}.</p>` : "";
-  const suite = plus ? `<details class="mois-plus"><summary>${plural(n - 2, "mois suivant", "mois suivants")}</summary><div class="mini-wrap">${h}</div></details>` : "";
-  return `<div class="mini-wrap">${plus || h}</div>${suite}<div class="legend"><span class="l-joue">${OWNER} libre</span><span class="l-pris">${OWNER} pris</span>${ofs.length ? `<span class="l-offre">${esc(libOf)}</span>` : ""}</div>
-  ${e.relaches ? "" : `<p class="aide">${estExpo(e) ? "Jours de fermeture non renseignés." : "Relâches non renseignées."}</p>`}${loin}`;
+  const pm = n - 1, pd = n - 3;
+  const plus = pm > 0 ? `<button class="linkbtn cal-plus" type="button" data-calplus><span class="m">${plural(pm, "mois suivant", "mois suivants")}</span>${pd > 0 ? `<span class="d">${plural(pd, "mois suivant", "mois suivants")}</span>` : ""}</button>` : "";
+  return `<div class="mini-wrap cal-w">${h}</div>${plus}<div class="legend"><span class="l-joue">${OWNER} libre</span><span class="l-pris">${OWNER} pris</span>${ofs.length ? `<span class="l-offre">${esc(libOf)}</span>` : ""}</div>
+  ${adm ? `<p class="aide">Touche un soir libre pour réserver.</p>` : ""}${e.relaches ? "" : `<p class="aide">${estExpo(e) ? "Jours de fermeture non renseignés." : "Relâches non renseignées."}</p>`}${loin}`;
 }
 
 /* ---------- Filtres de l’affiche (état dans l’URL) ---------- */
@@ -648,32 +686,51 @@ function monthHTML(f) {
 let SHEET_FROM = null, FROM_APP = false;
 // Barre Factotum en tête de la fiche (aussi quand on arrive par un lien partagé) : retour à l’accueil.
 const marqueFiche = () => `<a class="sh-marque" href="#${ACCUEIL}" aria-label="${NOM}, accueil"><span class="logo">${cleF()}Factotum</span>${EXPO ? '<span class="mention">Expo</span>' : ""}</a>`;
+let SHEET_IDS = [], SHEET_T = null; // liste d’où l’on vient (fiche précédente / suivante) ; minuterie de fermeture
 async function openSheet(id) {
   let e = BYID.get(id);
-  if (!e) { try { await loadJournal(); } catch (_) {} e = BYID.get(id); }
+  if (!e || (e.statut !== "vu" && DEJA_VU[e.id] && !JOURNAL)) { try { await loadJournal(); } catch (_) {} e = BYID.get(id); }
   // Une sortie de l’autre site s’ouvre chez lui (les liens partagés tiennent, l’en-tête dit où l’on est).
   if (e && !duSite(e)) { location.replace(urlSortie(id)); return; }
-  const box = $("#sheetIn");
+  const s = $("#sheet"), box = $("#sheetIn");
+  if (s.hidden || !SHEET_IDS.includes(id)) SHEET_IDS = [...new Set($$("#main article.row[data-id]").filter((r) => !r.hidden && r.offsetParent).map((r) => r.dataset.id))];
+  const k = SHEET_IDS.indexOf(id), prec = k > 0 ? SHEET_IDS[k - 1] : "", suiv = k >= 0 && k < SHEET_IDS.length - 1 ? SHEET_IDS[k + 1] : "";
+  const nav = k >= 0 && SHEET_IDS.length > 1 ? `<button class="btn ico" type="button" data-nav="${esc(prec)}" aria-label="Fiche précédente" title="Fiche précédente"${prec ? "" : " disabled"}>${ico("prec")}</button><button class="btn ico" type="button" data-nav="${esc(suiv)}" aria-label="Fiche suivante" title="Fiche suivante"${suiv ? "" : " disabled"}>${ico("suiv")}</button>` : "";
   box.className = "sheet-in" + (e ? " g-" + famE(e) : "");
   if (!e) {
     box.innerHTML = `${marqueFiche()}<div class="shtop"><button class="btn ico" type="button" data-close aria-label="Fermer">${ico("fermer")}</button><span class="k"></span></div><h2 id="sheetT" class="mh">Sortie introuvable</h2><p class="empty">Cette fiche n’existe plus ou a changé d’adresse.</p>`;
   } else {
-    const vu = e.statut === "vu", L = lieu(e), c = creditsHTML(e);
-    box.innerHTML = `${marqueFiche()}<div class="shtop"><button class="btn ico" type="button" data-close aria-label="Fermer">${ico("fermer")}</button><span class="k">${esc([e.categorie, e.sousGenre].filter(Boolean).join(" · "))}${L.nom ? " · " + esc(court(e.lieuId)) : ""}</span><button class="btn ico" type="button" data-share="${esc(e.id)}" aria-label="Partager">${ico("partager")}</button></div>
-    <div class="shh"><span class="meta">${esc(vu ? "Vu le " + (e.vuLe || []).map((d) => fmtY(D(d), true)).join(", ") : range(e))}</span><div class="tit">${genreIco(e, "g")}<h2 id="sheetT" class="nom">${esc(e.titre)}</h2></div>
-      <div class="ligne">${!vu && e.note ? stars(e.note, e.pronostic) : ""}${vu && e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : ""}${badges(e)}</div>${actsHTML(e, false, PRIVE && ADMIN ? ADMIN.ficheActs(e) : "").replace('class="acts"', 'class="acts sh-acts"')}</div>
-    ${vu ? `<div class="fi-g fi-vu"><div class="fi-p">${PRIVE && ADMIN ? ADMIN.ficheHTML(e) + ADMIN.journalResume(e) : ""}${e.avis ? `<blockquote>${esc(e.avis)}</blockquote>` : ""}${c ? `<p class="cr">${c}</p>` : ""}<dl class="dl"><dt>${ico("lieu")}<span class="vh">Lieu</span></dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}</dd></dl>${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${e.note ? `<p class="calc">Note de la grille ${stars(e.note, false, "Note de la grille")}</p>` : ""}</div></div>` : ficheCorps(e, true)}`;
+    const vu = e.statut === "vu", L = lieu(e), c = creditsHTML(e), tete = enteteFiche(e);
+    box.innerHTML = `${marqueFiche()}<div class="shtop"><button class="btn ico" type="button" data-close aria-label="Fermer">${ico("fermer")}</button><span class="k">${esc([e.categorie, e.sousGenre].filter(Boolean).join(" · "))}${L.nom ? " · " + esc(court(e.lieuId)) : ""}</span>${nav}<button class="btn ico" type="button" data-share="${esc(e.id)}" aria-label="Partager">${ico("partager")}</button></div>
+    ${vu ? `<div class="fi-g fi-vu"><div class="fi-p">${tete}${PRIVE && ADMIN ? ADMIN.ficheHTML(e) + ADMIN.journalResume(e) : ""}${e.avis ? `<blockquote>${esc(e.avis)}</blockquote>` : ""}${c ? `<p class="cr">${c}</p>` : ""}<dl class="dl"><dt>${ico("lieu")}<span class="vh">Lieu</span></dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}</dd></dl>${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${e.note ? `<p class="calc">Note de la grille ${stars(e.note, false, "Note de la grille")}</p>` : ""}</div></div>` : ficheCorps(e, tete)}`;
   }
-  const s = $("#sheet");
+  clearTimeout(SHEET_T); s.classList.remove("sort"); box.style.transform = "";
   if (s.hidden) { SHEET_FROM = document.activeElement; s.hidden = false; document.documentElement.style.overflow = "hidden"; }
   box.scrollTop = 0; box.focus();
   document.title = (e ? e.titre + " – " : "") + NOM;
 }
+// Passer à une autre fiche de la même liste sans empiler l’historique.
+function ficheVoisine(id2) { if (!id2) return; history.replaceState(null, "", "#sortie-" + encodeURIComponent(id2)); openSheet(id2); }
 function closeSheet() {
-  const s = $("#sheet"); if (s.hidden) return;
-  s.hidden = true; document.documentElement.style.overflow = ""; document.title = TITRE_VUE || NOM;
+  const s = $("#sheet"); if (s.hidden || s.classList.contains("sort")) return;
+  const fin = () => { s.hidden = true; s.classList.remove("sort"); $("#sheetIn").style.transform = ""; document.documentElement.style.overflow = $("#dlg") ? "hidden" : ""; };
+  document.title = TITRE_VUE || NOM;
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) fin(); else { s.classList.add("sort"); SHEET_T = setTimeout(fin, 200); } // fermeture animée (CSS « m-sort »)
   if (SHEET_FROM && document.contains(SHEET_FROM)) SHEET_FROM.focus({ preventScroll: true });
 }
+// Gestes sur mobile : glisser vers la gauche ou la droite change de fiche, vers le bas (en haut de la fiche) la ferme.
+(() => {
+  const box = $("#sheetIn"); let x0 = 0, y0 = 0, haut = false, actif = false;
+  box.addEventListener("touchstart", (ev) => { if (ev.touches.length !== 1 || ev.target.closest(".chips,.cal-w,input,textarea,select")) { actif = false; return; } actif = true; x0 = ev.touches[0].clientX; y0 = ev.touches[0].clientY; haut = box.scrollTop <= 0; }, { passive: true });
+  box.addEventListener("touchmove", (ev) => { if (!actif || !haut) return; const dy = ev.touches[0].clientY - y0; if (dy > 0 && Math.abs(ev.touches[0].clientX - x0) < dy) box.style.transform = `translateY(${Math.min(dy, 200) * 0.6}px)`; }, { passive: true });
+  box.addEventListener("touchend", (ev) => {
+    if (!actif) return; actif = false;
+    const t = ev.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0;
+    if (haut && dy > 90 && Math.abs(dx) < dy) { requestClose(); return; }
+    box.style.transform = "";
+    if (Math.abs(dx) > 70 && Math.abs(dy) < 40) { const cible = $$("#sheetIn [data-nav]")[dx < 0 ? 1 : 0]; if (cible && cible.dataset.nav) ficheVoisine(cible.dataset.nav); }
+  }, { passive: true });
+})();
 function requestClose() {
   if (FROM_APP) history.back();
   else { history.replaceState(null, "", "#" + (BASE || ACCUEIL)); route(); }
@@ -682,6 +739,7 @@ $("#sheet").addEventListener("click", (ev) => { if (ev.target.id === "sheet" || 
 document.addEventListener("keydown", (ev) => {
   if ($("#sheet").hidden) return;
   if (ev.key === "Escape") { ev.preventDefault(); requestClose(); }
+  if ((ev.key === "ArrowLeft" || ev.key === "ArrowRight") && !ev.target.closest("input,textarea,select")) { const n = $$("#sheetIn [data-nav]")[ev.key === "ArrowLeft" ? 0 : 1]; if (n && n.dataset.nav) { ev.preventDefault(); ficheVoisine(n.dataset.nav); } }
   if (ev.key === "Tab") {
     const f = $$('a[href],button:not([disabled]),input,select,[tabindex="0"]', $("#sheetIn")).filter((x) => x.offsetParent);
     if (!f.length) return;
@@ -1195,7 +1253,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.57"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.58"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1206,7 +1264,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.57"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.58"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1224,7 +1282,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.57"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.58"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
@@ -1322,6 +1380,10 @@ document.addEventListener("click", async (ev) => {
   if (rb) { const id = rb.closest(".row").dataset.id; if (id) location.hash = "#sortie-" + encodeURIComponent(id); return; } // fiche en surimpression
   const pl = ev.target.closest("[data-plus]");
   if (pl) { pl.nextElementSibling.hidden = false; pl.remove(); return; } // crédits : noms suivants
+  const nv = ev.target.closest("[data-nav]");
+  if (nv) { ficheVoisine(nv.dataset.nav); return; }
+  const cpl = ev.target.closest("[data-calplus]");
+  if (cpl) { const w = cpl.previousElementSibling; if (w) w.classList.add("tout"); cpl.hidden = true; return; }
   const pg = ev.target.closest("[data-partage]");
   if (pg) {
     const url = location.origin + location.pathname + location.hash;

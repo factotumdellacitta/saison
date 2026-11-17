@@ -1033,3 +1033,39 @@ body:has(#dlg) .pub,body:has(#dlg) .toast{bottom:auto;top:0}
 .shh .sh-acts .btn.ai,.shh .sh-acts .btn.ai.danger{border-color:transparent;color:var(--sur-accent)}
 .shh .sh-acts .btn.ai.pri{border-color:var(--sur-accent);background:transparent;color:var(--sur-accent)}
 @media (hover:hover){.shh .sh-acts .btn:hover{background:var(--sur-accent);color:var(--ga,var(--accent))}.shh .sh-acts .btn.pri:hover{background:transparent;color:var(--sur-accent)}}
+/* ---------- Fiche (v4.58) ---------- */
+/* En-tête de couleur dans la colonne principale ; sur bureau, le calendrier monte à sa hauteur, à droite. */
+.fi-p>.shh{margin:0 calc(-1 * var(--marge)) var(--e4)}
+@media (min-width:960px){
+  .fi-g{margin-top:0}
+  .fi-p>.shh{margin:0 0 var(--e4) calc(-1 * var(--marge))}
+  .fi-g>.fi-d{padding-top:var(--e4)}
+  .fi-g>.fi-d>.sec:first-child{border-top:0;padding-top:0}
+  .fi-g.fi-vu>.fi-p{grid-column:1/-1}
+  .fi-g.fi-vu>.fi-p>.shh{margin-right:calc(-1 * var(--marge))}
+  .fi-g.fi-vu>.fi-p>:not(.shh){max-width:760px}
+}
+.sh-info{display:flex;flex-direction:column;gap:2px;margin:var(--e3) 0 0;font-size:var(--t-meta);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.dv{margin:var(--e3) 0 0;font-size:var(--t-meta);font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--encre-2)}
+.dv a{color:var(--encre);font-weight:700}
+.shtop [data-nav]:disabled{opacity:.35;cursor:default}
+/* Calendrier : un mois sur mobile, trois sur bureau, la suite à la demande. */
+.cal-w:not(.tout)>.cal:nth-child(n+2){display:none}
+.cal-plus .d{display:none}
+@media (min-width:960px){
+  .cal-w:not(.tout)>.cal:nth-child(n+2){display:block}
+  .cal-w:not(.tout)>.cal:nth-child(n+4){display:none}
+  .cal-plus .m{display:none}.cal-plus .d{display:inline}
+  .cal-plus:not(:has(.d)){display:none}
+}
+.cal-plus{margin-top:var(--e2)}
+button.cell.cal-res{cursor:pointer;font:inherit;font-weight:800}
+@media (hover:hover){button.cell.cal-res:hover{background:var(--encre);color:var(--fond)}}
+/* Fermeture des fenêtres : fondu et léger glissement vers le bas. */
+@media (prefers-reduced-motion:no-preference){
+  .sheet.sort{animation:m-fondu-sort 200ms ease-in forwards;pointer-events:none}
+  .sheet.sort>.sheet-in{animation:m-descend 200ms ease-in forwards}
+  .sheet-in{transition:transform var(--duree)}
+}
+@keyframes m-fondu-sort{from{opacity:1}to{opacity:0}}
+@keyframes m-descend{from{transform:none}to{transform:translateY(16px)}}

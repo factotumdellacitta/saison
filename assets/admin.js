@@ -429,7 +429,12 @@
   }
 
   /* ---------- Dialogue (formulaires) ---------- */
-  function fermerDlg() { const d = $("#dlg"); if (d) d.remove(); document.documentElement.style.overflow = $("#sheet").hidden ? "" : "hidden"; }
+  function fermerDlg() {
+    const d = $("#dlg"); if (!d) return;
+    d.removeAttribute("id"); // une nouvelle fenêtre peut s’ouvrir pendant que celle-ci s’efface
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) d.remove(); else { d.classList.add("sort"); setTimeout(() => d.remove(), 200); }
+    document.documentElement.style.overflow = $("#sheet").hidden ? "" : "hidden";
+  }
   document.addEventListener("keydown", (ev) => { if (ev.key === "Escape" && $("#dlg")) { ev.stopImmediatePropagation(); ev.preventDefault(); fermerDlg(); } }, true);
   function dlg(titre, corps, onSubmit, { valider: lbl = "Enregistrer", danger } = {}) {
     fermerDlg();
@@ -609,9 +614,9 @@
     const out = []; for (let d = new Date(Math.max(+p[0], +TODAY)), i = 0; d <= p[1] && i < 400; d = add(d, 1), i++) if (playsOn(e, d)) out.push(iso(d)); // jours de relâche retirés
     return out;
   }
-  function formReserver(id) {
+  function formReserver(id, dPre) {
     const e = BYID.get(id); if (!e) return;
-    const r0 = PRIVE.reservations[id], r = r0 || {};
+    const r0 = PRIVE.reservations[id], r = r0 || (dPre ? { date: dPre } : {}); // dPre : soir touché dans le calendrier de la fiche
     const jours = joursJoues(e); if (r.date && !jours.includes(r.date)) jours.unshift(r.date);
     const loc = etatLocal();
     const opts = jours.map((k) => [k, `${fmtY(D(k), true)}${conflits(loc, k, id).length ? " · pris" : ""}`]);
@@ -1580,7 +1585,7 @@
     const b = ev.target.closest("[data-adm]"); if (!b) return;
     const id = b.dataset.id, a = b.dataset.adm;
     if (!TOK && a !== "noop" && a !== "jmodif") { formJeton("Cet appareil est en lecture seule."); return; }
-    if (a === "reserver") formReserver(id);
+    if (a === "reserver") formReserver(id, b.dataset.date);
     else if (a === "annuler") act(() => annulerRes(id));
     else if (a === "vu" || a === "revu" || a === "notes") formVu(id, a);
     else if (a === "editer") formSortie(id);
