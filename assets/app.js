@@ -327,13 +327,17 @@ function rowJ(e) {
   // Admin : les personnes venues avec moi, en label sur la ligne.
   const jp = PRIVE && ADMIN && PRIVE.journalPrive ? PRIVE.journalPrive[e.id] : null, acc = jp ? [...new Set(jp.accompagnants || [])] : [];
   return `<article class="row g-${famille(e.categorie)}" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${esc(e.id)}">${gb(e)}${stubHTML(e, "vu")}
-  <span class="mid">${l1(e, e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : "")}${e.avis ? `<span class="art">« ${esc(e.avis)} »</span>` : artLigne(e) ? `<span class="art nom">${esc(artLigne(e))}</span>` : ""}${ligneMeta(esc(meta), acc.length ? `<span class="bds"><span class="b">avec ${esc(acc.join(", "))}</span></span>` : "")}</span></button><div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
+  <span class="mid">${l1(e, e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : "")}${e.avis ? `<span class="art avis">« ${esc(e.avis)} »</span>` : artLigne(e) ? `<span class="art nom">${esc(artLigne(e))}</span>` : ""}${ligneMeta(esc(meta), acc.length ? `<span class="bds"><span class="b">avec ${esc(acc.join(", "))}</span></span>` : "")}</span></button><div class="det" id="d-${esc(e.id)}" hidden></div></article>`;
 }
 function creditsHTML(e) {
   const by = {};
   (e.artistes || []).forEach((a) => (by[a.role] ??= []).push(a));
   const ordre = estExpo(e) ? ["artiste", ...ROLES.filter((r) => r !== "artiste")] : ROLES; // exposition : artistes exposés d’abord
-  return ordre.filter((r) => by[r]).map((r) => `<span class="ro">${esc(r)}</span> ${by[r].map((a) => `<a href="#artiste-${slug(a.nom)}">${esc(a.nom)}</a>`).join(", ")}`).join(" · ");
+  const lien = (a) => `<a href="#artiste-${slug(a.nom)}">${esc(a.nom)}</a>`, MAXN = 6;
+  return ordre.filter((r) => by[r]).map((r) => {
+    const n = by[r], vis = n.length > MAXN + 1 ? n.slice(0, MAXN) : n, reste = n.slice(vis.length);
+    return `<span class="ro">${esc(r)}</span> ${vis.map(lien).join(", ")}${reste.length ? `<button class="plus" type="button" data-plus aria-expanded="false" aria-label="Voir ${reste.length} autres noms">+ ${reste.length}</button><span hidden>, ${reste.map(lien).join(", ")}</span>` : ""}`;
+  }).join(" · ");
 }
 function offresHTML(e) {
   const L = lieu(e);
@@ -360,8 +364,8 @@ function detHTML(e) {
     const mod = adm ? `<button class="btn ai" type="button" data-adm="jmodif" data-id="${esc(e.id)}" aria-label="Modifier les entrées et la fiche" title="Modifier les entrées et la fiche">${ico("modifier")}</button><button class="btn ai danger" type="button" data-adm="supprimer" data-id="${esc(e.id)}" aria-label="Supprimer du journal" title="Supprimer du journal">${ico("supprimer")}</button>` : "";
     return `${c ? `<p class="cr">${c}</p>` : ""}
     <dl class="dl"><dt>${ico("lieu")}<span class="vh">Lieu</span></dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}</dd>
-    <dt>${ico("mois")}<span class="vh">Vu le</span></dt><dd>${(e.vuLe || []).map((d) => fmtY(D(d), true)).join(", ")}</dd>${e.note ? `<dt>Grille</dt><dd>${stars(e.note, false, "Note de la grille")}</dd>` : ""}</dl>
-    ${e.avis ? `<blockquote>${esc(e.avis)}</blockquote>` : ""}${adm ? ADMIN.journalResume(e) : ""}${actsHTML(e, true).replace('<div class="acts">', `<div class="acts">${mod}`)}`;
+    ${e.note ? `<dt>Grille</dt><dd>${stars(e.note, false, "Note de la grille")}</dd>` : ""}</dl>
+    ${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${adm ? ADMIN.journalResume(e) : ""}${actsHTML(e, true).replace('<div class="acts">', `<div class="acts">${mod}`)}`;
   }
   return ficheCorps(e);
 }
@@ -377,9 +381,9 @@ function ficheCorps(e, plein) {
   return `${c ? `<p class="cr">${c}</p>` : ""}
     <dl class="dl"><dt>${ico("lieu")}<span class="vh">Lieu</span></dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}${L.ville && L.ville !== "Paris" ? " (" + esc(L.ville) + ")" : ""}</dd>
     <dt>${ico("mois")}<span class="vh">Dates</span></dt><dd>${esc(range(e))}</dd>${e.horaires ? `<dt>${ico("horaires")}<span class="vh">Horaires</span></dt><dd>${esc(e.horaires)}</dd>` : ""}${estExpo(e) ? expoInfos(e) : ""}</dl>
-    ${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${calculHTML(e)}
+    ${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${calculHTML(e)}${actsHTML(e, !plein)}
     ${PRIVE && ADMIN ? ADMIN.ficheHTML(e) : ""}
-    ${(e.offres || []).length || L.tarifJeune ? `<h3 class="sec">Offres</h3>${offresHTML(e)}` : ""}${actsHTML(e, !plein)}<h3 class="sec">Dates</h3>${ficheCal(e)}`;
+    ${(e.offres || []).length || L.tarifJeune ? `<h3 class="sec">Offres</h3>${offresHTML(e)}` : ""}<h3 class="sec">Dates</h3>${ficheCal(e)}`;
 }
 
 /* ---------- Calendriers ---------- */
@@ -390,12 +394,15 @@ function monthGrid(y, m, cellFn) {
   for (let d = 1; d <= last.getDate(); d++) h += cellFn(new Date(y, m, d));
   return h + "</div>";
 }
+const moisN = (a, b) => (b.getFullYear() - a.getFullYear()) * 12 + b.getMonth() - a.getMonth() + 1;
+// Calendrier de la fiche : trois mois au plus d’emblée ; au-delà, deux puis « N mois suivants » à déplier (six au total).
 function ficheCal(e) {
   const p = span(e); if (!p) return '<p class="empty">Dates inconnues.</p>';
   const offers = new Set((e.offres || []).map((o) => o.date).filter(Boolean));
   const st = p[0] < TODAY ? TODAY : p[0];
-  let h = "", n = 0;
+  let h = "", n = 0, plus = "";
   for (let c = new Date(st.getFullYear(), st.getMonth(), 1); c <= p[1] && n < 6; c = new Date(c.getFullYear(), c.getMonth() + 1, 1), n++) {
+    if (n === 2 && moisN(st, p[1]) > 3) { plus = h; h = ""; }
     h += `<div class="cal mini"><div class="calh"><h3>${MOIS_L[c.getMonth()]} ${c.getFullYear()}</h3></div>` + monthGrid(c.getFullYear(), c.getMonth(), (d) => {
       const k = iso(d), on = playsOn(e, d) && d >= TODAY, busy = BUSY.has(k);
       const cls = ["cell", on ? (busy ? "busy" : "play") : "", d < TODAY ? "past" : "", +d === +TODAY ? "today" : "", offers.has(k) ? "of" : ""].filter(Boolean).join(" ");
@@ -405,7 +412,8 @@ function ficheCal(e) {
     }) + "</div>";
   }
   const loin = HORIZON && iso(p[1]) > HORIZON ? `<p class="aide">Soirs pris connus jusqu’au ${fmt(D(HORIZON))}.</p>` : "";
-  return `<div class="mini-wrap">${h}</div><div class="legend"><span class="l-joue">${OWNER} libre</span><span class="l-pris">${OWNER} pris</span>${estExpo(e) ? "" : '<span class="l-offre">Offre jeune</span>'}</div>
+  const suite = plus ? `<details class="mois-plus"><summary>${plural(n - 2, "mois suivant", "mois suivants")}</summary><div class="mini-wrap">${h}</div></details>` : "";
+  return `<div class="mini-wrap">${plus || h}</div>${suite}<div class="legend"><span class="l-joue">${OWNER} libre</span><span class="l-pris">${OWNER} pris</span>${estExpo(e) ? "" : '<span class="l-offre">Offre jeune</span>'}</div>
   ${e.relaches ? "" : `<p class="aide">${estExpo(e) ? "Jours de fermeture non renseignés." : "Relâches non renseignées."}</p>`}${loin}`;
 }
 
@@ -1100,7 +1108,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.43"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.44"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1111,7 +1119,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.43"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.44"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1129,7 +1137,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.43"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.44"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
@@ -1229,6 +1237,8 @@ document.addEventListener("click", async (ev) => {
     det.hidden = !open; row.classList.toggle("open", open); rb.setAttribute("aria-expanded", String(open));
     return;
   }
+  const pl = ev.target.closest("[data-plus]");
+  if (pl) { pl.nextElementSibling.hidden = false; pl.remove(); return; } // crédits : noms suivants
   const sh = ev.target.closest("[data-share]");
   if (sh) {
     const e = BYID.get(sh.dataset.share), url = shareURL(sh.dataset.share);

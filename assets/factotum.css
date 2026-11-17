@@ -20,7 +20,7 @@
 }
 :root{
   --police:"Schibsted Grotesk","Factotum secours","Helvetica Neue",Arial,sans-serif;
-  --t-site:44px;--t-puce:11px;--t-logo:22px;--t-section:22px;--t-fiche:17px;--t-corps:15px;--t-champ:16px;--t-meta:12px;--t-date:13px;--t-chiffre:48px;--t-jour:22px;--t-barre:20px;
+  --t-site:44px;--t-puce:11px;--t-logo:22px;--t-section:20px;--t-fiche:16px;--t-corps:14px;--t-champ:16px;--t-meta:11px;--t-date:13px;--t-chiffre:44px;--t-jour:20px;--t-barre:20px;
   --e1:4px;--e2:8px;--e3:12px;--e4:16px;--e6:24px;--e8:32px;--e12:48px;
   --cible:44px;--marge:16px;--max:1120px;--colonne-date:60px;--bande:6px;--t-badge:10px;
   --sat:env(safe-area-inset-top,0px);--sab:env(safe-area-inset-bottom,0px);--sal:env(safe-area-inset-left,0px);--sar:env(safe-area-inset-right,0px);
@@ -28,7 +28,7 @@
   --duree:120ms;
 }
 @media (min-width:960px){:root{
-  --t-site:72px;--t-logo:40px;--t-section:28px;--t-fiche:19px;--t-corps:16px;--t-date:14px;--t-jour:28px;
+  --t-site:72px;--t-logo:40px;--t-section:24px;--t-fiche:18px;--t-corps:15px;--t-meta:12px;--t-date:14px;--t-jour:24px;
   --marge:24px;--collant:var(--nav);
 }}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
@@ -56,7 +56,7 @@
 /* ---------- Base ---------- */
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--collant) + var(--e6))}
-body{margin:0;background:var(--fond);color:var(--encre);font-family:var(--police);font-size:var(--t-corps);font-weight:400;line-height:1.45;font-variant-numeric:tabular-nums;font-feature-settings:"tnum";-webkit-tap-highlight-color:transparent;min-height:100dvh}
+body{margin:0;background:var(--fond);color:var(--encre);font-family:var(--police);font-size:var(--t-corps);font-weight:400;line-height:1.4;font-variant-numeric:tabular-nums;font-feature-settings:"tnum";-webkit-tap-highlight-color:transparent;min-height:100dvh}
 a{color:inherit;text-decoration-thickness:1px;text-underline-offset:3px}
 button,input,select,textarea{font:inherit;color:inherit;font-variant-numeric:tabular-nums}
 h1,h2,h3,h4{margin:0;font-weight:800;line-height:1.1}
@@ -810,7 +810,7 @@ body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
 /* Zones tactiles de 44 px : tri, liens des fiches, icônes admin (4 px de plus entre elles, « Supprimer » à l'écart) */
 .linkbtn{position:relative}
 .linkbtn::after{content:"";position:absolute;left:0;right:0;top:-6px;bottom:-6px}
-.dl dd a,.cr a{display:inline-block;padding:var(--e1) 0}
+.dl dd a{display:inline-block;padding:var(--e1) 0}
 .acts-adm{gap:var(--e2)}
 .acts-adm .btn.ai.danger:last-child{margin-left:auto}
 /* Menu admin : une seule ligne défilante */
@@ -819,3 +819,30 @@ body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
 #dlg form>.acts{position:sticky;bottom:0;z-index:2;margin:var(--e4) calc(-1 * var(--marge)) 0;padding:var(--e3) var(--marge) calc(var(--e3) + var(--sab));background:var(--fond);border-top:1px solid var(--filet)}
 body:has(#dlg) .pub,body:has(#dlg) .toast{bottom:auto;top:0}
 .aussi a{scroll-margin:calc(var(--collant) + var(--e4)) 0 calc(var(--nav) + var(--e6))}
+
+/* ---------- Revue ergonomie : fiche déroulée plus courte ---------- */
+/* Ouverte, la ligne ne répète pas les artistes (crédits complets dessous) ; l’avis du journal s’y lit en entier, replié à 3 lignes sinon. */
+.row.open .rb .art.nom{display:none}
+.rb .art.avis{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+.row.open .rb .art.avis{display:block;-webkit-line-clamp:none;overflow:visible}
+/* Crédits : interligne serré, rôles en petites capitales, au-delà de 6 noms la suite se déplie. */
+:is(.det,#sheet) .cr{margin:var(--e2) 0 var(--e3);line-height:1.6}
+.cr .plus{position:relative;padding:0 var(--e1);border:0;background:none;color:var(--encre);font:inherit;font-size:var(--t-meta);font-weight:700;letter-spacing:.06em;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.cr .plus::after{content:"";position:absolute;left:-8px;right:-8px;top:-12px;bottom:-12px}
+/* Infos : lignes plus basses. */
+:is(.det,#sheet) .dl dt,:is(.det,#sheet) .dl dd{padding:6px 0}
+:is(.det,#sheet) .dl{margin-bottom:var(--e3)}
+:is(.det,#sheet) .why{margin-bottom:var(--e1)}
+:is(.det,#sheet) .acts{margin:var(--e3) 0 0}
+/* Sous-titres du déroulé : métadonnée sur filet fin plutôt que titre de section. */
+:is(.det,#sheet) .sec{margin:var(--e4) 0 var(--e2);padding:var(--e2) 0 0;border-top-width:1px;font-size:var(--t-meta);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--encre-2)}
+:is(.det,#sheet) .off li{margin:2px 0}
+:is(.det,#sheet) .calh h3{font-size:var(--t-corps)}
+.mois-plus{margin-top:var(--e3)}
+.mois-plus>summary{display:inline-flex;align-items:center;min-height:var(--cible);list-style:none;cursor:pointer;font-size:var(--t-meta);font-weight:700;text-transform:uppercase;letter-spacing:.06em;text-decoration:underline;text-underline-offset:3px}
+.mois-plus>summary::-webkit-details-marker{display:none}
+.mois-plus[open]>summary{display:none}
+:is(.det,#sheet) .mini .cell{min-height:28px;padding:2px var(--e1)}
+:is(.det,#sheet) .mini .dow{padding:2px var(--e1)}
+:is(.det,#sheet) .mini-wrap{gap:var(--e3) var(--e4)}
+.det .mini.cal,:is(.det,#sheet) .mini-wrap>.cal{margin-top:0}
