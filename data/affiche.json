@@ -9,6 +9,14 @@
     {
      "nom": "Laura Vazquez",
      "role": "auteur"
+    },
+    {
+     "nom": "Laura Vazquez",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Laura Vazquez",
+     "role": "interprète"
     }
    ],
    "lieuId": "odeon",
@@ -140,6 +148,26 @@
     {
      "nom": "Noëmie Ksicova",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Noëmie Ksicova",
+     "role": "auteur"
+    },
+    {
+     "nom": "Vincent Dissez",
+     "role": "interprète"
+    },
+    {
+     "nom": "Boutaïna El-Fekkak",
+     "role": "interprète"
+    },
+    {
+     "nom": "Sébastien Éveno",
+     "role": "interprète"
+    },
+    {
+     "nom": "Marceau Legroux Hernandez",
+     "role": "interprète"
     }
    ],
    "lieuId": "tgp",
@@ -267,6 +295,10 @@
     {
      "nom": "Constance Meyer",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Comédie-Française",
+     "role": "compagnie"
     }
    ],
    "lieuId": "comedie-francaise",
@@ -684,7 +716,11 @@
    "publicJeune": false,
    "leonardYVa": true,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "lun",
+    "mar"
+   ]
   },
   {
    "id": "ce-que-j-appelle-oubli",
@@ -874,6 +910,34 @@
     {
      "nom": "Lorraine de Sagazan",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Adèle Carlier",
+     "role": "interprète"
+    },
+    {
+     "nom": "Vladislav Galard",
+     "role": "interprète"
+    },
+    {
+     "nom": "Léo-Antonin Lutinier",
+     "role": "interprète"
+    },
+    {
+     "nom": "Michiko Takahashi",
+     "role": "interprète"
+    },
+    {
+     "nom": "Joël Terrin",
+     "role": "interprète"
+    },
+    {
+     "nom": "Manon Xardel",
+     "role": "interprète"
+    },
+    {
+     "nom": "Ensemble Miroirs Étendus",
+     "role": "interprète"
     }
    ],
    "lieuId": "les-gemeaux",
@@ -960,6 +1024,18 @@
     {
      "nom": "Cathy Marston",
      "role": "chorégraphie"
+    },
+    {
+     "nom": "Frédéric Chopin",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Philip Feeney",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Ballet de l’Opéra national de Paris",
+     "role": "compagnie"
     }
    ],
    "lieuId": "palais-garnier",
@@ -1812,6 +1888,14 @@
     {
      "nom": "Johan Inger",
      "role": "chorégraphie"
+    },
+    {
+     "nom": "Grégoire Hetzel",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Ballet de l’Opéra national de Paris",
+     "role": "compagnie"
     }
    ],
    "lieuId": "palais-garnier",
@@ -1890,6 +1974,14 @@
     {
      "nom": "Mathieu Romano",
      "role": "direction musicale"
+    },
+    {
+     "nom": "Christel Loetzsch",
+     "role": "interprète"
+    },
+    {
+     "nom": "Ensemble Aedes",
+     "role": "interprète"
     }
    ],
    "lieuId": "opera-comique",
@@ -2277,6 +2369,22 @@
     {
      "nom": "Josef Nadj",
      "role": "chorégraphie"
+    },
+    {
+     "nom": "Ivan Fatjo",
+     "role": "chorégraphie"
+    },
+    {
+     "nom": "John Cage",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Josef Nadj",
+     "role": "interprète"
+    },
+    {
+     "nom": "Ivan Fatjo",
+     "role": "interprète"
     }
    ],
    "lieuId": "mc93",
@@ -2308,6 +2416,26 @@
     {
      "nom": "Christian Lacroix",
      "role": "artiste"
+    },
+    {
+     "nom": "Gabriel Fauré",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Igor Stravinsky",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Piotr Ilitch Tchaïkovski",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Alondra de la Parra",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Ballet de l’Opéra national de Paris",
+     "role": "compagnie"
     }
    ],
    "lieuId": "opera-bastille",
@@ -2383,6 +2511,10 @@
     {
      "nom": "Noémie Gantier",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Noémie Gantier",
+     "role": "interprète"
     }
    ],
    "lieuId": "nanterre-amandiers",
@@ -2944,6 +3076,18 @@
     {
      "nom": "Frederick Ashton",
      "role": "chorégraphie"
+    },
+    {
+     "nom": "Louis-Joseph-Ferdinand Hérold",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Philip Ellis",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Ballet de l’Opéra national de Paris",
+     "role": "compagnie"
     }
    ],
    "lieuId": "palais-garnier",
@@ -3044,6 +3188,30 @@
     {
      "nom": "Julie Deliquet",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Julie André",
+     "role": "interprète"
+    },
+    {
+     "nom": "Astrid Bayiha",
+     "role": "interprète"
+    },
+    {
+     "nom": "Évelyne Didi",
+     "role": "interprète"
+    },
+    {
+     "nom": "Marina Keltchewsky",
+     "role": "interprète"
+    },
+    {
+     "nom": "Odja Llorca",
+     "role": "interprète"
+    },
+    {
+     "nom": "Marie Payen",
+     "role": "interprète"
     }
    ],
    "lieuId": "la-colline",
@@ -3240,6 +3408,10 @@
     {
      "nom": "Anne Théron",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Marie-Laure Crochant",
+     "role": "interprète"
     }
    ],
    "lieuId": "les-gemeaux",
@@ -3271,6 +3443,10 @@
     {
      "nom": "Lilo Baur",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Comédie-Française",
+     "role": "compagnie"
     }
    ],
    "lieuId": "comedie-francaise",
@@ -3305,6 +3481,34 @@
     {
      "nom": "Guillaume Vincent",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Guillaume Vincent",
+     "role": "auteur"
+    },
+    {
+     "nom": "Suzanne de Baecque",
+     "role": "interprète"
+    },
+    {
+     "nom": "Zakary Bairi",
+     "role": "interprète"
+    },
+    {
+     "nom": "Bonnie Barbier",
+     "role": "interprète"
+    },
+    {
+     "nom": "Julie Borgel",
+     "role": "interprète"
+    },
+    {
+     "nom": "Maxime Crescini",
+     "role": "interprète"
+    },
+    {
+     "nom": "Félicien Fonsino",
+     "role": "interprète"
     }
    ],
    "lieuId": "t2g",
@@ -3322,7 +3526,10 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "dim"
+   ]
   },
   {
    "id": "la-tour-de-nesle",
@@ -3336,6 +3543,10 @@
     {
      "nom": "Thomas Jolly",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Comédie-Française",
+     "role": "compagnie"
     }
    ],
    "lieuId": "comedie-francaise",
@@ -3373,6 +3584,10 @@
     {
      "nom": "Benjamin Lazar",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Comédie-Française",
+     "role": "compagnie"
     }
    ],
    "lieuId": "comedie-francaise",
@@ -3412,6 +3627,10 @@
     {
      "nom": "Simon Falguières",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Comédie-Française",
+     "role": "compagnie"
     }
    ],
    "lieuId": "comedie-francaise",
@@ -3446,6 +3665,10 @@
     {
      "nom": "Pierre Corneille",
      "role": "auteur"
+    },
+    {
+     "nom": "Comédie-Française",
+     "role": "compagnie"
     }
    ],
    "lieuId": "comedie-francaise",
@@ -3605,6 +3828,14 @@
     {
      "nom": "Christian Hecq",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Jean-Baptiste Lully",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Comédie-Française",
+     "role": "compagnie"
     }
    ],
    "lieuId": "comedie-francaise",
@@ -3681,6 +3912,18 @@
     {
      "nom": "Emmanuel Demarcy-Mota",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Arman Méliès",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Troupe du Théâtre de la Ville",
+     "role": "compagnie"
+    },
+    {
+     "nom": "Élodie Bouchez",
+     "role": "interprète"
     }
    ],
    "lieuId": "theatre-de-la-ville",
@@ -3802,6 +4045,18 @@
     {
      "nom": "Louis Arene",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Sophie Botte",
+     "role": "interprète"
+    },
+    {
+     "nom": "François Praud",
+     "role": "interprète"
+    },
+    {
+     "nom": "Lionel Lingelser",
+     "role": "interprète"
     }
    ],
    "lieuId": "nanterre-amandiers",
@@ -4193,7 +4448,32 @@
    "id": "le-silence",
    "titre": "Le Silence",
    "categorie": "Théâtre",
-   "artistes": [],
+   "artistes": [
+    {
+     "nom": "Guillaume Poix",
+     "role": "auteur"
+    },
+    {
+     "nom": "Lorraine de Sagazan",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Jeanne Favre",
+     "role": "interprète"
+    },
+    {
+     "nom": "Victoria Quesnel",
+     "role": "interprète"
+    },
+    {
+     "nom": "Mathieu Perotto",
+     "role": "interprète"
+    },
+    {
+     "nom": "Benjamin Tholozan",
+     "role": "interprète"
+    }
+   ],
    "lieuId": "la-colline",
    "salle": "Petit théâtre",
    "debut": "2027-05-18",
@@ -4223,6 +4503,18 @@
     {
      "nom": "Reynaldo Hahn",
      "role": "compositeur"
+    },
+    {
+     "nom": "Sammy El Ghadab",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Pascal Neyron",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Les Frivolités Parisiennes",
+     "role": "compagnie"
     }
    ],
    "lieuId": "athenee",
@@ -4234,7 +4526,7 @@
    "calcul": "C1 N1 H0",
    "pronostic": false,
    "pourquoi": "Opérette rare.",
-   "lien": null,
+   "lien": "https://www.music-opera.com/fr/athenee-theatre-louis-jouvet-france-paris/le-temps-d-aimer-hahn-2500314.html",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": false,
@@ -4384,6 +4676,10 @@
     {
      "nom": "Christophe Honoré",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Comédie-Française",
+     "role": "compagnie"
     }
    ],
    "lieuId": "comedie-francaise",
@@ -4421,6 +4717,10 @@
     {
      "nom": "Emma Dante",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Comédie-Française",
+     "role": "compagnie"
     }
    ],
    "lieuId": "comedie-francaise",
@@ -4680,6 +4980,10 @@
     {
      "nom": "David Bobée",
      "role": "mise en scène"
+    },
+    {
+     "nom": "George Sand",
+     "role": "auteur"
     }
    ],
    "lieuId": "theatre-public-montreuil",
@@ -4959,6 +5263,18 @@
     {
      "nom": "Maguy Marin",
      "role": "chorégraphie"
+    },
+    {
+     "nom": "Compagnie Maguy Marin",
+     "role": "compagnie"
+    },
+    {
+     "nom": "Franz Schubert",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Gavin Bryars",
+     "role": "compositeur"
     }
    ],
    "lieuId": "les-gemeaux",
@@ -5215,6 +5531,14 @@
     {
      "nom": "Christos Papadopoulos",
      "role": "chorégraphie"
+    },
+    {
+     "nom": "The Lion and the Wolf",
+     "role": "compagnie"
+    },
+    {
+     "nom": "Kornilios Selamsis",
+     "role": "compositeur"
     }
    ],
    "lieuId": "les-gemeaux",
@@ -5285,6 +5609,18 @@
     {
      "nom": "Phia Ménard",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Compagnie Non Nova",
+     "role": "compagnie"
+    },
+    {
+     "nom": "Phia Ménard",
+     "role": "interprète"
+    },
+    {
+     "nom": "Fabrice Ilia Leroy",
+     "role": "interprète"
     }
    ],
    "lieuId": "t2g",
@@ -5358,8 +5694,8 @@
    "calcul": "C1 N1 H0",
    "pronostic": false,
    "pourquoi": "Concert au Zénith.",
-   "lien": null,
-   "billetterie": null,
+   "lien": "https://75.agendaculturel.fr/concert/nono-la-grinta.html",
+   "billetterie": "https://www.fnacspectacles.com/en/event/nono-la-grinta-zenith-paris-la-villette-21853924/",
    "publicJeune": false,
    "leonardYVa": true,
    "statut": "a-voir",
@@ -5434,7 +5770,19 @@
     },
     {
      "nom": "Clémence Jeanguillaume",
-     "role": "mise en scène"
+     "role": "auteur"
+    },
+    {
+     "nom": "Compagnie Diva Bonsoir",
+     "role": "compagnie"
+    },
+    {
+     "nom": "Clémence Jeanguillaume",
+     "role": "interprète"
+    },
+    {
+     "nom": "Lionel Dray",
+     "role": "auteur"
     }
    ],
    "lieuId": "theatre-de-la-bastille",
@@ -5739,6 +6087,30 @@
     {
      "nom": "Guillaume Dustan",
      "role": "auteur"
+    },
+    {
+     "nom": "Simon-Elie Galibert",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Aymen Bouchou",
+     "role": "interprète"
+    },
+    {
+     "nom": "Thomas Gonzalez",
+     "role": "interprète"
+    },
+    {
+     "nom": "Angie Mercier",
+     "role": "interprète"
+    },
+    {
+     "nom": "Roman Kané",
+     "role": "interprète"
+    },
+    {
+     "nom": "Claire Toubin",
+     "role": "interprète"
     }
    ],
    "lieuId": "t2g",
@@ -5766,6 +6138,14 @@
     {
      "nom": "Adeline Rosenstein",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Adeline Rosenstein",
+     "role": "auteur"
+    },
+    {
+     "nom": "Maison Ravage",
+     "role": "compagnie"
     }
    ],
    "lieuId": "theatre-public-montreuil",
@@ -5823,6 +6203,18 @@
     {
      "nom": "Rudolf Noureev",
      "role": "chorégraphie"
+    },
+    {
+     "nom": "Alexandre Glazounov",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Vello Pähn",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Ballet de l’Opéra national de Paris",
+     "role": "compagnie"
     }
    ],
    "lieuId": "opera-bastille",
@@ -5978,6 +6370,26 @@
     {
      "nom": "Emmanuel Demarcy-Mota",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Troupe du Théâtre de la Ville",
+     "role": "compagnie"
+    },
+    {
+     "nom": "Serge Maggiani",
+     "role": "interprète"
+    },
+    {
+     "nom": "Hugues Quester",
+     "role": "interprète"
+    },
+    {
+     "nom": "Valérie Dashwood",
+     "role": "interprète"
+    },
+    {
+     "nom": "Philippe Demarle",
+     "role": "interprète"
     }
    ],
    "lieuId": "theatre-de-la-ville",
@@ -6428,6 +6840,30 @@
     {
      "nom": "Samar Haddad King",
      "role": "chorégraphie"
+    },
+    {
+     "nom": "Yousef Sbieh",
+     "role": "chorégraphie"
+    },
+    {
+     "nom": "Mohammad Smahneh",
+     "role": "chorégraphie"
+    },
+    {
+     "nom": "Hisham Abu Jabal",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Yaa Samar! Dance Theatre",
+     "role": "compagnie"
+    },
+    {
+     "nom": "Yousef Sbieh",
+     "role": "interprète"
+    },
+    {
+     "nom": "Mohammad Smahneh",
+     "role": "interprète"
     }
    ],
    "lieuId": "theatre-de-la-bastille",
@@ -6565,6 +7001,10 @@
     {
      "nom": "Tame Impala",
      "role": "interprète"
+    },
+    {
+     "nom": "Wet Leg",
+     "role": "interprète"
     }
    ],
    "lieuId": "accor-arena",
@@ -6577,7 +7017,7 @@
    "calcul": "C1 N3 H2",
    "pronostic": false,
    "pourquoi": "Tournée Deadbeat de Kevin Parker, deux soirs à l’Accor Arena.",
-   "lien": null,
+   "lien": "https://75.agendaculturel.fr/concert/tame-impala-deadbeat-eu-uk-tour-2027.html",
    "billetterie": null,
    "publicJeune": false,
    "leonardYVa": true,
@@ -6685,6 +7125,14 @@
     {
      "nom": "Stéphanie Aflalo",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Stéphanie Aflalo",
+     "role": "auteur"
+    },
+    {
+     "nom": "Stéphanie Aflalo",
+     "role": "interprète"
     }
    ],
    "lieuId": "theatre-de-la-bastille",
@@ -6828,7 +7276,19 @@
     },
     {
      "nom": "Olivier Saccomano",
-     "role": "mise en scène"
+     "role": "auteur"
+    },
+    {
+     "nom": "Florian Onnéin",
+     "role": "interprète"
+    },
+    {
+     "nom": "Conchita Paz",
+     "role": "interprète"
+    },
+    {
+     "nom": "Charly Totterwitz",
+     "role": "interprète"
     }
    ],
    "lieuId": "theatre-public-montreuil",
@@ -6889,6 +7349,34 @@
     {
      "nom": "Michel Laubu",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Emili Hufnagel",
+     "role": "auteur"
+    },
+    {
+     "nom": "Turak Théâtre",
+     "role": "compagnie"
+    },
+    {
+     "nom": "Michel Laubu",
+     "role": "interprète"
+    },
+    {
+     "nom": "Elodie Dubuc",
+     "role": "interprète"
+    },
+    {
+     "nom": "Caroline Cybula",
+     "role": "interprète"
+    },
+    {
+     "nom": "Christophe Millot",
+     "role": "interprète"
+    },
+    {
+     "nom": "Patrick Murys",
+     "role": "interprète"
     }
    ],
    "lieuId": "nanterre-amandiers",
@@ -6916,6 +7404,30 @@
     {
      "nom": "Philippe Quesne",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Jean-Charles Dumay",
+     "role": "interprète"
+    },
+    {
+     "nom": "Sachiko Hara",
+     "role": "interprète"
+    },
+    {
+     "nom": "Sébastien Jacobs",
+     "role": "interprète"
+    },
+    {
+     "nom": "Sasha Rau",
+     "role": "interprète"
+    },
+    {
+     "nom": "Bettina Stucky",
+     "role": "interprète"
+    },
+    {
+     "nom": "Samuel Weiss",
+     "role": "interprète"
     }
    ],
    "lieuId": "odeon",
@@ -6941,6 +7453,9 @@
      "tarif": "de 7 à 21 €",
      "condition": "Moins de 28 ans, sur justificatif"
     }
+   ],
+   "relaches": [
+    "lun"
    ]
   },
   {
@@ -7037,6 +7552,22 @@
     {
      "nom": "Hubert Colas",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Stéphanie Aflalo",
+     "role": "interprète"
+    },
+    {
+     "nom": "Lou Chrétien Février",
+     "role": "interprète"
+    },
+    {
+     "nom": "Ava Hervier",
+     "role": "interprète"
+    },
+    {
+     "nom": "Isabelle Mouchard",
+     "role": "interprète"
     }
    ],
    "lieuId": "odeon",
@@ -7062,6 +7593,9 @@
      "tarif": "19 €",
      "condition": "Moins de 28 ans, sur justificatif"
     }
+   ],
+   "relaches": [
+    "sam"
    ]
   },
   {
@@ -7328,6 +7862,30 @@
     {
      "nom": "Nacera Belaza",
      "role": "chorégraphie"
+    },
+    {
+     "nom": "Nacera Belaza",
+     "role": "interprète"
+    },
+    {
+     "nom": "Paulin Banc",
+     "role": "interprète"
+    },
+    {
+     "nom": "Viivi Forsman",
+     "role": "interprète"
+    },
+    {
+     "nom": "Bastien Gash",
+     "role": "interprète"
+    },
+    {
+     "nom": "Aimée Lagrange",
+     "role": "interprète"
+    },
+    {
+     "nom": "Eva Studzinski",
+     "role": "interprète"
     }
    ],
    "lieuId": "odeon",
@@ -7353,6 +7911,9 @@
      "tarif": "19 €",
      "condition": "Moins de 28 ans, sur justificatif"
     }
+   ],
+   "relaches": [
+    "lun"
    ]
   },
   {
