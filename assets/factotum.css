@@ -16,6 +16,7 @@
   --accent:#E30613;--sur-accent:#FFFFFF;--accent-texte:#E30613;
   --g-theatre:#B4233C;--g-lyrique:#1F5FA8;--g-danse:#946200;--g-concert:#B04A00;--g-xbeaux:#A3175E;--g-xphoto:#0F5F7A;--g-xcontemporain:#7A5230;
   --a-theatre:#B4233C;--a-lyrique:#1F5FA8;--a-danse:#946200;--a-concert:#B04A00;--a-neutre:#5C5C5C;--a-xbeaux:#A3175E;--a-xphoto:#0F5F7A;--a-xcontemporain:#7A5230;
+  --voile:rgba(17,17,17,.45);
   color-scheme:light;
 }
 :root{
@@ -35,12 +36,12 @@
   --fond:#0E0E0E;--surface:#161616;--encre:#F2F2F2;--encre-2:#A6A6A6;--filet:#F2F2F2;--filet-leger:#2E2E2E;
   --accent:#E30613;--sur-accent:#FFFFFF;--accent-texte:#FF5A4F;
   --g-theatre:#FF94A3;--g-lyrique:#8DB8F2;--g-danse:#E8B04A;--g-concert:#FFA066;--g-xbeaux:#F48FC0;--g-xphoto:#7CC7E0;--g-xcontemporain:#D9A877;
-  --a-theatre:#B4233C;--a-lyrique:#1F5FA8;--a-danse:#946200;--a-concert:#B04A00;--a-neutre:#5C5C5C;--a-xbeaux:#A3175E;--a-xphoto:#0F5F7A;--a-xcontemporain:#7A5230;color-scheme:dark}}
+  --a-theatre:#B4233C;--a-lyrique:#1F5FA8;--a-danse:#946200;--a-concert:#B04A00;--a-neutre:#5C5C5C;--a-xbeaux:#A3175E;--a-xphoto:#0F5F7A;--a-xcontemporain:#7A5230;--voile:rgba(0,0,0,.6);color-scheme:dark}}
 :root[data-theme="dark"],[data-theme="dark"]{
   --fond:#0E0E0E;--surface:#161616;--encre:#F2F2F2;--encre-2:#A6A6A6;--filet:#F2F2F2;--filet-leger:#2E2E2E;
   --accent:#E30613;--sur-accent:#FFFFFF;--accent-texte:#FF5A4F;
   --g-theatre:#FF94A3;--g-lyrique:#8DB8F2;--g-danse:#E8B04A;--g-concert:#FFA066;--g-xbeaux:#F48FC0;--g-xphoto:#7CC7E0;--g-xcontemporain:#D9A877;
-  --a-theatre:#B4233C;--a-lyrique:#1F5FA8;--a-danse:#946200;--a-concert:#B04A00;--a-neutre:#5C5C5C;--a-xbeaux:#A3175E;--a-xphoto:#0F5F7A;--a-xcontemporain:#7A5230;color-scheme:dark}
+  --a-theatre:#B4233C;--a-lyrique:#1F5FA8;--a-danse:#946200;--a-concert:#B04A00;--a-neutre:#5C5C5C;--a-xbeaux:#A3175E;--a-xphoto:#0F5F7A;--a-xcontemporain:#7A5230;--voile:rgba(0,0,0,.6);color-scheme:dark}
 /* Factotum Expo (expo/index.html, <html data-site="expo">) : même charte, accent vert Véronèse. Seul l'accent change ;
    la variante de texte du thème sombre est éclaircie pour passer AA (contrôlé par tools/contrast.mjs). */
 :root[data-site="expo"],[data-site="expo"],[data-site="expo"] [data-theme="light"]{
@@ -1006,8 +1007,8 @@ body:has(#dlg) .pub,body:has(#dlg) .toast{bottom:auto;top:0}
 /* ---------- Fiche en surimpression : deux colonnes sur bureau, « Dates » (calendrier) à gauche ---------- */
 @media (min-width:960px){
   .fi-g{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--e8);align-items:start;margin-top:var(--e4)}
-  .fi-g>.fi-p{grid-column:1/span 7;grid-row:1}
-  .fi-g>.fi-d{grid-column:8/span 5;grid-row:1}
+  .fi-g>.fi-p{grid-column:1/span 8;grid-row:1}
+  .fi-g>.fi-d{grid-column:9/span 4;grid-row:1}
   .fi-g>.fi-d>.sec:first-child{margin-top:0}
   .fi-g.fi-vu>.fi-p{grid-column:1/span 8}
   .fi-d .mini-wrap{grid-template-columns:minmax(0,1fr)}
@@ -1076,3 +1077,19 @@ button.cell.cal-res{cursor:pointer;font:inherit;font-weight:800}
 .shh .tit .coeur-f svg{width:24px;height:24px}
 .shh .tit .coeur-f:not(button) svg,.shh .tit button.coeur-f[aria-pressed="true"] svg{fill:currentColor}
 .shh .tit button.envie.coeur-f{position:relative;top:auto;right:auto;border:0;background:none;cursor:pointer}
+/* ---------- Fiche : panneau latéral sur bureau (v4.60) ----------
+   La liste reste visible sous un voile ; un clic sur le voile ferme. Défilement horizontal laissé au navigateur
+   (geste « retour » du trackpad), rien ne déborde en largeur. */
+.sheet-in{overscroll-behavior-x:auto;overflow-x:clip}
+@media (min-width:960px){
+  .sheet{background:var(--voile)}
+  #sheet{justify-content:flex-end}
+  #sheet>.sheet-in{max-width:min(920px,100%);border-left:1px solid var(--filet);border-right:0}
+  #dlg{align-items:flex-start}
+}
+@media (min-width:960px) and (prefers-reduced-motion:no-preference){
+  #sheet>.sheet-in{animation:m-panneau 240ms cubic-bezier(.2,.7,.2,1)}
+  #sheet.sort>.sheet-in{animation:m-panneau-sort 200ms ease-in forwards}
+}
+@keyframes m-panneau{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+@keyframes m-panneau-sort{from{opacity:1;transform:none}to{opacity:0;transform:translateX(40px)}}
