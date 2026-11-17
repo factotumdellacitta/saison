@@ -296,9 +296,16 @@
    "boston-nelsons-lang-lang"
   ]
  },
+ "andy-warhol": {
+  "nom": "Andy Warhol",
+  "sorties": [
+   "andy-warhol-la-ligne-et-l-image"
+  ]
+ },
  "angele": {
   "nom": "Angèle",
   "sorties": [
+   "angele-instinct-tour-2027",
    "vu-solidays-2023-dimanche",
    "vu-we-love-green-2022"
   ]
@@ -916,12 +923,6 @@
    "la-mort-du-mome"
   ]
  },
- "catherine-hiegel": {
-  "nom": "Catherine Hiegel",
-  "sorties": [
-   "suzanne"
-  ]
- },
  "cathy-marston": {
   "nom": "Cathy Marston",
   "sorties": [
@@ -981,6 +982,12 @@
    "le-suicide",
    "ruy-blas",
    "vu-bestioles"
+  ]
+ },
+ "charlotte-chastel-rousseau": {
+  "nom": "Charlotte Chastel-Rousseau",
+  "sorties": [
+   "zurbaran-louvre"
   ]
  },
  "charly-paillet": {
@@ -1128,6 +1135,12 @@
   "nom": "Cie Sensible Indocile",
   "sorties": [
    "vu-le-bain"
+  ]
+ },
+ "cindy-sherman": {
+  "nom": "Cindy Sherman",
+  "sorties": [
+   "remember-me-bourse-de-commerce"
   ]
  },
  "claire-de-la-rue-du-can": {
@@ -1748,6 +1761,12 @@
    "turandot"
   ]
  },
+ "eva-gonzales": {
+  "nom": "Eva Gonzalès",
+  "sorties": [
+   "eva-gonzales-petit-palais"
+  ]
+ },
  "eva-studzinski": {
   "nom": "Eva Studzinski",
   "sorties": [
@@ -1857,6 +1876,12 @@
   "nom": "Francis Huster",
   "sorties": [
    "le-discours-d-un-roi"
+  ]
+ },
+ "francisco-de-zurbaran": {
+  "nom": "Francisco de Zurbarán",
+  "sorties": [
+   "zurbaran-louvre"
   ]
  },
  "francois-berleand": {
@@ -2205,7 +2230,8 @@
  "gustave-le-gray": {
   "nom": "Gustave Le Gray",
   "sorties": [
-   "gustave-le-gray-peintre-photographe"
+   "gustave-le-gray-peintre-photographe",
+   "remember-me-bourse-de-commerce"
   ]
  },
  "guy-cassiers": {
@@ -2218,12 +2244,6 @@
   "nom": "Gwendoline",
   "sorties": [
    "vu-solidays-2023-dimanche"
-  ]
- },
- "gwendoline-hamon": {
-  "nom": "Gwendoline Hamon",
-  "sorties": [
-   "la-jalousie"
   ]
  },
  "h-k-gruber": {
@@ -2395,6 +2415,12 @@
   "nom": "Irénée Rohrbach",
   "sorties": [
    "c-est-beau"
+  ]
+ },
+ "irving-penn": {
+  "nom": "Irving Penn",
+  "sorties": [
+   "remember-me-bourse-de-commerce"
   ]
  },
  "isabelle-adjani": {
@@ -3870,6 +3896,12 @@
    "dipus-rex"
   ]
  },
+ "matthieu-humery": {
+  "nom": "Matthieu Humery",
+  "sorties": [
+   "remember-me-bourse-de-commerce"
+  ]
+ },
  "maud-saint-jean": {
   "nom": "Maud Saint-Jean",
   "sorties": [
@@ -3964,12 +3996,6 @@
    "mahler-2-van-zweden"
   ]
  },
- "michel-fau": {
-  "nom": "Michel Fau",
-  "sorties": [
-   "la-jalousie"
-  ]
- },
  "michel-laubu": {
   "nom": "Michel Laubu",
   "sorties": [
@@ -4016,6 +4042,7 @@
  "miki": {
   "nom": "Miki",
   "sorties": [
+   "miki-zenith-2026",
    "vu-miki-elysee-montmartre-2026"
   ]
  },
@@ -4288,6 +4315,12 @@
    "vu-we-love-green-2023-vendredi"
   ]
  },
+ "oasis": {
+  "nom": "Oasis",
+  "sorties": [
+   "oasis-stade-de-france-2027"
+  ]
+ },
  "odja-llorca": {
   "nom": "Odja Llorca",
   "sorties": [
@@ -4447,6 +4480,12 @@
   "nom": "Patrick Timsit",
   "sorties": [
    "vu-patrick-timsit-on-ne-peut-pas-rire-de-tout"
+  ]
+ },
+ "paul-cezanne": {
+  "nom": "Paul Cezanne",
+  "sorties": [
+   "cezanne-et-nous"
   ]
  },
  "paul-claudel": {
@@ -4636,6 +4675,7 @@
   "nom": "Pomme",
   "sorties": [
    "le-petit-cirque",
+   "pomme-olympia-2027",
    "vu-solidays-2024",
    "vu-we-love-green-2023-dimanche"
   ]
@@ -4663,6 +4703,12 @@
   "nom": "Raphaël Pichon",
   "sorties": [
    "ode-a-la-joie-pichon"
+  ]
+ },
+ "raymond-depardon": {
+  "nom": "Raymond Depardon",
+  "sorties": [
+   "remember-me-bourse-de-commerce"
   ]
  },
  "rebecca-chaillon": {
@@ -4718,6 +4764,12 @@
   "nom": "Riccardo Muti",
   "sorties": [
    "attila"
+  ]
+ },
+ "richard-ashcroft": {
+  "nom": "Richard Ashcroft",
+  "sorties": [
+   "oasis-stade-de-france-2027"
   ]
  },
  "richard-wagner": {
@@ -4832,12 +4884,6 @@
    "delay-the-sadness"
   ]
  },
- "sacha-guitry": {
-  "nom": "Sacha Guitry",
-  "sorties": [
-   "la-jalousie"
-  ]
- },
  "sachiko-hara": {
   "nom": "Sachiko Hara",
   "sorties": [
@@ -4926,6 +4972,7 @@
  "sch": {
   "nom": "SCH",
   "sorties": [
+   "sch-stade-de-france-2027",
    "vu-solidays-2023-vendredi",
    "vu-solidays-2025-dimanche"
   ]
@@ -5110,6 +5157,7 @@
  "sofiane-pamart": {
   "nom": "Sofiane Pamart",
   "sorties": [
+   "sofiane-pamart-stade-de-france",
    "vu-solidays-2023-vendredi"
   ]
  },
@@ -5532,6 +5580,12 @@
    "une-odyssee"
   ]
  },
+ "u2": {
+  "nom": "U2",
+  "sorties": [
+   "u2-stade-de-france-2027"
+  ]
+ },
  "valentina-carrasco": {
   "nom": "Valentina Carrasco",
   "sorties": [
@@ -5709,6 +5763,12 @@
   "nom": "Willy Decker",
   "sorties": [
    "la-clemence-de-titus"
+  ]
+ },
+ "wolf-alice": {
+  "nom": "Wolf Alice",
+  "sorties": [
+   "u2-stade-de-france-2027"
   ]
  },
  "wolfgang-amadeus-mozart": {

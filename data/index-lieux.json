@@ -1,6 +1,7 @@
 {
  "accor-arena": {
   "sorties": [
+   "angele-instinct-tour-2027",
    "tame-impala",
    "vu-adele-bercy-2016",
    "vu-celine-dion-bercy-2016",
@@ -88,6 +89,11 @@
    "concert-tres-chic",
    "vu-le-fusible",
    "vu-un-tramway-nomme-desir"
+  ]
+ },
+ "bourse-de-commerce": {
+  "sorties": [
+   "remember-me-bourse-de-commerce"
   ]
  },
  "casino-de-paris": {
@@ -215,6 +221,11 @@
    "gustave-fayet-collectionneur-createur"
   ]
  },
+ "grand-palais": {
+  "sorties": [
+   "cezanne-et-nous"
+  ]
+ },
  "grande-halle-villette": {
   "sorties": [
    "tartuffe-van-hove",
@@ -290,6 +301,11 @@
    "singin-in-the-rain"
   ]
  },
+ "louvre": {
+  "sorties": [
+   "zurbaran-louvre"
+  ]
+ },
  "magazzini-generali": {
   "sorties": [
    "vu-diplo-magazzini-generali-2024"
@@ -300,6 +316,11 @@
    "chiens-de-navarre-i-will-survive",
    "josef-nadj-dialogues-dans-le-reve",
    "steven-cohen-people-will-people-you"
+  ]
+ },
+ "musee-luxembourg": {
+  "sorties": [
+   "andy-warhol-la-ligne-et-l-image"
   ]
  },
  "musee-orsay": {
@@ -341,7 +362,8 @@
  },
  "olympia": {
   "sorties": [
-   "esdeekid"
+   "esdeekid",
+   "pomme-olympia-2027"
   ]
  },
  "opera-bastille": {
@@ -389,6 +411,11 @@
   "sorties": [
    "vu-black-eyed-peas-la-defense-arena-2024",
    "vu-damso-la-defense-arena-2026"
+  ]
+ },
+ "petit-palais": {
+  "sorties": [
+   "eva-gonzales-petit-palais"
   ]
  },
  "petit-saint-martin": {
@@ -489,6 +516,10 @@
  },
  "stade-de-france": {
   "sorties": [
+   "oasis-stade-de-france-2027",
+   "sch-stade-de-france-2027",
+   "sofiane-pamart-stade-de-france",
+   "u2-stade-de-france-2027",
    "vu-the-weeknd-stade-de-france-2023"
   ]
  },
@@ -584,7 +615,6 @@
  },
  "theatre-de-la-michodiere": {
   "sorties": [
-   "la-jalousie",
    "vu-lexperience-theatrale",
    "vu-nuit-d-ivresse"
   ]
@@ -652,9 +682,7 @@
   ]
  },
  "theatre-montparnasse": {
-  "sorties": [
-   "suzanne"
-  ]
+  "sorties": []
  },
  "theatre-public-montreuil": {
   "sorties": [
@@ -684,6 +712,7 @@
  },
  "zenith-paris": {
   "sorties": [
+   "miki-zenith-2026",
    "nono",
    "vu-central-cee-zenith-2022",
    "vu-theodora-zenith-2026"

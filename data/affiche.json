@@ -3235,45 +3235,6 @@
    ]
   },
   {
-   "id": "la-jalousie",
-   "titre": "La Jalousie",
-   "categorie": "Théâtre",
-   "artistes": [
-    {
-     "nom": "Sacha Guitry",
-     "role": "auteur"
-    },
-    {
-     "nom": "Michel Fau",
-     "role": "mise en scène"
-    },
-    {
-     "nom": "Michel Fau",
-     "role": "interprète"
-    },
-    {
-     "nom": "Gwendoline Hamon",
-     "role": "interprète"
-    }
-   ],
-   "lieuId": "theatre-de-la-michodiere",
-   "salle": "",
-   "debut": "2026-11-05",
-   "fin": null,
-   "datesTexte": "à partir du 5 nov. 2026",
-   "horaires": "1h45",
-   "note": 2,
-   "calcul": "C1 N2 H0",
-   "pronostic": false,
-   "pourquoi": "Reprise, Guitry par Fau.",
-   "lien": "https://www.michodiere.com/evenement/la-jalousie-1/",
-   "billetterie": null,
-   "publicJeune": false,
-   "leonardYVa": false,
-   "statut": "a-voir",
-   "offres": []
-  },
-  {
    "id": "la-mort-du-mome",
    "titre": "La mort du Môme",
    "categorie": "Théâtre",
@@ -6963,37 +6924,6 @@
    "etat": "dernieres-places"
   },
   {
-   "id": "suzanne",
-   "titre": "Suzanne",
-   "categorie": "Théâtre",
-   "artistes": [
-    {
-     "nom": "Catherine Hiegel",
-     "role": "interprète"
-    }
-   ],
-   "lieuId": "theatre-montparnasse",
-   "salle": "",
-   "debut": "2026-09-25",
-   "fin": null,
-   "datesTexte": "depuis le 25 sept. 2026",
-   "horaires": "mer. et jeu. 21h, ven. et sam. 19h, dim. 17h ; 10 € pour les moins de 26 ans",
-   "note": 2,
-   "calcul": "C1 N1 H0",
-   "pronostic": false,
-   "pourquoi": "Ancienne sociétaire de la CF.",
-   "lien": "https://www.theatremontparnasse.com/spectacle/suzanne/",
-   "billetterie": null,
-   "publicJeune": false,
-   "leonardYVa": false,
-   "statut": "a-voir",
-   "offres": [],
-   "relaches": [
-    "lun",
-    "mar"
-   ]
-  },
-  {
    "id": "tame-impala",
    "titre": "Tame Impala",
    "categorie": "Concert",
@@ -9451,6 +9381,423 @@
     "source": "https://www.artrabbit.com/events/chroniques-de-la-mer-et-dune-temp%C3%AAte",
     "ajouteLe": "2026-11-16"
    }
+  },
+  {
+   "id": "miki-zenith-2026",
+   "titre": "Miki",
+   "categorie": "Concert",
+   "sousGenre": "Pop",
+   "artistes": [
+    {
+     "nom": "Miki",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "zenith-paris",
+   "salle": "",
+   "debut": "2026-11-18",
+   "fin": "2026-11-18",
+   "note": 2,
+   "calcul": "C1 N1 H1",
+   "pronostic": true,
+   "pourquoi": "Miki passe de l’Élysée Montmartre au Zénith de Paris, un soir.",
+   "lien": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/339712-miki-set-to-perform-at-paris-zenith-in-november-2026",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/339712-miki-set-to-perform-at-paris-zenith-in-november-2026"
+  },
+  {
+   "id": "pomme-olympia-2027",
+   "titre": "Pomme",
+   "categorie": "Concert",
+   "sousGenre": "Chanson",
+   "artistes": [
+    {
+     "nom": "Pomme",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "olympia",
+   "salle": "",
+   "debut": "2027-03-04",
+   "fin": "2027-03-05",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Deux soirs à l’Olympia pendant une tournée de 19 dates en France, de janvier à mars 2027.",
+   "lien": "https://75.agendaculturel.fr/concert/pomme-tournee.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "datesTexte": "4 et 5 mars 2027",
+   "source": "https://www.fnacspectacles.com/magazine/concerts/concert-pomme-2027-19-dates-et-prevente-le-24-septembre"
+  },
+  {
+   "id": "angele-instinct-tour-2027",
+   "titre": "Angèle – Instinct Tour",
+   "categorie": "Concert",
+   "sousGenre": "Pop",
+   "artistes": [
+    {
+     "nom": "Angèle",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "salle": "",
+   "debut": "2027-03-08",
+   "fin": "2027-03-13",
+   "note": 3,
+   "calcul": "C1 N2 H2",
+   "pronostic": true,
+   "pourquoi": "Retour d’Angèle sur scène avec l’Instinct Tour, ouvert à Paris par cinq soirs à l’Accor Arena après des premières dates complètes.",
+   "lien": "https://75.agendaculturel.fr/concert/angele-instinct-tour.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "datesTexte": "8, 9 et 10 mars 2027, puis une date ajoutée le 13 mars",
+   "source": "https://www.fnacspectacles.com/magazine/concerts/angele-en-concert-en-2027"
+  },
+  {
+   "id": "sofiane-pamart-stade-de-france",
+   "titre": "Sofiane Pamart au Stade de France",
+   "categorie": "Concert",
+   "sousGenre": "Piano",
+   "artistes": [
+    {
+     "nom": "Sofiane Pamart",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "stade-de-france",
+   "salle": "",
+   "debut": "2027-04-17",
+   "fin": "2027-04-17",
+   "note": 3,
+   "calcul": "C1 N2 H2",
+   "pronostic": true,
+   "pourquoi": "Premier pianiste à jouer seul au Stade de France, un soir.",
+   "lien": "https://www.stadefrance.com/en/ticket/sofiane-pamart",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "horaires": "20h",
+   "source": "https://www.sofianepamart.com/pages/stade-de-france"
+  },
+  {
+   "id": "sch-stade-de-france-2027",
+   "titre": "SCH au Stade de France",
+   "categorie": "Concert",
+   "sousGenre": "Rap",
+   "artistes": [
+    {
+     "nom": "SCH",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "stade-de-france",
+   "salle": "",
+   "debut": "2027-04-23",
+   "fin": "2027-04-24",
+   "note": 3,
+   "calcul": "C1 N2 H2",
+   "pronostic": true,
+   "pourquoi": "Deux soirs au Stade de France, le second ajouté après une première date complète.",
+   "lien": "https://leclaireur.fnac.com/article/643058-sch-au-stade-de-france-ou-et-quand-prendre-ses-billets/",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "datesTexte": "23 et 24 avril 2027",
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/337949-sch-in-concert-at-the-stade-de-france-in-april-2027-additional-date-added"
+  },
+  {
+   "id": "u2-stade-de-france-2027",
+   "titre": "U2 au Stade de France",
+   "categorie": "Concert",
+   "sousGenre": "Rock",
+   "artistes": [
+    {
+     "nom": "U2",
+     "role": "interprète"
+    },
+    {
+     "nom": "Wolf Alice",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "stade-de-france",
+   "salle": "",
+   "debut": "2027-05-05",
+   "fin": "2027-05-09",
+   "note": 3,
+   "calcul": "C1 N3 H2",
+   "pronostic": true,
+   "pourquoi": "Retour de U2 en stade à Paris, trois soirs, Wolf Alice en première partie.",
+   "lien": "https://www.jds.fr/actu/u2-au-stade-de-france-une-3e-date-a-paris-la-billetterie-ouvre-aujourd-hui-1835324_A",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "datesTexte": "5, 8 et 9 mai 2027",
+   "relaches": [
+    "2027-05-06",
+    "2027-05-07"
+   ],
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/352453-u2-to-play-stade-de-france-in-may-2027-third-date-announced"
+  },
+  {
+   "id": "oasis-stade-de-france-2027",
+   "titre": "Oasis au Stade de France",
+   "categorie": "Concert",
+   "sousGenre": "Rock",
+   "artistes": [
+    {
+     "nom": "Oasis",
+     "role": "interprète"
+    },
+    {
+     "nom": "Richard Ashcroft",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "stade-de-france",
+   "salle": "",
+   "debut": "2027-07-20",
+   "fin": "2027-07-23",
+   "note": 4,
+   "calcul": "C1 N3 H2 +Chef-d’œuvre",
+   "pronostic": true,
+   "pourquoi": "Seules dates françaises de la tournée mondiale 2027 d’Oasis, vente par tirage au sort, Richard Ashcroft en première partie.",
+   "lien": "https://parisjetaime.com/evenement/concert-oasis-paris-e2585",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "datesTexte": "20 et 23 juillet 2027 (dates déplacées par la préfecture)",
+   "relaches": [
+    "2027-07-21",
+    "2027-07-22"
+   ],
+   "source": "https://leclaireur.fnac.com/article/692470-oasis-a-paris-stade-de-france-pourquoi-le-concert-a-ete-decale/"
+  },
+  {
+   "id": "cezanne-et-nous",
+   "titre": "Cezanne et nous",
+   "categorie": "Exposition",
+   "sousGenre": "Peinture",
+   "artistes": [
+    {
+     "nom": "Paul Cezanne",
+     "role": "artiste"
+    }
+   ],
+   "lieuId": "grand-palais",
+   "salle": "",
+   "debut": "2026-09-23",
+   "fin": "2027-01-17",
+   "note": 4,
+   "calcul": "C1 N3 H2 +Chef-d’œuvre",
+   "pronostic": true,
+   "pourquoi": "Quelque 180 œuvres, dont 70 de Cezanne, face à Picasso, Matisse, Mondrian ou Joan Mitchell, avec le Centre Pompidou et le musée d’Orsay.",
+   "lien": "https://www.grandpalais.fr/fr/programme/cezanne-et-nous",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "expo": {
+    "type": "musee",
+    "tarif": "19 €",
+    "gratuit": false,
+    "source": "https://www.centrepompidou.fr/en/offer-to-professionals/press-area/cezanne-et-nous",
+    "ajouteLe": "2026-11-17"
+   }
+  },
+  {
+   "id": "zurbaran-louvre",
+   "titre": "Zurbarán",
+   "categorie": "Exposition",
+   "sousGenre": "Peinture",
+   "artistes": [
+    {
+     "nom": "Francisco de Zurbarán",
+     "role": "artiste"
+    },
+    {
+     "nom": "Charlotte Chastel-Rousseau",
+     "role": "commissaire"
+    }
+   ],
+   "lieuId": "louvre",
+   "salle": "Hall Napoléon",
+   "debut": "2026-10-07",
+   "fin": "2027-01-25",
+   "note": 3,
+   "calcul": "C1 N3 H1 +Chef-d’œuvre",
+   "pronostic": true,
+   "pourquoi": "Première grande rétrospective du peintre espagnol au Louvre, 65 œuvres, avec la National Gallery et l’Art Institute of Chicago.",
+   "lien": "https://www.louvre.fr/expositions-et-evenements/expositions/zurbaran",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "expo": {
+    "type": "musee",
+    "gratuit": false,
+    "source": "https://www.louvre.fr/expositions-et-evenements/expositions/zurbaran",
+    "ajouteLe": "2026-11-17"
+   },
+   "relaches": [
+    "mar"
+   ]
+  },
+  {
+   "id": "andy-warhol-la-ligne-et-l-image",
+   "titre": "Andy Warhol. La ligne et l’image",
+   "categorie": "Exposition",
+   "sousGenre": "Dessin",
+   "artistes": [
+    {
+     "nom": "Andy Warhol",
+     "role": "artiste"
+    }
+   ],
+   "lieuId": "musee-luxembourg",
+   "salle": "",
+   "debut": "2026-09-16",
+   "fin": "2027-01-10",
+   "note": 3,
+   "calcul": "C1 N3 H1",
+   "pronostic": true,
+   "pourquoi": "Warhol dessinateur : environ 150 dessins, peintures, sérigraphies et archives en cinq sections.",
+   "lien": "https://museeduluxembourg.fr/en/actualite/tickets-now-sale-exhibition-andy-warhol-la-ligne-et-limage",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "expo": {
+    "type": "musee",
+    "nocturnes": [
+     "lun"
+    ],
+    "tarif": "14 €",
+    "gratuit": false,
+    "source": "https://www.arte.it/calendario-arte/parigi/mostra-andy-warhol-la-ligne-et-l-image-103418",
+    "ajouteLe": "2026-11-17"
+   },
+   "horaires": "10h30–19h, lundi jusqu’à 22h"
+  },
+  {
+   "id": "eva-gonzales-petit-palais",
+   "titre": "Eva Gonzalès (1847-1883), parcours d’une artiste libre",
+   "categorie": "Exposition",
+   "sousGenre": "Peinture",
+   "artistes": [
+    {
+     "nom": "Eva Gonzalès",
+     "role": "artiste"
+    }
+   ],
+   "lieuId": "petit-palais",
+   "salle": "",
+   "debut": "2026-09-15",
+   "fin": "2027-01-24",
+   "note": 2,
+   "calcul": "C1 N1 H1",
+   "pronostic": true,
+   "pourquoi": "Première grande rétrospective de l’unique élève de Manet, avec le Van Gogh Museum.",
+   "lien": "https://www.petitpalais.paris.fr/en/node/3992",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "expo": {
+    "type": "musee",
+    "source": "https://www.petitpalais.paris.fr/en/node/3992",
+    "ajouteLe": "2026-11-17"
+   },
+   "relaches": [
+    "lun"
+   ]
+  },
+  {
+   "id": "remember-me-bourse-de-commerce",
+   "titre": "Remember Me",
+   "categorie": "Exposition",
+   "sousGenre": "Photographie",
+   "artistes": [
+    {
+     "nom": "Gustave Le Gray",
+     "role": "artiste"
+    },
+    {
+     "nom": "Irving Penn",
+     "role": "artiste"
+    },
+    {
+     "nom": "Cindy Sherman",
+     "role": "artiste"
+    },
+    {
+     "nom": "Raymond Depardon",
+     "role": "artiste"
+    },
+    {
+     "nom": "Matthieu Humery",
+     "role": "commissaire"
+    }
+   ],
+   "lieuId": "bourse-de-commerce",
+   "salle": "",
+   "debut": "2026-10-07",
+   "fin": "2027-01-18",
+   "note": 3,
+   "calcul": "C1 N3 H1",
+   "pronostic": true,
+   "pourquoi": "Deux siècles de photographie dans la collection Pinault : environ 700 œuvres de plus de 70 artistes.",
+   "lien": "https://www.pinaultcollection.com/en/node/2174",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "expo": {
+    "type": "fondation",
+    "gratuit": false,
+    "source": "https://www.pinaultcollection.com/en/node/2174",
+    "ajouteLe": "2026-11-17"
+   },
+   "relaches": [
+    "mar"
+   ]
   }
  ]
 }

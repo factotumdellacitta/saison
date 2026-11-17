@@ -1,4 +1,75 @@
 {
- "maj": "2026-11-16",
- "sorties": []
+ "maj": "2026-11-17",
+ "sorties": [
+  {
+   "id": "la-jalousie",
+   "titre": "La Jalousie",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Sacha Guitry",
+     "role": "auteur"
+    },
+    {
+     "nom": "Michel Fau",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Michel Fau",
+     "role": "interprète"
+    },
+    {
+     "nom": "Gwendoline Hamon",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "theatre-de-la-michodiere",
+   "salle": "",
+   "debut": "2026-11-05",
+   "fin": null,
+   "datesTexte": "à partir du 5 nov. 2026",
+   "horaires": "1h45",
+   "note": 2,
+   "calcul": "C1 N2 H0",
+   "pronostic": false,
+   "pourquoi": "Reprise, Guitry par Fau.",
+   "lien": "https://www.michodiere.com/evenement/la-jalousie-1/",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "passe",
+   "offres": []
+  },
+  {
+   "id": "suzanne",
+   "titre": "Suzanne",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Catherine Hiegel",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "theatre-montparnasse",
+   "salle": "",
+   "debut": "2026-09-25",
+   "fin": null,
+   "datesTexte": "depuis le 25 sept. 2026",
+   "horaires": "mer. et jeu. 21h, ven. et sam. 19h, dim. 17h ; 10 € pour les moins de 26 ans",
+   "note": 2,
+   "calcul": "C1 N1 H0",
+   "pronostic": false,
+   "pourquoi": "Ancienne sociétaire de la CF.",
+   "lien": "https://www.theatremontparnasse.com/spectacle/suzanne/",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "passe",
+   "offres": [],
+   "relaches": [
+    "lun",
+    "mar"
+   ]
+  }
+ ]
 }

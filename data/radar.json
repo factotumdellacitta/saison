@@ -1,4 +1,235 @@
 {
- "maj": "2026-11-16",
- "rapports": []
+ "maj": "2026-11-17",
+ "rapports": [
+  {
+   "id": "2026-11-17",
+   "date": "2026-11-17",
+   "domaine": "complete",
+   "titre": "Première veille : les stades de 2027 et cinq expositions",
+   "chapo": "Première veille complète de Factotum. Sept concerts et cinq expositions entrent à l’affiche, la distribution de 88 spectacles est complétée et deux fiches passées rejoignent l’archive. Les grandes dates de 2027 sont déjà en vente : U2, Oasis, SCH et Sofiane Pamart au Stade de France, Angèle à l’Accor Arena.",
+   "sections": [
+    {
+     "titre": "À retenir",
+     "texte": [
+      "Le printemps 2027 se joue au Stade de France : SCH les 23 et 24 avril, U2 les 5, 8 et 9 mai, Oasis les 20 et 23 juillet, et Sofiane Pamart le 17 avril, premier pianiste à s’y produire seul. Pour toutes ces dates, la vente générale est déjà passée.",
+      "Côté scène, la semaine est celle des dernières : La Walkyrie s’achève ce soir à Bastille, Ganesh versus the Third Reich se joue jusqu’au 21 novembre à la Cité internationale et Ici sont les dragons jusqu’au 29 au Théâtre du Soleil."
+     ]
+    },
+    {
+     "titre": "Spectacles",
+     "texte": [
+      "Les fiches à venir portent désormais l’équipe artistique et les têtes de distribution relevées sur les pages officielles des théâtres : 88 spectacles complétés, dont La Mort du môme à La Colline (Reda Kateb, Élodie Bouchez, Oulaya Amamra), Le Mariage de Figaro à la Porte Saint-Martin (Vincent Dedienne, Micha Lescot, Noémie Lvovsky), Seppuku d’Angélica Liddell et Rituels au Ballet de l’Opéra. Pour les troupes nombreuses sans rôle-titre annoncé, seules la compagnie et l’équipe figurent.",
+      "Delay the Sadness de Sharon Eyal au Rond-Point est complet ; Deux trois choses qu’elle nous dit d’elle au Théâtre de la Ville et la performance de Steven Cohen à la MC93 n’ont plus que de rares places."
+     ],
+     "lignes": [
+      {
+       "id": "la-mort-du-mome",
+       "titre": "La Mort du môme",
+       "texte": "La Colline, jusqu’au 12 déc."
+      },
+      {
+       "id": "le-mariage-de-figaro",
+       "titre": "Le Mariage de Figaro",
+       "texte": "Porte Saint-Martin, jusqu’au 31 déc."
+      },
+      {
+       "id": "delay-the-sadness",
+       "titre": "Delay the Sadness",
+       "texte": "Rond-Point, 16–19 déc., complet"
+      }
+     ]
+    },
+    {
+     "titre": "Concerts et showcases",
+     "lignes": [
+      {
+       "id": "miki-zenith-2026",
+       "titre": "Miki",
+       "texte": "Zénith, 18 nov."
+      },
+      {
+       "id": "pomme-olympia-2027",
+       "titre": "Pomme",
+       "texte": "Olympia, 4 et 5 mars 2027"
+      },
+      {
+       "id": "angele-instinct-tour-2027",
+       "titre": "Angèle – Instinct Tour",
+       "texte": "Accor Arena, 8 au 13 mars 2027, premières dates complètes"
+      },
+      {
+       "id": "sofiane-pamart-stade-de-france",
+       "titre": "Sofiane Pamart",
+       "texte": "Stade de France, 17 avril 2027"
+      },
+      {
+       "id": "sch-stade-de-france-2027",
+       "titre": "SCH",
+       "texte": "Stade de France, 23 et 24 avril 2027"
+      },
+      {
+       "id": "u2-stade-de-france-2027",
+       "titre": "U2",
+       "texte": "Stade de France, 5, 8 et 9 mai 2027"
+      },
+      {
+       "id": "oasis-stade-de-france-2027",
+       "titre": "Oasis",
+       "texte": "Stade de France, 20 et 23 juillet 2027"
+      }
+     ]
+    },
+    {
+     "titre": "Expositions",
+     "texte": [
+      "Factotum Expo s’étoffe de cinq expositions en cours, à voir avant la fin janvier."
+     ],
+     "lignes": [
+      {
+       "id": "cezanne-et-nous",
+       "titre": "Cezanne et nous",
+       "texte": "Grand Palais, jusqu’au 17 janv."
+      },
+      {
+       "id": "zurbaran-louvre",
+       "titre": "Zurbarán",
+       "texte": "Louvre, jusqu’au 25 janv."
+      },
+      {
+       "id": "andy-warhol-la-ligne-et-l-image",
+       "titre": "Andy Warhol. La ligne et l’image",
+       "texte": "Musée du Luxembourg, jusqu’au 10 janv."
+      },
+      {
+       "id": "eva-gonzales-petit-palais",
+       "titre": "Eva Gonzalès",
+       "texte": "Petit Palais, jusqu’au 24 janv."
+      },
+      {
+       "id": "remember-me-bourse-de-commerce",
+       "titre": "Remember Me",
+       "texte": "Bourse de Commerce, jusqu’au 18 janv."
+      }
+     ]
+    },
+    {
+     "titre": "Annonces à suivre",
+     "lignes": [
+      {
+       "titre": "Pomme à l’Accor Arena",
+       "texte": "8 décembre 2027, pour l’album « la forteresse » ; vente non datée (Sortir à Paris)"
+      },
+      {
+       "titre": "We Love Green 2027",
+       "texte": "Bois de Vincennes, début juin 2027, dates et programmation à confirmer (Time Out)"
+      },
+      {
+       "titre": "Rock en Seine 2027",
+       "texte": "édition annulée pour travaux, retour annoncé du 23 au 27 août 2028 (organisateurs)"
+      },
+      {
+       "titre": "Zaho de Sagazan",
+       "texte": "tournée des Zéniths et Arenas de mai à novembre 2027, date parisienne à confirmer (Infoconcert)"
+      }
+     ]
+    },
+    {
+     "titre": "Mises en vente à venir",
+     "lignes": [
+      {
+       "id": "vampire-s-mountain",
+       "titre": "Vampire’s Mountain",
+       "texte": "Odéon, ouverture hors abonnement le 24 nov."
+      },
+      {
+       "id": "la-nuee",
+       "titre": "La Nuée",
+       "texte": "Odéon, ouverture hors abonnement le 24 nov."
+      },
+      {
+       "id": "don-giovanni",
+       "titre": "Don Giovanni",
+       "texte": "avant-première jeunes, vente le 7 janv. à 12 h"
+      },
+      {
+       "id": "werther",
+       "titre": "Werther",
+       "texte": "avant-première jeunes, vente le 14 janv. à 12 h"
+      },
+      {
+       "id": "le-cid",
+       "titre": "Comédie-Française",
+       "texte": "dates de mars à juillet, ouverture estimée vers le 27 janv."
+      },
+      {
+       "id": "joyaux",
+       "titre": "Joyaux",
+       "texte": "avant-première jeunes, vente le 18 mars à 12 h"
+      }
+     ]
+    },
+    {
+     "titre": "Derniers jours",
+     "lignes": [
+      {
+       "id": "la-walkyrie",
+       "titre": "La Walkyrie",
+       "texte": "Opéra Bastille, ce soir"
+      },
+      {
+       "id": "ganesh-versus-the-third-reich",
+       "titre": "Ganesh versus the Third Reich",
+       "texte": "Théâtre de la Cité internationale, jusqu’au 21 nov."
+      },
+      {
+       "id": "war-requiem-alsop",
+       "titre": "War Requiem",
+       "texte": "Philharmonie, 26 et 27 nov."
+      },
+      {
+       "id": "ici-sont-les-dragons",
+       "titre": "Ici sont les dragons",
+       "texte": "Théâtre du Soleil, jusqu’au 29 nov."
+      }
+     ]
+    },
+    {
+     "titre": "Incontournables",
+     "lignes": [
+      {
+       "id": "cezanne-et-nous",
+       "titre": "Cezanne et nous",
+       "texte": "Grand Palais, jusqu’au 17 janv."
+      },
+      {
+       "id": "le-canard-sauvage",
+       "titre": "Le Canard sauvage",
+       "texte": "Les Gémeaux, 21–31 janv."
+      },
+      {
+       "id": "la-cerisaie",
+       "titre": "La Cerisaie",
+       "texte": "Théâtre Antoine, 29 janv.–28 févr."
+      },
+      {
+       "id": "capri",
+       "titre": "Capri – L’Île des fugitifs",
+       "texte": "Odéon, 24 févr.–7 mars"
+      },
+      {
+       "id": "oasis-stade-de-france-2027",
+       "titre": "Oasis",
+       "texte": "Stade de France, 20 et 23 juillet 2027"
+      }
+     ]
+    }
+   ],
+   "bilan": {
+    "ajoutees": 12,
+    "archivees": 2,
+    "revisees": 0,
+    "ventes": 27
+   }
+  }
+ ]
 }

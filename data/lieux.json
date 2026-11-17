@@ -838,5 +838,55 @@
   "site": "https://www.zenith-paris.com",
   "billetterie": null,
   "tarifJeune": ""
+ },
+ "louvre": {
+  "nom": "Musée du Louvre",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://www.louvre.fr",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "Rue de Rivoli, 75001 Paris"
+ },
+ "grand-palais": {
+  "nom": "Grand Palais",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://www.grandpalais.fr",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "Avenue Winston-Churchill, 75008 Paris"
+ },
+ "petit-palais": {
+  "nom": "Petit Palais",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://www.petitpalais.paris.fr",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "Avenue Winston-Churchill, 75008 Paris"
+ },
+ "musee-luxembourg": {
+  "nom": "Musée du Luxembourg",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://museeduluxembourg.fr",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "19 rue de Vaugirard, 75006 Paris"
+ },
+ "bourse-de-commerce": {
+  "nom": "Bourse de Commerce – Pinault Collection",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.pinaultcollection.com",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "2 rue de Viarmes, 75001 Paris"
  }
 }
