@@ -329,7 +329,8 @@ const coeurPub = (e) => (!(PRIVE && ADMIN) && enviesIds().has(e.id) ? `<span cla
 const gb = (e) => `<span class="gb" aria-hidden="true"></span>`; // bande pleine de la couleur du genre, sans contenu
 // Première ligne : titre à gauche, note puis cœur à droite.
 // Première ligne : picto du genre (de sa couleur) et titre à gauche, note puis cœur à droite.
-const l1 = (e, note) => `<span class="l1"><span class="tt nom">${genreIco(e, "gt")}<span class="vh">${esc(genre(e))} : </span>${esc(e.titre)}</span>${note}${coeurPub(e)}</span>`;
+const tagX = (e) => (!EXPO && estExpo(e) ? `<span class="tag-x" data-site="expo">Expo</span>` : ""); // repère vert d’une expo reprise sur Factotum
+const l1 = (e, note) => `<span class="l1"><span class="tt nom">${tagX(e)}${genreIco(e, "gt")}<span class="vh">${esc(genre(e))} : </span>${esc(e.titre)}</span>${note}${coeurPub(e)}</span>`;
 // Libellés courts des puces de genre (pour tenir sur une ligne) ; le nom complet reste en aria-label.
 const GENRE_PUCE = { "Comédie musicale": "Musical" };
 const sousG = (e) => (e.sousGenre ? cap(e.sousGenre.toLowerCase()) : "");
@@ -400,8 +401,14 @@ function ficheCorps(e, tete = "") {
 // En-tête de couleur : dates, picto et titre, note et badges, prochain soir libre et vente proche, boutons.
 function enteteFiche(e) {
   const vu = e.statut === "vu";
-  return `<div class="shh"><span class="meta">${esc(vu ? "Vu le " + (e.vuLe || []).map((d) => fmtY(D(d), true)).join(", ") : range(e))}</span><div class="tit">${genreIco(e, "g")}<h2 id="sheetT" class="nom">${esc(e.titre)}</h2></div>
+  return `<div class="shh"><span class="meta">${esc(vu ? "Vu le " + (e.vuLe || []).map((d) => fmtY(D(d), true)).join(", ") : range(e))}</span><div class="tit">${genreIco(e, "g")}<h2 id="sheetT" class="nom">${esc(e.titre)}</h2>${coeurFiche(e)}</div>
     <div class="ligne">${!vu && e.note ? stars(e.note, e.pronostic) : ""}${vu && e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : ""}${badges(e)}</div>${vu ? "" : enteteInfos(e)}${actsHTML(e, false, PRIVE && ADMIN ? ADMIN.ficheActs(e) : "").replace('class="acts"', 'class="acts sh-acts"')}</div>`;
+}
+// Cœur de la fiche : bouton en mode admin, cœur plein (non modifiable) pour le public si c’est un coup de cœur.
+function coeurFiche(e) {
+  if (e.statut === "vu") return "";
+  if (PRIVE && ADMIN) return ADMIN.heart(e.id).replace('class="envie"', 'class="envie coeur-f"');
+  return enviesIds().has(e.id) ? `<span class="coeur-f" role="img" aria-label="Coup de cœur de ${OWNER}">${COEUR}</span>` : "";
 }
 // Prochain soir libre (spectacles) et nombre de soirs libres jusqu’à la fin.
 function prochainLibre(e) {
@@ -907,7 +914,7 @@ function radarLigne(r) {
 const partagerBtn = () => `<button class="btn ico ph-share" type="button" data-partage aria-label="Partager cette page" title="Partager cette page">${ico("partager")}</button>`;
 // Aperçu court d’une sortie (colonnes latérales, Plus tard, rapports) : trait de la couleur du genre, date, titre, précision, note.
 function apercu(e, date, sub, titre) {
-  const t = titre || (e ? e.titre : ""), c = `<span class="vd">${esc(date || "")}</span><span class="vt"><b>${esc(t)}</b>${sub ? ` <span>· ${sub}</span>` : ""}</span>${e && e.note ? stars(e.note, e.pronostic) : ""}`;
+  const t = titre || (e ? e.titre : ""), c = `<span class="vd">${esc(date || "")}</span><span class="vt">${e ? tagX(e) : ""}<b>${esc(t)}</b>${sub ? ` <span>· ${sub}</span>` : ""}</span>${e && e.note ? stars(e.note, e.pronostic) : ""}`;
   return `<li class="ap${e ? " g-" + famE(e) : ""}">${e && BYID.has(e.id) ? `<a href="#sortie-${esc(e.id)}">${c}</a>` : `<div class="ap-s">${c}</div>`}</li>`;
 }
 const dateAp = (e) => { const p = span(e); return !p ? "à venir" : running(e) ? "fin " + fmt(p[1]) : fmt(p[0]); };
@@ -1253,7 +1260,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.58"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.59"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1264,7 +1271,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.58"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.59"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1282,7 +1289,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.58"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.59"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }

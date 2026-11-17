@@ -31,6 +31,15 @@ export const PAIRES = [
   ["g-concert", "surface", 4.5, "surtitre de genre sur surface (concert)"],
   ["sur-accent", "a-concert", 4.5, "texte blanc sur aplat de genre (concert)"],
   ["sur-accent", "a-neutre", 4.5, "texte blanc sur aplat neutre (domaine Arts et civilisations de Factotum Expo)"],
+  ["g-xbeaux", "fond", 4.5, "domaine Peinture et dessin (Expo)"],
+  ["g-xbeaux", "surface", 4.5, "domaine Peinture et dessin sur surface (Expo)"],
+  ["sur-accent", "a-xbeaux", 4.5, "texte blanc sur aplat Peinture et dessin (Expo)"],
+  ["g-xphoto", "fond", 4.5, "domaine Photographie (Expo)"],
+  ["g-xphoto", "surface", 4.5, "domaine Photographie sur surface (Expo)"],
+  ["sur-accent", "a-xphoto", 4.5, "texte blanc sur aplat Photographie (Expo)"],
+  ["g-xcontemporain", "fond", 4.5, "domaine Art contemporain (Expo)"],
+  ["g-xcontemporain", "surface", 4.5, "domaine Art contemporain sur surface (Expo)"],
+  ["sur-accent", "a-xcontemporain", 4.5, "texte blanc sur aplat Art contemporain (Expo)"],
 ];
 
 const hex = (h) => { const m = /^#([0-9a-f]{6})$/i.exec(h.trim()); if (!m) throw new Error(`couleur illisible : ${h}`); return [0, 2, 4].map((i) => parseInt(m[1].slice(i, i + 2), 16) / 255); };
