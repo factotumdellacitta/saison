@@ -172,10 +172,21 @@ function court(id) {
   if (COURT[id]) return COURT[id];
   return LIEUX[id].nom.replace(/^Théâtre (du |de la |de l’|des |de )/, "").replace(/^Théâtre /, "Th. ").replace(/ – .*/, "").replace(/ \(.*\)/, "");
 }
-const ended = (e) => { const b = D(e.fin) || D(e.debut); return b && b < TODAY; };
-const span = (e) => { const a = D(e.debut); return a ? [a, D(e.fin) || a] : null; };
+const ended = (e) => { const p = span(e); return p && p[1] < TODAY; };
+// Les offres datées (avant-premières jeunes…) sont des dates à part entière : elles étendent la période et se jouent toujours.
+const datesOffres = (e) => (e.offres || []).map((o) => o.date).filter(Boolean);
+const span = (e) => {
+  const a = D(e.debut); if (!a) return null;
+  let p0 = a, p1 = D(e.fin) || a;
+  for (const k of datesOffres(e)) { const d = D(k); if (d < p0) p0 = d; if (d > p1) p1 = d; }
+  return [p0, p1];
+};
 const RELJ = ["dim", "lun", "mar", "mer", "jeu", "ven", "sam"];
-const playsOn = (e, d) => { const s = span(e); if (!s || d < s[0] || d > s[1]) return false; const r = e.relaches; return !r || (!r.includes(RELJ[d.getDay()]) && !r.includes(iso(d))); };
+const playsOn = (e, d) => {
+  if (datesOffres(e).includes(iso(d))) return true;
+  const a = D(e.debut); if (!a || d < a || d > (D(e.fin) || a)) return false; // entre deux : seulement la période annoncée
+  const r = e.relaches; return !r || (!r.includes(RELJ[d.getDay()]) && !r.includes(iso(d)));
+};
 const overlaps = (e, s, t) => { const p = span(e); return p && p[0] <= t && p[1] >= s; };
 function freeIn(e, s, t) {
   const p = span(e); if (!p) return false;
@@ -1260,7 +1271,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.60"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.61"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1271,7 +1282,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.60"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.61"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1289,7 +1300,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.60"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.61"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
