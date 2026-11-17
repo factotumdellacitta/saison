@@ -1039,9 +1039,9 @@
    ],
    "lieuId": "palais-garnier",
    "salle": "",
-   "debut": "2027-02-12",
+   "debut": "2027-02-11",
    "fin": "2027-03-08",
-   "datesTexte": "12 févr. – 8 mars 2027",
+   "datesTexte": "Avant-première jeunes le 11 févr. ; 12 févr. – 8 mars 2027",
    "horaires": "1h55 avec entracte",
    "note": 2,
    "calcul": "C1 N2 H1",
@@ -1455,9 +1455,9 @@
    ],
    "lieuId": "opera-bastille",
    "salle": "",
-   "debut": "2027-01-28",
+   "debut": "2027-01-25",
    "fin": "2027-06-24",
-   "datesTexte": "28 janv. – 24 juin 2027, en deux séries (janv.-févr., puis mai-juin)",
+   "datesTexte": "Avant-première jeunes le 25 janv. ; 28 janv. – 24 juin 2027, en deux séries (janv.-févr., puis mai-juin)",
    "horaires": "3h20 avec entracte ; Peter Mattei en janv.-févr., Davide Luciano en mai-juin",
    "note": 3,
    "calcul": "C1 N2 H1 +Chef-d’œuvre",
@@ -1477,6 +1477,10 @@
      "venteApprox": false,
      "condition": "Nés après le 1er janvier 1998, 2 places max."
     }
+   ],
+   "relaches": [
+    "2027-01-26",
+    "2027-01-27"
    ]
   },
   {
@@ -1899,9 +1903,9 @@
    ],
    "lieuId": "palais-garnier",
    "salle": "",
-   "debut": "2027-06-25",
+   "debut": "2027-06-24",
    "fin": "2027-07-14",
-   "datesTexte": "25 juin – 14 juill. 2027",
+   "datesTexte": "Avant-première jeunes le 24 juin ; 25 juin – 14 juill. 2027",
    "horaires": "1h50 avec entracte",
    "note": 3,
    "calcul": "C1 N2 H1 +Chef-d’œuvre",
@@ -2249,7 +2253,7 @@
    ],
    "lieuId": "opera-bastille",
    "salle": "",
-   "debut": "2027-05-03",
+   "debut": "2027-04-30",
    "fin": "2027-05-25",
    "datesTexte": "3 – 25 mai 2027 (avant-première jeunes le 30 avril)",
    "horaires": "3h15 avec entracte",
@@ -2271,6 +2275,10 @@
      "venteApprox": false,
      "condition": "Nés après le 1er janvier 1998, 2 places max."
     }
+   ],
+   "relaches": [
+    "2027-05-01",
+    "2027-05-02"
    ]
   },
   {
@@ -2439,9 +2447,9 @@
    ],
    "lieuId": "opera-bastille",
    "salle": "",
-   "debut": "2027-04-05",
+   "debut": "2027-04-03",
    "fin": "2027-05-18",
-   "datesTexte": "5 avril – 18 mai 2027",
+   "datesTexte": "Avant-première jeunes le 3 avr. ; 5 avril – 18 mai 2027",
    "horaires": "1h50 avec entracte",
    "note": 4,
    "calcul": "C2 N3 H1 +Chef-d’œuvre",
@@ -2461,6 +2469,9 @@
      "venteApprox": false,
      "condition": "Nés après le 1er janvier 1998, 2 places max."
     }
+   ],
+   "relaches": [
+    "2027-04-04"
    ]
   },
   {
@@ -3089,9 +3100,9 @@
    ],
    "lieuId": "palais-garnier",
    "salle": "",
-   "debut": "2027-05-07",
+   "debut": "2027-05-05",
    "fin": "2027-05-22",
-   "datesTexte": "7 – 22 mai 2027",
+   "datesTexte": "Avant-première jeunes le 5 mai ; 7 – 22 mai 2027",
    "horaires": "2h05 avec entracte",
    "note": 3,
    "calcul": "C2 N2 H1 +Chef-d’œuvre",
@@ -3111,6 +3122,9 @@
      "venteApprox": false,
      "condition": "Nés après le 1er janvier 1998, 2 places max."
     }
+   ],
+   "relaches": [
+    "2027-05-06"
    ]
   },
   {
@@ -4780,9 +4794,9 @@
    ],
    "lieuId": "tce",
    "salle": "",
-   "debut": "2026-12-05",
+   "debut": "2026-12-03",
    "fin": "2026-12-14",
-   "datesTexte": "sam. 5, lun. 7, mer. 9, ven. 11 et lun. 14 déc. 2026",
+   "datesTexte": "Avant-première jeunes le 3 déc. ; sam. 5, lun. 7, mer. 9, ven. 11 et lun. 14 déc. 2026",
    "horaires": "19h30, sam. 5 à 18h ; 2h environ",
    "note": 3,
    "calcul": "C1 N3 H1",
@@ -4804,6 +4818,7 @@
     }
    ],
    "relaches": [
+    "2026-12-04",
     "2026-12-06",
     "2026-12-08",
     "2026-12-10",
@@ -5307,9 +5322,9 @@
    ],
    "lieuId": "palais-garnier",
    "salle": "",
-   "debut": "2027-04-24",
+   "debut": "2027-04-21",
    "fin": "2027-05-11",
-   "datesTexte": "24 avril – 11 mai 2027",
+   "datesTexte": "Avant-première jeunes le 21 avr. ; 24 avril – 11 mai 2027",
    "horaires": "3h avec entracte",
    "note": 2,
    "calcul": "C1 N2 H1",
@@ -5329,6 +5344,10 @@
      "venteApprox": false,
      "condition": "Nés après le 1er janvier 1998, 2 places max."
     }
+   ],
+   "relaches": [
+    "2027-04-22",
+    "2027-04-23"
    ]
   },
   {
@@ -5785,9 +5804,9 @@
    ],
    "lieuId": "tce",
    "salle": "",
-   "debut": "2027-04-20",
+   "debut": "2027-04-18",
    "fin": "2027-04-29",
-   "datesTexte": "mar. 20, ven. 23, dim. 25, mar. 27 et jeu. 29 avril 2027",
+   "datesTexte": "Avant-première jeunes le 18 avr. ; mar. 20, ven. 23, dim. 25, mar. 27 et jeu. 29 avril 2027",
    "horaires": "19h30, dim. 25 à 17h ; 1h40 environ",
    "note": 3,
    "calcul": "C1 N2 H1 +Chef-d’œuvre",
@@ -5807,6 +5826,7 @@
     }
    ],
    "relaches": [
+    "2027-04-19",
     "2027-04-21",
     "2027-04-22",
     "2027-04-24",
@@ -6170,9 +6190,9 @@
    ],
    "lieuId": "opera-bastille",
    "salle": "",
-   "debut": "2027-06-15",
+   "debut": "2027-06-14",
    "fin": "2027-07-14",
-   "datesTexte": "15 juin – 14 juill. 2027",
+   "datesTexte": "Avant-première jeunes le 14 juin ; 15 juin – 14 juill. 2027",
    "horaires": "3h05 avec 2 entractes",
    "note": 3,
    "calcul": "C2 N2 H1 +Chef-d’œuvre",
@@ -6401,9 +6421,9 @@
    ],
    "lieuId": "tce",
    "salle": "",
-   "debut": "2027-02-22",
+   "debut": "2027-02-20",
    "fin": "2027-02-28",
-   "datesTexte": "lun. 22, mer. 24, ven. 26 et dim. 28 févr. 2027",
+   "datesTexte": "Avant-première jeunes le 20 févr. ; lun. 22, mer. 24, ven. 26 et dim. 28 févr. 2027",
    "horaires": "19h30, dim. 28 à 17h ; 2h30 environ",
    "note": 3,
    "calcul": "C1 N3 H1",
@@ -6423,6 +6443,7 @@
     }
    ],
    "relaches": [
+    "2027-02-21",
     "2027-02-23",
     "2027-02-25",
     "2027-02-27"
@@ -7437,9 +7458,9 @@
    ],
    "lieuId": "opera-bastille",
    "salle": "",
-   "debut": "2027-02-11",
+   "debut": "2027-02-08",
    "fin": "2027-03-12",
-   "datesTexte": "11 févr. – 12 mars 2027",
+   "datesTexte": "Avant-première jeunes le 8 févr. ; 11 févr. – 12 mars 2027",
    "horaires": "2h50 avec entracte ; Benjamin Bernheim du 11 au 20 févr., puis Léo Vermot-Desroches",
    "note": 4,
    "calcul": "C2 N3 H2 +Chef-d’œuvre",
@@ -7459,6 +7480,10 @@
      "venteApprox": false,
      "condition": "Nés après le 1er janvier 1998, 2 places max."
     }
+   ],
+   "relaches": [
+    "2027-02-09",
+    "2027-02-10"
    ]
   },
   {
