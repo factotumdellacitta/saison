@@ -1135,3 +1135,14 @@ button.cell.cal-res{cursor:pointer;font:inherit;font-weight:800}
 .sites a.vers-expo,.sites a.vers-spectacles{border-bottom-color:transparent}
 .chip.filtres{justify-content:center}
 .chip.filtres .nf:empty{display:none}
+/* ---------- Fiche (v4.68) : auteur sous le titre ; avis d’une sortie vue à droite ---------- */
+.sh-aut{margin:var(--e1) 0 0;font-size:var(--t-fiche);font-weight:500;line-height:1.25}
+.fi-avis .sec{display:flex;align-items:center;justify-content:space-between}
+.fi-avis .sec .btn.ai{min-height:32px;min-width:32px;margin:-6px 0}
+.fi-avis blockquote{margin:var(--e2) 0 0;font-size:var(--t-corps)}
+@media (min-width:960px){
+  .fi-g.fi-vu>.fi-p{grid-column:1/span 8}
+  .fi-g.fi-vu>.fi-p>.shh{margin-right:0}
+  .fi-g.fi-vu>.fi-p>:not(.shh){max-width:none}
+  .fi-g.fi-vu>.fi-avis{grid-column:9/span 4;grid-row:1/span 2}
+}

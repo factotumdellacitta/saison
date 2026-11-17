@@ -1,6 +1,16 @@
 {
  "versions": [
   {
+   "version": "4.68",
+   "date": "2026-11-17",
+   "titre": "Fiches : auteur sous le titre ; avis à droite au Journal",
+   "points": [
+    "Sous le titre, l’auteur de l’œuvre (Victor Hugo, Giacomo Puccini…), les crédits complets dessous",
+    "Fiche d’une sortie vue : « Mon avis » à droite (dessous sur mobile), modifiable seul en mode admin",
+    "Fiche d’une sortie vue : « Autour de cette sortie » avec les sorties à l’affiche"
+   ]
+  },
+  {
    "version": "4.67",
    "date": "2026-11-17",
    "titre": "Fiche d’une sortie vue : infos privées sans doublon",

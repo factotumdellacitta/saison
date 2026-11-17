@@ -419,8 +419,23 @@ function ficheCorps(e, tete = "") {
 // En-tête de couleur : dates, picto et titre, note et badges, prochain soir libre et vente proche, boutons.
 function enteteFiche(e) {
   const vu = e.statut === "vu";
-  return `<div class="shh"><span class="meta">${esc(vu ? "Vu le " + (e.vuLe || []).map((d) => fmtY(D(d), true)).join(", ") : range(e))}</span><div class="tit">${genreIco(e, "g")}<h2 id="sheetT" class="nom">${esc(e.titre)}</h2>${coeurFiche(e)}</div>
+  return `<div class="shh"><span class="meta">${esc(vu ? "Vu le " + (e.vuLe || []).map((d) => fmtY(D(d), true)).join(", ") : range(e))}</span><div class="tit">${genreIco(e, "g")}<h2 id="sheetT" class="nom">${esc(e.titre)}</h2>${coeurFiche(e)}</div>${auteurHTML(e)}
     <div class="ligne">${!vu && e.note ? stars(e.note, e.pronostic) : ""}${vu && e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : ""}${badges(e)}</div>${vu ? "" : enteteInfos(e)}${actsHTML(e, false, PRIVE && ADMIN ? ADMIN.ficheActs(e) : "").replace('class="acts"', 'class="acts sh-acts"')}</div>`;
+}
+// Sous le titre : l’auteur de l’œuvre (auteur ou compositeur ; à défaut chorégraphe ; artiste exposé pour une expo), sans « de »,
+// et seulement s’il n’est pas déjà dans le titre. Les crédits complets restent dessous.
+function auteurHTML(e) {
+  const A = e.artistes || [], par = (r) => A.filter((a) => a.role === r).map((a) => a.nom);
+  let n = estExpo(e) ? par("artiste") : [...par("auteur"), ...par("compositeur")];
+  if (!n.length && !estExpo(e)) n = par("chorégraphie");
+  const t = norm(e.titre); n = [...new Set(n)].filter((x) => !t.includes(norm(x))).slice(0, 2);
+  return n.length ? `<p class="sh-aut">${esc(n.join(", "))}</p>` : "";
+}
+// Avis de Léonard sur une sortie vue : colonne de droite sur bureau, sous les infos sur mobile ; en admin, bouton pour le modifier seul.
+function avisHTML(e) {
+  const adm = PRIVE && ADMIN, b = adm ? `<button class="btn ai" type="button" data-adm="avis" data-id="${esc(e.id)}" aria-label="${e.avis ? "Modifier mon avis" : "Écrire mon avis"}" title="${e.avis ? "Modifier mon avis" : "Écrire mon avis"}">${ico(e.avis ? "modifier" : "ajouter")}</button>` : "";
+  if (!e.avis && !adm) return "";
+  return `<section class="fi-d fi-avis" aria-labelledby="fiAv"><h3 class="sec" id="fiAv">Mon avis${b}</h3>${e.avis ? `<blockquote>${esc(e.avis)}</blockquote>` : '<p class="aide">Pas encore d’avis.</p>'}</section>`;
 }
 // Cœur de la fiche : bouton en mode admin, cœur plein (non modifiable) pour le public si c’est un coup de cœur.
 function coeurFiche(e) {
@@ -727,7 +742,7 @@ async function openSheet(id) {
   } else {
     const vu = e.statut === "vu", L = lieu(e), c = creditsHTML(e), tete = enteteFiche(e);
     box.innerHTML = `${marqueFiche()}<div class="shtop"><button class="btn ico" type="button" data-close aria-label="Fermer">${ico("fermer")}</button><span class="k">${esc([e.categorie, e.sousGenre].filter(Boolean).join(" · "))}${L.nom ? " · " + esc(court(e.lieuId)) : ""}</span>${nav}<button class="btn ico" type="button" data-share="${esc(e.id)}" aria-label="Partager">${ico("partager")}</button></div>
-    ${vu ? `<div class="fi-g fi-vu"><div class="fi-p">${tete}${PRIVE && ADMIN ? ADMIN.ficheHTML(e) : ""}${e.avis ? `<blockquote>${esc(e.avis)}</blockquote>` : ""}${c ? `<p class="cr">${c}</p>` : ""}<dl class="dl"><dt>${ico("lieu")}<span class="vh">Lieu</span></dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}</dd></dl>${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${e.note ? `<p class="calc">Note de la grille ${stars(e.note, false, "Note de la grille")}</p>` : ""}</div></div>` : ficheCorps(e, tete)}`;
+    ${vu ? `<div class="fi-g fi-vu"><div class="fi-p">${tete}${PRIVE && ADMIN ? ADMIN.ficheHTML(e) : ""}${c ? `<p class="cr">${c}</p>` : ""}<dl class="dl"><dt>${ico("lieu")}<span class="vh">Lieu</span></dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}</dd></dl>${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${e.note ? `<p class="calc">Note de la grille ${stars(e.note, false, "Note de la grille")}</p>` : ""}</div>${avisHTML(e)}${autourHTML(e)}</div>` : ficheCorps(e, tete)}`;
   }
   clearTimeout(SHEET_T); s.classList.remove("sort"); box.style.transform = "";
   if (s.hidden) { SHEET_FROM = document.activeElement; s.hidden = false; document.documentElement.style.overflow = "hidden"; }
@@ -1286,7 +1301,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.67"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.68"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1297,7 +1312,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.67"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.68"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1315,7 +1330,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.67"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.68"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }

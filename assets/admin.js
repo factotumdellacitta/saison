@@ -577,6 +577,15 @@
     const del = form.querySelector("[data-envdel]"); if (del) del.onclick = () => { fermerDlg(); act(() => basculerEnvie(id)); };
   }
 
+  // Avis public d’une sortie vue, seul (bouton « Mon avis » de la fiche).
+  function formAvis(id) {
+    const e = BYID.get(id); if (!e) return;
+    dlg(`Mon avis : ${e.titre}`, champ("Mon avis (public)", `<textarea name="avis" rows="5">${esc(e.avis || "")}</textarea>`), async (f) => {
+      const avis = val(f, "avis");
+      return ecrire("Admin : avis mis à jour", (d) => { const s = d.journal.sorties.find((x) => x.id === id); if (!s) throw new Error("Cette sortie n’est plus au journal."); s.avis = avis; });
+    });
+  }
+
   /* ---------- Fiche : bloc admin ---------- */
   function ficheHTML(e) {
     if (!PRIVE) return "";
@@ -1590,6 +1599,7 @@
     else if (a === "vu" || a === "revu" || a === "notes") formVu(id, a);
     else if (a === "editer") formSortie(id);
     else if (a === "jmodif") ouvrirJournal(id);
+    else if (a === "avis") formAvis(id);
     else if (a === "ajouter") formSortie(null);
     else if (a === "ecarter") act(() => ecarter(id, "ecarte"));
     else if (a === "remettre") act(() => ecarter(id, "a-voir"));
