@@ -888,5 +888,114 @@
   "billetterie": null,
   "tarifJeune": "",
   "adresse": "2 rue de Viarmes, 75001 Paris"
+ },
+ "grand-rex": {
+  "nom": "Grand Rex",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.legrandrex.com",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "1 boulevard Poissonnière, 75002 Paris"
+ },
+ "hippodrome-longchamp": {
+  "nom": "Hippodrome ParisLongchamp",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.parislongchamp.com",
+  "billetterie": null,
+  "tarifJeune": ""
+ },
+ "musee-orangerie": {
+  "nom": "Musée de l’Orangerie",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://www.musee-orangerie.fr",
+  "billetterie": null,
+  "tarifJeune": "Gratuit pour les moins de 26 ans résidents de l’Espace économique européen",
+  "adresse": "Jardin des Tuileries, 75001 Paris"
+ },
+ "mam-paris": {
+  "nom": "Musée d’Art moderne de Paris",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://www.mam.paris.fr",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "11 avenue du Président-Wilson, 75116 Paris"
+ },
+ "jacquemart-andre": {
+  "nom": "Musée Jacquemart-André",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.musee-jacquemart-andre.com",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "158 boulevard Haussmann, 75008 Paris"
+ },
+ "marmottan": {
+  "nom": "Musée Marmottan Monet",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.marmottan.fr",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "2 rue Louis-Boilly, 75016 Paris"
+ },
+ "jeu-de-paume": {
+  "nom": "Jeu de Paume",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://jeudepaume.org",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "1 place de la Concorde, 75008 Paris"
+ },
+ "fondation-cartier": {
+  "nom": "Fondation Cartier pour l’art contemporain",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.fondationcartier.com",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "2 place du Palais-Royal, 75001 Paris"
+ },
+ "mep": {
+  "nom": "Maison européenne de la photographie",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://www.mep-fr.org",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "5/7 rue de Fourcy, 75004 Paris"
+ },
+ "institut-du-monde-arabe": {
+  "nom": "Institut du monde arabe",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://www.imarabe.org",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "1 rue des Fossés-Saint-Bernard, 75005 Paris"
+ },
+ "musee-cernuschi": {
+  "nom": "Musée Cernuschi",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Public",
+  "site": "https://www.cernuschi.paris.fr",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "7 avenue Vélasquez, 75008 Paris"
  }
 }

@@ -5,14 +5,16 @@
    "id": "2026-11-17",
    "date": "2026-11-17",
    "domaine": "complete",
-   "titre": "Première veille : les stades de 2027 et cinq expositions",
-   "chapo": "Première veille complète de Factotum. Sept concerts et cinq expositions entrent à l’affiche, la distribution de 88 spectacles est complétée et deux fiches passées rejoignent l’archive. Les grandes dates de 2027 sont déjà en vente : U2, Oasis, SCH et Sofiane Pamart au Stade de France, Angèle à l’Accor Arena.",
+   "titre": "Première veille : les annonces de 2027 et dix-huit expositions",
+   "chapo": "Première veille complète de Factotum, approfondie le jour même. 35 concerts et 18 expositions entrent à l’affiche, la distribution de 88 spectacles est complétée et deux fiches passées rejoignent l’archive. À ne pas manquer cette semaine : les préventes de Stray Kids (18 nov.) et de KPop Demon Hunters (19 nov.), toutes deux à Paris La Défense Arena.",
    "sections": [
     {
      "titre": "À retenir",
      "texte": [
-      "Le printemps 2027 se joue au Stade de France : SCH les 23 et 24 avril, U2 les 5, 8 et 9 mai, Oasis les 20 et 23 juillet, et Sofiane Pamart le 17 avril, premier pianiste à s’y produire seul. Pour toutes ces dates, la vente générale est déjà passée.",
-      "Côté scène, la semaine est celle des dernières : La Walkyrie s’achève ce soir à Bastille, Ganesh versus the Third Reich se joue jusqu’au 21 novembre à la Cité internationale et Ici sont les dragons jusqu’au 29 au Théâtre du Soleil."
+      "Deux ventes ouvrent cette semaine : Stray Kids (prévente des membres STAY le 18 novembre à 11 h, prévente artiste à 15 h, vente générale le 19 à 15 h) et KPop Demon Hunters (préventes le 19 novembre à 10 h et 14 h, sur inscription jusqu’au 18).",
+      "Le printemps 2027 se joue au Stade de France : Sofiane Pamart le 17 avril, SCH les 23 et 24, Kaaris le 22 mai, SDM les 29 et 30 mai, U2 les 5, 8 et 9 mai, Oasis les 20 et 23 juillet. Pour toutes ces dates, la vente générale est déjà passée.",
+      "Deux incontournables nouveaux : Jean-Michel Jarre, de retour en France après dix ans pour les 50 ans d’Oxygène à La Seine Musicale (14–16 octobre 2027), et Monet, peindre le temps à l’Orangerie, pour le centenaire de la mort du peintre (jusqu’au 25 janvier).",
+      "Côté scène, la semaine est celle des dernières : La Walkyrie s’achève ce soir à Bastille, Ganesh versus the Third Reich se joue jusqu’au 21 novembre et Ici sont les dragons jusqu’au 29."
      ]
     },
     {
@@ -41,6 +43,13 @@
     },
     {
      "titre": "Concerts et showcases",
+     "texte": [
+      "Rap : les grandes salles se remplissent pour 2027. L2B (16 octobre) et Leto (11 décembre) passent à Paris La Défense Arena, Guy2Bezbar fait son premier Bercy (17 avril), Kaaris et SDM prennent le Stade de France ; Tiakola joue avec l’Orchestre Lamoureux à la Philharmonie après-demain, complet.",
+      "Pop et chanson : Angèle ouvre l’Instinct Tour par cinq Bercy en mars, Pomme passe de l’Olympia (complet) à son premier Bercy le 8 décembre 2027, Théa aborde le Zénith (19 mars), Vianney, Eddy de Pretto et Charlotte Cardin prennent Bercy à l’automne 2027, TeddyBear joue au Trianon le 26 janvier. Étienne Daho rejoue Pop Satori et Éden en symphonique sous la nef du Grand Palais (15 janvier), Ludovico Einaudi y joue seul au piano la veille.",
+      "R&B, funk et musiques du monde : Erykah Badu au Zénith (20 janvier), Angélique Kidjo et Youssou N’Dour au Grand Rex pour leur seule date française (24 mars), Jorja Smith à Bercy (27 mai), Tayc trois soirs à Bercy (1er–3 juin), Jamiroquai deux soirs (9–10 juillet).",
+      "Rock et pop internationale : Rush revient en France pour une seule date (19 février), Weezer aussi (Zénith, 25 mai), Fall Out Boy joue à Bercy le 10 juin, Noah Kahan à Longchamp le 10 juillet, U2 et Oasis au Stade de France. K-pop : Stray Kids et KPop Demon Hunters à La Défense Arena.",
+      "Électro : Mosimann fait son premier Bercy (16 octobre) après deux Zénith complets, John Summit passe au Zénith (23 février), Jean-Michel Jarre fête Oxygène à La Seine Musicale."
+     ],
      "lignes": [
       {
        "id": "miki-zenith-2026",
@@ -48,47 +57,117 @@
        "texte": "Zénith, 18 nov."
       },
       {
-       "id": "pomme-olympia-2027",
-       "titre": "Pomme",
-       "texte": "Olympia, 4 et 5 mars 2027"
+       "id": "tiakola-philharmonie-lamoureux",
+       "titre": "Tiakola et l’Orchestre Lamoureux",
+       "texte": "Philharmonie, 19 nov., complet"
+      },
+      {
+       "id": "etienne-daho-grand-palais-2027",
+       "titre": "Étienne Daho symphonique",
+       "texte": "Grand Palais, 15 janv."
+      },
+      {
+       "id": "erykah-badu-zenith-2027",
+       "titre": "Erykah Badu",
+       "texte": "Zénith, 20 janv."
+      },
+      {
+       "id": "teddybear-trianon-2027",
+       "titre": "TeddyBear",
+       "texte": "Trianon, 26 janv."
+      },
+      {
+       "id": "rush-fifty-something-2027",
+       "titre": "Rush",
+       "texte": "Paris La Défense Arena, 19 févr."
       },
       {
        "id": "angele-instinct-tour-2027",
        "titre": "Angèle – Instinct Tour",
-       "texte": "Accor Arena, 8 au 13 mars 2027, premières dates complètes"
+       "texte": "Accor Arena, 8 au 13 mars"
       },
       {
-       "id": "sofiane-pamart-stade-de-france",
-       "titre": "Sofiane Pamart",
-       "texte": "Stade de France, 17 avril 2027"
+       "id": "kidjo-ndour-grand-rex-2027",
+       "titre": "Angélique Kidjo et Youssou N’Dour",
+       "texte": "Grand Rex, 24 mars"
       },
       {
-       "id": "sch-stade-de-france-2027",
-       "titre": "SCH",
-       "texte": "Stade de France, 23 et 24 avril 2027"
+       "id": "weezer-zenith-2027",
+       "titre": "Weezer",
+       "texte": "Zénith, 25 mai"
       },
       {
-       "id": "u2-stade-de-france-2027",
-       "titre": "U2",
-       "texte": "Stade de France, 5, 8 et 9 mai 2027"
+       "id": "stray-kids-run-it-2027",
+       "titre": "Stray Kids",
+       "texte": "Paris La Défense Arena, 9 juil."
       },
       {
-       "id": "oasis-stade-de-france-2027",
-       "titre": "Oasis",
-       "texte": "Stade de France, 20 et 23 juillet 2027"
+       "id": "jamiroquai-accor-arena-2027",
+       "titre": "Jamiroquai",
+       "texte": "Accor Arena, 9 et 10 juil."
+      },
+      {
+       "id": "jean-michel-jarre-oxygene-2027",
+       "titre": "Jean-Michel Jarre – Oxygène, 50 ans",
+       "texte": "La Seine Musicale, 14–16 oct."
+      },
+      {
+       "id": "mosimann-dream-tour-finale",
+       "titre": "Mosimann",
+       "texte": "Accor Arena, 16 oct."
+      },
+      {
+       "id": "l2b-paris-la-defense-arena-2027",
+       "titre": "L2B",
+       "texte": "Paris La Défense Arena, 16 oct."
+      },
+      {
+       "id": "pomme-accor-arena-2027",
+       "titre": "Pomme",
+       "texte": "Accor Arena, 8 déc. 2027"
       }
      ]
     },
     {
      "titre": "Expositions",
      "texte": [
-      "Factotum Expo s’étoffe de cinq expositions en cours, à voir avant la fin janvier."
+      "Factotum Expo compte désormais vingt et une expositions. Le Grand Palais, l’Orangerie, le Musée d’Art moderne et le Louvre concentrent les rendez-vous de l’hiver ; trois ouvertures arrivent : Corée au musée Cernuschi le 20 novembre, l’Alhambra nasride à l’Institut du monde arabe le 24, Girls au Grand Palais le 9 décembre."
      ],
      "lignes": [
+      {
+       "id": "monet-peindre-le-temps",
+       "titre": "Monet, peindre le temps",
+       "texte": "Orangerie, jusqu’au 25 janv."
+      },
       {
        "id": "cezanne-et-nous",
        "titre": "Cezanne et nous",
        "texte": "Grand Palais, jusqu’au 17 janv."
+      },
+      {
+       "id": "kerry-james-marshall-the-histories",
+       "titre": "Kerry James Marshall, The Histories",
+       "texte": "Musée d’Art moderne, jusqu’au 24 janv."
+      },
+      {
+       "id": "louvre-photo",
+       "titre": "Louvre Photo",
+       "texte": "Louvre, jusqu’au 3 mai"
+      },
+      {
+       "id": "mary-cassatt-l-independante",
+       "titre": "Mary Cassatt, l’indépendante",
+       "texte": "Musée d’Orsay, jusqu’au 31 janv."
+      },
+      {
+       "id": "eternel-tintoret",
+       "titre": "Éternel Tintoret",
+       "texte": "Jacquemart-André, jusqu’au 24 janv."
+      },
+      {
+       "id": "penn-and-fashion",
+       "titre": "Penn & Fashion",
+       "texte": "MEP, jusqu’au 17 janv."
       },
       {
        "id": "zurbaran-louvre",
@@ -101,14 +180,49 @@
        "texte": "Musée du Luxembourg, jusqu’au 10 janv."
       },
       {
+       "id": "remember-me-bourse-de-commerce",
+       "titre": "Remember Me",
+       "texte": "Bourse de Commerce, jusqu’au 18 janv."
+      },
+      {
+       "id": "stan-douglas-parallax",
+       "titre": "Stan Douglas. Parallax",
+       "texte": "Jeu de Paume, jusqu’au 10 janv."
+      },
+      {
+       "id": "ibrahim-mahama-le-temps-des-recoltes",
+       "titre": "Ibrahim Mahama, Le Temps des récoltes",
+       "texte": "Fondation Cartier, jusqu’au 28 févr."
+      },
+      {
+       "id": "histoires-de-paysages-monet-hockney",
+       "titre": "Histoires de paysages",
+       "texte": "Marmottan Monet, jusqu’au 31 janv."
+      },
+      {
+       "id": "bruxelles-1900",
+       "titre": "Bruxelles 1900",
+       "texte": "Petit Palais, jusqu’au 25 avril"
+      },
+      {
        "id": "eva-gonzales-petit-palais",
        "titre": "Eva Gonzalès",
        "texte": "Petit Palais, jusqu’au 24 janv."
       },
       {
-       "id": "remember-me-bourse-de-commerce",
-       "titre": "Remember Me",
-       "texte": "Bourse de Commerce, jusqu’au 18 janv."
+       "id": "coree-le-royaume-des-lettres",
+       "titre": "Corée. Le Royaume des lettrés",
+       "texte": "Cernuschi, ouverture le 20 nov."
+      },
+      {
+       "id": "les-secrets-de-l-alhambra",
+       "titre": "Les Secrets de l’Alhambra nasride",
+       "texte": "Institut du monde arabe, ouverture le 24 nov."
+      },
+      {
+       "id": "girls-grand-palais",
+       "titre": "Girls",
+       "texte": "Grand Palais, ouverture le 9 déc."
       }
      ]
     },
@@ -116,12 +230,16 @@
      "titre": "Annonces à suivre",
      "lignes": [
       {
-       "titre": "Pomme à l’Accor Arena",
-       "texte": "8 décembre 2027, pour l’album « la forteresse » ; vente non datée (Sortir à Paris)"
-      },
-      {
        "titre": "We Love Green 2027",
        "texte": "Bois de Vincennes, début juin 2027, dates et programmation à confirmer (Time Out)"
+      },
+      {
+       "titre": "Lollapalooza Paris 2027",
+       "texte": "retour annoncé à Longchamp en juillet 2027, dates à confirmer (Paris je t’aime)"
+      },
+      {
+       "titre": "Solidays 2027",
+       "texte": "fin juin à Longchamp, dates non encore annoncées"
       },
       {
        "titre": "Rock en Seine 2027",
@@ -136,6 +254,16 @@
     {
      "titre": "Mises en vente à venir",
      "lignes": [
+      {
+       "id": "stray-kids-run-it-2027",
+       "titre": "Stray Kids",
+       "texte": "prévente STAY le 18 nov. à 11 h, prévente artiste à 15 h, vente générale le 19 nov. à 15 h"
+      },
+      {
+       "id": "kpop-demon-hunters-golden-world-tour",
+       "titre": "KPop Demon Hunters",
+       "texte": "préventes le 19 nov. à 10 h et 14 h, sur inscription"
+      },
       {
        "id": "vampire-s-mountain",
        "titre": "Vampire’s Mountain",
@@ -197,6 +325,11 @@
      "titre": "Incontournables",
      "lignes": [
       {
+       "id": "monet-peindre-le-temps",
+       "titre": "Monet, peindre le temps",
+       "texte": "Orangerie, jusqu’au 25 janv."
+      },
+      {
        "id": "cezanne-et-nous",
        "titre": "Cezanne et nous",
        "texte": "Grand Palais, jusqu’au 17 janv."
@@ -220,15 +353,20 @@
        "id": "oasis-stade-de-france-2027",
        "titre": "Oasis",
        "texte": "Stade de France, 20 et 23 juillet 2027"
+      },
+      {
+       "id": "jean-michel-jarre-oxygene-2027",
+       "titre": "Jean-Michel Jarre – Oxygène, 50 ans",
+       "texte": "La Seine Musicale, 14–16 oct. 2027"
       }
      ]
     }
    ],
    "bilan": {
-    "ajoutees": 12,
+    "ajoutees": 53,
     "archivees": 2,
     "revisees": 0,
-    "ventes": 27
+    "ventes": 32
    }
   }
  ]

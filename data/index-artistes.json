@@ -1,4 +1,10 @@
 {
+ "a-day-to-remember": {
+  "nom": "A Day To Remember",
+  "sorties": [
+   "fall-out-boy-2027"
+  ]
+ },
  "adama-diop": {
   "nom": "Adama Diop",
   "sorties": [
@@ -358,6 +364,12 @@
   "nom": "Angélique Boudeville",
   "sorties": [
    "faust"
+  ]
+ },
+ "angelique-kidjo": {
+  "nom": "Angélique Kidjo",
+  "sorties": [
+   "kidjo-ndour-grand-rex-2027"
   ]
  },
  "angie-mercier": {
@@ -1023,6 +1035,12 @@
    "vu-bestioles"
   ]
  },
+ "charlotte-cardin": {
+  "nom": "Charlotte Cardin",
+  "sorties": [
+   "charlotte-cardin-accor-arena-2027"
+  ]
+ },
  "charlotte-chastel-rousseau": {
   "nom": "Charlotte Chastel-Rousseau",
   "sorties": [
@@ -1208,6 +1226,13 @@
   "nom": "Claude-Michel Schönberg",
   "sorties": [
    "les-miserables"
+  ]
+ },
+ "claude-monet": {
+  "nom": "Claude Monet",
+  "sorties": [
+   "histoires-de-paysages-monet-hockney",
+   "monet-peindre-le-temps"
   ]
  },
  "claude-stratz": {
@@ -1473,6 +1498,12 @@
    "vu-un-stand-up-de-bonne-qualite"
   ]
  },
+ "david-hockney": {
+  "nom": "David Hockney",
+  "sorties": [
+   "histoires-de-paysages-monet-hockney"
+  ]
+ },
  "david-leone": {
   "nom": "David Leone",
   "sorties": [
@@ -1562,6 +1593,12 @@
    "vu-angels-in-america"
   ]
  },
+ "dominique-de-font-reaulx": {
+  "nom": "Dominique de Font-Réaulx",
+  "sorties": [
+   "louvre-photo"
+  ]
+ },
  "dominique-pinon": {
   "nom": "Dominique Pinon",
   "sorties": [
@@ -1590,6 +1627,12 @@
   "nom": "Eddy D’Aranjo",
   "sorties": [
    "oedipe-roi"
+  ]
+ },
+ "eddy-de-pretto": {
+  "nom": "Eddy de Pretto",
+  "sorties": [
+   "eddy-de-pretto-accor-arena-2027"
   ]
  },
  "edith-biscaro": {
@@ -1621,6 +1664,12 @@
   "nom": "Elīna Garanča",
   "sorties": [
    "le-chateau-de-barbe-bleue"
+  ]
+ },
+ "elisa-de-wyngaert": {
+  "nom": "Elisa De Wyngaert",
+  "sorties": [
+   "girls-grand-palais"
   ]
  },
  "elissa-alloula": {
@@ -1798,6 +1847,12 @@
    "le-trouvere-rhorer"
   ]
  },
+ "erykah-badu": {
+  "nom": "Erykah Badu",
+  "sorties": [
+   "erykah-badu-zenith-2027"
+  ]
+ },
  "esdeekid": {
   "nom": "EsDeeKid",
   "sorties": [
@@ -1819,6 +1874,7 @@
  "etienne-daho": {
   "nom": "Étienne Daho",
   "sorties": [
+   "etienne-daho-grand-palais-2027",
    "vu-etienne-daho-accor-arena-2023"
   ]
  },
@@ -1880,6 +1936,12 @@
   "nom": "Fabrice Ilia Leroy",
   "sorties": [
    "nocturne-parade"
+  ]
+ },
+ "fall-out-boy": {
+  "nom": "Fall Out Boy",
+  "sorties": [
+   "fall-out-boy-2027"
   ]
  },
  "fave": {
@@ -2343,6 +2405,12 @@
    "thesee-sa-vie-nouvelle"
   ]
  },
+ "guy2bezbar": {
+  "nom": "Guy2Bezbar",
+  "sorties": [
+   "guy2bezbar-accor-arena-2027"
+  ]
+ },
  "gwendoline": {
   "nom": "Gwendoline",
   "sorties": [
@@ -2473,6 +2541,12 @@
    "rhinoceros"
   ]
  },
+ "ibrahim-mahama": {
+  "nom": "Ibrahim Mahama",
+  "sorties": [
+   "ibrahim-mahama-le-temps-des-recoltes"
+  ]
+ },
  "ichiro-sugae": {
   "nom": "Ichiro Sugae",
   "sorties": [
@@ -2524,6 +2598,7 @@
  "irving-penn": {
   "nom": "Irving Penn",
   "sorties": [
+   "penn-and-fashion",
    "remember-me-bourse-de-commerce"
   ]
  },
@@ -2654,6 +2729,12 @@
    "dipus-rex"
   ]
  },
+ "jamiroquai": {
+  "nom": "Jamiroquai",
+  "sorties": [
+   "jamiroquai-accor-arena-2027"
+  ]
+ },
  "jason-derulo": {
   "nom": "Jason Derulo",
   "sorties": [
@@ -2714,6 +2795,12 @@
   "nom": "Jean-Luc Reichmann",
   "sorties": [
    "vu-nuit-d-ivresse"
+  ]
+ },
+ "jean-michel-jarre": {
+  "nom": "Jean-Michel Jarre",
+  "sorties": [
+   "jean-michel-jarre-oxygene-2027"
   ]
  },
  "jean-philippe-daguerre": {
@@ -2895,6 +2982,12 @@
    "focus-ben-duke"
   ]
  },
+ "john-summit": {
+  "nom": "John Summit",
+  "sorties": [
+   "john-summit-zenith-2027"
+  ]
+ },
  "jok-air": {
   "nom": "Jok’Air",
   "sorties": [
@@ -2924,6 +3017,12 @@
   "sorties": [
    "le-suicide",
    "ruy-blas"
+  ]
+ },
+ "jorja-smith": {
+  "nom": "Jorja Smith",
+  "sorties": [
+   "jorja-smith-accor-arena-2027"
   ]
  },
  "jose-montalvo": {
@@ -3080,6 +3179,12 @@
    "vu-orso-et-moi"
   ]
  },
+ "kaaris": {
+  "nom": "Kaaris",
+  "sorties": [
+   "kaaris-stade-de-france-2027"
+  ]
+ },
  "kader-lassina-toure": {
   "nom": "Kader Lassina Touré",
   "sorties": [
@@ -3129,6 +3234,12 @@
    "seppuku"
   ]
  },
+ "kerry-james-marshall": {
+  "nom": "Kerry James Marshall",
+  "sorties": [
+   "kerry-james-marshall-the-histories"
+  ]
+ },
  "klaus-florian-vogt": {
   "nom": "Klaus Florian Vogt",
   "sorties": [
@@ -3163,6 +3274,12 @@
    "my-fierce-ignorant-step"
   ]
  },
+ "kpop-demon-hunters": {
+  "nom": "KPop Demon Hunters",
+  "sorties": [
+   "kpop-demon-hunters-golden-world-tour"
+  ]
+ },
  "krystian-lupa": {
   "nom": "Krystian Lupa",
   "sorties": [
@@ -3186,6 +3303,12 @@
   "nom": "Kurt Weill",
   "sorties": [
    "les-sept-peches-capitaux"
+  ]
+ },
+ "l2b": {
+  "nom": "L2B",
+  "sorties": [
+   "l2b-paris-la-defense-arena-2027"
   ]
  },
  "la-bocca-della-luna": {
@@ -3495,6 +3618,7 @@
  "leto": {
   "nom": "Leto",
   "sorties": [
+   "leto-paris-la-defense-arena-2027",
    "vu-solidays-2025-vendredi"
   ]
  },
@@ -3701,6 +3825,12 @@
   "nom": "Lucinda Childs",
   "sorties": [
    "pulsations-childs"
+  ]
+ },
+ "ludovico-einaudi": {
+  "nom": "Ludovico Einaudi",
+  "sorties": [
+   "ludovico-einaudi-grand-palais-2027"
   ]
  },
  "ludwig-van-beethoven": {
@@ -4011,6 +4141,12 @@
    "vu-grease-mogador"
   ]
  },
+ "mary-cassatt": {
+  "nom": "Mary Cassatt",
+  "sorties": [
+   "mary-cassatt-l-independante"
+  ]
+ },
  "masanori-kikuzawa": {
   "nom": "Masanori Kikuzawa",
   "sorties": [
@@ -4264,6 +4400,12 @@
    "ruy-blas"
   ]
  },
+ "mosimann": {
+  "nom": "Mosimann",
+  "sorties": [
+   "mosimann-dream-tour-finale"
+  ]
+ },
  "murat-karahan": {
   "nom": "Murat Karahan",
   "sorties": [
@@ -4357,6 +4499,12 @@
    "dipus-rex"
   ]
  },
+ "neck-deep": {
+  "nom": "Neck Deep",
+  "sorties": [
+   "fall-out-boy-2027"
+  ]
+ },
  "netia-jones": {
   "nom": "Netia Jones",
   "sorties": [
@@ -4433,6 +4581,12 @@
   "nom": "Niska",
   "sorties": [
    "vu-solidays-2025-samedi"
+  ]
+ },
+ "noah-kahan": {
+  "nom": "Noah Kahan",
+  "sorties": [
+   "noah-kahan-off-track-2027"
   ]
  },
  "noam-morgensztern": {
@@ -4551,6 +4705,12 @@
   "nom": "Orchestre du Conservatoire de Paris",
   "sorties": [
    "ode-a-la-joie-pichon"
+  ]
+ },
+ "orchestre-lamoureux": {
+  "nom": "Orchestre Lamoureux",
+  "sorties": [
+   "tiakola-philharmonie-lamoureux"
   ]
  },
  "orchestre-national-bordeaux-aquitaine": {
@@ -4877,6 +5037,7 @@
   "nom": "Pomme",
   "sorties": [
    "le-petit-cirque",
+   "pomme-accor-arena-2027",
    "pomme-olympia-2027",
    "vu-solidays-2024",
    "vu-we-love-green-2023-dimanche"
@@ -4893,6 +5054,12 @@
   "nom": "Queens of the Stone Age",
   "sorties": [
    "vu-rock-en-seine-2025"
+  ]
+ },
+ "quentin-bajac": {
+  "nom": "Quentin Bajac",
+  "sorties": [
+   "louvre-photo"
   ]
  },
  "quinn-kelsey": {
@@ -5087,6 +5254,12 @@
    "raymonda"
   ]
  },
+ "rush": {
+  "nom": "Rush",
+  "sorties": [
+   "rush-fifty-something-2027"
+  ]
+ },
  "russell-braun": {
   "nom": "Russell Braun",
   "sorties": [
@@ -5222,6 +5395,12 @@
    "food-court",
    "ganesh-versus-the-third-reich",
    "neanderthal-repetitions-publiques"
+  ]
+ },
+ "sdm": {
+  "nom": "SDM",
+  "sorties": [
+   "sdm-stade-de-france-2027"
   ]
  },
  "sebastien-chassagne": {
@@ -5462,6 +5641,12 @@
    "orphee"
   ]
  },
+ "stan-douglas": {
+  "nom": "Stan Douglas",
+  "sorties": [
+   "stan-douglas-parallax"
+  ]
+ },
  "stanislas-de-barbeyrac": {
   "nom": "Stanislas de Barbeyrac",
   "sorties": [
@@ -5562,6 +5747,12 @@
    "steven-cohen-people-will-people-you"
   ]
  },
+ "stray-kids": {
+  "nom": "Stray Kids",
+  "sorties": [
+   "stray-kids-run-it-2027"
+  ]
+ },
  "stromae": {
   "nom": "Stromae",
   "sorties": [
@@ -5647,10 +5838,22 @@
    "vu-lexikon"
   ]
  },
+ "tayc": {
+  "nom": "Tayc",
+  "sorties": [
+   "tayc-joya-tour-2027"
+  ]
+ },
  "ted-huffman": {
   "nom": "Ted Huffman",
   "sorties": [
    "orphee"
+  ]
+ },
+ "teddybear": {
+  "nom": "TeddyBear",
+  "sorties": [
+   "teddybear-trianon-2027"
   ]
  },
  "tennessee-williams": {
@@ -5699,6 +5902,12 @@
   "nom": "The Weeknd",
   "sorties": [
    "vu-the-weeknd-stade-de-france-2023"
+  ]
+ },
+ "thea": {
+  "nom": "Théa",
+  "sorties": [
+   "thea-zenith-2027"
   ]
  },
  "theatre-du-balcon": {
@@ -5809,6 +6018,7 @@
  "tiakola": {
   "nom": "Tiakola",
   "sorties": [
+   "tiakola-philharmonie-lamoureux",
    "vu-solidays-2023-vendredi"
   ]
  },
@@ -5816,6 +6026,12 @@
   "nom": "Timur Zangiev",
   "sorties": [
    "le-trouvere"
+  ]
+ },
+ "tintoret": {
+  "nom": "Tintoret",
+  "sorties": [
+   "eternel-tintoret"
   ]
  },
  "tokyo-ballet": {
@@ -5938,6 +6154,12 @@
    "fondre-gourfink"
   ]
  },
+ "vianney": {
+  "nom": "Vianney",
+  "sorties": [
+   "vianney-accor-arena-2027"
+  ]
+ },
  "victor-gadin": {
   "nom": "Victor Gadin",
   "sorties": [
@@ -6015,6 +6237,12 @@
   "nom": "Warren Casey",
   "sorties": [
    "vu-grease-mogador"
+  ]
+ },
+ "weezer": {
+  "nom": "Weezer",
+  "sorties": [
+   "weezer-zenith-2027"
   ]
  },
  "werenoi": {
@@ -6099,6 +6327,12 @@
   "nom": "Yousef Sbieh",
   "sorties": [
    "shabaab"
+  ]
+ },
+ "youssou-n-dour": {
+  "nom": "Youssou N’Dour",
+  "sorties": [
+   "kidjo-ndour-grand-rex-2027"
   ]
  },
  "yukio-mishima": {

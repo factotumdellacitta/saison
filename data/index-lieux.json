@@ -2,7 +2,17 @@
  "accor-arena": {
   "sorties": [
    "angele-instinct-tour-2027",
+   "charlotte-cardin-accor-arena-2027",
+   "eddy-de-pretto-accor-arena-2027",
+   "fall-out-boy-2027",
+   "guy2bezbar-accor-arena-2027",
+   "jamiroquai-accor-arena-2027",
+   "jorja-smith-accor-arena-2027",
+   "mosimann-dream-tour-finale",
+   "pomme-accor-arena-2027",
    "tame-impala",
+   "tayc-joya-tour-2027",
+   "vianney-accor-arena-2027",
    "vu-adele-bercy-2016",
    "vu-celine-dion-bercy-2016",
    "vu-etienne-daho-accor-arena-2023",
@@ -216,6 +226,11 @@
    "shrek-le-musical"
   ]
  },
+ "fondation-cartier": {
+  "sorties": [
+   "ibrahim-mahama-le-temps-des-recoltes"
+  ]
+ },
  "fondation-louis-vuitton": {
   "sorties": [
    "gustave-fayet-collectionneur-createur"
@@ -223,7 +238,15 @@
  },
  "grand-palais": {
   "sorties": [
-   "cezanne-et-nous"
+   "cezanne-et-nous",
+   "etienne-daho-grand-palais-2027",
+   "girls-grand-palais",
+   "ludovico-einaudi-grand-palais-2027"
+  ]
+ },
+ "grand-rex": {
+  "sorties": [
+   "kidjo-ndour-grand-rex-2027"
   ]
  },
  "grande-halle-villette": {
@@ -238,8 +261,28 @@
    "vu-le-suicide-double-jeu"
   ]
  },
+ "hippodrome-longchamp": {
+  "sorties": [
+   "noah-kahan-off-track-2027"
+  ]
+ },
+ "institut-du-monde-arabe": {
+  "sorties": [
+   "les-secrets-de-l-alhambra"
+  ]
+ },
+ "jacquemart-andre": {
+  "sorties": [
+   "eternel-tintoret"
+  ]
+ },
  "jardin-des-tuileries": {
   "sorties": []
+ },
+ "jeu-de-paume": {
+  "sorties": [
+   "stan-douglas-parallax"
+  ]
  },
  "just-me-milano": {
   "sorties": [
@@ -282,7 +325,9 @@
   ]
  },
  "le-trianon": {
-  "sorties": []
+  "sorties": [
+   "teddybear-trianon-2027"
+  ]
  },
  "les-gemeaux": {
   "sorties": [
@@ -303,12 +348,23 @@
  },
  "louvre": {
   "sorties": [
+   "louvre-photo",
    "zurbaran-louvre"
   ]
  },
  "magazzini-generali": {
   "sorties": [
    "vu-diplo-magazzini-generali-2024"
+  ]
+ },
+ "mam-paris": {
+  "sorties": [
+   "kerry-james-marshall-the-histories"
+  ]
+ },
+ "marmottan": {
+  "sorties": [
+   "histoires-de-paysages-monet-hockney"
   ]
  },
  "mc93": {
@@ -318,14 +374,30 @@
    "steven-cohen-people-will-people-you"
   ]
  },
+ "mep": {
+  "sorties": [
+   "penn-and-fashion"
+  ]
+ },
+ "musee-cernuschi": {
+  "sorties": [
+   "coree-le-royaume-des-lettres"
+  ]
+ },
  "musee-luxembourg": {
   "sorties": [
    "andy-warhol-la-ligne-et-l-image"
   ]
  },
+ "musee-orangerie": {
+  "sorties": [
+   "monet-peindre-le-temps"
+  ]
+ },
  "musee-orsay": {
   "sorties": [
-   "gustave-le-gray-peintre-photographe"
+   "gustave-le-gray-peintre-photographe",
+   "mary-cassatt-l-independante"
   ]
  },
  "nanterre-amandiers": {
@@ -409,12 +481,18 @@
  },
  "paris-la-defense-arena": {
   "sorties": [
+   "kpop-demon-hunters-golden-world-tour",
+   "l2b-paris-la-defense-arena-2027",
+   "leto-paris-la-defense-arena-2027",
+   "rush-fifty-something-2027",
+   "stray-kids-run-it-2027",
    "vu-black-eyed-peas-la-defense-arena-2024",
    "vu-damso-la-defense-arena-2026"
   ]
  },
  "petit-palais": {
   "sorties": [
+   "bruxelles-1900",
    "eva-gonzales-petit-palais"
   ]
  },
@@ -443,6 +521,7 @@
    "ode-a-la-joie-pichon",
    "passion-selon-saint-matthieu-rattle",
    "siegfried-zurich",
+   "tiakola-philharmonie-lamoureux",
    "trifonov-berliner-barock-solisten",
    "trifonov-recital-2027",
    "war-requiem-alsop"
@@ -499,6 +578,7 @@
  },
  "seine-musicale": {
   "sorties": [
+   "jean-michel-jarre-oxygene-2027",
    "vu-bejart-et-nous-loiseau-de-feu-bolero",
    "vu-west-side-story-seine-musicale"
   ]
@@ -516,8 +596,10 @@
  },
  "stade-de-france": {
   "sorties": [
+   "kaaris-stade-de-france-2027",
    "oasis-stade-de-france-2027",
    "sch-stade-de-france-2027",
+   "sdm-stade-de-france-2027",
    "sofiane-pamart-stade-de-france",
    "u2-stade-de-france-2027",
    "vu-the-weeknd-stade-de-france-2023"
@@ -712,10 +794,14 @@
  },
  "zenith-paris": {
   "sorties": [
+   "erykah-badu-zenith-2027",
+   "john-summit-zenith-2027",
    "miki-zenith-2026",
    "nono",
+   "thea-zenith-2027",
    "vu-central-cee-zenith-2022",
-   "vu-theodora-zenith-2026"
+   "vu-theodora-zenith-2026",
+   "weezer-zenith-2027"
   ]
  }
 }

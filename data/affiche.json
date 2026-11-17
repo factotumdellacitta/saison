@@ -9437,7 +9437,8 @@
    "offres": [],
    "nouveau": true,
    "datesTexte": "4 et 5 mars 2027",
-   "source": "https://www.fnacspectacles.com/magazine/concerts/concert-pomme-2027-19-dates-et-prevente-le-24-septembre"
+   "source": "https://www.fnacspectacles.com/magazine/concerts/concert-pomme-2027-19-dates-et-prevente-le-24-septembre",
+   "etat": "complet"
   },
   {
    "id": "angele-instinct-tour-2027",
@@ -9797,6 +9798,1435 @@
    },
    "relaches": [
     "mar"
+   ]
+  },
+  {
+   "id": "stray-kids-run-it-2027",
+   "titre": "Stray Kids – RUN IT",
+   "categorie": "Concert",
+   "sousGenre": "K-pop",
+   "artistes": [
+    {
+     "nom": "Stray Kids",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "paris-la-defense-arena",
+   "salle": "",
+   "debut": "2027-07-09",
+   "fin": "2027-07-09",
+   "note": 3,
+   "calcul": "C1 N3 H2",
+   "pronostic": true,
+   "pourquoi": "Seule date française de la tournée RUN IT, deux ans après deux Stade de France.",
+   "lien": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/357749-stray-kids-in-concert-at-paris-la-defense-arena-in-july-2027",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Prévente STAY",
+     "vente": "2026-11-18T11:00",
+     "venteApprox": false,
+     "condition": "Membres STAY, inscription sur la plateforme FANS"
+    },
+    {
+     "type": "Prévente artiste",
+     "vente": "2026-11-18T15:00",
+     "venteApprox": false,
+     "condition": "Gratuite, sur inscription avant le 15 nov. à 21 h"
+    },
+    {
+     "type": "Vente générale",
+     "vente": "2026-11-19T15:00",
+     "venteApprox": false,
+     "condition": "4 billets au plus par personne"
+    }
+   ],
+   "nouveau": true,
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/357805-stray-kids-in-concert-in-paris-in-2027-everything-you-need-to-know-about-when-tickets-go-on-sale"
+  },
+  {
+   "id": "kpop-demon-hunters-golden-world-tour",
+   "titre": "KPop Demon Hunters – Golden World Tour",
+   "categorie": "Concert",
+   "sousGenre": "K-pop",
+   "artistes": [
+    {
+     "nom": "KPop Demon Hunters",
+     "role": "compagnie"
+    }
+   ],
+   "lieuId": "paris-la-defense-arena",
+   "salle": "",
+   "debut": "2027-10-05",
+   "fin": "2027-10-05",
+   "note": 3,
+   "calcul": "C1 N2 H2",
+   "pronostic": true,
+   "pourquoi": "Adaptation sur scène du phénomène Netflix, seule date parisienne, organisée avec AEG Presents.",
+   "lien": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/358230-k-pop-demon-hunters-golden-world-tour-is-coming-to-paris-la-defense-arena-in-2027",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Prévente For The Fans",
+     "vente": "2026-11-19T10:00",
+     "venteApprox": false,
+     "condition": "Sur inscription avant le 18 nov. à 9 h 59"
+    },
+    {
+     "type": "Prévente AEG Presents",
+     "vente": "2026-11-19T14:00",
+     "venteApprox": false,
+     "condition": "Sur inscription avant le 18 nov. à 21 h 59"
+    }
+   ],
+   "nouveau": true,
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/358230-k-pop-demon-hunters-golden-world-tour-is-coming-to-paris-la-defense-arena-in-2027"
+  },
+  {
+   "id": "thea-zenith-2027",
+   "titre": "Théa",
+   "categorie": "Concert",
+   "sousGenre": "Pop",
+   "artistes": [
+    {
+     "nom": "Théa",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "zenith-paris",
+   "salle": "",
+   "debut": "2027-03-19",
+   "fin": "2027-03-19",
+   "note": 2,
+   "calcul": "C1 N1 H1",
+   "pronostic": true,
+   "pourquoi": "Après la Boule Noire, la Maroquinerie, la Cigale et l’Olympia, premier Zénith de Paris.",
+   "lien": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/337047-thea-concert-zenith-paris",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/337047-thea-concert-zenith-paris"
+  },
+  {
+   "id": "fall-out-boy-2027",
+   "titre": "Fall Out Boy – Twilight of the Punks",
+   "categorie": "Concert",
+   "sousGenre": "Rock",
+   "artistes": [
+    {
+     "nom": "Fall Out Boy",
+     "role": "interprète"
+    },
+    {
+     "nom": "A Day To Remember",
+     "role": "interprète"
+    },
+    {
+     "nom": "Neck Deep",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "salle": "",
+   "debut": "2027-06-10",
+   "fin": "2027-06-10",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Seule date parisienne de la tournée européenne, A Day To Remember et Neck Deep en invités.",
+   "lien": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/357836-fall-out-boy-to-perform-at-paris-bercy-in-june-2027",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Prévente artiste",
+     "vente": "2026-11-12T12:00",
+     "venteApprox": false,
+     "condition": "Sur inscription"
+    },
+    {
+     "type": "Vente générale",
+     "vente": "2026-11-13T12:00",
+     "venteApprox": false
+    }
+   ],
+   "nouveau": true,
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/357836-fall-out-boy-to-perform-at-paris-bercy-in-june-2027"
+  },
+  {
+   "id": "pomme-accor-arena-2027",
+   "titre": "Pomme – la forteresse",
+   "categorie": "Concert",
+   "sousGenre": "Chanson",
+   "artistes": [
+    {
+     "nom": "Pomme",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "salle": "",
+   "debut": "2027-12-08",
+   "fin": "2027-12-08",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Premier Bercy de Pomme, pour l’album « la forteresse », après deux Olympia complets.",
+   "lien": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/357600-pomme-in-concert-at-paris-bercy-in-december-2027",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Prévente",
+     "vente": "2026-11-07T10:00",
+     "venteApprox": false,
+     "condition": "Sur inscription"
+    },
+    {
+     "type": "Vente générale",
+     "vente": "2026-11-10T10:00",
+     "venteApprox": false
+    }
+   ],
+   "nouveau": true,
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/357600-pomme-in-concert-at-paris-bercy-in-december-2027"
+  },
+  {
+   "id": "l2b-paris-la-defense-arena-2027",
+   "titre": "L2B",
+   "categorie": "Concert",
+   "sousGenre": "Rap",
+   "artistes": [
+    {
+     "nom": "L2B",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "paris-la-defense-arena",
+   "salle": "",
+   "debut": "2027-10-16",
+   "fin": "2027-10-16",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Après deux Bercy complets en mars 2026, le trio passe à la plus grande salle couverte d’Europe, un soir.",
+   "lien": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/357835-l2b-in-concert-at-paris-la-defense-arena-in-october-2027",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Prévente artiste",
+     "vente": "2026-11-10T12:00",
+     "venteApprox": false
+    },
+    {
+     "type": "Prévente Paris La Défense Arena",
+     "vente": "2026-11-10T18:00",
+     "venteApprox": false
+    },
+    {
+     "type": "Vente générale",
+     "vente": "2026-11-12T12:00",
+     "venteApprox": false
+    }
+   ],
+   "nouveau": true,
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/357835-l2b-in-concert-at-paris-la-defense-arena-in-october-2027"
+  },
+  {
+   "id": "leto-paris-la-defense-arena-2027",
+   "titre": "Leto",
+   "categorie": "Concert",
+   "sousGenre": "Rap",
+   "artistes": [
+    {
+     "nom": "Leto",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "paris-la-defense-arena",
+   "salle": "",
+   "debut": "2027-12-11",
+   "fin": "2027-12-11",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Après un Bercy complet en 2025, date unique à Paris La Défense Arena.",
+   "lien": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/354874-leto-in-concert-at-paris-la-defense-arena-in-december-2027",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/354874-leto-in-concert-at-paris-la-defense-arena-in-december-2027"
+  },
+  {
+   "id": "guy2bezbar-accor-arena-2027",
+   "titre": "Guy2Bezbar – Jeunesse dorée",
+   "categorie": "Concert",
+   "sousGenre": "Rap",
+   "artistes": [
+    {
+     "nom": "Guy2Bezbar",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "salle": "",
+   "debut": "2027-04-17",
+   "fin": "2027-04-17",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Premier Bercy en solo, après Cigale, Olympia et Zénith complets.",
+   "lien": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/353381-guy2bezbar-in-concert-at-paris-bercy-in-april-2027",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Prévente",
+     "vente": "2026-10-06T10:00",
+     "venteApprox": false
+    },
+    {
+     "type": "Vente générale",
+     "vente": "2026-10-07T10:00",
+     "venteApprox": false
+    }
+   ],
+   "nouveau": true,
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/353381-guy2bezbar-in-concert-at-paris-bercy-in-april-2027"
+  },
+  {
+   "id": "kaaris-stade-de-france-2027",
+   "titre": "Kaaris au Stade de France",
+   "categorie": "Concert",
+   "sousGenre": "Rap",
+   "artistes": [
+    {
+     "nom": "Kaaris",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "stade-de-france",
+   "salle": "",
+   "debut": "2027-05-22",
+   "fin": "2027-05-22",
+   "note": 3,
+   "calcul": "C1 N2 H2",
+   "pronostic": true,
+   "pourquoi": "Concert présenté comme le grand final de son parcours, après Bercy et La Défense Arena.",
+   "lien": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/352759-kaaris-to-perform-at-the-stade-de-france-in-2027-for-his-grand-finale-tickets-go-on-sale",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Vente générale",
+     "vente": "2026-09-28T10:00",
+     "venteApprox": false
+    }
+   ],
+   "nouveau": true,
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/352759-kaaris-to-perform-at-the-stade-de-france-in-2027-for-his-grand-finale-tickets-go-on-sale"
+  },
+  {
+   "id": "sdm-stade-de-france-2027",
+   "titre": "SDM au Stade de France – In Infinitum",
+   "categorie": "Concert",
+   "sousGenre": "Rap",
+   "artistes": [
+    {
+     "nom": "SDM",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "stade-de-france",
+   "salle": "",
+   "debut": "2027-05-29",
+   "fin": "2027-05-30",
+   "note": 3,
+   "calcul": "C1 N2 H2",
+   "pronostic": true,
+   "pourquoi": "Deux soirs au Stade de France pour l’album In Infinitum, le second ajouté devant la demande.",
+   "lien": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/352915-sdm-to-perform-at-the-stade-de-france-in-may-2027-new-date",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Vente générale (2e date)",
+     "vente": "2026-10-02T10:00",
+     "venteApprox": false,
+     "condition": "Fnac Spectacles et Stade de France"
+    }
+   ],
+   "nouveau": true,
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/352915-sdm-to-perform-at-the-stade-de-france-in-may-2027-new-date"
+  },
+  {
+   "id": "vianney-accor-arena-2027",
+   "titre": "Vianney – Les évadés",
+   "categorie": "Concert",
+   "sousGenre": "Chanson",
+   "artistes": [
+    {
+     "nom": "Vianney",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "salle": "",
+   "debut": "2027-11-26",
+   "fin": "2027-11-27",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Deux Bercy pour l’album « Les évadés », après trois Zénith en avril 2027.",
+   "lien": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/355675-vianney-in-concert-at-paris-bercy-in-november-2027",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/355675-vianney-in-concert-at-paris-bercy-in-november-2027"
+  },
+  {
+   "id": "etienne-daho-grand-palais-2027",
+   "titre": "Étienne Daho symphonique – Pop Satori et Éden",
+   "categorie": "Concert",
+   "sousGenre": "Pop",
+   "artistes": [
+    {
+     "nom": "Étienne Daho",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "grand-palais",
+   "salle": "",
+   "debut": "2027-01-15",
+   "fin": "2027-01-15",
+   "note": 3,
+   "calcul": "C1 N2 H2 +Chef-d’œuvre",
+   "pronostic": true,
+   "pourquoi": "Un soir sous la nef du Grand Palais (Collector) pour les 40 ans de Pop Satori et les 30 ans d’Éden, en version symphonique.",
+   "lien": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/352729-etienne-daho-to-perform-a-symphonic-concert-at-the-grand-palais-in-paris-in-january-2027",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Prévente",
+     "vente": "2026-09-24T10:00",
+     "venteApprox": false
+    }
+   ],
+   "nouveau": true,
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/352729-etienne-daho-to-perform-a-symphonic-concert-at-the-grand-palais-in-paris-in-january-2027"
+  },
+  {
+   "id": "ludovico-einaudi-grand-palais-2027",
+   "titre": "Ludovico Einaudi – Solo Piano Tour",
+   "categorie": "Concert",
+   "sousGenre": "Piano",
+   "artistes": [
+    {
+     "nom": "Ludovico Einaudi",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "grand-palais",
+   "salle": "",
+   "debut": "2027-01-14",
+   "fin": "2027-01-14",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Premier concert d’Einaudi sous la nef du Grand Palais (Collector), seul au piano, 8 500 places assises.",
+   "lien": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/353588-ludovico-einaudi-will-perform-in-concert-at-the-grand-palais-in-january-2027-as-part-of-his-solo-piano-tour",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Prévente",
+     "vente": "2026-10-09T10:00",
+     "venteApprox": false,
+     "condition": "Sur inscription"
+    },
+    {
+     "type": "Vente générale",
+     "vente": "2026-10-09T18:00",
+     "venteApprox": false
+    }
+   ],
+   "nouveau": true,
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/353588-ludovico-einaudi-will-perform-in-concert-at-the-grand-palais-in-january-2027-as-part-of-his-solo-piano-tour"
+  },
+  {
+   "id": "jean-michel-jarre-oxygene-2027",
+   "titre": "Jean-Michel Jarre – Oxygène, 50 ans",
+   "categorie": "Concert",
+   "sousGenre": "Électro",
+   "artistes": [
+    {
+     "nom": "Jean-Michel Jarre",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "seine-musicale",
+   "salle": "",
+   "debut": "2027-10-14",
+   "fin": "2027-10-16",
+   "note": 4,
+   "calcul": "C1 N3 H2 +Chef-d’œuvre",
+   "pronostic": true,
+   "pourquoi": "Retour sur scène en France après dix ans, trois soirs immersifs pour les 50 ans d’Oxygène.",
+   "lien": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/355359-jean-michel-jarre-in-concert-at-la-seine-musicale-in-paris-in-october-2027",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Prévente La Seine Musicale",
+     "vente": "2026-10-28T11:00",
+     "venteApprox": false
+    }
+   ],
+   "nouveau": true,
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/355359-jean-michel-jarre-in-concert-at-la-seine-musicale-in-paris-in-october-2027"
+  },
+  {
+   "id": "charlotte-cardin-accor-arena-2027",
+   "titre": "Charlotte Cardin – Midnight, mon amour Tour",
+   "categorie": "Concert",
+   "sousGenre": "Pop",
+   "artistes": [
+    {
+     "nom": "Charlotte Cardin",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "salle": "",
+   "debut": "2027-12-04",
+   "fin": "2027-12-05",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Deux soirs à Bercy pour le troisième album, le second ajouté devant la demande.",
+   "lien": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/355542-charlotte-cardin-to-perform-at-paris-bercy-in-december-2027-new-date",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/355542-charlotte-cardin-to-perform-at-paris-bercy-in-december-2027-new-date"
+  },
+  {
+   "id": "eddy-de-pretto-accor-arena-2027",
+   "titre": "Eddy de Pretto – Les Solitudes Extrêmes Tour",
+   "categorie": "Concert",
+   "sousGenre": "Chanson",
+   "artistes": [
+    {
+     "nom": "Eddy de Pretto",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "salle": "",
+   "debut": "2027-11-02",
+   "fin": "2027-11-02",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Seule date parisienne d’une tournée de 21 concerts.",
+   "lien": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/353213-eddy-de-pretto-in-concert-at-paris-bercy-in-november-2027",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Prévente artiste",
+     "vente": "2026-10-06T11:00",
+     "venteApprox": false,
+     "condition": "Sur inscription"
+    }
+   ],
+   "nouveau": true,
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/353213-eddy-de-pretto-in-concert-at-paris-bercy-in-november-2027"
+  },
+  {
+   "id": "kidjo-ndour-grand-rex-2027",
+   "titre": "Angélique Kidjo et Youssou N’Dour – Chimes of Freedom Tour",
+   "categorie": "Concert",
+   "sousGenre": "Musiques du monde",
+   "artistes": [
+    {
+     "nom": "Angélique Kidjo",
+     "role": "interprète"
+    },
+    {
+     "nom": "Youssou N’Dour",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "grand-rex",
+   "salle": "",
+   "debut": "2027-03-24",
+   "fin": "2027-03-24",
+   "note": 3,
+   "calcul": "C1 N3 H2",
+   "pronostic": true,
+   "pourquoi": "Deux légendes des musiques africaines réunies, seule date en France.",
+   "lien": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/351630-angelique-kidjo-and-youssou-n-dour-in-concert-at-the-grand-rex-in-paris-in-march-2027",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Vente générale",
+     "vente": "2026-09-04T10:00",
+     "venteApprox": false
+    }
+   ],
+   "nouveau": true,
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/351630-angelique-kidjo-and-youssou-n-dour-in-concert-at-the-grand-rex-in-paris-in-march-2027"
+  },
+  {
+   "id": "jorja-smith-accor-arena-2027",
+   "titre": "Jorja Smith – What Are The Odds",
+   "categorie": "Concert",
+   "sousGenre": "R&B",
+   "artistes": [
+    {
+     "nom": "Jorja Smith",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "salle": "",
+   "debut": "2027-05-27",
+   "fin": "2027-05-27",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Premier Bercy de Jorja Smith, pour son nouvel album.",
+   "lien": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/350845-jorja-smith-in-concert-at-paris-bercy-in-may-2027",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/350845-jorja-smith-in-concert-at-paris-bercy-in-may-2027"
+  },
+  {
+   "id": "weezer-zenith-2027",
+   "titre": "Weezer",
+   "categorie": "Concert",
+   "sousGenre": "Rock",
+   "artistes": [
+    {
+     "nom": "Weezer",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "zenith-paris",
+   "salle": "",
+   "debut": "2027-05-25",
+   "fin": "2027-05-25",
+   "note": 3,
+   "calcul": "C1 N2 H2",
+   "pronostic": true,
+   "pourquoi": "Date unique en France pour le groupe de Rivers Cuomo.",
+   "lien": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/350158-weezer-to-perform-in-paris-for-a-one-off-date-in-2027-details-and-ticketing-launch-date",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/350158-weezer-to-perform-in-paris-for-a-one-off-date-in-2027-details-and-ticketing-launch-date"
+  },
+  {
+   "id": "teddybear-trianon-2027",
+   "titre": "TeddyBear",
+   "categorie": "Concert",
+   "sousGenre": "Chanson",
+   "artistes": [
+    {
+     "nom": "TeddyBear",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "le-trianon",
+   "salle": "",
+   "debut": "2027-01-26",
+   "fin": "2027-01-26",
+   "note": 2,
+   "calcul": "C1 N1 H1",
+   "pronostic": true,
+   "pourquoi": "Le phénomène belge présente son premier album, seule date parisienne.",
+   "lien": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/352690-teddybear-the-new-belgian-phenomenon-in-concert-at-the-trianon-in-paris-in-january-2027",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/352690-teddybear-the-new-belgian-phenomenon-in-concert-at-the-trianon-in-paris-in-january-2027"
+  },
+  {
+   "id": "rush-fifty-something-2027",
+   "titre": "Rush – Fifty Something Tour",
+   "categorie": "Concert",
+   "sousGenre": "Rock",
+   "artistes": [
+    {
+     "nom": "Rush",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "paris-la-defense-arena",
+   "salle": "",
+   "debut": "2027-02-19",
+   "fin": "2027-02-19",
+   "note": 3,
+   "calcul": "C1 N3 H2",
+   "pronostic": true,
+   "pourquoi": "Retour de Rush en France 35 ans après son unique concert dans le pays, une seule date.",
+   "lien": "https://rush.com/new-rush-2027-tour",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Prévente",
+     "vente": "2026-02-25T10:00",
+     "venteApprox": false,
+     "condition": "Sur inscription"
+    },
+    {
+     "type": "Vente générale",
+     "vente": "2026-02-27T10:00",
+     "venteApprox": false
+    }
+   ],
+   "nouveau": true,
+   "source": "https://www.defense-92.fr/musique/la-tournee-de-rush-passera-par-la-paris-la-defense-arena-en-2027-86601"
+  },
+  {
+   "id": "erykah-badu-zenith-2027",
+   "titre": "Erykah Badu – IMEHO Tour",
+   "categorie": "Concert",
+   "sousGenre": "R&B",
+   "artistes": [
+    {
+     "nom": "Erykah Badu",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "zenith-paris",
+   "salle": "",
+   "debut": "2027-01-20",
+   "fin": "2027-01-20",
+   "note": 3,
+   "calcul": "C1 N3 H1",
+   "pronostic": true,
+   "pourquoi": "Date reportée de l’automne 2026, au Zénith de Paris.",
+   "lien": "https://75.agendaculturel.fr/concert/erykah-badu-1.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "source": "https://themusicuniverse.com/erykah-badu-announces-2027-imeho-european-tour/"
+  },
+  {
+   "id": "jamiroquai-accor-arena-2027",
+   "titre": "Jamiroquai",
+   "categorie": "Concert",
+   "sousGenre": "Funk",
+   "artistes": [
+    {
+     "nom": "Jamiroquai",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "salle": "",
+   "debut": "2027-07-09",
+   "fin": "2027-07-10",
+   "note": 3,
+   "calcul": "C1 N3 H1",
+   "pronostic": true,
+   "pourquoi": "Deux soirs de Jamiroquai à Bercy.",
+   "lien": "https://75.agendaculturel.fr/concert/jamiroquai.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Vente générale",
+     "vente": "2026-11-13T10:00",
+     "venteApprox": false
+    }
+   ],
+   "nouveau": true,
+   "source": "https://leclaireur.fnac.com/article/cp72949-jamiroquai-en-concert-a-laccor-arena-pourquoi-il-reste-leternel-parrain-du-cool/"
+  },
+  {
+   "id": "tayc-joya-tour-2027",
+   "titre": "Tayc – JOYA Tour",
+   "categorie": "Concert",
+   "sousGenre": "R&B",
+   "artistes": [
+    {
+     "nom": "Tayc",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "salle": "",
+   "debut": "2027-06-01",
+   "fin": "2027-06-03",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Trois soirs à Bercy en clôture de la tournée JOYA.",
+   "lien": "https://www.accorarena.com/en/events-and-tickets/tayc-joya-tour--4fda9",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "source": "https://www.infoconcert.com/actualites/tayc-met-ses-fans-en-joie-il-annonce-trois-concerts-a-laccor-arena-et-une-tournee-des-zenith-en-2027-22209"
+  },
+  {
+   "id": "mosimann-dream-tour-finale",
+   "titre": "Mosimann – Dream Tour Finale",
+   "categorie": "Concert",
+   "sousGenre": "Électro",
+   "artistes": [
+    {
+     "nom": "Mosimann",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "salle": "",
+   "debut": "2027-10-16",
+   "fin": "2027-10-16",
+   "note": 3,
+   "calcul": "C1 N2 H2",
+   "pronostic": true,
+   "pourquoi": "Premier Bercy du DJ après deux Zénith complets.",
+   "lien": "https://www.accorarena.com/en/events-and-tickets/mosimann--1c4eb",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Vente générale",
+     "vente": "2026-04-17T10:00",
+     "venteApprox": false
+    }
+   ],
+   "nouveau": true,
+   "source": "https://www.infoconcert.com/actualites/le-zenith-de-paris-complet-mosimann-jouera-ses-tracks-de-reve-a-laccor-arena-en-octobre-2027-22111"
+  },
+  {
+   "id": "john-summit-zenith-2027",
+   "titre": "John Summit – Ctrl Escape Arena Tour",
+   "categorie": "Concert",
+   "sousGenre": "Électro",
+   "artistes": [
+    {
+     "nom": "John Summit",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "zenith-paris",
+   "salle": "",
+   "debut": "2027-02-23",
+   "fin": "2027-02-23",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Le DJ américain au Zénith de Paris pour sa tournée des arénas.",
+   "lien": "https://www.jds.fr/paris/concerts/electro/john-summit-ctrl-escape-arena-tour-1787635_A",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "source": "https://www.jds.fr/paris/concerts/electro/john-summit-ctrl-escape-arena-tour-1787635_A"
+  },
+  {
+   "id": "noah-kahan-off-track-2027",
+   "titre": "Noah Kahan – The Last of the Bugs World Tour",
+   "categorie": "Concert",
+   "sousGenre": "Folk",
+   "artistes": [
+    {
+     "nom": "Noah Kahan",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "hippodrome-longchamp",
+   "salle": "",
+   "debut": "2027-07-10",
+   "fin": "2027-07-10",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Seule date française de sa tournée des stades, sur la scène éphémère Off Track à Longchamp.",
+   "lien": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/356466-off-track-2027-noah-kahan-in-concert-at-hippodrome-parislongchamp",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Prévente",
+     "vente": "2026-11-10T12:00",
+     "venteApprox": false
+    },
+    {
+     "type": "Vente générale",
+     "vente": "2026-11-12T12:00",
+     "venteApprox": false
+    }
+   ],
+   "nouveau": true,
+   "source": "https://75.agendaculturel.fr/concert/noah-kahan-the-last-of-the-bugs-world-tour.html"
+  },
+  {
+   "id": "tiakola-philharmonie-lamoureux",
+   "titre": "Tiakola et l’Orchestre Lamoureux",
+   "categorie": "Concert",
+   "sousGenre": "Rap",
+   "artistes": [
+    {
+     "nom": "Tiakola",
+     "role": "interprète"
+    },
+    {
+     "nom": "Orchestre Lamoureux",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "philharmonie",
+   "salle": "",
+   "debut": "2026-11-19",
+   "fin": "2026-11-19",
+   "note": 3,
+   "calcul": "C1 N2 H2",
+   "pronostic": true,
+   "pourquoi": "Le rappeur avec un orchestre symphonique, un soir à la Philharmonie.",
+   "lien": "https://www.sortiraparis.com/scenes/concert-musique/articles/353849-tiakola-a-la-philharmonie-de-paris-un-concert-avec-l-orchestre-lamoureux",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "source": "https://www.sortiraparis.com/scenes/concert-musique/articles/353849-tiakola-a-la-philharmonie-de-paris-un-concert-avec-l-orchestre-lamoureux",
+   "etat": "complet"
+  },
+  {
+   "id": "mary-cassatt-l-independante",
+   "titre": "Mary Cassatt, l’indépendante",
+   "categorie": "Exposition",
+   "sousGenre": "Peinture",
+   "artistes": [
+    {
+     "nom": "Mary Cassatt",
+     "role": "artiste"
+    }
+   ],
+   "lieuId": "musee-orsay",
+   "salle": "",
+   "debut": "2026-10-06",
+   "fin": "2027-01-31",
+   "note": 3,
+   "calcul": "C1 N3 H1",
+   "pronostic": true,
+   "pourquoi": "Grande exposition du musée d’Orsay consacrée à la peintre impressionniste américaine.",
+   "lien": "https://www.musee-orsay.fr/es/programa/agenda/exposiciones/mary-cassatt-la-independiente",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "expo": {
+    "type": "musee",
+    "source": "https://www.cometoparis.com/fre/musee-orsay/expositions/mary-cassatt-lindependante-m9001938",
+    "ajouteLe": "2026-11-17",
+    "nocturnes": [
+     "jeu"
+    ],
+    "tarif": "16 €",
+    "gratuit": false,
+    "jeunes": "gratuit-ue-18-25"
+   },
+   "relaches": [
+    "lun"
+   ],
+   "horaires": "9h30–18h, jeudi jusqu’à 21h45"
+  },
+  {
+   "id": "monet-peindre-le-temps",
+   "titre": "Monet, peindre le temps",
+   "categorie": "Exposition",
+   "sousGenre": "Peinture",
+   "artistes": [
+    {
+     "nom": "Claude Monet",
+     "role": "artiste"
+    }
+   ],
+   "lieuId": "musee-orangerie",
+   "salle": "",
+   "debut": "2026-09-30",
+   "fin": "2027-01-25",
+   "note": 4,
+   "calcul": "C1 N3 H2 +Chef-d’œuvre",
+   "pronostic": true,
+   "pourquoi": "Près de quarante toiles de Monet pour le centenaire de sa mort, avec la Tate Modern, autour des Nymphéas.",
+   "lien": "https://www.offi.fr/expositions-musees/musee-de-lorangerie-2889/monet-peindre-le-temps-105855.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "expo": {
+    "type": "musee",
+    "source": "https://www.finestresullarte.info/fr/expositions/monet-peindre-le-temps-une-grande-exposition-a-paris-pour-le-centenaire-de-sa-mort",
+    "ajouteLe": "2026-11-17",
+    "jeunes": "gratuit-ue-18-25"
+   }
+  },
+  {
+   "id": "kerry-james-marshall-the-histories",
+   "titre": "Kerry James Marshall, The Histories",
+   "categorie": "Exposition",
+   "sousGenre": "Peinture",
+   "artistes": [
+    {
+     "nom": "Kerry James Marshall",
+     "role": "artiste"
+    }
+   ],
+   "lieuId": "mam-paris",
+   "salle": "",
+   "debut": "2026-09-18",
+   "fin": "2027-01-24",
+   "note": 3,
+   "calcul": "C1 N3 H2",
+   "pronostic": true,
+   "pourquoi": "Première exposition en France de l’artiste américain, venue de la Royal Academy et du Kunsthaus de Zurich.",
+   "lien": "https://www.mam.paris.fr/en/node/2250",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "expo": {
+    "type": "musee",
+    "source": "https://www.mam.paris.fr/sites/default/files/documents/fr_cp_kerry_james_marshall_22.06.2026.pdf",
+    "ajouteLe": "2026-11-17",
+    "nocturnes": [
+     "jeu"
+    ],
+    "tarif": "17 €",
+    "gratuit": false,
+    "jeunesTexte": "Gratuit pour les moins de 18 ans"
+   },
+   "relaches": [
+    "lun"
+   ],
+   "horaires": "10h–18h, jeudi jusqu’à 21h30"
+  },
+  {
+   "id": "louvre-photo",
+   "titre": "Louvre Photo",
+   "categorie": "Exposition",
+   "sousGenre": "Photographie",
+   "artistes": [
+    {
+     "nom": "Dominique de Font-Réaulx",
+     "role": "commissaire"
+    },
+    {
+     "nom": "Quentin Bajac",
+     "role": "commissaire"
+    }
+   ],
+   "lieuId": "louvre",
+   "salle": "Mezzanine Napoléon",
+   "debut": "2026-11-04",
+   "fin": "2027-05-03",
+   "note": 3,
+   "calcul": "C1 N3 H1",
+   "pronostic": true,
+   "pourquoi": "Plus de 300 photographies, des daguerréotypes à l’image numérique, sur la place du Louvre dans l’histoire de la photographie.",
+   "lien": "https://www.louvre.fr/expositions-et-evenements/expositions/louvre-photo",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "expo": {
+    "type": "musee",
+    "source": "https://www.louvre.fr/expositions-et-evenements/expositions/louvre-photo",
+    "ajouteLe": "2026-11-17",
+    "gratuit": false
+   },
+   "relaches": [
+    "mar"
+   ]
+  },
+  {
+   "id": "eternel-tintoret",
+   "titre": "Éternel Tintoret",
+   "categorie": "Exposition",
+   "sousGenre": "Peinture",
+   "artistes": [
+    {
+     "nom": "Tintoret",
+     "role": "artiste"
+    }
+   ],
+   "lieuId": "jacquemart-andre",
+   "salle": "",
+   "debut": "2026-09-11",
+   "fin": "2027-01-24",
+   "note": 3,
+   "calcul": "C1 N3 H1",
+   "pronostic": true,
+   "pourquoi": "Une quarantaine de peintures et dessins autour du maître vénitien.",
+   "lien": "https://www.offi.fr/expositions-musees/musee-jacquemart-andre-2518/eternel-tintoret-106726.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "expo": {
+    "type": "musee",
+    "source": "https://www.cometoparis.com/fre/musee-jacquemart-andre/exposition/eternel-tintoret-m9001929",
+    "ajouteLe": "2026-11-17"
+   }
+  },
+  {
+   "id": "histoires-de-paysages-monet-hockney",
+   "titre": "Histoires de paysages. De Monet à Hockney",
+   "categorie": "Exposition",
+   "sousGenre": "Peinture",
+   "artistes": [
+    {
+     "nom": "Claude Monet",
+     "role": "artiste"
+    },
+    {
+     "nom": "David Hockney",
+     "role": "artiste"
+    }
+   ],
+   "lieuId": "marmottan",
+   "salle": "",
+   "debut": "2026-09-24",
+   "fin": "2027-01-31",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Une centaine d’œuvres sur le paysage de 1890 à nos jours, avec le musée de Grenoble.",
+   "lien": "https://www.marmottan.fr/en/expositions/histoires-de-paysages/",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "expo": {
+    "type": "musee",
+    "source": "https://www.marmottan.fr/en/expositions/histoires-de-paysages/",
+    "ajouteLe": "2026-11-17",
+    "tarif": "14 €",
+    "gratuit": false
+   }
+  },
+  {
+   "id": "stan-douglas-parallax",
+   "titre": "Stan Douglas. Parallax",
+   "categorie": "Exposition",
+   "sousGenre": "Photographie",
+   "artistes": [
+    {
+     "nom": "Stan Douglas",
+     "role": "artiste"
+    }
+   ],
+   "lieuId": "jeu-de-paume",
+   "salle": "",
+   "debut": "2026-10-20",
+   "fin": "2027-01-10",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "La plus grande monographie de l’artiste canadien en France depuis plus de trente ans.",
+   "lien": "https://jeudepaume.org/en/evenement/stan-douglas/",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "expo": {
+    "type": "musee",
+    "source": "https://jeudepaume.org/en/evenement/stan-douglas/",
+    "ajouteLe": "2026-11-17",
+    "gratuit": false
+   },
+   "relaches": [
+    "lun"
+   ]
+  },
+  {
+   "id": "ibrahim-mahama-le-temps-des-recoltes",
+   "titre": "Ibrahim Mahama, Le Temps des récoltes",
+   "categorie": "Exposition",
+   "sousGenre": "Art contemporain",
+   "artistes": [
+    {
+     "nom": "Ibrahim Mahama",
+     "role": "artiste"
+    }
+   ],
+   "lieuId": "fondation-cartier",
+   "salle": "",
+   "debut": "2026-10-22",
+   "fin": "2027-02-28",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "L’artiste ghanéen et neuf invités dans le nouveau bâtiment de la Fondation Cartier.",
+   "lien": "https://www.fondationcartier.com/en/programme/exhibition/the-harvest-season",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "expo": {
+    "type": "fondation",
+    "source": "https://www.fondationcartier.com/en/programme/exhibition/the-harvest-season",
+    "ajouteLe": "2026-11-17",
+    "gratuit": false
+   }
+  },
+  {
+   "id": "penn-and-fashion",
+   "titre": "Penn & Fashion",
+   "categorie": "Exposition",
+   "sousGenre": "Photographie",
+   "artistes": [
+    {
+     "nom": "Irving Penn",
+     "role": "artiste"
+    }
+   ],
+   "lieuId": "mep",
+   "salle": "",
+   "debut": "2026-09-30",
+   "fin": "2027-01-17",
+   "note": 3,
+   "calcul": "C1 N3 H1",
+   "pronostic": true,
+   "pourquoi": "Soixante ans de photographie de mode par Irving Penn.",
+   "lien": "https://www.mep-fr.org",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "expo": {
+    "type": "musee",
+    "source": "https://www.offi.fr/expositions-musees/mois-11-2026.html",
+    "ajouteLe": "2026-11-17",
+    "gratuit": false
+   }
+  },
+  {
+   "id": "bruxelles-1900",
+   "titre": "Bruxelles 1900",
+   "categorie": "Exposition",
+   "sousGenre": "Peinture",
+   "artistes": [],
+   "lieuId": "petit-palais",
+   "salle": "",
+   "debut": "2026-11-10",
+   "fin": "2027-04-25",
+   "note": 2,
+   "calcul": "C1 N1 H1",
+   "pronostic": true,
+   "pourquoi": "Panorama inédit en France de la scène artistique bruxelloise vers 1900 : peinture, sculpture, affiches, bijoux.",
+   "lien": "https://www.offi.fr/expositions-musees/petit-palais-2991/bruxelles-1900-108154.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "expo": {
+    "type": "musee",
+    "source": "https://www.paris.fr/evenements/bruxelles-1900-127376",
+    "ajouteLe": "2026-11-17",
+    "tarif": "17 €",
+    "gratuit": false
+   },
+   "relaches": [
+    "lun"
+   ]
+  },
+  {
+   "id": "girls-grand-palais",
+   "titre": "Girls. Adolescence, mode et rébellion",
+   "categorie": "Exposition",
+   "sousGenre": "Mode",
+   "artistes": [
+    {
+     "nom": "Elisa De Wyngaert",
+     "role": "commissaire"
+    }
+   ],
+   "lieuId": "grand-palais",
+   "salle": "",
+   "debut": "2026-12-09",
+   "fin": "2027-03-21",
+   "note": 2,
+   "calcul": "C1 N1 H1",
+   "pronostic": true,
+   "pourquoi": "L’adolescence des filles vue par artistes, couturiers, cinéastes et photographes, d’après le MoMu d’Anvers.",
+   "lien": "https://www.offi.fr/expositions-musees/grand-palais-5399/girls-adolescence-mode-et-rebellion-107375.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "expo": {
+    "type": "musee",
+    "source": "https://75.agendaculturel.fr/exposition/girls-adolescence-mode-et-rebellion.html",
+    "ajouteLe": "2026-11-17",
+    "gratuit": false
+   },
+   "relaches": [
+    "lun"
+   ]
+  },
+  {
+   "id": "les-secrets-de-l-alhambra",
+   "titre": "Les Secrets de l’Alhambra nasride",
+   "categorie": "Exposition",
+   "sousGenre": "Arts de l’Islam",
+   "artistes": [],
+   "lieuId": "institut-du-monde-arabe",
+   "salle": "",
+   "debut": "2026-11-24",
+   "fin": "2027-05-16",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "L’Alhambra des sultans nasrides au temps de Muhammad V, autour de la fontaine des Lions.",
+   "lien": "https://www.offi.fr/expositions-musees/institut-du-monde-arabe-2504/les-secrets-de-lalhambra-107189.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "expo": {
+    "type": "musee",
+    "source": "https://75.agendaculturel.fr/exposition/les-secrets-de-l-alhambra.html",
+    "ajouteLe": "2026-11-17",
+    "gratuit": false
+   },
+   "relaches": [
+    "lun"
+   ],
+   "horaires": "10h–18h, samedi et dimanche jusqu’à 19h"
+  },
+  {
+   "id": "coree-le-royaume-des-lettres",
+   "titre": "Corée. Le Royaume des lettrés 1600-1900",
+   "categorie": "Exposition",
+   "sousGenre": "Arts d’Asie",
+   "artistes": [],
+   "lieuId": "musee-cernuschi",
+   "salle": "",
+   "debut": "2026-11-20",
+   "fin": "2027-04-04",
+   "note": 2,
+   "calcul": "C1 N1 H1",
+   "pronostic": true,
+   "pourquoi": "Le monde des yangban, l’élite lettrée du royaume de Chosŏn, en chefs-d’œuvre, mobilier et costumes.",
+   "lien": "https://www.offi.fr/expositions-musees/musee-cernuschi-1751/coree-le-royaume-des-lettres-1600-1900-107316.html",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "nouveau": true,
+   "expo": {
+    "type": "musee",
+    "source": "https://75.agendaculturel.fr/exposition/coree-le-royaume-des-lettres-1600-1900.html",
+    "ajouteLe": "2026-11-17",
+    "gratuit": false
+   },
+   "relaches": [
+    "lun"
    ]
   }
  ]
