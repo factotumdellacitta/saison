@@ -941,3 +941,35 @@ body:has(#dlg) .pub,body:has(#dlg) .toast{bottom:auto;top:0}
   .acts:has(>.acts-adm) .btn::after{content:"";position:absolute;inset:-6px -2px}
   .acts>.acts-adm .btn.ai{position:relative}
 }
+/* Aperçus courts (colonnes latérales, Plus tard, rapports) : trait plein de la couleur du genre à gauche, comme les lignes. */
+.vl li.ap>a,.vl li.ap>.ap-s{display:flex;gap:var(--e3);align-items:baseline;min-height:var(--cible);padding:var(--e2) 0 var(--e2) var(--e2);border-left:var(--bande) solid var(--ga,var(--filet-leger));text-decoration:none}
+.vl li.ap .vd{width:96px}
+.r-lat .vl li.ap .vd{width:80px}
+.vl .vm.vr{border-bottom:0;padding-top:var(--e2);text-transform:none;letter-spacing:0;font-weight:500}
+/* Rapport : texte en colonne de lecture, fiches citées à droite (bureau), dessous (mobile). */
+.rp-s.a-lignes .rp-a{margin-top:var(--e3)}
+@media (min-width:960px){
+  .rp-s.a-lignes{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--e6);align-items:start}
+  .rp-s.a-lignes>.mh{grid-column:1/-1}
+  .rp-s.a-lignes>.rp-t{grid-column:1/span 7}
+  .rp-s.a-lignes>.rp-a{grid-column:8/span 5;margin-top:var(--e3)}
+  .rp-a .vl li.ap .vd{width:72px}
+}
+.rp-a .vl{border-top:1px solid var(--filet)}
+.rp-fin{margin-top:var(--e8)}
+/* Billetteries : recherche et rubriques sur une ligne, liens compacts en colonnes. */
+.lk-barre{display:flex;flex-direction:column;gap:var(--e2);margin-top:var(--e3)}
+@media (min-width:760px){.lk-barre{flex-direction:row;align-items:center}.lk-barre>.rech{flex:0 0 320px}}
+#r-liens .lks{margin-top:var(--e4)}
+.lkc{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));column-gap:var(--e4);border-top:0}
+.lkc a{min-height:var(--cible);padding:6px 0}
+.lkc .lt b{font-size:var(--t-corps)}
+.lkc .lt small{font-size:var(--t-badge)}
+.lks[hidden],.lk li[hidden]{display:none}
+/* Mouvement : fermeture d’une fiche, trait de l’onglet actif. */
+@media (prefers-reduced-motion:no-preference){
+  .det.ferme{animation:m-replie 180ms ease-in forwards}
+  .tab[aria-current="page"]::after,.tab[aria-selected="true"]::after{animation:m-trait 240ms cubic-bezier(.2,.7,.2,1)}
+}
+@keyframes m-replie{from{opacity:1;transform:none}to{opacity:0;transform:translateY(-6px)}}
+@keyframes m-trait{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
