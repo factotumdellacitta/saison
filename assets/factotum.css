@@ -1131,3 +1131,7 @@ button.cell.cal-res{cursor:pointer;font:inherit;font-weight:800}
 .sites a.vers-spectacles{border-bottom-color:var(--id-spectacles)}
 @media (hover:hover){.sites a:hover,.sites a.vers-expo:hover,.sites a.vers-spectacles:hover{background:none;color:var(--sur-accent);border-bottom-color:var(--sur-accent)}}
 @media (max-width:959.98px){.top .sites{justify-content:flex-start;gap:var(--e4)}.top .sites a{flex:0 0 auto}}
+/* v4.66 : lien vers l'autre site sans soulignement de couleur ; bouton Filtres centré (compteur vide masqué) */
+.sites a.vers-expo,.sites a.vers-spectacles{border-bottom-color:transparent}
+.chip.filtres{justify-content:center}
+.chip.filtres .nf:empty{display:none}

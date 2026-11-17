@@ -1,6 +1,15 @@
 {
  "versions": [
   {
+   "version": "4.66",
+   "date": "2026-11-17",
+   "titre": "Sélecteur de site sans couleur, bouton Filtres centré",
+   "points": [
+    "Le lien vers l’autre site n’est plus souligné de sa couleur",
+    "Bouton Filtres : icône et texte centrés (compteur vide masqué)"
+   ]
+  },
+  {
    "version": "4.65",
    "date": "2026-11-17",
    "titre": "Aperçus de lien propres à chaque fiche",
