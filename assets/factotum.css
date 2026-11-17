@@ -887,3 +887,15 @@ body:has(#dlg) .pub,body:has(#dlg) .toast{bottom:auto;top:0}
 .r-res .chip .pi,.r-res .chip .coeur{width:16px;height:16px}
 .stub small.au{letter-spacing:0}
 @media (min-width:960px){.r-res.defile{flex-wrap:wrap;overflow:visible}}
+/* Ouvertures de vente : la date n’est que dans la colonne ; groupes « Cette semaine » puis par mois, en métadonnées ; deux colonnes sur bureau. */
+.v-fbar{display:flex;align-items:center;gap:var(--e3)}
+.v-fbar .seg{flex:none}
+.v-fbar .chips{flex:1;min-width:0}
+.v-g{margin-top:var(--e6)}
+.v-t{display:flex;align-items:baseline;gap:var(--e2);margin:0;padding:var(--e2) 0;border-top:3px solid var(--filet);font-size:var(--t-meta);font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+.v-t small{font-weight:500;color:var(--encre-2)}
+.v-l .art b{font-weight:700}
+@media (min-width:960px){
+  .v-l{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--e6);align-items:start}
+  .v-l>.row:nth-child(2){border-top:1px solid var(--filet-leger)}
+}

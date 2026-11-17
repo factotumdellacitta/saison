@@ -780,7 +780,7 @@ function renderRadar() {
   const go = (id, n, t) => `<button class="chip" type="button" data-rgo="${id}">${(n + " " + t).trim()}</button>`;
   const nSuivies = r.suite.filter((x) => suivie(x.e)).length;
   $("#main").innerHTML = `<section id="radar"><h1 class="vh">Radar</h1>
-  <nav class="chips defile r-res" aria-label="Accès du radar"><a class="chip" href="#ventes">${ico("ventes")}Ouvertures de vente</a>${go("r-reserver", r.aReserver.length, "à réserver")}<a class="chip" href="#coeur">${COEUR}Coups de cœur</a><a class="chip" href="#rapports">Rapports de veille</a>${go("r-liens", "", "Billetteries")}</nav>
+  <nav class="chips defile r-res" aria-label="Accès du radar"><a class="chip" href="#ventes">${ico("ventes")}Ouvertures de vente</a><a class="chip" href="#coeur">${COEUR}Coups de cœur</a>${go("r-reserver", r.aReserver.length, r.aReserver.length > 1 ? "notées 4" : "notée 4")}<a class="chip" href="#rapports">Rapports de veille</a>${go("r-liens", "", "Billetteries")}</nav>
   ${nC ? `<div class="msg">${plural(nC, "billet")} à compléter <a href="#admin?v=rapide">Traiter</a></div>` : ""}
   <div class="r-g"><div class="r-col">${rapportEnTete()}
     <section class="r-b r-reserver" id="r-reserver"><h2 class="mh">À réserver <small>notées 4</small></h2>
@@ -870,15 +870,18 @@ function listeVentes(T) {
   const q = norm(VF.q).trim();
   const L = T.filter(({ e }) => (RF === "tout" || suivie(e)) && (!VF.cat.size || VF.cat.has(slug(e.categorie)))
     && (!q || norm([e.titre, court(e.lieuId), e.categorie, e.sousGenre || "", ...(e.artistes || []).map((a) => a.nom)].join(" ")).includes(q)));
-  let h = "", last = "", lastM = "";
-  for (const { e, o, v } of L) {
-    const k = iso(v), n = dansJ(v), m = k.slice(0, 7);
-    if (m !== lastM && n > R_SEMAINE) { h += `<h2 class="mh v-mois">${cap(MOIS_L[v.getMonth()])} ${v.getFullYear()}</h2>`; lastM = m; }
-    if (k !== last) { h += `<h3 class="jour">${n === 0 ? "Aujourd’hui" : n === 1 ? "Demain" : cap(fmt(v, true))}</h3>`; last = k; }
-    const hv = heureV(o), info = [`${hv ? "Vente à " + hv : "Vente"}${o.venteApprox ? (hv ? " (estimée)" : " (date estimée)") : hv ? "" : ", heure inconnue"}`, offreTxt(o), o.condition && o.condition !== o.type ? esc(o.condition) : ""].filter(Boolean).join(" · ");
-    h += rowR(e, "v" + k, stubR(n <= R_SEMAINE ? jTxt(n) : "vente", v, n <= 2), info);
+  const G = [];
+  for (const x of L) {
+    const n = dansJ(x.v), k = n <= R_SEMAINE ? "s" : iso(x.v).slice(0, 7);
+    if (!G.length || G.at(-1).k !== k) G.push({ k, t: k === "s" ? "Cette semaine" : cap(MOIS_L[x.v.getMonth()]) + " " + x.v.getFullYear(), L: [] });
+    G.at(-1).L.push(x);
   }
-  return h ? `<div class="list">${h}</div>` : `<p class="empty">${RF === "tout" ? "Aucune ouverture ne correspond." : "Aucune ouverture suivie ne correspond : essaie « Toutes »."}</p>`;
+  const h = G.map((g) => `<section class="v-g"><h2 class="v-t">${g.t} <small>${g.L.length}</small></h2><div class="list v-l">${g.L.map(({ e, o, v }) => {
+    const n = dansJ(v), hv = heureV(o);
+    const info = [hv ? `<b>${hv}</b>` : "", o.venteApprox ? (hv ? "date estimée" : "Date estimée") : "", offreTxt(o), o.condition && o.condition !== o.type ? `<span class="cr">${esc(o.condition)}</span>` : ""].filter(Boolean).join(" · ");
+    return rowR(e, "v" + iso(v), stubR(n <= R_SEMAINE ? jTxt(n) : JOURS[v.getDay()], v, n <= 2), info);
+  }).join("")}</div></section>`).join("");
+  return h || `<p class="empty">${RF === "tout" ? "Aucune ouverture ne correspond." : "Aucune ouverture suivie ne correspond : essaie « Toutes »."}</p>`;
 }
 const serV = () => [VF.q.trim() ? "q=" + encodeURIComponent(VF.q.trim()) : "", VF.cat.size ? "cat=" + [...VF.cat].join(",") : "", RF === "suivies" ? "rf=suivies" : ""].filter(Boolean).join("&");
 function renderVentes(q0) {
@@ -887,8 +890,8 @@ function renderVentes(q0) {
   const T = ventesToutes(), cats = CATS.filter((c) => T.some((x) => x.e.categorie === c));
   const nS = T.filter((x) => suivie(x.e)).length;
   $("#main").innerHTML = `<section id="pv"><div class="ph"><h1>Ouvertures de vente</h1></div>
-  <div class="tools barre-f">${rech("vq", "Rechercher une ouverture", VF.q)}<div class="seg" role="group" aria-label="Ouvertures affichées"><button type="button" data-rf="tout" aria-pressed="${RF === "tout"}">Toutes (${T.length})</button><button type="button" data-rf="suivies" aria-pressed="${RF === "suivies"}" title="Notées 4 ou coups de cœur">Suivies (${nS})</button></div></div>
-  <div class="fbar"><div class="chips defile gtabs" role="group" aria-label="Genres">${cats.map((c) => `<button class="chip g-${famille(c)}" type="button" data-vc="${slug(c)}" aria-pressed="${VF.cat.has(slug(c))}">${ico(c)}${esc(c)}</button>`).join("")}</div></div>
+  <div class="tools barre-f">${rech("vq", "Rechercher une ouverture", VF.q)}</div>
+  <div class="fbar v-fbar"><div class="seg" role="group" aria-label="Ouvertures affichées"><button type="button" data-rf="tout" aria-pressed="${RF === "tout"}">Toutes ${T.length}</button><button type="button" data-rf="suivies" aria-pressed="${RF === "suivies"}" title="Notées 4 ou coups de cœur">Suivies ${nS}</button></div><div class="chips defile gtabs" role="group" aria-label="Genres">${cats.map((c) => `<button class="chip g-${famille(c)}" type="button" data-vc="${slug(c)}" aria-pressed="${VF.cat.has(slug(c))}">${ico(c)}${esc(c)}</button>`).join("")}</div></div>
   <div id="vListe">${listeVentes(T)}</div>
   ${PRIVE ? `<h2 class="mh">Abonnement aux ouvertures (admin)</h2>${subsHTML()}` : ""}</section>`;
   const m = $("#pv"), maj = () => { $("#vListe").innerHTML = listeVentes(T); const s = serV(); history.replaceState(null, "", "#ventes" + (s ? "?" + s : "")); BASE = RENDERED = location.hash.slice(1); };
@@ -1116,7 +1119,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.48"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.49"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1127,7 +1130,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.48"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.49"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1145,7 +1148,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.48"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.49"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
