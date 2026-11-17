@@ -1122,3 +1122,12 @@ button.cell.cal-res{cursor:pointer;font:inherit;font-weight:800}
 .vers ul{margin:var(--e1) 0 0;padding-left:var(--e4)}
 .vers ul li{margin:2px 0;color:var(--encre-2)}
 .vers>li.cur .vv b{color:var(--accent-texte)}
+/* ---------- Sélecteur « Spectacles | Expos » (v4.64) : liens discrets soulignés ----------
+   Site courant : souligné blanc ; autre site : souligné de sa couleur d'identité (vert vers Expo, rouge vers Spectacles). */
+.sites{border:0;gap:var(--e4);align-items:center}
+.sites a,.sites a[aria-current="page"],.sites a.vers-expo,.sites a.vers-spectacles{min-height:28px;padding:0;background:none;color:var(--sur-accent);font-weight:500;text-decoration:none;border-bottom:3px solid transparent}
+.sites a[aria-current="page"]{font-weight:800;border-bottom-color:var(--sur-accent)}
+.sites a.vers-expo{border-bottom-color:var(--id-expo)}
+.sites a.vers-spectacles{border-bottom-color:var(--id-spectacles)}
+@media (hover:hover){.sites a:hover,.sites a.vers-expo:hover,.sites a.vers-spectacles:hover{background:none;color:var(--sur-accent);border-bottom-color:var(--sur-accent)}}
+@media (max-width:959.98px){.top .sites{justify-content:flex-start;gap:var(--e4)}.top .sites a{flex:0 0 auto}}

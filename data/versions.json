@@ -1,6 +1,14 @@
 {
  "versions": [
   {
+   "version": "4.64",
+   "date": "2026-11-17",
+   "titre": "Sélecteur de site en liens soulignés",
+   "points": [
+    "« Spectacles | Expos » en liens discrets : site courant souligné en blanc, autre site souligné de sa couleur (vert vers Expo, rouge vers Spectacles)"
+   ]
+  },
+  {
    "version": "4.63",
    "date": "2026-11-17",
    "titre": "Page des versions, sélecteur de site à la largeur du logo",
