@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-16",
+ "maj": "2026-11-17",
  "sorties": [
   {
    "id": "gustave-fayet-collectionneur-createur",
@@ -66,6 +66,18 @@
     {
      "nom": "Scott Gibbons",
      "role": "compositeur"
+    },
+    {
+     "nom": "Gérard Bayle",
+     "role": "interprète"
+    },
+    {
+     "nom": "Stefania Horodeyska",
+     "role": "interprète"
+    },
+    {
+     "nom": "Lorenzo Coletta",
+     "role": "interprète"
     }
    ],
    "lieuId": "odeon",
@@ -512,6 +524,18 @@
     {
      "nom": "Jacques Brel",
      "role": "compositeur"
+    },
+    {
+     "nom": "Rosas",
+     "role": "compagnie"
+    },
+    {
+     "nom": "Anne Teresa De Keersmaeker",
+     "role": "interprète"
+    },
+    {
+     "nom": "Solal Mariotte",
+     "role": "interprète"
     }
    ],
    "lieuId": "festival-avignon",
@@ -566,6 +590,42 @@
     {
      "nom": "Wolfgang Amadeus Mozart",
      "role": "compositeur"
+    },
+    {
+     "nom": "Dmitri Tcherniakov",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Christophe Rousset",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Les Talens Lyriques",
+     "role": "interprète"
+    },
+    {
+     "nom": "Agneta Eichenholz",
+     "role": "interprète"
+    },
+    {
+     "nom": "Claudia Mahnke",
+     "role": "interprète"
+    },
+    {
+     "nom": "Rainer Trost",
+     "role": "interprète"
+    },
+    {
+     "nom": "Russell Braun",
+     "role": "interprète"
+    },
+    {
+     "nom": "Georg Nigl",
+     "role": "interprète"
+    },
+    {
+     "nom": "Patricia Petibon",
+     "role": "interprète"
     }
    ],
    "lieuId": "chatelet",
@@ -1011,6 +1071,30 @@
     {
      "nom": "Céline Champinot",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Yanis Boulahia",
+     "role": "interprète"
+    },
+    {
+     "nom": "Hassan Gourniz",
+     "role": "interprète"
+    },
+    {
+     "nom": "Loulie Houmed",
+     "role": "interprète"
+    },
+    {
+     "nom": "Camille Léon-Fucien",
+     "role": "interprète"
+    },
+    {
+     "nom": "Nabila Mekkid",
+     "role": "interprète"
+    },
+    {
+     "nom": "Living Smile Vidya",
+     "role": "interprète"
     }
    ],
    "lieuId": "festival-avignon",
@@ -1329,6 +1413,18 @@
     {
      "nom": "Molière",
      "role": "auteur"
+    },
+    {
+     "nom": "Valérie Lesort",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Christian Hecq",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Comédie-Française",
+     "role": "compagnie"
     }
    ],
    "lieuId": "porte-saint-martin",
@@ -1348,7 +1444,8 @@
    ],
    "noteLeonard": null,
    "avis": "",
-   "offres": []
+   "offres": [],
+   "source": "https://www.offi.fr/theatre/theatre-de-la-porte-saint-martin-3023/le-bourgeois-gentilhomme-79678.html"
   },
   {
    "id": "vu-le-cercle-des-poetes-disparus",
@@ -1357,7 +1454,23 @@
    "artistes": [
     {
      "nom": "Stéphane Freiss",
-     "role": "artiste"
+     "role": "interprète"
+    },
+    {
+     "nom": "Tom Schulman",
+     "role": "auteur"
+    },
+    {
+     "nom": "Gérald Sibleyras",
+     "role": "auteur"
+    },
+    {
+     "nom": "Olivier Solivérès",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Ethan Oliel",
+     "role": "interprète"
     }
    ],
    "lieuId": "theatre-libre",
@@ -1483,6 +1596,14 @@
     {
      "nom": "Barbara Lamballais",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Barbara Lamballais",
+     "role": "auteur"
+    },
+    {
+     "nom": "Karina Testa",
+     "role": "auteur"
     }
    ],
    "lieuId": "le-splendid",
@@ -1503,7 +1624,8 @@
    "noteLeonard": null,
    "avis": "",
    "offres": [],
-   "sousGenre": ""
+   "sousGenre": "",
+   "source": "https://www.offi.fr/theatre/le-splendid-3194/le-proces-dune-vie-104102.html"
   },
   {
    "id": "vu-le-proces-pelicot",
@@ -1756,7 +1878,20 @@
    "id": "vu-le-syndrome-dulysse",
    "titre": "Le Syndrome d’Ulysse",
    "categorie": "Théâtre",
-   "artistes": [],
+   "artistes": [
+    {
+     "nom": "Serge Barbuscia",
+     "role": "auteur"
+    },
+    {
+     "nom": "Ali Babar Kenjah",
+     "role": "auteur"
+    },
+    {
+     "nom": "Théâtre du Balcon",
+     "role": "compagnie"
+    }
+   ],
    "lieuId": "avignon-off",
    "salle": "Théâtre du Balcon",
    "debut": null,
@@ -1784,6 +1919,26 @@
     {
      "nom": "Gustave Flaubert",
      "role": "auteur"
+    },
+    {
+     "nom": "Paul Emond",
+     "role": "auteur"
+    },
+    {
+     "nom": "Sandrine Molaro",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Gilles-Vincent Kapps",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Sandrine Molaro",
+     "role": "interprète"
+    },
+    {
+     "nom": "Gilles-Vincent Kapps",
+     "role": "interprète"
     }
    ],
    "lieuId": "poche-montparnasse",
@@ -2007,11 +2162,15 @@
     },
     {
      "nom": "François Berléand",
-     "role": "artiste"
+     "role": "interprète"
     },
     {
      "nom": "Max Boublil",
-     "role": "artiste"
+     "role": "interprète"
+    },
+    {
+     "nom": "Anne Bouvier",
+     "role": "mise en scène"
     }
    ],
    "lieuId": "theatre-de-la-michodiere",
@@ -2138,6 +2297,34 @@
     {
      "nom": "Muriel Imbach",
      "role": "mise en scène"
+    },
+    {
+     "nom": "La Bocca della Luna",
+     "role": "compagnie"
+    },
+    {
+     "nom": "Coline Bardin",
+     "role": "interprète"
+    },
+    {
+     "nom": "Pierre-Isaïe Duc",
+     "role": "interprète"
+    },
+    {
+     "nom": "Linna Ibrahim",
+     "role": "interprète"
+    },
+    {
+     "nom": "Cédric Leproust",
+     "role": "interprète"
+    },
+    {
+     "nom": "Fred Ozier",
+     "role": "interprète"
+    },
+    {
+     "nom": "Selvi Pürro",
+     "role": "interprète"
     }
    ],
    "lieuId": "festival-avignon",
@@ -2238,6 +2425,30 @@
     {
      "nom": "Alexandra Badea",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Alexandra Badea",
+     "role": "auteur"
+    },
+    {
+     "nom": "Alexandra Badea",
+     "role": "interprète"
+    },
+    {
+     "nom": "Amine Adjina",
+     "role": "interprète"
+    },
+    {
+     "nom": "Madalina Constantin",
+     "role": "interprète"
+    },
+    {
+     "nom": "Kader Lassina Touré",
+     "role": "interprète"
+    },
+    {
+     "nom": "Sophie Verbeeck",
+     "role": "interprète"
     }
    ],
    "lieuId": "la-colline",
@@ -2300,6 +2511,34 @@
     {
      "nom": "Giacomo Puccini",
      "role": "compositeur"
+    },
+    {
+     "nom": "Éric Ruf",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Lorenzo Passerini",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Orchestre National de France",
+     "role": "interprète"
+    },
+    {
+     "nom": "Selene Zanetti",
+     "role": "interprète"
+    },
+    {
+     "nom": "Pene Pati",
+     "role": "interprète"
+    },
+    {
+     "nom": "Alexandre Duhamel",
+     "role": "interprète"
+    },
+    {
+     "nom": "Amina Edris",
+     "role": "interprète"
     }
    ],
    "lieuId": "tce",
@@ -2391,6 +2630,18 @@
     {
      "nom": "Anne Teresa De Keersmaeker",
      "role": "chorégraphie"
+    },
+    {
+     "nom": "Rosas",
+     "role": "compagnie"
+    },
+    {
+     "nom": "Thierry De Mey",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Peter Vermeersch",
+     "role": "compositeur"
     }
    ],
    "lieuId": "chaillot",
@@ -2617,6 +2868,22 @@
     {
      "nom": "Tennessee Williams",
      "role": "auteur"
+    },
+    {
+     "nom": "Pauline Susini",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Cristiana Reali",
+     "role": "interprète"
+    },
+    {
+     "nom": "Alysson Paradis",
+     "role": "interprète"
+    },
+    {
+     "nom": "Lionel Abelanski",
+     "role": "interprète"
     }
    ],
    "lieuId": "bouffes-parisiens",
@@ -4429,6 +4696,26 @@
     {
      "nom": "Christopher Wheeldon",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Jesse Warkentin",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Leanne Cope",
+     "role": "interprète"
+    },
+    {
+     "nom": "Ryan Steele",
+     "role": "interprète"
+    },
+    {
+     "nom": "Michael Burrell",
+     "role": "interprète"
+    },
+    {
+     "nom": "Zachary Prince",
+     "role": "interprète"
     }
    ],
    "lieuId": "chatelet",

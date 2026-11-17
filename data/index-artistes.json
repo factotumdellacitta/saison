@@ -57,6 +57,12 @@
    "le-ventre-de-paris"
   ]
  },
+ "agneta-eichenholz": {
+  "nom": "Agneta Eichenholz",
+  "sorties": [
+   "vu-cosi-fan-tutte"
+  ]
+ },
  "aigul-akhmetshina": {
   "nom": "Aigul Akhmetshina",
   "sorties": [
@@ -131,6 +137,12 @@
    "amadoca"
   ]
  },
+ "alexandre-duhamel": {
+  "nom": "Alexandre Duhamel",
+  "sorties": [
+   "vu-puccini"
+  ]
+ },
  "alexandre-dumas": {
   "nom": "Alexandre Dumas",
   "sorties": [
@@ -176,6 +188,12 @@
    "ubu-roi"
   ]
  },
+ "ali-babar-kenjah": {
+  "nom": "Ali Babar Kenjah",
+  "sorties": [
+   "vu-le-syndrome-dulysse"
+  ]
+ },
  "aliocha-schneider": {
   "nom": "Aliocha Schneider",
   "sorties": [
@@ -206,6 +224,12 @@
    "joyaux"
   ]
  },
+ "alysson-paradis": {
+  "nom": "Alysson Paradis",
+  "sorties": [
+   "vu-un-tramway-nomme-desir"
+  ]
+ },
  "ambre-febvre": {
   "nom": "Ambre Febvre",
   "sorties": [
@@ -227,13 +251,15 @@
  "amina-edris": {
   "nom": "Amina Edris",
   "sorties": [
-   "romeo-et-juliette-jolly"
+   "romeo-et-juliette-jolly",
+   "vu-puccini"
   ]
  },
  "amine-adjina": {
   "nom": "Amine Adjina",
   "sorties": [
-   "la-mort-du-mome"
+   "la-mort-du-mome",
+   "vu-points-de-non-retour-quais-de-seine"
   ]
  },
  "amitai-pati": {
@@ -371,6 +397,12 @@
   "nom": "Anne Barbot",
   "sorties": [
    "le-ventre-de-paris"
+  ]
+ },
+ "anne-bouvier": {
+  "nom": "Anne Bouvier",
+  "sorties": [
+   "vu-lexperience-theatrale"
   ]
  },
  "anne-brochet": {
@@ -877,7 +909,8 @@
  "camille-leon-fucien": {
   "nom": "Camille Léon-Fucien",
   "sorties": [
-   "la-parabole-du-seum"
+   "la-parabole-du-seum",
+   "vu-la-parabole-du-seum-avignon"
   ]
  },
  "carine-goron": {
@@ -933,6 +966,12 @@
   "nom": "Cécile Roussat",
   "sorties": [
    "le-carnaval-baroque"
+  ]
+ },
+ "cedric-leproust": {
+  "nom": "Cédric Leproust",
+  "sorties": [
+   "vu-nous-ou-le-paradoxe-du-herisson"
   ]
  },
  "celine-champinot": {
@@ -1055,7 +1094,8 @@
   "sorties": [
    "berlin-mon-garcon",
    "le-bourgeois-gentilhomme",
-   "les-surs-hilton"
+   "les-surs-hilton",
+   "vu-le-bourgeois-gentilhomme-porte-saint-martin"
   ]
  },
  "christian-lacroix": {
@@ -1110,7 +1150,8 @@
  "christophe-rousset": {
   "nom": "Christophe Rousset",
   "sorties": [
-   "romeo-et-juliette-steibelt"
+   "romeo-et-juliette-steibelt",
+   "vu-cosi-fan-tutte"
   ]
  },
  "christopher-maltman": {
@@ -1181,6 +1222,12 @@
    "diskoteekki"
   ]
  },
+ "claudia-mahnke": {
+  "nom": "Claudia Mahnke",
+  "sorties": [
+   "vu-cosi-fan-tutte"
+  ]
+ },
  "claudine-galea": {
   "nom": "Claudine Galea",
   "sorties": [
@@ -1247,6 +1294,12 @@
    "l-envers-du-music-hall"
   ]
  },
+ "coline-bardin": {
+  "nom": "Coline Bardin",
+  "sorties": [
+   "vu-nous-ou-le-paradoxe-du-herisson"
+  ]
+ },
  "colonel-reyel": {
   "nom": "Colonel Reyel",
   "sorties": [
@@ -1266,6 +1319,7 @@
    "les-femmes-savantes",
    "polyeucte-soiree-repertoire",
    "vu-la-vie-parisienne",
+   "vu-le-bourgeois-gentilhomme-porte-saint-martin",
    "vu-le-malade-imaginaire",
    "vu-le-soulier-de-satin",
    "vu-seisme"
@@ -1317,6 +1371,12 @@
   "nom": "Constance Meyer",
   "sorties": [
    "apres-guerre"
+  ]
+ },
+ "cristiana-reali": {
+  "nom": "Cristiana Reali",
+  "sorties": [
+   "vu-un-tramway-nomme-desir"
   ]
  },
  "curzio-malaparte": {
@@ -1488,6 +1548,12 @@
    "chicago-makela-sibelius-chostakovitch",
    "lady-macbeth-de-mzensk",
    "lso-pappano-vengerov"
+  ]
+ },
+ "dmitri-tcherniakov": {
+  "nom": "Dmitri Tcherniakov",
+  "sorties": [
+   "vu-cosi-fan-tutte"
   ]
  },
  "dominique-blanc": {
@@ -1716,7 +1782,8 @@
   "nom": "Éric Ruf",
   "sorties": [
    "la-cerisaie",
-   "vu-le-soulier-de-satin"
+   "vu-le-soulier-de-satin",
+   "vu-puccini"
   ]
  },
  "ermonela-jaho": {
@@ -1741,6 +1808,12 @@
   "nom": "Estelle Lefébure",
   "sorties": [
    "vu-l-invitation"
+  ]
+ },
+ "ethan-oliel": {
+  "nom": "Ethan Oliel",
+  "sorties": [
+   "vu-le-cercle-des-poetes-disparus"
   ]
  },
  "etienne-daho": {
@@ -1929,6 +2002,12 @@
    "vu-rock-en-seine-2022"
   ]
  },
+ "fred-ozier": {
+  "nom": "Fred Ozier",
+  "sorties": [
+   "vu-nous-ou-le-paradoxe-du-herisson"
+  ]
+ },
  "frederic-chopin": {
   "nom": "Frédéric Chopin",
   "sorties": [
@@ -2019,6 +2098,12 @@
    "rinaldo"
   ]
  },
+ "georg-nigl": {
+  "nom": "Georg Nigl",
+  "sorties": [
+   "vu-cosi-fan-tutte"
+  ]
+ },
  "george-balanchine": {
   "nom": "George Balanchine",
   "sorties": [
@@ -2067,10 +2152,22 @@
    "missa-solemnis-makela"
   ]
  },
+ "gerald-sibleyras": {
+  "nom": "Gérald Sibleyras",
+  "sorties": [
+   "vu-le-cercle-des-poetes-disparus"
+  ]
+ },
  "geraldine-martineau": {
   "nom": "Géraldine Martineau",
   "sorties": [
    "vu-orso-et-moi"
+  ]
+ },
+ "gerard-bayle": {
+  "nom": "Gérard Bayle",
+  "sorties": [
+   "faust-castellucci"
   ]
  },
  "giacomo-puccini": {
@@ -2105,6 +2202,12 @@
   "nom": "Gilles Leroy",
   "sorties": [
    "vu-art-majeur"
+  ]
+ },
+ "gilles-vincent-kapps": {
+  "nom": "Gilles-Vincent Kapps",
+  "sorties": [
+   "vu-leducation-sentimentale"
   ]
  },
  "gims": {
@@ -2292,7 +2395,8 @@
  "hassan-gourniz": {
   "nom": "Hassan Gourniz",
   "sorties": [
-   "la-parabole-du-seum"
+   "la-parabole-du-seum",
+   "vu-la-parabole-du-seum-avignon"
   ]
  },
  "hector-berlioz": {
@@ -2707,6 +2811,12 @@
    "vu-west-side-story-seine-musicale"
   ]
  },
+ "jesse-warkentin": {
+  "nom": "Jesse Warkentin",
+  "sorties": [
+   "vu-un-americain-a-paris"
+  ]
+ },
  "jim-jacobs": {
   "nom": "Jim Jacobs",
   "sorties": [
@@ -2970,6 +3080,12 @@
    "vu-orso-et-moi"
   ]
  },
+ "kader-lassina-toure": {
+  "nom": "Kader Lassina Touré",
+  "sorties": [
+   "vu-points-de-non-retour-quais-de-seine"
+  ]
+ },
  "kalash": {
   "nom": "Kalash",
   "sorties": [
@@ -2981,6 +3097,12 @@
   "nom": "Kammerorchester Basel",
   "sorties": [
    "mitridate-re-di-ponto"
+  ]
+ },
+ "karina-testa": {
+  "nom": "Karina Testa",
+  "sorties": [
+   "vu-le-proces-dune-vie"
   ]
  },
  "karine-deshayes": {
@@ -3064,6 +3186,12 @@
   "nom": "Kurt Weill",
   "sorties": [
    "les-sept-peches-capitaux"
+  ]
+ },
+ "la-bocca-della-luna": {
+  "nom": "La Bocca della Luna",
+  "sorties": [
+   "vu-nous-ou-le-paradoxe-du-herisson"
   ]
  },
  "la-femme": {
@@ -3248,6 +3376,12 @@
    "vu-bestioles"
   ]
  },
+ "leanne-cope": {
+  "nom": "Leanne Cope",
+  "sorties": [
+   "vu-un-americain-a-paris"
+  ]
+ },
  "leila-slimani": {
   "nom": "Leïla Slimani",
   "sorties": [
@@ -3354,7 +3488,8 @@
  "les-talens-lyriques": {
   "nom": "Les Talens Lyriques",
   "sorties": [
-   "romeo-et-juliette-steibelt"
+   "romeo-et-juliette-steibelt",
+   "vu-cosi-fan-tutte"
   ]
  },
  "leto": {
@@ -3384,6 +3519,12 @@
    "vu-lavare"
   ]
  },
+ "linna-ibrahim": {
+  "nom": "Linna Ibrahim",
+  "sorties": [
+   "vu-nous-ou-le-paradoxe-du-herisson"
+  ]
+ },
  "lio-kuokman": {
   "nom": "Lio Kuokman",
   "sorties": [
@@ -3393,6 +3534,7 @@
  "lionel-abelanski": {
   "nom": "Lionel Abelanski",
   "sorties": [
+   "vu-un-tramway-nomme-desir",
    "vu-willy-protagoras-enferme-dans-les-toilettes"
   ]
  },
@@ -3411,7 +3553,8 @@
  "living-smile-vidya": {
   "nom": "Living Smile Vidya",
   "sorties": [
-   "la-parabole-du-seum"
+   "la-parabole-du-seum",
+   "vu-la-parabole-du-seum-avignon"
   ]
  },
  "loic-corbery": {
@@ -3460,10 +3603,17 @@
    "vu-we-love-green-2023-samedi"
   ]
  },
+ "lorenzo-coletta": {
+  "nom": "Lorenzo Coletta",
+  "sorties": [
+   "faust-castellucci"
+  ]
+ },
  "lorenzo-passerini": {
   "nom": "Lorenzo Passerini",
   "sorties": [
-   "manon-lescaut"
+   "manon-lescaut",
+   "vu-puccini"
   ]
  },
  "lorraine-de-sagazan": {
@@ -3525,7 +3675,8 @@
  "loulie-houmed": {
   "nom": "Loulie Houmed",
   "sorties": [
-   "la-parabole-du-seum"
+   "la-parabole-du-seum",
+   "vu-la-parabole-du-seum-avignon"
   ]
  },
  "lucie-leguay": {
@@ -3572,6 +3723,12 @@
   "nom": "Lydia Steier",
   "sorties": [
    "vu-la-vestale"
+  ]
+ },
+ "madalina-constantin": {
+  "nom": "Madalina Constantin",
+  "sorties": [
+   "vu-points-de-non-retour-quais-de-seine"
   ]
  },
  "maelle-poesy": {
@@ -3971,6 +4128,12 @@
    "vu-willy-protagoras-enferme-dans-les-toilettes"
   ]
  },
+ "michael-burrell": {
+  "nom": "Michael Burrell",
+  "sorties": [
+   "vu-un-americain-a-paris"
+  ]
+ },
  "michael-schade": {
   "nom": "Michael Schade",
   "sorties": [
@@ -4129,7 +4292,8 @@
  "nabila-mekkid": {
   "nom": "Nabila Mekkid",
   "sorties": [
-   "la-parabole-du-seum"
+   "la-parabole-du-seum",
+   "vu-la-parabole-du-seum-avignon"
   ]
  },
  "nacera-belaza": {
@@ -4358,6 +4522,12 @@
    "un-hamlet-de-moins"
   ]
  },
+ "olivier-soliveres": {
+  "nom": "Olivier Solivérès",
+  "sorties": [
+   "vu-le-cercle-des-poetes-disparus"
+  ]
+ },
  "orchestre-de-l-opera-de-zurich": {
   "nom": "Orchestre de l’Opéra de Zurich",
   "sorties": [
@@ -4394,7 +4564,8 @@
   "nom": "Orchestre National de France",
   "sorties": [
    "attila",
-   "manon-lescaut"
+   "manon-lescaut",
+   "vu-puccini"
   ]
  },
  "orchestre-philharmonique-de-radio-france": {
@@ -4458,6 +4629,12 @@
    "ellen-babic"
   ]
  },
+ "patricia-petibon": {
+  "nom": "Patricia Petibon",
+  "sorties": [
+   "vu-cosi-fan-tutte"
+  ]
+ },
  "patrick-chesnais": {
   "nom": "Patrick Chesnais",
   "sorties": [
@@ -4494,6 +4671,12 @@
    "vu-le-soulier-de-satin"
   ]
  },
+ "paul-emond": {
+  "nom": "Paul Emond",
+  "sorties": [
+   "vu-leducation-sentimentale"
+  ]
+ },
  "paul-lightfoot": {
   "nom": "Paul Lightfoot",
   "sorties": [
@@ -4524,6 +4707,12 @@
    "capra-une-chevre"
   ]
  },
+ "pauline-susini": {
+  "nom": "Pauline Susini",
+  "sorties": [
+   "vu-un-tramway-nomme-desir"
+  ]
+ },
  "pavel-cernoch": {
   "nom": "Pavel Černoch",
   "sorties": [
@@ -4540,13 +4729,20 @@
   "nom": "Pene Pati",
   "sorties": [
    "la-rondine",
-   "romeo-et-juliette-jolly"
+   "romeo-et-juliette-jolly",
+   "vu-puccini"
   ]
  },
  "peter-mattei": {
   "nom": "Peter Mattei",
   "sorties": [
    "don-giovanni"
+  ]
+ },
+ "peter-vermeersch": {
+  "nom": "Peter Vermeersch",
+  "sorties": [
+   "vu-rosas-danst-rosas"
   ]
  },
  "phia-menard": {
@@ -4628,6 +4824,12 @@
    "polyeucte-soiree-repertoire"
   ]
  },
+ "pierre-isaie-duc": {
+  "nom": "Pierre-Isaïe Duc",
+  "sorties": [
+   "vu-nous-ou-le-paradoxe-du-herisson"
+  ]
+ },
  "pierre-marie-braye-weppe": {
   "nom": "Pierre-Marie Braye-Weppe",
   "sorties": [
@@ -4697,6 +4899,12 @@
   "nom": "Quinn Kelsey",
   "sorties": [
    "le-trouvere"
+  ]
+ },
+ "rainer-trost": {
+  "nom": "Rainer Trost",
+  "sorties": [
+   "vu-cosi-fan-tutte"
   ]
  },
  "raphael-pichon": {
@@ -4860,6 +5068,13 @@
    "vu-rosalia-accor-arena-2026"
   ]
  },
+ "rosas": {
+  "nom": "Rosas",
+  "sorties": [
+   "vu-brel",
+   "vu-rosas-danst-rosas"
+  ]
+ },
  "roxanne-roux": {
   "nom": "Roxanne Roux",
   "sorties": [
@@ -4872,10 +5087,22 @@
    "raymonda"
   ]
  },
+ "russell-braun": {
+  "nom": "Russell Braun",
+  "sorties": [
+   "vu-cosi-fan-tutte"
+  ]
+ },
  "russell-thomas": {
   "nom": "Russell Thomas",
   "sorties": [
    "lso-rattle-john-adams"
+  ]
+ },
+ "ryan-steele": {
+  "nom": "Ryan Steele",
+  "sorties": [
+   "vu-un-americain-a-paris"
   ]
  },
  "s-e-d": {
@@ -4924,6 +5151,12 @@
   "nom": "Sandrine Bonnaire",
   "sorties": [
    "4-48-psychose"
+  ]
+ },
+ "sandrine-molaro": {
+  "nom": "Sandrine Molaro",
+  "sorties": [
+   "vu-leducation-sentimentale"
   ]
  },
  "sarah-goninon": {
@@ -5030,6 +5263,18 @@
    "ruy-blas"
   ]
  },
+ "selene-zanetti": {
+  "nom": "Selene Zanetti",
+  "sorties": [
+   "vu-puccini"
+  ]
+ },
+ "selvi-purro": {
+  "nom": "Selvi Pürro",
+  "sorties": [
+   "vu-nous-ou-le-paradoxe-du-herisson"
+  ]
+ },
  "sephora-pondi": {
   "nom": "Séphora Pondi",
   "sorties": [
@@ -5047,6 +5292,12 @@
    "vu-lavare",
    "vu-le-soulier-de-satin",
    "vu-le-suicide"
+  ]
+ },
+ "serge-barbuscia": {
+  "nom": "Serge Barbuscia",
+  "sorties": [
+   "vu-le-syndrome-dulysse"
   ]
  },
  "serge-lifar": {
@@ -5191,6 +5442,12 @@
    "madame-de-sade"
   ]
  },
+ "sophie-verbeeck": {
+  "nom": "Sophie Verbeeck",
+  "sorties": [
+   "vu-points-de-non-retour-quais-de-seine"
+  ]
+ },
  "sophocle": {
   "nom": "Sophocle",
   "sorties": [
@@ -5221,6 +5478,12 @@
   "nom": "Stefan Astakhov",
   "sorties": [
    "le-barbier-de-seville"
+  ]
+ },
+ "stefania-horodeyska": {
+  "nom": "Stefania Horodeyska",
+  "sorties": [
+   "faust-castellucci"
   ]
  },
  "stefano-massini": {
@@ -5438,6 +5701,12 @@
    "vu-the-weeknd-stade-de-france-2023"
   ]
  },
+ "theatre-du-balcon": {
+  "nom": "Théâtre du Balcon",
+  "sorties": [
+   "vu-le-syndrome-dulysse"
+  ]
+ },
  "theatre-du-radeau": {
   "nom": "Théâtre du Radeau",
   "sorties": [
@@ -5461,6 +5730,12 @@
   "nom": "Thibault Perriard",
   "sorties": [
    "capra-une-chevre"
+  ]
+ },
+ "thierry-de-mey": {
+  "nom": "Thierry De Mey",
+  "sorties": [
+   "vu-rosas-danst-rosas"
   ]
  },
  "thierry-hancisse": {
@@ -5549,6 +5824,12 @@
    "kaguyahime"
   ]
  },
+ "tom-schulman": {
+  "nom": "Tom Schulman",
+  "sorties": [
+   "vu-le-cercle-des-poetes-disparus"
+  ]
+ },
  "tony-kushner": {
   "nom": "Tony Kushner",
   "sorties": [
@@ -5608,7 +5889,8 @@
   "nom": "Valérie Lesort",
   "sorties": [
    "le-bourgeois-gentilhomme",
-   "les-surs-hilton"
+   "les-surs-hilton",
+   "vu-le-bourgeois-gentilhomme-porte-saint-martin"
   ]
  },
  "vanessa-paradis": {
@@ -5790,7 +6072,8 @@
  "yanis-boulahia": {
   "nom": "Yanis Boulahia",
   "sorties": [
-   "la-parabole-du-seum"
+   "la-parabole-du-seum",
+   "vu-la-parabole-du-seum-avignon"
   ]
  },
  "yann-boudaud": {
@@ -5842,6 +6125,12 @@
   "sorties": [
    "le-trouvere",
    "turandot"
+  ]
+ },
+ "zachary-prince": {
+  "nom": "Zachary Prince",
+  "sorties": [
+   "vu-un-americain-a-paris"
   ]
  },
  "zaho-de-sagazan": {
