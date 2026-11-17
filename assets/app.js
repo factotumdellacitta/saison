@@ -276,9 +276,12 @@ function stubHTML(e, mode) {
   if (running(e)) return `<span class="stub" title="jusqu’au ${fmtY(p[1])}"><small class="fin">fin<span class="vh"> le</span></small><b>${p[1].getDate()}</b><small>${MOIS[p[1].getMonth()]}</small></span>`;
   // Trois lignes au plus : jour, mois, puis « au 24 » (même mois) ou « au 24/01 » ; « et » s’il n’y a que deux dates.
   const loin = (d) => (d.getFullYear() !== TODAY.getFullYear() && d.getFullYear() !== TODAY.getFullYear() + 1 ? " " + String(d.getFullYear()).slice(2) : "");
+  // Même mois : « 16 / au 24 / avr. » ; mois différents : « 24 / févr. au / 7 mars ».
   const mot = nbJoues(e) === 2 ? "et" : "au", meme = p[0].getMonth() === p[1].getMonth() && p[0].getFullYear() === p[1].getFullYear();
-  const au = +p[0] !== +p[1] ? `<small class="au" title="${mot} ${esc(fmtY(p[1], true))}">${mot} ${p[1].getDate()}${meme ? "" : "/" + String(p[1].getMonth() + 1).padStart(2, "0")}</small>` : "";
-  return `<span class="stub"><b>${p[0].getDate()}</b><small>${MOIS[p[0].getMonth()]}${loin(p[0])}</small>${au}</span>`;
+  const tt = `${fmtY(p[0], true)} ${mot} ${fmtY(p[1], true)}`;
+  if (+p[0] === +p[1]) return `<span class="stub"><b>${p[0].getDate()}</b><small>${MOIS[p[0].getMonth()]}${loin(p[0])}</small></span>`;
+  if (meme) return `<span class="stub" title="${esc(tt)}"><b>${p[0].getDate()}</b><small class="au">${mot} ${p[1].getDate()}</small><small>${MOIS[p[0].getMonth()]}${loin(p[0])}</small></span>`;
+  return `<span class="stub" title="${esc(tt)}"><b>${p[0].getDate()}</b><small class="au2"><span>${MOIS[p[0].getMonth()]}</span> ${mot}</small><small class="au2">${p[1].getDate()} ${MOIS[p[1].getMonth()]}</small></span>`;
 }
 function badges(e) {
   // Alignés à droite de la ligne lieu ; les plus importants au bord droit (ordre de lecture : déjà vu … Léonard y va).
@@ -730,11 +733,31 @@ function pubExpo() {
   return `<a class="pub-expo" data-site="expo" href="expo/#a-voir" id="r-expos"><span class="pe-l"><span class="logo">${cleF()}Factotum</span><span class="mention">Expo</span></span><span class="pe-t">Musées, fondations et galeries de Paris : les expositions notées, à voir avant qu’elles ferment.</span>${t ? `<span class="pe-n">${esc(t)}</span>` : ""}<span class="pe-c">Voir les expos</span></a>`;
 }
 const heureV = (o) => { const h = /T(\d\d):(\d\d)/.exec(o.vente); return h ? (+h[1]) + "h" + (h[2] !== "00" ? h[2] : "") : ""; };
-const offreTxt = (o) => esc(o.type) + (o.tarif ? ", " + esc(o.tarif) : "");
+// Aperçus : libellés courts (« Ouverture des ventes hors abonnement » → « Hors abonnement », « Nés après le 1er janvier 1998, 2 places max. » → « –28 ans »).
+const typeCourt = (t) => { const r = String(t || "").replace(/^ouverture des ventes\s*/i, "").trim(); return r ? cap(r) : "Vente"; };
+function condCourte(c) {
+  let t = String(c || "")
+    .replace(/n[ée]e?s?\s+(?:après|à partir)\s+(?:du\s+|le\s+)?(?:1er\s+)?(?:janvier\s+)?(\d{4})/gi, (_, y) => "–" + (TODAY.getFullYear() - +y) + " ans")
+    .replace(/moins de (\d+) ans/gi, "–$1 ans")
+    .replace(/,?\s*sur justificatifs?/gi, "")
+    .replace(/,?\s*\d+\s*places?\s*max(?:imum)?\.?/gi, "")
+    .replace(/\s+/g, " ").replace(/^[\s,;.·]+|[\s,;.·]+$/g, "");
+  return t ? cap(t) : "";
+}
+const offreTxt = (o) => esc(typeCourt(o.type)) + (o.tarif ? ", " + esc(o.tarif) : "");
+// Info d’une ouverture : « Vente 12h · Avant-première jeunes, 10 € · –28 ans ».
+const venteInfo = (o) => { const hv = heureV(o), c = condCourte(o.condition); return [`<b>Vente${hv ? " " + hv : ""}</b>`, o.venteApprox ? "date estimée" : "", offreTxt(o), c && c !== typeCourt(o.type) ? `<span class="cr">${esc(c)}</span>` : ""].filter(Boolean).join(" · "); };
+// Dates de jeu courtes : « 16–24 avr. », « 26 et 27 mars », « 24 févr.–7 mars ».
+function joueCourt(e) {
+  const p = span(e); if (!p) return "";
+  if (+p[0] === +p[1]) return fmt(p[0]);
+  const meme = p[0].getMonth() === p[1].getMonth() && p[0].getFullYear() === p[1].getFullYear(), deux = nbJoues(e) === 2;
+  return meme ? p[0].getDate() + (deux ? " et " : "–") + fmt(p[1]) : fmt(p[0]) + (deux ? " et " : "–") + fmt(p[1]);
+}
 const libresTxt = (e) => { const n = soirsLibres(e); return n == null ? "" : n ? plural(n, "soir libre", "soirs libres") : `<b class="warn">aucun soir libre</b>`; };
 const stubR = (lbl, d, urg) => `<span class="stub"><small class="fin${urg ? " urg" : ""}">${lbl}</small><b>${d.getDate()}</b><small>${MOIS[d.getMonth()]}</small></span>`;
-function rowR(e, pre, stub, info) {
-  const k = esc(pre + "-" + e.id), meta = [sousG(e), court(e.lieuId)].filter(Boolean).join(" · ");
+function rowR(e, pre, stub, info, jeu) {
+  const k = esc(pre + "-" + e.id), meta = [sousG(e), court(e.lieuId), jeu ? joueCourt(e) : ""].filter(Boolean).join(" · ");
   return `<article class="row g-${famille(e.categorie)}" data-id="${esc(e.id)}"><button class="rb" type="button" aria-expanded="false" aria-controls="d-${k}">${gb(e)}${stub}
   <span class="mid">${l1(e, stars(e.note, e.pronostic))}${info ? `<span class="art">${info}</span>` : ""}${ligneMeta(esc(meta), badges(e).replace('<span class="b">Dernières dates</span>', "").replace('<span class="bds"></span>', ""))}</span></button>${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}<div class="det" id="d-${k}" hidden></div></article>`;
 }
@@ -758,7 +781,7 @@ function blocSemaine(r) {
   for (const { e, o, v } of r.semaine) {
     const k = iso(v), n = dansJ(v);
     if (k !== last) { h += `<h3 class="jour">${n === 0 ? "Aujourd’hui" : n === 1 ? "Demain" : cap(fmt(v, true))} <small>${plural(r.semaine.filter((x) => iso(x.v) === k).length, "ouverture")}</small></h3>`; last = k; }
-    h += rowR(e, "s", stubR(jTxt(n), v, n <= 2), [heureV(o) ? "Vente à " + heureV(o) + (o.venteApprox ? " (estimée)" : "") : "Vente" + (o.venteApprox ? " (date estimée)" : ", heure inconnue"), offreTxt(o)].join(" · "));
+    h += rowR(e, "s", stubR(jTxt(n), v, n <= 2), venteInfo(o), true);
   }
   return `<div class="list">${h}</div>`;
 }
@@ -866,6 +889,12 @@ function ventesToutes() {
   LIVE.forEach((e) => ouvertures(e).forEach((o) => L.push({ e, o, v: venteDate(o) })));
   return L.sort((a, b) => a.v - b.v || b.e.note - a.e.note || a.e.titre.localeCompare(b.e.titre, "fr"));
 }
+// Groupe de lignes : titre en métadonnées sur filet, lignes en deux colonnes sur bureau (Ouvertures, Coups de cœur, Artiste, Lieu).
+const groupeHTML = (t, n, rows) => `<section class="v-g"><h2 class="v-t">${t} <small>${n}</small></h2><div class="list v-l">${rows}</div></section>`;
+function groupesPar(items, cle, row) {
+  const G = []; for (const e of items) { const k = cle(e); if (!G.length || G.at(-1).k !== k) G.push({ k, L: [] }); G.at(-1).L.push(e); }
+  return G.map((g) => groupeHTML(esc(g.k), g.L.length, g.L.map(row).join(""))).join("");
+}
 function listeVentes(T) {
   const q = norm(VF.q).trim();
   const L = T.filter(({ e }) => (RF === "tout" || suivie(e)) && (!VF.cat.size || VF.cat.has(slug(e.categorie)))
@@ -876,11 +905,10 @@ function listeVentes(T) {
     if (!G.length || G.at(-1).k !== k) G.push({ k, t: k === "s" ? "Cette semaine" : cap(MOIS_L[x.v.getMonth()]) + " " + x.v.getFullYear(), L: [] });
     G.at(-1).L.push(x);
   }
-  const h = G.map((g) => `<section class="v-g"><h2 class="v-t">${g.t} <small>${g.L.length}</small></h2><div class="list v-l">${g.L.map(({ e, o, v }) => {
-    const n = dansJ(v), hv = heureV(o);
-    const info = [hv ? `<b>${hv}</b>` : "", o.venteApprox ? (hv ? "date estimée" : "Date estimée") : "", offreTxt(o), o.condition && o.condition !== o.type ? `<span class="cr">${esc(o.condition)}</span>` : ""].filter(Boolean).join(" · ");
-    return rowR(e, "v" + iso(v), stubR(n <= R_SEMAINE ? jTxt(n) : JOURS[v.getDay()], v, n <= 2), info);
-  }).join("")}</div></section>`).join("");
+  const h = G.map((g) => groupeHTML(g.t, g.L.length, g.L.map(({ e, o, v }) => {
+    const n = dansJ(v);
+    return rowR(e, "v" + iso(v), stubR(n <= R_SEMAINE ? jTxt(n) : JOURS[v.getDay()], v, n <= 2), venteInfo(o), true);
+  }).join(""))).join("");
   return h || `<p class="empty">${RF === "tout" ? "Aucune ouverture ne correspond." : "Aucune ouverture suivie ne correspond : essaie « Toutes »."}</p>`;
 }
 const serV = () => [VF.q.trim() ? "q=" + encodeURIComponent(VF.q.trim()) : "", VF.cat.size ? "cat=" + [...VF.cat].join(",") : "", RF === "suivies" ? "rf=suivies" : ""].filter(Boolean).join("&");
@@ -1050,8 +1078,7 @@ function renderArtiste(k) {
   if (!a) { $("#main").innerHTML = `<a class="back" href="#artistes">Artistes et lieux</a><p class="empty">Artiste inconnu.</p>`; return; }
   const aff = a.aff.filter((e) => !ended(e)).sort(byStart), vus = a.vus.slice().sort(byVu);
   $("#main").innerHTML = `<a class="back" href="#artistes">Artistes et lieux</a><div class="ph"><h1>${esc(a.nom)}</h1><p>${esc(cap(ROLES.filter((r) => a.roles.has(r)).join(", ")))} · ${plural(aff.length, "sortie")} à l’affiche, ${plural(vus.length, "vue", "vues")}</p></div>
-  <h2 class="mh">À l’affiche</h2><div class="list">${aff.map(rowA).join("") || '<p class="empty">Rien à l’affiche.</p>'}</div>
-  <h2 class="mh">Vu</h2><div class="list">${vus.map(rowJ).join("") || '<p class="empty">Pas encore vu.</p>'}</div>`;
+  ${aff.length ? groupeHTML("À l’affiche", aff.length, aff.map(rowA).join("")) : ""}${vus.length ? groupeHTML("Vu", vus.length, vus.map(rowJ).join("")) : ""}`;
   document.title = a.nom + " – " + NOM;
 }
 function renderLieu(id) {
@@ -1062,8 +1089,7 @@ function renderLieu(id) {
   const ext = (u, t) => web(u) ? `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${t}</a>` : "";
   $("#main").innerHTML = `<a class="back" href="#lieux">Artistes et lieux</a><div class="ph"><h1>${esc(L.nom)}</h1><p>${esc([L.ville, L.zone !== L.ville ? L.zone : ""].filter(Boolean).join(", "))} · lieu ${L.statut === "Public" ? "public" : "privé"}</p></div>
   <dl class="dl inl">${L.tarifJeune ? `<dt>Tarif jeune</dt><dd>${esc(L.tarifJeune)}</dd>` : ""}${L.adresse ? `<dt>Adresse</dt><dd>${esc(L.adresse)}</dd>` : ""}${L.site ? `<dt>Site</dt><dd>${ext(L.site, esc(L.site.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")))}</dd>` : ""}${L.billetterie ? `<dt>Billetterie</dt><dd>${ext(L.billetterie, "Acheter des places")}</dd>` : ""}</dl>
-  <h2 class="mh">À l’affiche <small>${aff.length}</small></h2><div class="list">${aff.map(rowA).join("") || '<p class="empty">Rien à l’affiche.</p>'}</div>
-  <h2 class="mh">Vu ici <small>${vus.length}</small></h2><div class="list">${vus.map(rowJ).join("") || '<p class="empty">Aucune.</p>'}</div>`;
+  ${aff.length ? groupeHTML("À l’affiche", aff.length, aff.map(rowA).join("")) : ""}${vus.length ? groupeHTML("Vu ici", vus.length, vus.map(rowJ).join("")) : ""}`;
   document.title = L.nom + " – " + NOM;
 }
 
@@ -1077,10 +1103,8 @@ const liensParRubrique = (L) => ORDRE_LIENS.map((c) => [c, L.filter((l) => l.cat
 function renderCoeur() {
   const E = enviesIds();
   const items = LIVE.filter((e) => E.has(e.id)).sort((a, b) => sortKey(a) - sortKey(b) || a.titre.localeCompare(b.titre, "fr"));
-  let html = "", last = null;
-  for (const e of items) { const g = groupOf(e); if (g !== last) { html += `<h2 class="jour">${g}</h2>`; last = g; } html += rowA(e); }
   $("#main").innerHTML = `<div class="ph"><h1>Coups de cœur de ${OWNER}</h1><p>${EXPO ? plural(items.length, "exposition") : plural(items.length, "sortie") + " à l’affiche"}</p></div>
-  <div class="list">${html || `<p class="empty">Aucun coup de cœur pour le moment.</p>`}</div>`;
+  ${groupesPar(items, groupOf, rowA) || `<p class="empty">Aucun coup de cœur pour le moment.</p>`}`;
 }
 // Billetteries, cartes jeunes et calendriers de vente : section du Radar (l’ancienne page Liens, #liens y mène).
 function liensHTML() {
@@ -1119,7 +1143,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.49"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.50"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1130,7 +1154,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.49"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.50"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1148,7 +1172,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.49"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.50"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }

@@ -22,7 +22,7 @@
   --police:"Schibsted Grotesk","Factotum secours","Helvetica Neue",Arial,sans-serif;
   --t-site:44px;--t-puce:11px;--t-logo:22px;--t-section:20px;--t-fiche:16px;--t-corps:14px;--t-champ:16px;--t-meta:11px;--t-date:13px;--t-chiffre:44px;--t-jour:20px;--t-barre:20px;
   --e1:4px;--e2:8px;--e3:12px;--e4:16px;--e6:24px;--e8:32px;--e12:48px;
-  --cible:44px;--marge:16px;--max:1120px;--colonne-date:60px;--bande:6px;--t-badge:10px;
+  --cible:44px;--marge:16px;--max:1120px;--colonne-date:64px;--bande:6px;--t-badge:10px;
   --sat:env(safe-area-inset-top,0px);--sab:env(safe-area-inset-bottom,0px);--sal:env(safe-area-inset-left,0px);--sar:env(safe-area-inset-right,0px);
   --sat2:calc(var(--sat) + min(var(--sat), var(--e3)));--barre:48px;--nav:52px;--collant:calc(var(--sat2) + var(--barre));
   --duree:120ms;
@@ -899,3 +899,12 @@ body:has(#dlg) .pub,body:has(#dlg) .toast{bottom:auto;top:0}
   .v-l{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--e6);align-items:start}
   .v-l>.row:nth-child(2){border-top:1px solid var(--filet-leger)}
 }
+/* Colonne de date : 64 px (charte), marge droite réduite ; lignes « au 24 », « févr. au », « 7 mars » au gabarit des puces. */
+.rb .stub{padding-right:var(--e1)}
+.stub small.au,.stub small.au2{margin-top:var(--e1);font-size:var(--t-puce);font-weight:500;letter-spacing:0;white-space:nowrap;text-transform:uppercase;line-height:1.2}
+.stub small.au+small{margin-top:2px}
+.stub small.au2{color:var(--encre-2)}
+.stub small.au2 span{color:var(--encre);font-weight:800}
+.stub small.au2+small.au2{margin-top:1px}
+/* Pages en groupes (Coups de cœur, Artiste, Lieu) : premier groupe sous l’en-tête de page. */
+.ph+.v-g{margin-top:var(--e4)}
