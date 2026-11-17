@@ -182,6 +182,10 @@
     {
      "nom": "Yuriy Zavalnyouk",
      "role": "interprète"
+    },
+    {
+     "nom": "Jean Galmiche",
+     "role": "interprète"
     }
    ],
    "lieuId": "la-colline",
@@ -296,6 +300,22 @@
     {
      "nom": "Séverine Chavrier",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Guilain Desenclos",
+     "role": "interprète"
+    },
+    {
+     "nom": "Victor Gadin",
+     "role": "interprète"
+    },
+    {
+     "nom": "Adèle Joulin",
+     "role": "interprète"
+    },
+    {
+     "nom": "Areski Moreira",
+     "role": "interprète"
     }
    ],
    "lieuId": "theatre-de-la-ville",
@@ -547,6 +567,14 @@
     {
      "nom": "Gurshad Shaheman",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Gurshad Shaheman",
+     "role": "auteur"
+    },
+    {
+     "nom": "Gurshad Shaheman",
+     "role": "interprète"
     }
    ],
    "lieuId": "theatre-de-la-bastille",
@@ -577,6 +605,34 @@
     {
      "nom": "Jeanne Candel",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Jeanne Candel",
+     "role": "auteur"
+    },
+    {
+     "nom": "Jeanne Candel",
+     "role": "interprète"
+    },
+    {
+     "nom": "Vladislav Galard",
+     "role": "interprète"
+    },
+    {
+     "nom": "Pauline Huruguen",
+     "role": "interprète"
+    },
+    {
+     "nom": "Sarah Le Picard",
+     "role": "interprète"
+    },
+    {
+     "nom": "Laure Mathis",
+     "role": "interprète"
+    },
+    {
+     "nom": "Thibault Perriard",
+     "role": "interprète"
     }
    ],
    "lieuId": "tgp",
@@ -966,6 +1022,14 @@
     {
      "nom": "Sharon Eyal",
      "role": "chorégraphie"
+    },
+    {
+     "nom": "Gai Behar",
+     "role": "chorégraphie"
+    },
+    {
+     "nom": "S-E-D",
+     "role": "compagnie"
     }
    ],
    "lieuId": "rond-point",
@@ -983,7 +1047,8 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "etat": "complet"
   },
   {
    "id": "deshonoree",
@@ -1030,11 +1095,15 @@
     },
     {
      "nom": "Marie-Armelle Deguy",
-     "role": "artiste"
+     "role": "interprète"
     },
     {
      "nom": "Marcel Bozonnet",
-     "role": "artiste"
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Marie-Armelle Deguy",
+     "role": "mise en scène"
     }
    ],
    "lieuId": "theatre-de-la-ville",
@@ -1059,7 +1128,8 @@
     "2026-12-14",
     "2026-12-15",
     "2026-12-17"
-   ]
+   ],
+   "etat": "dernieres-places"
   },
   {
    "id": "didon-et-enee",
@@ -1377,6 +1447,22 @@
     {
      "nom": "Patrick Pineau",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Constance Dollé",
+     "role": "interprète"
+    },
+    {
+     "nom": "Pascal Rénéric",
+     "role": "interprète"
+    },
+    {
+     "nom": "Roxanne Roux",
+     "role": "interprète"
+    },
+    {
+     "nom": "Jean-Philippe François",
+     "role": "interprète"
     }
    ],
    "lieuId": "rond-point",
@@ -1621,6 +1707,30 @@
     {
      "nom": "Bruce Gladwin",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Jalal Asapil",
+     "role": "interprète"
+    },
+    {
+     "nom": "Sarah Goninon",
+     "role": "interprète"
+    },
+    {
+     "nom": "Sarah Mainwaring",
+     "role": "interprète"
+    },
+    {
+     "nom": "Scott Price",
+     "role": "interprète"
+    },
+    {
+     "nom": "Tamika Simpson",
+     "role": "interprète"
+    },
+    {
+     "nom": "The Necks",
+     "role": "interprète"
     }
    ],
    "lieuId": "odeon",
@@ -1638,7 +1748,10 @@
    "publicJeune": false,
    "leonardYVa": false,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "lun"
+   ]
   },
   {
    "id": "ganesh-versus-the-third-reich",
@@ -2310,6 +2423,26 @@
     {
      "nom": "Emma Dante",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Emma Dante",
+     "role": "auteur"
+    },
+    {
+     "nom": "David Leone",
+     "role": "interprète"
+    },
+    {
+     "nom": "Giuditta Perriera",
+     "role": "interprète"
+    },
+    {
+     "nom": "Ivano Picciallo",
+     "role": "interprète"
+    },
+    {
+     "nom": "Leonarda Saffi",
+     "role": "interprète"
     }
    ],
    "lieuId": "la-colline",
@@ -3510,6 +3643,10 @@
     {
      "nom": "Thomas Ostermeier",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Maja Zade",
+     "role": "auteur"
     }
    ],
    "lieuId": "les-gemeaux",
@@ -3952,14 +4089,18 @@
    "artistes": [
     {
      "nom": "Marie Bourgeois",
-     "role": "artiste"
+     "role": "mise en scène"
     },
     {
      "nom": "Yoann Bourgeois",
-     "role": "artiste"
+     "role": "mise en scène"
     },
     {
      "nom": "Pomme",
+     "role": "interprète"
+    },
+    {
+     "nom": "Marie Bourgeois",
      "role": "interprète"
     }
    ],
@@ -4163,6 +4304,14 @@
     {
      "nom": "Anne Barbot",
      "role": "mise en scène"
+    },
+    {
+     "nom": "Agathe Peyrard",
+     "role": "auteur"
+    },
+    {
+     "nom": "Anne Barbot",
+     "role": "interprète"
     }
    ],
    "lieuId": "tgp",
@@ -4708,7 +4857,10 @@
    "publicJeune": false,
    "leonardYVa": true,
    "statut": "a-voir",
-   "offres": []
+   "offres": [],
+   "relaches": [
+    "lun"
+   ]
   },
   {
    "id": "maria-stuarda",
@@ -5159,7 +5311,15 @@
    "artistes": [
     {
      "nom": "Hiroshi Sugimoto",
-     "role": "artiste"
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Atsuo Kanze",
+     "role": "interprète"
+    },
+    {
+     "nom": "Teruhisa Oshima",
+     "role": "interprète"
     }
    ],
    "lieuId": "theatre-de-la-ville",
@@ -5363,6 +5523,42 @@
     {
      "nom": "Fouad Boussouf",
      "role": "chorégraphie"
+    },
+    {
+     "nom": "Mohanad Aljaramani",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Lucien Zerrad",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Compagnie Massala",
+     "role": "compagnie"
+    },
+    {
+     "nom": "Nadim Bahsoun",
+     "role": "interprète"
+    },
+    {
+     "nom": "Yumio Chanoki",
+     "role": "interprète"
+    },
+    {
+     "nom": "Filipa Correia Lescuyer",
+     "role": "interprète"
+    },
+    {
+     "nom": "Marcus Diallo",
+     "role": "interprète"
+    },
+    {
+     "nom": "Lola Ruscica",
+     "role": "interprète"
+    },
+    {
+     "nom": "Ismaël Belabid-Lenoir",
+     "role": "interprète"
     }
    ],
    "lieuId": "rond-point",
@@ -5500,6 +5696,18 @@
     {
      "nom": "Paul Lightfoot",
      "role": "chorégraphie"
+    },
+    {
+     "nom": "Max Richter",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Zoltán Kodály",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Ballet de l’Opéra national de Paris",
+     "role": "compagnie"
     }
    ],
    "lieuId": "palais-garnier",
@@ -5672,6 +5880,10 @@
     {
      "nom": "Jacob Jonas",
      "role": "chorégraphie"
+    },
+    {
+     "nom": "Jacob Jonas The Company",
+     "role": "compagnie"
     }
    ],
    "lieuId": "theatre-de-la-ville",
@@ -5916,6 +6128,26 @@
     {
      "nom": "Pina Bausch",
      "role": "chorégraphie"
+    },
+    {
+     "nom": "Édouard Lalo",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Maurice Ravel",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Igor Stravinsky",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Vello Pähn",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Ballet de l’Opéra national de Paris",
+     "role": "compagnie"
     }
    ],
    "lieuId": "opera-bastille",
@@ -6149,6 +6381,26 @@
     {
      "nom": "Angélica Liddell",
      "role": "interprète"
+    },
+    {
+     "nom": "Masanori Kikuzawa",
+     "role": "interprète"
+    },
+    {
+     "nom": "Alberto Alonso Martínez",
+     "role": "interprète"
+    },
+    {
+     "nom": "Gumersindo Puche",
+     "role": "interprète"
+    },
+    {
+     "nom": "Ichiro Sugae",
+     "role": "interprète"
+    },
+    {
+     "nom": "Kazan Tachimoto",
+     "role": "interprète"
     }
    ],
    "lieuId": "odeon",
@@ -6376,6 +6628,10 @@
     {
      "nom": "Valérie Dréville",
      "role": "interprète"
+    },
+    {
+     "nom": "Valérie Dréville",
+     "role": "mise en scène"
     }
    ],
    "lieuId": "les-gemeaux",

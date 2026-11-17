@@ -18,6 +18,12 @@
    "didon-et-enee"
   ]
  },
+ "adele-joulin": {
+  "nom": "Adèle Joulin",
+  "sorties": [
+   "aria-da-capo"
+  ]
+ },
  "adeline-d-hermy": {
   "nom": "Adeline d’Hermy",
   "sorties": [
@@ -37,6 +43,12 @@
   "nom": "Agatha Christie",
   "sorties": [
    "la-souriciere"
+  ]
+ },
+ "agathe-peyrard": {
+  "nom": "Agathe Peyrard",
+  "sorties": [
+   "le-ventre-de-paris"
   ]
  },
  "aigul-akhmetshina": {
@@ -75,6 +87,12 @@
   "nom": "Alan Gilbert",
   "sorties": [
    "dipus-rex"
+  ]
+ },
+ "alberto-alonso-martinez": {
+  "nom": "Alberto Alonso Martínez",
+  "sorties": [
+   "seppuku"
   ]
  },
  "alex-olle": {
@@ -406,6 +424,12 @@
    "la-griselda"
   ]
  },
+ "areski-moreira": {
+  "nom": "Areski Moreira",
+  "sorties": [
+   "aria-da-capo"
+  ]
+ },
  "ariane-ascaride": {
   "nom": "Ariane Ascaride",
   "sorties": [
@@ -460,6 +484,12 @@
   "nom": "Asmik Grigorian",
   "sorties": [
    "asmik-grigorian-lukas-geniusas"
+  ]
+ },
+ "atsuo-kanze": {
+  "nom": "Atsuo Kanze",
+  "sorties": [
+   "noh-climax"
   ]
  },
  "aurora": {
@@ -518,6 +548,8 @@
  "ballet-de-l-opera-national-de-paris": {
   "nom": "Ballet de l’Opéra national de Paris",
   "sorties": [
+   "pulsations-childs",
+   "rituels-lifar",
    "vu-sylvia-bal-de-l-x-2025"
   ]
  },
@@ -1103,10 +1135,22 @@
    "vu-seisme"
   ]
  },
+ "compagnie-massala": {
+  "nom": "Compagnie Massala",
+  "sorties": [
+   "oum"
+  ]
+ },
  "compagnie-paizo": {
   "nom": "Compagnie Paizo",
   "sorties": [
    "vu-hubris"
+  ]
+ },
+ "constance-dolle": {
+  "nom": "Constance Dollé",
+  "sorties": [
+   "ellen-babic"
   ]
  },
  "constance-meyer": {
@@ -1207,6 +1251,12 @@
   "sorties": [
    "vu-david-castello-lopes-le-havre",
    "vu-un-stand-up-de-bonne-qualite"
+  ]
+ },
+ "david-leone": {
+  "nom": "David Leone",
+  "sorties": [
+   "l-ange-du-foyer"
   ]
  },
  "david-woods": {
@@ -1327,6 +1377,12 @@
   "sorties": [
    "le-suicide",
    "vu-les-bonnes"
+  ]
+ },
+ "edouard-lalo": {
+  "nom": "Édouard Lalo",
+  "sorties": [
+   "rituels-lifar"
   ]
  },
  "el-conde-de-torrefiel": {
@@ -1556,6 +1612,12 @@
    "vu-solidays-2023-dimanche"
   ]
  },
+ "filipa-correia-lescuyer": {
+  "nom": "Filipa Correia Lescuyer",
+  "sorties": [
+   "oum"
+  ]
+ },
  "florence-viala": {
   "nom": "Florence Viala",
   "sorties": [
@@ -1668,6 +1730,12 @@
    "l-elixir-d-amour",
    "lucia-di-lammermoor-sierra",
    "maria-stuarda"
+  ]
+ },
+ "gai-behar": {
+  "nom": "Gai Behar",
+  "sorties": [
+   "delay-the-sadness"
   ]
  },
  "garance-bocobza": {
@@ -1795,6 +1863,12 @@
    "vu-le-barbier-de-seville"
   ]
  },
+ "giuditta-perriera": {
+  "nom": "Giuditta Perriera",
+  "sorties": [
+   "l-ange-du-foyer"
+  ]
+ },
  "giuseppe-verdi": {
   "nom": "Giuseppe Verdi",
   "sorties": [
@@ -1813,6 +1887,12 @@
   "nom": "Groupe Grenade",
   "sorties": [
    "un-coin-de-paradis"
+  ]
+ },
+ "guilain-desenclos": {
+  "nom": "Guilain Desenclos",
+  "sorties": [
+   "aria-da-capo"
   ]
  },
  "guillaume-barbot": {
@@ -1844,6 +1924,12 @@
   "nom": "Guillaume Vincent",
   "sorties": [
    "la-tour-de-constance"
+  ]
+ },
+ "gumersindo-puche": {
+  "nom": "Gumersindo Puche",
+  "sorties": [
+   "seppuku"
   ]
  },
  "gurshad-shaheman": {
@@ -2007,13 +2093,20 @@
    "vu-from-martin-to-eden"
   ]
  },
+ "ichiro-sugae": {
+  "nom": "Ichiro Sugae",
+  "sorties": [
+   "seppuku"
+  ]
+ },
  "igor-stravinsky": {
   "nom": "Igor Stravinsky",
   "sorties": [
    "boston-nelsons-lang-lang",
    "dipus-rex",
    "histoire-du-soldat",
-   "histoire-du-soldat-tce"
+   "histoire-du-soldat-tce",
+   "rituels-lifar"
   ]
  },
  "il-caravaggio": {
@@ -2065,11 +2158,23 @@
    "celle-qui-doute"
   ]
  },
+ "ismael-belabid-lenoir": {
+  "nom": "Ismaël Belabid-Lenoir",
+  "sorties": [
+   "oum"
+  ]
+ },
  "ivan-ayon-rivas": {
   "nom": "Iván Ayón-Rivas",
   "sorties": [
    "attila",
    "faust"
+  ]
+ },
+ "ivano-picciallo": {
+  "nom": "Ivano Picciallo",
+  "sorties": [
+   "l-ange-du-foyer"
   ]
  },
  "ivo-van-hove": {
@@ -2098,6 +2203,12 @@
  },
  "jacob-jonas": {
   "nom": "Jacob Jonas",
+  "sorties": [
+   "restart"
+  ]
+ },
+ "jacob-jonas-the-company": {
+  "nom": "Jacob Jonas The Company",
   "sorties": [
    "restart"
   ]
@@ -2132,6 +2243,12 @@
    "vu-solidays-2023-vendredi"
   ]
  },
+ "jalal-asapil": {
+  "nom": "Jalal Asapil",
+  "sorties": [
+   "food-court"
+  ]
+ },
  "jamie-barton": {
   "nom": "Jamie Barton",
   "sorties": [
@@ -2164,6 +2281,12 @@
    "ivanov"
   ]
  },
+ "jean-galmiche": {
+  "nom": "Jean Galmiche",
+  "sorties": [
+   "amadoca"
+  ]
+ },
  "jean-genet": {
   "nom": "Jean Genet",
   "sorties": [
@@ -2186,6 +2309,12 @@
   "nom": "Jean-Philippe Daguerre",
   "sorties": [
    "du-charbon-dans-les-veines"
+  ]
+ },
+ "jean-philippe-francois": {
+  "nom": "Jean-Philippe François",
+  "sorties": [
+   "ellen-babic"
   ]
  },
  "jean-philippe-rameau": {
@@ -2535,6 +2664,12 @@
    "fondre-gourfink"
   ]
  },
+ "kazan-tachimoto": {
+  "nom": "Kazan Tachimoto",
+  "sorties": [
+   "seppuku"
+  ]
+ },
  "klaus-florian-vogt": {
   "nom": "Klaus Florian Vogt",
   "sorties": [
@@ -2648,6 +2783,12 @@
   "sorties": [
    "10-000-langages-pour-en-faire-un",
    "zero"
+  ]
+ },
+ "laure-mathis": {
+  "nom": "Laure Mathis",
+  "sorties": [
+   "capra-une-chevre"
   ]
  },
  "laurence-cote": {
@@ -2806,6 +2947,12 @@
    "vertige-manhattan-transfer"
   ]
  },
+ "leonarda-saffi": {
+  "nom": "Leonarda Saffi",
+  "sorties": [
+   "l-ange-du-foyer"
+  ]
+ },
  "leonore-vanier": {
   "nom": "Léonore Vanier",
   "sorties": [
@@ -2921,6 +3068,12 @@
    "merci-de-votre-collaboration"
   ]
  },
+ "lola-ruscica": {
+  "nom": "Lola Ruscica",
+  "sorties": [
+   "oum"
+  ]
+ },
  "lolita-tergemina": {
   "nom": "Lolita Tergémina",
   "sorties": [
@@ -3007,6 +3160,12 @@
    "histoire-du-soldat"
   ]
  },
+ "lucien-zerrad": {
+  "nom": "Lucien Zerrad",
+  "sorties": [
+   "oum"
+  ]
+ },
  "lucile-richardot": {
   "nom": "Lucile Richardot",
   "sorties": [
@@ -3063,6 +3222,12 @@
   "nom": "Maharram Huseynov",
   "sorties": [
    "attila"
+  ]
+ },
+ "maja-zade": {
+  "nom": "Maja Zade",
+  "sorties": [
+   "le-canard-sauvage"
   ]
  },
  "mammar-benranou": {
@@ -3124,6 +3289,12 @@
   "nom": "Marco Poingt",
   "sorties": [
    "vu-gala-talents-du-coeur-gaveau-2026"
+  ]
+ },
+ "marcus-diallo": {
+  "nom": "Marcus Diallo",
+  "sorties": [
+   "oum"
   ]
  },
  "marcus-lindeen": {
@@ -3273,6 +3444,12 @@
    "vu-grease-mogador"
   ]
  },
+ "masanori-kikuzawa": {
+  "nom": "Masanori Kikuzawa",
+  "sorties": [
+   "seppuku"
+  ]
+ },
  "mathias-marechal": {
   "nom": "Mathias Maréchal",
   "sorties": [
@@ -3309,10 +3486,22 @@
    "vu-post"
   ]
  },
+ "maurice-ravel": {
+  "nom": "Maurice Ravel",
+  "sorties": [
+   "rituels-lifar"
+  ]
+ },
  "max-boublil": {
   "nom": "Max Boublil",
   "sorties": [
    "vu-lexperience-theatrale"
+  ]
+ },
+ "max-richter": {
+  "nom": "Max Richter",
+  "sorties": [
+   "pulsations-childs"
   ]
  },
  "maxim-vengerov": {
@@ -3446,6 +3635,12 @@
    "passion-selon-saint-matthieu-rattle"
   ]
  },
+ "mohanad-aljaramani": {
+  "nom": "Mohanad Aljaramani",
+  "sorties": [
+   "oum"
+  ]
+ },
  "moliere": {
   "nom": "Molière",
   "sorties": [
@@ -3506,6 +3701,12 @@
   "nom": "Nacera Belaza",
   "sorties": [
    "la-nuee"
+  ]
+ },
+ "nadim-bahsoun": {
+  "nom": "Nadim Bahsoun",
+  "sorties": [
+   "oum"
   ]
  },
  "nadine-sierra": {
@@ -3798,6 +3999,12 @@
    "heaven-hell"
   ]
  },
+ "pascal-reneric": {
+  "nom": "Pascal Rénéric",
+  "sorties": [
+   "ellen-babic"
+  ]
+ },
  "patrick-chesnais": {
   "nom": "Patrick Chesnais",
   "sorties": [
@@ -3838,6 +4045,12 @@
   "nom": "Pauline Delabroy-Allard",
   "sorties": [
    "vu-art-majeur"
+  ]
+ },
+ "pauline-huruguen": {
+  "nom": "Pauline Huruguen",
+  "sorties": [
+   "capra-une-chevre"
   ]
  },
  "pavel-cernoch": {
@@ -4138,6 +4351,12 @@
    "vu-rosalia-accor-arena-2026"
   ]
  },
+ "roxanne-roux": {
+  "nom": "Roxanne Roux",
+  "sorties": [
+   "ellen-babic"
+  ]
+ },
  "rudolf-noureev": {
   "nom": "Rudolf Noureev",
   "sorties": [
@@ -4148,6 +4367,12 @@
   "nom": "Russell Thomas",
   "sorties": [
    "lso-rattle-john-adams"
+  ]
+ },
+ "s-e-d": {
+  "nom": "S-E-D",
+  "sorties": [
+   "delay-the-sadness"
   ]
  },
  "sacha-guitry": {
@@ -4180,15 +4405,28 @@
    "4-48-psychose"
   ]
  },
+ "sarah-goninon": {
+  "nom": "Sarah Goninon",
+  "sorties": [
+   "food-court"
+  ]
+ },
  "sarah-kane": {
   "nom": "Sarah Kane",
   "sorties": [
    "4-48-psychose"
   ]
  },
+ "sarah-le-picard": {
+  "nom": "Sarah Le Picard",
+  "sorties": [
+   "capra-une-chevre"
+  ]
+ },
  "sarah-mainwaring": {
   "nom": "Sarah Mainwaring",
   "sorties": [
+   "food-court",
    "neanderthal-repetitions-publiques"
   ]
  },
@@ -4220,6 +4458,7 @@
  "scott-price": {
   "nom": "Scott Price",
   "sorties": [
+   "food-court",
    "ganesh-versus-the-third-reich",
    "neanderthal-repetitions-publiques"
   ]
@@ -4569,6 +4808,7 @@
  "tamika-simpson": {
   "nom": "Tamika Simpson",
   "sorties": [
+   "food-court",
    "ganesh-versus-the-third-reich"
   ]
  },
@@ -4590,6 +4830,12 @@
    "vu-un-tramway-nomme-desir"
   ]
  },
+ "teruhisa-oshima": {
+  "nom": "Teruhisa Oshima",
+  "sorties": [
+   "noh-climax"
+  ]
+ },
  "tg-stan": {
   "nom": "tg STAN",
   "sorties": [
@@ -4606,6 +4852,12 @@
   "nom": "The Cure",
   "sorties": [
    "vu-rock-en-seine-2026"
+  ]
+ },
+ "the-necks": {
+  "nom": "The Necks",
+  "sorties": [
+   "food-court"
   ]
  },
  "the-weeknd": {
@@ -4631,6 +4883,12 @@
   "sorties": [
    "vu-fete-de-l-humanite-2025-vendredi",
    "vu-theodora-zenith-2026"
+  ]
+ },
+ "thibault-perriard": {
+  "nom": "Thibault Perriard",
+  "sorties": [
+   "capra-une-chevre"
   ]
  },
  "thierry-hancisse": {
@@ -4768,6 +5026,12 @@
    "vu-vegedream-yoyo-2025"
   ]
  },
+ "vello-pahn": {
+  "nom": "Vello Pähn",
+  "sorties": [
+   "rituels-lifar"
+  ]
+ },
  "vendredi-sur-mer": {
   "nom": "Vendredi sur Mer",
   "sorties": [
@@ -4786,6 +5050,12 @@
   "nom": "Véronique Weil",
   "sorties": [
    "fondre-gourfink"
+  ]
+ },
+ "victor-gadin": {
+  "nom": "Victor Gadin",
+  "sorties": [
+   "aria-da-capo"
   ]
  },
  "victor-hugo": {
@@ -4814,6 +5084,12 @@
   "nom": "Vladimir Cauchemar",
   "sorties": [
    "vu-solidays-2023-samedi"
+  ]
+ },
+ "vladislav-galard": {
+  "nom": "Vladislav Galard",
+  "sorties": [
+   "capra-une-chevre"
   ]
  },
  "volodia-piotrovitch-d-orlik": {
@@ -4902,6 +5178,12 @@
    "seppuku"
   ]
  },
+ "yumio-chanoki": {
+  "nom": "Yumio Chanoki",
+  "sorties": [
+   "oum"
+  ]
+ },
  "yuriy-zavalnyouk": {
   "nom": "Yuriy Zavalnyouk",
   "sorties": [
@@ -4931,6 +5213,12 @@
   "nom": "Zola",
   "sorties": [
    "vu-zola-biko-2024"
+  ]
+ },
+ "zoltan-kodaly": {
+  "nom": "Zoltán Kodály",
+  "sorties": [
+   "pulsations-childs"
   ]
  },
  "zurcher-sing-akademie": {
