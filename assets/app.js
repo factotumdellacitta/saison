@@ -854,6 +854,8 @@ function radarLigne(r) {
   return `<a class="r-ligne" href="#radar">${ico("ventes")}<b>Radar</b> <span>${t || "rien d’urgent"}</span></a>`;
 }
 // Colonne de droite de l’Affiche : les envies (à la place de « À réserver »), avec un lien vers la page de toutes les envies.
+// Partager la page affichée (Coups de cœur, rapports, ouvertures, artiste, lieu) : le lien seul.
+const partagerBtn = () => `<button class="btn ico ph-share" type="button" data-partage aria-label="Partager cette page" title="Partager cette page">${ico("partager")}</button>`;
 // Aperçu court d’une sortie (colonnes latérales, Plus tard, rapports) : trait de la couleur du genre, date, titre, précision, note.
 function apercu(e, date, sub, titre) {
   const t = titre || (e ? e.titre : ""), c = `<span class="vd">${esc(date || "")}</span><span class="vt"><b>${esc(t)}</b>${sub ? ` <span>· ${sub}</span>` : ""}</span>${e && e.note ? stars(e.note, e.pronostic) : ""}`;
@@ -891,20 +893,26 @@ function rapportEnTete() {
 }
 function rapportHTML(r) {
   const ligne = (l) => { const e = l.id ? BYID.get(l.id) : null; return apercu(e, e ? dateAp(e) : "", l.texte ? esc(l.texte) : "", l.titre || (e && e.titre)); };
-  return (r.sections || []).map((s) => { const L = s.lignes || [];
-    return `<section class="rp-s${L.length ? " a-lignes" : ""}"><h2 class="mh">${esc(s.titre || "")}</h2><div class="rp-t">${(s.texte || []).map((p) => `<p>${esc(p)}</p>`).join("")}</div>${L.length ? `<aside class="rp-a" aria-label="Fiches citées"><ul class="vl">${L.map(ligne).join("")}</ul></aside>` : ""}</section>`; }).join("");
+  return (r.sections || []).map((s) => {
+    const L = s.lignes || [], T = s.texte || [], expo = !EXPO && /^expo/i.test(s.titre || "") || (L.length && L.every((l) => { const e = BYID.get(l.id); return e && estExpo(e); }));
+    const fiches = L.length ? `<aside class="rp-a" aria-label="Fiches citées"><ul class="vl">${L.map(ligne).join("")}</ul></aside>` : "";
+    // Expositions : aux couleurs de Factotum Expo (data-site), les fiches seules, puis l’encadré vers le site Expo.
+    if (expo) return `<section class="rp-s rp-x" data-site="expo"><h2 class="mh">${esc(s.titre || "Expositions")}<span class="mention">Expo</span></h2>${fiches}${EXPO ? "" : pubExpo()}</section>`;
+    const cls = !T.length ? " sans-texte" : L.length ? " a-lignes" : "";
+    return `<section class="rp-s${cls}"><h2 class="mh">${esc(s.titre || "")}</h2>${T.length ? `<div class="rp-t">${T.map((p) => `<p>${esc(p)}</p>`).join("")}</div>` : ""}${fiches}</section>`;
+  }).join("");
 }
 function renderRapport(id) {
   const r = (RAPPORTS || []).find((x) => x.id === id);
   if (!r) { $("#main").innerHTML = `<div class="ph"><h1>Rapport introuvable</h1></div><p class="empty">Ce rapport n’existe pas ou n’est pas disponible hors connexion.</p>${rapportLiens()}`; return; }
   document.title = TITRE_VUE = r.titre + " – " + NOM;
-  $("#main").innerHTML = `<article class="rp"><div class="ph"><h1>${esc(r.titre)}</h1><p>${rapportMeta(r)}</p></div>
+  $("#main").innerHTML = `<article class="rp"><div class="ph">${partagerBtn()}<h1>${esc(r.titre)}</h1><p>${rapportMeta(r)}</p></div>
   ${r.chapo ? `<p class="rp-chapo">${esc(r.chapo)}</p>` : ""}${rapportHTML(r)}
   <div class="acts rp-fin">${LIVE.some((e) => estNeuf(e) && duSite(e)) ? `<a class="btn pri" href="#${ACCUEIL}?neuf">Toutes les nouveautés (${LIVE.filter((e) => estNeuf(e) && duSite(e)).length})</a>` : ""}<a class="btn" href="#rapports">Tous les rapports</a><a class="btn" href="${RACINE}data/radar.atom" type="application/atom+xml">Flux Atom</a></div></article>`;
 }
 function renderRapports() {
   const L = RAPPORTS || [];
-  $("#main").innerHTML = `<div class="ph"><h1>Rapports de veille</h1></div>
+  $("#main").innerHTML = `<div class="ph">${partagerBtn()}<h1>Rapports de veille</h1></div>
   ${L.length ? `<ul class="lk">${L.map((r) => `<li><a href="#rapport-${esc(r.id)}"><span class="lt"><b>${esc(r.titre)}</b><small>${rapportMeta(r)}</small></span></a></li>`).join("")}</ul>` : `<p class="empty">Aucun rapport pour l’instant.</p>`}
   <div class="acts"><a class="btn" href="#radar">Radar</a><a class="btn" href="${RACINE}data/radar.atom" type="application/atom+xml">Flux Atom</a></div>`;
 }
@@ -964,7 +972,7 @@ function renderVentes(q0) {
   if ([...p0.keys()].length) { VF.q = p0.get("q") || ""; VF.cat = new Set((p0.get("cat") || "").split(",").filter(Boolean)); RF = p0.get("rf") === "suivies" ? "suivies" : "tout"; }
   const T = ventesToutes(), cats = CATS.filter((c) => T.some((x) => x.e.categorie === c));
   const nS = T.filter((x) => suivie(x.e)).length;
-  $("#main").innerHTML = `<section id="pv"><div class="ph"><h1>Ouvertures de vente</h1></div>
+  $("#main").innerHTML = `<section id="pv"><div class="ph">${partagerBtn()}<h1>Ouvertures de vente</h1></div>
   <div class="tools barre-f">${rech("vq", "Rechercher une ouverture", VF.q)}</div>
   <div class="fbar v-fbar"><div class="seg" role="group" aria-label="Ouvertures affichées"><button type="button" data-rf="tout" aria-pressed="${RF === "tout"}">Toutes ${T.length}</button><button type="button" data-rf="suivies" aria-pressed="${RF === "suivies"}" title="Notées 4 ou coups de cœur">Suivies ${nS}</button></div><div class="chips defile gtabs" role="group" aria-label="Genres">${cats.map((c) => `<button class="chip g-${famille(c)}" type="button" data-vc="${slug(c)}" aria-pressed="${VF.cat.has(slug(c))}">${ico(c)}${esc(c)}</button>`).join("")}</div></div>
   <div id="vListe">${listeVentes(T)}</div>
@@ -1124,7 +1132,7 @@ function renderArtiste(k) {
   const a = artistes()[k];
   if (!a) { $("#main").innerHTML = `<a class="back" href="#artistes">Artistes et lieux</a><p class="empty">Artiste inconnu.</p>`; return; }
   const aff = a.aff.filter((e) => !ended(e)).sort(byStart), vus = a.vus.slice().sort(byVu);
-  $("#main").innerHTML = `<a class="back" href="#artistes">Artistes et lieux</a><div class="ph"><h1>${esc(a.nom)}</h1><p>${esc(cap(ROLES.filter((r) => a.roles.has(r)).join(", ")))} · ${plural(aff.length, "sortie")} à l’affiche, ${plural(vus.length, "vue", "vues")}</p></div>
+  $("#main").innerHTML = `<a class="back" href="#artistes">Artistes et lieux</a><div class="ph">${partagerBtn()}<h1>${esc(a.nom)}</h1><p>${esc(cap(ROLES.filter((r) => a.roles.has(r)).join(", ")))} · ${plural(aff.length, "sortie")} à l’affiche, ${plural(vus.length, "vue", "vues")}</p></div>
   ${genresHTML([...aff, ...vus])}${aff.length ? groupeHTML("À l’affiche", aff.length, aff.map(rowA).join("")) : ""}${vus.length ? groupeHTML("Vu", vus.length, vus.map(rowJ).join("")) : ""}`;
   brancherGenres($("#main"));
   document.title = a.nom + " – " + NOM;
@@ -1135,7 +1143,7 @@ function renderLieu(id) {
   const aff = AFF.filter((e) => e.lieuId === id && e.statut === "a-voir" && !ended(e)).sort(byStart);
   const vus = (JOURNAL || []).filter((e) => e.lieuId === id).sort(byVu);
   const ext = (u, t) => web(u) ? `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${t}</a>` : "";
-  $("#main").innerHTML = `<a class="back" href="#lieux">Artistes et lieux</a><div class="ph"><h1>${esc(L.nom)}</h1><p>${esc([L.ville, L.zone !== L.ville ? L.zone : ""].filter(Boolean).join(", "))} · lieu ${L.statut === "Public" ? "public" : "privé"}</p></div>
+  $("#main").innerHTML = `<a class="back" href="#lieux">Artistes et lieux</a><div class="ph">${partagerBtn()}<h1>${esc(L.nom)}</h1><p>${esc([L.ville, L.zone !== L.ville ? L.zone : ""].filter(Boolean).join(", "))} · lieu ${L.statut === "Public" ? "public" : "privé"}</p></div>
   <dl class="dl inl">${L.tarifJeune ? `<dt>Tarif jeune</dt><dd>${esc(L.tarifJeune)}</dd>` : ""}${L.adresse ? `<dt>Adresse</dt><dd>${esc(L.adresse)}</dd>` : ""}${L.site ? `<dt>Site</dt><dd>${ext(L.site, esc(L.site.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")))}</dd>` : ""}${L.billetterie ? `<dt>Billetterie</dt><dd>${ext(L.billetterie, "Acheter des places")}</dd>` : ""}</dl>
   ${genresHTML([...aff, ...vus])}${aff.length ? groupeHTML("À l’affiche", aff.length, aff.map(rowA).join("")) : ""}${vus.length ? groupeHTML("Vu ici", vus.length, vus.map(rowJ).join("")) : ""}`;
   brancherGenres($("#main"));
@@ -1152,7 +1160,7 @@ const liensParRubrique = (L) => ORDRE_LIENS.map((c) => [c, L.filter((l) => l.cat
 function renderCoeur(q) {
   const E = enviesIds(), init = (new URLSearchParams(q || "").get("cat") || "").split(",").filter(Boolean);
   const items = LIVE.filter((e) => E.has(e.id)).sort((a, b) => sortKey(a) - sortKey(b) || a.titre.localeCompare(b.titre, "fr"));
-  $("#main").innerHTML = `<div class="ph"><h1>Coups de cœur de ${OWNER}</h1><p>${EXPO ? plural(items.length, "exposition") : plural(items.length, "sortie") + " à l’affiche"}</p></div>
+  $("#main").innerHTML = `<div class="ph">${partagerBtn()}<h1>Coups de cœur de ${OWNER}</h1><p>${EXPO ? plural(items.length, "exposition") : plural(items.length, "sortie") + " à l’affiche"}</p></div>
   ${genresHTML(items)}${groupesPar(items, groupOf, rowA) || `<p class="empty">Aucun coup de cœur pour le moment.</p>`}`;
   // Genres retenus dans l’adresse (#coeur?cat=theatre,opera).
   brancherGenres($("#main"), init, (sel) => { history.replaceState(null, "", "#coeur" + (sel.size ? "?cat=" + [...sel].join(",") : "")); BASE = RENDERED = location.hash.slice(1); });
@@ -1196,7 +1204,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.54"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.55"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1207,7 +1215,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.54"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.55"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1225,7 +1233,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.54"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.55"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
@@ -1335,6 +1343,13 @@ document.addEventListener("click", async (ev) => {
   }
   const pl = ev.target.closest("[data-plus]");
   if (pl) { pl.nextElementSibling.hidden = false; pl.remove(); return; } // crédits : noms suivants
+  const pg = ev.target.closest("[data-partage]");
+  if (pg) {
+    const url = location.origin + location.pathname + location.hash;
+    try { if (navigator.share) { await navigator.share({ title: document.title, url }); return; } } catch (err) { if (err && err.name === "AbortError") return; }
+    try { await navigator.clipboard.writeText(url); toast("Lien copié"); } catch (_) { prompt("Copie ce lien :", url); }
+    return;
+  }
   const sh = ev.target.closest("[data-share]");
   if (sh) {
     const e = BYID.get(sh.dataset.share), url = shareURL(sh.dataset.share);

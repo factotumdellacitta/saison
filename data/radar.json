@@ -15,6 +15,43 @@
       "Le printemps 2027 se joue au Stade de France : Sofiane Pamart le 17 avril, SCH les 23 et 24, Kaaris le 22 mai, SDM les 29 et 30 mai, U2 les 5, 8 et 9 mai, Oasis les 20 et 23 juillet. Pour toutes ces dates, la vente générale est déjà passée.",
       "Deux incontournables nouveaux : Jean-Michel Jarre, de retour en France après dix ans pour les 50 ans d’Oxygène à La Seine Musicale (14–16 octobre 2027), et Monet, peindre le temps à l’Orangerie, pour le centenaire de la mort du peintre (jusqu’au 25 janvier).",
       "Côté scène, la semaine est celle des dernières : La Walkyrie s’achève ce soir à Bastille, Ganesh versus the Third Reich se joue jusqu’au 21 novembre et Ici sont les dragons jusqu’au 29."
+     ],
+     "lignes": [
+      {
+       "id": "vampire-s-mountain",
+       "titre": "Vampire's Mountain",
+       "texte": "Odéon, vente le 24 nov."
+      },
+      {
+       "id": "don-giovanni",
+       "titre": "Don Giovanni",
+       "texte": "Avant-première jeunes, vente le 7 janv. à 12 h"
+      },
+      {
+       "id": "jean-michel-jarre-oxygene-2027",
+       "titre": "Jean-Michel Jarre – Oxygène, 50 ans",
+       "texte": "La Seine Musicale, 14–16 oct. 2027"
+      },
+      {
+       "id": "monet-peindre-le-temps",
+       "titre": "Monet, peindre le temps",
+       "texte": "Orangerie, jusqu’au 25 janv."
+      },
+      {
+       "id": "la-walkyrie",
+       "titre": "La Walkyrie",
+       "texte": "Opéra Bastille, dernière le 17 nov."
+      },
+      {
+       "id": "ganesh-versus-the-third-reich",
+       "titre": "Ganesh versus the Third Reich",
+       "texte": "Cité internationale, jusqu’au 21 nov."
+      },
+      {
+       "id": "ici-sont-les-dragons",
+       "titre": "Ici sont les dragons",
+       "texte": "Théâtre du Soleil, jusqu’au 29 nov."
+      }
      ]
     },
     {
