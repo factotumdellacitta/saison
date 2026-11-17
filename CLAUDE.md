@@ -144,7 +144,7 @@ La note est celle de la veille : elle mesure la valeur et le retentissement de l
 - **Trace** : `pourquoi` reste une phrase factuelle ; dans la réponse de `/veille`, `/note` ou `/ajoute`, donne le calcul et la note (« C1 N3 H2 +Chef-d’œuvre = 7 → 4 ») pour chaque note posée ou révisée.
 
 ## Liens
-`lien` : toujours la page officielle de la sortie sur le site du lieu. À défaut, page officielle du festival, puis page de saison du lieu. L'Officiel des spectacles seulement en dernier recours. Pour un vu : page archivée officielle si elle existe. `billetterie` : URL d'achat directe si différente.
+`lien` : une **source primaire**, dans cet ordre : page de la sortie sur le site du lieu (fiche de l’événement ou de la billetterie de la salle : Stade de France, Accor Arena, Zénith, Olympia…) ; à défaut, page officielle de l’artiste, du festival ou de l’organisateur ; à défaut, page de l’événement chez un **revendeur officiel** (Ticketmaster, Fnac Spectacles, See Tickets, Dice, Shotgun) ; à défaut, page de saison du lieu. La presse et les agrégateurs (Sortir à Paris, JDS, Agenda culturel, L’Officiel des spectacles, Paris je t’aime…) ne servent qu’en `source`, jamais en `lien`, sauf s’il n’existe aucune page primaire ; la veille suivante remplace alors le lien dès qu’une page officielle paraît. Pour un vu : page archivée officielle si elle existe. `billetterie` : URL d'achat directe si différente.
 `liens.json` : catégories Billetteries, Cartes et tarifs jeunes, Calendriers de vente, Outils.
 
 ## Veille
@@ -167,6 +167,7 @@ La veille se lance **à la main** (`/veille` et ses variantes), jamais par une r
 - **Presse** : Le Monde, Libération, Télérama, Le Figaro, Les Échos, La Terrasse, Sceneweb, France Inter, Forum Opéra, Diapason, Danser Canal Historique.
 
 ### Concerts et showcases (pop, rap, chanson, rock, jazz, électro, classique et lyrique)
+- **Genre exclu** : la K-pop (groupes, tournées et spectacles dérivés). Aucune fiche, aucune ligne de rapport.
 - **Sélection** : notoriété et **dynamique** de l’artiste (progression de taille de salle, presse spécialisée, présence en festival, dates précédentes complètes), **rareté** (showcase, date unique en France, petite salle pour un artiste en vue, retour, adieux). Ces éléments se traduisent en N et H du barème. La proximité avec le profil décide seulement de l’ordre de recherche et des cas limites à 2.
 - **Salles** : petites (La Maroquinerie, La Boule Noire, Point Éphémère, Badaboum, Le Trabendo, La Bellevilloise, Le Pop-Up du Label, Les Trois Baudets, FGO-Barbara, La Machine du Moulin Rouge, Yoyo) ; moyennes et grandes (Olympia, La Cigale, Le Trianon, Élysée Montmartre, Bataclan, Casino de Paris, Alhambra, Salle Pleyel, Zénith, Adidas Arena, Accor Arena, Paris La Défense Arena, Stade de France) ; jazz (New Morning, Sunset-Sunside, Duc des Lombards, Bal Blomet) ; électro (Rex Club, La Station – Gare des Mines, Kilomètre 25, Dehors Brut) ; classique (Philharmonie, TCE, Salle Pleyel, Seine Musicale, Opéra de Paris, Radio France).
 - **Festivals** : Solidays, We Love Green, Rock en Seine, Fête de l’Humanité, Lollapalooza Paris, Pitchfork Paris, Les Inrocks Festival, MaMA, Peacock Society, Jazz à la Villette, Banlieues Bleues, Days Off, Festival de Saint-Denis. Une fiche par édition, complétée à chaque vague d’annonces.
@@ -183,6 +184,14 @@ La veille se lance **à la main** (`/veille` et ses variantes), jamais par une r
   | Prévente | offre « Prévente » : `vente` (date et heure), `condition` (qui y a droit : fan club, Live Nation, Fnac, banque, code), lien d’achat dans `billetterie` de la fiche |
   | Vente générale | offre « Vente générale » : `vente` (date et heure) |
   | Dernières places, complet | `etat` sur la fiche ou sur l’offre ; retiré quand des places reviennent |
+
+- **Détection précoce des annonces et des mises en vente** (l’enjeu essentiel de la veille concerts) : une prévente ouvre souvent deux à cinq jours après l’annonce, parfois sur inscription close la veille ; une veille qui ne regarde que la presse arrive trop tard. À chaque veille concerts et à chaque `/veille ventes` :
+  1. **Pages des salles d’abord** (source primaire, les nouvelles dates y apparaissent en premier) : plans de site et pages de programmation du Stade de France (`/fr/billetterie/<artiste>`), du Zénith (`le-zenith.com/shows/`), de l’Accor Arena (`/events-and-tickets/`), de Paris La Défense Arena, de l’Adidas Arena, de l’Olympia, de La Seine Musicale, du Grand Palais (programme Collector), puis des salles moyennes et petites. Toute page nouvelle depuis le dernier rapport est une annonce à examiner.
+  2. **Organisateurs et billetteries** : Live Nation, AEG Presents, Gérard Drouot, Décibels, Corida, Auguri, Alias, Garmonia ; rubriques « préventes » et « nouveautés » de Ticketmaster et Fnac Spectacles.
+  3. **Artistes suivis** : site officiel et annonces de tournée, en premier.
+  4. **Presse à flux**, pour recouper : Sortir à Paris (rubrique concerts, la plus récente d’abord), Infoconcert, Time Out, Le Bon Bon, presse spécialisée.
+  Pour chaque annonce retenue : fiche le jour même, avec **chaque vague de vente** en offre (prévente artiste, de salle, fan club, banque, puis vente générale), date et heure, et dans `condition` qui y a droit et **la date limite d’inscription**. Vente annoncée sans date : offre `venteApprox: true` (date estimée), corrigée dès publication. Le rapport ouvre sur les ventes des 7 jours suivants, inscriptions comprises.
+  Cadence conseillée, au choix de Léonard : `/veille ventes` deux fois par semaine (début et milieu de semaine), la veille complète une fois par semaine ou moins.
 
   Le cœur de la veille concerts : **détecter l’annonce**, puis **guetter la mise en vente**. Chaque prévente et chaque vente générale datée entre dans le flux `ventes-<icsToken>.ics` avec son alerte ; une date estimée y figure avec « ~ » et se corrige dès qu’elle est publiée.
 

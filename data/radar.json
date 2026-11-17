@@ -6,12 +6,12 @@
    "date": "2026-11-17",
    "domaine": "complete",
    "titre": "Première veille : les annonces de 2027 et dix-huit expositions",
-   "chapo": "Première veille complète de Factotum, approfondie le jour même. 35 concerts et 18 expositions entrent à l’affiche, la distribution de 88 spectacles est complétée et deux fiches passées rejoignent l’archive. À ne pas manquer cette semaine : les préventes de Stray Kids (18 nov.) et de KPop Demon Hunters (19 nov.), toutes deux à Paris La Défense Arena.",
+   "chapo": "Première veille complète de Factotum, approfondie le jour même. 33 concerts et 18 expositions entrent à l’affiche, la distribution de 88 spectacles est complétée et deux fiches passées rejoignent l’archive. Les grandes dates de 2027 sont presque toutes déjà en vente : la veille des prochaines annonces devient la priorité.",
    "sections": [
     {
      "titre": "À retenir",
      "texte": [
-      "Deux ventes ouvrent cette semaine : Stray Kids (prévente des membres STAY le 18 novembre à 11 h, prévente artiste à 15 h, vente générale le 19 à 15 h) et KPop Demon Hunters (préventes le 19 novembre à 10 h et 14 h, sur inscription jusqu’au 18).",
+      "Aucune vente de concert retenu n’ouvre cette semaine : les grandes dates de 2027 annoncées cet automne sont déjà en vente. Les prochaines ouvertures à l’affiche sont celles de l’Odéon (24 novembre) et les avant-premières jeunes de l’Opéra de Paris à partir du 7 janvier.",
       "Le printemps 2027 se joue au Stade de France : Sofiane Pamart le 17 avril, SCH les 23 et 24, Kaaris le 22 mai, SDM les 29 et 30 mai, U2 les 5, 8 et 9 mai, Oasis les 20 et 23 juillet. Pour toutes ces dates, la vente générale est déjà passée.",
       "Deux incontournables nouveaux : Jean-Michel Jarre, de retour en France après dix ans pour les 50 ans d’Oxygène à La Seine Musicale (14–16 octobre 2027), et Monet, peindre le temps à l’Orangerie, pour le centenaire de la mort du peintre (jusqu’au 25 janvier).",
       "Côté scène, la semaine est celle des dernières : La Walkyrie s’achève ce soir à Bastille, Ganesh versus the Third Reich se joue jusqu’au 21 novembre et Ici sont les dragons jusqu’au 29."
@@ -47,7 +47,7 @@
       "Rap : les grandes salles se remplissent pour 2027. L2B (16 octobre) et Leto (11 décembre) passent à Paris La Défense Arena, Guy2Bezbar fait son premier Bercy (17 avril), Kaaris et SDM prennent le Stade de France ; Tiakola joue avec l’Orchestre Lamoureux à la Philharmonie après-demain, complet.",
       "Pop et chanson : Angèle ouvre l’Instinct Tour par cinq Bercy en mars, Pomme passe de l’Olympia (complet) à son premier Bercy le 8 décembre 2027, Théa aborde le Zénith (19 mars), Vianney, Eddy de Pretto et Charlotte Cardin prennent Bercy à l’automne 2027, TeddyBear joue au Trianon le 26 janvier. Étienne Daho rejoue Pop Satori et Éden en symphonique sous la nef du Grand Palais (15 janvier), Ludovico Einaudi y joue seul au piano la veille.",
       "R&B, funk et musiques du monde : Erykah Badu au Zénith (20 janvier), Angélique Kidjo et Youssou N’Dour au Grand Rex pour leur seule date française (24 mars), Jorja Smith à Bercy (27 mai), Tayc trois soirs à Bercy (1er–3 juin), Jamiroquai deux soirs (9–10 juillet).",
-      "Rock et pop internationale : Rush revient en France pour une seule date (19 février), Weezer aussi (Zénith, 25 mai), Fall Out Boy joue à Bercy le 10 juin, Noah Kahan à Longchamp le 10 juillet, U2 et Oasis au Stade de France. K-pop : Stray Kids et KPop Demon Hunters à La Défense Arena.",
+      "Rock et pop internationale : Rush revient en France pour une seule date (19 février), Weezer aussi (Zénith, 25 mai), Fall Out Boy joue à Bercy le 10 juin, Noah Kahan à Longchamp le 10 juillet, U2 et Oasis au Stade de France.",
       "Électro : Mosimann fait son premier Bercy (16 octobre) après deux Zénith complets, John Summit passe au Zénith (23 février), Jean-Michel Jarre fête Oxygène à La Seine Musicale."
      ],
      "lignes": [
@@ -95,11 +95,6 @@
        "id": "weezer-zenith-2027",
        "titre": "Weezer",
        "texte": "Zénith, 25 mai"
-      },
-      {
-       "id": "stray-kids-run-it-2027",
-       "titre": "Stray Kids",
-       "texte": "Paris La Défense Arena, 9 juil."
       },
       {
        "id": "jamiroquai-accor-arena-2027",
@@ -255,16 +250,6 @@
      "titre": "Mises en vente à venir",
      "lignes": [
       {
-       "id": "stray-kids-run-it-2027",
-       "titre": "Stray Kids",
-       "texte": "prévente STAY le 18 nov. à 11 h, prévente artiste à 15 h, vente générale le 19 nov. à 15 h"
-      },
-      {
-       "id": "kpop-demon-hunters-golden-world-tour",
-       "titre": "KPop Demon Hunters",
-       "texte": "préventes le 19 nov. à 10 h et 14 h, sur inscription"
-      },
-      {
        "id": "vampire-s-mountain",
        "titre": "Vampire’s Mountain",
        "texte": "Odéon, ouverture hors abonnement le 24 nov."
@@ -363,10 +348,10 @@
     }
    ],
    "bilan": {
-    "ajoutees": 53,
+    "ajoutees": 51,
     "archivees": 2,
     "revisees": 0,
-    "ventes": 32
+    "ventes": 27
    }
   }
  ]
