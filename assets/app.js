@@ -368,9 +368,10 @@ function offresHTML(e) {
   if (L.tarifJeune) li.push(`<li class="soft">Tarif jeune du lieu : ${esc(L.tarifJeune)}</li>`);
   return li.length ? `<ul class="off">${li.join("")}</ul>` : "";
 }
-function actsHTML(e, details) {
+function actsHTML(e, details, adm = "") {
   const o = official(e), b0 = booking(e), b = b0 && b0 !== o ? b0 : "", vu = e.statut === "vu";
-  return `<div class="acts">${b && !vu ? `<a class="btn pri" href="${esc(b)}" target="_blank" rel="noopener noreferrer">${ico("billet")}Billetterie</a>` : ""}${o ? `<a class="btn${!b && !vu ? " pri" : ""}" href="${esc(o)}" target="_blank" rel="noopener noreferrer">${ico("externe")}${vu ? "Page archivée" : "Site officiel"}</a>` : ""}${details ? `<button class="btn ico" type="button" data-share="${esc(e.id)}" aria-label="Partager" title="Partager">${ico("partager")}</button>` : ""}</div>`;
+  const lo = vu ? "Page archivée" : "Site officiel"; // libellés masqués sur mobile quand les icônes admin suivent (aria-label gardé)
+  return `<div class="acts">${b && !vu ? `<a class="btn pri" href="${esc(b)}" target="_blank" rel="noopener noreferrer" aria-label="Billetterie">${ico("billet")}<span class="lbl">Billetterie</span></a>` : ""}${o ? `<a class="btn${!b && !vu ? " pri" : ""}" href="${esc(o)}" target="_blank" rel="noopener noreferrer" aria-label="${lo}">${ico("externe")}<span class="lbl">${lo}</span></a>` : ""}${details ? `<button class="btn ico" type="button" data-share="${esc(e.id)}" aria-label="Partager" title="Partager">${ico("partager")}</button>` : ""}${adm ? `<span class="acts-adm" role="group" aria-label="Admin">${adm}</span>` : ""}</div>`;
 }
 function detHTML(e) {
   const c = creditsHTML(e);
@@ -378,10 +379,11 @@ function detHTML(e) {
   if (e.statut === "vu") {
     const L = lieu(e), adm = PRIVE && ADMIN;
     const mod = adm ? `<button class="btn ai" type="button" data-adm="jmodif" data-id="${esc(e.id)}" aria-label="Modifier les entrées et la fiche" title="Modifier les entrées et la fiche">${ico("modifier")}</button><button class="btn ai danger" type="button" data-adm="supprimer" data-id="${esc(e.id)}" aria-label="Supprimer du journal" title="Supprimer du journal">${ico("supprimer")}</button>` : "";
-    return `${adm ? `<section class="adm-c" aria-label="Admin">${ADMIN.journalResume(e)}<div class="acts acts-adm">${mod}</div></section>` : ""}${c ? `<p class="cr">${c}</p>` : ""}
+    const res = adm ? ADMIN.journalResume(e) : "";
+    return `${res ? `<section class="adm-c" aria-label="Admin">${res}</section>` : ""}${c ? `<p class="cr">${c}</p>` : ""}
     <dl class="dl"><dt>${ico("lieu")}<span class="vh">Lieu</span></dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}</dd>
     ${e.note ? `<dt>Grille</dt><dd>${stars(e.note, false, "Note de la grille")}</dd>` : ""}</dl>
-    ${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${actsHTML(e, true)}`;
+    ${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${actsHTML(e, true, mod)}`;
   }
   return ficheCorps(e);
 }
@@ -397,7 +399,7 @@ function ficheCorps(e, plein) {
   return `${PRIVE && ADMIN ? ADMIN.ficheHTML(e) : ""}${c ? `<p class="cr">${c}</p>` : ""}
     <dl class="dl"><dt>${ico("lieu")}<span class="vh">Lieu</span></dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}${L.ville && L.ville !== "Paris" ? " (" + esc(L.ville) + ")" : ""}</dd>
     <dt>${ico("mois")}<span class="vh">Dates</span></dt><dd>${esc(range(e))}</dd>${e.horaires ? `<dt>${ico("horaires")}<span class="vh">Horaires</span></dt><dd>${esc(e.horaires)}</dd>` : ""}${estExpo(e) ? expoInfos(e) : ""}</dl>
-    ${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${calculHTML(e)}${actsHTML(e, !plein)}
+    ${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${calculHTML(e)}${actsHTML(e, !plein, PRIVE && ADMIN ? ADMIN.ficheActs(e) : "")}
     ${(e.offres || []).length || L.tarifJeune ? `<h3 class="sec">Offres</h3>${offresHTML(e)}` : ""}<h3 class="sec">Dates</h3>${ficheCal(e)}`;
 }
 
@@ -659,7 +661,7 @@ async function openSheet(id) {
     box.innerHTML = `${marqueFiche()}<div class="shtop"><button class="btn ico" type="button" data-close aria-label="Fermer">${ico("fermer")}</button><span class="k">${esc([e.categorie, e.sousGenre].filter(Boolean).join(" · "))}${L.nom ? " · " + esc(court(e.lieuId)) : ""}</span><button class="btn ico" type="button" data-share="${esc(e.id)}" aria-label="Partager">${ico("partager")}</button></div>
     <div class="shh"><span class="meta">${esc(vu ? "Vu le " + (e.vuLe || []).map((d) => fmtY(D(d), true)).join(", ") : range(e))}</span><div class="tit">${genreIco(e, "g")}<h2 id="sheetT" class="nom">${esc(e.titre)}</h2></div>
       <div class="ligne">${!vu && e.note ? stars(e.note, e.pronostic) : ""}${vu && e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : ""}${badges(e)}</div></div>
-    ${vu ? `${PRIVE && ADMIN ? ADMIN.ficheHTML(e) : ""}${c ? `<p class="cr">${c}</p>` : ""}<dl class="dl"><dt>Ma note</dt><dd>${e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : "pas de note"}</dd>${e.note ? `<dt>Grille</dt><dd>${stars(e.note, false, "Note de la grille")}</dd>` : ""}</dl>${e.avis ? `<blockquote>${esc(e.avis)}</blockquote>` : ""}${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${actsHTML(e, false)}` : ficheCorps(e, true)}`;
+    ${vu ? `${PRIVE && ADMIN ? ADMIN.ficheHTML(e) : ""}${c ? `<p class="cr">${c}</p>` : ""}<dl class="dl"><dt>Ma note</dt><dd>${e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : "pas de note"}</dd>${e.note ? `<dt>Grille</dt><dd>${stars(e.note, false, "Note de la grille")}</dd>` : ""}</dl>${e.avis ? `<blockquote>${esc(e.avis)}</blockquote>` : ""}${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${actsHTML(e, false, PRIVE && ADMIN ? ADMIN.ficheActs(e) : "")}` : ficheCorps(e, true)}`;
   }
   const s = $("#sheet");
   if (s.hidden) { SHEET_FROM = document.activeElement; s.hidden = false; document.documentElement.style.overflow = "hidden"; }
@@ -746,7 +748,7 @@ function condCourte(c) {
 }
 const offreTxt = (o) => esc(typeCourt(o.type)) + (o.tarif ? ", " + esc(o.tarif) : "");
 // Info d’une ouverture : « Vente 12h · Avant-première jeunes, 10 € · –28 ans ».
-const venteInfo = (o) => { const hv = heureV(o), c = condCourte(o.condition); return [`<b>Vente${hv ? " " + hv : ""}</b>`, o.venteApprox ? "date estimée" : "", offreTxt(o), c && c !== typeCourt(o.type) ? `<span class="cr">${esc(c)}</span>` : ""].filter(Boolean).join(" · "); };
+const venteInfo = (o) => { const hv = heureV(o), c = condCourte(o.condition); return [`<b>Vente${hv ? " " + hv : ""}</b>`, o.venteApprox ? "date estimée" : "", typeCourt(o.type) === "Vente" && !o.tarif ? "" : offreTxt(o), c && c !== typeCourt(o.type) ? `<span class="cr">${esc(c)}</span>` : ""].filter(Boolean).join(" · "); };
 // Dates de jeu courtes : « 16–24 avr. », « 26 et 27 mars », « 24 févr.–7 mars ».
 function joueCourt(e) {
   const p = span(e); if (!p) return "";
@@ -803,10 +805,10 @@ function renderRadar() {
   const go = (id, n, t) => `<button class="chip" type="button" data-rgo="${id}">${(n + " " + t).trim()}</button>`;
   const nSuivies = r.suite.filter((x) => suivie(x.e)).length;
   $("#main").innerHTML = `<section id="radar"><h1 class="vh">Radar</h1>
-  <nav class="chips defile r-res" aria-label="Accès du radar"><a class="chip" href="#ventes">${ico("ventes")}Ouvertures de vente</a><a class="chip" href="#coeur">${COEUR}Coups de cœur</a>${go("r-reserver", r.aReserver.length, r.aReserver.length > 1 ? "notées 4" : "notée 4")}<a class="chip" href="#rapports">Rapports de veille</a>${go("r-liens", "", "Billetteries")}</nav>
+  <nav class="r-res" aria-label="Accès du radar"><a class="chip" href="#ventes">${ico("ventes")}Ventes</a><a class="chip" href="#coeur">${COEUR}Coups de cœur</a>${go("r-reserver", "", "Incontournables")}${go("r-liens", "", "Billetteries")}</nav>
   ${nC ? `<div class="msg">${plural(nC, "billet")} à compléter <a href="#admin?v=rapide">Traiter</a></div>` : ""}
   <div class="r-g"><div class="r-col">${rapportEnTete()}
-    <section class="r-b r-reserver" id="r-reserver"><h2 class="mh">À réserver <small>notées 4</small></h2>
+    <section class="r-b r-reserver" id="r-reserver"><h2 class="mh">Incontournables à réserver <small>${r.aReserver.length}</small></h2>
       ${r.aReserver.length ? `<div class="list">${r.aReserver.map((x) => rowR(x.e, "r", stubReserver(x), infoReserver(x))).join("")}</div>` : `<p class="empty">Tous les incontournables sont réservés.</p>`}</section>
     <section class="r-b r-chances" id="r-chances"><h2 class="mh">Dernières chances <small>notées 3 et +</small></h2>
       ${r.chances.length ? `<div class="list">${r.chances.map((e) => rowR(e, "c", stubR("fin", finDe(e), dansJ(finDe(e)) <= 7), [`Jusqu’au ${fmt(finDe(e), true)}`, libresTxt(e)].filter(Boolean).join(" · "))).join("")}</div>` : `<p class="empty">Rien de noté 3 ou plus ne s’arrête dans les ${R_FIN} jours.</p>`}</section>
@@ -861,7 +863,8 @@ const rapportLiens = () => `<div class="acts"><a class="btn" href="#rapports">To
 function rapportEnTete() {
   const r = (RAPPORTS || [])[0]; if (!r) return "";
   return `<section class="r-b rp" id="r-rapport"><h2 class="mh">Dernière veille <small>${esc(fmt(D(r.date)))}</small></h2>
-  <p class="rp-chapo"><a href="#rapport-${esc(r.id)}">${esc(r.titre)}</a></p>${r.chapo ? `<p>${esc(r.chapo)}</p>` : ""}</section>`;
+  <p class="rp-chapo"><a href="#rapport-${esc(r.id)}">${esc(r.titre)}</a></p>${r.chapo ? `<p>${esc(r.chapo)}</p>` : ""}
+  <div class="acts"><a class="btn" href="#rapports">Tous les rapports de veille</a></div></section>`;
 }
 function rapportHTML(r) {
   const ligne = (l) => { const c = `<span class="lt"><b>${esc(l.titre || "")}</b>${l.texte ? `<small>${esc(l.texte)}</small>` : ""}</span>`; return `<li>${l.id && BYID.has(l.id) ? `<a href="#sortie-${esc(l.id)}">${c}</a>` : `<div class="rp-l">${c}</div>`}</li>`; };
@@ -894,6 +897,25 @@ const groupeHTML = (t, n, rows) => `<section class="v-g"><h2 class="v-t">${t} <s
 function groupesPar(items, cle, row) {
   const G = []; for (const e of items) { const k = cle(e); if (!G.length || G.at(-1).k !== k) G.push({ k, L: [] }); G.at(-1).L.push(e); }
   return G.map((g) => groupeHTML(esc(g.k), g.L.length, g.L.map(row).join(""))).join("");
+}
+// Puces de genre des pages en groupes (Coups de cœur, Artiste, Lieu) : filtrent les lignes déjà affichées, groupes vides masqués.
+function genresHTML(items) {
+  const cats = CATS.filter((c) => items.some((e) => e.categorie === c)); if (cats.length < 2) return "";
+  return `<div class="fbar fg"><div class="chips defile gtabs" role="group" aria-label="Genres">${cats.map((c) => `<button class="chip g-${famille(c)}" type="button" data-fg="${slug(c)}" aria-pressed="false" aria-label="${esc(c)}">${ico(c)}${esc(GENRE_PUCE[c] || c)}</button>`).join("")}</div></div>`;
+}
+function brancherGenres(root, init, quand) {
+  const sel = new Set(init || []);
+  const app = () => {
+    root.querySelectorAll("[data-fg]").forEach((b) => b.setAttribute("aria-pressed", String(sel.has(b.dataset.fg))));
+    root.querySelectorAll(".v-g").forEach((g) => {
+      let n = 0;
+      g.querySelectorAll(":scope>.v-l>.row").forEach((r) => { const e = BYID.get(r.dataset.id), ok = !sel.size || (e && sel.has(slug(e.categorie))); r.hidden = !ok; if (ok) n++; });
+      g.hidden = !n; const sm = g.querySelector(".v-t small"); if (sm) sm.textContent = n;
+    });
+    if (quand) quand(sel);
+  };
+  root.addEventListener("click", (ev) => { const b = ev.target.closest("[data-fg]"); if (!b) return; const v = b.dataset.fg; sel.has(v) ? sel.delete(v) : sel.add(v); app(); });
+  if (sel.size) app();
 }
 function listeVentes(T) {
   const q = norm(VF.q).trim();
@@ -1078,7 +1100,8 @@ function renderArtiste(k) {
   if (!a) { $("#main").innerHTML = `<a class="back" href="#artistes">Artistes et lieux</a><p class="empty">Artiste inconnu.</p>`; return; }
   const aff = a.aff.filter((e) => !ended(e)).sort(byStart), vus = a.vus.slice().sort(byVu);
   $("#main").innerHTML = `<a class="back" href="#artistes">Artistes et lieux</a><div class="ph"><h1>${esc(a.nom)}</h1><p>${esc(cap(ROLES.filter((r) => a.roles.has(r)).join(", ")))} · ${plural(aff.length, "sortie")} à l’affiche, ${plural(vus.length, "vue", "vues")}</p></div>
-  ${aff.length ? groupeHTML("À l’affiche", aff.length, aff.map(rowA).join("")) : ""}${vus.length ? groupeHTML("Vu", vus.length, vus.map(rowJ).join("")) : ""}`;
+  ${genresHTML([...aff, ...vus])}${aff.length ? groupeHTML("À l’affiche", aff.length, aff.map(rowA).join("")) : ""}${vus.length ? groupeHTML("Vu", vus.length, vus.map(rowJ).join("")) : ""}`;
+  brancherGenres($("#main"));
   document.title = a.nom + " – " + NOM;
 }
 function renderLieu(id) {
@@ -1089,7 +1112,8 @@ function renderLieu(id) {
   const ext = (u, t) => web(u) ? `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${t}</a>` : "";
   $("#main").innerHTML = `<a class="back" href="#lieux">Artistes et lieux</a><div class="ph"><h1>${esc(L.nom)}</h1><p>${esc([L.ville, L.zone !== L.ville ? L.zone : ""].filter(Boolean).join(", "))} · lieu ${L.statut === "Public" ? "public" : "privé"}</p></div>
   <dl class="dl inl">${L.tarifJeune ? `<dt>Tarif jeune</dt><dd>${esc(L.tarifJeune)}</dd>` : ""}${L.adresse ? `<dt>Adresse</dt><dd>${esc(L.adresse)}</dd>` : ""}${L.site ? `<dt>Site</dt><dd>${ext(L.site, esc(L.site.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")))}</dd>` : ""}${L.billetterie ? `<dt>Billetterie</dt><dd>${ext(L.billetterie, "Acheter des places")}</dd>` : ""}</dl>
-  ${aff.length ? groupeHTML("À l’affiche", aff.length, aff.map(rowA).join("")) : ""}${vus.length ? groupeHTML("Vu ici", vus.length, vus.map(rowJ).join("")) : ""}`;
+  ${genresHTML([...aff, ...vus])}${aff.length ? groupeHTML("À l’affiche", aff.length, aff.map(rowA).join("")) : ""}${vus.length ? groupeHTML("Vu ici", vus.length, vus.map(rowJ).join("")) : ""}`;
+  brancherGenres($("#main"));
   document.title = L.nom + " – " + NOM;
 }
 
@@ -1100,11 +1124,13 @@ const hote = (u) => { try { return new URL(u).hostname.replace(/^www\./, ""); } 
 // Liens rangés par rubrique, dans l’ordre du fichier à l’intérieur de chaque rubrique.
 const liensParRubrique = (L) => ORDRE_LIENS.map((c) => [c, L.filter((l) => l.categorie === c)]);
 /* ---------- Coups de cœur (envies, publiques) ---------- */
-function renderCoeur() {
-  const E = enviesIds();
+function renderCoeur(q) {
+  const E = enviesIds(), init = (new URLSearchParams(q || "").get("cat") || "").split(",").filter(Boolean);
   const items = LIVE.filter((e) => E.has(e.id)).sort((a, b) => sortKey(a) - sortKey(b) || a.titre.localeCompare(b.titre, "fr"));
   $("#main").innerHTML = `<div class="ph"><h1>Coups de cœur de ${OWNER}</h1><p>${EXPO ? plural(items.length, "exposition") : plural(items.length, "sortie") + " à l’affiche"}</p></div>
-  ${groupesPar(items, groupOf, rowA) || `<p class="empty">Aucun coup de cœur pour le moment.</p>`}`;
+  ${genresHTML(items)}${groupesPar(items, groupOf, rowA) || `<p class="empty">Aucun coup de cœur pour le moment.</p>`}`;
+  // Genres retenus dans l’adresse (#coeur?cat=theatre,opera).
+  brancherGenres($("#main"), init, (sel) => { history.replaceState(null, "", "#coeur" + (sel.size ? "?cat=" + [...sel].join(",") : "")); BASE = RENDERED = location.hash.slice(1); });
 }
 // Billetteries, cartes jeunes et calendriers de vente : section du Radar (l’ancienne page Liens, #liens y mène).
 function liensHTML() {
@@ -1143,7 +1169,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.50"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.52"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1154,7 +1180,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.50"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.52"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1172,7 +1198,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.50"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.52"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
@@ -1203,12 +1229,13 @@ async function renderView(h) {
   else if (view === "artistes" || view === "lieux") renderAL(view, q);
   else if (view === "artiste") renderArtiste(decodeURIComponent(path.slice(8)));
   else if (view === "lieu") renderLieu(decodeURIComponent(path.slice(5)));
-  else if (view === "coeur") renderCoeur();
+  else if (view === "coeur") renderCoeur(q);
   else if (view === "ventes") renderVentes(q);
   else if (view === "plan") renderPlan();
   else if (view === "admin") await renderAdmin(q);
   const hc = $("#hcoeur"); if (hc) { if (view === "coeur") hc.setAttribute("aria-current", "page"); else hc.removeAttribute("aria-current"); }
   RENDERED = h;
+  if (!samePath) { const m = $("#main"); m.classList.remove("entre"); void m.offsetWidth; m.classList.add("entre"); } // fondu d’entrée d’une nouvelle page (CSS, sauf mouvement réduit)
   colLat();
   if (path === "liens") { const l = $("#r-liens"); if (l) l.scrollIntoView({ block: "start" }); }
   else if (!samePath) window.scrollTo(0, 0);

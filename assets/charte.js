@@ -132,7 +132,7 @@
       <li>Polices Inter, Roboto, Poppins, Montserrat, Space Grotesk ou police système par défaut</li><li>Dégradés (hachures fonctionnelles exceptées), glassmorphisme, ombres portées, flou d’arrière-plan</li>
       <li>Coins arrondis au-delà de 2 px, boutons en pilule, cartes flottantes</li><li>Emoji, bibliothèques d’icônes, pictogrammes décoratifs ; toute icône hors du jeu Factotum, de la clé F et du cœur</li>
       <li>Violet, indigo, bleu ardoise ou toute couleur hors palette</li><li>Héros centré avec accroche, grandes sections vides, texte d’accueil marketing</li>
-      <li>Animations d’échelle, rebonds, révélations au défilement, squelettes de chargement : seules les transitions de couleur et d’opacité de 120 ms, aucune en mouvement réduit</li>
+      <li>Animations d’échelle, rebonds, révélations au défilement, squelettes de chargement. Le mouvement permis : transitions de couleur et d’opacité de 120 ms ; fondu avec glissement de 6 à 16 px, 160 à 240 ms, sans rebond, à l’entrée d’une page, au déroulé d’une fiche, à l’ouverture d’une fenêtre et d’un message. Aucun en mouvement réduit</li>
       <li>Texte noir sur aplat rouge ; clé F rouge sur rouge, redressée, ombrée ou animée</li></ul></section>
     <p class="meta muet" data-st="margin:var(--e8) 0">Largo al factotum della città.</p></div>`;
 

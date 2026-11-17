@@ -908,3 +908,36 @@ body:has(#dlg) .pub,body:has(#dlg) .toast{bottom:auto;top:0}
 .stub small.au2+small.au2{margin-top:1px}
 /* Pages en groupes (Coups de cœur, Artiste, Lieu) : premier groupe sous l’en-tête de page. */
 .ph+.v-g{margin-top:var(--e4)}
+/* Radar : quatre accès visibles d’un coup (2 × 2 sur mobile, une rangée sur bureau). */
+.r-res{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--e1);margin:var(--e3) 0 0}
+.r-res .chip{justify-content:center;min-width:0}
+@media (min-width:600px){.r-res{display:flex;flex-wrap:wrap}.r-res .chip{justify-content:flex-start}}
+#r-rapport .acts{margin-top:var(--e3)}
+/* Boutons admin dans la rangée « Site officiel » / Partager, après un écart. */
+.acts>.acts-adm{display:inline-flex;flex-wrap:nowrap;align-items:center;gap:var(--e1);margin:0 0 0 var(--e2);padding-left:var(--e2);border-left:1px solid var(--filet-leger)}
+.acts>.acts-adm .btn.ai{min-height:36px;min-width:36px}
+.acts>.acts-adm .btn.ai.danger:last-child{margin-left:0}
+.fbar.fg{margin-top:var(--e3)}
+.v-l>.row[hidden],.v-g[hidden]{display:none}
+/* ---------- Mouvement (charte) : court, sans rebond ni échelle, jamais au défilement, coupé en mouvement réduit ---------- */
+@media (prefers-reduced-motion:no-preference){
+  #main.entre{animation:m-entre 180ms cubic-bezier(.2,.7,.2,1)}
+  .det:not([hidden]){animation:m-deroule 200ms cubic-bezier(.2,.7,.2,1)}
+  .sheet{animation:m-fondu 160ms ease-out}
+  .sheet>.sheet-in{animation:m-monte 240ms cubic-bezier(.2,.7,.2,1)}
+  .toast.show{animation:m-monte 200ms cubic-bezier(.2,.7,.2,1)}
+  .row.open .tt{transition:color var(--duree)}
+}
+@keyframes m-entre{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes m-deroule{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@keyframes m-fondu{from{opacity:0}to{opacity:1}}
+@keyframes m-monte{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@media (max-width:599.98px){
+  .acts:has(>.acts-adm){gap:var(--e1);flex-wrap:nowrap}
+  .acts:has(>.acts-adm)>.btn{min-width:32px;min-height:32px;padding:0 var(--e1);position:relative}
+  .acts:has(>.acts-adm)>.btn .lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .acts>.acts-adm{margin-left:0;padding-left:var(--e1);gap:var(--e1)}
+  .acts>.acts-adm .btn.ai{min-width:32px;min-height:32px;padding:0}
+  .acts:has(>.acts-adm) .btn::after{content:"";position:absolute;inset:-6px -2px}
+  .acts>.acts-adm .btn.ai{position:relative}
+}

@@ -319,8 +319,7 @@
     {
      "type": "Ouverture des ventes",
      "vente": "2027-01-27",
-     "venteApprox": true,
-     "condition": "Détenteurs de cartes avant le grand public"
+     "venteApprox": true
     }
    ]
   },
@@ -755,8 +754,7 @@
     {
      "type": "Ouverture des ventes",
      "vente": "2027-01-27",
-     "venteApprox": true,
-     "condition": "Détenteurs de cartes avant le grand public"
+     "venteApprox": true
     }
    ]
   },
@@ -2692,8 +2690,7 @@
     {
      "type": "Dates à partir du 1er mars",
      "vente": "2027-01-27",
-     "venteApprox": true,
-     "condition": "Détenteurs de cartes avant le grand public"
+     "venteApprox": true
     }
    ],
    "relaches": [
@@ -2830,8 +2827,7 @@
     {
      "type": "Ouverture des ventes",
      "vente": "2027-01-27",
-     "venteApprox": true,
-     "condition": "Détenteurs de cartes avant le grand public"
+     "venteApprox": true
     }
    ]
   },
@@ -3430,8 +3426,7 @@
     {
      "type": "Ouverture des ventes",
      "vente": "2027-01-27",
-     "venteApprox": true,
-     "condition": "Détenteurs de cartes avant le grand public"
+     "venteApprox": true
     }
    ]
   },
@@ -3571,8 +3566,7 @@
     {
      "type": "Ouverture des ventes",
      "vente": "2027-01-27",
-     "venteApprox": true,
-     "condition": "Détenteurs de cartes avant le grand public"
+     "venteApprox": true
     }
    ]
   },
@@ -3613,8 +3607,7 @@
     {
      "type": "Ouverture des ventes",
      "vente": "2027-01-27",
-     "venteApprox": true,
-     "condition": "Détenteurs de cartes avant le grand public"
+     "venteApprox": true
     }
    ]
   },
@@ -3652,8 +3645,7 @@
     {
      "type": "Ouverture des ventes",
      "vente": "2027-01-27",
-     "venteApprox": true,
-     "condition": "Détenteurs de cartes avant le grand public"
+     "venteApprox": true
     }
    ]
   },
@@ -3819,8 +3811,7 @@
     {
      "type": "Ouverture des ventes",
      "vente": "2027-01-27",
-     "venteApprox": true,
-     "condition": "Détenteurs de cartes avant le grand public"
+     "venteApprox": true
     }
    ]
   },
@@ -4107,8 +4098,7 @@
     {
      "type": "Dates à partir du 1er mars",
      "vente": "2027-01-27",
-     "venteApprox": true,
-     "condition": "Détenteurs de cartes avant le grand public"
+     "venteApprox": true
     }
    ],
    "relaches": [
@@ -4662,8 +4652,7 @@
     {
      "type": "Ouverture des ventes",
      "vente": "2027-01-27",
-     "venteApprox": true,
-     "condition": "Détenteurs de cartes avant le grand public"
+     "venteApprox": true
     }
    ]
   },
@@ -4704,8 +4693,7 @@
     {
      "type": "Ouverture des ventes",
      "vente": "2027-01-27",
-     "venteApprox": true,
-     "condition": "Détenteurs de cartes avant le grand public"
+     "venteApprox": true
     }
    ]
   },
@@ -8034,8 +8022,7 @@
     {
      "type": "Dates à partir du 1er mars",
      "vente": "2027-01-27",
-     "venteApprox": true,
-     "condition": "Détenteurs de cartes avant le grand public"
+     "venteApprox": true
     }
    ],
    "horaires": "20h30, matinées 14h (mer., jeu., sam., dim.) ; 2h sans entracte",
@@ -8390,8 +8377,7 @@
     {
      "type": "Dates à partir du 1er mars",
      "vente": "2027-01-27",
-     "venteApprox": true,
-     "condition": "Détenteurs de cartes avant le grand public"
+     "venteApprox": true
     }
    ],
    "horaires": "20h30, matinées 14h (dim.) ; 2h05 sans entracte",

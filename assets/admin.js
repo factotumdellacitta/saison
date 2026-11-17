@@ -586,11 +586,17 @@
     if (env) et.push(`<b>${x ? "Ça m’intéresse" : "Coup de cœur"}</b> <button class="linkbtn adm-n" type="button" data-adm="envie" data-id="${esc(e.id)}">${env.note ? "« " + esc(env.note) + " »" : "ajouter une note"}</button>`);
     if (e.statut === "ecarte") et.push("<b>Écartée</b> (masquée du public)");
     const notes = vu && jp && jp.notes ? `<p class="adm-e">${esc(jp.notes).replace(/\n/g, "<br>")}</p>` : "";
-    const acts = vu
+    // État en tête du déroulé ; les actions rejoignent la rangée « Site officiel » et Partager (ficheActs).
+    return et.length || notes ? `<section class="adm-c" aria-label="Admin">${et.length ? `<p class="adm-e">${et.join(" · ")}</p>` : ""}${notes}</section>` : "";
+  }
+  function ficheActs(e) {
+    if (!PRIVE) return "";
+    const vu = e.statut === "vu", r = PRIVE.reservations[e.id], x = estExpo(e);
+    const b = (act, t, icone, cls = "") => `<button class="btn ai ${cls}" type="button" data-adm="${act}" data-id="${esc(e.id)}" aria-label="${t}" title="${t}">${ico(icone)}</button>`;
+    return vu
       ? b("revu", "Ajouter une date vue", "ajouter", "pri") + b("notes", "Dates, note, avis et notes", "carres") + b("editer", "Modifier la fiche", "modifier") + b("supprimer", "Supprimer", "supprimer", "danger")
       : b("reserver", r ? (x ? "Modifier la visite" : "Modifier la réservation") : (x ? "Planifier une visite" : "J’ai réservé"), "billet-ok", "pri") + (r ? b("annuler", x ? "Annuler la visite" : "Annuler la réservation", "billet-barre", "danger") : "") +
-        b("vu", "Marquer vu", "coche") + b("editer", "Modifier la fiche", "modifier") + (e.statut === "ecarte" ? b("remettre", "Remettre à l’affiche", "oeil") : b("ecarter", "Écarter (masquer du public)", "oeil-barre")) + b("supprimer", "Supprimer", "supprimer", "danger");
-    return `<section class="adm-c" aria-label="Admin">${et.length ? `<p class="adm-e">${et.join(" · ")}</p>` : ""}${notes}<div class="acts acts-adm">${acts}</div></section>`;
+        b("vu", "Marquer vu", "coche") + b("editer", "Modifier la fiche", "modifier") + (e.statut === "ecarte" ? b("remettre", "Remettre à l’affiche", "oeil") : r ? "" : b("ecarter", "Écarter (masquer du public)", "oeil-barre")) + b("supprimer", "Supprimer", "supprimer", "danger");
   }
   const detRes = (r) => {
     const t = [r.salle, r.places || (r.billets && r.billets.length) ? plural(nbPlaces(r), "place") : "", r.siege, resumePrix(r), (r.accompagnants || []).length ? "avec " + r.accompagnants.join(", ") : "", r.note].filter(Boolean).join(" · ");
@@ -1587,5 +1593,5 @@
     else if (a === "journal") act(formJournal);
   });
 
-  ADMIN = { render, heart, ficheHTML, idsAvec, accSelectHTML, portail, restaurer, journalForm, brancherJournal, journalResume };
+  ADMIN = { render, heart, ficheHTML, ficheActs, idsAvec, accSelectHTML, portail, restaurer, journalForm, brancherJournal, journalResume };
 })();
