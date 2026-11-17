@@ -852,3 +852,27 @@ body:has(#dlg) .pub,body:has(#dlg) .toast{bottom:auto;top:0}
 .rb .art.nom{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 .l1 .st{margin-top:4px}
 .row>.envie{top:7px}
+/* Déroulé collé à sa ligne : pas de marge entre l’aperçu et la fiche. */
+.det{padding-top:0}
+:is(.det,#sheet) .cr{padding-top:0;margin-top:0}
+.det>.dl:first-child,.det>.adm-c:first-child{margin-top:0}
+/* Barre admin : en tête du déroulé, une ligne d’état en métadonnées, les actions en icônes sur une rangée. */
+.adm-c{margin:0 0 var(--e3);padding:0 0 var(--e1);border-bottom:1px solid var(--filet-leger)}
+.adm-e{margin:0 0 var(--e1);font-size:var(--t-meta);line-height:1.45;color:var(--encre-2)}
+.adm-e b{color:var(--encre);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.adm-c .acts-adm{margin:0;gap:var(--e1);flex-wrap:nowrap;overflow-x:auto}
+.adm-c .acts-adm .btn.ai{min-height:36px;min-width:36px}
+.adm-c .acts-adm .btn.ai.danger:last-child{margin-left:auto}
+.linkbtn.adm-n{min-height:0;font-size:var(--t-meta);font-weight:500;text-transform:none;letter-spacing:0;color:var(--encre-2)}
+#sheet .adm-c{margin-top:var(--e2)}
+/* Colonne de date : trois lignes au plus. */
+.stub small.au{white-space:nowrap}
+/* Radar : le rapport passe en tête de la colonne principale ; les ventes occupent la colonne de droite dès le haut. */
+#r-rapport{order:0}
+#r-expos{order:5}
+#r-rapport>.mh:first-child{margin-top:var(--e3)}
+@media (min-width:960px){
+  .r-res{display:none}
+  #radar>.r-g{margin-top:var(--e4)}
+  .r-col>.r-b:first-child>.mh,.r-col.r-lat2>.mh:first-child{margin-top:0}
+}

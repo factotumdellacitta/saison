@@ -579,17 +579,18 @@
     // Actions en petits boutons à icône (libellé pour les lecteurs d’écran et en infobulle) ; seule l’action principale garde un mot.
     const b = (act, t, icone, cls = "", mot = "") => `<button class="btn ai ${cls}" type="button" data-adm="${act}" data-id="${esc(e.id)}" aria-label="${t}" title="${t}">${ico(icone)}${mot ? `<span>${mot}</span>` : ""}</button>`;
     const x = estExpo(e);
-    let etat = "";
-    if (r) etat = `<p><b>${x ? "Visite prévue" : "Réservé"}</b> : ${r.date ? esc(fmtY(D(r.date), true)) : "date à préciser"}${r.heure ? " à " + esc(r.heure) : ""}${detRes(r)}</p>`;
-    if (vu && jp) etat += `<p>${esc([jp.places || (jp.billets && jp.billets.length) ? plural(nbPlaces(jp), "place") : "", resumePrix(jp), (jp.accompagnants || []).length ? "avec " + jp.accompagnants.join(", ") : ""].filter(Boolean).join(" · "))}</p>`;
-    if (vu && jp && jp.notes) etat += `<p><b>Mes notes</b> (privées) : ${esc(jp.notes).replace(/\n/g, "<br>")}</p>`;
-    if (env) etat += `<p><b>${x ? "Ça m’intéresse" : "Coup de cœur"}</b>${env.note ? " · « " + esc(env.note) + " »" : ""}</p>`;
-    const prio = env ? `<div class="chips wrap-ok" role="group" aria-label="Coup de cœur"><button class="chip" type="button" data-adm="envie" data-id="${esc(e.id)}">Note privée</button></div>` : "";
+    // Barre admin compacte en tête du déroulé : une ligne d’état (métadonnées), puis les actions en icônes sur une seule rangée.
+    const et = [];
+    if (r) et.push(`<b>${x ? "Visite" : "Réservé"}</b> ${r.date ? esc(fmt(D(r.date), true)) : "date à préciser"}${r.heure ? " à " + esc(r.heure) : ""}${detRes(r)}`);
+    if (vu && jp) { const l = [jp.places || (jp.billets && jp.billets.length) ? plural(nbPlaces(jp), "place") : "", resumePrix(jp), (jp.accompagnants || []).length ? "avec " + jp.accompagnants.join(", ") : ""].filter(Boolean).join(" · "); if (l) et.push(esc(l)); }
+    if (env) et.push(`<b>${x ? "Ça m’intéresse" : "Coup de cœur"}</b> <button class="linkbtn adm-n" type="button" data-adm="envie" data-id="${esc(e.id)}">${env.note ? "« " + esc(env.note) + " »" : "ajouter une note"}</button>`);
+    if (e.statut === "ecarte") et.push("<b>Écartée</b> (masquée du public)");
+    const notes = vu && jp && jp.notes ? `<p class="adm-e">${esc(jp.notes).replace(/\n/g, "<br>")}</p>` : "";
     const acts = vu
-      ? b("revu", "Ajouter une date vue", "ajouter", "pri", "Revu") + b("notes", "Dates, note, avis et notes", "carres") + b("editer", "Modifier la fiche", "modifier") + b("supprimer", "Supprimer", "supprimer", "danger")
-      : (r ? b("reserver", x ? "Modifier la visite" : "Modifier la réservation", "billet-ok", "pri", x ? "Visite" : "Réservé") + b("annuler", x ? "Annuler la visite" : "Annuler la réservation", "billet-barre", "danger") : b("reserver", x ? "Planifier une visite" : "J’ai réservé", "billet-ok", "pri", x ? "Visite" : "Réservé")) +
+      ? b("revu", "Ajouter une date vue", "ajouter", "pri") + b("notes", "Dates, note, avis et notes", "carres") + b("editer", "Modifier la fiche", "modifier") + b("supprimer", "Supprimer", "supprimer", "danger")
+      : b("reserver", r ? (x ? "Modifier la visite" : "Modifier la réservation") : (x ? "Planifier une visite" : "J’ai réservé"), "billet-ok", "pri") + (r ? b("annuler", x ? "Annuler la visite" : "Annuler la réservation", "billet-barre", "danger") : "") +
         b("vu", "Marquer vu", "coche") + b("editer", "Modifier la fiche", "modifier") + (e.statut === "ecarte" ? b("remettre", "Remettre à l’affiche", "oeil") : b("ecarter", "Écarter (masquer du public)", "oeil-barre")) + b("supprimer", "Supprimer", "supprimer", "danger");
-    return `<section class="admbox" aria-label="Admin"><h3 class="adm-titre">Admin${e.statut === "ecarte" ? " · écartée (masquée du public)" : ""}</h3>${etat}${prio}<div class="acts acts-adm">${acts}</div></section>`;
+    return `<section class="adm-c" aria-label="Admin">${et.length ? `<p class="adm-e">${et.join(" · ")}</p>` : ""}${notes}<div class="acts acts-adm">${acts}</div></section>`;
   }
   const detRes = (r) => {
     const t = [r.salle, r.places || (r.billets && r.billets.length) ? plural(nbPlaces(r), "place") : "", r.siege, resumePrix(r), (r.accompagnants || []).length ? "avec " + r.accompagnants.join(", ") : "", r.note].filter(Boolean).join(" · ");
@@ -748,7 +749,7 @@
   function journalResume(e) {
     const jp = PRIVE.journalPrive[e.id]; if (!jp) return "";
     const l = [jp.places || (jp.billets && jp.billets.length) ? plural(nbPlaces(jp), "place") : "", resumePrix(jp), (jp.accompagnants || []).length ? "avec " + jp.accompagnants.join(", ") : ""].filter(Boolean).join(" · ");
-    return l || jp.notes ? `<section class="admbox" aria-label="Admin"><h3 class="adm-titre">Admin</h3>${l ? `<p>${esc(l)}</p>` : ""}${jp.notes ? `<p><b>Mes notes</b> (privées) : ${esc(jp.notes).replace(/\n/g, "<br>")}</p>` : ""}</section>` : "";
+    return (l ? `<p class="adm-e">${esc(l)}</p>` : "") + (jp.notes ? `<p class="adm-e">${esc(jp.notes).replace(/\n/g, "<br>")}</p>` : "");
   }
   // Fenêtre superposée : formulaire complet du journal (dates, note, avis, places, notes, fiche).
   function ouvrirJournal(id) {

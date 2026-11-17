@@ -190,11 +190,18 @@ const dansJ = (d) => Math.round((new Date(d.getFullYear(), d.getMonth(), d.getDa
 const jTxt = (n) => n <= 0 ? "auj." : n === 1 ? "demain" : "J-" + n;
 // Ouvertures encore à venir (aujourd’hui compris), hors offres complètes.
 const ouvertures = (e) => (e.offres || []).filter((o) => o.vente && o.etat !== "complet" && venteDate(o) >= TODAY).sort((a, b) => venteDate(a) - venteDate(b));
+// Nombre de jours joués sur toute la période (relâches retirées) ; null au-delà de 400 jours.
+function nbJoues(e) {
+  const p = span(e); if (!p) return 0;
+  let n = 0; for (let d = p[0], i = 0; d <= p[1]; d = add(d, 1), i++) { if (i > 400) return null; if (playsOn(e, d)) n++; }
+  return n;
+}
 function range(e) {
   if (e.datesTexte) return e.datesTexte;
   const p = span(e); if (!p) return "Dates à préciser";
   const [a, b] = p;
   if (+a === +b) return fmtY(a, true);
+  if (nbJoues(e) === 2) return (a.getMonth() === b.getMonth() && a.getFullYear() === b.getFullYear() ? a.getDate() : fmt(a)) + " et " + fmtY(b);
   return a.getFullYear() === b.getFullYear() ? fmt(a) + " – " + fmtY(b) : fmtY(a) + " – " + fmtY(b);
 }
 // Barème de la veille (CLAUDE.md) : critique, notoriété, hype, bonus +Chef-d’œuvre et +Distinction. « calcul » = "C1 N3 H2 +Chef-d’œuvre" ; total sur 9.
@@ -267,8 +274,10 @@ function stubHTML(e, mode) {
   const p = span(e);
   if (!p) return `<span class="stub"><b>–</b><small>à venir</small></span>`;
   if (running(e)) return `<span class="stub" title="jusqu’au ${fmtY(p[1])}"><small class="fin">fin<span class="vh"> le</span></small><b>${p[1].getDate()}</b><small>${MOIS[p[1].getMonth()]}</small></span>`;
-  const loin = (d) => (d.getFullYear() !== TODAY.getFullYear() && d.getFullYear() !== TODAY.getFullYear() + 1 ? " " + d.getFullYear() : "");
-  const au = +p[0] !== +p[1] ? `<small class="au">au ${jj(p[1])} ${MOIS[p[1].getMonth()]}${loin(p[1])}</small>` : "";
+  // Trois lignes au plus : jour, mois, puis « au 24 » (même mois) ou « au 24/01 » ; « et » s’il n’y a que deux dates.
+  const loin = (d) => (d.getFullYear() !== TODAY.getFullYear() && d.getFullYear() !== TODAY.getFullYear() + 1 ? " " + String(d.getFullYear()).slice(2) : "");
+  const mot = nbJoues(e) === 2 ? "et" : "au", meme = p[0].getMonth() === p[1].getMonth() && p[0].getFullYear() === p[1].getFullYear();
+  const au = +p[0] !== +p[1] ? `<small class="au" title="${mot} ${esc(fmtY(p[1], true))}">${mot} ${p[1].getDate()}${meme ? "" : "/" + String(p[1].getMonth() + 1).padStart(2, "0")}</small>` : "";
   return `<span class="stub"><b>${p[0].getDate()}</b><small>${MOIS[p[0].getMonth()]}${loin(p[0])}</small>${au}</span>`;
 }
 function badges(e) {
@@ -366,10 +375,10 @@ function detHTML(e) {
   if (e.statut === "vu") {
     const L = lieu(e), adm = PRIVE && ADMIN;
     const mod = adm ? `<button class="btn ai" type="button" data-adm="jmodif" data-id="${esc(e.id)}" aria-label="Modifier les entrées et la fiche" title="Modifier les entrées et la fiche">${ico("modifier")}</button><button class="btn ai danger" type="button" data-adm="supprimer" data-id="${esc(e.id)}" aria-label="Supprimer du journal" title="Supprimer du journal">${ico("supprimer")}</button>` : "";
-    return `${c ? `<p class="cr">${c}</p>` : ""}
+    return `${adm ? `<section class="adm-c" aria-label="Admin">${ADMIN.journalResume(e)}<div class="acts acts-adm">${mod}</div></section>` : ""}${c ? `<p class="cr">${c}</p>` : ""}
     <dl class="dl"><dt>${ico("lieu")}<span class="vh">Lieu</span></dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}</dd>
     ${e.note ? `<dt>Grille</dt><dd>${stars(e.note, false, "Note de la grille")}</dd>` : ""}</dl>
-    ${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${adm ? ADMIN.journalResume(e) : ""}${actsHTML(e, true).replace('<div class="acts">', `<div class="acts">${mod}`)}`;
+    ${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${actsHTML(e, true)}`;
   }
   return ficheCorps(e);
 }
@@ -377,16 +386,15 @@ function detHTML(e) {
 function calculHTML(e) {
   const k = calculDe(e.calcul); if (!k) return "";
   const t = [...Object.entries(CRIT).map(([c, l]) => l + " " + k.socle[c]), ...k.bonus.map((b) => b + " +1")].join(" · ");
-  return `<p class="calc"><span class="vh">Barème : </span>${esc(t)} = ${k.total}${e.pronostic ? " (prévision)" : ""}</p>`;
+  return `<p class="calc"><span class="vh">Barème : </span>${esc(t)} = ${k.total} sur 9${e.pronostic ? " (prévision)" : ""}</p>`;
 }
 // Corps de la fiche : utilisé par la fiche plein écran et par le déroulé d’une ligne (toute la fiche, sans détour).
 function ficheCorps(e, plein) {
   const L = lieu(e), c = creditsHTML(e);
-  return `${c ? `<p class="cr">${c}</p>` : ""}
+  return `${PRIVE && ADMIN ? ADMIN.ficheHTML(e) : ""}${c ? `<p class="cr">${c}</p>` : ""}
     <dl class="dl"><dt>${ico("lieu")}<span class="vh">Lieu</span></dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}${L.ville && L.ville !== "Paris" ? " (" + esc(L.ville) + ")" : ""}</dd>
     <dt>${ico("mois")}<span class="vh">Dates</span></dt><dd>${esc(range(e))}</dd>${e.horaires ? `<dt>${ico("horaires")}<span class="vh">Horaires</span></dt><dd>${esc(e.horaires)}</dd>` : ""}${estExpo(e) ? expoInfos(e) : ""}</dl>
     ${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${calculHTML(e)}${actsHTML(e, !plein)}
-    ${PRIVE && ADMIN ? ADMIN.ficheHTML(e) : ""}
     ${(e.offres || []).length || L.tarifJeune ? `<h3 class="sec">Offres</h3>${offresHTML(e)}` : ""}<h3 class="sec">Dates</h3>${ficheCal(e)}`;
 }
 
@@ -648,7 +656,7 @@ async function openSheet(id) {
     box.innerHTML = `${marqueFiche()}<div class="shtop"><button class="btn ico" type="button" data-close aria-label="Fermer">${ico("fermer")}</button><span class="k">${esc([e.categorie, e.sousGenre].filter(Boolean).join(" · "))}${L.nom ? " · " + esc(court(e.lieuId)) : ""}</span><button class="btn ico" type="button" data-share="${esc(e.id)}" aria-label="Partager">${ico("partager")}</button></div>
     <div class="shh"><span class="meta">${esc(vu ? "Vu le " + (e.vuLe || []).map((d) => fmtY(D(d), true)).join(", ") : range(e))}</span><div class="tit">${genreIco(e, "g")}<h2 id="sheetT" class="nom">${esc(e.titre)}</h2></div>
       <div class="ligne">${!vu && e.note ? stars(e.note, e.pronostic) : ""}${vu && e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : ""}${badges(e)}</div></div>
-    ${vu ? `${c ? `<p class="cr">${c}</p>` : ""}<dl class="dl"><dt>Ma note</dt><dd>${e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : "pas de note"}</dd>${e.note ? `<dt>Grille</dt><dd>${stars(e.note, false, "Note de la grille")}</dd>` : ""}</dl>${e.avis ? `<blockquote>${esc(e.avis)}</blockquote>` : ""}${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${PRIVE && ADMIN ? ADMIN.ficheHTML(e) : ""}${actsHTML(e, false)}` : ficheCorps(e, true)}`;
+    ${vu ? `${PRIVE && ADMIN ? ADMIN.ficheHTML(e) : ""}${c ? `<p class="cr">${c}</p>` : ""}<dl class="dl"><dt>Ma note</dt><dd>${e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : "pas de note"}</dd>${e.note ? `<dt>Grille</dt><dd>${stars(e.note, false, "Note de la grille")}</dd>` : ""}</dl>${e.avis ? `<blockquote>${esc(e.avis)}</blockquote>` : ""}${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${actsHTML(e, false)}` : ficheCorps(e, true)}`;
   }
   const s = $("#sheet");
   if (s.hidden) { SHEET_FROM = document.activeElement; s.hidden = false; document.documentElement.style.overflow = "hidden"; }
@@ -689,7 +697,7 @@ function soirsLibres(e) {
 }
 function radar() {
   const lim = add(TODAY, R_SEMAINE + 1), finLim = add(TODAY, R_FIN);
-  const vivantes = LIVE.filter((e) => !reservee(e));
+  const vivantes = LIVE.filter((e) => !reservee(e) && soirsLibres(e) !== 0); // aucune sortie dont tous les soirs restants sont pris
   const semaine = [], suite = [];
   vivantes.forEach((e) => ouvertures(e).forEach((o) => (venteDate(o) < lim ? semaine : suite).push({ e, o, v: venteDate(o) })));
   const parVente = (a, b) => a.v - b.v || b.e.note - a.e.note || a.e.titre.localeCompare(b.e.titre, "fr");
@@ -772,16 +780,15 @@ function renderRadar() {
   const nC = adm ? (PRIVE.aCompleter || []).length : 0;
   const go = (id, n, t) => `<button class="chip" type="button" data-rgo="${id}">${(n + " " + t).trim()}</button>`;
   const nSuivies = r.suite.filter((x) => suivie(x.e)).length;
-  $("#main").innerHTML = `<section id="radar"><div class="ph"><h1>Radar</h1></div>
+  $("#main").innerHTML = `<section id="radar"><h1 class="vh">Radar</h1>
   <nav class="chips wrap-ok r-res" aria-label="Résumé du radar">${go("r-semaine", r.semaine.length, r.semaine.length > 1 ? "ventes cette semaine" : "vente cette semaine")}${go("r-reserver", r.aReserver.length, "à réserver")}${go("r-chances", r.chances.length, r.chances.length > 1 ? "dernières chances" : "dernière chance")}${go("r-liens", "", "Billetteries")}</nav>
   ${nC ? `<div class="msg">${plural(nC, "billet")} à compléter <a href="#admin?v=rapide">Traiter</a></div>` : ""}
-  ${rapportEnTete()}
-  <div class="r-g"><div class="r-col">
+  <div class="r-g"><div class="r-col">${rapportEnTete()}
     <section class="r-b r-reserver" id="r-reserver"><h2 class="mh">À réserver <small>notées 4</small></h2>
       ${r.aReserver.length ? `<div class="list">${r.aReserver.map((x) => rowR(x.e, "r", stubReserver(x), infoReserver(x))).join("")}</div>` : `<p class="empty">Tous les incontournables sont réservés.</p>`}</section>
     <section class="r-b r-chances" id="r-chances"><h2 class="mh">Dernières chances <small>notées 3 et +</small></h2>
       ${r.chances.length ? `<div class="list">${r.chances.map((e) => rowR(e, "c", stubR("fin", finDe(e), dansJ(finDe(e)) <= 7), [`Jusqu’au ${fmt(finDe(e), true)}`, libresTxt(e)].filter(Boolean).join(" · "))).join("")}</div>` : `<p class="empty">Rien de noté 3 ou plus ne s’arrête dans les ${R_FIN} jours.</p>`}</section>
-  </div><div class="r-col r-lat2${r.semaine.length ? "" : " calme"}">
+  ${radarExposHTML()}</div><div class="r-col r-lat2${r.semaine.length ? "" : " calme"}">
     <h2 class="mh">Prochaines ouvertures de vente</h2>
     <section class="r-b r-semaine" id="r-semaine"><h3 class="sec">Cette semaine</h3>${blocSemaine(r)}</section>
     <section class="r-b r-suite" id="r-suite"><h3 class="sec">Plus tard</h3>
@@ -789,7 +796,6 @@ function renderRadar() {
       <div id="rSuite">${blocSuite(r)}</div>
       <div class="acts"><a class="btn pri" href="#ventes">${ico("ventes")}Toutes les ouvertures de vente</a></div></section>
   </div></div>
-  ${radarExposHTML()}
   <section class="r-b" id="r-liens"><h2 class="mh">Billetteries et calendriers de vente</h2>${LIENS ? liensHTML() : '<p class="empty">Liens indisponibles hors connexion.</p>'}</section>
   ${PRIVE ? `<h2 class="mh">Abonnements (admin)</h2>${subsHTML()}` : ""}</section>`;
   const m = $("#radar");
@@ -1112,7 +1118,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.45"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.46"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1123,7 +1129,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.45"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.46"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1141,7 +1147,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.45"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.46"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
