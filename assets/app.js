@@ -406,8 +406,8 @@ function ficheCorps(e, tete = "") {
     <dl class="dl"><dt>${ico("lieu")}<span class="vh">Lieu</span></dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}${L.ville && L.ville !== "Paris" ? " (" + esc(L.ville) + ")" : ""}</dd>
     <dt>${ico("mois")}<span class="vh">Dates</span></dt><dd>${esc(range(e))}</dd>${e.horaires ? `<dt>${ico("horaires")}<span class="vh">Horaires</span></dt><dd>${esc(e.horaires)}</dd>` : ""}${estExpo(e) ? expoInfos(e) : ""}</dl>
     ${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${calculHTML(e)}
-    ${(e.offres || []).length || L.tarifJeune ? `<h3 class="sec">Offres</h3>${offresHTML(e)}` : ""}${autourHTML(e)}</div>
-    <div class="fi-d"><h3 class="sec">Dates</h3>${ficheCal(e)}</div></div>`;
+    ${(e.offres || []).length || L.tarifJeune ? `<h3 class="sec">Offres</h3>${offresHTML(e)}` : ""}</div>
+    <div class="fi-d"><h3 class="sec">Dates</h3>${ficheCal(e)}</div>${autourHTML(e)}</div>`;
 }
 // En-tête de couleur : dates, picto et titre, note et badges, prochain soir libre et vente proche, boutons.
 function enteteFiche(e) {
@@ -441,14 +441,15 @@ function dejaVuHTML(e) {
   const a0 = (e.artistes || [])[0], J = JOURNAL.filter((j) => (j.vuLe || []).some((d) => dv.includes(d)) && (norm(j.titre) === norm(e.titre) || (a0 && (j.artistes || [])[0] && j.artistes[0].nom === a0.nom)));
   return J.length ? `<p class="dv">Déjà vu : ${J.map((j) => `<a href="#sortie-${esc(j.id)}">${esc(j.titre)}, ${esc(fmtY(D(j.vuLe.at(-1)), true))}</a>`).join(" · ")}</p>` : "";
 }
-// « Autour de cette sortie » : mêmes artistes d’abord, puis même lieu ; quatre aperçus au plus.
+// « Autour de cette sortie » : d’autres sorties à l’affiche avec les mêmes artistes, puis dans la même salle (quatre au plus),
+// chacune avec la raison du lien. Après le calendrier sur mobile, sous les infos sur bureau.
 function autourHTML(e) {
   const noms = new Set((e.artistes || []).map((a) => a.nom));
   const sc = (x) => ((x.artistes || []).some((a) => noms.has(a.nom)) ? 2 : 0) + (e.lieuId && x.lieuId === e.lieuId ? 1 : 0);
   const L = LIVE.filter((x) => x.id !== e.id && x.statut === "a-voir" && sc(x) > 0).sort((a, b) => sc(b) - sc(a) || sortKey(a) - sortKey(b)).slice(0, 4);
   if (!L.length) return "";
-  const pourquoi = (x) => { const a = (x.artistes || []).find((y) => noms.has(y.nom)); return a ? a.nom : court(x.lieuId); };
-  return `<h3 class="sec">Autour de cette sortie</h3><ul class="vl">${L.map((x) => apercu(x, dateAp(x), esc(pourquoi(x)))).join("")}</ul>`;
+  const lien = (x) => { const a = (x.artistes || []).find((y) => noms.has(y.nom)); return a ? `${a.nom}, ${a.role}` : `même salle : ${court(x.lieuId)}`; };
+  return `<section class="fi-a" aria-labelledby="fiA"><h3 class="sec" id="fiA">Autour de cette sortie <small>mêmes artistes ou même salle</small></h3><ul class="vl">${L.map((x) => apercu(x, dateAp(x), esc(lien(x)))).join("")}</ul></section>`;
 }
 
 /* ---------- Calendriers ---------- */
@@ -1271,7 +1272,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.61"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.62"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1282,7 +1283,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.61"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.62"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1300,7 +1301,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.61"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.62"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }

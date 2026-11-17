@@ -1093,3 +1093,9 @@ button.cell.cal-res{cursor:pointer;font:inherit;font-weight:800}
 }
 @keyframes m-panneau{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
 @keyframes m-panneau-sort{from{opacity:1;transform:none}to{opacity:0;transform:translateX(40px)}}
+/* « Autour de cette sortie » : après le calendrier sur mobile ; sous les infos (colonne de gauche) sur bureau. */
+.fi-a .sec small{margin-left:var(--e1)}
+@media (min-width:960px){
+  .fi-g>.fi-d{grid-row:1/span 2}
+  .fi-g>.fi-a{grid-column:1/span 8;grid-row:2}
+}
