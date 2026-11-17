@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-17",
+ "maj": "2026-11-18",
  "sorties": [
   {
    "id": "gustave-fayet-collectionneur-createur",
@@ -3490,10 +3490,6 @@
     },
     {
      "nom": "SCH",
-     "role": "interprète"
-    },
-    {
-     "nom": "Sofiane Pamart",
      "role": "interprète"
     },
     {
