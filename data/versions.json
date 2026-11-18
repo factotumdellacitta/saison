@@ -1,6 +1,17 @@
 {
  "versions": [
   {
+   "version": "4.73",
+   "date": "2026-11-18",
+   "titre": "Filtres : une règle de disponibilité, panneau plus compact",
+   "points": [
+    "Une seule règle : un soir libre où ça se joue, dans la période choisie s’il y en a une ; réservées et sans dates toujours visibles",
+    "« Soirs pris inclus » remplace la rubrique « Libre »",
+    "Mobile : le panneau ouvert s’insère au-dessus des sorties et défile avec la page",
+    "Panneau resserré : intitulés à gauche, listes déroulantes sans intitulé"
+   ]
+  },
+  {
    "version": "4.72",
    "date": "2026-11-18",
    "titre": "Filtre « Libre » refait",
