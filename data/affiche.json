@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-17",
+ "maj": "2026-11-19",
  "sorties": [
   {
    "id": "10-000-langages-pour-en-faire-un",
@@ -4213,61 +4213,6 @@
    "statut": "a-voir",
    "offres": [],
    "source": "https://www.fnacspectacles.com/artist/le-fantome-de-lopera/le-fantome-de-lopera-theatre-du-gymnase-marie-bell-paris-4128847/"
-  },
-  {
-   "id": "le-mariage-de-figaro",
-   "titre": "La Folle Journée ou Le Mariage de Figaro",
-   "categorie": "Théâtre",
-   "artistes": [
-    {
-     "nom": "Beaumarchais",
-     "role": "auteur"
-    },
-    {
-     "nom": "Alain Françon",
-     "role": "mise en scène"
-    },
-    {
-     "nom": "Vincent Dedienne",
-     "role": "interprète"
-    },
-    {
-     "nom": "Micha Lescot",
-     "role": "interprète"
-    },
-    {
-     "nom": "Alix Poisson",
-     "role": "interprète"
-    },
-    {
-     "nom": "Noémie Lvovsky",
-     "role": "interprète"
-    },
-    {
-     "nom": "Ana Blagojević",
-     "role": "interprète"
-    }
-   ],
-   "lieuId": "porte-saint-martin",
-   "salle": "",
-   "debut": "2026-09-26",
-   "fin": "2026-12-31",
-   "datesTexte": "26 sept. – 31 déc. 2026",
-   "horaires": "mer. – ven. 20h, sam. 16h et 20h30, dim. 16h ; 2h15",
-   "note": 3,
-   "calcul": "C2 N2 H1 +Chef-d’œuvre",
-   "pronostic": false,
-   "pourquoi": "Beaumarchais par Alain Françon, Vincent Dedienne en Figaro.",
-   "lien": "https://www.portestmartin.com/le-mariage-de-figaro",
-   "billetterie": "https://billetterie.portestmartin.fr/fr/manifestation/68/le_mariage_de_figaro",
-   "publicJeune": false,
-   "leonardYVa": true,
-   "statut": "a-voir",
-   "offres": [],
-   "relaches": [
-    "lun",
-    "mar"
-   ]
   },
   {
    "id": "le-pere",
