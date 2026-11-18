@@ -1176,9 +1176,6 @@ button.cell.cal-res{cursor:pointer;font:inherit;font-weight:800}
 /* v4.70 : barre du bas sur sa propre couche (Safari iOS la recalculait mal au défilement) ; fenêtres sans défilement en chaîne. */
 @media (max-width:959.98px){.tabs{transform:translateZ(0);will-change:transform}}
 .sheet-in{overscroll-behavior-y:contain}
-/* Ligne des résultats : sorties masquées faute de soir libre */
-.resbar .masq{margin-left:var(--e3);font-size:var(--t-meta);font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--encre-2)}
-.resbar .masq .linkbtn{min-height:0;margin-left:var(--e1);color:var(--encre)}
 /* ---------- Panneau de filtres (v4.73) ----------
    Mobile : le panneau s’insère au-dessus des sorties et défile avec la page (plus de bloc collant ni de défilement propre) ;
    intitulé de rubrique à gauche, puces à droite, sur une seule ligne quand c’est possible. */
@@ -1194,4 +1191,3 @@ button.cell.cal-res{cursor:pointer;font:inherit;font-weight:800}
 .fgr .f{margin:0;max-width:320px}
 .fgr .f select{min-height:40px}
 @media (min-width:960px){.fgr,.fgr[class]{grid-template-columns:72px minmax(0,1fr)}.fgr>div:not(.chips){flex-direction:row;flex-wrap:wrap;align-items:center;gap:var(--e2) var(--e3)}.fgr .f{flex:0 0 260px}}
-@media (max-width:959.98px){.resbar{flex-wrap:wrap}.resbar .masq{order:5;flex-basis:100%;margin:0 0 var(--e1)}}

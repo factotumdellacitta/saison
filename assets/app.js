@@ -623,7 +623,7 @@ function renderAffiche(q) {
 <div class="chips">${chip("soirs", "tout", "Soirs pris inclus", ` aria-label="Aussi les sorties où ${OWNER} n’a aucun soir libre (dans la période choisie s’il y en a une)"`)}</div></div></div>
       <div class="fgr" role="group" aria-labelledby="fgP"><span class="fl" id="fgP">Pour</span><div class="chips">${chip("jeune", "1", "Public jeune")}${chip("offre", "1", "Offre jeune")}${chip("yva", "1", OWNER + " y va")}${chip("neuf", "1", "Nouveautés")}</div></div>
     </div>
-    <div class="resbar"><span class="n" id="nres" aria-live="polite"></span><span class="masq" id="masq" hidden></span>
+    <div class="resbar"><span class="n" id="nres" aria-live="polite"></span>
       <div class="vuectl"><button class="linkbtn tri" type="button" id="tri"></button><div class="seg seg-s" role="group" aria-label="Affichage"><button class="i" type="button" data-vue="liste" aria-pressed="true" aria-label="Liste">${ico("liste")}</button><button class="i" type="button" data-vue="mois" aria-pressed="false" aria-label="Calendrier">${ico("mois")}</button></div></div><div class="active" id="active"></div></div></div>
   <div id="monthBox"></div>
   <div id="alist" class="list"></div><p class="aussi" id="aussi" hidden></p></section>${radarLateral()}</div>`;
@@ -668,9 +668,6 @@ function updateAffiche() {
   if (f.vue === "mois" && !f.jour) { const c = monthCursor(f); items = items.filter((e) => overlaps(e, c, new Date(c.getFullYear(), c.getMonth() + 1, 0))); }
   const act = activeList(f);
   $("#nres").textContent = plural(items.length, "sortie");
-  const nM = f.soirs === "" ? LIVE.filter((e) => !matchA(e, f, f.vue === "mois" && !f.jour) && matchA(e, { ...f, soirs: "tout" }, f.vue === "mois" && !f.jour)).length : 0;
-  $("#masq").innerHTML = nM ? `${nM} sans soir libre <button class="linkbtn" type="button" data-g="soirs" data-v="tout">Afficher</button>` : "";
-  $("#masq").hidden = !nM;
   $("#active").innerHTML = `${act.map((a) => `<button class="chip on${a.k === "cat" ? " g-" + famille(a.t) : ""}" type="button" data-rm="${a.k}" data-v="${esc(a.v)}" aria-label="Retirer le filtre ${esc(a.t)}">${esc(a.t)}<span class="x" aria-hidden="true">×</span></button>`).join("")}${act.length ? `<button class="chip effacer" type="button" id="clear">Tout effacer</button>` : ""}`;
   const tri = $("#tri"); tri.innerHTML = ico("tri") + (f.tri === "note" ? "Note" : "Date"); tri.setAttribute("aria-label", `Tri par ${f.tri === "note" ? "note" : "date"}, changer`);
   tri.onclick = () => setF((x) => { x.tri = x.tri === "note" ? "date" : "note"; });
@@ -1321,7 +1318,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.73"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.74"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1332,7 +1329,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.73"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.74"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1350,7 +1347,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.73"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.74"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }

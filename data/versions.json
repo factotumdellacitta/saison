@@ -1,6 +1,14 @@
 {
  "versions": [
   {
+   "version": "4.74",
+   "date": "2026-11-18",
+   "titre": "Ligne des résultats allégée",
+   "points": [
+    "Plus de mention « N sans soir libre » sous le nombre de résultats ; « Soirs pris inclus » reste dans Filtres › Quand"
+   ]
+  },
+  {
    "version": "4.73",
    "date": "2026-11-18",
    "titre": "Filtres : une règle de disponibilité, panneau plus compact",
