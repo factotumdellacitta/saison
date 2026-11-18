@@ -128,7 +128,7 @@ body.compact .barre{visibility:visible}
 .tab.ouvert .court::after{content:"";display:inline-block;width:6px;height:6px;margin-left:var(--e1);vertical-align:2px;background:var(--accent-texte)}
 @media (hover:hover){.tab:hover{color:var(--encre)}}
 @media (min-width:960px){
-  .tabs{position:sticky;top:0;height:auto;padding:0 calc((100% - var(--max)) / 2 + var(--marge));display:flex;gap:var(--e6);border-top:0;border-bottom:1px solid var(--filet)}
+  .tabs{position:sticky;top:0;height:auto;padding:0 max(var(--marge), calc((100% - var(--max)) / 2 + var(--marge)));display:flex;gap:var(--e6);border-top:0;border-bottom:1px solid var(--filet)}
   .tab{min-height:var(--nav);padding:0}
   .tab[aria-selected="true"]::after,.tab[aria-current="page"]::after{left:0;right:0;bottom:-1px}
   .tab .court{display:none}.tab .long{position:static;width:auto;height:auto;overflow:visible;clip:auto}

@@ -1,6 +1,15 @@
 {
  "versions": [
   {
+   "version": "4.71",
+   "date": "2026-11-18",
+   "titre": "Affiche sans les sorties où Léonard n’est jamais libre",
+   "points": [
+    "Par défaut, les sorties dont tous les soirs restants sont pris ne sont plus proposées ; la puce « Aussi sans soir libre » (Filtres › Quand) les remontre",
+    "Bureau : la barre de navigation garde sa marge quand la fenêtre est étroite"
+   ]
+  },
+  {
    "version": "4.70",
    "date": "2026-11-18",
    "titre": "Mobile : barre du bas fixe au défilement",
