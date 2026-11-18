@@ -433,7 +433,7 @@
     const d = $("#dlg"); if (!d) return;
     d.removeAttribute("id"); // une nouvelle fenêtre peut s’ouvrir pendant que celle-ci s’efface
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) d.remove(); else { d.classList.add("sort"); setTimeout(() => d.remove(), 200); }
-    document.documentElement.style.overflow = $("#sheet").hidden ? "" : "hidden";
+    verrou(!$("#sheet").hidden);
   }
   document.addEventListener("keydown", (ev) => { if (ev.key === "Escape" && $("#dlg")) { ev.stopImmediatePropagation(); ev.preventDefault(); fermerDlg(); } }, true);
   function dlg(titre, corps, onSubmit, { valider: lbl = "Enregistrer", danger } = {}) {
@@ -441,7 +441,7 @@
     const el = document.createElement("div"); el.className = "sheet"; el.id = "dlg";
     el.innerHTML = `<div class="sheet-in" role="dialog" aria-modal="true" aria-labelledby="dlgT" tabindex="-1"><div class="shtop"><button class="btn ico" type="button" data-dlgclose aria-label="Fermer">${ico("fermer")}</button><h2 class="k" id="dlgT">${esc(titre)}</h2></div>
     <form class="frm" novalidate autocomplete="off">${corps}<p class="err" role="alert" hidden></p><div class="acts"><button class="btn pri" type="submit">${esc(lbl)}</button>${danger || ""}<button class="btn" type="button" data-dlgclose>Annuler</button></div></form></div>`;
-    document.body.appendChild(el); document.documentElement.style.overflow = "hidden";
+    document.body.appendChild(el); verrou(true);
     const form = el.querySelector("form"), errEl = form.querySelector(".err"), sub = form.querySelector('[type="submit"]');
     if (form.querySelector('[type="password"]')) { form.setAttribute("autocomplete", "on"); form.method = "post"; form.action = location.pathname; }
     el.addEventListener("click", (ev) => { if (ev.target === el || ev.target.closest("[data-dlgclose]")) fermerDlg(); });
@@ -789,7 +789,7 @@
     fermerDlg();
     const el = document.createElement("div"); el.className = "sheet"; el.id = "dlg";
     el.innerHTML = `<div class="sheet-in" role="dialog" aria-modal="true" aria-labelledby="dlgT" tabindex="-1"><div class="shtop"><button class="btn ico" type="button" data-dlgclose aria-label="Fermer">${ico("fermer")}</button><h2 class="k" id="dlgT">Journal : ${esc(e.titre)}</h2></div>${journalForm(e)}</div>`;
-    document.body.appendChild(el); document.documentElement.style.overflow = "hidden";
+    document.body.appendChild(el); verrou(true);
     el.addEventListener("click", (ev) => { if (ev.target === el || ev.target.closest("[data-dlgclose]")) fermerDlg(); });
     brancherJournal(el.querySelector("form.jin"));
     el.querySelector(".sheet-in").focus();

@@ -1173,3 +1173,6 @@ button.cell.cal-res{cursor:pointer;font:inherit;font-weight:800}
 .adm-billets li{display:flex;flex-wrap:wrap;gap:0 var(--e2);padding:2px 0;font-size:var(--t-corps)}
 .adm-billets li span{color:var(--encre-2)}
 .adm-avec{margin:var(--e2) 0 0;font-size:var(--t-corps)}
+/* v4.70 : barre du bas sur sa propre couche (Safari iOS la recalculait mal au défilement) ; fenêtres sans défilement en chaîne. */
+@media (max-width:959.98px){.tabs{transform:translateZ(0);will-change:transform}}
+.sheet-in{overscroll-behavior-y:contain}
