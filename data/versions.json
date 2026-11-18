@@ -1,6 +1,17 @@
 {
  "versions": [
   {
+   "version": "4.72",
+   "date": "2026-11-18",
+   "titre": "Filtre « Libre » refait",
+   "points": [
+    "Rubrique « Libre » : au moins un soir (par défaut), à la date choisie, tout",
+    "Le filtre des soirs libres fonctionne de nouveau (il ne renvoyait rien sans période choisie)",
+    "« N sans soir libre · Afficher » sous le nombre de résultats ; badge gris « Aucun soir libre »",
+    "Libellés courts : Banlieue, Public, Privé"
+   ]
+  },
+  {
    "version": "4.71",
    "date": "2026-11-18",
    "titre": "Affiche sans les sorties où Léonard n’est jamais libre",
