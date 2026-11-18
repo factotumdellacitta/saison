@@ -82,7 +82,7 @@ for (const e of [...affiche, ...archive]) {
 }
 for (const e of journal) {
   const x = estExpo(e), l = court(e.lieuId), vu = (e.vuLe || []).map((k) => fmtY(D(k))).join(", ");
-  const desc = [[e.categorie, l].filter(Boolean).join(" · "), vu ? `Vu le ${vu}` : "", noms(e), e.avis ? `« ${e.avis} »` : ""].filter(Boolean).join(". ");
+  const desc = [[e.categorie, l].filter(Boolean).join(" · "), vu ? `Vu le ${vu}` : "", noms(e), e.avis ? `«\u00a0${e.avis}\u00a0»` : ""].filter(Boolean).join(". ");
   pages.push({ fichier: `${e.id}.html`, titre: e.titre, titreCourt: l ? `${e.titre} – ${l}` : e.titre, description: desc, cible: (x ? "expo/" : "") + "#sortie-" + e.id, expo: x });
 }
 // Rapports de veille.

@@ -60,6 +60,12 @@ const ICO = {
   "Humour": "<path d=\"M9 2h6v9H9zM12 13v6M7 21h10\"/>",
   "Festival": "<path d=\"M3.6 20 12 6.6 20.4 20M10 20l2-4.5 2 4.5M12 6.6V3\" stroke-linecap=\"butt\"/><path d=\"M12 2h4.5v3H12z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M2 20h20\"/>",
   "Exposition": "<path d=\"M3 4h18v16H3zM7 8h10v8H7z\"/>",
+  // Factotum Expo : un picto par domaine (chevalet, appareil, formes, amphore).
+  "xbeaux": "<path d=\"M5 3h14v11H5zM8 17l-2 4M16 17l2 4M12 17v4\"/>",
+  "xphoto": "<path d=\"M3 7h18v13H3zM8 4h5\"/><circle cx=\"12\" cy=\"13.5\" r=\"3.5\"/>",
+  "xcontemporain": "<circle cx=\"7\" cy=\"7\" r=\"3.5\"/><path d=\"M14 3.5h6.5V10H14zM4 20.5h8L8 13.5z\"/>",
+  "xobjets": "<path d=\"M9 2.5h6M10 5.5c0 2.5-5 3.5-5 8.5a7 7 0 0 0 14 0c0-5-5-6-5-8.5\"/>",
+  "info": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 7.5h.01M12 11v5.5\"/>",
   "Cinéma": "<path d=\"M3 10h18v10H3zM3 5h18v5H3z\"/><path d=\"M9.5 5 7 10M15.5 5 13 10\" stroke-linecap=\"butt\"/>",
   "Événement": "<path d=\"M7 3h10l-1 7a4 4 0 0 1-8 0zM12 14v6M8 21h8\"/>",
   "Sur scène": "<path d=\"M12 2v3M8 5h8l-1 4H9zM9 9L5 20M15 9l4 11M3 21h18\"/>",
@@ -108,7 +114,7 @@ const X_DOM_DE = { Peinture: "beaux", Dessin: "beaux", Gravure: "beaux", Estampe
 const domaineX = (e) => X_DOM_DE[e.sousGenre] || "objets";
 const famE = (e) => (e.categorie === "Exposition" ? "x" + domaineX(e) : famille(e.categorie));
 const gk = (e) => `<span class="gk">${genreIco(e)}${esc(genre(e))}</span>`;
-const genreIco = (e, cls) => ico(CATS.includes(e.categorie) ? e.categorie : "Autre", cls);
+const genreIco = (e, cls) => ico(e.categorie === "Exposition" ? "x" + domaineX(e) : CATS.includes(e.categorie) ? e.categorie : "Autre", cls); // expo : picto du domaine
 const THEMES = ["auto", "light", "dark"], THEME_TXT = { auto: "Auto", light: "Clair", dark: "Sombre" }, THEME_ICO = { auto: "auto", light: "clair", dark: "sombre" };
 const themeLu = () => { try { const t = localStorage.getItem("factotum-theme"); return THEMES.includes(t) ? t : "auto"; } catch (_) { return "auto"; } };
 function themePose(t) {
@@ -365,7 +371,7 @@ function rowJ(e) {
   // Admin : les personnes venues avec moi, en label sur la ligne.
   const jp = PRIVE && ADMIN && PRIVE.journalPrive ? PRIVE.journalPrive[e.id] : null, acc = jp ? [...new Set(jp.accompagnants || [])] : [];
   return `<article class="row g-${famE(e)}" data-id="${esc(e.id)}"><button class="rb" type="button" aria-haspopup="dialog">${gb(e)}${stubHTML(e, "vu")}
-  <span class="mid">${l1(e, e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : "")}${e.avis ? `<span class="art avis">« ${esc(e.avis)} »</span>` : artLigne(e) ? `<span class="art nom">${esc(artLigne(e))}</span>` : ""}${ligneMeta(esc(meta), acc.length ? `<span class="bds"><span class="b">avec ${esc(acc.join(", "))}</span></span>` : "")}</span></button></article>`;
+  <span class="mid">${l1(e, e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : "")}${e.avis ? `<span class="art avis">«\u00a0${esc(e.avis)}\u00a0»</span>` : artLigne(e) ? `<span class="art nom">${esc(artLigne(e))}</span>` : ""}${ligneMeta(esc(meta), acc.length ? `<span class="bds"><span class="b">avec ${esc(acc.join(", "))}</span></span>` : "")}</span></button></article>`;
 }
 function creditsHTML(e) {
   const ordre = estExpo(e) ? ["artiste", ...ROLES.filter((r) => r !== "artiste")] : ROLES; // exposition : artistes exposés d’abord
@@ -400,42 +406,44 @@ function actsHTML(e, details, adm = "") {
   const lo = vu ? "Page archivée" : "Site officiel"; // libellés masqués sur mobile quand les icônes admin suivent (aria-label gardé)
   return `<div class="acts">${b && !vu ? `<a class="btn pri" href="${esc(b)}" target="_blank" rel="noopener noreferrer" aria-label="Billetterie">${ico("billet")}<span class="lbl">Billetterie</span></a>` : ""}${o ? `<a class="btn${!b && !vu ? " pri" : ""}" href="${esc(o)}" target="_blank" rel="noopener noreferrer" aria-label="${lo}">${ico("externe")}<span class="lbl">${lo}</span></a>` : ""}${details ? `<button class="btn ico" type="button" data-share="${esc(e.id)}" aria-label="Partager" title="Partager">${ico("partager")}</button>` : ""}${adm ? `<span class="acts-adm" role="group" aria-label="Admin">${adm}</span>` : ""}</div>`;
 }
-// Détail du barème sous « Pourquoi » : « Critique 1 · Notoriété 3 · Hype 2 · Chef-d’œuvre +1 = 7 ».
-function calculHTML(e) {
-  const k = calculDe(e.calcul); if (!k) return "";
-  const t = [...Object.entries(CRIT).map(([c, l]) => l + " " + k.socle[c]), ...k.bonus.map((b) => b + " +1")].join(" · ");
-  return `<p class="calc"><span class="vh">Barème : </span>${esc(t)} = ${k.total} sur 9${e.pronostic ? " (prévision)" : ""}</p>`;
-}
 // Corps de la fiche : utilisé par la fiche plein écran et par le déroulé d’une ligne (toute la fiche, sans détour).
 function ficheCorps(e, tete = "") {
   const L = lieu(e), c = creditsHTML(e);
   return `<div class="fi-g"><div class="fi-p">${tete}${PRIVE && ADMIN ? ADMIN.ficheHTML(e) : ""}${dejaVuHTML(e)}${c ? `<p class="cr">${c}</p>` : ""}
     <dl class="dl"><dt>${ico("lieu")}<span class="vh">Lieu</span></dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}${L.ville && L.ville !== "Paris" ? " (" + esc(L.ville) + ")" : ""}</dd>
     <dt>${ico("mois")}<span class="vh">Dates</span></dt><dd>${esc(range(e))}</dd>${e.horaires ? `<dt>${ico("horaires")}<span class="vh">Horaires</span></dt><dd>${esc(e.horaires)}</dd>` : ""}${estExpo(e) ? expoInfos(e) : ""}</dl>
-    ${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${calculHTML(e)}
+    ${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}
     ${(e.offres || []).length || L.tarifJeune ? `<h3 class="sec">Offres</h3>${offresHTML(e)}` : ""}</div>
     <div class="fi-d"><h3 class="sec">Dates</h3>${ficheCal(e)}</div>${autourHTML(e)}</div>`;
 }
 // En-tête de couleur : dates, picto et titre, note et badges, prochain soir libre et vente proche, boutons.
 function enteteFiche(e) {
   const vu = e.statut === "vu";
-  return `<div class="shh"><span class="meta">${esc(vu ? "Vu le " + (e.vuLe || []).map((d) => fmtY(D(d), true)).join(", ") : range(e))}</span><div class="tit">${genreIco(e, "g")}<h2 id="sheetT" class="nom">${esc(e.titre)}</h2>${coeurFiche(e)}</div>${auteurHTML(e)}
-    <div class="ligne">${!vu && e.note ? stars(e.note, e.pronostic) : ""}${vu && e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : ""}${badges(e)}</div>${vu ? "" : enteteInfos(e)}${actsHTML(e, false, PRIVE && ADMIN ? ADMIN.ficheActs(e) : "").replace('class="acts"', 'class="acts sh-acts"')}</div>`;
+  return `<div class="shh"><span class="meta">${esc(vu ? "Vu le " + (e.vuLe || []).map((d) => fmtY(D(d), true)).join(", ") : range(e))}</span><div class="tit">${genreIco(e, "g")}<div class="tit-t"><h2 id="sheetT" class="nom">${esc(e.titre)}</h2>${auteurHTML(e)}</div>${coeurFiche(e)}</div>
+    <div class="ligne">${!vu && e.note ? stars(e.note, e.pronostic) + infoNote(e) : ""}${vu && e.noteLeonard ? stars(e.noteLeonard, false, "Ma note") : ""}${badges(e)}</div>${!vu && e.note ? baremeHTML(e) : ""}${vu ? avisTete(e) : enteteInfos(e)}${actsHTML(e, false, PRIVE && ADMIN ? ADMIN.ficheActs(e) : "").replace('class="acts"', 'class="acts sh-acts"')}</div>`;
 }
-// Sous le titre : l’auteur de l’œuvre (auteur ou compositeur ; à défaut chorégraphe ; artiste exposé pour une expo), sans « de »,
-// et seulement s’il n’est pas déjà dans le titre. Les crédits complets restent dessous.
+// À côté du picto, sous le titre : l’auteur de l’œuvre (auteur ou compositeur ; à défaut chorégraphe), lien vers sa page, sans « de ».
+// Pas pour les expositions (leur titre se suffit, les artistes sont dans la fiche) ; omis s’il figure déjà dans le titre.
 function auteurHTML(e) {
+  if (estExpo(e)) return "";
   const A = e.artistes || [], par = (r) => A.filter((a) => a.role === r).map((a) => a.nom);
-  let n = estExpo(e) ? par("artiste") : [...par("auteur"), ...par("compositeur")];
-  if (!n.length && !estExpo(e)) n = par("chorégraphie");
+  let n = [...par("auteur"), ...par("compositeur")];
+  if (!n.length) n = par("chorégraphie");
   const t = norm(e.titre); n = [...new Set(n)].filter((x) => !t.includes(norm(x))).slice(0, 2);
-  return n.length ? `<p class="sh-aut">${esc(n.join(", "))}</p>` : "";
+  return n.length ? `<p class="sh-aut">${n.map((x) => `<a href="#artiste-${slug(x)}">${esc(x)}</a>`).join(", ")}</p>` : "";
 }
-// Avis de Léonard sur une sortie vue : colonne de droite sur bureau, sous les infos sur mobile ; en admin, bouton pour le modifier seul.
-function avisHTML(e) {
-  const adm = PRIVE && ADMIN, b = adm ? `<button class="btn ai" type="button" data-adm="avis" data-id="${esc(e.id)}" aria-label="${e.avis ? "Modifier mon avis" : "Écrire mon avis"}" title="${e.avis ? "Modifier mon avis" : "Écrire mon avis"}">${ico(e.avis ? "modifier" : "ajouter")}</button>` : "";
-  if (!e.avis && !adm) return "";
-  return `<section class="fi-d fi-avis" aria-labelledby="fiAv"><h3 class="sec" id="fiAv">Mon avis${b}</h3>${e.avis ? `<blockquote>${esc(e.avis)}</blockquote>` : '<p class="aide">Pas encore d’avis.</p>'}</section>`;
+// Note de la veille : un « i » à côté des carrés ; le détail et le barème s’affichent au toucher (ou au survol sur ordinateur).
+const infoNote = (e) => (calculDe(e.calcul) ? `<button class="info-n" type="button" data-bareme aria-expanded="false" aria-controls="bar-${esc(e.id)}" aria-label="Détail de la note" title="Détail de la note">${ico("info")}</button>` : "");
+function baremeHTML(e) {
+  const k = calculDe(e.calcul); if (!k) return "";
+  const t = [...Object.entries(CRIT).map(([c, l]) => l + " " + k.socle[c]), ...k.bonus.map((b) => b + " +1")].join(" · ");
+  return `<div class="bareme" id="bar-${esc(e.id)}" hidden><p><b>${esc(t)} = ${k.total} sur 9</b>${e.pronostic ? " (prévision : la critique est estimée)" : ""}</p><p>Barème de la veille : critique 0 à 2, notoriété 0 à 3, hype 0 à 2, +1 pour un chef-d’œuvre, +1 pour une distinction. Total sur 9 : 7 et plus, 4 carrés ; 5 ou 6, 3 ; 2 à 4, 2 ; 1, 1.</p></div>`;
+}
+// Sortie vue : mon avis dans une case de l’en-tête de couleur ; en mode admin, bouton pour le modifier seul.
+function avisTete(e) {
+  const adm = PRIVE && ADMIN; if (!e.avis && !adm) return "";
+  const b = adm ? `<button class="btn ai" type="button" data-adm="avis" data-id="${esc(e.id)}" aria-label="${e.avis ? "Modifier mon avis" : "Écrire mon avis"}" title="${e.avis ? "Modifier mon avis" : "Écrire mon avis"}">${ico(e.avis ? "modifier" : "ajouter")}</button>` : "";
+  return `<div class="sh-avis"><span class="meta">Mon avis</span>${b}${e.avis ? `<p>«\u00a0${esc(e.avis)}\u00a0»</p>` : '<p class="vide">Pas encore d’avis.</p>'}</div>`;
 }
 // Cœur de la fiche : bouton en mode admin, cœur plein (non modifiable) pour le public si c’est un coup de cœur.
 function coeurFiche(e) {
@@ -742,7 +750,7 @@ async function openSheet(id) {
   } else {
     const vu = e.statut === "vu", L = lieu(e), c = creditsHTML(e), tete = enteteFiche(e);
     box.innerHTML = `${marqueFiche()}<div class="shtop"><button class="btn ico" type="button" data-close aria-label="Fermer">${ico("fermer")}</button><span class="k">${esc([e.categorie, e.sousGenre].filter(Boolean).join(" · "))}${L.nom ? " · " + esc(court(e.lieuId)) : ""}</span>${nav}<button class="btn ico" type="button" data-share="${esc(e.id)}" aria-label="Partager">${ico("partager")}</button></div>
-    ${vu ? `<div class="fi-g fi-vu"><div class="fi-p">${tete}${PRIVE && ADMIN ? ADMIN.ficheHTML(e) : ""}${c ? `<p class="cr">${c}</p>` : ""}<dl class="dl"><dt>${ico("lieu")}<span class="vh">Lieu</span></dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}</dd></dl>${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${e.note ? `<p class="calc">Note de la grille ${stars(e.note, false, "Note de la grille")}</p>` : ""}</div>${avisHTML(e)}${autourHTML(e)}</div>` : ficheCorps(e, tete)}`;
+    ${vu ? `<div class="fi-g fi-vu"><div class="fi-p">${tete}${PRIVE && ADMIN ? ADMIN.ficheHTML(e) : ""}${c ? `<p class="cr">${c}</p>` : ""}<dl class="dl"><dt>${ico("lieu")}<span class="vh">Lieu</span></dt><dd class="pl">${e.lieuId && L.nom ? `<a href="#lieu-${esc(e.lieuId)}">${esc(L.nom)}</a>` : "À préciser"}${e.salle ? ", " + esc(e.salle) : ""}</dd></dl>${e.pourquoi ? `<p class="why">${esc(e.pourquoi)}</p>` : ""}${e.note ? `<p class="calc">Note de la grille ${stars(e.note, false, "Note de la grille")}</p>` : ""}</div>${autourHTML(e)}</div>` : ficheCorps(e, tete)}`;
   }
   clearTimeout(SHEET_T); s.classList.remove("sort"); box.style.transform = "";
   if (s.hidden) { SHEET_FROM = document.activeElement; s.hidden = false; document.documentElement.style.overflow = "hidden"; }
@@ -1301,7 +1309,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.68"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.69"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1312,7 +1320,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.68"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.69"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1330,7 +1338,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.68"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.69"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
@@ -1429,6 +1437,8 @@ document.addEventListener("click", async (ev) => {
   if (rb) { const id = rb.closest(".row").dataset.id; if (id) location.hash = "#sortie-" + encodeURIComponent(id); return; } // fiche en surimpression
   const pl = ev.target.closest("[data-plus]");
   if (pl) { pl.nextElementSibling.hidden = false; pl.remove(); return; } // crédits : noms suivants
+  const bi = ev.target.closest("[data-bareme]");
+  if (bi) { const p = document.getElementById(bi.getAttribute("aria-controls")), o = !!p && p.hidden; if (p) p.hidden = !o; bi.setAttribute("aria-expanded", String(o)); return; }
   const nv = ev.target.closest("[data-nav]");
   if (nv) { ficheVoisine(nv.dataset.nav); return; }
   const cpl = ev.target.closest("[data-calplus]");

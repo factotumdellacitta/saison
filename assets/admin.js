@@ -595,13 +595,25 @@
     const x = estExpo(e);
     // Barre admin compacte en tête du déroulé : une ligne d’état (métadonnées), puis les actions en icônes sur une seule rangée.
     const et = [];
-    if (r) et.push(`<b>${x ? "Visite" : "Réservé"}</b> ${r.date ? esc(fmt(D(r.date), true)) : "date à préciser"}${r.heure ? " à " + esc(r.heure) : ""}${detRes(r)}`);
-    if (vu && jp) { const l = [jp.places || (jp.billets && jp.billets.length) ? plural(nbPlaces(jp), "place") : "", resumePrix(jp), (jp.accompagnants || []).length ? "avec " + jp.accompagnants.join(", ") : ""].filter(Boolean).join(" · "); if (l) et.push(esc(l)); }
+    if (r) { const t = [r.salle, r.siege, r.note].filter(Boolean).join(" · "); et.push(`<b>${x ? "Visite" : "Réservé"}</b> ${r.date ? esc(fmt(D(r.date), true)) : "date à préciser"}${r.heure ? " à " + esc(r.heure) : ""}${t ? " · " + esc(t) : ""}`); }
     if (env) et.push(`<b>${x ? "Ça m’intéresse" : "Coup de cœur"}</b> <button class="linkbtn adm-n" type="button" data-adm="envie" data-id="${esc(e.id)}">${env.note ? "« " + esc(env.note) + " »" : "ajouter une note"}</button>`);
     if (e.statut === "ecarte") et.push("<b>Écartée</b> (masquée du public)");
     const notes = vu && jp && jp.notes ? `<p class="adm-e">${esc(jp.notes).replace(/\n/g, "<br>")}</p>` : "";
     // État en tête du déroulé ; les actions rejoignent la rangée « Site officiel » et Partager (ficheActs).
-    return et.length || notes ? `<section class="adm-c" aria-label="Admin">${et.length ? `<p class="adm-e">${et.join(" · ")}</p>` : ""}${notes}</section>` : "";
+    const pl = billetsHTML(vu ? jp : r);
+    return et.length || notes || pl ? `<section class="adm-c" aria-label="Admin">${et.length ? `<p class="adm-e">${et.join(" · ")}</p>` : ""}${pl}${notes}</section>` : "";
+  }
+  // Places, une ligne par personne : nom, prix de sa place, tarif et qui paie (pas de total).
+  const PAIE = { autrui: "offerte", spectateur: "à sa charge", gratuit: "gratuite" };
+  function billetsHTML(x) {
+    if (!x) return "";
+    const B = x.billets || [];
+    if (!B.length) { const acc = [...new Set(x.accompagnants || [])]; return acc.length ? `<p class="adm-avec">Avec ${acc.map((n) => `<b>${esc(n)}</b>`).join(", ")}</p>` : ""; }
+    return `<ul class="adm-billets">${B.map((b) => {
+      const nom = b.spectateur || "?", tiers = nom !== "Moi";
+      const t = [euros(b.prix), b.tarif || "", b.categoriePlace || "", PAIE[b.paiement] || (tiers && (b.paiement === "moi" || b.paiement === "offert" || !b.paiement) ? "offerte par moi" : "")].filter(Boolean).join(" · ");
+      return `<li><b>${esc(nom)}</b>${t ? `<span>${esc(t)}</span>` : ""}</li>`;
+    }).join("")}</ul>`;
   }
   function ficheActs(e) {
     if (!PRIVE) return "";

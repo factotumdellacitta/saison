@@ -1,6 +1,19 @@
 {
  "versions": [
   {
+   "version": "4.69",
+   "date": "2026-11-18",
+   "titre": "Fiches : avis en tête, auteur à côté du picto, détail de la note au « i », pictos d’Expo",
+   "points": [
+    "Sortie vue : mon avis dans une case de l’en-tête de couleur",
+    "Admin : places détaillées, une ligne par personne (prix, tarif, qui paie)",
+    "Auteur de l’œuvre à côté du picto, cliquable (pas pour les expos)",
+    "Détail de la note et barème sous un « i » à côté des carrés",
+    "Factotum Expo : un picto par domaine (chevalet, appareil, formes, amphore)",
+    "Guillemets de l’avis avec espaces insécables"
+   ]
+  },
+  {
    "version": "4.68",
    "date": "2026-11-17",
    "titre": "Fiches : auteur sous le titre ; avis à droite au Journal",

@@ -86,7 +86,7 @@
     $("#main").innerHTML = `<section id="expos"><h1 class="vh">${VUES[V].titre}</h1>
     <div class="tools barre-f">${rech("xq", "Rechercher une exposition", XF.q)}
       <button class="chip filtres" type="button" data-panel="xpF" aria-expanded="false" aria-controls="xpF">${ico("filtres")}<span class="lbf">Filtres</span><span class="nf" id="xnF"></span></button></div>
-    <div class="fbar"><div class="chips defile gtabs" role="group" aria-label="Domaines">${doms.map((d) => chip("dom", d, ico("Exposition") + X_DOMAINES[d]).replace('class="chip"', `class="chip g-x${d}"`)).join("")}</div>
+    <div class="fbar"><div class="chips defile gtabs" role="group" aria-label="Domaines">${doms.map((d) => chip("dom", d, ico("x" + d) + X_DOMAINES[d]).replace('class="chip"', `class="chip g-x${d}"`)).join("")}</div>
       <div class="fpanel" id="xpF" hidden>
         <div class="fgr" role="group" aria-labelledby="xgN"><span class="fl" id="xgN">Note</span><div class="chips">${chip("note", "2", carres(2, true), ' aria-label="Note 2 et plus"')}${chip("note", "3", carres(3, true), ' aria-label="Note 3 et plus"')}${chip("note", "4", carres(4), ' aria-label="Note 4"')}</div></div>
         <div class="fgr" role="group" aria-labelledby="xgL"><span class="fl" id="xgL">Lieu</span><div class="chips">${types.map((t) => chip("type", t, EXPO_TYPES[t])).join("")}</div></div>
