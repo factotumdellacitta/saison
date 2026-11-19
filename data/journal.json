@@ -33,6 +33,10 @@
     {
      "nom": "Ana Blagojević",
      "role": "interprète"
+    },
+    {
+     "nom": "Axel Auriant",
+     "role": "artiste"
     }
    ],
    "lieuId": "porte-saint-martin",
@@ -59,7 +63,8 @@
     "2026-11-18"
    ],
    "noteLeonard": 3,
-   "avis": "Le génie farceur de Beaumarchais avec l’énergie d’une troupe d’acteurs et d’actrices géniaux, en particulier Vincent Dedienne – fin et drôle – et Axel Auriant, irrésistible."
+   "avis": "Le génie farceur de Beaumarchais avec l’énergie d’une troupe d’acteurs et d’actrices géniaux, en particulier Vincent Dedienne – fin et drôle – et Axel Auriant, irrésistible.",
+   "sousGenre": ""
   },
   {
    "id": "gustave-fayet-collectionneur-createur",
