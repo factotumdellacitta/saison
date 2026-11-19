@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-19",
+ "maj": "2026-11-20",
  "sorties": [
   {
    "id": "10-000-langages-pour-en-faire-un",
@@ -5615,64 +5615,6 @@
    "statut": "a-voir",
    "offres": [],
    "source": "https://75.agendaculturel.fr/concert/nono-la-grinta.html"
-  },
-  {
-   "id": "oedipe-roi",
-   "titre": "Œdipe roi",
-   "categorie": "Théâtre",
-   "artistes": [
-    {
-     "nom": "Sophocle",
-     "role": "auteur"
-    },
-    {
-     "nom": "Eddy D’Aranjo",
-     "role": "mise en scène"
-    },
-    {
-     "nom": "Eddy D’Aranjo",
-     "role": "interprète"
-    },
-    {
-     "nom": "Edith Biscaro",
-     "role": "interprète"
-    },
-    {
-     "nom": "Clémence Delille",
-     "role": "interprète"
-    },
-    {
-     "nom": "Marie Depoorter",
-     "role": "interprète"
-    },
-    {
-     "nom": "Carine Goron",
-     "role": "interprète"
-    },
-    {
-     "nom": "Volodia Piotrovitch d’Orlik",
-     "role": "interprète"
-    }
-   ],
-   "lieuId": "odeon",
-   "salle": "Berthier Paris 17",
-   "debut": "2026-11-14",
-   "fin": "2026-11-29",
-   "datesTexte": "14 – 29 nov. 2026",
-   "horaires": "4h avec entracte ; dès 16 ans",
-   "note": 2,
-   "calcul": "C1 N1 H0 +Chef-d’œuvre",
-   "pronostic": true,
-   "pourquoi": "Eddy D’Aranjo relit Œdipe roi à partir de sa propre histoire familiale. Quatre heures.",
-   "lien": "https://www.theatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/eddy-d-aranjo-oedipe-roi-s26-27",
-   "billetterie": null,
-   "publicJeune": false,
-   "leonardYVa": true,
-   "statut": "a-voir",
-   "offres": [],
-   "relaches": [
-    "lun"
-   ]
   },
   {
    "id": "olalaland",

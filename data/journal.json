@@ -1,6 +1,69 @@
 {
- "maj": "2026-11-19",
+ "maj": "2026-11-20",
  "sorties": [
+  {
+   "id": "oedipe-roi",
+   "titre": "Œdipe roi",
+   "categorie": "Théâtre",
+   "artistes": [
+    {
+     "nom": "Sophocle",
+     "role": "auteur"
+    },
+    {
+     "nom": "Eddy D’Aranjo",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Eddy D’Aranjo",
+     "role": "interprète"
+    },
+    {
+     "nom": "Edith Biscaro",
+     "role": "interprète"
+    },
+    {
+     "nom": "Clémence Delille",
+     "role": "interprète"
+    },
+    {
+     "nom": "Marie Depoorter",
+     "role": "interprète"
+    },
+    {
+     "nom": "Carine Goron",
+     "role": "interprète"
+    },
+    {
+     "nom": "Volodia Piotrovitch d’Orlik",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "odeon",
+   "salle": "Berthier Paris 17",
+   "debut": "2026-11-14",
+   "fin": "2026-11-29",
+   "datesTexte": "14 – 29 nov. 2026",
+   "horaires": "4h avec entracte ; dès 16 ans",
+   "note": 2,
+   "calcul": "C1 N1 H0 +Chef-d’œuvre",
+   "pronostic": true,
+   "pourquoi": "Eddy D’Aranjo relit Œdipe roi à partir de sa propre histoire familiale. Quatre heures.",
+   "lien": "https://www.theatre-odeon.eu/fr/saison-2026-2027/spectacles-2026-2027/eddy-d-aranjo-oedipe-roi-s26-27",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "offres": [],
+   "relaches": [
+    "lun"
+   ],
+   "vuLe": [
+    "2026-11-19"
+   ],
+   "noteLeonard": 2,
+   "avis": "Accordons-nous déjà que la mention de Sophocle relève de la publicité mensongère (que fait la DGCCRF ?). J’ai la culpabilité d’avoir apprécié cette forme de curiosité morbide par laquelle le public parisien de l’Odéon (je m’y inclus) s’est fasciné d’une histoire exotique mêlant incestes, viols, tabous, non-dits familiaux, addictions – bref, des déboires sociaux en tout genre – d’une famille ouvrière picarde, et dont l’apothéose s’est manifestée par l’introduction d’un spéculum (à prononcer comme « Factotum ») dans un vagin EN LIVE. Je ne peux m’empêcher de penser que les longs et fastidieux passages sur le rôle de l’art ne relèvent d’une forme d’onanisme hors propos, dans lequel l’auteur se réfugie néanmoins sincèrement pour apaiser sa colère/sa peine. Sentiment similaire lors de la glorification de sa grand-mère alcoolique et absente (Jeanne) par le fait qu’elle eût été « faiseuse d’ange », au mépris du récit traumatique de l’oncle.\n\nElle s’est fait violer par son fils José, qui est le père d’Eddy et lui-même violeur de sa fille, la sœur d’Eddy. \n\nStanding ovation final."
+  },
   {
    "id": "le-mariage-de-figaro",
    "titre": "La Folle Journée ou Le Mariage de Figaro",
