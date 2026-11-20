@@ -505,6 +505,12 @@
    "la-griselda"
   ]
  },
+ "anyma": {
+  "nom": "Anyma",
+  "sorties": [
+   "anyma-paris-la-defense-arena"
+  ]
+ },
  "areski-moreira": {
   "nom": "Areski Moreira",
   "sorties": [
@@ -552,6 +558,12 @@
   "nom": "Arne De Tremerie",
   "sorties": [
    "la-fete"
+  ]
+ },
+ "art-garfunkel": {
+  "nom": "Art Garfunkel",
+  "sorties": [
+   "art-garfunkel-olympia-2027"
   ]
  },
  "arthur-jugnot": {
@@ -826,6 +838,12 @@
    "vu-black-m-sciences-po-2026"
   ]
  },
+ "blink-182": {
+  "nom": "blink-182",
+  "sorties": [
+   "blink-182-paris-la-defense-arena"
+  ]
+ },
  "bon-iver": {
   "nom": "Bon Iver",
   "sorties": [
@@ -836,6 +854,12 @@
   "nom": "Bonnie Barbier",
   "sorties": [
    "la-tour-de-constance"
+  ]
+ },
+ "bonobo": {
+  "nom": "Bonobo",
+  "sorties": [
+   "bonobo-salle-pleyel-2027"
   ]
  },
  "boris-charmatz": {
@@ -905,6 +929,12 @@
   "nom": "Camilla Nylund",
   "sorties": [
    "la-walkyrie-zurich"
+  ]
+ },
+ "camille": {
+  "nom": "Camille",
+  "sorties": [
+   "camille-grand-rex-2027"
   ]
  },
  "camille-de-toledo": {
@@ -997,6 +1027,7 @@
  "celine-dion": {
   "nom": "Céline Dion",
   "sorties": [
+   "celine-dion-paris-2027",
    "vu-celine-dion-bercy-2016"
   ]
  },
@@ -1025,6 +1056,12 @@
   "sorties": [
    "faust",
    "romeo-et-juliette-jolly"
+  ]
+ },
+ "charli-xcx": {
+  "nom": "Charli xcx",
+  "sorties": [
+   "charli-xcx-accor-arena-2027"
   ]
  },
  "charlie-fabert": {
@@ -1574,6 +1611,12 @@
    "vu-theodora-zenith-2026"
   ]
  },
+ "djadja-dinaz": {
+  "nom": "Djadja & Dinaz",
+  "sorties": [
+   "djadja-dinaz-paris-la-defense-arena-2027"
+  ]
+ },
  "dmitri-chostakovitch": {
   "nom": "Dmitri Chostakovitch",
   "sorties": [
@@ -1957,6 +2000,12 @@
    "la-tour-de-constance"
   ]
  },
+ "feu-chatterton": {
+  "nom": "Feu! Chatterton",
+  "sorties": [
+   "feu-chatterton-accor-arena-2027"
+  ]
+ },
  "filipa-correia-lescuyer": {
   "nom": "Filipa Correia Lescuyer",
   "sorties": [
@@ -2099,6 +2148,12 @@
   "nom": "Gabriel Fauré",
   "sorties": [
    "joyaux"
+  ]
+ },
+ "gael-faye": {
+  "nom": "Gaël Faye",
+  "sorties": [
+   "gael-faye-accor-arena-2027"
   ]
  },
  "gael-kamilindi": {
@@ -2276,6 +2331,7 @@
  "gims": {
   "nom": "Gims",
   "sorties": [
+   "gims-paris-la-defense-arena",
    "vu-solidays-2025-dimanche"
   ]
  },
@@ -2304,6 +2360,12 @@
   "nom": "Gottfried von der Goltz",
   "sorties": [
    "trifonov-berliner-barock-solisten"
+  ]
+ },
+ "gracie-abrams": {
+  "nom": "Gracie Abrams",
+  "sorties": [
+   "gracie-abrams-accor-arena-2027"
   ]
  },
  "gregoire-hetzel": {
@@ -2461,6 +2523,12 @@
    "la-clemence-de-titus"
   ]
  },
+ "harry-styles": {
+  "nom": "Harry Styles",
+  "sorties": [
+   "harry-styles-together-together"
+  ]
+ },
  "hassan-gourniz": {
   "nom": "Hassan Gourniz",
   "sorties": [
@@ -2540,6 +2608,12 @@
   "nom": "Hugues Quester",
   "sorties": [
    "rhinoceros"
+  ]
+ },
+ "ibrahim-maalouf": {
+  "nom": "Ibrahim Maalouf",
+  "sorties": [
+   "ibrahim-maalouf-paris-la-defense-arena"
   ]
  },
  "ibrahim-mahama": {
@@ -2668,6 +2742,12 @@
   "nom": "Jaap van Zweden",
   "sorties": [
    "mahler-2-van-zweden"
+  ]
+ },
+ "jack-johnson": {
+  "nom": "Jack Johnson",
+  "sorties": [
+   "jack-johnson-olympia-2027"
   ]
  },
  "jack-london": {
@@ -2839,6 +2919,12 @@
   "nom": "Jean Sibelius",
   "sorties": [
    "chicago-makela-sibelius-chostakovitch"
+  ]
+ },
+ "jeanne-added": {
+  "nom": "Jeanne Added",
+  "sorties": [
+   "jeanne-added-olympia-2027"
   ]
  },
  "jeanne-alechinsky": {
@@ -3215,6 +3301,12 @@
   "nom": "Karine Deshayes",
   "sorties": [
    "rinaldo"
+  ]
+ },
+ "karol-g": {
+  "nom": "Karol G",
+  "sorties": [
+   "karol-g-paris-la-defense-arena"
   ]
  },
  "karole-armitage": {
@@ -4226,6 +4318,12 @@
    "la-tour-de-constance"
   ]
  },
+ "mc-solaar": {
+  "nom": "MC Solaar",
+  "sorties": [
+   "mc-solaar-accor-arena-2028"
+  ]
+ },
  "melanie-thierry": {
   "nom": "Mélanie Thierry",
   "sorties": [
@@ -4411,6 +4509,12 @@
   "nom": "Muriel Imbach",
   "sorties": [
    "vu-nous-ou-le-paradoxe-du-herisson"
+  ]
+ },
+ "muse": {
+  "nom": "Muse",
+  "sorties": [
+   "muse-paris-la-defense-arena"
   ]
  },
  "myriam-gourfink": {
@@ -4665,6 +4769,12 @@
    "le-suicide"
   ]
  },
+ "olivia-rodrigo": {
+  "nom": "Olivia Rodrigo",
+  "sorties": [
+   "olivia-rodrigo-unraveled-tour"
+  ]
+ },
  "olivier-saccomano": {
   "nom": "Olivier Saccomano",
   "sorties": [
@@ -4733,6 +4843,7 @@
  "orelsan": {
   "nom": "Orelsan",
   "sorties": [
+   "orelsan-accor-arena-2026",
    "vu-we-love-green-2023-vendredi"
   ]
  },
@@ -4782,6 +4893,12 @@
   "nom": "Pascal Rénéric",
   "sorties": [
    "ellen-babic"
+  ]
+ },
+ "patrice": {
+  "nom": "Patrice",
+  "sorties": [
+   "patrice-alhambra-2027"
   ]
  },
  "patricia-petibon": {
@@ -5043,6 +5160,12 @@
   "sorties": [
    "l-elixir-d-amour",
    "les-pecheurs-de-perles"
+  ]
+ },
+ "purple-disco-machine": {
+  "nom": "Purple Disco Machine",
+  "sorties": [
+   "purple-disco-machine-zenith-2027"
   ]
  },
  "queens-of-the-stone-age": {
@@ -5325,6 +5448,12 @@
   "nom": "Sandrine Molaro",
   "sorties": [
    "vu-leducation-sentimentale"
+  ]
+ },
+ "santana": {
+  "nom": "Santana",
+  "sorties": [
+   "santana-accor-arena-2027"
   ]
  },
  "sarah-goninon": {
@@ -5755,6 +5884,12 @@
    "vu-le-soulier-de-satin"
   ]
  },
+ "suzane": {
+  "nom": "Suzane",
+  "sorties": [
+   "suzane-accor-arena-2028"
+  ]
+ },
  "suzanne-de-baecque": {
   "nom": "Suzanne de Baecque",
   "sorties": [
@@ -5874,6 +6009,12 @@
    "vu-rock-en-seine-2026"
   ]
  },
+ "the-flaming-lips": {
+  "nom": "The Flaming Lips",
+  "sorties": [
+   "the-flaming-lips-olympia-2027"
+  ]
+ },
  "the-lion-and-the-wolf": {
   "nom": "The Lion and the Wolf",
   "sorties": [
@@ -5895,6 +6036,7 @@
  "thea": {
   "nom": "Théa",
   "sorties": [
+   "thea-accor-arena-2028",
    "thea-zenith-2027"
   ]
  },
@@ -6309,6 +6451,12 @@
   "sorties": [
    "le-suicide",
    "ruy-blas"
+  ]
+ },
+ "youn-sun-nah": {
+  "nom": "Youn Sun Nah",
+  "sorties": [
+   "youn-sun-nah-seine-musicale-2026"
   ]
  },
  "yousef-sbieh": {

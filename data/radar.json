@@ -6,12 +6,12 @@
    "date": "2026-11-17",
    "domaine": "complete",
    "titre": "Première veille : les annonces de 2027 et dix-huit expositions",
-   "chapo": "Première veille complète de Factotum, approfondie le jour même. 33 concerts et 18 expositions entrent à l’affiche, la distribution de 88 spectacles est complétée et deux fiches passées rejoignent l’archive. Les grandes dates de 2027 sont presque toutes déjà en vente : la veille des prochaines annonces devient la priorité.",
+   "chapo": "Première veille complète de Factotum, complétée le 20 novembre par une veille des concerts à partir des pages des salles et des billetteries. 61 concerts et 18 expositions entrent à l’affiche, la distribution de 88 spectacles est complétée et deux fiches passées rejoignent l’archive. À guetter : Théa à Bercy (vente générale lundi 23 novembre à 12 h) et cinq dates annoncées dont la billetterie n’est pas encore ouverte, dont Jack Johnson et Art Garfunkel à l’Olympia.",
    "sections": [
     {
      "titre": "À retenir",
      "texte": [
-      "Aucune vente de concert retenu n’ouvre cette semaine : les grandes dates de 2027 annoncées cet automne sont déjà en vente. Les prochaines ouvertures à l’affiche sont celles de l’Odéon (24 novembre) et les avant-premières jeunes de l’Opéra de Paris à partir du 7 janvier.",
+      "Ventes de la semaine prochaine : Théa à Bercy le 14 avril 2028 (prévente de la salle le 20 novembre à 12 h, vente générale lundi 23 novembre à 12 h), Suzane à Bercy le 25 mars 2028 et Patrice à l’Alhambra le 26 avril 2027 (vente lundi 23 novembre, à 12 h et 10 h). Djadja & Dinaz (La Défense Arena, 16 et 17 avril 2027) sont en vente générale depuis le 20 novembre. Jack Johnson (Olympia, 28 et 30 juin 2027), Art Garfunkel (Olympia, 3 mars), The Flaming Lips, Jeanne Added et Purple Disco Machine sont annoncés sans que la billetterie soit ouverte.",
       "Le printemps 2027 se joue au Stade de France : Sofiane Pamart le 17 avril, SCH les 23 et 24, Kaaris le 22 mai, SDM les 29 et 30 mai, U2 les 5, 8 et 9 mai, Oasis les 20 et 23 juillet. Pour toutes ces dates, la vente générale est déjà passée.",
       "Deux incontournables nouveaux : Jean-Michel Jarre, de retour en France après dix ans pour les 50 ans d’Oxygène à La Seine Musicale (14–16 octobre 2027), et Monet, peindre le temps à l’Orangerie, pour le centenaire de la mort du peintre (jusqu’au 25 janvier).",
       "Côté scène, la semaine est celle des dernières : La Walkyrie s’achève ce soir à Bastille, Ganesh versus the Third Reich se joue jusqu’au 21 novembre et Ici sont les dragons jusqu’au 29."
@@ -81,6 +81,7 @@
     {
      "titre": "Concerts et showcases",
      "texte": [
+      "Veille du 20 novembre, faite depuis les agendas des salles : décembre est chargé, avec Orelsan quinze soirs à Bercy (9 au 28 décembre), Muse à La Défense Arena (3 et 4 décembre, puis quatre soirs en janvier), Anyma (12 décembre) et Gims (16 et 17 décembre). En 2027 s’ajoutent Feu! Chatterton à Bercy (8 et 9 février), Charli xcx (24 février), Ibrahim Maalouf à La Défense Arena (10 avril), Gracie Abrams (trois Bercy en avril), Olivia Rodrigo (23 et 24 avril), Céline Dion (dix soirs en mai), blink-182 (15 juin), Karol G (1er juillet), Santana (7 juillet), Harry Styles (quatre soirs en juillet), Gaël Faye (10 décembre) et MC Solaar pour ses 40 ans de carrière (Bercy, 29 février 2028). Jazz et électro : Youn Sun Nah à La Seine Musicale le 25 novembre, Bonobo à la Salle Pleyel les 26 et 27 mars.",
       "Rap : les grandes salles se remplissent pour 2027. L2B (16 octobre) et Leto (11 décembre) passent à Paris La Défense Arena, Guy2Bezbar fait son premier Bercy (17 avril), Kaaris et SDM prennent le Stade de France ; Tiakola joue avec l’Orchestre Lamoureux à la Philharmonie après-demain, complet.",
       "Pop et chanson : Angèle ouvre l’Instinct Tour par cinq Bercy en mars, Pomme passe de l’Olympia (complet) à son premier Bercy le 8 décembre 2027, Théa aborde le Zénith (19 mars), Vianney, Eddy de Pretto et Charlotte Cardin prennent Bercy à l’automne 2027, TeddyBear joue au Trianon le 26 janvier. Étienne Daho rejoue Pop Satori et Éden en symphonique sous la nef du Grand Palais (15 janvier), Ludovico Einaudi y joue seul au piano la veille.",
       "R&B, funk et musiques du monde : Erykah Badu au Zénith (20 janvier), Angélique Kidjo et Youssou N’Dour au Grand Rex pour leur seule date française (24 mars), Jorja Smith à Bercy (27 mai), Tayc trois soirs à Bercy (1er–3 juin), Jamiroquai deux soirs (9–10 juillet).",
@@ -88,6 +89,41 @@
       "Électro : Mosimann fait son premier Bercy (16 octobre) après deux Zénith complets, John Summit passe au Zénith (23 février), Jean-Michel Jarre fête Oxygène à La Seine Musicale."
      ],
      "lignes": [
+      {
+       "id": "orelsan-accor-arena-2026",
+       "titre": "Orelsan",
+       "texte": "Accor Arena, 15 soirs du 9 au 28 déc."
+      },
+      {
+       "id": "muse-paris-la-defense-arena",
+       "titre": "Muse",
+       "texte": "La Défense Arena, 3 et 4 déc., puis janvier"
+      },
+      {
+       "id": "charli-xcx-accor-arena-2027",
+       "titre": "Charli xcx",
+       "texte": "Accor Arena, 24 févr."
+      },
+      {
+       "id": "olivia-rodrigo-unraveled-tour",
+       "titre": "Olivia Rodrigo",
+       "texte": "La Défense Arena, 23 et 24 avril"
+      },
+      {
+       "id": "celine-dion-paris-2027",
+       "titre": "Céline Dion",
+       "texte": "La Défense Arena, dix soirs en mai"
+      },
+      {
+       "id": "harry-styles-together-together",
+       "titre": "Harry Styles",
+       "texte": "La Défense Arena, 16 au 24 juil."
+      },
+      {
+       "id": "mc-solaar-accor-arena-2028",
+       "titre": "MC Solaar – 40 ans",
+       "texte": "Accor Arena, 29 févr. 2028"
+      },
       {
        "id": "miki-zenith-2026",
        "titre": "Miki",
@@ -287,6 +323,51 @@
      "titre": "Mises en vente à venir",
      "lignes": [
       {
+       "id": "thea-accor-arena-2028",
+       "titre": "Théa",
+       "texte": "Accor Arena, 14 avril 2028 : prévente salle le 20 nov. à 12 h, vente générale le 23 nov. à 12 h"
+      },
+      {
+       "id": "djadja-dinaz-paris-la-defense-arena-2027",
+       "titre": "Djadja & Dinaz",
+       "texte": "La Défense Arena : vente générale ouverte le 20 nov."
+      },
+      {
+       "id": "suzane-accor-arena-2028",
+       "titre": "Suzane",
+       "texte": "Accor Arena, 25 mars 2028 : vente le 23 nov. à 12 h"
+      },
+      {
+       "id": "patrice-alhambra-2027",
+       "titre": "Patrice",
+       "texte": "Alhambra, 26 avril 2027 : vente le 23 nov. à 10 h"
+      },
+      {
+       "id": "jack-johnson-olympia-2027",
+       "titre": "Jack Johnson",
+       "texte": "Olympia, 28 et 30 juin 2027 : billetterie pas encore ouverte"
+      },
+      {
+       "id": "art-garfunkel-olympia-2027",
+       "titre": "Art Garfunkel",
+       "texte": "Olympia, 3 mars 2027 : billetterie pas encore ouverte"
+      },
+      {
+       "id": "the-flaming-lips-olympia-2027",
+       "titre": "The Flaming Lips",
+       "texte": "Olympia, 6 avril 2027 : billetterie pas encore ouverte"
+      },
+      {
+       "id": "jeanne-added-olympia-2027",
+       "titre": "Jeanne Added",
+       "texte": "Olympia, 11 mars 2027 : billetterie pas encore ouverte"
+      },
+      {
+       "id": "purple-disco-machine-zenith-2027",
+       "titre": "Purple Disco Machine",
+       "texte": "Zénith, 27 nov. 2027 : « prochainement en vente »"
+      },
+      {
        "id": "vampire-s-mountain",
        "titre": "Vampire’s Mountain",
        "texte": "Odéon, ouverture hors abonnement le 24 nov."
@@ -385,10 +466,10 @@
     }
    ],
    "bilan": {
-    "ajoutees": 51,
+    "ajoutees": 79,
     "archivees": 2,
     "revisees": 0,
-    "ventes": 27
+    "ventes": 32
    }
   }
  ]

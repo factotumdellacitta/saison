@@ -9731,7 +9731,8 @@
    "statut": "a-voir",
    "offres": [],
    "nouveau": true,
-   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/337047-thea-concert-zenith-paris"
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/337047-thea-concert-zenith-paris",
+   "etat": "complet"
   },
   {
    "id": "fall-out-boy-2027",
@@ -11045,6 +11046,869 @@
    "relaches": [
     "lun"
    ]
+  },
+  {
+   "id": "thea-accor-arena-2028",
+   "titre": "Théa – Popstar Speedrun",
+   "categorie": "Concert",
+   "sousGenre": "Pop",
+   "artistes": [
+    {
+     "nom": "Théa",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "salle": "",
+   "debut": "2028-04-14",
+   "fin": "2028-04-14",
+   "note": 2,
+   "calcul": "C1 N1 H2",
+   "pronostic": true,
+   "pourquoi": "Premier Bercy de Théa, après un Zénith complet, pour l’album « Popstar Speedrun ».",
+   "lien": "https://www.ticketmaster.fr/fr/resultat?ipSearch=Th%C3%A9a",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Prévente Accor Arena",
+     "vente": "2026-11-20T12:00",
+     "venteApprox": false,
+     "condition": "Sur inscription auprès de la salle"
+    },
+    {
+     "type": "Vente générale",
+     "vente": "2026-11-23T12:00",
+     "venteApprox": false
+    }
+   ],
+   "source": "https://www.sortiraparis.com/scenes/concert-musique/articles/358779-thea-en-concert-a-paris-bercy-en-avril-2028",
+   "nouveau": true
+  },
+  {
+   "id": "suzane-accor-arena-2028",
+   "titre": "Suzane",
+   "categorie": "Concert",
+   "sousGenre": "Chanson",
+   "artistes": [
+    {
+     "nom": "Suzane",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "salle": "",
+   "debut": "2028-03-25",
+   "fin": "2028-03-25",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Deuxième Bercy de Suzane, après celui du 29 mai 2027.",
+   "lien": "https://www.ticketmaster.fr/fr/resultat?ipSearch=Suzane",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Vente générale",
+     "vente": "2026-11-23T12:00",
+     "venteApprox": false
+    }
+   ],
+   "source": "https://jamapp.fr/billetterie",
+   "nouveau": true
+  },
+  {
+   "id": "patrice-alhambra-2027",
+   "titre": "Patrice",
+   "categorie": "Concert",
+   "sousGenre": "Reggae",
+   "artistes": [
+    {
+     "nom": "Patrice",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "alhambra",
+   "salle": "",
+   "debut": "2027-04-26",
+   "fin": "2027-04-26",
+   "note": 2,
+   "calcul": "C1 N1 H1",
+   "pronostic": true,
+   "pourquoi": "Le chanteur germano-sierra-léonais à l’Alhambra, un soir.",
+   "lien": "https://www.ticketmaster.fr/fr/resultat?ipSearch=Patrice",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Vente générale",
+     "vente": "2026-11-23T10:00",
+     "venteApprox": false
+    }
+   ],
+   "source": "https://jamapp.fr/billetterie",
+   "nouveau": true
+  },
+  {
+   "id": "djadja-dinaz-paris-la-defense-arena-2027",
+   "titre": "Djadja & Dinaz",
+   "categorie": "Concert",
+   "sousGenre": "Rap",
+   "artistes": [
+    {
+     "nom": "Djadja & Dinaz",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "paris-la-defense-arena",
+   "salle": "",
+   "debut": "2027-04-16",
+   "fin": "2027-04-17",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Deux soirs à La Défense Arena pour le duo de Meaux, après Bercy en 2023.",
+   "lien": "https://www.ticketmaster.fr/fr/manifestation/djadja-dinaz-billet/idmanif/669506/idseance/4391755",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Prévente Fnac Spectacles",
+     "vente": "2026-11-19T12:00",
+     "venteApprox": false,
+     "condition": "Pendant 24 heures"
+    },
+    {
+     "type": "Prévente salle",
+     "vente": "2026-11-19T18:00",
+     "venteApprox": false
+    },
+    {
+     "type": "Vente générale",
+     "vente": "2026-11-20",
+     "venteApprox": false
+    }
+   ],
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/358391-djadja-dinaz-in-concert-at-paris-la-defense-arena-in-april-2027",
+   "nouveau": true
+  },
+  {
+   "id": "jack-johnson-olympia-2027",
+   "titre": "Jack Johnson – Surfilmusic Tour",
+   "categorie": "Concert",
+   "sousGenre": "Folk",
+   "artistes": [
+    {
+     "nom": "Jack Johnson",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "olympia",
+   "salle": "",
+   "debut": "2027-06-28",
+   "fin": "2027-06-30",
+   "note": 3,
+   "calcul": "C1 N3 H2",
+   "pronostic": true,
+   "pourquoi": "Jack Johnson dans une salle de 2 000 places, deux soirs ; billetterie pas encore ouverte.",
+   "lien": "https://www.olympiahall.com/agenda/jack-johnson/",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://news.pollstar.com/2026/10/19/jack-johnson-announces-european-surfilmusic-tour-dates/",
+   "nouveau": true,
+   "datesTexte": "28 et 30 juin 2027",
+   "relaches": [
+    "2027-06-29"
+   ]
+  },
+  {
+   "id": "art-garfunkel-olympia-2027",
+   "titre": "Art Garfunkel",
+   "categorie": "Concert",
+   "sousGenre": "Folk",
+   "artistes": [
+    {
+     "nom": "Art Garfunkel",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "olympia",
+   "salle": "",
+   "debut": "2027-03-03",
+   "fin": "2027-03-03",
+   "note": 3,
+   "calcul": "C1 N3 H2",
+   "pronostic": true,
+   "pourquoi": "Rare passage parisien de la voix de Simon & Garfunkel, un soir ; billetterie pas encore ouverte.",
+   "lien": "https://www.olympiahall.com/agenda/art-garfunkel/",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://www.olympiahall.com/agenda/art-garfunkel/",
+   "nouveau": true
+  },
+  {
+   "id": "the-flaming-lips-olympia-2027",
+   "titre": "The Flaming Lips",
+   "categorie": "Concert",
+   "sousGenre": "Rock",
+   "artistes": [
+    {
+     "nom": "The Flaming Lips",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "olympia",
+   "salle": "",
+   "debut": "2027-04-06",
+   "fin": "2027-04-06",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Retour du groupe pour l’album « The Teardrop Throbs », un soir ; billetterie pas encore ouverte.",
+   "lien": "https://www.olympiahall.com/agenda/the-flaming-lips/",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://www.olympiahall.com/agenda/the-flaming-lips/",
+   "nouveau": true
+  },
+  {
+   "id": "jeanne-added-olympia-2027",
+   "titre": "Jeanne Added",
+   "categorie": "Concert",
+   "sousGenre": "Pop",
+   "artistes": [
+    {
+     "nom": "Jeanne Added",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "olympia",
+   "salle": "",
+   "debut": "2027-03-11",
+   "fin": "2027-03-11",
+   "note": 2,
+   "calcul": "C1 N1 H1",
+   "pronostic": true,
+   "pourquoi": "Jeanne Added à l’Olympia, un soir ; billetterie pas encore ouverte.",
+   "lien": "https://www.olympiahall.com/agenda/jeanne-added/",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://www.olympiahall.com/agenda/jeanne-added/",
+   "nouveau": true
+  },
+  {
+   "id": "purple-disco-machine-zenith-2027",
+   "titre": "Purple Disco Machine",
+   "categorie": "Concert",
+   "sousGenre": "Électro",
+   "artistes": [
+    {
+     "nom": "Purple Disco Machine",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "zenith-paris",
+   "salle": "",
+   "debut": "2027-11-27",
+   "fin": "2027-11-27",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Le producteur allemand au Zénith, annoncé « prochainement en vente » par la salle (Live Nation).",
+   "lien": "https://le-zenith.com/shows/Purple%20Disco%20Machine-22572",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://le-zenith.com/shows/Purple%20Disco%20Machine-22572",
+   "nouveau": true
+  },
+  {
+   "id": "orelsan-accor-arena-2026",
+   "titre": "Orelsan",
+   "categorie": "Concert",
+   "sousGenre": "Rap",
+   "artistes": [
+    {
+     "nom": "Orelsan",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "salle": "",
+   "debut": "2026-12-09",
+   "fin": "2026-12-28",
+   "note": 3,
+   "calcul": "C1 N2 H2",
+   "pronostic": true,
+   "pourquoi": "Quinze soirs à Bercy en décembre, une résidence sans précédent pour un rappeur français.",
+   "lien": "https://www.ticketmaster.fr/fr/manifestation/orelsan-billet/idmanif/636763/idseance/4175618",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://jamapp.fr/salle/accor-arena",
+   "nouveau": true,
+   "datesTexte": "15 soirs du 9 au 28 décembre 2026"
+  },
+  {
+   "id": "muse-paris-la-defense-arena",
+   "titre": "Muse – The Wow! Signal Europa Tour",
+   "categorie": "Concert",
+   "sousGenre": "Rock",
+   "artistes": [
+    {
+     "nom": "Muse",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "paris-la-defense-arena",
+   "salle": "",
+   "debut": "2026-12-03",
+   "fin": "2027-01-17",
+   "note": 3,
+   "calcul": "C1 N3 H2",
+   "pronostic": true,
+   "pourquoi": "Six soirs à La Défense Arena pour la tournée européenne de Muse.",
+   "lien": "https://www.ticketmaster.fr/fr/resultat?ipSearch=Muse",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://jamapp.fr/artist/Muse",
+   "nouveau": true,
+   "datesTexte": "3 et 4 décembre 2026, 12, 13, 16 et 17 janvier 2027"
+  },
+  {
+   "id": "anyma-paris-la-defense-arena",
+   "titre": "Anyma",
+   "categorie": "Concert",
+   "sousGenre": "Électro",
+   "artistes": [
+    {
+     "nom": "Anyma",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "paris-la-defense-arena",
+   "salle": "",
+   "debut": "2026-12-12",
+   "fin": "2026-12-12",
+   "note": 3,
+   "calcul": "C1 N2 H2",
+   "pronostic": true,
+   "pourquoi": "Le show audiovisuel d’Anyma dans la plus grande salle couverte d’Europe, un soir.",
+   "lien": "https://www.ticketmaster.fr/fr/manifestation/anyma-billet/idmanif/648904/idseance/4264375",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://jamapp.fr/salle/plenitude-arena",
+   "nouveau": true
+  },
+  {
+   "id": "gims-paris-la-defense-arena",
+   "titre": "Gims",
+   "categorie": "Concert",
+   "sousGenre": "Pop",
+   "artistes": [
+    {
+     "nom": "Gims",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "paris-la-defense-arena",
+   "salle": "",
+   "debut": "2026-12-16",
+   "fin": "2026-12-17",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Deux soirs de Gims à La Défense Arena.",
+   "lien": "https://www.ticketmaster.fr/fr/manifestation/gims-billet/idmanif/645637/idseance/4237612",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://jamapp.fr/salle/plenitude-arena",
+   "nouveau": true
+  },
+  {
+   "id": "feu-chatterton-accor-arena-2027",
+   "titre": "Feu! Chatterton",
+   "categorie": "Concert",
+   "sousGenre": "Rock",
+   "artistes": [
+    {
+     "nom": "Feu! Chatterton",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "salle": "",
+   "debut": "2027-02-08",
+   "fin": "2027-02-09",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Premiers Bercy de Feu! Chatterton, deux soirs.",
+   "lien": "https://www.ticketmaster.fr/fr/manifestation/feu-chatterton-billet/idmanif/623864/idtier/18864121",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://jamapp.fr/salle/accor-arena",
+   "nouveau": true
+  },
+  {
+   "id": "charli-xcx-accor-arena-2027",
+   "titre": "Charli xcx – Music, Fashion, Film Tour",
+   "categorie": "Concert",
+   "sousGenre": "Pop",
+   "artistes": [
+    {
+     "nom": "Charli xcx",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "salle": "",
+   "debut": "2027-02-24",
+   "fin": "2027-02-24",
+   "note": 3,
+   "calcul": "C1 N3 H2",
+   "pronostic": true,
+   "pourquoi": "Seule date française de la nouvelle tournée de Charli xcx.",
+   "lien": "https://www.livenation.fr/event/charli-xcx-music-fashion-film-tour-paris-tickets-edp1691962",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://www.livenation.fr/",
+   "nouveau": true
+  },
+  {
+   "id": "ibrahim-maalouf-paris-la-defense-arena",
+   "titre": "Ibrahim Maalouf",
+   "categorie": "Concert",
+   "sousGenre": "Jazz",
+   "artistes": [
+    {
+     "nom": "Ibrahim Maalouf",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "paris-la-defense-arena",
+   "salle": "",
+   "debut": "2027-04-10",
+   "fin": "2027-04-10",
+   "note": 3,
+   "calcul": "C1 N2 H2",
+   "pronostic": true,
+   "pourquoi": "Un trompettiste de jazz dans la plus grande salle couverte d’Europe, un soir.",
+   "lien": "https://www.ticketmaster.fr/fr/resultat?ipSearch=Ibrahim%20Maalouf",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://jamapp.fr/salle/plenitude-arena",
+   "nouveau": true
+  },
+  {
+   "id": "gracie-abrams-accor-arena-2027",
+   "titre": "Gracie Abrams",
+   "categorie": "Concert",
+   "sousGenre": "Pop",
+   "artistes": [
+    {
+     "nom": "Gracie Abrams",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "salle": "",
+   "debut": "2027-04-08",
+   "fin": "2027-04-12",
+   "note": 3,
+   "calcul": "C1 N2 H2",
+   "pronostic": true,
+   "pourquoi": "Trois Bercy pour Gracie Abrams.",
+   "lien": "https://www.ticketmaster.fr/fr/resultat?ipSearch=Gracie%20Abrams",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://jamapp.fr/artist/Gracie%20Abrams",
+   "nouveau": true,
+   "datesTexte": "8, 9 et 12 avril 2027",
+   "relaches": [
+    "2027-04-10",
+    "2027-04-11"
+   ]
+  },
+  {
+   "id": "olivia-rodrigo-unraveled-tour",
+   "titre": "Olivia Rodrigo – The Unraveled Tour",
+   "categorie": "Concert",
+   "sousGenre": "Pop",
+   "artistes": [
+    {
+     "nom": "Olivia Rodrigo",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "paris-la-defense-arena",
+   "salle": "",
+   "debut": "2027-04-23",
+   "fin": "2027-04-24",
+   "note": 3,
+   "calcul": "C1 N3 H2",
+   "pronostic": true,
+   "pourquoi": "Deux soirs à La Défense Arena, seules dates françaises de la tournée.",
+   "lien": "https://www.livenation.fr/event/olivia-rodrigo-the-unraveled-tour-nanterre-tickets-edp1670808",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://www.livenation.fr/",
+   "nouveau": true
+  },
+  {
+   "id": "celine-dion-paris-2027",
+   "titre": "Céline Dion",
+   "categorie": "Concert",
+   "sousGenre": "Chanson",
+   "artistes": [
+    {
+     "nom": "Céline Dion",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "paris-la-defense-arena",
+   "salle": "",
+   "debut": "2027-05-08",
+   "fin": "2027-05-29",
+   "note": 3,
+   "calcul": "C1 N3 H2",
+   "pronostic": true,
+   "pourquoi": "Dix soirs de Céline Dion à La Défense Arena en mai 2027, après la série parisienne de l’automne 2026.",
+   "lien": "https://www.axs.com/CelineParis",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://jamapp.fr/artist/C%C3%A9line%20Dion",
+   "nouveau": true,
+   "datesTexte": "dix soirs entre le 8 et le 29 mai 2027"
+  },
+  {
+   "id": "blink-182-paris-la-defense-arena",
+   "titre": "blink-182",
+   "categorie": "Concert",
+   "sousGenre": "Rock",
+   "artistes": [
+    {
+     "nom": "blink-182",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "paris-la-defense-arena",
+   "salle": "",
+   "debut": "2027-06-15",
+   "fin": "2027-06-15",
+   "note": 3,
+   "calcul": "C1 N3 H1",
+   "pronostic": true,
+   "pourquoi": "blink-182 à La Défense Arena, un soir.",
+   "lien": "https://www.livenation.fr/event/blink-182-nanterre-tickets-edp1679674",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://www.livenation.fr/",
+   "nouveau": true
+  },
+  {
+   "id": "karol-g-paris-la-defense-arena",
+   "titre": "Karol G – Viajando por el mundo Tropitour",
+   "categorie": "Concert",
+   "sousGenre": "Reggaeton",
+   "artistes": [
+    {
+     "nom": "Karol G",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "paris-la-defense-arena",
+   "salle": "",
+   "debut": "2027-07-01",
+   "fin": "2027-07-01",
+   "note": 3,
+   "calcul": "C1 N3 H1",
+   "pronostic": true,
+   "pourquoi": "La star colombienne à La Défense Arena, un soir.",
+   "lien": "https://www.ticketmaster.fr/fr/manifestation/karol-g-billet/idmanif/657500/idtier/18864121",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://jamapp.fr/salle/plenitude-arena",
+   "nouveau": true
+  },
+  {
+   "id": "santana-accor-arena-2027",
+   "titre": "Santana",
+   "categorie": "Concert",
+   "sousGenre": "Rock",
+   "artistes": [
+    {
+     "nom": "Santana",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "salle": "",
+   "debut": "2027-07-07",
+   "fin": "2027-07-07",
+   "note": 3,
+   "calcul": "C1 N3 H1",
+   "pronostic": true,
+   "pourquoi": "Carlos Santana à Bercy, un soir.",
+   "lien": "https://www.ticketmaster.fr/fr/manifestation/santana-billet/idmanif/678626/idseance/4459278",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://jamapp.fr/salle/accor-arena",
+   "nouveau": true
+  },
+  {
+   "id": "harry-styles-together-together",
+   "titre": "Harry Styles – Together, Together",
+   "categorie": "Concert",
+   "sousGenre": "Pop",
+   "artistes": [
+    {
+     "nom": "Harry Styles",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "paris-la-defense-arena",
+   "salle": "",
+   "debut": "2027-07-16",
+   "fin": "2027-07-24",
+   "note": 3,
+   "calcul": "C1 N3 H2",
+   "pronostic": true,
+   "pourquoi": "Quatre soirs de Harry Styles à La Défense Arena.",
+   "lien": "https://www.ticketmaster.fr/fr/manifestation/harry-styles-billet/idmanif/672082/idseance/4422166",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://jamapp.fr/salle/plenitude-arena",
+   "nouveau": true,
+   "datesTexte": "16, 17, 23 et 24 juillet 2027",
+   "relaches": [
+    "2027-07-18",
+    "2027-07-19",
+    "2027-07-20",
+    "2027-07-21",
+    "2027-07-22"
+   ]
+  },
+  {
+   "id": "gael-faye-accor-arena-2027",
+   "titre": "Gaël Faye",
+   "categorie": "Concert",
+   "sousGenre": "Chanson",
+   "artistes": [
+    {
+     "nom": "Gaël Faye",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "salle": "",
+   "debut": "2027-12-10",
+   "fin": "2027-12-10",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Gaël Faye à Bercy, un soir.",
+   "lien": "https://www.ticketmaster.fr/fr/manifestation/gael-faye-billet/idmanif/661633/idtier/18864121",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://jamapp.fr/salle/accor-arena",
+   "nouveau": true
+  },
+  {
+   "id": "mc-solaar-accor-arena-2028",
+   "titre": "MC Solaar – 40 ans",
+   "categorie": "Concert",
+   "sousGenre": "Rap",
+   "artistes": [
+    {
+     "nom": "MC Solaar",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "salle": "",
+   "debut": "2028-02-29",
+   "fin": "2028-02-29",
+   "note": 3,
+   "calcul": "C1 N3 H2",
+   "pronostic": true,
+   "pourquoi": "Bercy en clôture de la tournée des 40 ans de carrière de MC Solaar.",
+   "lien": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/154176-mc-solaar-to-perform-at-bercy-in-february-2028-to-celebrate-40-years-in-music",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Prévente",
+     "vente": "2026-11-05",
+     "venteApprox": false
+    },
+    {
+     "type": "Vente générale",
+     "vente": "2026-11-06T10:00",
+     "venteApprox": false
+    }
+   ],
+   "source": "https://www.afrik.com/mc-solaar-en-tournee-en-2028-pour-ses-40-ans-de-carriere",
+   "nouveau": true
+  },
+  {
+   "id": "camille-grand-rex-2027",
+   "titre": "Camille",
+   "categorie": "Concert",
+   "sousGenre": "Chanson",
+   "artistes": [
+    {
+     "nom": "Camille",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "grand-rex",
+   "salle": "",
+   "debut": "2027-11-08",
+   "fin": "2027-11-08",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Date ajoutée au Grand Rex après des Olympia complets.",
+   "lien": "https://www.infoconcert.com/actualites/ses-concerts-a-lolympia-complets-camille-ajoute-une-nouvelle-date-a-paris-au-grand-rex-en-novembre-2027-23243",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [
+    {
+     "type": "Vente générale",
+     "vente": "2026-11-19T10:00",
+     "venteApprox": false
+    }
+   ],
+   "source": "https://www.infoconcert.com/actualites/ses-concerts-a-lolympia-complets-camille-ajoute-une-nouvelle-date-a-paris-au-grand-rex-en-novembre-2027-23243",
+   "nouveau": true
+  },
+  {
+   "id": "bonobo-salle-pleyel-2027",
+   "titre": "Bonobo – Distance in Static",
+   "categorie": "Concert",
+   "sousGenre": "Électro",
+   "artistes": [
+    {
+     "nom": "Bonobo",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "salle-pleyel",
+   "salle": "",
+   "debut": "2027-03-26",
+   "fin": "2027-03-27",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Deux soirs à la Salle Pleyel pour le nouvel album, le premier complet.",
+   "lien": "https://www.sallepleyel.com/",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/355668-bonobo-in-concert-in-paris-two-dates-in-march-2027",
+   "nouveau": true
+  },
+  {
+   "id": "youn-sun-nah-seine-musicale-2026",
+   "titre": "Youn Sun Nah – Lost Pieces",
+   "categorie": "Concert",
+   "sousGenre": "Jazz",
+   "artistes": [
+    {
+     "nom": "Youn Sun Nah",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "seine-musicale",
+   "salle": "",
+   "debut": "2026-11-25",
+   "fin": "2026-11-25",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "La chanteuse coréenne et son quartet à l’Auditorium de La Seine Musicale, un soir.",
+   "lien": "https://www.laseinemusicale.com/",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/358370-youn-sun-nah-and-her-quartet-at-la-seine-musicale-the-pop-turn-of-lost-pieces",
+   "nouveau": true,
+   "horaires": "20h30"
   }
  ]
 }

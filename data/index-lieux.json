@@ -2,16 +2,25 @@
  "accor-arena": {
   "sorties": [
    "angele-instinct-tour-2027",
+   "charli-xcx-accor-arena-2027",
    "charlotte-cardin-accor-arena-2027",
    "eddy-de-pretto-accor-arena-2027",
    "fall-out-boy-2027",
+   "feu-chatterton-accor-arena-2027",
+   "gael-faye-accor-arena-2027",
+   "gracie-abrams-accor-arena-2027",
    "guy2bezbar-accor-arena-2027",
    "jamiroquai-accor-arena-2027",
    "jorja-smith-accor-arena-2027",
+   "mc-solaar-accor-arena-2028",
    "mosimann-dream-tour-finale",
+   "orelsan-accor-arena-2026",
    "pomme-accor-arena-2027",
+   "santana-accor-arena-2027",
+   "suzane-accor-arena-2028",
    "tame-impala",
    "tayc-joya-tour-2027",
+   "thea-accor-arena-2028",
    "vianney-accor-arena-2027",
    "vu-adele-bercy-2016",
    "vu-celine-dion-bercy-2016",
@@ -25,6 +34,7 @@
  },
  "alhambra": {
   "sorties": [
+   "patrice-alhambra-2027",
    "vu-anne-roumanoff-aimons-nous",
    "vu-marc-antoine-le-bret-nouveau-spectacle"
   ]
@@ -246,6 +256,7 @@
  },
  "grand-rex": {
   "sorties": [
+   "camille-grand-rex-2027",
    "kidjo-ndour-grand-rex-2027"
   ]
  },
@@ -434,8 +445,12 @@
  },
  "olympia": {
   "sorties": [
+   "art-garfunkel-olympia-2027",
    "esdeekid",
-   "pomme-olympia-2027"
+   "jack-johnson-olympia-2027",
+   "jeanne-added-olympia-2027",
+   "pomme-olympia-2027",
+   "the-flaming-lips-olympia-2027"
   ]
  },
  "opera-bastille": {
@@ -481,8 +496,18 @@
  },
  "paris-la-defense-arena": {
   "sorties": [
+   "anyma-paris-la-defense-arena",
+   "blink-182-paris-la-defense-arena",
+   "celine-dion-paris-2027",
+   "djadja-dinaz-paris-la-defense-arena-2027",
+   "gims-paris-la-defense-arena",
+   "harry-styles-together-together",
+   "ibrahim-maalouf-paris-la-defense-arena",
+   "karol-g-paris-la-defense-arena",
    "l2b-paris-la-defense-arena-2027",
    "leto-paris-la-defense-arena-2027",
+   "muse-paris-la-defense-arena",
+   "olivia-rodrigo-unraveled-tour",
    "rush-fifty-something-2027",
    "vu-black-eyed-peas-la-defense-arena-2024",
    "vu-damso-la-defense-arena-2026"
@@ -566,6 +591,7 @@
  },
  "salle-pleyel": {
   "sorties": [
+   "bonobo-salle-pleyel-2027",
    "vu-patrick-timsit-on-ne-peut-pas-rire-de-tout"
   ]
  },
@@ -578,7 +604,8 @@
   "sorties": [
    "jean-michel-jarre-oxygene-2027",
    "vu-bejart-et-nous-loiseau-de-feu-bolero",
-   "vu-west-side-story-seine-musicale"
+   "vu-west-side-story-seine-musicale",
+   "youn-sun-nah-seine-musicale-2026"
   ]
  },
  "solidays": {
@@ -796,6 +823,7 @@
    "john-summit-zenith-2027",
    "miki-zenith-2026",
    "nono",
+   "purple-disco-machine-zenith-2027",
    "thea-zenith-2027",
    "vu-central-cee-zenith-2022",
    "vu-theodora-zenith-2026",
