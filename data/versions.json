@@ -1,6 +1,18 @@
 {
  "versions": [
   {
+   "version": "4.75",
+   "date": "2026-11-20",
+   "titre": "Fiche et Radar : calendrier complet, barème en tableau",
+   "points": [
+    "Calendrier : tous les mois ; un soir joué reste souligné, hachuré en plus quand Léonard est pris",
+    "Détail de la note en tableau (critères, points, échelle, total), sans « sur 9 »",
+    "Saison 26–27 dans l’en-tête",
+    "Sauts de ligne gardés dans les avis, les « pourquoi » et les notes",
+    "Radar mobile : ouvertures de vente de cette semaine puis plus tard, juste après la dernière veille"
+   ]
+  },
+  {
    "version": "4.74",
    "date": "2026-11-18",
    "titre": "Ligne des résultats allégée",

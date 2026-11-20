@@ -1191,3 +1191,27 @@ button.cell.cal-res{cursor:pointer;font:inherit;font-weight:800}
 .fgr .f{margin:0;max-width:320px}
 .fgr .f select{min-height:40px}
 @media (min-width:960px){.fgr,.fgr[class]{grid-template-columns:72px minmax(0,1fr)}.fgr>div:not(.chips){flex-direction:row;flex-wrap:wrap;align-items:center;gap:var(--e2) var(--e3)}.fgr .f{flex:0 0 260px}}
+/* ---------- v4.75 ---------- */
+/* Calendrier : un soir joué reste souligné même pris (hachures en plus) ; tous les mois affichés */
+.cell.play.busy::before{background:var(--encre)}
+.cal-w>.cal{display:block!important}
+/* Textes saisis : les sauts de ligne sont gardés */
+.why,.sh-avis p,.adm-e,.fi-p blockquote,.rb .art.avis{white-space:pre-line}
+/* Barème en tableau, sur l’aplat */
+.bar-t{width:100%;border-collapse:collapse;margin:0 0 var(--e2);font-size:var(--t-meta)}
+.bar-t th,.bar-t td{padding:3px var(--e2) 3px 0;border-bottom:1px solid var(--sur-accent);text-align:left;font-weight:500}
+.bar-t thead th{font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.bar-t tfoot th,.bar-t tfoot td{font-weight:800;border-bottom:0}
+.bar-t td:nth-child(2){font-weight:700}
+.bar-n td{text-align:center}
+.bar-n td:nth-child(2){font-weight:500}
+/* Radar mobile : dernière veille, ouvertures de vente (cette semaine puis plus tard, avec son bouton), puis le reste */
+@media (max-width:959.98px){
+  #r-rapport{order:0}
+  .r-lat2>.mh,.r-lat2.calme>.mh{order:1}
+  .r-semaine,.r-lat2.calme>.r-semaine{order:2}
+  .r-suite{order:3}
+  .r-reserver{order:4}
+  .r-chances{order:5}
+  .pub-expo{order:6}
+}

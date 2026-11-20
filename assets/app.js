@@ -437,8 +437,10 @@ function auteurHTML(e) {
 const infoNote = (e) => (calculDe(e.calcul) ? `<button class="info-n" type="button" data-bareme aria-expanded="false" aria-controls="bar-${esc(e.id)}" aria-label="Détail de la note" title="Détail de la note">${ico("info")}</button>` : "");
 function baremeHTML(e) {
   const k = calculDe(e.calcul); if (!k) return "";
-  const t = [...Object.entries(CRIT).map(([c, l]) => l + " " + k.socle[c]), ...k.bonus.map((b) => b + " +1")].join(" · ");
-  return `<div class="bareme" id="bar-${esc(e.id)}" hidden><p><b>${esc(t)} = ${k.total} sur 9</b>${e.pronostic ? " (prévision : la critique est estimée)" : ""}</p><p>Barème de la veille : critique 0 à 2, notoriété 0 à 3, hype 0 à 2, +1 pour un chef-d’œuvre, +1 pour une distinction. Total sur 9 : 7 et plus, 4 carrés ; 5 ou 6, 3 ; 2 à 4, 2 ; 1, 1.</p></div>`;
+  const ECH = { C: "0 à 2", N: "0 à 3", H: "0 à 2" };
+  const lig = [...Object.entries(CRIT).map(([c, l]) => [l, k.socle[c], ECH[c]]), ["Chef-d’œuvre", k.bonus.includes("Chef-d’œuvre") ? "+1" : "0", "+1"], ["Distinction", k.bonus.includes("Distinction") ? "+1" : "0", "+1"]];
+  return `<div class="bareme" id="bar-${esc(e.id)}" hidden><table class="bar-t"><thead><tr><th scope="col">Critère</th><th scope="col">Points</th><th scope="col">Échelle</th></tr></thead><tbody>${lig.map(([l, v, x]) => `<tr><th scope="row">${esc(l)}</th><td>${esc(String(v))}</td><td>${x}</td></tr>`).join("")}</tbody><tfoot><tr><th scope="row">Total</th><td>${k.total}</td><td>${e.pronostic ? "prévision" : ""}</td></tr></tfoot></table>
+  <table class="bar-t bar-n"><tbody><tr><th scope="row">Total</th><td>7 et +</td><td>5–6</td><td>2–4</td><td>1</td></tr><tr><th scope="row">Carrés</th><td>4</td><td>3</td><td>2</td><td>1</td></tr></tbody></table></div>`;
 }
 // Sortie vue : mon avis dans une case de l’en-tête de couleur ; en mode admin, bouton pour le modifier seul.
 function avisTete(e) {
@@ -497,10 +499,10 @@ function ficheCal(e) {
   const offers = new Set((e.offres || []).map((o) => o.date).filter(Boolean));
   const st = p[0] < TODAY ? TODAY : p[0], adm = !!(PRIVE && ADMIN);
   let h = "", n = 0;
-  for (let c = new Date(st.getFullYear(), st.getMonth(), 1); c <= p[1] && n < 6; c = new Date(c.getFullYear(), c.getMonth() + 1, 1), n++) {
+  for (let c = new Date(st.getFullYear(), st.getMonth(), 1); c <= p[1] && n < 24; c = new Date(c.getFullYear(), c.getMonth() + 1, 1), n++) { // tous les mois jusqu’à la fin
     h += `<div class="cal mini"><div class="calh"><h3>${MOIS_L[c.getMonth()]} ${c.getFullYear()}</h3></div>` + monthGrid(c.getFullYear(), c.getMonth(), (d) => {
       const k = iso(d), on = playsOn(e, d) && d >= TODAY, busy = BUSY.has(k);
-      const cls = ["cell", on ? (busy ? "busy" : "play") : "", d < TODAY ? "past" : "", +d === +TODAY ? "today" : "", offers.has(k) ? "of" : ""].filter(Boolean).join(" ");
+      const cls = ["cell", on ? (busy ? "play busy" : "play") : "", d < TODAY ? "past" : "", +d === +TODAY ? "today" : "", offers.has(k) ? "of" : ""].filter(Boolean).join(" "); // soir joué : souligné ; pris : hachuré en plus
       const joue = estExpo(e) ? ", ouverte" : ", se joue";
       const lab = `${fmt(d, true)}${on ? (busy ? `${joue}, ${OWNER} pris` : HORIZON && k > HORIZON ? joue : `${joue}, ${OWNER} libre`) : ""}${offers.has(k) ? ", " + esc((((e.offres || []).find((o) => o.date === k) || {}).type || "offre").toLowerCase()) : ""}`;
       // Admin : un soir libre se touche pour réserver à cette date.
@@ -508,13 +510,11 @@ function ficheCal(e) {
       return `<div class="${cls}" role="img" aria-label="${lab}"><span class="n" aria-hidden="true">${d.getDate()}</span></div>`;
     }) + "</div>";
   }
-  const vus = new Set(); for (let c = new Date(st.getFullYear(), st.getMonth(), 1), i = 0; c <= p[1] && i < 6; c = new Date(c.getFullYear(), c.getMonth() + 1, 1), i++) vus.add(iso(c).slice(0, 7));
+  const vus = new Set(); for (let c = new Date(st.getFullYear(), st.getMonth(), 1), i = 0; c <= p[1] && i < 24; c = new Date(c.getFullYear(), c.getMonth() + 1, 1), i++) vus.add(iso(c).slice(0, 7));
   const ofs = (e.offres || []).filter((o) => o.date && vus.has(o.date.slice(0, 7)) && D(o.date) >= TODAY), tys = [...new Set(ofs.map((o) => typeCourt(o.type)))];
   const libOf = tys.length === 1 ? tys[0] : "Offre";
   const loin = HORIZON && iso(p[1]) > HORIZON ? `<p class="aide">Soirs pris connus jusqu’au ${fmt(D(HORIZON))}.</p>` : "";
-  const pm = n - 1, pd = n - 3;
-  const plus = pm > 0 ? `<button class="linkbtn cal-plus" type="button" data-calplus><span class="m">${plural(pm, "mois suivant", "mois suivants")}</span>${pd > 0 ? `<span class="d">${plural(pd, "mois suivant", "mois suivants")}</span>` : ""}</button>` : "";
-  return `<div class="mini-wrap cal-w">${h}</div>${plus}<div class="legend"><span class="l-joue">${OWNER} libre</span><span class="l-pris">${OWNER} pris</span>${ofs.length ? `<span class="l-offre">${esc(libOf)}</span>` : ""}</div>
+  return `<div class="mini-wrap cal-w">${h}</div><div class="legend"><span class="l-joue">${OWNER} libre</span><span class="l-pris">${OWNER} pris</span>${ofs.length ? `<span class="l-offre">${esc(libOf)}</span>` : ""}</div>
   ${adm ? `<p class="aide">Touche un soir libre pour réserver.</p>` : ""}${e.relaches ? "" : `<p class="aide">${estExpo(e) ? "Jours de fermeture non renseignés." : "Relâches non renseignées."}</p>`}${loin}`;
 }
 
@@ -1318,7 +1318,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.74"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.75"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1329,7 +1329,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.74"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.75"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1347,7 +1347,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.74"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.75"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
@@ -1450,8 +1450,6 @@ document.addEventListener("click", async (ev) => {
   if (bi) { const p = document.getElementById(bi.getAttribute("aria-controls")), o = !!p && p.hidden; if (p) p.hidden = !o; bi.setAttribute("aria-expanded", String(o)); return; }
   const nv = ev.target.closest("[data-nav]");
   if (nv) { ficheVoisine(nv.dataset.nav); return; }
-  const cpl = ev.target.closest("[data-calplus]");
-  if (cpl) { const w = cpl.previousElementSibling; if (w) w.classList.add("tout"); cpl.hidden = true; return; }
   const pg = ev.target.closest("[data-partage]");
   if (pg) {
     const url = partageURL();
@@ -1477,7 +1475,7 @@ document.addEventListener("click", async (ev) => {
 });
 
 /* ---------- En-tête : saison calculée, thème, barre compacte au défilement ---------- */
-$("#saison").innerHTML = '<span class="sl">Saison </span>' + saisonDe().debut + "–" + (saisonDe().debut + 1); // « Saison » replié sur mobile quand la mention du site partage la ligne
+$("#saison").innerHTML = '<span class="sl">Saison </span>' + saisonDe().court; // « 26–27 », comme partout // « Saison » replié sur mobile quand la mention du site partage la ligne
 themePose(themeLu()); lockIcon();
 document.addEventListener("keydown", (ev) => { const m = $(".tmenu"); if (ev.key === "Escape" && m) { const b = m.parentElement.querySelector("[data-theme-btn]"); themeFerme(); b.focus(); } });
 if ("IntersectionObserver" in window) new IntersectionObserver(([x]) => document.body.classList.toggle("compact", !x.isIntersecting)).observe($("#top"));
