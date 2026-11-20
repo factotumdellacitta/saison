@@ -1,6 +1,15 @@
 {
  "versions": [
   {
+   "version": "4.76",
+   "date": "2026-11-20",
+   "titre": "Barème compact, calendrier comme avant",
+   "points": [
+    "Détail de la note : tableau sur deux lignes (« 1 sur 2 »), correspondance avec les carrés sur une ligne",
+    "Calendrier : soir joué souligné si libre, hachuré si pris"
+   ]
+  },
+  {
    "version": "4.75",
    "date": "2026-11-20",
    "titre": "Fiche et Radar : calendrier complet, barème en tableau",

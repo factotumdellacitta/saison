@@ -51,10 +51,10 @@ const cleF = (cls = "cle", px) => `<svg class="${cls}" viewBox="0 0 48 48" fill=
 /* Icônes Factotum : trait 2 px sur une grille de 24, extrémités carrées, angles vifs, en encre (jamais en rouge sur fond clair).
    Elles remplacent un mot (le libellé reste pour l’accessibilité) ou accompagnent le genre ; jamais décoratives. */
 const ICO = {
-  "Théâtre": "<path d=\"M13 7.5V3h9.5v5.5A4.75 4.75 0 0 1 15 12.37M15 6.3l1.6-.8M20.5 6.3l-1.6-.8M16 10a3 3 0 0 1 3.5 0\" stroke-linecap=\"butt\"/><path d=\"M1.5 10H12v4.5a5.25 5.25 0 0 1-10.5 0z\"/><path d=\"M3.9 12.4h2M7.6 12.4h2M4.75 15.2a3 3 0 0 0 4 0\" stroke-linecap=\"butt\"/>",
+  "Théâtre": "<path d=\"M13 7.5V3h9.5v5.5A4.76 4.76 0 0 1 15 12.37M15 6.3l1.6-.8M20.5 6.3l-1.6-.8M16 10a3 3 0 0 1 3.5 0\" stroke-linecap=\"butt\"/><path d=\"M1.5 10H12v4.5a5.25 5.25 0 0 1-10.5 0z\"/><path d=\"M3.9 12.4h2M7.6 12.4h2M4.76 15.2a3 3 0 0 0 4 0\" stroke-linecap=\"butt\"/>",
   "Opéra": "<path d=\"M3 21h18M5 21V12h14v9M9 12v9M12 12v9M15 12v9M4 12h16M6 12a6 6 0 0 1 12 0M12 6V3\"/>",
   "Danse": "<path d=\"M3 16c0-1.7 1.3-3 3-3h5c3.5 0 7 1.8 10 4v3H6.5C4.6 20 3 18.4 3 16.5z\"/><path d=\"M7 13 12 4M11 13 6 4\" stroke-linecap=\"butt\"/>",
-  "Comédie musicale": "<path d=\"M1.5 7H12v4.5a5.25 5.25 0 0 1-10.5 0z\"/><path d=\"M3.9 9.4h2M7.6 9.4h2M4.75 12.2a3 3 0 0 0 4 0\" stroke-linecap=\"butt\"/><path d=\"M18 16.94V3.5M18 3.5c0 3 3.4 3.5 3.4 7.5\" stroke-linecap=\"butt\"/><ellipse cx=\"16.4\" cy=\"17.4\" rx=\"2.7\" ry=\"1.95\" transform=\"rotate(-22 16.4 17.4)\" fill=\"currentColor\" stroke=\"none\"/>",
+  "Comédie musicale": "<path d=\"M1.5 7H12v4.5a5.25 5.25 0 0 1-10.5 0z\"/><path d=\"M3.9 9.4h2M7.6 9.4h2M4.76 12.2a3 3 0 0 0 4 0\" stroke-linecap=\"butt\"/><path d=\"M18 16.94V3.5M18 3.5c0 3 3.4 3.5 3.4 7.5\" stroke-linecap=\"butt\"/><ellipse cx=\"16.4\" cy=\"17.4\" rx=\"2.7\" ry=\"1.95\" transform=\"rotate(-22 16.4 17.4)\" fill=\"currentColor\" stroke=\"none\"/>",
   "Récital": "<path d=\"M4 3h5c0 7 11 6 11 13v5H4zM4 17h16M8 17v4M12 17v4M16 17v4\"/>",
   "Concert": "<path d=\"M8 17.74V6.4l10-2v11.34\" stroke-linecap=\"butt\"/><ellipse cx=\"6.4\" cy=\"18.2\" rx=\"2.7\" ry=\"1.95\" transform=\"rotate(-22 6.4 18.2)\" fill=\"currentColor\" stroke=\"none\"/><ellipse cx=\"16.4\" cy=\"16.2\" rx=\"2.7\" ry=\"1.95\" transform=\"rotate(-22 16.4 16.2)\" fill=\"currentColor\" stroke=\"none\"/>",
   "Humour": "<path d=\"M9 2h6v9H9zM12 13v6M7 21h10\"/>",
@@ -437,10 +437,11 @@ function auteurHTML(e) {
 const infoNote = (e) => (calculDe(e.calcul) ? `<button class="info-n" type="button" data-bareme aria-expanded="false" aria-controls="bar-${esc(e.id)}" aria-label="Détail de la note" title="Détail de la note">${ico("info")}</button>` : "");
 function baremeHTML(e) {
   const k = calculDe(e.calcul); if (!k) return "";
-  const ECH = { C: "0 à 2", N: "0 à 3", H: "0 à 2" };
-  const lig = [...Object.entries(CRIT).map(([c, l]) => [l, k.socle[c], ECH[c]]), ["Chef-d’œuvre", k.bonus.includes("Chef-d’œuvre") ? "+1" : "0", "+1"], ["Distinction", k.bonus.includes("Distinction") ? "+1" : "0", "+1"]];
-  return `<div class="bareme" id="bar-${esc(e.id)}" hidden><table class="bar-t"><thead><tr><th scope="col">Critère</th><th scope="col">Points</th><th scope="col">Échelle</th></tr></thead><tbody>${lig.map(([l, v, x]) => `<tr><th scope="row">${esc(l)}</th><td>${esc(String(v))}</td><td>${x}</td></tr>`).join("")}</tbody><tfoot><tr><th scope="row">Total</th><td>${k.total}</td><td>${e.pronostic ? "prévision" : ""}</td></tr></tfoot></table>
-  <table class="bar-t bar-n"><tbody><tr><th scope="row">Total</th><td>7 et +</td><td>5–6</td><td>2–4</td><td>1</td></tr><tr><th scope="row">Carrés</th><td>4</td><td>3</td><td>2</td><td>1</td></tr></tbody></table></div>`;
+  // Une ligne d’intitulés, une ligne de points (« 1 sur 2 ») ; la correspondance avec les carrés tient en une ligne.
+  const SUR = { C: 2, N: 3, H: 2 };
+  const col = [...Object.entries(CRIT).map(([c, l]) => [l, `${k.socle[c]} <small>sur ${SUR[c]}</small>`]), ["Chef-d’œuvre", k.bonus.includes("Chef-d’œuvre") ? "+1" : "0"], ["Distinction", k.bonus.includes("Distinction") ? "+1" : "0"], ["Total", String(k.total)]];
+  return `<div class="bareme" id="bar-${esc(e.id)}" hidden><table class="bar-t"><thead><tr>${col.map(([l]) => `<th scope="col">${esc(l)}</th>`).join("")}</tr></thead><tbody><tr>${col.map(([, v]) => `<td>${v}</td>`).join("")}</tr></tbody></table>
+  <p class="bar-n">Carrés : 4 dès 7 · 3 pour 5–6 · 2 pour 2–4 · 1 pour 1${e.pronostic ? " · critique estimée (prévision)" : ""}</p></div>`;
 }
 // Sortie vue : mon avis dans une case de l’en-tête de couleur ; en mode admin, bouton pour le modifier seul.
 function avisTete(e) {
@@ -502,7 +503,7 @@ function ficheCal(e) {
   for (let c = new Date(st.getFullYear(), st.getMonth(), 1); c <= p[1] && n < 24; c = new Date(c.getFullYear(), c.getMonth() + 1, 1), n++) { // tous les mois jusqu’à la fin
     h += `<div class="cal mini"><div class="calh"><h3>${MOIS_L[c.getMonth()]} ${c.getFullYear()}</h3></div>` + monthGrid(c.getFullYear(), c.getMonth(), (d) => {
       const k = iso(d), on = playsOn(e, d) && d >= TODAY, busy = BUSY.has(k);
-      const cls = ["cell", on ? (busy ? "play busy" : "play") : "", d < TODAY ? "past" : "", +d === +TODAY ? "today" : "", offers.has(k) ? "of" : ""].filter(Boolean).join(" "); // soir joué : souligné ; pris : hachuré en plus
+      const cls = ["cell", on ? (busy ? "busy" : "play") : "", d < TODAY ? "past" : "", +d === +TODAY ? "today" : "", offers.has(k) ? "of" : ""].filter(Boolean).join(" "); // soir joué : souligné si libre, hachuré si pris
       const joue = estExpo(e) ? ", ouverte" : ", se joue";
       const lab = `${fmt(d, true)}${on ? (busy ? `${joue}, ${OWNER} pris` : HORIZON && k > HORIZON ? joue : `${joue}, ${OWNER} libre`) : ""}${offers.has(k) ? ", " + esc((((e.offres || []).find((o) => o.date === k) || {}).type || "offre").toLowerCase()) : ""}`;
       // Admin : un soir libre se touche pour réserver à cette date.
@@ -1318,7 +1319,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.75"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.76"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1329,7 +1330,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.75"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.76"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1347,7 +1348,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.75"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.76"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }

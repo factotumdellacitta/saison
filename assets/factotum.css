@@ -1193,18 +1193,17 @@ button.cell.cal-res{cursor:pointer;font:inherit;font-weight:800}
 @media (min-width:960px){.fgr,.fgr[class]{grid-template-columns:72px minmax(0,1fr)}.fgr>div:not(.chips){flex-direction:row;flex-wrap:wrap;align-items:center;gap:var(--e2) var(--e3)}.fgr .f{flex:0 0 260px}}
 /* ---------- v4.75 ---------- */
 /* Calendrier : un soir joué reste souligné même pris (hachures en plus) ; tous les mois affichés */
-.cell.play.busy::before{background:var(--encre)}
 .cal-w>.cal{display:block!important}
 /* Textes saisis : les sauts de ligne sont gardés */
 .why,.sh-avis p,.adm-e,.fi-p blockquote,.rb .art.avis{white-space:pre-line}
 /* Barème en tableau, sur l’aplat */
-.bar-t{width:100%;border-collapse:collapse;margin:0 0 var(--e2);font-size:var(--t-meta)}
-.bar-t th,.bar-t td{padding:3px var(--e2) 3px 0;border-bottom:1px solid var(--sur-accent);text-align:left;font-weight:500}
-.bar-t thead th{font-weight:700;text-transform:uppercase;letter-spacing:.06em}
-.bar-t tfoot th,.bar-t tfoot td{font-weight:800;border-bottom:0}
-.bar-t td:nth-child(2){font-weight:700}
-.bar-n td{text-align:center}
-.bar-n td:nth-child(2){font-weight:500}
+.bar-t{width:100%;border-collapse:collapse;margin:0 0 var(--e1);font-size:var(--t-meta)}
+.bar-t th,.bar-t td{padding:2px var(--e1) 2px 0;text-align:left;vertical-align:bottom}
+.bar-t th{font-weight:500;line-height:1.2;border-bottom:1px solid var(--sur-accent)}
+.bar-t td{padding-top:var(--e1);font-size:var(--t-corps);font-weight:800;white-space:nowrap}
+.bar-t td small{font-size:var(--t-meta);font-weight:500}
+.bar-t th:last-child,.bar-t td:last-child{text-align:right;padding-right:0}
+.bar-n{margin:0;font-size:var(--t-meta);opacity:.9}
 /* Radar mobile : dernière veille, ouvertures de vente (cette semaine puis plus tard, avec son bouton), puis le reste */
 @media (max-width:959.98px){
   #r-rapport{order:0}
