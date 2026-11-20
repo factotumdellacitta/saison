@@ -125,6 +125,12 @@
    "le-trouvere"
   ]
  },
+ "alex-vizorek": {
+  "nom": "Alex Vizorek",
+  "sorties": [
+   "alex-vizorek-zenith"
+  ]
+ },
  "alexandra-badea": {
   "nom": "Alexandra Badea",
   "sorties": [
@@ -444,6 +450,7 @@
  "anne-roumanoff": {
   "nom": "Anne Roumanoff",
   "sorties": [
+   "anne-roumanoff-l-age-libre",
    "vu-anne-roumanoff-aimons-nous"
   ]
  },
@@ -1523,6 +1530,12 @@
    "trifonov-recital-2027"
   ]
  },
+ "dany-boon": {
+  "nom": "Dany Boon",
+  "sorties": [
+   "dany-boon-clown-n-est-pas-un-metier"
+  ]
+ },
  "david-bobee": {
   "nom": "David Bobée",
   "sorties": [
@@ -1532,6 +1545,7 @@
  "david-castello-lopes": {
   "nom": "David Castello-Lopes",
   "sorties": [
+   "david-castello-lopes-delicieux",
    "vu-david-castello-lopes-le-havre",
    "vu-un-stand-up-de-bonne-qualite"
   ]
@@ -1702,6 +1716,12 @@
   "nom": "El Conde de Torrefiel",
   "sorties": [
    "vu-lexikon"
+  ]
+ },
+ "elie-semoun": {
+  "nom": "Elie Semoun",
+  "sorties": [
+   "elie-semoun-cactus"
   ]
  },
  "elina-garanca": {
@@ -1974,6 +1994,12 @@
   "nom": "Fabien Gabel",
   "sorties": [
    "romeo-et-juliette-jolly"
+  ]
+ },
+ "fabrice-eboue": {
+  "nom": "Fabrice Éboué",
+  "sorties": [
+   "fabrice-eboue-solitudes"
   ]
  },
  "fabrice-ilia-leroy": {
@@ -2814,6 +2840,13 @@
   "nom": "Jamiroquai",
   "sorties": [
    "jamiroquai-accor-arena-2027"
+  ]
+ },
+ "jarry": {
+  "nom": "Jarry",
+  "sorties": [
+   "jarry-bonhomme-zenith",
+   "les-folies-de-jarry"
   ]
  },
  "jason-derulo": {
@@ -5217,6 +5250,12 @@
    "la-mort-du-mome"
   ]
  },
+ "redouane-bougheraba": {
+  "nom": "Redouane Bougheraba",
+  "sorties": [
+   "redouane-bougheraba-mon-premier-spectacle"
+  ]
+ },
  "regula-muhlemann": {
   "nom": "Regula Mühlemann",
   "sorties": [
@@ -5279,6 +5318,12 @@
   "nom": "Richard Wilberforce",
   "sorties": [
    "missa-solemnis-makela"
+  ]
+ },
+ "ricky-gervais": {
+  "nom": "Ricky Gervais",
+  "sorties": [
+   "ricky-gervais-legend"
   ]
  },
  "riles": {

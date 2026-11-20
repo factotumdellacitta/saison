@@ -1,6 +1,87 @@
 {
- "maj": "2026-11-17",
+ "maj": "2026-11-20",
  "rapports": [
+  {
+   "id": "2026-11-20",
+   "date": "2026-11-20",
+   "domaine": "humour",
+   "titre": "L’humour entre dans la veille",
+   "chapo": "Première veille consacrée à l’humour, désormais suivi comme les spectacles et les concerts. Dix spectacles retenus, de Bobino à Bercy ; Ricky Gervais et Dany Boon en tête.",
+   "sections": [
+    {
+     "titre": "À retenir",
+     "texte": [
+      "Ricky Gervais donne à l’Accor Arena, le 30 avril, sa seule date française de Legend, en anglais. Dany Boon revient au seul-en-scène après sept ans avec Clown n’est pas un métier ! : les trois soirs de l’Olympia, fin avril, affichent déjà complet."
+     ],
+     "lignes": [
+      {
+       "id": "ricky-gervais-legend",
+       "titre": "Ricky Gervais – Legend",
+       "texte": "Note 3 · Accor Arena, 30 avr. 2027"
+      },
+      {
+       "id": "dany-boon-clown-n-est-pas-un-metier",
+       "titre": "Dany Boon – Clown n’est pas un métier !",
+       "texte": "Note 3 · Olympia, 27–29 avr. · complet"
+      }
+     ]
+    },
+    {
+     "titre": "Humour",
+     "texte": [
+      "Les grandes salles accueillent Jarry au Zénith (complet) puis à Bercy en mars 2028 pour un spectacle participatif, Fabrice Éboué et Alex Vizorek au Zénith, Redouane Bougheraba au Dôme de Paris. Dans les salles moyennes : Anne Roumanoff à Bobino, Elie Semoun à la Cigale, David Castello-Lopes au Théâtre Libre jusqu’en mars."
+     ],
+     "lignes": [
+      {
+       "id": "anne-roumanoff-l-age-libre",
+       "titre": "Anne Roumanoff – L’âge libre",
+       "texte": "Note 2 · Bobino, 15 et 16 déc."
+      },
+      {
+       "id": "elie-semoun-cactus",
+       "titre": "Elie Semoun – Cactus",
+       "texte": "Note 2 · La Cigale, 5 et 6 janv."
+      },
+      {
+       "id": "redouane-bougheraba-mon-premier-spectacle",
+       "titre": "Redouane Bougheraba – Mon premier spectacle",
+       "texte": "Note 2 · Dôme de Paris, 3–6 févr."
+      },
+      {
+       "id": "jarry-bonhomme-zenith",
+       "titre": "Jarry – Bonhomme",
+       "texte": "Note 2 · Zénith, 26 févr. · complet"
+      },
+      {
+       "id": "fabrice-eboue-solitudes",
+       "titre": "Fabrice Éboué – SolitudeS",
+       "texte": "Note 2 · Zénith, 24 mars"
+      },
+      {
+       "id": "david-castello-lopes-delicieux",
+       "titre": "David Castello-Lopes – Délicieux",
+       "texte": "Note 2 · Théâtre Libre, jusqu’au 9 mars"
+      },
+      {
+       "id": "alex-vizorek-zenith",
+       "titre": "Alex Vizorek au Zénith",
+       "texte": "Note 2 · 3 déc. 2027"
+      },
+      {
+       "id": "les-folies-de-jarry",
+       "titre": "Les Folies de Jarry",
+       "texte": "Note 2 · Accor Arena, 23 mars 2028"
+      }
+     ]
+    }
+   ],
+   "bilan": {
+    "ajoutees": 10,
+    "archivees": 0,
+    "revisees": 0,
+    "ventes": 0
+   }
+  },
   {
    "id": "2026-11-17",
    "date": "2026-11-17",

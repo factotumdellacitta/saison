@@ -14,8 +14,8 @@
 :root,[data-theme="light"]{
   --fond:#FFFFFF;--surface:#FFFFFF;--encre:#111111;--encre-2:#5C5C5C;--filet:#111111;--filet-leger:#D9D9D9;
   --accent:#E30613;--sur-accent:#FFFFFF;--accent-texte:#E30613;
-  --g-theatre:#B4233C;--g-lyrique:#1F5FA8;--g-danse:#946200;--g-concert:#B04A00;--g-xbeaux:#A3175E;--g-xphoto:#0F5F7A;--g-xcontemporain:#7A5230;
-  --a-theatre:#B4233C;--a-lyrique:#1F5FA8;--a-danse:#946200;--a-concert:#B04A00;--a-neutre:#5C5C5C;--a-xbeaux:#A3175E;--a-xphoto:#0F5F7A;--a-xcontemporain:#7A5230;
+  --g-theatre:#B4233C;--g-lyrique:#1F5FA8;--g-danse:#946200;--g-concert:#B04A00;--g-humour:#5E6B00;--g-xbeaux:#A3175E;--g-xphoto:#0F5F7A;--g-xcontemporain:#7A5230;
+  --a-theatre:#B4233C;--a-lyrique:#1F5FA8;--a-danse:#946200;--a-concert:#B04A00;--a-humour:#5E6B00;--a-neutre:#5C5C5C;--a-xbeaux:#A3175E;--a-xphoto:#0F5F7A;--a-xcontemporain:#7A5230;
   --voile:rgba(17,17,17,.45);
   --id-spectacles:#E30613;--id-expo:#00715D;
   color-scheme:light;
@@ -36,13 +36,13 @@
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --fond:#0E0E0E;--surface:#161616;--encre:#F2F2F2;--encre-2:#A6A6A6;--filet:#F2F2F2;--filet-leger:#2E2E2E;
   --accent:#E30613;--sur-accent:#FFFFFF;--accent-texte:#FF5A4F;
-  --g-theatre:#FF94A3;--g-lyrique:#8DB8F2;--g-danse:#E8B04A;--g-concert:#FFA066;--g-xbeaux:#F48FC0;--g-xphoto:#7CC7E0;--g-xcontemporain:#D9A877;
-  --a-theatre:#B4233C;--a-lyrique:#1F5FA8;--a-danse:#946200;--a-concert:#B04A00;--a-neutre:#5C5C5C;--a-xbeaux:#A3175E;--a-xphoto:#0F5F7A;--a-xcontemporain:#7A5230;--voile:rgba(0,0,0,.6);color-scheme:dark}}
+  --g-theatre:#FF94A3;--g-lyrique:#8DB8F2;--g-danse:#E8B04A;--g-concert:#FFA066;--g-humour:#C3D25C;--g-xbeaux:#F48FC0;--g-xphoto:#7CC7E0;--g-xcontemporain:#D9A877;
+  --a-theatre:#B4233C;--a-lyrique:#1F5FA8;--a-danse:#946200;--a-concert:#B04A00;--a-humour:#5E6B00;--a-neutre:#5C5C5C;--a-xbeaux:#A3175E;--a-xphoto:#0F5F7A;--a-xcontemporain:#7A5230;--voile:rgba(0,0,0,.6);color-scheme:dark}}
 :root[data-theme="dark"],[data-theme="dark"]{
   --fond:#0E0E0E;--surface:#161616;--encre:#F2F2F2;--encre-2:#A6A6A6;--filet:#F2F2F2;--filet-leger:#2E2E2E;
   --accent:#E30613;--sur-accent:#FFFFFF;--accent-texte:#FF5A4F;
-  --g-theatre:#FF94A3;--g-lyrique:#8DB8F2;--g-danse:#E8B04A;--g-concert:#FFA066;--g-xbeaux:#F48FC0;--g-xphoto:#7CC7E0;--g-xcontemporain:#D9A877;
-  --a-theatre:#B4233C;--a-lyrique:#1F5FA8;--a-danse:#946200;--a-concert:#B04A00;--a-neutre:#5C5C5C;--a-xbeaux:#A3175E;--a-xphoto:#0F5F7A;--a-xcontemporain:#7A5230;--voile:rgba(0,0,0,.6);color-scheme:dark}
+  --g-theatre:#FF94A3;--g-lyrique:#8DB8F2;--g-danse:#E8B04A;--g-concert:#FFA066;--g-humour:#C3D25C;--g-xbeaux:#F48FC0;--g-xphoto:#7CC7E0;--g-xcontemporain:#D9A877;
+  --a-theatre:#B4233C;--a-lyrique:#1F5FA8;--a-danse:#946200;--a-concert:#B04A00;--a-humour:#5E6B00;--a-neutre:#5C5C5C;--a-xbeaux:#A3175E;--a-xphoto:#0F5F7A;--a-xcontemporain:#7A5230;--voile:rgba(0,0,0,.6);color-scheme:dark}
 /* Factotum Expo (expo/index.html, <html data-site="expo">) : même charte, accent vert Véronèse. Seul l'accent change ;
    la variante de texte du thème sombre est éclaircie pour passer AA (contrôlé par tools/contrast.mjs). */
 :root[data-site="expo"],[data-site="expo"],[data-site="expo"] [data-theme="light"]{
@@ -617,7 +617,7 @@ body.adm .row:has(>.envie) .l1{padding-right:calc(18px + var(--e2))}
 .ss .pi{width:14px;height:14px;margin:-2px var(--e1) 0 0}
 /* Familles de genre : une encre par famille (surtitre, tranche devant la date, icône des puces, barres) et un aplat (puce active, en-tête de fiche) */
 .g-theatre{--g:var(--g-theatre);--ga:var(--a-theatre)}.g-lyrique{--g:var(--g-lyrique);--ga:var(--a-lyrique)}
-.g-danse{--g:var(--g-danse);--ga:var(--a-danse)}.g-concert{--g:var(--g-concert);--ga:var(--a-concert)}.g-neutre{--g:var(--encre);--ga:var(--accent)}
+.g-danse{--g:var(--g-danse);--ga:var(--a-danse)}.g-concert{--g:var(--g-concert);--ga:var(--a-concert)}.g-humour{--g:var(--g-humour);--ga:var(--a-humour)}.g-neutre{--g:var(--encre);--ga:var(--accent)}
 .gk{display:flex;align-items:center;gap:6px;margin-bottom:2px;font-size:var(--t-meta);font-weight:700;text-transform:uppercase;letter-spacing:.06em;line-height:1.35;color:var(--g,var(--encre))}
 .gk .pi{width:16px;height:16px}
 /* Bande de genre à gauche de la ligne : aplat, icône et libellé en blanc, à la verticale (lu de bas en haut). */
@@ -988,10 +988,10 @@ body:has(#dlg) .pub,body:has(#dlg) .toast{bottom:auto;top:0}
 /* ---------- Code couleur unique (Factotum et Factotum Expo) ----------
    Identité : rouge (Factotum), vert (Expo) ; jamais pour coder un genre ou un domaine.
    Familles : carmin (théâtre ; peinture et dessin), bleu de Prusse (lyrique ; photographie), ocre (danse ; art contemporain),
-   orange brûlé (concert, récital), neutre gris (autres genres ; arts et civilisations). */
+   orange brûlé (concert, récital), olive (humour), neutre gris (autres genres ; arts et civilisations). */
 .g-neutre{--g:var(--encre);--ga:var(--a-neutre)}
 .bars .bg.g-neutre{background:var(--a-neutre)}
-.sheet-in.g-theatre .shh,.sheet-in.g-concert .shh{background:var(--ga)}
+.sheet-in.g-theatre .shh,.sheet-in.g-concert .shh,.sheet-in.g-humour .shh{background:var(--ga)}
 /* Partager une page : icône en haut à droite de l’en-tête de page. */
 .ph{position:relative}
 .ph:has(>.ph-share){padding-right:calc(var(--cible) + var(--e2))}

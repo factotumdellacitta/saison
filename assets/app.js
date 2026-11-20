@@ -51,13 +51,13 @@ const cleF = (cls = "cle", px) => `<svg class="${cls}" viewBox="0 0 48 48" fill=
 /* Icônes Factotum : trait 2 px sur une grille de 24, extrémités carrées, angles vifs, en encre (jamais en rouge sur fond clair).
    Elles remplacent un mot (le libellé reste pour l’accessibilité) ou accompagnent le genre ; jamais décoratives. */
 const ICO = {
-  "Théâtre": "<path d=\"M13 7.5V3h9.5v5.5A4.76 4.76 0 0 1 15 12.37M15 6.3l1.6-.8M20.5 6.3l-1.6-.8M16 10a3 3 0 0 1 3.5 0\" stroke-linecap=\"butt\"/><path d=\"M1.5 10H12v4.5a5.25 5.25 0 0 1-10.5 0z\"/><path d=\"M3.9 12.4h2M7.6 12.4h2M4.76 15.2a3 3 0 0 0 4 0\" stroke-linecap=\"butt\"/>",
+  "Théâtre": "<path d=\"M13 7.5V3h9.5v5.5A4.77 4.77 0 0 1 15 12.37M15 6.3l1.6-.8M20.5 6.3l-1.6-.8M16 10a3 3 0 0 1 3.5 0\" stroke-linecap=\"butt\"/><path d=\"M1.5 10H12v4.5a5.25 5.25 0 0 1-10.5 0z\"/><path d=\"M3.9 12.4h2M7.6 12.4h2M4.77 15.2a3 3 0 0 0 4 0\" stroke-linecap=\"butt\"/>",
   "Opéra": "<path d=\"M3 21h18M5 21V12h14v9M9 12v9M12 12v9M15 12v9M4 12h16M6 12a6 6 0 0 1 12 0M12 6V3\"/>",
   "Danse": "<path d=\"M3 16c0-1.7 1.3-3 3-3h5c3.5 0 7 1.8 10 4v3H6.5C4.6 20 3 18.4 3 16.5z\"/><path d=\"M7 13 12 4M11 13 6 4\" stroke-linecap=\"butt\"/>",
-  "Comédie musicale": "<path d=\"M1.5 7H12v4.5a5.25 5.25 0 0 1-10.5 0z\"/><path d=\"M3.9 9.4h2M7.6 9.4h2M4.76 12.2a3 3 0 0 0 4 0\" stroke-linecap=\"butt\"/><path d=\"M18 16.94V3.5M18 3.5c0 3 3.4 3.5 3.4 7.5\" stroke-linecap=\"butt\"/><ellipse cx=\"16.4\" cy=\"17.4\" rx=\"2.7\" ry=\"1.95\" transform=\"rotate(-22 16.4 17.4)\" fill=\"currentColor\" stroke=\"none\"/>",
+  "Comédie musicale": "<path d=\"M1.5 7H12v4.5a5.25 5.25 0 0 1-10.5 0z\"/><path d=\"M3.9 9.4h2M7.6 9.4h2M4.77 12.2a3 3 0 0 0 4 0\" stroke-linecap=\"butt\"/><path d=\"M18 16.94V3.5M18 3.5c0 3 3.4 3.5 3.4 7.5\" stroke-linecap=\"butt\"/><ellipse cx=\"16.4\" cy=\"17.4\" rx=\"2.7\" ry=\"1.95\" transform=\"rotate(-22 16.4 17.4)\" fill=\"currentColor\" stroke=\"none\"/>",
   "Récital": "<path d=\"M4 3h5c0 7 11 6 11 13v5H4zM4 17h16M8 17v4M12 17v4M16 17v4\"/>",
   "Concert": "<path d=\"M8 17.74V6.4l10-2v11.34\" stroke-linecap=\"butt\"/><ellipse cx=\"6.4\" cy=\"18.2\" rx=\"2.7\" ry=\"1.95\" transform=\"rotate(-22 6.4 18.2)\" fill=\"currentColor\" stroke=\"none\"/><ellipse cx=\"16.4\" cy=\"16.2\" rx=\"2.7\" ry=\"1.95\" transform=\"rotate(-22 16.4 16.2)\" fill=\"currentColor\" stroke=\"none\"/>",
-  "Humour": "<path d=\"M9 2h6v9H9zM12 13v6M7 21h10\"/>",
+  "Humour": "<path d=\"M8 2h8v9H8zM12 14v6M7 21h10\"/><path d=\"M10 6.5a2 2 0 0 0 4 0\" stroke-linecap=\"butt\"/>",
   "Festival": "<path d=\"M3.6 20 12 6.6 20.4 20M10 20l2-4.5 2 4.5M12 6.6V3\" stroke-linecap=\"butt\"/><path d=\"M12 2h4.5v3H12z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M2 20h20\"/>",
   "Exposition": "<path d=\"M3 4h18v16H3zM7 8h10v8H7z\"/>",
   // Factotum Expo : un picto par domaine (chevalet, appareil, formes, amphore).
@@ -103,8 +103,8 @@ const ICO = {
 };
 const ico = (n, cls) => ICO[n] ? `<svg class="pi${cls ? " " + cls : ""}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true" focusable="false">${ICO[n]}</svg>` : "";
 // Familles de genre (code couleur) : théâtre, musique, danse, images ; le reste est neutre.
-// Familles de couleur : bleu pour la scène lyrique, vert pour la musique de concert ; Expo et Cinéma neutres.
-const FAMILLE = { "Théâtre": "theatre", "Opéra": "lyrique", "Comédie musicale": "lyrique", "Concert": "concert", "Récital": "concert", "Danse": "danse" };
+// Familles de couleur : carmin (théâtre), bleu (scène lyrique), ocre (danse), orange brûlé (concert), olive (humour) ; le reste neutre.
+const FAMILLE = { "Théâtre": "theatre", "Opéra": "lyrique", "Comédie musicale": "lyrique", "Concert": "concert", "Récital": "concert", "Danse": "danse", "Humour": "humour" };
 const famille = (c) => FAMILLE[c] || "neutre";
 // Factotum Expo : code couleur par domaine (sousGenre), sur les mêmes encres et aplats que les genres ; le vert reste à l’identité du site.
 const X_DOMAINES = { beaux: "Peinture et dessin", photo: "Photographie", contemporain: "Art contemporain", objets: "Arts et civilisations" };
@@ -989,7 +989,7 @@ function coeurLigne() {
 /* ---------- Rapports de veille (#rapports, #rapport-<id>, en tête du Radar) ---------- */
 // Chaque veille publie un rapport daté dans data/radar.json : { id, date, domaine, titre, chapo, sections:[{ titre, texte:[…], lignes:[{ id, titre, texte }] }], bilan }.
 // Public : aucune donnée privée. Flux Atom généré par build.mjs (data/radar.atom).
-const DOMAINES = { complete: "Veille complète", spectacles: "Spectacles", concerts: "Concerts", expo: "Expositions", ventes: "Ventes" };
+const DOMAINES = { complete: "Veille complète", spectacles: "Spectacles", humour: "Humour", concerts: "Concerts", expo: "Expositions", ventes: "Ventes" };
 const rapportMeta = (r) => [cap(fmtY(D(r.date), true)), DOMAINES[r.domaine] || "", r.bilan && r.bilan.ajoutees ? plural(r.bilan.ajoutees, "fiche ajoutée", "fiches ajoutées") : ""].filter(Boolean).map(esc).join(" · ");
 const rapportLiens = () => `<div class="acts"><a class="btn" href="#rapports">Tous les rapports</a><a class="btn" href="${RACINE}data/radar.atom" type="application/atom+xml">Flux Atom</a></div>`;
 function rapportEnTete() {
@@ -1319,7 +1319,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.76"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.77"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1330,7 +1330,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.76"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.77"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1348,7 +1348,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.76"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.77"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }

@@ -1,6 +1,17 @@
 {
  "versions": [
   {
+   "version": "4.77",
+   "date": "2026-11-20",
+   "titre": "L’humour a sa couleur",
+   "points": [
+    "Humour : famille propre, couleur olive (#5E6B00, #C3D25C en sombre), sur les lignes, les puces, les fiches et les statistiques",
+    "Nouvelle icône de l’humour : micro sur pied et sourire",
+    "Charte et contrôles de contraste mis à jour",
+    "Les rapports de veille peuvent porter sur l’humour seul."
+   ]
+  },
+  {
    "version": "4.76",
    "date": "2026-11-20",
    "titre": "Barème compact, calendrier comme avant",

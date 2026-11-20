@@ -11909,6 +11909,286 @@
    "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/concerts-music-festival/articles/358370-youn-sun-nah-and-her-quartet-at-la-seine-musicale-the-pop-turn-of-lost-pieces",
    "nouveau": true,
    "horaires": "20h30"
+  },
+  {
+   "id": "ricky-gervais-legend",
+   "titre": "Ricky Gervais – Legend",
+   "categorie": "Humour",
+   "sousGenre": "Stand-up",
+   "artistes": [
+    {
+     "nom": "Ricky Gervais",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "debut": "2027-04-30",
+   "fin": "2027-04-30",
+   "note": 3,
+   "calcul": "C1 N3 H2",
+   "pronostic": true,
+   "pourquoi": "Seule date française du nouveau spectacle du créateur de The Office, en anglais.",
+   "lien": "https://www.ticketmaster.fr/fr/manifestation/ricky-gervais-billet/idmanif/674664/idseance/4433815",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://www.jamapp.fr/billetterie",
+   "nouveau": true,
+   "horaires": "19h30"
+  },
+  {
+   "id": "dany-boon-clown-n-est-pas-un-metier",
+   "titre": "Dany Boon – Clown n’est pas un métier !",
+   "categorie": "Humour",
+   "sousGenre": "One-man-show",
+   "artistes": [
+    {
+     "nom": "Dany Boon",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "olympia",
+   "debut": "2027-04-27",
+   "fin": "2027-04-29",
+   "note": 3,
+   "calcul": "C1 N3 H1",
+   "pronostic": true,
+   "pourquoi": "Retour au seul-en-scène après sept ans loin des planches ; trois soirs à l’Olympia.",
+   "lien": "https://www.olympiahall.com/agenda/dany-boon/",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://www.olympiahall.com/agenda/dany-boon/",
+   "nouveau": true,
+   "horaires": "20h",
+   "etat": "complet"
+  },
+  {
+   "id": "jarry-bonhomme-zenith",
+   "titre": "Jarry – Bonhomme",
+   "categorie": "Humour",
+   "sousGenre": "One-man-show",
+   "artistes": [
+    {
+     "nom": "Jarry",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "zenith-paris",
+   "debut": "2027-02-26",
+   "fin": "2027-02-26",
+   "note": 2,
+   "calcul": "C0 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Date au Zénith de la tournée Bonhomme.",
+   "lien": "https://le-zenith.com/shows/Jarry-21954",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://le-zenith.com/shows/Jarry-21954",
+   "nouveau": true,
+   "etat": "complet"
+  },
+  {
+   "id": "les-folies-de-jarry",
+   "titre": "Les Folies de Jarry",
+   "categorie": "Humour",
+   "sousGenre": "One-man-show",
+   "artistes": [
+    {
+     "nom": "Jarry",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "accor-arena",
+   "debut": "2028-03-23",
+   "fin": "2028-03-23",
+   "note": 2,
+   "calcul": "C0 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Spectacle participatif à Bercy : la catégorie de place fixe le degré de participation.",
+   "lien": "https://www.sortiraparis.com/en/what-to-see-in-paris/shows/articles/358592-jarry-s-madcap-show-at-bercy-a-show-where-your-seat-determines-how-much-you-participate",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/shows/articles/358592-jarry-s-madcap-show-at-bercy-a-show-where-your-seat-determines-how-much-you-participate",
+   "nouveau": true,
+   "horaires": "20h"
+  },
+  {
+   "id": "fabrice-eboue-solitudes",
+   "titre": "Fabrice Éboué – SolitudeS",
+   "categorie": "Humour",
+   "sousGenre": "Stand-up",
+   "artistes": [
+    {
+     "nom": "Fabrice Éboué",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "zenith-paris",
+   "debut": "2027-03-24",
+   "fin": "2027-03-24",
+   "note": 2,
+   "calcul": "C1 N2 H0",
+   "pronostic": true,
+   "pourquoi": "Nouveau spectacle, date au Zénith.",
+   "lien": "https://le-zenith.com/shows/Fabrice%20%C3%89bou%C3%A9-22282",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://le-zenith.com/shows/Fabrice%20%C3%89bou%C3%A9-22282",
+   "nouveau": true
+  },
+  {
+   "id": "alex-vizorek-zenith",
+   "titre": "Alex Vizorek au Zénith",
+   "categorie": "Humour",
+   "sousGenre": "Stand-up",
+   "artistes": [
+    {
+     "nom": "Alex Vizorek",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "zenith-paris",
+   "debut": "2027-12-03",
+   "fin": "2027-12-03",
+   "note": 2,
+   "calcul": "C1 N1 H1",
+   "pronostic": true,
+   "pourquoi": "Date au Zénith pour le chroniqueur de France Inter.",
+   "lien": "https://le-zenith.com/shows/Alex%20Vizorek-22025",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://le-zenith.com/shows/Alex%20Vizorek-22025",
+   "nouveau": true,
+   "horaires": "20h"
+  },
+  {
+   "id": "redouane-bougheraba-mon-premier-spectacle",
+   "titre": "Redouane Bougheraba – Mon premier spectacle",
+   "categorie": "Humour",
+   "sousGenre": "Stand-up",
+   "artistes": [
+    {
+     "nom": "Redouane Bougheraba",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "dome-de-paris",
+   "debut": "2027-02-03",
+   "fin": "2027-02-06",
+   "note": 2,
+   "calcul": "C0 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Quatre soirs au Dôme de Paris pour l’humoriste marseillais.",
+   "lien": "https://www.ledomedeparis.com",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://www.sortiraparis.com/",
+   "nouveau": true,
+   "horaires": "20h"
+  },
+  {
+   "id": "david-castello-lopes-delicieux",
+   "titre": "David Castello-Lopes – Délicieux",
+   "categorie": "Humour",
+   "sousGenre": "One-man-show",
+   "artistes": [
+    {
+     "nom": "David Castello-Lopes",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "theatre-libre",
+   "debut": "2026-09-14",
+   "fin": "2027-03-09",
+   "note": 2,
+   "calcul": "C1 N1 H0",
+   "pronostic": true,
+   "pourquoi": "Nouveau seul-en-scène, à l’affiche du Théâtre Libre jusqu’en mars.",
+   "lien": "https://www.fnacspectacles.com/en/event/david-castello-lopes-delicieux-theatre-libre-paris-theatre-libre-paris-10-21343460/",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://www.sortiraparis.com/en/what-to-see-in-paris/shows/articles/340698-david-castello-lopes-brings-delicieux-to-theatre-libre-in-paris",
+   "nouveau": true,
+   "horaires": "1h15"
+  },
+  {
+   "id": "elie-semoun-cactus",
+   "titre": "Elie Semoun – Cactus",
+   "categorie": "Humour",
+   "sousGenre": "One-man-show",
+   "artistes": [
+    {
+     "nom": "Elie Semoun",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "la-cigale",
+   "debut": "2027-01-05",
+   "fin": "2027-01-06",
+   "note": 2,
+   "calcul": "C0 N2 H0",
+   "pronostic": true,
+   "pourquoi": "Huitième spectacle, deux soirs à la Cigale.",
+   "lien": "https://www.fnacspectacles.com/artist/elie-semoun/elie-semoun-cactus-tournee-3790422/",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://75.agendaculturel.fr/theatre/elie-semoun-cactus.html",
+   "nouveau": true,
+   "horaires": "20h"
+  },
+  {
+   "id": "anne-roumanoff-l-age-libre",
+   "titre": "Anne Roumanoff – L’âge libre",
+   "categorie": "Humour",
+   "sousGenre": "One-woman-show",
+   "artistes": [
+    {
+     "nom": "Anne Roumanoff",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "bobino",
+   "debut": "2026-12-15",
+   "fin": "2026-12-16",
+   "note": 2,
+   "calcul": "C0 N2 H0",
+   "pronostic": true,
+   "pourquoi": "Nouveau spectacle, deux soirs à Bobino.",
+   "lien": "https://www.fnacspectacles.com/event/anne-roumanoff-lage-libre-bobino-paris-bobino-paris-14-22156685/",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "source": "https://75.agendaculturel.fr/theatre/anne-roumanoff.html",
+   "nouveau": true,
+   "horaires": "20h"
   }
  ]
 }

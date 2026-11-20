@@ -229,7 +229,7 @@ if (archive && archive.maj && !ISO.test(archive.maj)) erreurs.push("maj invalide
 
 // ---------- Rapports de veille (Radar) ----------
 // Publics : structure stricte, aucune clé inconnue (donc aucune donnée privée), sorties citées connues.
-const DOMAINES = ["complete", "spectacles", "concerts", "expo", "ventes"];
+const DOMAINES = ["complete", "spectacles", "humour", "concerts", "expo", "ventes"];
 const radar = existsSync("data/radar.json") ? lire("data/radar.json") : null;
 if (radar) {
   const cles = (o, permis, ou) => { for (const k of Object.keys(o || {})) if (!permis.includes(k)) erreurs.push(`radar.json ${ou} : champ inconnu « ${k} ».`); };

@@ -12,10 +12,12 @@
    "guy2bezbar-accor-arena-2027",
    "jamiroquai-accor-arena-2027",
    "jorja-smith-accor-arena-2027",
+   "les-folies-de-jarry",
    "mc-solaar-accor-arena-2028",
    "mosimann-dream-tour-finale",
    "orelsan-accor-arena-2026",
    "pomme-accor-arena-2027",
+   "ricky-gervais-legend",
    "santana-accor-arena-2027",
    "suzane-accor-arena-2028",
    "tame-impala",
@@ -95,6 +97,11 @@
  "bendana-pinel": {
   "sorties": [
    "miguel-rothschild-chroniques-de-la-mer"
+  ]
+ },
+ "bobino": {
+  "sorties": [
+   "anne-roumanoff-l-age-libre"
   ]
  },
  "bouffes-du-nord": {
@@ -191,6 +198,11 @@
  "docks-le-havre": {
   "sorties": [
    "vu-david-castello-lopes-le-havre"
+  ]
+ },
+ "dome-de-paris": {
+  "sorties": [
+   "redouane-bougheraba-mon-premier-spectacle"
   ]
  },
  "duc-des-lombards": {
@@ -302,6 +314,7 @@
  },
  "la-cigale": {
   "sorties": [
+   "elie-semoun-cactus",
    "vu-jean-luc-lemoine-si-vous-avez-manque-le-debut"
   ]
  },
@@ -446,6 +459,7 @@
  "olympia": {
   "sorties": [
    "art-garfunkel-olympia-2027",
+   "dany-boon-clown-n-est-pas-un-metier",
    "esdeekid",
    "jack-johnson-olympia-2027",
    "jeanne-added-olympia-2027",
@@ -779,6 +793,7 @@
  },
  "theatre-libre": {
   "sorties": [
+   "david-castello-lopes-delicieux",
    "vu-le-cercle-des-poetes-disparus"
   ]
  },
@@ -819,7 +834,10 @@
  },
  "zenith-paris": {
   "sorties": [
+   "alex-vizorek-zenith",
    "erykah-badu-zenith-2027",
+   "fabrice-eboue-solitudes",
+   "jarry-bonhomme-zenith",
    "john-summit-zenith-2027",
    "miki-zenith-2026",
    "nono",

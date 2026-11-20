@@ -997,5 +997,25 @@
   "billetterie": null,
   "tarifJeune": "",
   "adresse": "7 avenue Vélasquez, 75008 Paris"
+ },
+ "dome-de-paris": {
+  "nom": "Dôme de Paris – Palais des Sports",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.ledomedeparis.com",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "34 boulevard Victor, 75015 Paris"
+ },
+ "bobino": {
+  "nom": "Bobino",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.bobino.fr",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "14-20 rue de la Gaîté, 75014 Paris"
  }
 }

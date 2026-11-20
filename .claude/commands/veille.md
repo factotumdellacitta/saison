@@ -1,12 +1,12 @@
 ---
-description: Veille à la demande et rapport Radar (ex. /veille ; /veille concerts ; /veille spectacles ; /veille expo ; /veille ventes)
+description: Veille à la demande et rapport Radar (ex. /veille ; /veille concerts ; /veille spectacles ; /veille humour ; /veille expo ; /veille ventes)
 ---
 Veille demandée : $ARGUMENTS
 
 Lancée à la main par Léonard, jamais planifiée. Applique la section « Veille » de CLAUDE.md (principes, sources, hiérarchie, cycle des concerts, rapport). Domaine selon l'argument :
-- *(vide)* : veille **complète**, toutes les étapes, les trois domaines (`domaine: "complete"`) ;
-- `spectacles`, `concerts` ou `expo` : les étapes 1, 2 et 6 à 9, et dans les étapes 3 à 5 ce seul domaine ;
-- `ventes` : **passage court**, centré sur la détection précoce : nouvelles pages des salles depuis le dernier rapport, ventes et inscriptions des 14 jours à venir ; étapes 2, 3, 4 (concerts seulement) et 5 limitée aux sorties dont une vente ouvre sous 14 jours, puis 8 et 9. Aucune recherche de nouveautés hors artistes suivis.
+- *(vide)* : veille **complète**, toutes les étapes, les quatre domaines (`domaine: "complete"`) ;
+- `spectacles`, `humour`, `concerts` ou `expo` : les étapes 1, 2 et 6 à 9, et dans les étapes 3 à 5 ce seul domaine ;
+- `ventes` : **passage court**, centré sur la détection précoce : nouvelles pages des salles depuis le dernier rapport, ventes et inscriptions des 14 jours à venir ; étapes 2, 3, 4 (concerts et humour seulement) et 5 limitée aux sorties dont une vente ouvre sous 14 jours, puis 8 et 9. Aucune recherche de nouveautés hors artistes suivis.
 
 Un seul commit à la fin.
 
@@ -16,6 +16,7 @@ Un seul commit à la fin.
 4. **Nouveautés**, par domaine, lieux et sources de la section « Veille » :
    - *Spectacles* : programmations des lieux de `lieux.json` et des lieux à couvrir, sources de `liens.json` ; distribution complète (auteur ou compositeur, mise en scène, chorégraphie, direction musicale, interprètes principaux, graphies de `data/index-artistes.json`).
    - *Concerts et showcases* : appliquer la « Détection précoce des annonces et des mises en vente » de CLAUDE.md, pages et plans de site des salles d’abord (toute page nouvelle depuis le dernier rapport), puis organisateurs, billetteries, artistes suivis et presse à flux. Jamais de K-pop. Annonces, puis mises en vente. Fiche **dès l'annonce officielle** (`pronostic: true` tant que la tournée n'a pas commencé, `sousGenre`, artiste en tête en premier `interprète`). Une offre par vague de vente avec date et heure (« Prévente » avec `condition`, « Vente générale ») ; date non publiée : estimation et `venteApprox: true`. Festivals : une fiche par édition, complétée et renotée à chaque vague d'annonces. Classique et lyrique au TCE et à la Philharmonie : hiérarchie stricte, repère d'environ 4 nouvelles propositions par mois de représentation.
+   - *Humour* : sous-section « Humour » de CLAUDE.md, salles et pages de programmation d’abord, détection précoce des ventes comme pour les concerts ; `categorie: "Humour"`, `sousGenre`, humoriste en premier `interprète`.
    - *Expositions* : musées, fondations et galeries notables ; bloc `expo` complet (`source`, `ajouteLe`), ouvertures à 30 jours.
    - Pour chaque ajout : dédoublonnage contre affiche, journal et archive ; `lien` = source primaire (page de la salle, de l’artiste ou d’un revendeur officiel, voir « Liens » de CLAUDE.md), la presse seulement en `source` ; **aucun champ inventé** ; note au barème de CLAUDE.md avec `calcul` (jamais le profil) ; seuil 2 ; `nouveau: true`. Hiérarchise : la pertinence avant le nombre.
 5. **Ventes et états** : complète les offres manquantes (avant-premières jeunes de l'Opéra, Carte Jeunes TCE, tarifs moins de 28 et 30 ans, gratuités jeunes des musées), corrige les dates estimées dès qu'elles sont publiées, mets à jour `etat` (`dernieres-places`, `attente`, `complet`, retiré quand des places reviennent), en priorité pour les notes 4, les artistes suivis et les ventes sous 14 jours.
