@@ -1,6 +1,14 @@
 {
  "versions": [
   {
+   "version": "4.80",
+   "date": "2026-11-21",
+   "titre": "Réservations à venir au Journal",
+   "points": [
+    "Journal en admin : aperçu compact des prochaines réservations (quatre au plus) et bouton vers toutes les réservations"
+   ]
+  },
+  {
    "version": "4.79",
    "date": "2026-11-21",
    "titre": "Recherche, partage et mode admin",

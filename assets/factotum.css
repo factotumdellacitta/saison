@@ -1220,5 +1220,6 @@ button.cell.cal-res{cursor:pointer;font:inherit;font-weight:800}
 .adm-sous a{display:inline-flex;align-items:center;min-height:44px;color:var(--fond);text-decoration:none}
 .adm-sous a[aria-current]{font-weight:800;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
 /* Journal (admin) : sorties réservées passées ou du soir, à verser au journal */
-.a-journal{margin:0 0 var(--e6)}
+.a-journal,.a-venir{margin:0 0 var(--e6)}
+.a-venir .acts{margin-top:var(--e3)}
 .a-journal .ad{border-left:3px solid var(--accent);padding-left:var(--e3)}

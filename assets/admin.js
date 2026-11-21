@@ -1477,11 +1477,16 @@
   /* Journal (admin) : réservations du soir même ou passées, à verser au journal. */
   function aJournalHTML() {
     const k = iso(TODAY), L = Object.entries(PRIVE.reservations).filter(([id, r]) => r.date && r.date <= k && BYID.get(id)).sort((a, b) => a[1].date.localeCompare(b[1].date));
-    if (!L.length) return "";
+    // Aperçu compact des réservations à venir (quatre au plus), avec un renvoi vers l’onglet Réservations de l’admin.
+    const V = Object.entries(PRIVE.reservations).filter(([id, r]) => r.date && r.date > k && BYID.get(id)).sort((a, b) => a[1].date.localeCompare(b[1].date));
+    if (!L.length && !V.length) return "";
     const b = (a, id, t, cls = "") => `<button class="btn ${cls}" type="button" data-adm="${a}" data-id="${esc(id)}">${t}</button>`;
-    return `<section class="a-journal" aria-labelledby="ajT"><h2 class="mh" id="ajT">À ajouter au journal <small>${L.length}</small></h2><div class="list">${L.map(([id, r]) => `<div class="ad"><h3><a href="#sortie-${esc(id)}">${esc(titreDe(id))}</a></h3>
+    const aj = L.length ? `<section class="a-journal" aria-labelledby="ajT"><h2 class="mh" id="ajT">À ajouter au journal <small>${L.length}</small></h2><div class="list">${L.map(([id, r]) => `<div class="ad"><h3><a href="#sortie-${esc(id)}">${esc(titreDe(id))}</a></h3>
       <p class="cr"><b>${r.date === k ? "Ce soir" : esc(cap(fmtY(D(r.date), true)))}</b>${court(BYID.get(id).lieuId) ? " · " + esc(court(BYID.get(id).lieuId)) : ""}</p>
-      <div class="acts">${b("vu", id, "Vu, au journal", "pri")}${r.date < k ? b("annuler", id, "Pas vu, retirer") : ""}</div></div>`).join("")}</div></section>`;
+      <div class="acts">${b("vu", id, "Vu, au journal", "pri")}${r.date < k ? b("annuler", id, "Pas vu, retirer") : ""}</div></div>`).join("")}</div></section>` : "";
+    const av = V.length ? `<section class="a-venir" aria-labelledby="avT"><h2 class="mh" id="avT">Réservations à venir <small>${V.length}</small></h2><ul class="vl">${V.slice(0, 4).map(([id, r]) => `<li><a href="#sortie-${esc(id)}"><span class="vd">${esc(fmt(D(r.date), true))}</span><span class="vt"><b>${esc(titreDe(id))}</b>${court(BYID.get(id).lieuId) ? ` <span>· ${esc(court(BYID.get(id).lieuId))}</span>` : ""}</span></a></li>`).join("")}</ul>
+      <div class="acts"><a class="btn" href="#admin?v=res">${V.length > 4 ? `Toutes les réservations (${V.length})` : "Gérer les réservations"}</a></div></section>` : "";
+    return aj + av;
   }
   function vueEnvies() {
     const L = Object.entries(PRIVE.envies).map(([id, v]) => ({ id, v, e: BYID.get(id) })).filter((x) => x.e);
