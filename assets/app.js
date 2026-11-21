@@ -1147,6 +1147,8 @@ function renderJournal(q) {
     }
     $("#jlist").innerHTML = list || `<p class="empty">Aucune sortie ne correspond${JQ.trim() ? " à « " + esc(JQ.trim()) + " »" : ""}.</p>`;
     $("#jn").textContent = plural(vis.length, "sortie");
+    // Encarts admin (à ajouter, à venir) : masqués dès qu’on cherche ou filtre, pour que les résultats viennent en tête.
+    const ja = $("#jadm"); if (ja) ja.hidden = !!(JQ.trim() || f.cat.size || f.sa.size || f.mn.size || JAVEC);
   };
   // Barre comme l’Affiche : recherche, « + » (admin), Filtres (saison, ma note, avec) ; genres en puces ; statistiques en colonne sur bureau.
   const nF = f.sa.size + f.mn.size + (JAVEC ? 1 : 0);
@@ -1170,7 +1172,7 @@ function renderJournal(q) {
       <a class="linkbtn tri" href="#journal?${esc(jq(f, "tri", f.tri === "note" ? "date" : "note"))}" aria-label="Tri par ${f.tri === "note" ? "ma note" : "date"}, changer">${ico("tri")}${f.tri === "note" ? "Ma note" : "Date"}</a>
       <div class="active">${jetons}${jetons ? `<a class="chip effacer" href="#journal?${esc([f.tri === "note" ? "tri=note" : "", JQ.trim() ? "q=" + encodeURIComponent(JQ.trim()) : ""].filter(Boolean).join("&"))}" data-jclr>Tout effacer</a>` : ""}</div></div></div>
   <div class="j-stm" id="pJS"${JPANEL === "pJS" ? "" : " hidden"}><h2 class="mh">Statistiques <small>${esc(libS)}</small></h2><div class="stats">${stats}</div></div>
-  ${PRIVE && ADMIN && ADMIN.aJournalHTML ? ADMIN.aJournalHTML() : ""}<div class="list" id="jlist"></div></section>
+  <div id="jadm">${PRIVE && ADMIN && ADMIN.aJournalHTML ? ADMIN.aJournalHTML() : ""}</div><div class="list" id="jlist"></div></section>
   <aside class="r-lat j-lat" aria-label="Statistiques du journal"><h2 class="mh">Statistiques <small>${esc(libS)}</small></h2><div class="stats">${stats}</div></aside></div>`;
   $$("[data-jclr]").forEach((x) => x.addEventListener("click", () => { JAVEC = ""; if (x.tagName === "BUTTON") renderJournal(q); }));
   $$("[data-jpanel]").forEach((bt) => bt.onclick = () => {
@@ -1320,7 +1322,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.80"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.81"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1331,7 +1333,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.80"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.81"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1349,7 +1351,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.80"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.81"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }

@@ -434,7 +434,7 @@ details.box[open]>summary::before{content:"–"}
 .vl{list-style:none;margin:0;padding:0;border-top:1px solid var(--filet)}
 .vl li{border-bottom:1px solid var(--filet-leger)}
 .vl a{display:flex;gap:var(--e3);align-items:baseline;min-height:var(--cible);padding:var(--e2) 0;text-decoration:none}
-.vl button{display:flex;gap:var(--e3);align-items:baseline;width:100%;min-height:var(--cible);padding:var(--e2) 0;border:0;border-radius:0;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.vl button:not(.btn){display:flex;gap:var(--e3);align-items:baseline;width:100%;min-height:var(--cible);padding:var(--e2) 0;border:0;border-radius:0;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer}
 .vl .vd{flex:none;width:112px;font-size:var(--t-date);font-weight:800;text-transform:uppercase;color:var(--accent-texte)}
 .vl .vt{flex:1;min-width:0;overflow-wrap:anywhere}
 .vl .vt b{font-weight:700}
@@ -1222,4 +1222,19 @@ button.cell.cal-res{cursor:pointer;font:inherit;font-weight:800}
 /* Journal (admin) : sorties réservées passées ou du soir, à verser au journal */
 .a-journal,.a-venir{margin:0 0 var(--e6)}
 .a-venir .acts{margin-top:var(--e3)}
-.a-journal .ad{border-left:3px solid var(--accent);padding-left:var(--e3)}
+/* Lignes d’admin : aperçu court (trait du genre sur toute la hauteur), puis avertissement et actions alignés sur le titre */
+.vl li.ar{border-left:var(--bande) solid var(--ga,var(--filet-leger))}
+.vl li.ar>a,.vl li.ar>.ap-s{border-left:0}
+.vl li.ar .ar-x{padding:0 0 var(--e3) calc(var(--e2) + 96px + var(--e3))}
+.vl li.ar .ar-x:empty{display:none}
+.ar-x .warn{margin:0 0 var(--e2);font-size:var(--t-meta)}
+.ar-x .acts{margin:0;gap:var(--e1)}
+.ar-g{margin:0 0 var(--e6)}
+@media (max-width:599.98px){.vl li.ar .ar-x{padding-left:var(--e2)}}
+@media (min-width:960px){
+  .ar-grille{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--e8);align-items:start}
+  .ar-p{grid-column:1/span 8}
+  .ar-s{grid-column:9/span 4}
+  .ar-s .vl li.ap .vd{width:80px}
+  .ar-s .vl li.ar .ar-x{padding-left:var(--e2)}
+}

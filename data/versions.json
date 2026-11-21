@@ -1,6 +1,16 @@
 {
  "versions": [
   {
+   "version": "4.81",
+   "date": "2026-11-21",
+   "titre": "Réservations en aperçus, paiement facultatif",
+   "points": [
+    "Admin, Réservations : aperçus courts comme ailleurs (trait du genre, date, titre, lieu) avec leurs actions ; terminées et écartées à droite sur bureau, sous les réservations à venir sur mobile",
+    "Places : paiement « Non précisé » par défaut, pour noter seulement les spectateurs",
+    "Journal en admin : les encarts disparaissent pendant une recherche ou un filtre"
+   ]
+  },
+  {
    "version": "4.80",
    "date": "2026-11-21",
    "titre": "Réservations à venir au Journal",

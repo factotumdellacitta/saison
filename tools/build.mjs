@@ -149,7 +149,7 @@ const fichierIcs = (lignes) => lignes.map(plie).join("\r\n") + "\r\n";
 const num = (v) => (v == null || v === "" ? null : typeof v === "number" ? v : (() => { const m = String(v).replace(",", ".").match(/-?\d+(\.\d+)?/); return m ? +m[0] : null; })());
 const eur = (n) => (Number.isInteger(n) ? String(n) : n.toFixed(2).replace(".", ",")) + " €";
 function lignesPlaces(r) {
-  if (r.billets?.length) return r.billets.map((b) => ({ ...b, spectateur: b.spectateur ?? b.pour ?? "", prix: num(b.prix), paiement: !b.paiement || b.paiement === "offert" ? "moi" : b.paiement }));
+  if (r.billets?.length) return r.billets.map((b) => ({ ...b, spectateur: b.spectateur ?? b.pour ?? "", prix: num(b.prix), paiement: b.paiement === "offert" ? "moi" : b.paiement === "inconnu" ? "" : b.paiement || (num(b.prix) == null ? "" : "moi") }));
   const n = r.places || 1, u = num(r.prixPlace) != null ? num(r.prixPlace) : num(r.prix) != null ? num(r.prix) / n : null;
   if (u == null) return [];
   return Array.from({ length: n }, (_, i) => ({ spectateur: i ? (r.accompagnants || [])[i - 1] || "" : "Moi", prix: u, paiement: "moi", tarif: r.tarif, categoriePlace: r.categoriePlace }));

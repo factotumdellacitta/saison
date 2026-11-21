@@ -39,12 +39,13 @@
   /* Ma place : payée par moi, offerte par quelqu’un (prix = sa valeur commerciale, non comptée dans mes dépenses)
      ou gratuite. Place d’un tiers : payée par moi (= je l’offre), payée par la personne, ou gratuite.
      L’ancien « offert » (tiers) vaut « moi ». */
-  const PAIEMENTS_MOI = [["moi", "Payée par moi"], ["autrui", "Offerte par quelqu’un (prix = valeur de la place)"], ["gratuit", "Gratuite (invitation, mécénat)"]];
-  const PAIEMENTS_TIERS = [["moi", "Payée par moi (je l’offre)"], ["spectateur", "Payée par la personne"], ["gratuit", "Gratuite (invitation, mécénat)"]];
+  // « Non précisé » (défaut d’une nouvelle place) : seul le spectateur est noté ; avec un prix, la place compte dans la valeur, pas dans « payé par moi ».
+  const PAIEMENTS_MOI = [["", "Non précisé"], ["moi", "Payée par moi"], ["autrui", "Offerte par quelqu’un (prix = valeur de la place)"], ["gratuit", "Gratuite (invitation, mécénat)"]];
+  const PAIEMENTS_TIERS = [["", "Non précisé"], ["moi", "Payée par moi (je l’offre)"], ["spectateur", "Payée par la personne"], ["gratuit", "Gratuite (invitation, mécénat)"]];
   const marque = (b) => estMoi(b.spectateur) ? { autrui: "offerte à moi", gratuit: "gratuite" }[b.paiement] || "" : { moi: "offerte par moi", spectateur: "sa part", gratuit: "gratuite" }[b.paiement] || "";
   function places(r) {
     if (!r) return [];
-    if (r.billets && r.billets.length) return r.billets.map((b) => ({ ...b, spectateur: b.spectateur ?? b.pour ?? "", prix: num(b.prix), paiement: !b.paiement || b.paiement === "offert" ? "moi" : b.paiement }));
+    if (r.billets && r.billets.length) return r.billets.map((b) => ({ ...b, spectateur: b.spectateur ?? b.pour ?? "", prix: num(b.prix), paiement: b.paiement === "offert" ? "moi" : b.paiement === "inconnu" ? "" : b.paiement || (num(b.prix) == null ? "" : "moi") }));
     const n = r.places || 1, u = num(r.prixPlace) != null ? num(r.prixPlace) : num(r.prix) != null ? num(r.prix) / n : null, acc = r.accompagnants || [];
     return Array.from({ length: n }, (_, i) => ({ spectateur: i === 0 ? "Moi" : acc[i - 1] || "", prix: u, paiement: "moi", ...(r.tarif ? { tarif: r.tarif } : {}), ...(r.categoriePlace ? { categoriePlace: r.categoriePlace } : {}) }));
   }
@@ -236,7 +237,7 @@
     else for (const l of d.liens) if (!CAT_LIENS.includes(l.categorie) || !l.titre || !URL_RE.test(l.url || "")) err.push(`Lien « ${l.titre || "?"} » : catégorie, titre ou adresse invalide.`);
     if (d.prive.soirs != null && (!Array.isArray(d.prive.soirs) || d.prive.soirs.some((x) => !ISO_RE.test(x)))) err.push("Soirs pris : liste invalide.");
     for (const [id, r] of Object.entries(d.prive.reservations)) if (r.date && !ISO_RE.test(r.date)) err.push(`Réservation ${titreDe(id)} : date invalide.`);
-    for (const [id, r] of [...Object.entries(d.prive.reservations), ...Object.entries(d.prive.journalPrive)]) for (const b of r.billets || []) if (!["moi", "offert", "autrui", "spectateur", "gratuit"].includes(b.paiement || "moi") || (b.prix != null && (typeof b.prix !== "number" || b.prix < 0))) err.push(`${titreDe(id)} : place invalide (prix ou paiement).`);
+    for (const [id, r] of [...Object.entries(d.prive.reservations), ...Object.entries(d.prive.journalPrive)]) for (const b of r.billets || []) if (!["moi", "offert", "autrui", "spectateur", "gratuit", "inconnu"].includes(b.paiement || "moi") || (b.prix != null && (typeof b.prix !== "number" || b.prix < 0))) err.push(`${titreDe(id)} : place invalide (prix ou paiement).`);
     for (const b of d.prive.blocages) if (b && typeof b === "object" && (!ISO_RE.test(b.debut || "") || !ISO_RE.test(b.fin || "") || b.fin < b.debut)) err.push("Période bloquée : dates invalides.");
     return err;
   }
@@ -478,13 +479,13 @@
   const tarifsConnus = () => [...new Set([...TARIFS, ...[...Object.values(PRIVE.reservations), ...Object.values(PRIVE.journalPrive)].flatMap((x) => places(x).map((b) => b.tarif)).filter(Boolean)])];
   const ligneHTML = (b = {}) => `<div class="bl3">
     <div class="grid2">${champ("Spectateur", inp("b_sp", b.spectateur, 'list="dl-pour" placeholder="Moi ou un prénom" autocapitalize="words"'))}${champ("Prix (€)", inp("b_prix", b.prix ?? "", 'inputmode="decimal" placeholder="0 si offert"'))}</div>
-    ${champ("Paiement", sel("b_pay", estMoi(b.spectateur) ? PAIEMENTS_MOI : PAIEMENTS_TIERS, b.paiement || "moi"))}
+    ${champ("Paiement", sel("b_pay", estMoi(b.spectateur) ? PAIEMENTS_MOI : PAIEMENTS_TIERS, b.paiement || ""))}
     <div class="grid2">${champ("Tarif", inp("b_tarif", b.tarif, 'list="dl-tarifs"'))}${champ("Catégorie", inp("b_cat", b.categoriePlace, 'placeholder="cat. 1"'))}</div>
     <button type="button" class="linkbtn" data-delbillet>Retirer cette place</button></div>`;
   function prixHTML(r = {}) {
     const L = places(r);
     return `<fieldset class="fs" data-prix><legend>Spectateurs et prix</legend>
-      <p class="cr">Une ligne par place ; la tienne : « Moi ». Si on te l’offre, indique son prix (sa valeur) et « Offerte par quelqu’un ».</p>
+      <p class="cr">Une ligne par place ; la tienne : « Moi ». Prix et paiement facultatifs.</p>
       <div data-rows>${L.map(ligneHTML).join("")}</div>
       <div class="acts acts-haut"><button type="button" class="btn" data-addbillet>${ico("ajouter")}Spectateur</button><button type="button" class="btn" data-meme>Même prix et tarif partout</button></div>
       ${champ("Plein tarif par place (€, facultatif, pour les économies)", inp("pleinPlace", r.pleinPlace ?? "", 'inputmode="decimal"'))}
@@ -494,8 +495,10 @@
   function lirePrix(f) {
     const billets = [...f.querySelectorAll("[data-rows] .bl3")].map((x) => {
       const q = (n) => x.querySelector(`[name="${n}"]`).value.trim();
-      const b = { spectateur: q("b_sp"), prix: num(q("b_prix")), paiement: q("b_pay") || "moi" };
-      if (estMoi(b.spectateur)) { b.spectateur = "Moi"; if (!["moi", "autrui", "gratuit"].includes(b.paiement)) b.paiement = "moi"; }
+      const b = { spectateur: q("b_sp"), prix: num(q("b_prix")), paiement: q("b_pay") };
+      if (estMoi(b.spectateur)) { b.spectateur = "Moi"; if (!["", "moi", "autrui", "gratuit"].includes(b.paiement)) b.paiement = ""; }
+      // Paiement non précisé : sans prix, on ne garde que le spectateur ; avec un prix, « inconnu » (ni payé par moi, ni par un autre).
+      if (!b.paiement) { if (b.prix == null) { delete b.prix; delete b.paiement; } else b.paiement = "inconnu"; }
       if (q("b_tarif")) b.tarif = q("b_tarif");
       if (q("b_cat")) b.categoriePlace = q("b_cat");
       return b;
@@ -611,7 +614,7 @@
     if (!B.length) { const acc = [...new Set(x.accompagnants || [])]; return acc.length ? `<p class="adm-avec">Avec ${acc.map((n) => `<b>${esc(n)}</b>`).join(", ")}</p>` : ""; }
     return `<ul class="adm-billets">${B.map((b) => {
       const nom = b.spectateur || "?", tiers = nom !== "Moi";
-      const t = [euros(b.prix), b.tarif || "", b.categoriePlace || "", PAIE[b.paiement] || (tiers && (b.paiement === "moi" || b.paiement === "offert" || !b.paiement) ? "offerte par moi" : "")].filter(Boolean).join(" · ");
+      const t = [euros(b.prix), b.tarif || "", b.categoriePlace || "", PAIE[b.paiement] || (tiers && (b.paiement === "moi" || b.paiement === "offert" || (!b.paiement && b.prix != null)) ? "offerte par moi" : "")].filter(Boolean).join(" · ");
       return `<li><b>${esc(nom)}</b>${t ? `<span>${esc(t)}</span>` : ""}</li>`;
     }).join("")}</ul>`;
   }
@@ -1444,20 +1447,28 @@
     const v = (e.offres || []).filter((o) => o.vente && venteDate(o) >= NOW).sort((a, b) => venteDate(a) - venteDate(b))[0];
     return v || null;
   }
+  // Ligne d’admin : l’aperçu court du site (trait du genre, date, titre, détail), puis un avertissement et les actions.
+  const bA = (a, id, t, cls = "") => `<button class="btn ${cls}" type="button" data-adm="${a}" data-id="${esc(id)}">${t}</button>`;
+  function ligneAdm(id, date, sub, acts, warn = "") {
+    const e = BYID.get(id), li = apercu(e || null, date, sub, e ? "" : id);
+    return li.replace('<li class="ap', '<li class="ap ar').replace(/<\/li>$/, `<div class="ar-x">${warn ? `<p class="warn">${esc(warn)}</p>` : ""}${acts ? `<div class="acts">${acts}</div>` : ""}</div></li>`);
+  }
+  const lieuDe = (id) => { const e = BYID.get(id); return e && e.lieuId ? esc(court(e.lieuId)) : ""; };
+  const dateRes = (r) => (r.date ? (r.date === iso(TODAY) ? "Ce soir" : fmt(D(r.date), true)) : "Date ?");
+  // Réservation passée (ou du soir) : « Vu, au journal », et « Pas vu, retirer » une fois la date passée.
+  const lignePassee = ([id, r]) => ligneAdm(id, dateRes(r), lieuDe(id), bA("vu", id, "Vu, au journal", "pri") + (r.date < iso(TODAY) ? bA("annuler", id, "Pas vu, retirer") : ""));
   function vueRes() {
     const res = Object.entries(PRIVE.reservations).sort((a, b) => (a[1].date || "9").localeCompare(b[1].date || "9"));
-    const fut = res.filter(([, r]) => !r.date || D(r.date) >= TODAY), past = res.filter(([, r]) => r.date && D(r.date) < TODAY);
-    const locD = etatLocal();
-    const carte = ([id, r], passe) => carteRes(id, r, passe, locD);
-    const ec = AFF.filter((e) => e.statut === "ecarte");
-    return `${vueRanger(true)}
-    <h2 class="mh">À venir <small>${fut.length}</small></h2><div class="list">${fut.map((x) => carte(x, false)).join("") || '<p class="empty">Aucune réservation.</p>'}</div>
-    ${ec.length ? `<details class="box"><summary>Écartées <span class="ml">${ec.length}</span></summary><ul class="vl">${ec.map((e) => `<li><a href="#sortie-${esc(e.id)}"><span class="vt"><b>${esc(e.titre)}</b> <span>· ${esc(court(e.lieuId))}</span></span></a></li>`).join("")}</ul></details>` : ""}`;
-  }
-  function carteRes(id, r, passe, locD) {
-      const c = conflits(locD, r.date, id);
-      return `<div class="ad"><h3><a href="#sortie-${esc(id)}">${esc(titreDe(id))}</a></h3><p><b>${r.date ? esc(cap(fmtY(D(r.date), true))) : "Date à préciser"}</b>${r.heure ? " · " + esc(r.heure) : ""}${detRes(r)}</p>${c.length ? `<p class="warn">Conflit : ${esc(c.join(", "))}</p>` : ""}
-      ${passe ? `<p class="warn">C’est passé : tu l’as vu ?</p>` : ""}<div class="acts">${passe ? `<button class="btn pri" type="button" data-adm="vu" data-id="${esc(id)}">Oui, marquer vu</button>` : `<button class="btn" type="button" data-adm="reserver" data-id="${esc(id)}">Modifier</button><button class="btn" type="button" data-adm="vu" data-id="${esc(id)}">Vu</button>`}<button class="btn" type="button" data-adm="annuler" data-id="${esc(id)}">${passe ? "Non, supprimer" : "Annuler"}</button></div></div>`;
+    const fut = res.filter(([, r]) => !r.date || D(r.date) >= TODAY), locD = etatLocal();
+    const { res: past, passees } = aRanger(), ec = AFF.filter((e) => e.statut === "ecarte");
+    const g = (t, n, corps) => `<section class="ar-g"><h2 class="mh">${t} <small>${n}</small></h2><ul class="vl">${corps}</ul></section>`;
+    const venir = fut.map(([id, r]) => { const c = conflits(locD, r.date, id); return ligneAdm(id, dateRes(r), [lieuDe(id), r.heure ? esc(r.heure) : "", detRes(r).replace(/^ · /, "")].filter(Boolean).join(" · "),
+      bA("reserver", id, "Modifier") + bA("vu", id, "Vu") + bA("annuler", id, "Annuler"), c.length ? "Conflit : " + c.join(", ") : ""); }).join("");
+    // Mobile : à ranger, à venir, puis terminées et écartées. Bureau : les deux premiers à gauche (8 colonnes), le reste à droite.
+    return `<div class="ar-grille"><div class="ar-p">${past.length ? g("Passées, à ranger", past.length, past.map(lignePassee).join("")) : ""}
+      ${fut.length ? g("À venir", fut.length, venir) : '<h2 class="mh">À venir</h2><p class="empty">Aucune réservation.</p>'}</div>
+      <div class="ar-s">${passees.length ? g("Terminées, encore à l’affiche", passees.length, passees.map((e) => ligneAdm(e.id, fmt(D(e.fin)), esc(court(e.lieuId)), bA("vu", e.id, "Vu", "pri") + bA("ecarter", e.id, "Écarter") + bA("supprimer", e.id, "Supprimer"))).join("")) : ""}
+      ${ec.length ? g("Écartées", ec.length, ec.map((e) => ligneAdm(e.id, dateAp(e), esc(court(e.lieuId)), "")).join("")) : ""}</div></div>`;
   }
   /* À ranger : réservations passées et sorties à l’affiche dont la date est passée. */
   function aRanger() {
@@ -1466,25 +1477,14 @@
     return { res, passees };
   }
   const nRanger = () => { const { res, passees } = aRanger(); return res.length + passees.length; };
-  function vueRanger(dansRes) {
-    const { res, passees } = aRanger(), locD = etatLocal();
-    if (!res.length && !passees.length) return dansRes ? "" : '<p class="empty">Rien à ranger.</p>';
-    const b = (a, id, t, cls = "") => `<button class="btn ${cls}" type="button" data-adm="${a}" data-id="${esc(id)}">${t}</button>`;
-    return `${res.length ? `<h2 class="mh">Passées, à ranger <small>${res.length}</small></h2><div class="list">${res.map(([id, r]) => carteRes(id, r, true, locD)).join("")}</div>` : ""}
-    ${passees.length ? `<h2 class="mh">Terminées, encore à l’affiche <small>${passees.length}</small></h2><div class="list">${passees.map((e) => `<div class="ad"><h3><a href="#sortie-${esc(e.id)}">${esc(e.titre)}</a></h3><p class="cr">${esc([court(e.lieuId), range(e)].filter(Boolean).join(" · "))}</p>
-      <div class="acts">${b("vu", e.id, "Vu, au journal", "pri")}${b("ecarter", e.id, "Écarter")}${b("supprimer", e.id, "Supprimer")}</div></div>`).join("")}</div>` : ""}`;
-  }
   /* Journal (admin) : réservations du soir même ou passées, à verser au journal. */
   function aJournalHTML() {
     const k = iso(TODAY), L = Object.entries(PRIVE.reservations).filter(([id, r]) => r.date && r.date <= k && BYID.get(id)).sort((a, b) => a[1].date.localeCompare(b[1].date));
     // Aperçu compact des réservations à venir (quatre au plus), avec un renvoi vers l’onglet Réservations de l’admin.
     const V = Object.entries(PRIVE.reservations).filter(([id, r]) => r.date && r.date > k && BYID.get(id)).sort((a, b) => a[1].date.localeCompare(b[1].date));
     if (!L.length && !V.length) return "";
-    const b = (a, id, t, cls = "") => `<button class="btn ${cls}" type="button" data-adm="${a}" data-id="${esc(id)}">${t}</button>`;
-    const aj = L.length ? `<section class="a-journal" aria-labelledby="ajT"><h2 class="mh" id="ajT">À ajouter au journal <small>${L.length}</small></h2><div class="list">${L.map(([id, r]) => `<div class="ad"><h3><a href="#sortie-${esc(id)}">${esc(titreDe(id))}</a></h3>
-      <p class="cr"><b>${r.date === k ? "Ce soir" : esc(cap(fmtY(D(r.date), true)))}</b>${court(BYID.get(id).lieuId) ? " · " + esc(court(BYID.get(id).lieuId)) : ""}</p>
-      <div class="acts">${b("vu", id, "Vu, au journal", "pri")}${r.date < k ? b("annuler", id, "Pas vu, retirer") : ""}</div></div>`).join("")}</div></section>` : "";
-    const av = V.length ? `<section class="a-venir" aria-labelledby="avT"><h2 class="mh" id="avT">Réservations à venir <small>${V.length}</small></h2><ul class="vl">${V.slice(0, 4).map(([id, r]) => `<li><a href="#sortie-${esc(id)}"><span class="vd">${esc(fmt(D(r.date), true))}</span><span class="vt"><b>${esc(titreDe(id))}</b>${court(BYID.get(id).lieuId) ? ` <span>· ${esc(court(BYID.get(id).lieuId))}</span>` : ""}</span></a></li>`).join("")}</ul>
+    const aj = L.length ? `<section class="a-journal" aria-labelledby="ajT"><h2 class="mh" id="ajT">À ajouter au journal <small>${L.length}</small></h2><ul class="vl">${L.map(lignePassee).join("")}</ul></section>` : "";
+    const av = V.length ? `<section class="a-venir" aria-labelledby="avT"><h2 class="mh" id="avT">Réservations à venir <small>${V.length}</small></h2><ul class="vl">${V.slice(0, 4).map(([id, r]) => ligneAdm(id, dateRes(r), lieuDe(id), "")).join("")}</ul>
       <div class="acts"><a class="btn" href="#admin?v=res">${V.length > 4 ? `Toutes les réservations (${V.length})` : "Gérer les réservations"}</a></div></section>` : "";
     return aj + av;
   }
