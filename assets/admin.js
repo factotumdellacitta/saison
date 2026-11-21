@@ -611,11 +611,11 @@
   function billetsHTML(x) {
     if (!x) return "";
     const B = x.billets || [];
-    if (!B.length) { const acc = [...new Set(x.accompagnants || [])]; return acc.length ? `<p class="adm-avec">Avec ${acc.map((n) => `<b>${esc(n)}</b>`).join(", ")}</p>` : ""; }
+    if (!B.length) { const acc = [...new Set(x.accompagnants || [])]; return acc.length ? `<p class="adm-avec">Avec ${acc.map((n) => `<button class="linkbtn" type="button" data-javec="${esc(n)}"><b>${esc(n)}</b></button>`).join(", ")}</p>` : ""; }
     return `<ul class="adm-billets">${B.map((b) => {
       const nom = b.spectateur || "?", tiers = nom !== "Moi";
       const t = [euros(b.prix), b.tarif || "", b.categoriePlace || "", PAIE[b.paiement] || (tiers && (b.paiement === "moi" || b.paiement === "offert" || (!b.paiement && b.prix != null)) ? "offerte par moi" : "")].filter(Boolean).join(" · ");
-      return `<li><b>${esc(nom)}</b>${t ? `<span>${esc(t)}</span>` : ""}</li>`;
+      return `<li>${tiers && b.spectateur ? `<button class="linkbtn" type="button" data-javec="${esc(nom)}"><b>${esc(nom)}</b></button>` : `<b>${esc(nom)}</b>`}${t ? `<span>${esc(t)}</span>` : ""}</li>`;
     }).join("")}</ul>`;
   }
   function ficheActs(e) {
@@ -1139,8 +1139,8 @@
   }
   function brancherRapide() {
     const qf = $("#qf"); if (!qf) return;
-    qf.onsubmit = (ev) => { ev.preventDefault(); const t = $("#qt").value; if (!t.trim()) return; RAPIDE = { texte: t, lignes: analyser(t) }; renderAdminVue("rapide"); };
-    const raz = $("#qraz"); if (raz) raz.onclick = () => { RAPIDE = null; renderAdminVue("rapide"); };
+    qf.onsubmit = (ev) => { ev.preventDefault(); const t = $("#qt").value; if (!t.trim()) return; RAPIDE = { texte: t, lignes: analyser(t) }; renderAdminVue("res"); };
+    const raz = $("#qraz"); if (raz) raz.onclick = () => { RAPIDE = null; renderAdminVue("res"); };
     const qr = $("#qr");
     if (qr) qr.onsubmit = async (ev) => {
       ev.preventDefault();
@@ -1167,7 +1167,7 @@
           }
           for (const l of reste) d.prive.aCompleter.push({ ajouteLe: todayISO(), texte: l.texte.slice(0, 4000), extrait: { sortieId: l.id || null, date: l.date || null, heure: l.heure, salle: l.salle, places: l.places, siege: l.siege, prixPlace: l.prixPlace, tarif: l.tarif } });
         });
-        RAPIDE = null; renderAdminVue("rapide"); toast(`${plural(ok.length, "billet")} enregistré${ok.length > 1 ? "s" : ""}${reste.length ? `, ${reste.length} à compléter` : ""}`);
+        RAPIDE = null; renderAdminVue("res"); toast(`${plural(ok.length, "billet")} enregistré${ok.length > 1 ? "s" : ""}${reste.length ? `, ${reste.length} à compléter` : ""}`);
       } catch (e) { if (!(e instanceof Annule)) { err.textContent = msgGH(e); err.hidden = false; } }
     };
     $$("[data-qdel]").forEach((b) => b.onclick = () => act(async () => {
@@ -1261,8 +1261,9 @@
     const cats = Object.entries(parCat).sort((x, y) => y[1] - x[1]);
     const opts = [["saison", "Saison en cours"], ["prec", "Saison précédente"], ["annee", "Année civile"], ["12m", "12 derniers mois"], ["tout", "Tout"]];
     const sansPrix = L.filter((x) => !x.c);
+    const mk_ = iso(TODAY).slice(0, 7), ceMois = depenses().filter((x) => x.c && x.date && x.date.startsWith(mk_)).reduce((s, x) => s + x.c.paye, 0);
     return `<div class="tools"><label class="f f-outil"><span>Période</span>${sel("bp", opts, BUDGET_P).replace("<select", '<select id="bp"')}</label></div>
-    <div class="kpis"><div><b>${esc(euros(paye) || "0 €")}</b><span>payés par moi${paye ? ` : ${esc(euros(pourMoi) || "0 €")} pour moi, ${esc(euros(offertAux) || "0 €")} offerts aux autres` : ""}</span></div>
+    <div class="kpis"><div class="k-mois"><b>${esc(euros(ceMois) || "0 €")}</b><span>payés par moi ce mois-ci (${esc(MOIS_L[TODAY.getMonth()])})</span></div><div><b>${esc(euros(paye) || "0 €")}</b><span>payés par moi${paye ? ` : ${esc(euros(pourMoi) || "0 €")} pour moi, ${esc(euros(offertAux) || "0 €")} offerts aux autres` : ""}</span></div>
       <div><b>${esc(euros(benef) || "0 €")}</b><span>valeur de mes places (${plural(nMoi, "place")}${nPaye ? `, ${esc(euros(pourMoi / nPaye))} en moyenne quand je paie` : ""})</span></div>
       <div><b>${esc(euros(recu) || "0 €")}</b><span>offerts à moi (${plural(nRecu, "place")})</span></div>
       <div><b>${vus + res}</b><span>sorties (${vus} vues, ${res} réservées)${eco ? ` · économies ${esc(euros(eco))}` : ""}</span></div></div>
@@ -1270,7 +1271,7 @@
     <details class="box stats" open><summary>Payé par moi, par mois</summary>${mois.length ? barres(mois) : '<p class="cr">Aucune dépense.</p>'}</details>
     <details class="box stats"><summary>Payé par moi, par catégorie</summary>${cats.length ? barres(cats) : '<p class="cr">Aucune dépense.</p>'}</details>
     <details class="box stats"><summary>Détail par sortie <span class="ml">${P.length}</span></summary><table class="t pile"><thead><tr><th>Sortie</th><th class="num">Valeur</th><th class="num">Payé par moi</th><th class="num">Offert à moi</th></tr></thead><tbody>${P.map((x) => `<tr><td><a href="#sortie-${esc(x.id)}">${esc(titreDe(x.id))}</a><br><small class="cr">${esc(fmt(D(x.date)))}${x.avenir ? ", réservé" : ""}</small></td><td class="num" data-l="Valeur">${esc(euros(x.c.engage))}</td><td class="num" data-l="Payé par moi">${esc(euros(x.c.paye) || "0 €")}</td><td class="num" data-l="Offert à moi">${esc(euros(x.c.recu))}</td></tr>`).join("")}</tbody></table></details>
-    ${sansPrix.length ? `<details class="box"><summary>Sans prix <span class="ml">${sansPrix.length}</span></summary><ul class="vl">${sansPrix.map((x) => `<li><a href="#sortie-${esc(x.id)}"><span class="vd">${esc(fmt(D(x.date)))}</span><span class="vt"><b>${esc(titreDe(x.id))}</b></span></a></li>`).join("")}</ul></details>` : ""}`;
+    ${sansPrix.length ? `<details class="box"><summary>Sans prix <span class="ml">${sansPrix.length}</span></summary><ul class="vl">${sansPrix.map((x) => ligneAdm(x.id, fmt(D(x.date)), lieuDe(x.id), "")).join("")}</ul></details>` : ""}`;
   }
 
   /* ---------- Accompagnants ---------- */
@@ -1449,23 +1450,29 @@
   }
   // Ligne d’admin : l’aperçu court du site (trait du genre, date, titre, détail), puis un avertissement et les actions.
   const bA = (a, id, t, cls = "") => `<button class="btn ${cls}" type="button" data-adm="${a}" data-id="${esc(id)}">${t}</button>`;
-  function ligneAdm(id, date, sub, acts, warn = "") {
+  function ligneAdm(id, date, sub, acts, warn = "", doux = "") {
     const e = BYID.get(id), li = apercu(e || null, date, sub, e ? "" : id);
-    return li.replace('<li class="ap', '<li class="ap ar').replace(/<\/li>$/, `<div class="ar-x">${warn ? `<p class="warn">${esc(warn)}</p>` : ""}${acts ? `<div class="acts">${acts}</div>` : ""}</div></li>`);
+    return li.replace('<li class="ap', '<li class="ap adl').replace(/<\/li>$/, `<div class="adl-x">${warn ? `<p class="warn">${esc(warn)}</p>` : ""}${doux ? `<p class="doux">${esc(doux)}</p>` : ""}${acts ? `<div class="acts">${acts}</div>` : ""}</div></li>`);
   }
   const lieuDe = (id) => { const e = BYID.get(id); return e && e.lieuId ? esc(court(e.lieuId)) : ""; };
-  const dateRes = (r) => (r.date ? (r.date === iso(TODAY) ? "Ce soir" : fmt(D(r.date), true)) : "Date ?");
+  const dateRes = (r) => (r.date ? (r.date === iso(TODAY) ? "Ce soir" : fmt(D(r.date))) : "Date ?");
+  // Détail d’une réservation dans un aperçu : lieu, heure et accompagnants seulement (ni prix, ni places).
+  const avecDe = (r) => { const a = [...new Set(r.accompagnants || places(r).map((b) => b.spectateur).filter((n) => n && !estMoi(n)))]; return a.length ? "avec " + esc(a.join(", ")) : ""; };
+  const subRes = (id, r) => [lieuDe(id), r.heure ? esc(r.heure) : "", avecDe(r)].filter(Boolean).join(" · ");
+  const agendaBtn = (r) => (r.date ? `<button class="btn" type="button" data-agenda="${r.date.slice(0, 7)}">Agenda</button>` : "");
   // Réservation passée (ou du soir) : « Vu, au journal », et « Pas vu, retirer » une fois la date passée.
-  const lignePassee = ([id, r]) => ligneAdm(id, dateRes(r), lieuDe(id), bA("vu", id, "Vu, au journal", "pri") + (r.date < iso(TODAY) ? bA("annuler", id, "Pas vu, retirer") : ""));
+  const lignePassee = ([id, r]) => ligneAdm(id, dateRes(r), subRes(id, r), bA("vu", id, "Vu, au journal", "pri") + (r.date < iso(TODAY) ? bA("annuler", id, "Pas vu, retirer") : ""));
   function vueRes() {
     const res = Object.entries(PRIVE.reservations).sort((a, b) => (a[1].date || "9").localeCompare(b[1].date || "9"));
     const fut = res.filter(([, r]) => !r.date || D(r.date) >= TODAY), locD = etatLocal();
     const { res: past, passees } = aRanger(), ec = AFF.filter((e) => e.statut === "ecarte");
     const g = (t, n, corps) => `<section class="ar-g"><h2 class="mh">${t} <small>${n}</small></h2><ul class="vl">${corps}</ul></section>`;
-    const venir = fut.map(([id, r]) => { const c = conflits(locD, r.date, id); return ligneAdm(id, dateRes(r), [lieuDe(id), r.heure ? esc(r.heure) : "", detRes(r).replace(/^ · /, "")].filter(Boolean).join(" · "),
-      bA("reserver", id, "Modifier") + bA("vu", id, "Vu") + bA("annuler", id, "Annuler"), c.length ? "Conflit : " + c.join(", ") : ""); }).join("");
+    const venir = fut.map(([id, r]) => { const c = conflits(locD, r.date, id); return ligneAdm(id, dateRes(r), subRes(id, r),
+      bA("reserver", id, "Modifier") + bA("vu", id, "Vu") + agendaBtn(r) + bA("annuler", id, "Annuler"), c.length ? "Conflit : " + c.join(", ") : ""); }).join("");
     // Mobile : à ranger, à venir, puis terminées et écartées. Bureau : les deux premiers à gauche (8 colonnes), le reste à droite.
-    return `<div class="ar-grille"><div class="ar-p">${past.length ? g("Passées, à ranger", past.length, past.map(lignePassee).join("")) : ""}
+    const nC = (PRIVE.aCompleter || []).length;
+    const coller = `<details class="box coller"${RAPIDE || nC ? " open" : ""}><summary>Coller une confirmation${nC ? ` <span class="ml">${nC} à compléter</span>` : ""}</summary>${vueRapide()}</details>`;
+    return `${coller}<div class="ar-grille"><div class="ar-p">${past.length ? g("Passées, à ranger", past.length, past.map(lignePassee).join("")) : ""}
       ${fut.length ? g("À venir", fut.length, venir) : '<h2 class="mh">À venir</h2><p class="empty">Aucune réservation.</p>'}</div>
       <div class="ar-s">${passees.length ? g("Terminées, encore à l’affiche", passees.length, passees.map((e) => ligneAdm(e.id, fmt(D(e.fin)), esc(court(e.lieuId)), bA("vu", e.id, "Vu", "pri") + bA("ecarter", e.id, "Écarter") + bA("supprimer", e.id, "Supprimer"))).join("")) : ""}
       ${ec.length ? g("Écartées", ec.length, ec.map((e) => ligneAdm(e.id, dateAp(e), esc(court(e.lieuId)), "")).join("")) : ""}</div></div>`;
@@ -1484,8 +1491,8 @@
     const V = Object.entries(PRIVE.reservations).filter(([id, r]) => r.date && r.date > k && BYID.get(id)).sort((a, b) => a[1].date.localeCompare(b[1].date));
     if (!L.length && !V.length) return "";
     const aj = L.length ? `<section class="a-journal" aria-labelledby="ajT"><h2 class="mh" id="ajT">À ajouter au journal <small>${L.length}</small></h2><ul class="vl">${L.map(lignePassee).join("")}</ul></section>` : "";
-    const av = V.length ? `<section class="a-venir" aria-labelledby="avT"><h2 class="mh" id="avT">Réservations à venir <small>${V.length}</small></h2><ul class="vl">${V.slice(0, 4).map(([id, r]) => ligneAdm(id, dateRes(r), lieuDe(id), "")).join("")}</ul>
-      <div class="acts"><a class="btn" href="#admin?v=res">${V.length > 4 ? `Toutes les réservations (${V.length})` : "Gérer les réservations"}</a></div></section>` : "";
+    const av = V.length ? `<section class="a-venir" aria-labelledby="avT"><h2 class="mh" id="avT">Réservations à venir <small>${V.length}</small></h2><ul class="vl">${V.slice(0, 3).map(([id, r]) => ligneAdm(id, dateRes(r), subRes(id, r), "")).join("")}</ul>
+      <div class="acts"><a class="btn" href="#admin?v=res">${V.length > 3 ? `Toutes les réservations (${V.length})` : "Gérer les réservations"}</a></div></section>` : "";
     return aj + av;
   }
   function vueEnvies() {
@@ -1493,10 +1500,16 @@
     const k = (x) => { const pv = prochaineVente(x.e); return [pv ? +venteDate(pv) : 9e15, sortKey(x.e)]; };
     L.sort((a, b) => { const [a1, a2] = k(a), [b1, b2] = k(b); return a1 - b1 || a2 - b2; });
     if (!L.length) return '<p class="empty">Aucun coup de cœur.</p>';
-    return `<div class="list">${L.map(({ id, v, e }) => { const pv = prochaineVente(e); return `<div class="ad"><h3><a href="#sortie-${esc(id)}">${esc(e.titre)}</a> ${stars(e.note, e.pronostic)}</h3>
-      <p class="cr">${esc(court(e.lieuId))} · ${esc(range(e))}${pv ? ` · <b class="warn">Vente ${esc(venteTxt(pv))}</b> (${esc(pv.type)})` : ""}</p>${v.note ? `<p>« ${esc(v.note)} »</p>` : ""}
-      <div class="chips wrap-ok" role="group" aria-label="Coup de cœur"><button class="chip" type="button" data-adm="envie" data-id="${esc(id)}">Note</button><button class="chip i" type="button" data-envie="${esc(id)}" aria-pressed="true" aria-label="Retirer des coups de cœur">${COEUR_APP}</button><button class="chip" type="button" data-adm="reserver" data-id="${esc(id)}">Réserver</button></div></div>`; }).join("")}</div>`;
+    // Une ligne comme ailleurs : jalon de vente (« J-3 ») ou dates dans la colonne de date, lieu et vente, note privée en avertissement doux.
+    const ligne = ({ id, v, e }) => { const pv = prochaineVente(e), r = PRIVE.reservations[id];
+      return ligneAdm(id, pv ? "Vente " + jTxt(dansJ(venteDate(pv))) : dateAp(e), [esc(court(e.lieuId)), pv ? `vente ${esc(venteTxt(pv))}` : "", r ? "réservé" : ""].filter(Boolean).join(" · "),
+        bA("envie", id, "Note") + (r ? "" : bA("reserver", id, "Réserver")) + `<button class="btn" type="button" data-envie="${esc(id)}" aria-pressed="true">Retirer</button>`, "", v.note ? "«\u00a0" + v.note + "\u00a0»" : ""); };
+    const tot = (x) => prochaineVente(x.e) && dansJ(venteDate(prochaineVente(x.e))) <= 14;
+    const A = L.filter(tot), B = L.filter((x) => !tot(x));
+    const g = (t, l) => (l.length ? `<section class="ar-g"><h2 class="mh">${t} <small>${l.length}</small></h2><ul class="vl">${l.map(ligne).join("")}</ul></section>` : "");
+    return `<div class="ar-grille"><div class="ar-p">${g("Ventes sous 14 jours", A)}${g(A.length ? "Les autres" : "Coups de cœur", B)}</div></div>`;
   }
+
 
   /* ---------- Formulaires de connexion ---------- */
   function formJeton(msg) {
@@ -1578,9 +1591,9 @@
 
   /* ---------- Espace admin ---------- */
   // Six onglets ; Budget et Réglages ont leurs sous-onglets. Les anciennes adresses (v=ranger, acc, lieux…) restent valables.
-  const ONGLETS = [["res", "Réservations"], ["envies", "Coups de cœur"], ["rapide", "Saisie rapide"], ["soirs", "Soirs pris"], ["budget", "Budget"], ["reglages", "Réglages"]];
+  const ONGLETS = [["res", "Réservations"], ["envies", "Coups de cœur"], ["soirs", "Soirs pris"], ["budget", "Budget"], ["reglages", "Réglages"]];
   const SOUS = { budget: [["budget", "Dépenses"], ["acc", "Accompagnants"]], reglages: [["lieux", "Lieux"], ["liens", "Liens"], ["abo", "Abonnements"]] };
-  const ALIAS = { ranger: "res", reglages: "lieux" };
+  const ALIAS = { ranger: "res", rapide: "res", reglages: "lieux" };
   const parent = (v) => Object.keys(SOUS).find((k) => SOUS[k].some(([s]) => s === v)) || v;
   const VUES = new Set([...ONGLETS.map(([k]) => k), ...Object.values(SOUS).flat().map(([k]) => k), ...Object.keys(ALIAS)]);
   let VUE = "res";
@@ -1589,10 +1602,10 @@
     if (!PRIVE) return vueConnexion();
     if (location.hash.slice(1).split("?")[0] !== "admin") return;
     const nE = Object.keys(PRIVE.envies).length, nC = (PRIVE.aCompleter || []).length, nR = nRanger();
-    const corps = { res: vueRes, envies: vueEnvies, rapide: vueRapide, soirs: vueSoirs, budget: vueBudget, acc: vueAcc, lieux: vueLieux, liens: vueLiens, abo: () => `${subsHTML()}<p class="cr">Adresses secrètes : ne les partage pas. Elles ne sont écrites nulle part dans le dépôt.</p>
+    const corps = { res: vueRes, envies: vueEnvies, soirs: vueSoirs, budget: vueBudget, acc: vueAcc, lieux: vueLieux, liens: vueLiens, abo: () => `${subsHTML()}<p class="cr">Adresses secrètes : ne les partage pas. Elles ne sont écrites nulle part dans le dépôt.</p>
       <div class="acts"><button class="btn" type="button" id="icsRegen">Régénérer les adresses des flux</button></div>` }[VUE] || vueRes;
     $("#main").innerHTML = `<div class="adm-tete"><h1>Admin</h1>${TOK ? "" : "<p>Lecture seule</p>"}
-    <nav class="chips defile" aria-label="Espace admin">${ONGLETS.map(([k, t]) => `<a class="chip" href="#admin?v=${k}"${k === parent(VUE) ? ' aria-current="page"' : ""}>${t}${k === "envies" && nE ? ` (${nE})` : ""}${k === "rapide" && nC ? ` (${nC})` : ""}${k === "res" && nR ? ` (${nR} à ranger)` : ""}</a>`).join("")}</nav>
+    <nav class="chips defile" aria-label="Espace admin">${ONGLETS.map(([k, t]) => `<a class="chip" href="#admin?v=${k}"${k === parent(VUE) ? ' aria-current="page"' : ""}>${t}${k === "envies" && nE ? ` (${nE})` : ""}${k === "res" && nR + nC ? ` (${nR + nC})` : ""}</a>`).join("")}</nav>
     ${SOUS[parent(VUE)] ? `<nav class="adm-sous" aria-label="${esc(ONGLETS.find(([k]) => k === parent(VUE))[1])}">${SOUS[parent(VUE)].map(([k, t]) => `<a href="#admin?v=${k}"${k === VUE ? ' aria-current="page"' : ""}>${t}</a>`).join("")}</nav>` : ""}</div>
     <div class="acts"><button class="btn pri" type="button" data-adm="ajouter">${ico("ajouter")}Spectacle</button><button class="btn" type="button" data-adm="journal">${ico("ajouter")}Journal</button>${TOK ? "" : '<button class="btn" type="button" id="aTok">Saisir le jeton</button>'}</div>
     <div id="av">${corps()}</div>`;
@@ -1604,7 +1617,7 @@
       toast("Nouvelles adresses : réabonne-toi après la publication");
     });
     const bp = $("#bp"); if (bp) bp.onchange = () => { BUDGET_P = bp.value; renderAdminVue(); };
-    if (VUE === "rapide") brancherRapide();
+    if (VUE === "res") brancherRapide();
     if (VUE === "soirs") brancherSoirs();
     if (VUE === "liens") brancherLiens();
     if (VUE === "lieux") brancherLieux();
@@ -1612,6 +1625,7 @@
   function render(q) {
     const v = new URLSearchParams(q || "").get("v");
     if (v && VUES.has(v)) VUE = ALIAS[v] || v;
+    const m = new URLSearchParams(q || "").get("m"); if (m && /^\d{4}-\d{2}$/.test(m)) VUE_SOIRS = new Date(+m.slice(0, 4), +m.slice(5) - 1, 1);
     renderAdminVue();
   }
 
@@ -1623,6 +1637,8 @@
     if (h) { ev.preventDefault(); return act(() => basculerEnvie(h.dataset.envie)); }
     const j = ev.target.closest("[data-javec]");
     if (j) { JAVEC = j.dataset.javec; location.hash = "#journal"; return; }
+    const ag = ev.target.closest("[data-agenda]");
+    if (ag) { location.hash = "#admin?v=soirs&m=" + ag.dataset.agenda; return; }
     const b = ev.target.closest("[data-adm]"); if (!b) return;
     const id = b.dataset.id, a = b.dataset.adm;
     if (!TOK && a !== "noop" && a !== "jmodif") { formJeton("Cet appareil est en lecture seule."); return; }
@@ -1640,5 +1656,10 @@
     else if (a === "journal") act(formJournal);
   });
 
-  ADMIN = { render, aJournalHTML, heart, ficheHTML, ficheActs, idsAvec, accSelectHTML, portail, restaurer, journalForm, brancherJournal, journalResume };
+  // Radar (admin) : « Ce soir » le jour d’une réservation.
+  function ceSoirHTML() {
+    const k = iso(TODAY), L = Object.entries(PRIVE.reservations).filter(([id, r]) => r.date === k && BYID.get(id));
+    return L.map(([id, r]) => `<div class="msg ce-soir"><b>Ce soir</b> <a href="#sortie-${esc(id)}">${esc(titreDe(id))}</a>${[r.heure ? esc(r.heure) : "", lieuDe(id), avecDe(r)].filter(Boolean).map((x) => " · " + x).join("")}</div>`).join("");
+  }
+  ADMIN = { render, aJournalHTML, ceSoirHTML, heart, ficheHTML, ficheActs, idsAvec, accSelectHTML, portail, restaurer, journalForm, brancherJournal, journalResume };
 })();

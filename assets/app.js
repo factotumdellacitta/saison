@@ -314,12 +314,14 @@ function stubHTML(e, mode) {
   if (meme) return `<span class="stub" title="${esc(tt)}"><b>${p[0].getDate()}</b><small class="au">${mot} ${p[1].getDate()}</small><small>${MOIS[p[0].getMonth()]}${loin(p[0])}</small></span>`;
   return `<span class="stub" title="${esc(tt)}"><b>${p[0].getDate()}</b><small class="au2"><span>${MOIS[p[0].getMonth()]}</span> ${mot}</small><small class="au2">${p[1].getDate()} ${MOIS[p[1].getMonth()]}</small></span>`;
 }
-function badges(e) {
+function badges(e, libres) {
   // Alignés à droite de la ligne lieu ; les plus importants au bord droit (ordre de lecture : déjà vu … Léonard y va).
   const b = [];
   const dv = e.statut !== "vu" && DEJA_VU[e.id]; // l’œuvre figure au journal (data/deja-vu.json, généré par build.mjs)
   if (dv && dv.length) { const t = "Vu le " + dv.map((x) => fmtY(D(x))).join(", "); b.push(`<span class="b vu" title="${esc(t)}" aria-label="Déjà vu (${esc(t.toLowerCase())})">Déjà vu</span>`); }
   if (e.statut !== "vu" && sansSoirLibre(e)) b.push(`<span class="b vu">Aucun soir libre</span>`);
+  // Lignes de l’Affiche seulement (ailleurs, le nombre est déjà écrit) : rareté, trois soirs libres ou moins sur une série d’au moins quatre dates.
+  else if (libres && e.statut !== "vu" && !estExpo(e) && !reservee(e) && !e.leonardYVa) { const x = prochainLibre(e); if (x && x.n && x.n <= 3 && x.t >= 4) b.push(`<span class="b vu">${plural(x.n, "soir libre", "soirs libres")}</span>`); }
   if (estExpo(e) && e.statut !== "vu") {
     const x = xp(e), et = expoEtat(e);
     if (x.gratuit) b.push(`<span class="b">Gratuit</span>`); else if (EXPO_JEUNES[x.jeunes]) b.push(`<span class="b" title="${esc(EXPO_JEUNES_L[x.jeunes])}">${EXPO_JEUNES[x.jeunes]}</span>`);
@@ -364,7 +366,7 @@ function rowA(e) {
   const h = e.horaires && e.horaires.length <= 40 ? e.horaires : "", art = artLigne(e);
   const meta = esc([sousG(e), estExpo(e) ? EXPO_TYPES[xp(e).type] : "", court(e.lieuId), estExpo(e) ? arrdtTxt(arrdt(e)) : ""].filter(Boolean).join(" · ")) + (h ? `<span class="hor"> · ${esc(h)}</span>` : ""); // horaires : bureau seulement (fiche dépliée sur mobile)
   return `<article class="row g-${famE(e)}" data-id="${esc(e.id)}"><button class="rb" type="button" aria-haspopup="dialog">${gb(e)}${stubHTML(e)}
-  <span class="mid">${l1(e, stars(e.note, e.pronostic))}${art ? `<span class="art nom">${esc(art)}</span>` : ""}${ligneMeta(meta, badges(e))}</span></button>${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}</article>`;
+  <span class="mid">${l1(e, stars(e.note, e.pronostic))}${art ? `<span class="art nom">${esc(art)}</span>` : ""}${ligneMeta(meta, badges(e, true))}</span></button>${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}</article>`;
 }
 function rowJ(e) {
   const n = (e.vuLe || []).length;
@@ -458,9 +460,9 @@ function coeurFiche(e) {
 // Prochain soir libre (spectacles) et nombre de soirs libres jusqu’à la fin.
 function prochainLibre(e) {
   const p = span(e); if (!p) return null;
-  let n = 0, prem = null;
-  for (let d = new Date(Math.max(+p[0], +TODAY)), i = 0; d <= p[1] && i < 400; d = add(d, 1), i++) if (playsOn(e, d) && !BUSY.has(iso(d))) { n++; if (!prem) prem = new Date(d); }
-  return { n, prem };
+  let n = 0, t = 0, prem = null;
+  for (let d = new Date(Math.max(+p[0], +TODAY)), i = 0; d <= p[1] && i < 400; d = add(d, 1), i++) if (playsOn(e, d)) { t++; if (!BUSY.has(iso(d))) { n++; if (!prem) prem = new Date(d); } }
+  return { n, t, prem };
 }
 function enteteInfos(e) {
   const t = [];
@@ -931,7 +933,7 @@ function renderRadar() {
   const nSuivies = r.suite.filter((x) => suivie(x.e)).length;
   $("#main").innerHTML = `<section id="radar"><h1 class="vh">Radar</h1>
   <nav class="r-res" aria-label="Accès du radar"><a class="chip" href="#ventes">${ico("ventes")}Ventes</a><a class="chip" href="#coeur">${COEUR}Coups de cœur</a>${go("r-reserver", "", "Incontournables")}${go("r-liens", "", "Billetteries")}</nav>
-  ${nC ? `<div class="msg">${plural(nC, "billet")} à compléter <a href="#admin?v=rapide">Traiter</a></div>` : ""}
+  ${adm && ADMIN.ceSoirHTML ? ADMIN.ceSoirHTML() : ""}${nC ? `<div class="msg">${plural(nC, "billet")} à compléter <a href="#admin?v=res">Traiter</a></div>` : ""}
   <div class="r-g"><div class="r-col">${rapportEnTete()}
     <section class="r-b r-reserver" id="r-reserver"><h2 class="mh">Incontournables à réserver <small>${r.aReserver.length}</small></h2>
       ${r.aReserver.length ? `<div class="list">${r.aReserver.map((x) => rowR(x.e, "r", stubReserver(x), infoReserver(x))).join("")}</div>` : `<p class="empty">Tous les incontournables sont réservés.</p>`}</section>
@@ -1322,7 +1324,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.81"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.82"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1333,7 +1335,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.81"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.82"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1351,7 +1353,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.81"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.82"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }

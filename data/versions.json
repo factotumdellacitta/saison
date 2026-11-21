@@ -1,6 +1,19 @@
 {
  "versions": [
   {
+   "version": "4.82",
+   "date": "2026-11-21",
+   "titre": "Aperçus d’admin alignés, raccourcis",
+   "points": [
+    "Aperçus d’admin : note alignée à droite, date courte, accompagnants au lieu des prix ; trois réservations à venir au Journal",
+    "Réservations : saisie rapide repliée en tête, bouton « Agenda » vers le bon mois des soirs pris",
+    "Coups de cœur (admin) en lignes, ventes sous 14 jours d’abord",
+    "Budget : payé par moi ce mois-ci en tête ; « Sans prix » en aperçus",
+    "Radar (admin) : bandeau « Ce soir » ; prénoms des accompagnants cliquables",
+    "Affiche : badge « N soirs libres » quand il en reste trois ou moins"
+   ]
+  },
+  {
    "version": "4.81",
    "date": "2026-11-21",
    "titre": "Réservations en aperçus, paiement facultatif",
