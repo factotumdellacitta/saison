@@ -5,15 +5,21 @@
    "id": "2026-11-20",
    "date": "2026-11-20",
    "domaine": "humour",
-   "titre": "L’humour entre dans la veille",
-   "chapo": "Première veille consacrée à l’humour, désormais suivi comme les spectacles et les concerts. Dix spectacles retenus, de Bobino à Bercy ; Ricky Gervais et Dany Boon en tête.",
+   "titre": "L’humour entre dans la veille, Huppert revient au Théâtre de la Ville",
+   "chapo": "Première veille consacrée à l’humour, désormais suivi comme les spectacles et les concerts, complétée par les grands rendez-vous de théâtre et la saison du Châtelet. En tête : Isabelle Huppert dans Mary Said What She Said, de Robert Wilson, au Théâtre de la Ville en avril.",
    "sections": [
     {
      "titre": "À retenir",
      "texte": [
+      "Isabelle Huppert reprend au Théâtre de la Ville, du 20 avril au 3 mai, Mary Said What She Said, le monologue de Marie Stuart créé avec Robert Wilson en 2019 et joué depuis en tournée internationale : un incontournable.",
       "Ricky Gervais donne à l’Accor Arena, le 30 avril, sa seule date française de Legend, en anglais. Dany Boon revient au seul-en-scène après sept ans avec Clown n’est pas un métier ! : les trois soirs de l’Olympia, fin avril, affichent déjà complet."
      ],
      "lignes": [
+      {
+       "id": "mary-said-what-she-said",
+       "titre": "Mary Said What She Said",
+       "texte": "Note 4 · Th. de la Ville, 20 avr. – 3 mai"
+      },
       {
        "id": "ricky-gervais-legend",
        "titre": "Ricky Gervais – Legend",
@@ -23,6 +29,55 @@
        "id": "dany-boon-clown-n-est-pas-un-metier",
        "titre": "Dany Boon – Clown n’est pas un métier !",
        "texte": "Note 3 · Olympia, 27–29 avr. · complet"
+      }
+     ]
+    },
+    {
+     "titre": "Spectacles",
+     "texte": [
+      "Au théâtre, Alain Françon et Vincent Dedienne jouent Le Mariage de Figaro à la Porte Saint-Martin jusqu’au 31 décembre, avec Micha Lescot et Noémie Lvovsky. Alexis Michalik ouvre sa nouvelle création à l’Hébertot le 30 janvier. Caroline Guiela Nguyen reprend Saigon au Théâtre de la Ville en juin.",
+      "Le Châtelet complète sa saison : La Belle et la Bête de Philip Glass mise en scène par Anne-Cécile Vandalem en février, Hammer d’Alexander Ekman en première française en mars, Company de Sondheim en avril, Chucho Valdés le 28 avril, puis Beethoven 7 de Sasha Waltz à la Maison des arts de Créteil en juin."
+     ],
+     "lignes": [
+      {
+       "id": "le-mariage-de-figaro-francon",
+       "titre": "Le Mariage de Figaro",
+       "texte": "Note 3 · Porte Saint-Martin, jusqu’au 31 déc."
+      },
+      {
+       "id": "company-chatelet",
+       "titre": "Company",
+       "texte": "Note 3 · Châtelet, 30 mars – 11 avr."
+      },
+      {
+       "id": "saigon",
+       "titre": "Saigon",
+       "texte": "Note 3 · Th. de la Ville, 3 – 11 juin"
+      },
+      {
+       "id": "chucho-valdes-chatelet",
+       "titre": "Chucho Valdés",
+       "texte": "Note 3 · Châtelet, 28 avr."
+      },
+      {
+       "id": "le-mariage-de-david-et-leila",
+       "titre": "Le Mariage de David et Leïla",
+       "texte": "Note 2 · Hébertot, dès le 30 janv."
+      },
+      {
+       "id": "la-belle-et-la-bete-glass",
+       "titre": "La Belle et la Bête",
+       "texte": "Note 2 · Châtelet, 3 – 11 févr."
+      },
+      {
+       "id": "hammer-ekman",
+       "titre": "Hammer",
+       "texte": "Note 2 · Châtelet, 6 – 14 mars"
+      },
+      {
+       "id": "beethoven-7-sasha-waltz",
+       "titre": "Beethoven 7",
+       "texte": "Note 2 · MAC Créteil, 2 – 5 juin"
       }
      ]
     },
@@ -73,10 +128,20 @@
        "texte": "Note 2 · Accor Arena, 23 mars 2028"
       }
      ]
+    },
+    {
+     "titre": "Incontournables",
+     "lignes": [
+      {
+       "id": "mary-said-what-she-said",
+       "titre": "Mary Said What She Said",
+       "texte": "Note 4 · Isabelle Huppert, Robert Wilson"
+      }
+     ]
     }
    ],
    "bilan": {
-    "ajoutees": 10,
+    "ajoutees": 19,
     "archivees": 0,
     "revisees": 0,
     "ventes": 0

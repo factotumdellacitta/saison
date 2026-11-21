@@ -143,6 +143,10 @@
  },
  "chatelet": {
   "sorties": [
+   "chucho-valdes-chatelet",
+   "company-chatelet",
+   "hammer-ekman",
+   "la-belle-et-la-bete-glass",
    "les-miserables",
    "vu-cosi-fan-tutte",
    "vu-la-vie-parisienne",
@@ -376,6 +380,11 @@
    "zurbaran-louvre"
   ]
  },
+ "mac-creteil": {
+  "sorties": [
+   "beethoven-7-sasha-waltz"
+  ]
+ },
  "magazzini-generali": {
   "sorties": [
    "vu-diplo-magazzini-generali-2024"
@@ -577,6 +586,7 @@
  "porte-saint-martin": {
   "sorties": [
    "le-mariage-de-figaro",
+   "le-mariage-de-figaro-francon",
    "vu-le-bourgeois-gentilhomme-porte-saint-martin",
    "vu-le-malade-imaginaire"
   ]
@@ -754,9 +764,11 @@
    "focus-ben-duke",
    "j-ai-une-theorie",
    "le-cercle-de-craie-caucasien",
+   "mary-said-what-she-said",
    "noh-climax",
    "restart",
    "rhinoceros",
+   "saigon",
    "vu-apres-moi-le-deluge"
   ]
  },
@@ -783,7 +795,8 @@
  },
  "theatre-hebertot": {
   "sorties": [
-   "diplomatie"
+   "diplomatie",
+   "le-mariage-de-david-et-leila"
   ]
  },
  "theatre-le-republique": {

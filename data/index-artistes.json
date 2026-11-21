@@ -96,7 +96,8 @@
  "alain-francon": {
   "nom": "Alain Françon",
   "sorties": [
-   "le-mariage-de-figaro"
+   "le-mariage-de-figaro",
+   "le-mariage-de-figaro-francon"
   ]
  },
  "alain-lenglet": {
@@ -129,6 +130,12 @@
   "nom": "Alex Vizorek",
   "sorties": [
    "alex-vizorek-zenith"
+  ]
+ },
+ "alexander-ekman": {
+  "nom": "Alexander Ekman",
+  "sorties": [
+   "hammer-ekman"
   ]
  },
  "alexandra-badea": {
@@ -185,6 +192,7 @@
  "alexis-michalik": {
   "nom": "Alexis Michalik",
   "sorties": [
+   "le-mariage-de-david-et-leila",
    "vu-edmond"
   ]
  },
@@ -221,7 +229,8 @@
  "alix-poisson": {
   "nom": "Alix Poisson",
   "sorties": [
-   "le-mariage-de-figaro"
+   "le-mariage-de-figaro",
+   "le-mariage-de-figaro-francon"
   ]
  },
  "allan-clayton": {
@@ -432,6 +441,7 @@
  "anne-cecile-vandalem": {
   "nom": "Anne-Cécile Vandalem",
   "sorties": [
+   "la-belle-et-la-bete-glass",
    "la-fete"
   ]
  },
@@ -710,7 +720,8 @@
  "beaumarchais": {
   "nom": "Beaumarchais",
   "sorties": [
-   "le-mariage-de-figaro"
+   "le-mariage-de-figaro",
+   "le-mariage-de-figaro-francon"
   ]
  },
  "bejart-ballet-lausanne": {
@@ -994,6 +1005,12 @@
    "une-odyssee"
   ]
  },
+ "caroline-guiela-nguyen": {
+  "nom": "Caroline Guiela Nguyen",
+  "sorties": [
+   "saigon"
+  ]
+ },
  "carrie-ann-matheson": {
   "nom": "Carrie-Ann Matheson",
   "sorties": [
@@ -1090,6 +1107,12 @@
   "nom": "Charlotte Chastel-Rousseau",
   "sorties": [
    "zurbaran-louvre"
+  ]
+ },
+ "charlotte-gauthier": {
+  "nom": "Charlotte Gauthier",
+  "sorties": [
+   "company-chatelet"
   ]
  },
  "charly-paillet": {
@@ -1233,6 +1256,12 @@
   "nom": "Christos Papadopoulos",
   "sorties": [
    "my-fierce-ignorant-step"
+  ]
+ },
+ "chucho-valdes": {
+  "nom": "Chucho Valdés",
+  "sorties": [
+   "chucho-valdes-chatelet"
   ]
  },
  "cie-sensible-indocile": {
@@ -1534,6 +1563,12 @@
   "nom": "Dany Boon",
   "sorties": [
    "dany-boon-clown-n-est-pas-un-metier"
+  ]
+ },
+ "darryl-pinckney": {
+  "nom": "Darryl Pinckney",
+  "sorties": [
+   "mary-said-what-she-said"
   ]
  },
  "david-bobee": {
@@ -1911,6 +1946,12 @@
    "le-trouvere-rhorer"
   ]
  },
+ "erwan-jones": {
+  "nom": "Erwan Jones",
+  "sorties": [
+   "company-chatelet"
+  ]
+ },
  "erykah-badu": {
   "nom": "Erykah Badu",
   "sorties": [
@@ -2095,6 +2136,12 @@
    "zurbaran-louvre"
   ]
  },
+ "franck-ollu": {
+  "nom": "Franck Ollu",
+  "sorties": [
+   "la-belle-et-la-bete-glass"
+  ]
+ },
  "francois-berleand": {
   "nom": "François Berléand",
   "sorties": [
@@ -2191,6 +2238,12 @@
    "vu-le-mariage-force"
   ]
  },
+ "gaetan-borg": {
+  "nom": "Gaétan Borg",
+  "sorties": [
+   "company-chatelet"
+  ]
+ },
  "gaetano-donizetti": {
   "nom": "Gaetano Donizetti",
   "sorties": [
@@ -2258,6 +2311,12 @@
   "nom": "George Benjamin",
   "sorties": [
    "histoire-du-soldat"
+  ]
+ },
+ "george-furth": {
+  "nom": "George Furth",
+  "sorties": [
+   "company-chatelet"
   ]
  },
  "george-gershwin": {
@@ -2380,6 +2439,12 @@
    "attila",
    "le-trouvere",
    "le-trouvere-rhorer"
+  ]
+ },
+ "goteborgsoperans-danskompani": {
+  "nom": "GöteborgsOperans Danskompani",
+  "sorties": [
+   "hammer-ekman"
   ]
  },
  "gottfried-von-der-goltz": {
@@ -2715,6 +2780,12 @@
    "le-pere"
   ]
  },
+ "isabelle-huppert": {
+  "nom": "Isabelle Huppert",
+  "sorties": [
+   "mary-said-what-she-said"
+  ]
+ },
  "isabelle-lafon": {
   "nom": "Isabelle Lafon",
   "sorties": [
@@ -2830,6 +2901,12 @@
    "food-court"
   ]
  },
+ "james-bonas": {
+  "nom": "James Bonas",
+  "sorties": [
+   "company-chatelet"
+  ]
+ },
  "jamie-barton": {
   "nom": "Jamie Barton",
   "sorties": [
@@ -2847,6 +2924,12 @@
   "sorties": [
    "jarry-bonhomme-zenith",
    "les-folies-de-jarry"
+  ]
+ },
+ "jasmine-roy": {
+  "nom": "Jasmine Roy",
+  "sorties": [
+   "company-chatelet"
   ]
  },
  "jason-derulo": {
@@ -2879,6 +2962,12 @@
   "nom": "Jean-Christophe Meurisse",
   "sorties": [
    "chiens-de-navarre-i-will-survive"
+  ]
+ },
+ "jean-cocteau": {
+  "nom": "Jean Cocteau",
+  "sorties": [
+   "la-belle-et-la-bete-glass"
   ]
  },
  "jean-francois-sivadier": {
@@ -3950,7 +4039,8 @@
  "ludovico-einaudi": {
   "nom": "Ludovico Einaudi",
   "sorties": [
-   "ludovico-einaudi-grand-palais-2027"
+   "ludovico-einaudi-grand-palais-2027",
+   "mary-said-what-she-said"
   ]
  },
  "ludwig-van-beethoven": {
@@ -4387,6 +4477,7 @@
   "nom": "Micha Lescot",
   "sorties": [
    "le-mariage-de-figaro",
+   "le-mariage-de-figaro-francon",
    "vu-willy-protagoras-enferme-dans-les-toilettes"
   ]
  },
@@ -4462,6 +4553,12 @@
   "sorties": [
    "vu-mika-bercy-2019",
    "vu-mika-chalons-2023"
+  ]
+ },
+ "mikael-karlsson": {
+  "nom": "Mikael Karlsson",
+  "sorties": [
+   "hammer-ekman"
   ]
  },
  "miki": {
@@ -4744,7 +4841,8 @@
  "noemie-lvovsky": {
   "nom": "Noémie Lvovsky",
   "sorties": [
-   "le-mariage-de-figaro"
+   "le-mariage-de-figaro",
+   "le-mariage-de-figaro-francon"
   ]
  },
  "nono-la-grinta": {
@@ -5068,6 +5166,12 @@
    "correspondances-nocturnes"
   ]
  },
+ "philip-glass": {
+  "nom": "Philip Glass",
+  "sorties": [
+   "la-belle-et-la-bete-glass"
+  ]
+ },
  "philippe-demarle": {
   "nom": "Philippe Demarle",
   "sorties": [
@@ -5341,6 +5445,7 @@
  "robert-wilson": {
   "nom": "Robert Wilson",
   "sorties": [
+   "mary-said-what-she-said",
    "turandot"
   ]
  },
@@ -5532,6 +5637,18 @@
    "vampire-s-mountain"
   ]
  },
+ "sasha-waltz": {
+  "nom": "Sasha Waltz",
+  "sorties": [
+   "beethoven-7-sasha-waltz"
+  ]
+ },
+ "sasha-waltz-guests": {
+  "nom": "Sasha Waltz & Guests",
+  "sorties": [
+   "beethoven-7-sasha-waltz"
+  ]
+ },
  "saverio-la-ruina": {
   "nom": "Saverio La Ruina",
   "sorties": [
@@ -5550,6 +5667,12 @@
    "sch-stade-de-france-2027",
    "vu-solidays-2023-vendredi",
    "vu-solidays-2025-dimanche"
+  ]
+ },
+ "scott-emerson": {
+  "nom": "Scott Emerson",
+  "sorties": [
+   "company-chatelet"
   ]
  },
  "scott-gibbons": {
@@ -5900,6 +6023,7 @@
  "stephen-sondheim": {
   "nom": "Stephen Sondheim",
   "sorties": [
+   "company-chatelet",
    "vu-west-side-story-seine-musicale"
   ]
  },
@@ -6150,6 +6274,12 @@
    "war-requiem-alsop"
   ]
  },
+ "thomas-dolie": {
+  "nom": "Thomas Dolié",
+  "sorties": [
+   "la-belle-et-la-bete-glass"
+  ]
+ },
  "thomas-dunford": {
   "nom": "Thomas Dunford",
   "sorties": [
@@ -6365,6 +6495,7 @@
   "nom": "Vincent Dedienne",
   "sorties": [
    "le-mariage-de-figaro",
+   "le-mariage-de-figaro-francon",
    "vu-un-soir-de-gala"
   ]
  },
@@ -6379,6 +6510,12 @@
   "sorties": [
    "didon-et-enee",
    "le-carnaval-baroque"
+  ]
+ },
+ "virginie-verrez": {
+  "nom": "Virginie Verrez",
+  "sorties": [
+   "la-belle-et-la-bete-glass"
   ]
  },
  "vladimir-cauchemar": {

@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-20",
+ "maj": "2026-11-21",
  "sorties": [
   {
    "id": "10-000-langages-pour-en-faire-un",
@@ -12189,6 +12189,404 @@
    "source": "https://75.agendaculturel.fr/theatre/anne-roumanoff.html",
    "nouveau": true,
    "horaires": "20h"
+  },
+  {
+   "categorie": "Théâtre",
+   "sousGenre": "",
+   "salle": "Sarah Bernhardt, Grande salle",
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "billetterie": null,
+   "nouveau": true,
+   "id": "mary-said-what-she-said",
+   "titre": "Mary Said What She Said",
+   "artistes": [
+    {
+     "nom": "Darryl Pinckney",
+     "role": "auteur"
+    },
+    {
+     "nom": "Robert Wilson",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Ludovico Einaudi",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Isabelle Huppert",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "theatre-de-la-ville",
+   "debut": "2027-04-20",
+   "fin": "2027-05-03",
+   "relaches": [
+    "2027-04-25",
+    "2027-05-01"
+   ],
+   "datesTexte": "20 avr. – 3 mai 2027",
+   "horaires": "20h, 1h30",
+   "note": 4,
+   "calcul": "C2 N3 H2",
+   "pronostic": false,
+   "pourquoi": "Reprise, après une longue tournée internationale, du monologue de Marie Stuart créé par Robert Wilson pour Isabelle Huppert au Théâtre de la Ville en 2019.",
+   "lien": "https://www.theatredelaville-paris.com/fr/spectacles/saison-26-27/theatre/mary-said-what-she-said-robert-wilson-isabelle-huppert-darryl-pinckney-ludovico-einaudi",
+   "source": "https://www.theatredelaville-paris.com/fr/spectacles/saison-26-27/theatre/mary-said-what-she-said-robert-wilson-isabelle-huppert-darryl-pinckney-ludovico-einaudi"
+  },
+  {
+   "categorie": "Théâtre",
+   "sousGenre": "",
+   "salle": "Sarah Bernhardt, Grande salle",
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "billetterie": null,
+   "nouveau": true,
+   "id": "saigon",
+   "titre": "Saigon",
+   "artistes": [
+    {
+     "nom": "Caroline Guiela Nguyen",
+     "role": "auteur"
+    },
+    {
+     "nom": "Caroline Guiela Nguyen",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "theatre-de-la-ville",
+   "debut": "2027-06-03",
+   "fin": "2027-06-11",
+   "relaches": [
+    "2027-06-06"
+   ],
+   "datesTexte": "3 – 11 juin 2027",
+   "horaires": "19h30, 3h15 avec entracte",
+   "note": 3,
+   "calcul": "C2 N2 H1",
+   "pronostic": false,
+   "pourquoi": "Reprise de la fresque de Caroline Guiela Nguyen sur les fantômes de l’Indochine, saluée par la critique depuis sa création à Avignon en 2017.",
+   "lien": "https://www.theatredelaville-paris.com/fr/spectacles/saison-26-27/theatre/saigon-caroline-guiela-nguyen",
+   "source": "https://www.theatredelaville-paris.com/fr/spectacles/saison-26-27/theatre/saigon-caroline-guiela-nguyen"
+  },
+  {
+   "categorie": "Théâtre",
+   "sousGenre": "",
+   "salle": "",
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "billetterie": null,
+   "nouveau": true,
+   "id": "le-mariage-de-figaro-francon",
+   "titre": "La Folle Journée ou Le Mariage de Figaro",
+   "artistes": [
+    {
+     "nom": "Beaumarchais",
+     "role": "auteur"
+    },
+    {
+     "nom": "Alain Françon",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Vincent Dedienne",
+     "role": "interprète"
+    },
+    {
+     "nom": "Micha Lescot",
+     "role": "interprète"
+    },
+    {
+     "nom": "Alix Poisson",
+     "role": "interprète"
+    },
+    {
+     "nom": "Noémie Lvovsky",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "porte-saint-martin",
+   "debut": "2026-09-26",
+   "fin": "2026-12-31",
+   "relaches": [
+    "lun",
+    "mar"
+   ],
+   "datesTexte": "26 sept. – 31 déc. 2026",
+   "horaires": "mer.–ven. 20h, sam. 16h et 20h30, dim. 16h",
+   "note": 3,
+   "calcul": "C1 N2 H1 +Chef-d’œuvre",
+   "pronostic": false,
+   "pourquoi": "Alain Françon retrouve Vincent Dedienne, cette fois dans le rôle-titre ; bonne presse nationale (Le Monde, Les Échos, Le Figaro).",
+   "lien": "https://www.portestmartin.com/le-mariage-de-figaro",
+   "source": "https://www.portestmartin.com/le-mariage-de-figaro"
+  },
+  {
+   "categorie": "Théâtre",
+   "sousGenre": "",
+   "salle": "",
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "billetterie": null,
+   "nouveau": true,
+   "id": "le-mariage-de-david-et-leila",
+   "titre": "Le Mariage de David et Leïla ou le Jour de l’éclipse",
+   "artistes": [
+    {
+     "nom": "Alexis Michalik",
+     "role": "auteur"
+    },
+    {
+     "nom": "Alexis Michalik",
+     "role": "mise en scène"
+    }
+   ],
+   "lieuId": "theatre-hebertot",
+   "debut": "2027-01-30",
+   "fin": null,
+   "relaches": [
+    "lun"
+   ],
+   "datesTexte": "À partir du 30 janv. 2027",
+   "horaires": "mar.–sam. 21h, sam. 15h, dim. 16h",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "Nouvelle création d’Alexis Michalik.",
+   "lien": "https://www.theatrehebertot.com/spectacle/le-mariage-de-david-et-leila",
+   "source": "https://www.theatrehebertot.com/spectacle/le-mariage-de-david-et-leila"
+  },
+  {
+   "categorie": "Opéra",
+   "sousGenre": "",
+   "salle": "",
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "billetterie": null,
+   "nouveau": true,
+   "id": "la-belle-et-la-bete-glass",
+   "titre": "La Belle et la Bête",
+   "artistes": [
+    {
+     "nom": "Philip Glass",
+     "role": "compositeur"
+    },
+    {
+     "nom": "Jean Cocteau",
+     "role": "auteur"
+    },
+    {
+     "nom": "Franck Ollu",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Anne-Cécile Vandalem",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Virginie Verrez",
+     "role": "interprète"
+    },
+    {
+     "nom": "Thomas Dolié",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "chatelet",
+   "debut": "2027-02-03",
+   "fin": "2027-02-11",
+   "relaches": [
+    "2027-02-04",
+    "2027-02-06",
+    "2027-02-09"
+   ],
+   "datesTexte": "3 – 11 févr. 2027",
+   "horaires": "20h, dim. 15h, 1h30",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": true,
+   "pourquoi": "L’opéra de Philip Glass sur le film de Cocteau, mis en scène par Anne-Cécile Vandalem.",
+   "lien": "https://www.chatelet.com/programmation/26-27/la-belle-et-la-bete/",
+   "source": "https://www.chatelet.com/programmation/26-27/la-belle-et-la-bete/"
+  },
+  {
+   "categorie": "Comédie musicale",
+   "sousGenre": "",
+   "salle": "",
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "billetterie": null,
+   "nouveau": true,
+   "id": "company-chatelet",
+   "titre": "Company",
+   "artistes": [
+    {
+     "nom": "Stephen Sondheim",
+     "role": "compositeur"
+    },
+    {
+     "nom": "George Furth",
+     "role": "auteur"
+    },
+    {
+     "nom": "James Bonas",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Charlotte Gauthier",
+     "role": "direction musicale"
+    },
+    {
+     "nom": "Erwan Jones",
+     "role": "chorégraphie"
+    },
+    {
+     "nom": "Gaétan Borg",
+     "role": "interprète"
+    },
+    {
+     "nom": "Jasmine Roy",
+     "role": "interprète"
+    },
+    {
+     "nom": "Scott Emerson",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "chatelet",
+   "debut": "2027-03-30",
+   "fin": "2027-04-11",
+   "relaches": [
+    "2027-03-31",
+    "2027-04-01",
+    "2027-04-05",
+    "2027-04-06",
+    "2027-04-07"
+   ],
+   "datesTexte": "30 mars – 11 avr. 2027",
+   "horaires": "20h, sam. et dim. 15h, 2h50 avec entracte",
+   "note": 3,
+   "calcul": "C1 N2 H1 +Chef-d’œuvre",
+   "pronostic": true,
+   "pourquoi": "Le classique de Sondheim, chansons en anglais et dialogues en français, après les grandes comédies musicales du Châtelet.",
+   "lien": "https://www.chatelet.com/programmation/26-27/company/",
+   "source": "https://www.chatelet.com/programmation/26-27/company/"
+  },
+  {
+   "categorie": "Danse",
+   "sousGenre": "",
+   "salle": "",
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "billetterie": null,
+   "nouveau": true,
+   "id": "hammer-ekman",
+   "titre": "Hammer",
+   "artistes": [
+    {
+     "nom": "Alexander Ekman",
+     "role": "chorégraphie"
+    },
+    {
+     "nom": "Mikael Karlsson",
+     "role": "compositeur"
+    },
+    {
+     "nom": "GöteborgsOperans Danskompani",
+     "role": "compagnie"
+    }
+   ],
+   "lieuId": "chatelet",
+   "debut": "2027-03-06",
+   "fin": "2027-03-14",
+   "relaches": [
+    "2027-03-08"
+   ],
+   "datesTexte": "6 – 14 mars 2027",
+   "horaires": "20h, dim. 15h, 2h15 avec entracte",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": false,
+   "pourquoi": "Première en France de la fresque d’Alexander Ekman pour les trente et un danseurs de Göteborg.",
+   "lien": "https://www.chatelet.com/programmation/26-27/hammer/",
+   "source": "https://www.chatelet.com/programmation/26-27/hammer/"
+  },
+  {
+   "categorie": "Danse",
+   "sousGenre": "",
+   "salle": "",
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "billetterie": null,
+   "nouveau": true,
+   "id": "beethoven-7-sasha-waltz",
+   "titre": "Beethoven 7",
+   "artistes": [
+    {
+     "nom": "Sasha Waltz",
+     "role": "chorégraphie"
+    },
+    {
+     "nom": "Sasha Waltz & Guests",
+     "role": "compagnie"
+    }
+   ],
+   "lieuId": "mac-creteil",
+   "debut": "2027-06-02",
+   "fin": "2027-06-05",
+   "datesTexte": "2 – 5 juin 2027",
+   "horaires": "20h, sam. 18h, 1h45 avec entracte",
+   "note": 2,
+   "calcul": "C1 N2 H1",
+   "pronostic": false,
+   "pourquoi": "La Septième de Beethoven dansée par Sasha Waltz, créée à Berlin en 2023, présentée par le Châtelet hors les murs.",
+   "lien": "https://www.chatelet.com/programmation/26-27/beethoven-7-sasha-waltz/",
+   "source": "https://www.chatelet.com/programmation/26-27/beethoven-7-sasha-waltz/"
+  },
+  {
+   "categorie": "Concert",
+   "sousGenre": "Jazz",
+   "salle": "",
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "a-voir",
+   "offres": [],
+   "billetterie": null,
+   "nouveau": true,
+   "id": "chucho-valdes-chatelet",
+   "titre": "Chucho Valdés",
+   "artistes": [
+    {
+     "nom": "Chucho Valdés",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "chatelet",
+   "debut": "2027-04-28",
+   "fin": "2027-04-28",
+   "horaires": "20h",
+   "note": 3,
+   "calcul": "C1 N3 H1",
+   "pronostic": true,
+   "pourquoi": "Le maître du jazz afro-cubain avec son Royal Quartet et des invités.",
+   "lien": "https://www.chatelet.com/programmation/26-27/chucho-valdes/",
+   "source": "https://www.chatelet.com/programmation/26-27/chucho-valdes/"
   }
  ]
 }
