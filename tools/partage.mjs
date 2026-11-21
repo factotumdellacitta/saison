@@ -5,6 +5,11 @@
 // montrerait l'aperçu générique du site. Rien de privé : uniquement des champs publics des fichiers publics.
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
+import { createHash } from "node:crypto";
+// Redirection par script, pas par <meta refresh> ni <link rel="canonical"> : certains robots d’aperçu (messageries, réseaux)
+// suivent ceux-ci jusqu’à la page du site, dont l’aperçu est générique ; ils n’exécutent pas le script et gardent celui de la fiche.
+const REDIR = 'location.replace(document.getElementById("v").href)';
+const REDIR_H = "sha256-" + createHash("sha256").update(REDIR).digest("base64");
 
 const dest = process.argv[2];
 if (!dest) { console.error("Usage : node tools/partage.mjs <dossier du site>"); process.exit(1); }
@@ -45,12 +50,11 @@ function page({ fichier, titre, titreCourt, description, cible, expo, type = "ar
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${esc(BASE)}; style-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${esc(BASE)}; style-src 'none'; script-src '${REDIR_H}'">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex">
 <title>${esc(t)}</title>
 <meta name="description" content="${esc(d)}">
-<link rel="canonical" href="${esc(vers)}">
 <meta property="og:type" content="${type}">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="${site}">
@@ -65,9 +69,8 @@ function page({ fichier, titre, titreCourt, description, cible, expo, type = "ar
 <meta name="twitter:title" content="${esc(titreCourt || titre)}">
 <meta name="twitter:description" content="${esc(d)}">
 <meta name="twitter:image" content="${esc(image)}">
-<meta http-equiv="refresh" content="0;url=${esc(vers)}">
 </head>
-<body><p><a href="${esc(vers)}">${esc(t)}</a></p></body>
+<body><p><a id="v" href="${esc(vers)}">${esc(t)}</a></p><script>${REDIR}</script></body>
 </html>
 `;
 }
@@ -75,7 +78,6 @@ function page({ fichier, titre, titreCourt, description, cible, expo, type = "ar
 const pages = [];
 // Fiches : à l'affiche, au journal (vues), à l'archive (liens déjà partagés).
 for (const e of [...affiche, ...archive]) {
-  if (e.statut === "ecarte") continue;
   const x = estExpo(e), l = court(e.lieuId);
   const desc = [[e.categorie === "Exposition" ? e.sousGenre || "Exposition" : e.categorie, l, dates(e)].filter(Boolean).join(" · "), [note(e.note), noms(e)].filter(Boolean).join(" · "), e.pourquoi || ""].filter(Boolean).join(". ");
   pages.push({ fichier: `${e.id}.html`, titre: e.titre, titreCourt: l ? `${e.titre} – ${l}` : e.titre, description: desc, cible: (x ? "expo/" : "") + "#sortie-" + e.id, expo: x });

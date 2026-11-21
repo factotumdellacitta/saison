@@ -1450,7 +1450,7 @@
     const locD = etatLocal();
     const carte = ([id, r], passe) => carteRes(id, r, passe, locD);
     const ec = AFF.filter((e) => e.statut === "ecarte");
-    return `${past.length ? `<p class="warn"><a href="#admin?v=ranger">${plural(past.length, "réservation passée", "réservations passées")} à ranger</a></p>` : ""}
+    return `${vueRanger(true)}
     <h2 class="mh">À venir <small>${fut.length}</small></h2><div class="list">${fut.map((x) => carte(x, false)).join("") || '<p class="empty">Aucune réservation.</p>'}</div>
     ${ec.length ? `<details class="box"><summary>Écartées <span class="ml">${ec.length}</span></summary><ul class="vl">${ec.map((e) => `<li><a href="#sortie-${esc(e.id)}"><span class="vt"><b>${esc(e.titre)}</b> <span>· ${esc(court(e.lieuId))}</span></span></a></li>`).join("")}</ul></details>` : ""}`;
   }
@@ -1466,13 +1466,22 @@
     return { res, passees };
   }
   const nRanger = () => { const { res, passees } = aRanger(); return res.length + passees.length; };
-  function vueRanger() {
+  function vueRanger(dansRes) {
     const { res, passees } = aRanger(), locD = etatLocal();
-    if (!res.length && !passees.length) return '<p class="empty">Rien à ranger.</p>';
+    if (!res.length && !passees.length) return dansRes ? "" : '<p class="empty">Rien à ranger.</p>';
     const b = (a, id, t, cls = "") => `<button class="btn ${cls}" type="button" data-adm="${a}" data-id="${esc(id)}">${t}</button>`;
-    return `${res.length ? `<h2 class="mh">Réservations passées <small>${res.length}</small></h2><div class="list">${res.map(([id, r]) => carteRes(id, r, true, locD)).join("")}</div>` : ""}
+    return `${res.length ? `<h2 class="mh">Passées, à ranger <small>${res.length}</small></h2><div class="list">${res.map(([id, r]) => carteRes(id, r, true, locD)).join("")}</div>` : ""}
     ${passees.length ? `<h2 class="mh">Terminées, encore à l’affiche <small>${passees.length}</small></h2><div class="list">${passees.map((e) => `<div class="ad"><h3><a href="#sortie-${esc(e.id)}">${esc(e.titre)}</a></h3><p class="cr">${esc([court(e.lieuId), range(e)].filter(Boolean).join(" · "))}</p>
       <div class="acts">${b("vu", e.id, "Vu, au journal", "pri")}${b("ecarter", e.id, "Écarter")}${b("supprimer", e.id, "Supprimer")}</div></div>`).join("")}</div>` : ""}`;
+  }
+  /* Journal (admin) : réservations du soir même ou passées, à verser au journal. */
+  function aJournalHTML() {
+    const k = iso(TODAY), L = Object.entries(PRIVE.reservations).filter(([id, r]) => r.date && r.date <= k && BYID.get(id)).sort((a, b) => a[1].date.localeCompare(b[1].date));
+    if (!L.length) return "";
+    const b = (a, id, t, cls = "") => `<button class="btn ${cls}" type="button" data-adm="${a}" data-id="${esc(id)}">${t}</button>`;
+    return `<section class="a-journal" aria-labelledby="ajT"><h2 class="mh" id="ajT">À ajouter au journal <small>${L.length}</small></h2><div class="list">${L.map(([id, r]) => `<div class="ad"><h3><a href="#sortie-${esc(id)}">${esc(titreDe(id))}</a></h3>
+      <p class="cr"><b>${r.date === k ? "Ce soir" : esc(cap(fmtY(D(r.date), true)))}</b>${court(BYID.get(id).lieuId) ? " · " + esc(court(BYID.get(id).lieuId)) : ""}</p>
+      <div class="acts">${b("vu", id, "Vu, au journal", "pri")}${r.date < k ? b("annuler", id, "Pas vu, retirer") : ""}</div></div>`).join("")}</div></section>`;
   }
   function vueEnvies() {
     const L = Object.entries(PRIVE.envies).map(([id, v]) => ({ id, v, e: BYID.get(id) })).filter((x) => x.e);
@@ -1563,17 +1572,23 @@
   }
 
   /* ---------- Espace admin ---------- */
-  const ONGLETS = [["res", "Réservations"], ["ranger", "À ranger"], ["envies", "Coups de cœur"], ["rapide", "Saisie rapide"], ["soirs", "Soirs pris"], ["budget", "Budget"], ["acc", "Accompagnants"], ["lieux", "Lieux"], ["liens", "Liens"], ["abo", "Abonnements"]];
+  // Six onglets ; Budget et Réglages ont leurs sous-onglets. Les anciennes adresses (v=ranger, acc, lieux…) restent valables.
+  const ONGLETS = [["res", "Réservations"], ["envies", "Coups de cœur"], ["rapide", "Saisie rapide"], ["soirs", "Soirs pris"], ["budget", "Budget"], ["reglages", "Réglages"]];
+  const SOUS = { budget: [["budget", "Dépenses"], ["acc", "Accompagnants"]], reglages: [["lieux", "Lieux"], ["liens", "Liens"], ["abo", "Abonnements"]] };
+  const ALIAS = { ranger: "res", reglages: "lieux" };
+  const parent = (v) => Object.keys(SOUS).find((k) => SOUS[k].some(([s]) => s === v)) || v;
+  const VUES = new Set([...ONGLETS.map(([k]) => k), ...Object.values(SOUS).flat().map(([k]) => k), ...Object.keys(ALIAS)]);
   let VUE = "res";
   function renderAdminVue(v) {
     if (v) VUE = v;
     if (!PRIVE) return vueConnexion();
     if (location.hash.slice(1).split("?")[0] !== "admin") return;
     const nE = Object.keys(PRIVE.envies).length, nC = (PRIVE.aCompleter || []).length, nR = nRanger();
-    const corps = { res: vueRes, ranger: vueRanger, envies: vueEnvies, rapide: vueRapide, soirs: vueSoirs, budget: vueBudget, acc: vueAcc, lieux: vueLieux, liens: vueLiens, abo: () => `${subsHTML()}<p class="cr">Adresses secrètes : ne les partage pas. Elles ne sont écrites nulle part dans le dépôt.</p>
+    const corps = { res: vueRes, envies: vueEnvies, rapide: vueRapide, soirs: vueSoirs, budget: vueBudget, acc: vueAcc, lieux: vueLieux, liens: vueLiens, abo: () => `${subsHTML()}<p class="cr">Adresses secrètes : ne les partage pas. Elles ne sont écrites nulle part dans le dépôt.</p>
       <div class="acts"><button class="btn" type="button" id="icsRegen">Régénérer les adresses des flux</button></div>` }[VUE] || vueRes;
     $("#main").innerHTML = `<div class="adm-tete"><h1>Admin</h1>${TOK ? "" : "<p>Lecture seule</p>"}
-    <nav class="chips defile" aria-label="Espace admin">${ONGLETS.map(([k, t]) => `<a class="chip" href="#admin?v=${k}"${k === VUE ? ' aria-current="page"' : ""}>${t}${k === "envies" && nE ? ` (${nE})` : ""}${k === "rapide" && nC ? ` (${nC})` : ""}${k === "ranger" && nR ? ` (${nR})` : ""}</a>`).join("")}</nav></div>
+    <nav class="chips defile" aria-label="Espace admin">${ONGLETS.map(([k, t]) => `<a class="chip" href="#admin?v=${k}"${k === parent(VUE) ? ' aria-current="page"' : ""}>${t}${k === "envies" && nE ? ` (${nE})` : ""}${k === "rapide" && nC ? ` (${nC})` : ""}${k === "res" && nR ? ` (${nR} à ranger)` : ""}</a>`).join("")}</nav>
+    ${SOUS[parent(VUE)] ? `<nav class="adm-sous" aria-label="${esc(ONGLETS.find(([k]) => k === parent(VUE))[1])}">${SOUS[parent(VUE)].map(([k, t]) => `<a href="#admin?v=${k}"${k === VUE ? ' aria-current="page"' : ""}>${t}</a>`).join("")}</nav>` : ""}</div>
     <div class="acts"><button class="btn pri" type="button" data-adm="ajouter">${ico("ajouter")}Spectacle</button><button class="btn" type="button" data-adm="journal">${ico("ajouter")}Journal</button>${TOK ? "" : '<button class="btn" type="button" id="aTok">Saisir le jeton</button>'}</div>
     <div id="av">${corps()}</div>`;
     if ($("#aTok")) $("#aTok").onclick = () => formJeton();
@@ -1591,7 +1606,7 @@
   }
   function render(q) {
     const v = new URLSearchParams(q || "").get("v");
-    if (v && ONGLETS.some(([k]) => k === v)) VUE = v;
+    if (v && VUES.has(v)) VUE = ALIAS[v] || v;
     renderAdminVue();
   }
 
@@ -1620,5 +1635,5 @@
     else if (a === "journal") act(formJournal);
   });
 
-  ADMIN = { render, heart, ficheHTML, ficheActs, idsAvec, accSelectHTML, portail, restaurer, journalForm, brancherJournal, journalResume };
+  ADMIN = { render, aJournalHTML, heart, ficheHTML, ficheActs, idsAvec, accSelectHTML, portail, restaurer, journalForm, brancherJournal, journalResume };
 })();

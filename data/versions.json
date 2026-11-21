@@ -1,6 +1,18 @@
 {
  "versions": [
   {
+   "version": "4.79",
+   "date": "2026-11-21",
+   "titre": "Recherche, partage et mode admin",
+   "points": [
+    "Recherche de l’Affiche : lieux et artistes trouvés nommés, avec un lien direct vers leur page ; l’adresse du lieu compte aussi",
+    "Aperçu des liens partagés plus fiable : les pages de partage ne renvoient plus les robots vers l’aperçu générique",
+    "Fiche en admin sur mobile : « Site officiel » garde son texte, les icônes admin passent dessous",
+    "Journal en admin : encart « À ajouter au journal » pour les réservations passées ou du soir même",
+    "Admin : six onglets (Réservations avec « À ranger » en tête, Coups de cœur, Saisie rapide, Soirs pris, Budget, Réglages)"
+   ]
+  },
+  {
    "version": "4.78",
    "date": "2026-11-21",
    "titre": "Théâtre de la Bastille abrégé sans ambiguïté",

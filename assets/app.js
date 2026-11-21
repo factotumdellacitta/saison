@@ -344,7 +344,7 @@ const artLigne = (e) => [...new Set([...(e.artistes || [])].sort((a, b) => rangA
 const normQ = (s) => norm(s).replace(/[’‘`]/g, "'");
 function texteDe(e) {
   const L = lieu(e), jp = PRIVE && PRIVE.journalPrive ? PRIVE.journalPrive[e.id] : null;
-  return normQ([e.titre, e.sousGenre, e.categorie, ...(e.artistes || []).map((a) => a.nom), court(e.lieuId), L.nom, L.ville, e.salle, e.avis, e.pourquoi, ...(e.vuLe || []), jp && jp.notes].filter(Boolean).join(" "));
+  return normQ([e.titre, e.sousGenre, e.categorie, ...(e.artistes || []).map((a) => a.nom), court(e.lieuId), L.nom, L.ville, L.adresse, e.salle, e.avis, e.pourquoi, ...(e.vuLe || []), jp && jp.notes].filter(Boolean).join(" "));
 }
 const cherche = (e, q) => { const t = normQ(q).trim(); if (!t) return true; const x = texteDe(e); return t.split(/\s+/).every((m) => x.includes(m)); };
 const genre = (e) => e.categorie + (e.sousGenre ? " (" + e.sousGenre.toLowerCase() + ")" : "");
@@ -404,7 +404,7 @@ function offresHTML(e) {
 }
 function actsHTML(e, details, adm = "") {
   const o = official(e), b0 = booking(e), b = b0 && b0 !== o ? b0 : "", vu = e.statut === "vu";
-  const lo = vu ? "Page archivée" : "Site officiel"; // libellés masqués sur mobile quand les icônes admin suivent (aria-label gardé)
+  const lo = vu ? "Page archivée" : "Site officiel"; // libellé toujours écrit ; en admin sur mobile, les icônes admin passent dessous
   return `<div class="acts">${b && !vu ? `<a class="btn pri" href="${esc(b)}" target="_blank" rel="noopener noreferrer" aria-label="Billetterie">${ico("billet")}<span class="lbl">Billetterie</span></a>` : ""}${o ? `<a class="btn${!b && !vu ? " pri" : ""}" href="${esc(o)}" target="_blank" rel="noopener noreferrer" aria-label="${lo}">${ico("externe")}<span class="lbl">${lo}</span></a>` : ""}${details ? `<button class="btn ico" type="button" data-share="${esc(e.id)}" aria-label="Partager" title="Partager">${ico("partager")}</button>` : ""}${adm ? `<span class="acts-adm" role="group" aria-label="Admin">${adm}</span>` : ""}</div>`;
 }
 // Corps de la fiche : utilisé par la fiche plein écran et par le déroulé d’une ligne (toute la fiche, sans détour).
@@ -711,12 +711,13 @@ function aussi(q0) {
   if (!JOURNAL) { loadJournal().then(() => { if (F.q.trim() === q) aussi(q); }).catch(() => {}); }
   const nq = norm(q), enc = encodeURIComponent(q), L = [];
   const nj = (JOURNAL || []).filter((e) => cherche(e, q)).length;
-  const na = Object.values(artistes()).filter((a) => norm(a.nom).includes(nq)).length;
-  const nl = Object.keys(LIEUX).filter((id) => norm(LIEUX[id].nom + " " + court(id) + " " + (LIEUX[id].ville || "")).includes(nq)).length;
+  const ar = Object.entries(artistes()).filter(([, a]) => norm(a.nom).includes(nq));
+  const li = Object.keys(LIEUX).filter((id) => norm(LIEUX[id].nom + " " + court(id) + " " + (LIEUX[id].ville || "") + " " + (LIEUX[id].adresse || "")).includes(nq));
+  // Lieux et artistes trouvés : nommés, avec un lien direct vers leur page (trois au plus, sinon le compte vers l’index).
+  if (li.length) L.push(li.length <= 3 ? li.map((id) => `<a href="#lieu-${esc(id)}">${esc(LIEUX[id].nom)}</a>`).join(" · ") : `<a href="#lieux?q=${enc}">${plural(li.length, "lieu", "lieux")}</a>`);
+  if (ar.length) L.push(ar.length <= 3 ? ar.map(([k, a]) => `<a href="#artiste-${esc(k)}">${esc(a.nom)}</a>`).join(" · ") : `<a href="#artistes?q=${enc}">${plural(ar.length, "artiste")}</a>`);
   if (nj) L.push(`<a href="#journal?q=${enc}">${nj} au journal</a>`);
-  if (na) L.push(`<a href="#artistes?q=${enc}">${plural(na, "artiste")}</a>`);
-  if (nl) L.push(`<a href="#lieux?q=${enc}">${plural(nl, "lieu", "lieux")}</a>`);
-  el.hidden = !L.length; el.innerHTML = L.length ? "Aussi : " + L.join(" · ") : "";
+  el.hidden = !L.length; el.innerHTML = L.length ? "Voir aussi : " + L.join(" · ") : "";
 }
 const sortKey = (e) => { const p = span(e); return p ? (running(e) ? +p[1] - 1e13 : +p[0]) : 9e15; };
 function groupOf(e) {
@@ -1169,7 +1170,7 @@ function renderJournal(q) {
       <a class="linkbtn tri" href="#journal?${esc(jq(f, "tri", f.tri === "note" ? "date" : "note"))}" aria-label="Tri par ${f.tri === "note" ? "ma note" : "date"}, changer">${ico("tri")}${f.tri === "note" ? "Ma note" : "Date"}</a>
       <div class="active">${jetons}${jetons ? `<a class="chip effacer" href="#journal?${esc([f.tri === "note" ? "tri=note" : "", JQ.trim() ? "q=" + encodeURIComponent(JQ.trim()) : ""].filter(Boolean).join("&"))}" data-jclr>Tout effacer</a>` : ""}</div></div></div>
   <div class="j-stm" id="pJS"${JPANEL === "pJS" ? "" : " hidden"}><h2 class="mh">Statistiques <small>${esc(libS)}</small></h2><div class="stats">${stats}</div></div>
-  <div class="list" id="jlist"></div></section>
+  ${PRIVE && ADMIN && ADMIN.aJournalHTML ? ADMIN.aJournalHTML() : ""}<div class="list" id="jlist"></div></section>
   <aside class="r-lat j-lat" aria-label="Statistiques du journal"><h2 class="mh">Statistiques <small>${esc(libS)}</small></h2><div class="stats">${stats}</div></aside></div>`;
   $$("[data-jclr]").forEach((x) => x.addEventListener("click", () => { JAVEC = ""; if (x.tagName === "BUTTON") renderJournal(q); }));
   $$("[data-jpanel]").forEach((bt) => bt.onclick = () => {
@@ -1319,7 +1320,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.78"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.79"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1330,7 +1331,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.78"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.79"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1348,7 +1349,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.78"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.79"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }

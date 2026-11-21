@@ -935,10 +935,10 @@ body:has(#dlg) .pub,body:has(#dlg) .toast{bottom:auto;top:0}
 @keyframes m-fondu{from{opacity:0}to{opacity:1}}
 @keyframes m-monte{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 @media (max-width:599.98px){
-  .acts:has(>.acts-adm){gap:var(--e1);flex-wrap:nowrap}
-  .acts:has(>.acts-adm)>.btn{min-width:32px;min-height:32px;padding:0 var(--e1);position:relative}
-  .acts:has(>.acts-adm)>.btn .lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-  .acts>.acts-adm{margin-left:0;padding-left:var(--e1);gap:var(--e1)}
+  /* Admin sur mobile : les boutons gardent leur texte ; les icônes admin passent sur une rangée à part, sous un filet léger */
+  .acts:has(>.acts-adm){gap:var(--e1);flex-wrap:wrap}
+  .acts>.acts-adm{flex-basis:100%;margin:var(--e1) 0 0;padding:var(--e2) 0 0;border-left:0;border-top:1px solid var(--filet-leger);gap:var(--e1)}
+  .shh .sh-acts>.acts-adm{border-top-color:var(--sur-accent)}
   .acts>.acts-adm .btn.ai{min-width:32px;min-height:32px;padding:0}
   .acts:has(>.acts-adm) .btn::after{content:"";position:absolute;inset:-6px -2px}
   .acts>.acts-adm .btn.ai{position:relative}
@@ -1214,3 +1214,11 @@ button.cell.cal-res{cursor:pointer;font:inherit;font-weight:800}
   .r-chances{order:5}
   .pub-expo{order:6}
 }
+/* ---------- v4.79 ---------- */
+/* Admin : sous-onglets (Budget, Réglages) en liens discrets */
+.adm-sous{display:flex;flex-wrap:wrap;gap:var(--e6);margin-top:var(--e1);font-size:var(--t-meta);font-weight:500;text-transform:uppercase;letter-spacing:.06em}
+.adm-sous a{display:inline-flex;align-items:center;min-height:44px;color:var(--fond);text-decoration:none}
+.adm-sous a[aria-current]{font-weight:800;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+/* Journal (admin) : sorties réservées passées ou du soir, à verser au journal */
+.a-journal{margin:0 0 var(--e6)}
+.a-journal .ad{border-left:3px solid var(--accent);padding-left:var(--e3)}
