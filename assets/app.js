@@ -314,11 +314,14 @@ function stubHTML(e, mode) {
   if (meme) return `<span class="stub" title="${esc(tt)}"><b>${p[0].getDate()}</b><small class="au">${mot} ${p[1].getDate()}</small><small>${MOIS[p[0].getMonth()]}${loin(p[0])}</small></span>`;
   return `<span class="stub" title="${esc(tt)}"><b>${p[0].getDate()}</b><small class="au2"><span>${MOIS[p[0].getMonth()]}</span> ${mot}</small><small class="au2">${p[1].getDate()} ${MOIS[p[1].getMonth()]}</small></span>`;
 }
-function badges(e, libres) {
+function badges(e, libres, vente) {
   // Alignés à droite de la ligne lieu ; les plus importants au bord droit (ordre de lecture : déjà vu … Léonard y va).
   const b = [];
   const dv = e.statut !== "vu" && DEJA_VU[e.id]; // l’œuvre figure au journal (data/deja-vu.json, généré par build.mjs)
   if (dv && dv.length) { const t = "Vu le " + dv.map((x) => fmtY(D(x))).join(", "); b.push(`<span class="b vu" title="${esc(t)}" aria-label="Déjà vu (${esc(t.toLowerCase())})">Déjà vu</span>`); }
+  // Coups de cœur (page publique) : décompte discret jusqu’à la prochaine mise en vente (picto + « J-12 »).
+  if (vente && e.statut !== "vu") { const v = (e.offres || []).filter((o) => o.vente && venteDate(o) >= NOW).map(venteDate).sort((a, b) => a - b)[0];
+    if (v) { const n = dansJ(v); b.push(`<span class="b bv${n <= 2 ? " urg" : ""}" role="img" aria-label="Mise en vente ${n <= 0 ? "aujourd’hui" : n === 1 ? "demain" : "dans " + n + " jours"}" title="Mise en vente le ${esc(fmt(v, true))}">${ico("ventes")}${jTxt(n)}</span>`); } }
   if (e.statut !== "vu" && sansSoirLibre(e)) b.push(`<span class="b vu">Aucun soir libre</span>`);
   // Lignes de l’Affiche seulement (ailleurs, le nombre est déjà écrit) : rareté, trois soirs libres ou moins sur une série d’au moins quatre dates.
   else if (libres && e.statut !== "vu" && !estExpo(e) && !reservee(e) && !e.leonardYVa) { const x = prochainLibre(e); if (x && x.n && x.n <= 3 && x.t >= 4) b.push(`<span class="b vu">${plural(x.n, "soir libre", "soirs libres")}</span>`); }
@@ -362,11 +365,11 @@ const l1 = (e, note) => `<span class="l1"><span class="tt nom">${tagX(e)}${genre
 const GENRE_PUCE = { "Comédie musicale": "Musical" };
 const sousG = (e) => (e.sousGenre ? cap(e.sousGenre.toLowerCase()) : "");
 const ligneMeta = (meta, b) => (meta || b ? `<span class="ss">${meta ? `<span class="ssm">${meta}</span>` : ""}${b}</span>` : ""); // lieu à gauche, labels à droite
-function rowA(e) {
+function rowA(e, vente) {
   const h = e.horaires && e.horaires.length <= 40 ? e.horaires : "", art = artLigne(e);
   const meta = esc([sousG(e), estExpo(e) ? EXPO_TYPES[xp(e).type] : "", court(e.lieuId), estExpo(e) ? arrdtTxt(arrdt(e)) : ""].filter(Boolean).join(" · ")) + (h ? `<span class="hor"> · ${esc(h)}</span>` : ""); // horaires : bureau seulement (fiche dépliée sur mobile)
   return `<article class="row g-${famE(e)}" data-id="${esc(e.id)}"><button class="rb" type="button" aria-haspopup="dialog">${gb(e)}${stubHTML(e)}
-  <span class="mid">${l1(e, stars(e.note, e.pronostic))}${art ? `<span class="art nom">${esc(art)}</span>` : ""}${ligneMeta(meta, badges(e, true))}</span></button>${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}</article>`;
+  <span class="mid">${l1(e, stars(e.note, e.pronostic))}${art ? `<span class="art nom">${esc(art)}</span>` : ""}${ligneMeta(meta, badges(e, true, vente === true))}</span></button>${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}</article>`;
 }
 function rowJ(e) {
   const n = (e.vuLe || []).length;
@@ -484,7 +487,7 @@ function autourHTML(e) {
   const sc = (x) => ((x.artistes || []).some((a) => noms.has(a.nom)) ? 2 : 0) + (e.lieuId && x.lieuId === e.lieuId ? 1 : 0);
   const L = LIVE.filter((x) => x.id !== e.id && x.statut === "a-voir" && sc(x) > 0).sort((a, b) => sc(b) - sc(a) || sortKey(a) - sortKey(b)).slice(0, 4);
   if (!L.length) return "";
-  return `<section class="fi-a" aria-labelledby="fiA"><h3 class="sec" id="fiA">Autour de cette sortie <small>mêmes artistes ou même salle</small></h3><ul class="vl">${L.map((x) => apercu(x, dateAp(x), esc(court(x.lieuId)))).join("")}</ul></section>`;
+  return `<section class="fi-a" aria-labelledby="fiA"><h3 class="sec" id="fiA">Autour de cette sortie</h3><ul class="vl">${L.map((x) => apercu(x, dateAp(x), esc(court(x.lieuId)))).join("")}</ul></section>`;
 }
 
 /* ---------- Calendriers ---------- */
@@ -1281,7 +1284,7 @@ function renderCoeur(q) {
   const E = enviesIds(), init = (new URLSearchParams(q || "").get("cat") || "").split(",").filter(Boolean);
   const items = LIVE.filter((e) => E.has(e.id)).sort((a, b) => sortKey(a) - sortKey(b) || a.titre.localeCompare(b.titre, "fr"));
   $("#main").innerHTML = `<div class="ph">${partagerBtn()}<h1>Coups de cœur de ${OWNER}</h1><p>${EXPO ? plural(items.length, "exposition") : plural(items.length, "sortie") + " à l’affiche"}</p></div>
-  ${genresHTML(items)}${groupesPar(items, groupOf, rowA) || `<p class="empty">Aucun coup de cœur pour le moment.</p>`}`;
+  ${genresHTML(items)}${groupesPar(items, groupOf, (e) => rowA(e, true)) || `<p class="empty">Aucun coup de cœur pour le moment.</p>`}`;
   // Genres retenus dans l’adresse (#coeur?cat=theatre,opera).
   brancherGenres($("#main"), init, (sel) => { history.replaceState(null, "", "#coeur" + (sel.size ? "?cat=" + [...sel].join(",") : "")); BASE = RENDERED = location.hash.slice(1); });
 }
@@ -1324,7 +1327,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.82"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.83"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1335,7 +1338,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.82"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.83"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1353,7 +1356,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.82"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.83"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }

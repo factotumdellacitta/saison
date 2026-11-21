@@ -1,6 +1,17 @@
 {
  "versions": [
   {
+   "version": "4.83",
+   "date": "2026-11-21",
+   "titre": "Pictos plutôt que mots",
+   "points": [
+    "Coups de cœur : décompte discret avant la mise en vente (« J-12 »)",
+    "Fiche : « Autour de cette sortie » sans sous-titre",
+    "Admin : actions des lignes en pictos discrets, à droite ; « Remettre à l’affiche » pour les écartées",
+    "Périodes bloquées et accompagnants en lignes compactes"
+   ]
+  },
+  {
    "version": "4.82",
    "date": "2026-11-21",
    "titre": "Aperçus d’admin alignés, raccourcis",

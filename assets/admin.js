@@ -1195,7 +1195,7 @@
       }) + `<div class="legend"><span class="l-pris">Pris</span><span class="l-va">Réservé</span><span class="l-icl">Agenda</span><span class="l-blq">Bloqué</span></div></div>
     <div class="acts"><button class="btn pri" type="button" id="sSave"${add_.length || rm.length ? "" : " disabled"}>Enregistrer${add_.length || rm.length ? ` (${add_.length ? "+" + add_.length : ""}${add_.length && rm.length ? " " : ""}${rm.length ? "−" + rm.length : ""})` : ""}</button>${add_.length || rm.length ? '<button class="btn" type="button" id="sRaz">Annuler</button>' : ""}</div>
     <h2 class="mh">Périodes bloquées <small>privées</small></h2>
-    <div class="list">${bl.map((x) => `<div class="ad"><p><b>${x.debut === x.fin ? esc(cap(fmtY(D(x.debut), true))) : `Du ${esc(fmt(D(x.debut)))} au ${esc(fmtY(D(x.fin)))}`}</b>${x.motif ? " · " + esc(x.motif) : ""}</p><button class="btn" type="button" data-bdel="${x.i}">Supprimer</button></div>`).join("") || '<p class="empty">Aucune période bloquée.</p>'}</div>
+    ${bl.length ? `<ul class="vl lc">${bl.map((x) => `<li><span class="vd">${x.debut === x.fin ? esc(fmt(D(x.debut))) : `${esc(fmt(D(x.debut)))}–${esc(fmt(D(x.fin)))}`}</span><span class="vt">${x.motif ? esc(x.motif) : ""}</span><button class="btn ai danger" type="button" data-bdel="${x.i}" aria-label="Supprimer cette période" title="Supprimer cette période">${ico("supprimer")}</button></li>`).join("")}</ul>` : '<p class="empty">Aucune période bloquée.</p>'}
     <form id="bf" class="frm admbox" novalidate><div class="grid2">${champ("Du", '<input type="date" name="bdeb">')}${champ("Au (inclus)", '<input type="date" name="bfin">')}</div>${champ("Motif (privé)", '<input name="bmotif" placeholder="Vacances, examens…">')}<div class="acts"><button class="btn pri" type="submit">Bloquer</button></div></form>`;
   }
   function blocages() {
@@ -1297,11 +1297,10 @@
   function vueAcc() {
     const p = personnes();
     if (!p.length) return '<p class="empty">Aucun accompagnant.</p>';
-    return `<div class="list">${p.map((x) => `<div class="ad"><h3>${esc(x.nom)} <small class="cr">${plural(x.n, "sortie")}</small></h3>
-      ${x.offert || x.part ? `<p class="cr">${[x.offert ? `Places que je lui ai offertes : ${esc(euros(x.offert))}` : "", x.part ? `réglées par ${esc(x.nom)} : ${esc(euros(x.part))}` : ""].filter(Boolean).join(" · ")}</p>` : ""}
-      <p class="cr">${x.dernier ? `Dernière : <a href="#sortie-${esc(x.dernier.id)}">${esc(titreDe(x.dernier.id))}</a>, ${esc(fmtY(D(x.dernier.date)))}` : "Aucune sortie vue ensemble"}${x.prochain ? ` · Prochaine : <a href="#sortie-${esc(x.prochain.id)}">${esc(titreDe(x.prochain.id))}</a>, ${esc(fmt(D(x.prochain.date), true))}` : ""}</p>
-      ${x.dernier ? `<button class="btn" type="button" data-javec="${esc(x.nom)}">Voir dans le journal</button>` : ""}</div>`).join("")}</div>`;
+    // Une ligne par personne : nombre de sorties, dernière et prochaine, sommes ; le journal filtré en picto.
+    return `<ul class="vl lc">${p.map((x) => `<li><span class="vd">${x.n}</span><span class="vt"><b>${esc(x.nom)}</b>${x.dernier ? ` <span>· <a href="#sortie-${esc(x.dernier.id)}">${esc(titreDe(x.dernier.id))}</a>, ${esc(fmt(D(x.dernier.date)))}</span>` : ""}${x.prochain ? ` <span>· prochaine : <a href="#sortie-${esc(x.prochain.id)}">${esc(titreDe(x.prochain.id))}</a>, ${esc(fmt(D(x.prochain.date)))}</span>` : ""}${x.offert || x.part ? `<small>${[x.offert ? `offert ${esc(euros(x.offert))}` : "", x.part ? `sa part ${esc(euros(x.part))}` : ""].filter(Boolean).join(" · ")}</small>` : ""}</span>${x.dernier ? `<button class="btn ai" type="button" data-javec="${esc(x.nom)}" aria-label="Voir dans le journal" title="Voir dans le journal">${ico("liste")}</button>` : ""}</li>`).join("")}</ul>`;
   }
+
 
   /* ---------- Liens utiles ---------- */
   // Édition des liens : une ligne par lien, par rubrique ; glisser la poignée pour l’ordre (ou vers une autre rubrique).
@@ -1449,33 +1448,34 @@
     return v || null;
   }
   // Ligne d’admin : l’aperçu court du site (trait du genre, date, titre, détail), puis un avertissement et les actions.
-  const bA = (a, id, t, cls = "") => `<button class="btn ${cls}" type="button" data-adm="${a}" data-id="${esc(id)}">${t}</button>`;
+  const bA = (a, id, t, icone, cls = "") => `<button class="btn ai ${cls}" type="button" data-adm="${a}" data-id="${esc(id)}" aria-label="${esc(t)}" title="${esc(t)}">${ico(icone)}</button>`;
   function ligneAdm(id, date, sub, acts, warn = "", doux = "") {
     const e = BYID.get(id), li = apercu(e || null, date, sub, e ? "" : id);
-    return li.replace('<li class="ap', '<li class="ap adl').replace(/<\/li>$/, `<div class="adl-x">${warn ? `<p class="warn">${esc(warn)}</p>` : ""}${doux ? `<p class="doux">${esc(doux)}</p>` : ""}${acts ? `<div class="acts">${acts}</div>` : ""}</div></li>`);
+    // Dessous : avertissement ou note à gauche, actions en pictos à droite (sous la note).
+    return li.replace('<li class="ap', '<li class="ap adl').replace(/<\/li>$/, `<div class="adl-x">${warn || doux ? `<div class="adl-t">${warn ? `<p class="warn">${esc(warn)}</p>` : ""}${doux ? `<p class="doux">${esc(doux)}</p>` : ""}</div>` : ""}${acts ? `<div class="adl-a" role="group" aria-label="Actions">${acts}</div>` : ""}</div></li>`);
   }
   const lieuDe = (id) => { const e = BYID.get(id); return e && e.lieuId ? esc(court(e.lieuId)) : ""; };
   const dateRes = (r) => (r.date ? (r.date === iso(TODAY) ? "Ce soir" : fmt(D(r.date))) : "Date ?");
   // Détail d’une réservation dans un aperçu : lieu, heure et accompagnants seulement (ni prix, ni places).
   const avecDe = (r) => { const a = [...new Set(r.accompagnants || places(r).map((b) => b.spectateur).filter((n) => n && !estMoi(n)))]; return a.length ? "avec " + esc(a.join(", ")) : ""; };
   const subRes = (id, r) => [lieuDe(id), r.heure ? esc(r.heure) : "", avecDe(r)].filter(Boolean).join(" · ");
-  const agendaBtn = (r) => (r.date ? `<button class="btn" type="button" data-agenda="${r.date.slice(0, 7)}">Agenda</button>` : "");
+  const agendaBtn = (r) => (r.date ? `<button class="btn ai" type="button" data-agenda="${r.date.slice(0, 7)}" aria-label="Voir le mois dans Soirs pris" title="Voir le mois dans Soirs pris">${ico("mois")}</button>` : "");
   // Réservation passée (ou du soir) : « Vu, au journal », et « Pas vu, retirer » une fois la date passée.
-  const lignePassee = ([id, r]) => ligneAdm(id, dateRes(r), subRes(id, r), bA("vu", id, "Vu, au journal", "pri") + (r.date < iso(TODAY) ? bA("annuler", id, "Pas vu, retirer") : ""));
+  const lignePassee = ([id, r]) => ligneAdm(id, dateRes(r), subRes(id, r), bA("vu", id, "Vu, au journal", "coche", "pri") + (r.date < iso(TODAY) ? bA("annuler", id, "Pas vu, retirer la réservation", "billet-barre", "danger") : ""));
   function vueRes() {
     const res = Object.entries(PRIVE.reservations).sort((a, b) => (a[1].date || "9").localeCompare(b[1].date || "9"));
     const fut = res.filter(([, r]) => !r.date || D(r.date) >= TODAY), locD = etatLocal();
     const { res: past, passees } = aRanger(), ec = AFF.filter((e) => e.statut === "ecarte");
     const g = (t, n, corps) => `<section class="ar-g"><h2 class="mh">${t} <small>${n}</small></h2><ul class="vl">${corps}</ul></section>`;
     const venir = fut.map(([id, r]) => { const c = conflits(locD, r.date, id); return ligneAdm(id, dateRes(r), subRes(id, r),
-      bA("reserver", id, "Modifier") + bA("vu", id, "Vu") + agendaBtn(r) + bA("annuler", id, "Annuler"), c.length ? "Conflit : " + c.join(", ") : ""); }).join("");
+      agendaBtn(r) + bA("reserver", id, "Modifier la réservation", "modifier") + bA("vu", id, "Marquer vu", "coche") + bA("annuler", id, "Annuler la réservation", "billet-barre", "danger"), c.length ? "Conflit : " + c.join(", ") : ""); }).join("");
     // Mobile : à ranger, à venir, puis terminées et écartées. Bureau : les deux premiers à gauche (8 colonnes), le reste à droite.
     const nC = (PRIVE.aCompleter || []).length;
     const coller = `<details class="box coller"${RAPIDE || nC ? " open" : ""}><summary>Coller une confirmation${nC ? ` <span class="ml">${nC} à compléter</span>` : ""}</summary>${vueRapide()}</details>`;
     return `${coller}<div class="ar-grille"><div class="ar-p">${past.length ? g("Passées, à ranger", past.length, past.map(lignePassee).join("")) : ""}
       ${fut.length ? g("À venir", fut.length, venir) : '<h2 class="mh">À venir</h2><p class="empty">Aucune réservation.</p>'}</div>
-      <div class="ar-s">${passees.length ? g("Terminées, encore à l’affiche", passees.length, passees.map((e) => ligneAdm(e.id, fmt(D(e.fin)), esc(court(e.lieuId)), bA("vu", e.id, "Vu", "pri") + bA("ecarter", e.id, "Écarter") + bA("supprimer", e.id, "Supprimer"))).join("")) : ""}
-      ${ec.length ? g("Écartées", ec.length, ec.map((e) => ligneAdm(e.id, dateAp(e), esc(court(e.lieuId)), "")).join("")) : ""}</div></div>`;
+      <div class="ar-s">${passees.length ? g("Terminées", passees.length, passees.map((e) => ligneAdm(e.id, fmt(D(e.fin)), esc(court(e.lieuId)), bA("vu", e.id, "Vu, au journal", "coche", "pri") + bA("ecarter", e.id, "Écarter (masquer du public)", "oeil-barre") + bA("supprimer", e.id, "Supprimer", "supprimer", "danger"))).join("")) : ""}
+      ${ec.length ? g("Écartées", ec.length, ec.map((e) => ligneAdm(e.id, dateAp(e), esc(court(e.lieuId)), bA("remettre", e.id, "Remettre à l’affiche", "oeil", "pri"))).join("")) : ""}</div></div>`;
   }
   /* À ranger : réservations passées et sorties à l’affiche dont la date est passée. */
   function aRanger() {
@@ -1502,8 +1502,8 @@
     if (!L.length) return '<p class="empty">Aucun coup de cœur.</p>';
     // Une ligne comme ailleurs : jalon de vente (« J-3 ») ou dates dans la colonne de date, lieu et vente, note privée en avertissement doux.
     const ligne = ({ id, v, e }) => { const pv = prochaineVente(e), r = PRIVE.reservations[id];
-      return ligneAdm(id, pv ? "Vente " + jTxt(dansJ(venteDate(pv))) : dateAp(e), [esc(court(e.lieuId)), pv ? `vente ${esc(venteTxt(pv))}` : "", r ? "réservé" : ""].filter(Boolean).join(" · "),
-        bA("envie", id, "Note") + (r ? "" : bA("reserver", id, "Réserver")) + `<button class="btn" type="button" data-envie="${esc(id)}" aria-pressed="true">Retirer</button>`, "", v.note ? "«\u00a0" + v.note + "\u00a0»" : ""); };
+      return ligneAdm(id, pv && dansJ(venteDate(pv)) <= 14 ? "Vente " + jTxt(dansJ(venteDate(pv))) : dateAp(e), [esc(court(e.lieuId)), pv ? `vente ${esc(venteTxt(pv))}` : "", r ? "réservé" : ""].filter(Boolean).join(" · "),
+        (r ? "" : bA("reserver", id, "J’ai réservé", "billet-ok")) + bA("envie", id, "Note privée", "modifier") + `<button class="btn ai danger" type="button" data-envie="${esc(id)}" aria-pressed="true" aria-label="Retirer des coups de cœur" title="Retirer des coups de cœur">${COEUR}</button>`, "", v.note ? "«\u00a0" + v.note + "\u00a0»" : ""); };
     const tot = (x) => prochaineVente(x.e) && dansJ(venteDate(prochaineVente(x.e))) <= 14;
     const A = L.filter(tot), B = L.filter((x) => !tot(x));
     const g = (t, l) => (l.length ? `<section class="ar-g"><h2 class="mh">${t} <small>${l.length}</small></h2><ul class="vl">${l.map(ligne).join("")}</ul></section>` : "");

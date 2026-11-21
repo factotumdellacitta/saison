@@ -1229,7 +1229,9 @@ button.cell.cal-res{cursor:pointer;font:inherit;font-weight:800}
 .vl li.adl .adl-x{padding:0 0 var(--e3) calc(var(--e2) + 80px + var(--e3))}
 .vl li.adl .adl-x:empty{display:none}
 .adl-x .warn{margin:0 0 var(--e2);font-size:var(--t-meta)}
-.adl-x .acts{margin:0;gap:var(--e1)}
+.vl li.adl .adl-x{display:flex;align-items:flex-start;gap:var(--e2)}
+.adl-t{flex:1;min-width:0}
+.adl-a{display:flex;gap:2px;margin-left:auto;margin-top:calc(-1 * var(--e2))}
 .ar-g{margin:0 0 var(--e6)}
 @media (max-width:599.98px){.vl li.adl .adl-x{padding-left:var(--e2)}}
 @media (min-width:960px){
@@ -1244,3 +1246,15 @@ button.cell.cal-res{cursor:pointer;font:inherit;font-weight:800}
 .coller{margin:var(--e4) 0 0}
 .coller .mh{font-size:var(--t-fiche);margin-top:var(--e4)}
 .adm-billets .linkbtn,.adm-avec .linkbtn{min-height:0;padding:0;font:inherit;color:inherit}
+/* ---------- v4.83 ---------- */
+/* Décompte de mise en vente (Coups de cœur) : badge discret, picto + « J-12 », rouge à deux jours ou moins */
+.b.bv{display:inline-flex;align-items:center;gap:2px;border-color:var(--filet-leger);color:var(--encre-2)}
+.b.bv .pi{width:11px;height:11px}
+.b.bv.urg{border-color:var(--accent-texte);color:var(--accent-texte)}
+/* Listes compactes d’admin (périodes bloquées, accompagnants) : texte à gauche, picto à droite */
+.vl.lc li{display:flex;align-items:center;gap:var(--e3);min-height:var(--cible);padding:var(--e1) 0}
+.vl.lc .vd{width:auto;min-width:32px}
+.vl.lc .vt small{display:block;font-size:var(--t-meta);color:var(--encre-2)}
+.vl.lc .vt a{color:inherit}
+.vl.lc .btn.ai{flex:none}
+.adl-a [data-envie]{color:var(--accent-texte)}
