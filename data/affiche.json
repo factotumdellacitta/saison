@@ -3296,7 +3296,7 @@
    "lien": "https://www.colline.fr/spectacles/la-mort-du-mome",
    "billetterie": null,
    "publicJeune": false,
-   "leonardYVa": false,
+   "leonardYVa": true,
    "statut": "a-voir",
    "offres": [],
    "relaches": [
