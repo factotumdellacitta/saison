@@ -201,6 +201,15 @@ function freeIn(e, s, t) {
   return false;
 }
 const running = (e) => { const p = span(e); return p && p[0] < TODAY && p[1] >= TODAY && +p[0] !== +p[1]; };
+// Offres jeunes seulement (une prévente ou une vente générale n’en est pas une) ; « –28 ans » quand toutes disent le même âge, sinon « Offre jeune ».
+const RE_JEUNE = /jeune|moins de \d+|[–-]\s?\d+ ans|n[ée]e?s?\s+(?:après|à partir)|étudiant/i;
+const offresJeunes = (e) => (e.offres || []).filter((o) => RE_JEUNE.test((o.type || "") + " " + (o.condition || "")));
+// Une tranche (« 16 – 29 ans ») ne dit pas « –29 ans » : elle est retirée avant de chercher l’âge.
+function offreJeuneTxt(e) {
+  const J = offresJeunes(e); if (!J.length) return "";
+  const ages = J.map((o) => { const m = /[–-]\s?(\d+) ans/.exec((condCourte(o.condition) + " " + condCourte(o.type)).replace(/\d+\s*[–-]\s*\d+\s*ans/g, "")); return m ? m[1] : ""; });
+  return ages.every((a) => a && a === ages[0]) ? "–" + ages[0] + " ans" : "Offre jeune";
+}
 const lastDays = (e) => { const p = span(e); return p && +p[0] !== +p[1] && p[1] >= TODAY && (p[1] - TODAY) / 864e5 <= 10; };
 const venteDate = (o) => { const [d, t = "10:00"] = o.vente.split("T"); const [y, m, j] = d.split("-").map(Number); const [h, mi] = t.split(":").map(Number); return new Date(y, m - 1, j, h, mi); };
 function venteTxt(o) {
@@ -335,9 +344,9 @@ function badges(e, libres, vente) {
   }
   if (e.nouveau === true && e.statut !== "vu") b.push(`<span class="b">Nouveau</span>`); // ajoutée par la dernière veille (CLAUDE.md, « Veille »)
   if (e.publicJeune) b.push(`<span class="b">Public jeune</span>`);
-  if ((e.offres || []).length) b.push(`<span class="b">Offre jeune</span>`);
+  const oj = offreJeuneTxt(e); if (oj) b.push(`<span class="b"${oj === "Offre jeune" ? "" : ' title="Offre jeune"'}>${oj}</span>`);
   if (ETATS[e.etat]) b.push(etatB(e.etat));
-  else if (lastDays(e)) b.push(`<span class="b">Dernières dates</span>`);
+  else if (lastDays(e)) { const n = dansJ(span(e)[1]); b.push(`<span class="b dd" title="Dernières dates">Fin ${n <= 0 ? "auj." : n === 1 ? "demain" : "J-" + n}</span>`); }
   if (e.leonardYVa) b.push(`<span class="b yva">${OWNER} y va</span>`);
   return b.length ? `<span class="bds">${b.join("")}</span>` : "";
 }
@@ -570,7 +579,7 @@ function matchA(e, f, noWin) {
   if (f.zone.size && ![...f.zone].some((z) => ZONES[z] === L.zone)) return false;
   if (f.statut.size && ![...f.statut].some((s) => STATUTS[s] === L.statut)) return false;
   if (f.jeune && !e.publicJeune) return false;
-  if (f.offre && !(e.offres || []).length) return false;
+  if (f.offre && !offresJeunes(e).length) return false;
   if (f.yva && !e.leonardYVa) return false;
   if (f.neuf && !estNeuf(e)) return false;
   if (f.lieu && e.lieuId !== f.lieu) return false;
@@ -888,7 +897,7 @@ const stubR = (lbl, d, urg) => `<span class="stub"><small class="fin${urg ? " ur
 function rowR(e, pre, stub, info, jeu) {
   const k = esc(pre + "-" + e.id), meta = [sousG(e), court(e.lieuId), jeu ? joueCourt(e) : ""].filter(Boolean).join(" · ");
   return `<article class="row g-${famE(e)}" data-id="${esc(e.id)}"><button class="rb" type="button" aria-haspopup="dialog">${gb(e)}${stub}
-  <span class="mid">${l1(e, stars(e.note, e.pronostic))}${info ? `<span class="art">${info}</span>` : ""}${ligneMeta(esc(meta), badges(e).replace('<span class="b">Dernières dates</span>', "").replace('<span class="bds"></span>', ""))}</span></button>${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}</article>`;
+  <span class="mid">${l1(e, stars(e.note, e.pronostic))}${info ? `<span class="art">${info}</span>` : ""}${ligneMeta(esc(meta), badges(e).replace(/<span class="b dd"[^>]*>[^<]*<\/span>/, "").replace('<span class="bds"></span>', ""))}</span></button>${PRIVE && ADMIN ? ADMIN.heart(e.id) : ""}</article>`;
 }
 function infoReserver({ e, o, rang }) {
   const f = finDe(e), li = libresTxt(e);
@@ -1327,7 +1336,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.83"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.84"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1338,7 +1347,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.83"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.84"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1356,7 +1365,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.83"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.84"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }
