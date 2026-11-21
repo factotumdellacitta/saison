@@ -1027,5 +1027,15 @@
   "billetterie": null,
   "tarifJeune": "",
   "adresse": "Place Salvador-Allende, 94000 Créteil"
+ },
+ "theatre-fontaine": {
+  "nom": "Théâtre Fontaine",
+  "ville": "Paris",
+  "zone": "Paris",
+  "statut": "Privé",
+  "site": "https://www.theatrefontaine.fr",
+  "billetterie": null,
+  "tarifJeune": "",
+  "adresse": "10 rue Pierre-Fontaine, 75009 Paris"
  }
 }

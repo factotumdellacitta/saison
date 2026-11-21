@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-20",
+ "maj": "2026-11-21",
  "sorties": [
   {
    "id": "oedipe-roi",
@@ -5291,6 +5291,49 @@
    "statut": "vu",
    "vuLe": [
     "2016-06-09"
+   ],
+   "noteLeonard": null,
+   "avis": "",
+   "offres": []
+  },
+  {
+   "id": "vu-mon-jour-de-chance",
+   "titre": "Mon jour de chance",
+   "categorie": "Théâtre",
+   "sousGenre": "Comédie",
+   "artistes": [
+    {
+     "nom": "Patrick Haudecœur",
+     "role": "auteur"
+    },
+    {
+     "nom": "Gérald Sibleyras",
+     "role": "auteur"
+    },
+    {
+     "nom": "José Paul",
+     "role": "mise en scène"
+    },
+    {
+     "nom": "Guillaume de Tonquédec",
+     "role": "interprète"
+    }
+   ],
+   "lieuId": "theatre-fontaine",
+   "salle": "",
+   "debut": "2025-12-27",
+   "fin": "2025-12-27",
+   "note": 0,
+   "pronostic": false,
+   "pourquoi": "Comédie de Patrick Haudecœur et Gérald Sibleyras mise en scène par José Paul, avec Guillaume de Tonquédec, deux nominations aux Molières 2025.",
+   "lien": "https://www.offi.fr/theatre/theatre-fontaine-2341/mon-jour-de-chance-96875.html",
+   "source": "https://www.theatreonline.com/Spectacle/Mon-jour-de-chance/94652",
+   "billetterie": null,
+   "publicJeune": false,
+   "leonardYVa": false,
+   "statut": "vu",
+   "vuLe": [
+    "2025-12-27"
    ],
    "noteLeonard": null,
    "avis": "",

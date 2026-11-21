@@ -2358,7 +2358,8 @@
  "gerald-sibleyras": {
   "nom": "Gérald Sibleyras",
   "sorties": [
-   "vu-le-cercle-des-poetes-disparus"
+   "vu-le-cercle-des-poetes-disparus",
+   "vu-mon-jour-de-chance"
   ]
  },
  "geraldine-martineau": {
@@ -2481,6 +2482,12 @@
   "nom": "Guillaume Barbot",
   "sorties": [
    "vu-art-majeur"
+  ]
+ },
+ "guillaume-de-tonquedec": {
+  "nom": "Guillaume de Tonquédec",
+  "sorties": [
+   "vu-mon-jour-de-chance"
   ]
  },
  "guillaume-dustan": {
@@ -3238,6 +3245,12 @@
   "nom": "José Montalvo",
   "sorties": [
    "un-coin-de-paradis"
+  ]
+ },
+ "jose-paul": {
+  "nom": "José Paul",
+  "sorties": [
+   "vu-mon-jour-de-chance"
   ]
  },
  "josef-nadj": {
@@ -5042,6 +5055,12 @@
   "nom": "Patrick Chesnais",
   "sorties": [
    "vu-l-invitation"
+  ]
+ },
+ "patrick-haudecoeur": {
+  "nom": "Patrick Haudecœur",
+  "sorties": [
+   "vu-mon-jour-de-chance"
   ]
  },
  "patrick-murys": {
