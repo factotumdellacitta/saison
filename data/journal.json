@@ -770,12 +770,12 @@
    "leonardYVa": false,
    "statut": "vu",
    "vuLe": [
-    "2024-02-02",
-    "2026-11-22"
+    "2024-02-02"
    ],
    "noteLeonard": null,
    "avis": "",
-   "offres": []
+   "offres": [],
+   "sousGenre": ""
   },
   {
    "id": "vu-dans-la-peau-de-cyrano",
