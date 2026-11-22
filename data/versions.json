@@ -1,6 +1,15 @@
 {
  "versions": [
   {
+   "version": "4.85",
+   "date": "2026-11-22",
+   "titre": "Mode admin plus réactif",
+   "points": [
+    "Les actions (coup de cœur, entrée au journal, réservation…) s’affichent aussitôt ; l’enregistrement suit en arrière-plan, une action après l’autre",
+    "En cas d’échec, retour à l’état du dépôt et message dans le bandeau"
+   ]
+  },
+  {
    "version": "4.84",
    "date": "2026-11-21",
    "titre": "Badges plus courts et exacts",

@@ -247,11 +247,44 @@
   const typo = (o) => typeof o === "string" ? o.replace(/\u2014/g, "–").replace(/\u202F/g, "\u00A0") : Array.isArray(o) ? o.map(typo) : o && typeof o === "object" ? Object.fromEntries(Object.entries(o).map(([k, v]) => [k, typo(v)])) : o;
 
   /* ---------- Écriture : un commit atomique par action ---------- */
-  // fn(d, essai) modifie d (copie fraîche du dépôt). Elle peut lever Annule. Rejouée telle quelle si main a bougé.
+  // Interface réactive (« optimiste ») : l’action est d’abord appliquée aux données en mémoire et l’écran se met à jour
+  // aussitôt ; l’envoi à GitHub suit en arrière-plan, en file (une action après l’autre), rejoué sur la version fraîche
+  // de main. En cas d’échec, l’écran revient à l’état du dépôt et le bandeau le dit.
+  let FILE = Promise.resolve(), EN_ATTENTE = 0;
+  const sigD = (d) => JSON.stringify([d.affiche.sorties, d.journal.sorties, d.lieux, d.liens, d.prive]);
+  async function enMemoire() {
+    try { await Promise.all([JOURNAL ? 0 : loadJournal(), LIENS ? 0 : loadLiens()]); } catch (_) { return null; }
+    if (!PRIVE || !JOURNAL || !LIENS) return null;
+    return structuredClone({ affiche: { maj: MAJ, sorties: AFF }, journal: { maj: JMAJ, sorties: JOURNAL }, lieux: LIEUX, liens: LIENS, dispo: DISPO_PUB || {}, prive: PRIVE, cal: BUSY_SRC.calendrier || null });
+  }
+  addEventListener("beforeunload", (ev) => { if (EN_ATTENTE) { ev.preventDefault(); ev.returnValue = ""; } });
   async function ecrire(message, fn) {
     if (!TOK) { formJeton(); throw new Annule(); }
-    if (OCCUPE) throw new Error("Une écriture est déjà en cours, attends quelques secondes.");
-    OCCUPE = true; bandeau("Enregistrement…", "run");
+    // 1. Tout de suite, en mémoire (les erreurs de saisie et les refus remontent ici, avant tout réseau).
+    const local = await enMemoire();
+    if (local) {
+      const avant = sigD(local);
+      await fn(local, 0);
+      for (const k of ["affiche", "journal", "lieux", "liens", "prive"]) local[k] = typo(local[k]);
+      const erreurs = valider(local);
+      if (erreurs.length) throw new Error("Données refusées : " + erreurs.slice(0, 4).join(" "));
+      if (sigD(local) === avant) { toast("Rien à enregistrer"); return true; }
+      appliquer(local, true);
+    }
+    // 2. En arrière-plan : le commit, à la suite des actions précédentes.
+    EN_ATTENTE++;
+    const tache = FILE.then(() => envoyer(message, fn, !!local));
+    FILE = tache.catch(() => {});
+    tache.catch(async (e) => {
+      if (!local) return;
+      // L’action affichée n’a pas pu être enregistrée (ou la version du dépôt a été gardée) : retour à l’état du dépôt.
+      try { await recharger(null, true); } catch (_) {}
+      if (!(e instanceof Annule)) bandeau("Non enregistré : " + msgGH(e), "ko");
+    }).finally(() => { EN_ATTENTE--; });
+    return local ? true : tache;
+  }
+  async function envoyer(message, fn, optimiste) {
+    OCCUPE = true; bandeau(EN_ATTENTE > 1 ? `Enregistrement… (${EN_ATTENTE})` : "Enregistrement…", "run");
     try {
       for (let essai = 0; essai < 4; essai++) {
         const base = await lireDistant();
@@ -272,7 +305,10 @@
         const commit = await gh(`/repos/${REPO}/git/commits`, { method: "POST", body: { message, tree: tree.sha, parents: [base.sha], author: AUTEUR, committer: AUTEUR } });
         try { await gh(`/repos/${REPO}/git/refs/heads/${BRANCHE}`, { method: "PATCH", body: { sha: commit.sha, force: false } }); }
         catch (e) { if (e.status === 422 || e.status === 409) { await pause(400 + essai * 600); continue; } throw e; }
-        appliquer(d);
+        // Déjà affiché si l’action a été appliquée en mémoire : on ne redessine que si le dépôt diffère (autre appareil, Claude Code).
+        if (optimiste && EN_ATTENTE > 1) { /* d’autres actions suivent : l’écran garde leur état, la dernière resynchronise */ }
+        else if (optimiste && sigD(d) === sigD({ affiche: { sorties: AFF }, journal: { sorties: JOURNAL }, lieux: LIEUX, liens: LIENS, prive: PRIVE })) { PRIVE = d.prive; MAJ = d.affiche.maj; JMAJ = d.journal.maj; }
+        else appliquer(d);
         suivrePublication(commit.sha);
         return true;
       }
