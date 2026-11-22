@@ -961,7 +961,9 @@ body:has(#dlg) .pub,body:has(#dlg) .toast{bottom:auto;top:0}
 .rp-fin{margin-top:var(--e8)}
 /* Billetteries : recherche et rubriques sur une ligne, liens compacts en colonnes. */
 .lk-barre{display:flex;flex-direction:column;gap:var(--e2);margin-top:var(--e3)}
+.lk-barre>.rech{flex:none}
 @media (min-width:760px){.lk-barre{flex-direction:row;align-items:center}.lk-barre>.rech{flex:0 0 320px}}
+.lk-plus{min-height:var(--cible);margin-top:var(--e1);font-size:var(--t-meta);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
 #r-liens .lks{margin-top:var(--e4)}
 .lkc{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));column-gap:var(--e4);border-top:0}
 .lkc a{min-height:var(--cible);padding:6px 0}

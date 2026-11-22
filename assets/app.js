@@ -1300,23 +1300,30 @@ function renderCoeur(q) {
 // Billetteries, cartes jeunes et calendriers de vente : section du Radar (l’ancienne page Liens, #liens y mène).
 function liensHTML() {
   const groups = liensParRubrique(LIENS.filter((x) => web(x.url))).filter(([, l]) => l.length);
-  const item = (x) => `<li data-q="${esc(norm(x.titre + " " + hote(x.url) + " " + (x.note || "")))}"><a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer"><span class="lt"><b>${esc(x.titre)}</b><small>${esc(hote(x.url))}${x.note ? " · " + esc(x.note) : ""}</small></span><span class="vh"> (nouvel onglet)</span></a></li>`;
-  const section = ([c, l]) => `<section class="lks" id="lk-${slug(c)}" data-lk="${slug(c)}"><h3 class="v-t">${esc(c)} <small>${l.length}</small></h3><ul class="lk lkc">${l.map(item).join("")}</ul></section>`;
+  // Titre propre : tiret demi-cadratin, sans « - programmation » (la rubrique le dit).
+  const tit = (t) => String(t).replace(/\s+[-–]\s*programmation$/i, "").replace(/ - /g, " – ");
+  const item = (x) => `<li data-q="${esc(norm(x.titre + " " + hote(x.url) + " " + (x.note || "")))}"><a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer"><span class="lt"><b>${esc(tit(x.titre))}</b><small>${esc(hote(x.url))}${x.note ? " · " + esc(x.note) : ""}</small></span><span class="vh"> (nouvel onglet)</span></a></li>`;
+  const section = ([c, l]) => `<section class="lks" id="lk-${slug(c)}" data-lk="${slug(c)}"><h3 class="v-t">${esc(c)} <small>${l.length}</small></h3><ul class="lk lkc">${l.map(item).join("")}</ul><button class="linkbtn lk-plus" type="button" data-lkplus hidden></button></section>`;
   // Recherche et rubriques en puces-filtres ; liens compacts sur plusieurs colonnes.
   return `<div class="lk-barre">${rech("lkq", "Rechercher une billetterie")}<div class="chips defile" role="group" aria-label="Rubriques" id="lkNav"><button class="chip" type="button" data-lkf="" aria-pressed="true">Tout</button>${groups.map(([c]) => `<button class="chip" type="button" data-lkf="${slug(c)}" aria-pressed="false">${esc(c)}</button>`).join("")}</div></div>
   ${groups.map(section).join("")}<p class="empty" id="lkvide" hidden>Aucun lien ne correspond.</p>`;
 }
 function brancherLiensRecherche() {
   let rub = "";
+  // Vue « Tout » sans recherche : les premiers liens de chaque rubrique, la suite derrière « + N » (rubrique choisie ou recherche : tout).
+  const LIM = matchMedia("(min-width:760px)").matches ? 12 : 6;
   const app = () => {
     const q = norm($("#lkq").value).trim(); let n = 0;
     $$("#main .lks").forEach((sec) => {
-      const lis = $$("li[data-q]", sec), dans = !rub || sec.dataset.lk === rub;
-      let v = 0; lis.forEach((li) => { const ok = dans && (!q || li.dataset.q.includes(q)); li.hidden = !ok; v += ok; });
+      const lis = $$("li[data-q]", sec), dans = !rub || sec.dataset.lk === rub, court = !rub && !q && !sec.classList.contains("ouvert");
+      let v = 0, cache = 0; lis.forEach((li) => { let ok = dans && (!q || li.dataset.q.includes(q)); if (ok && court && v >= LIM) { ok = false; cache++; } li.hidden = !ok; v += ok; });
+      const plus = sec.querySelector("[data-lkplus]"); plus.hidden = !cache; plus.textContent = cache ? `+ ${cache}` : ""; plus.setAttribute("aria-label", `Voir les ${cache} autres liens`);
       sec.hidden = !v; n += v;
     });
     $("#lkvide").hidden = n > 0;
   };
+  $$("#main [data-lkplus]").forEach((b) => b.onclick = () => { b.closest(".lks").classList.add("ouvert"); app(); });
+  app();
   $("#lkNav").onclick = (ev) => { const b = ev.target.closest("[data-lkf]"); if (!b) return; rub = b.dataset.lkf; $$("#lkNav [data-lkf]").forEach((x) => x.setAttribute("aria-pressed", String(x === b))); app(); };
   $("#lkq").oninput = app;
 }
@@ -1336,7 +1343,7 @@ const sessionVive = () => { try { return +localStorage.getItem("factotum-session
 let adP = null;
 const loadAdmin = () => adP || (adP = new Promise((ok, ko) => {
   if (window.top !== window.self) { adP = null; return ko(new Error("cadre")); } // jamais de mode admin dans une page encadrée par un autre site
-  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.85"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/admin.js?v=4.86"; s.onload = () => ok(); s.onerror = () => { adP = null; s.remove(); ko(new Error("admin")); };
   document.head.appendChild(s);
 }));
 async function renderAdmin(q) {
@@ -1347,7 +1354,7 @@ async function renderAdmin(q) {
 /* ---------- Expositions : vues « À voir » et « Bientôt » (assets/expo.js, chargé par le site Expo seulement) ---------- */
 let exP = null;
 const loadExpo = () => exP || (exP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.85"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/expo.js?v=4.86"; s.onload = () => ok(); s.onerror = () => { exP = null; s.remove(); ko(new Error("expo")); };
   document.head.appendChild(s);
 }));
 async function renderExpo(vue, q) {
@@ -1365,7 +1372,7 @@ function setTab(t) {
 /* Page #charte : référence de la charte Factotum (assets/charte.js, chargé à la demande, non liée dans la navigation). */
 let chP = null;
 const loadCharte = () => chP || (chP = new Promise((ok, ko) => {
-  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.85"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
+  const s = document.createElement("script"); s.src = RACINE + "assets/charte.js?v=4.86"; s.onload = () => ok(); s.onerror = () => { chP = null; s.remove(); ko(new Error("charte")); };
   document.head.appendChild(s);
 }));
 function modeCharte(on) { $("#top").hidden = on; document.documentElement.classList.toggle("charte", on); }

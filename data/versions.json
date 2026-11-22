@@ -1,6 +1,16 @@
 {
  "versions": [
   {
+   "version": "4.86",
+   "date": "2026-11-22",
+   "titre": "Billetteries plus compactes",
+   "points": [
+    "Mobile : plus de grand blanc autour de la recherche",
+    "Six liens par rubrique sur mobile (douze sur bureau), la suite derrière « + N »",
+    "Titres des liens allégés (« – » au lieu de « - », sans « programmation »)"
+   ]
+  },
+  {
    "version": "4.85",
    "date": "2026-11-22",
    "titre": "Mode admin plus réactif",
