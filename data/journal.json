@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-21",
+ "maj": "2026-11-22",
  "sorties": [
   {
    "id": "oedipe-roi",
@@ -769,7 +769,8 @@
    "leonardYVa": false,
    "statut": "vu",
    "vuLe": [
-    "2024-02-02"
+    "2024-02-02",
+    "2026-11-22"
    ],
    "noteLeonard": null,
    "avis": "",
