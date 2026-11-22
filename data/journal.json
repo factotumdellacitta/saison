@@ -1115,36 +1115,6 @@
    "offres": []
   },
   {
-   "id": "vu-la-mouette",
-   "titre": "La Mouette",
-   "categorie": "Théâtre",
-   "artistes": [
-    {
-     "nom": "Anton Tchekhov",
-     "role": "auteur"
-    }
-   ],
-   "lieuId": null,
-   "salle": "",
-   "debut": null,
-   "fin": null,
-   "note": 0,
-   "pronostic": false,
-   "pourquoi": "",
-   "lien": null,
-   "billetterie": null,
-   "publicJeune": false,
-   "leonardYVa": false,
-   "statut": "vu",
-   "vuLe": [
-    "2024-05-28"
-   ],
-   "noteLeonard": null,
-   "avis": "",
-   "offres": [],
-   "sousGenre": ""
-  },
-  {
    "id": "vu-la-musica-deuxieme",
    "titre": "La Musica deuxième",
    "categorie": "Théâtre",
