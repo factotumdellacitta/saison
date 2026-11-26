@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-22",
+ "maj": "2026-11-26",
  "sorties": [
   {
    "id": "10-000-langages-pour-en-faire-un",
@@ -4786,7 +4786,7 @@
    "lien": "https://www.theatrechampselysees.fr/saison-2026-27/opera-mis-en-scene/les-pecheurs-de-perles-2",
    "billetterie": null,
    "publicJeune": true,
-   "leonardYVa": false,
+   "leonardYVa": true,
    "statut": "a-voir",
    "offres": [
     {
